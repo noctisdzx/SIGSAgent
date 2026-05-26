@@ -44,6 +44,11 @@ runtime/snapshots/*
 runtime/logs/*
 !runtime/logs/.gitkeep
 
+# ===== Scratch / one-off script outputs =====
+scripts/_*.json
+scripts/_*.txt
+.git_commit_msg.tmp
+
 # ===== Secrets =====
 .env
 .env.*
