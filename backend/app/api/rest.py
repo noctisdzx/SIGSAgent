@@ -312,3 +312,24 @@ async def sim_step(req: Request) -> dict[str, Any]:
     sim = _sim(req)
     await sim.step()
     return {"status": "stepped", "sim_time": _world(req).sim_time.isoformat()}
+
+
+@router.get("/sim/status")
+async def sim_status(req: Request) -> dict[str, Any]:
+    sim = _sim(req)
+    world = _world(req)
+    pause_reason = getattr(sim, "pause_reason", None)
+    return {
+        "running": bool(getattr(sim, "is_running", False)),
+        "sim_time": world.sim_time.isoformat(),
+        "pause_reason": pause_reason,
+        "current_day": world.sim_time.date().isoformat(),
+    }
+
+
+@router.get("/sim/day_summaries")
+async def get_day_summaries(req: Request, limit: int = 30) -> dict[str, Any]:
+    """Return the most recent day-summary narratives (one per simulated day)."""
+    sim = _sim(req)
+    items = list(getattr(sim, "day_summaries", []) or [])
+    return {"summaries": items[-max(1, limit):]}

@@ -31,9 +31,9 @@
         class="ev"
         :class="`ev--${ev.type}`"
       >
-        <span class="ts">{{ ev.ts_sim || '—' }}</span>
+        <span class="ts">{{ shortSim(ev.ts_sim) || '—' }}</span>
         <span class="type">{{ ev.type }}</span>
-        <span v-if="ev.agent_id" class="aid">{{ ev.agent_id }}</span>
+        <span v-if="ev.agent_id" class="aid">{{ npcLabel(ev.agent_id) }}</span>
         <code class="payload">{{ summary(ev) }}</code>
       </div>
     </div>
@@ -41,22 +41,73 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useLangStore } from '@/stores/lang';
 import { useEventsStore } from '@/stores/events';
+import { useAgentsStore } from '@/stores/agents';
 
 const lang = useLangStore();
 const events = useEventsStore();
+const agents = useAgentsStore();
 
 const reversed = computed(() => events.stream.slice().reverse());
 
+function npcLabel(id: string): string {
+  if (!id) return '';
+  const a = agents.list.find(x => String(x.id) === String(id));
+  if (a) {
+    if (lang.lang === 'en') return (a as any).name_en || a.name || id;
+    return a.name || (a as any).name_en || id;
+  }
+  return id;
+}
+
+function shortSim(iso?: string): string {
+  if (!iso) return '';
+  try {
+    // 2026-05-26T07:35:00 → 05-26 07:35
+    return iso.replace('T', ' ').slice(5, 16);
+  } catch { return iso; }
+}
+
 function summary(ev: any): string {
   if (!ev?.payload) return '';
+  const p = ev.payload;
+  // Day-summary narrative event: show the bilingual headline.
+  if (ev.type === 'day_summary') {
+    const narr = lang.lang === 'en' ? (p.narrative_en || p.narrative_zh) : (p.narrative_zh || p.narrative_en);
+    return `📜 ${p.day || '?'} — ${(narr || '').slice(0, 140)}…`;
+  }
+  // Special-case the dialog event so users can read the lines at a glance.
+  if (ev.type === 'dialog') {
+    const sp = npcLabel(p.speaker_id) || p.speaker_name || '';
+    const ls = npcLabel(p.listener_id) || p.listener_name || '';
+    const topic = p.topic ? `「${p.topic}」` : '';
+    const line = lang.lang === 'en' ? (p.speaker_line_en || p.speaker_line) : (p.speaker_line || p.speaker_line_en);
+    const reply = lang.lang === 'en' ? (p.listener_line_en || p.listener_line) : (p.listener_line || p.listener_line_en);
+    return `${sp} → ${ls} ${topic}：${line || ''}   ↩ ${reply || ''}`;
+  }
+  if (ev.type === 'behavior') {
+    const ok = p.ok ? '✓' : '✗';
+    const act = p.action_id || '?';
+    const note = p.note ? ` — ${p.note}` : '';
+    return `${ok} ${act}(${JSON.stringify(p.params || {})})${note}`;
+  }
+  if (ev.type === 'agent_decision') {
+    const act = p.activity || '';
+    const step = p.step?.action_id || '';
+    const plan = (p.plan || []).map((s: any) => s.action_id).join('→');
+    return `${act} | step=${step} | plan=${plan}`;
+  }
   try {
-    const s = JSON.stringify(ev.payload);
+    const s = JSON.stringify(p);
     return s.length > 220 ? s.slice(0, 220) + '…' : s;
   } catch { return ''; }
 }
+
+onMounted(() => {
+  if (!agents.list.length) void agents.loadList();
+});
 </script>
 
 <style scoped>

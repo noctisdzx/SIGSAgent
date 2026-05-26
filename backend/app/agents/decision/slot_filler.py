@@ -56,13 +56,24 @@ class SlotFiller:
         gap_minutes: int,
         persona: dict,
         memories: list[RetrievedMemory] | list[str],
+        context: dict | None = None,
     ) -> SlotFillChoice | None:
+        """Pick a fragment to fill `gap_minutes` of empty schedule.
+
+        `context` may include `sim_time`, `weekday`, `here_uid`, `visible_agents`,
+        `visible_items`, `last_activity` — these are forwarded to the LLM so it
+        can reason about the actual situation (e.g. prefer a social fragment
+        when someone is nearby).
+        """
         candidates = self.library.fits(gap_minutes)
         if not candidates:
             return None
 
         persona_id = persona.get("id", "<unknown>")
-        cache_key = (persona_id, _memories_signature(memories), int(gap_minutes))
+        # cache key includes a context signature so different situations don't
+        # collide (e.g. same persona+memories but different visible agents).
+        ctx_sig = _memories_signature([str(sorted((context or {}).items()))])
+        cache_key = (persona_id, _memories_signature(memories) + ctx_sig, int(gap_minutes))
         cached = self._cache.get(cache_key)
         if cached is not None:
             self._cache.move_to_end(cache_key)
@@ -81,6 +92,7 @@ class SlotFiller:
                     {"id": f.id, "label": f.label, "tags": f.tags}
                     for f in candidates
                 ],
+                context=context,
             )
             chosen = next((f for f in candidates if f.id == choice_id), None)
             if chosen is None:
@@ -88,7 +100,7 @@ class SlotFiller:
             choice = SlotFillChoice(fragment=chosen, rationale=rationale)
         except Exception:
             choice = SlotFillChoice(
-                fragment=self._weighted_random(candidates, persona),
+                fragment=self._weighted_random(candidates, persona, context=context),
                 rationale="fallback: weighted random over fitting fragments",
                 degraded=True,
             )
@@ -108,7 +120,15 @@ class SlotFiller:
         self._cache.clear()
 
     @staticmethod
-    def _weighted_random(candidates: list[Fragment], persona: dict) -> Fragment:
+    def _weighted_random(candidates: list[Fragment], persona: dict,
+                         context: dict | None = None) -> Fragment:
         favs = set(persona.get("preferences", {}).get("favorite_tags", []))
-        weights = [1 + len(favs & set(f.tags)) for f in candidates]
+        visible = set((context or {}).get("visible_agents", []) or [])
+        weights = []
+        for f in candidates:
+            w = 1 + len(favs & set(f.tags))
+            # social-tagged fragment gets a bump if someone is nearby
+            if visible and ("social" in (f.tags or []) or "chat" in (f.tags or [])):
+                w += 2
+            weights.append(w)
         return random.choices(candidates, weights=weights, k=1)[0]

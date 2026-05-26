@@ -141,7 +141,12 @@ def test_template_current_block_for():
     boundary = template.current_block_for("monday", end_str)
     assert boundary is None or boundary.start == first.end
 
-    # A weekday with no overlapping block at 03:00 yields None.
-    assert template.current_block_for("monday", "03:00") is None
-    # Different weekday: 03:00 should also be empty for any weekday.
-    assert template.current_block_for("sunday", "03:00") is None
+    # The 00:00-wake_up window is now locked as `sleep` so NPCs don't get
+    # fragment-filled at 3am. Hence 03:00 must resolve to a sleep block.
+    block_3am = template.current_block_for("monday", "03:00")
+    assert block_3am is not None
+    assert block_3am.activity == "sleep"
+    # Same on sunday.
+    block_3am_sun = template.current_block_for("sunday", "03:00")
+    assert block_3am_sun is not None
+    assert block_3am_sun.activity == "sleep"

@@ -3,7 +3,14 @@ You decide what an NPC does in a {{ gap_minutes }}-minute gap of their day.
 Persona (JSON):
 {{ persona | tojson }}
 
-Recent memories (most relevant first):
+{% if context %}Current situation:
+- in-game time : {{ context.sim_time | default('?') }}  (weekday={{ context.weekday | default('?') }})
+- current room : {{ context.here_uid | default('?') }}
+- this gap follows activity: {{ context.last_activity | default('?') }}
+- visible nearby NPCs (ids) : {{ context.visible_agents | default([]) }}
+- visible items / furniture : {{ context.visible_items | default([]) }}
+{% endif %}
+Recent memories (most relevant first; these are the NPC's own STM/LTM):
 {% for m in memories %}- {{ m }}
 {% endfor %}
 
@@ -14,6 +21,8 @@ Candidate activity fragments (you MUST pick exactly one of these ids):
 Rules:
 - The picked id MUST appear verbatim in the candidates list above.
 - Prefer fragments whose tags overlap with the persona's favorite_tags.
+- If there are visible NPCs and a social fragment fits the duration, gently favor it.
+- Avoid repeating the activity the NPC just did (see "this gap follows activity").
 - Keep "rationale" to ONE short Chinese sentence (≤ 30 字).
 
 Reply STRICTLY as a single JSON object, no prose, no markdown fences.

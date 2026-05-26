@@ -1,5 +1,6 @@
 import { useEventsStore } from '@/stores/events';
 import { useWorldStore } from '@/stores/world';
+import { useSimStore } from '@/stores/sim';
 
 let socket: WebSocket | null = null;
 let reconnectTimer: number | null = null;
@@ -26,6 +27,7 @@ function defaultUrl(): string {
 function handleEvent(raw: any): void {
   const events = useEventsStore();
   const world = useWorldStore();
+  const sim = useSimStore();
   if (!raw || typeof raw !== 'object') return;
   const ev = raw as { type?: string; payload?: any; ts_sim?: string; agent_id?: string };
 
@@ -43,6 +45,10 @@ function handleEvent(raw: any): void {
       break;
     case 'tick':
       world.applyTick(ev.payload || ev);
+      break;
+    case 'day_summary':
+      // Auto-open the narrative modal and flip sim store to paused state.
+      sim.applyDaySummaryEvent(ev.payload);
       break;
     default:
       break;

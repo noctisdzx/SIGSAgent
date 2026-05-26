@@ -104,4 +104,10 @@ export const api = {
   simStart: () => http.post('/sim/start').then(r => r.data),
   simPause: () => http.post('/sim/pause').then(r => r.data),
   simStep: () => http.post('/sim/step').then(r => r.data),
+  simStatus: () =>
+    http.get<{ running: boolean; sim_time: string; pause_reason?: string | null; current_day: string }>(
+      '/sim/status',
+    ).then(r => r.data),
+  simDaySummaries: (limit = 30) =>
+    http.get<{ summaries: any[] }>('/sim/day_summaries', { params: { limit } }).then(r => r.data),
 };

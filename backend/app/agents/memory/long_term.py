@@ -28,6 +28,7 @@ class LongTermItem:
     source_ids: list[str] = field(default_factory=list)  # which STM/LTM items merged in
     hit_count: int = 0
     degraded: bool = False  # True if produced by fallback (not LLM)
+    text_en: str | None = None  # optional English mirror of `text`
     meta: dict = field(default_factory=dict)
 
 

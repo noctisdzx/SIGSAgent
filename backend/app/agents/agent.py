@@ -20,6 +20,13 @@ from app.agents.decision.slot_filler import SlotFiller
 from app.agents.memory.compressor import MemoryCompressor
 from app.agents.memory.long_term import LongTermItem, LongTermMemory
 from app.agents.memory.memory_graph import MemoryGraph, Triplet
+
+# Social activity markers (substring match on activity_text) that trigger
+# the LLM-driven dialog pipeline when at least one other NPC is co-located.
+SOCIAL_HINTS = (
+    "chat", "social", "聊", "搭话", "串门", "聚", "讨论", "约",
+    "discussion", "group_discussion", "approach", "talk",
+)
 from app.agents.memory.retriever import MemoryRetriever
 from app.agents.memory.short_term import ShortTermItem, ShortTermMemory
 from app.agents.perception.perceiver import Perceiver, PerceptionSnapshot
@@ -94,6 +101,15 @@ class PersonaConfig:
 
 class NPCAgent:
     """Orchestrates perception, memory, schedule, decision, behavior for one NPC."""
+
+    # Class-level lookup so an agent can find its dialog partner without each
+    # NPCAgent carrying a reference to every other NPCAgent. main.py populates
+    # this once all agents are constructed.
+    _registry: dict[str, "NPCAgent"] = {}
+
+    @classmethod
+    def set_registry(cls, agents: dict[str, "NPCAgent"]) -> None:
+        cls._registry = dict(agents)
 
     def __init__(
         self,
@@ -267,10 +283,10 @@ class NPCAgent:
 
             # 3) STM entry for current slot
             if slot.kind != SlotKind.EMPTY:
-                stm_item = schedule_item_to_stm(slot, self.persona.id)
+                stm_item = schedule_item_to_stm(slot, self.persona.id, now=world.sim_time)
                 if self.stm.add(stm_item):
                     try:
-                        await self.compressor.maybe_compress()
+                        await self.compressor.maybe_compress(now=world.sim_time)
                     except Exception as exc:
                         log.warning("compression failed for %s: %s", self.persona.id, exc)
 
@@ -352,16 +368,86 @@ class NPCAgent:
                 },
             })
 
-            # 7) Execute step
+            # 6b) If this is a social-style activity AND someone is in the same
+            #     room, run one LLM-driven dialog turn before/around the GOAP
+            #     step. Writes to both NPCs' STM + memory_graph and broadcasts
+            #     a WS `dialog` event so the UI can render it.
+            try:
+                await self._maybe_have_dialog(slot, snap, visible_agents, world)
+            except Exception as exc:
+                log.warning("dialog pipeline failed for %s: %s", self.persona.id, exc)
+
+            # 7) Execute step + write a result-flavoured STM so future decisions
+            #    can see what just happened (success/failure + reason + state).
             if chosen_step is not None:
+                # snapshot state BEFORE execution so we can show the delta
+                pre_state = dict(init_state)
+                pre_loc = pre_state.get("agent.location_uid")
+
                 result = await self.behavior_executor.execute(
                     self.persona.id, chosen_step.action_id, chosen_params, world,
                 )
+
+                post_agent = world.agents.get(self.persona.id)
+                post_loc = post_agent.location_uid if post_agent else None
+
+                # Build the result STM (one per executed step, tagged sim_time).
+                hhmm = world.sim_time.strftime("%H:%M")
+                if result.ok:
+                    if chosen_step.action_id == "move" and pre_loc and post_loc and pre_loc != post_loc:
+                        text = f"[{hhmm}] OK move {pre_loc}→{post_loc}（{activity_text}）"
+                        text_en = f"[{hhmm}] OK move {pre_loc}->{post_loc} ({activity_text})"
+                    else:
+                        text = f"[{hhmm}] OK {chosen_step.action_id}（{activity_text}）"
+                        text_en = f"[{hhmm}] OK {chosen_step.action_id} ({activity_text})"
+                else:
+                    text = (
+                        f"[{hhmm}] FAIL {chosen_step.action_id}"
+                        f"({chosen_params}) — {result.note or 'no detail'}"
+                    )
+                    text_en = (
+                        f"[{hhmm}] FAIL {chosen_step.action_id}"
+                        f"({chosen_params}) - {result.note or 'no detail'}"
+                    )
+                result_stm = ShortTermItem(
+                    id=f"stm_act_{uuid.uuid4().hex[:8]}",
+                    text=text,
+                    text_en=text_en,
+                    ts=world.sim_time,
+                    source=f"behavior:{chosen_step.action_id}",
+                    meta={
+                        "agent_id": self.persona.id,
+                        "action_id": chosen_step.action_id,
+                        "params": dict(chosen_params),
+                        "ok": bool(result.ok),
+                        "note": result.note,
+                        "pre_state": pre_state,
+                        "post_state": {
+                            "agent.location_uid": post_loc,
+                            "agent.energy": getattr(post_agent, "energy", None),
+                            "agent.hunger": getattr(post_agent, "hunger", None),
+                            "agent.mood": getattr(post_agent, "mood", None),
+                        },
+                        "activity": activity_text,
+                        "slot_location_uid": slot.location_uid,
+                    },
+                )
+                if self.stm.add(result_stm):
+                    try:
+                        await self.compressor.maybe_compress(now=world.sim_time)
+                    except Exception as exc:
+                        log.warning("compression failed for %s: %s", self.persona.id, exc)
+
                 await event_bus.publish({
                     "type": "behavior",
                     "ts_sim": world.sim_time.isoformat(),
                     "agent_id": self.persona.id,
-                    "payload": result.to_dict(),
+                    "payload": {
+                        **result.to_dict(),
+                        "pre_state": pre_state,
+                        "post_state": result_stm.meta["post_state"],
+                        "activity": activity_text,
+                    },
                 })
 
         except Exception as exc:  # never crash the loop
@@ -386,11 +472,48 @@ class NPCAgent:
             hi += 1
         gap_minutes = (hi - lo) * SLOT_MINUTES
 
+        # gather decision context from perception + recent memory + neighbour slot
+        agent_state = self.world.agents.get(self.persona.id)
+        here_uid = agent_state.location_uid if agent_state else None
+        try:
+            snap = self.perceiver.perceive(self.persona.id, self.world)
+            visible_agents = sorted({
+                a
+                for room in (snap.children + snap.siblings + snap.adjacent_fallback)
+                for a in room.agents
+            } - {self.persona.id})
+            visible_items: list[str] = sorted({
+                item
+                for room in (snap.children + snap.siblings + snap.adjacent_fallback)
+                for item in (room.items or [])
+            })
+        except Exception:
+            snap = None
+            visible_agents = []
+            visible_items = []
+
+        last_activity = None
+        if lo - 1 >= 0:
+            last_activity = self.timeline.slots[lo - 1].activity
+
+        ctx = {
+            "sim_time": self.world.sim_time.isoformat(timespec="minutes"),
+            "weekday": self._weekday_name(),
+            "here_uid": here_uid,
+            "visible_agents": visible_agents,
+            "visible_items": visible_items[:10],
+            "last_activity": last_activity,
+        }
+        # query terms make the retriever surface relevant memories.
+        query_parts = [last_activity or "", "free time"] + visible_agents[:3]
+        query = " ".join(p for p in query_parts if p)
+
         try:
             choice = await self.slot_filler.fill(
                 gap_minutes=gap_minutes,
                 persona=self.persona.to_dict(),
-                memories=self.retriever.retrieve(query="free time", top_k=3),
+                memories=self.retriever.retrieve(query=query or "free time", top_k=5),
+                context=ctx,
             )
         except Exception as exc:
             log.debug("slot fill failed for %s: %s", self.persona.id, exc)
@@ -414,6 +537,208 @@ class NPCAgent:
         )
 
     # ------------------------------------------------------------------
+    #                  dialog pipeline
+    # ------------------------------------------------------------------
+
+    def _is_social_activity(self, activity: str | None) -> bool:
+        if not activity:
+            return False
+        low = activity.lower()
+        return any(h in low for h in SOCIAL_HINTS)
+
+    async def _maybe_have_dialog(
+        self,
+        slot: Slot,
+        snap: PerceptionSnapshot,
+        visible_agents: list[str],
+        world: "WorldState",
+    ) -> None:
+        """If this tick is a social-style slot AND someone is in the same room,
+        ask the LLM for one short dialog and persist both sides.
+
+        Only fires when a real co-located agent exists (snap.here_uid agents),
+        so the `talk` precondition (target.location_uid == agent.location_uid)
+        is guaranteed to hold.
+        """
+        if not self._is_social_activity(slot.activity):
+            return
+        if not visible_agents:
+            return
+
+        # The here_uid room from perception is authoritative for co-location.
+        here_room = next(
+            (r for r in (snap.children + snap.siblings + snap.adjacent_fallback)
+             if r.uid == snap.here_uid),
+            None,
+        )
+        if here_room is None:
+            # Look at WorldState directly as a fallback.
+            colocated = sorted({
+                aid for aid, st in world.agents.items()
+                if aid != self.persona.id and st.location_uid == snap.here_uid
+            })
+        else:
+            colocated = sorted(set(here_room.agents) - {self.persona.id})
+        if not colocated:
+            return
+
+        target_id = colocated[0]
+        listener = self._registry.get(target_id)
+        if listener is None:
+            return
+
+        situation = {
+            "sim_time": world.sim_time.isoformat(timespec="minutes"),
+            "weekday": self._weekday_name(),
+            "here_uid": snap.here_uid,
+            "here_name": snap.here_name,
+            "current_activity": slot.activity,
+        }
+        speaker_dict = self.persona.to_dict()
+        listener_dict = listener.persona.to_dict()
+        speaker_mems = [m.text for m in self.retriever.retrieve(
+            query=f"{listener.persona.name} {slot.activity or ''}", top_k=3,
+        )]
+
+        try:
+            dialog = await self.llm.generate_dialog(
+                speaker=speaker_dict,
+                listener=listener_dict,
+                speaker_memories=speaker_mems,
+                situation=situation,
+            )
+        except Exception as exc:
+            log.warning("generate_dialog failed for %s->%s: %s",
+                        self.persona.id, target_id, exc)
+            return
+        log.info("dialog %s -> %s : %s (%s)",
+                 self.persona.id, target_id,
+                 dialog.get("speaker_line", "")[:30], dialog.get("topic"))
+
+        hhmm = world.sim_time.strftime("%H:%M")
+        topic = dialog.get("topic", "杂谈")
+        topic_en = dialog.get("topic_en", "chat")
+        tone = dialog.get("tone", "neutral")
+        speaker_line = dialog.get("speaker_line", "")
+        listener_line = dialog.get("listener_line", "")
+        speaker_line_en = dialog.get("speaker_line_en", speaker_line)
+        listener_line_en = dialog.get("listener_line_en", listener_line)
+        speaker_name = self.persona.name
+        listener_name = listener.persona.name
+        speaker_name_en = getattr(self.persona, "name_en", None) or speaker_name
+        listener_name_en = getattr(listener.persona, "name_en", None) or listener_name
+
+        # Run the GOAP `talk` action so the world records it + applies effects.
+        try:
+            await self.behavior_executor.execute(
+                self.persona.id, "talk", {"target_agent_id": target_id}, world,
+            )
+        except Exception as exc:
+            log.debug("talk action exec failed: %s", exc)
+
+        # Build paired STMs (bilingual).
+        speaker_stm = ShortTermItem(
+            id=f"stm_dlg_{uuid.uuid4().hex[:8]}",
+            text=f"[{hhmm}] 我对{listener_name}说：{speaker_line}（TA答：{listener_line}）",
+            text_en=f"[{hhmm}] I said to {listener_name_en}: \"{speaker_line_en}\" (reply: \"{listener_line_en}\")",
+            ts=world.sim_time,
+            source=f"dialog:{target_id}",
+            meta={
+                "agent_id": self.persona.id,
+                "role": "speaker",
+                "partner_id": target_id,
+                "partner_name": listener_name,
+                "partner_name_en": listener_name_en,
+                "topic": topic,
+                "topic_en": topic_en,
+                "tone": tone,
+                "here_uid": snap.here_uid,
+                "line": speaker_line,
+                "line_en": speaker_line_en,
+                "reply": listener_line,
+                "reply_en": listener_line_en,
+            },
+        )
+        listener_stm = ShortTermItem(
+            id=f"stm_dlg_{uuid.uuid4().hex[:8]}",
+            text=f"[{hhmm}] {speaker_name}对我说：{speaker_line}（我答：{listener_line}）",
+            text_en=f"[{hhmm}] {speaker_name_en} said to me: \"{speaker_line_en}\" (I replied: \"{listener_line_en}\")",
+            ts=world.sim_time,
+            source=f"dialog:{self.persona.id}",
+            meta={
+                "agent_id": target_id,
+                "role": "listener",
+                "partner_id": self.persona.id,
+                "partner_name": speaker_name,
+                "partner_name_en": speaker_name_en,
+                "topic": topic,
+                "topic_en": topic_en,
+                "tone": tone,
+                "here_uid": snap.here_uid,
+                "line": speaker_line,
+                "line_en": speaker_line_en,
+                "reply": listener_line,
+                "reply_en": listener_line_en,
+            },
+        )
+        if self.stm.add(speaker_stm):
+            try:
+                await self.compressor.maybe_compress(now=world.sim_time)
+            except Exception:
+                pass
+        if listener.stm.add(listener_stm):
+            try:
+                await listener.compressor.maybe_compress(now=world.sim_time)
+            except Exception:
+                pass
+
+        # Memory-graph triplets for both sides (narrative ledger).
+        triplet_speaker = Triplet(
+            id=f"trp_dlg_{uuid.uuid4().hex[:8]}",
+            subject=self.persona.id,
+            predicate=f"said_to({topic})",
+            obj=target_id,
+            ts=world.sim_time,
+            location_uid=snap.here_uid,
+            tone=tone,
+            meta={"line": speaker_line, "reply": listener_line},
+        )
+        self.mem_graph.add(triplet_speaker)
+        listener.mem_graph.add(Triplet(
+            id=f"trp_dlg_{uuid.uuid4().hex[:8]}",
+            subject=target_id,
+            predicate=f"heard_from({topic})",
+            obj=self.persona.id,
+            ts=world.sim_time,
+            location_uid=snap.here_uid,
+            tone=tone,
+            meta={"line": speaker_line, "reply": listener_line},
+        ))
+
+        # Broadcast a dedicated WS event so the UI can render dialog bubbles.
+        await event_bus.publish({
+            "type": "dialog",
+            "ts_sim": world.sim_time.isoformat(),
+            "agent_id": self.persona.id,
+            "payload": {
+                "speaker_id": self.persona.id,
+                "speaker_name": speaker_name,
+                "speaker_name_en": speaker_name_en,
+                "listener_id": target_id,
+                "listener_name": listener_name,
+                "listener_name_en": listener_name_en,
+                "here_uid": snap.here_uid,
+                "topic": topic,
+                "topic_en": topic_en,
+                "tone": tone,
+                "speaker_line": speaker_line,
+                "speaker_line_en": speaker_line_en,
+                "listener_line": listener_line,
+                "listener_line_en": listener_line_en,
+            },
+        })
+
+    # ------------------------------------------------------------------
     #                  introspection helpers (for REST)
     # ------------------------------------------------------------------
 
@@ -421,16 +746,21 @@ class NPCAgent:
         return {
             "short_term": [
                 {
-                    "id": it.id, "text": it.text, "ts": it.ts.isoformat(),
+                    "id": it.id, "text": it.text,
+                    "text_en": getattr(it, "text_en", None),
+                    "ts": it.ts.isoformat(),
                     "source": it.source, "hit_count": it.hit_count, "meta": it.meta,
                 }
                 for it in self.stm.all()
             ],
             "long_term": [
                 {
-                    "id": it.id, "text": it.text, "ts": it.ts.isoformat(),
+                    "id": it.id, "text": it.text,
+                    "text_en": getattr(it, "text_en", None),
+                    "ts": it.ts.isoformat(),
                     "source_ids": it.source_ids, "hit_count": it.hit_count,
-                    "degraded": it.degraded, "meta": it.meta,
+                    "degraded": it.degraded,
+                    "meta": getattr(it, "meta", {}),
                 }
                 for it in self.ltm.all()
             ],

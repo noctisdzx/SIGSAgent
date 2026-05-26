@@ -76,35 +76,80 @@ def _make_llm_adapter() -> tuple[LLMAdapter, bool]:
                 resp = await client.chat(
                     messages=[
                         {"role": "system",
-                         "content": "你是一个简洁的记忆压缩器，把多条短期记忆压成一句中文。"},
+                         "content": "你是一个记忆压缩器。把多条短期记忆压缩成一段中文摘要"
+                                    "（保留时间、地点、人物、情绪关键点），"
+                                    "再额外给出一段对应的英文摘要。"
+                                    "严格 JSON 输出: {\"zh\":\"…\", \"en\":\"…\"}。"},
                         {"role": "user", "content": "\n".join(f"- {t}" for t in texts)},
                     ],
                     temperature=0.3,
-                    max_tokens=200,
+                    max_tokens=800,
+                    response_format={"type": "json_object"},
                 )
-                return resp["choices"][0]["message"]["content"].strip()
+                raw = resp["choices"][0]["message"]["content"].strip()
+                # Pack as a special two-line string the compressor will split.
+                import json as _json
+                try:
+                    data = _json.loads(raw)
+                    zh = str(data.get("zh", "")).strip()
+                    en = str(data.get("en", "")).strip()
+                    if zh or en:
+                        return f"{zh}\u241F{en}"  # unit-separator joins zh + en
+                except Exception:
+                    pass
+                return raw
             except Exception:
                 return await self._mock.summarize_memories(texts)
 
-        async def choose_fragment(self, gap_minutes, persona, memories, candidates):
+        async def choose_fragment(self, gap_minutes, persona, memories, candidates, context=None):
             try:
+                ctx = context or {}
+                ctx_line = (
+                    f"sim_time={ctx.get('sim_time','?')} room={ctx.get('here_uid','?')} "
+                    f"visible_agents={ctx.get('visible_agents', [])} "
+                    f"last_activity={ctx.get('last_activity','?')}"
+                )
+                # Build the candidate id allow-list so we can recover from
+                # noisy LLM output (returns text around the id, or wraps it
+                # in quotes / brackets).
+                valid_ids = [c.get("id") for c in candidates if c.get("id")]
                 resp = await client.chat(
                     messages=[
                         {"role": "system",
-                         "content": "你为一个校园NPC选择填补空闲时间的活动。只返回候选id字符串。"},
+                         "content": "你为一个校园NPC选择填补空闲时间的活动。"
+                                    "返回 JSON: {\"id\":\"<候选id>\", \"rationale\":\"<≤30字>\"}。"
+                                    "id 必须严格出现在候选列表中。"
+                                    "如果当前房间有其他NPC且候选含social标签，请优先选社交向片段。"},
                         {"role": "user", "content":
                             f"persona={persona.get('name')} prefs={persona.get('preferences')}\n"
+                            f"context={ctx_line}\n"
                             f"memories={memories}\n"
                             f"candidates={candidates}\n"
                             f"gap_minutes={gap_minutes}"},
                     ],
                     temperature=0.4,
-                    max_tokens=60,
+                    max_tokens=300,
+                    response_format={"type": "json_object"},
                 )
-                pick = resp["choices"][0]["message"]["content"].strip()
-                return pick, "llm pick"
+                content = resp["choices"][0]["message"]["content"].strip()
+                import json as _json
+                try:
+                    data = _json.loads(content)
+                    pick = str(data.get("id", "")).strip()
+                    rationale = str(data.get("rationale", "")).strip() or "llm pick"
+                except Exception:
+                    pick = content
+                    rationale = "llm pick"
+                if pick not in valid_ids:
+                    # final mile salvage: find any valid id present in the text.
+                    pick = next((v for v in valid_ids if v in content), "") or pick
+                if pick not in valid_ids:
+                    raise ValueError(f"choose_fragment: invalid id {pick!r}")
+                return pick, rationale
             except Exception:
-                return await self._mock.choose_fragment(gap_minutes, persona, memories, candidates)
+                return await self._mock.choose_fragment(
+                    gap_minutes, persona, memories, candidates, context=context,
+                )
 
         async def extract_triplets(self, agent_id, events):
             try:
@@ -115,7 +160,7 @@ def _make_llm_adapter() -> tuple[LLMAdapter, bool]:
                         {"role": "user", "content": f"agent={agent_id} events={events}"},
                     ],
                     temperature=0.0,
-                    max_tokens=400,
+                    max_tokens=900,
                     response_format={"type": "json_object"},
                 )
                 content = resp["choices"][0]["message"]["content"]
@@ -128,6 +173,95 @@ def _make_llm_adapter() -> tuple[LLMAdapter, bool]:
                 raise ValueError("unexpected shape")
             except Exception:
                 return await self._mock.extract_triplets(agent_id, events)
+
+        async def generate_dialog(self, speaker, listener, speaker_memories, situation):
+            """Generate one short bilingual dialog between two NPCs.
+
+            Returns {speaker_line, listener_line, speaker_line_en, listener_line_en,
+            topic, topic_en, tone}. Falls back to the mock adapter on any
+            network/parse failure.
+            """
+            try:
+                sys_msg = (
+                    "你是校园模拟器的对话编剧。"
+                    "为两位 NPC 写一轮自然口语化的对话；同时输出中文和英文两个版本。"
+                    "严格 JSON 输出: "
+                    "{\"speaker_line\":\"<中文>\", \"listener_line\":\"<中文>\", "
+                    "\"speaker_line_en\":\"<English>\", \"listener_line_en\":\"<English>\", "
+                    "\"topic\":\"<中文 3-7 字>\", \"topic_en\":\"<English 1-4 words>\", "
+                    "\"tone\":\"friendly|neutral|tense|playful|curious\"}。"
+                    "每条中文 ≤35 汉字，英文 ≤25 words；不要寒暄套话；"
+                    "如果说话人最近记忆里有相关线索请自然体现。"
+                )
+                user_msg = (
+                    f"speaker={speaker.get('name')}({speaker.get('role','')}) "
+                    f"traits={speaker.get('personality', {})}\n"
+                    f"listener={listener.get('name')}({listener.get('role','')})\n"
+                    f"sim_time={situation.get('sim_time')} weekday={situation.get('weekday')}\n"
+                    f"room={situation.get('here_name')} ({situation.get('here_uid')})\n"
+                    f"current_activity={situation.get('current_activity')}\n"
+                    f"speaker_memories={speaker_memories}"
+                )
+                resp = await client.chat(
+                    messages=[
+                        {"role": "system", "content": sys_msg},
+                        {"role": "user", "content": user_msg},
+                    ],
+                    temperature=0.7,
+                    max_tokens=800,
+                    response_format={"type": "json_object"},
+                )
+                content = resp["choices"][0]["message"]["content"]
+                import json as _json
+                data = _json.loads(content)
+                return {
+                    "speaker_line": str(data.get("speaker_line", "")).strip() or "（无内容）",
+                    "listener_line": str(data.get("listener_line", "")).strip() or "（无回应）",
+                    "speaker_line_en": str(data.get("speaker_line_en", "")).strip() or "(empty)",
+                    "listener_line_en": str(data.get("listener_line_en", "")).strip() or "(no reply)",
+                    "topic": str(data.get("topic", "")).strip() or "杂谈",
+                    "topic_en": str(data.get("topic_en", "")).strip() or "chat",
+                    "tone": str(data.get("tone", "neutral")).strip() or "neutral",
+                }
+            except Exception:
+                return await self._mock.generate_dialog(
+                    speaker, listener, speaker_memories, situation,
+                )
+
+        async def narrate_day(self, day, bullets, stats):
+            """Bilingual omniscient-narrator paragraph for a finished sim day."""
+            try:
+                sys_msg = (
+                    "你是校园模拟器的旁白者。给定一天的事件流水，"
+                    "用生动、克制的笔触写一段中文旁白和一段英文旁白，描述这一天发生了什么 —— "
+                    "节奏、关系、有趣的细节都可以，但只用流水里出现过的人物。"
+                    "严格 JSON 输出: {\"zh\": \"<≤200汉字>\", \"en\": \"<≤180 words>\"}。"
+                )
+                events_blob = "\n".join(f"- {b}" for b in bullets)
+                user_msg = (
+                    f"DAY: {day}\n"
+                    f"STATS: {stats}\n"
+                    f"EVENTS (chronological):\n{events_blob}"
+                )
+                resp = await client.chat(
+                    messages=[
+                        {"role": "system", "content": sys_msg},
+                        {"role": "user", "content": user_msg},
+                    ],
+                    temperature=0.7,
+                    max_tokens=2000,
+                    response_format={"type": "json_object"},
+                )
+                content = resp["choices"][0]["message"]["content"]
+                import json as _json
+                data = _json.loads(content)
+                return {
+                    "zh": str(data.get("zh", "")).strip(),
+                    "en": str(data.get("en", "")).strip(),
+                    "degraded": False,
+                }
+            except Exception:
+                return await self._mock.narrate_day(day, bullets, stats)
 
     return _Adapter(), True
 
@@ -201,6 +335,8 @@ async def lifespan(app: FastAPI):
 
     # 6) Sim loop (started on demand by /api/sim/start, or auto).
     sim = SimLoop(world, scene) if scene else None
+    if sim is not None:
+        sim.set_llm(llm)  # so SimLoop can call narrate_day on midnight rollover
 
     # 7) Build NPCAgents.
     agents: dict[str, NPCAgent] = {}
@@ -240,6 +376,12 @@ async def lifespan(app: FastAPI):
     app.state.action_lib = action_lib
     app.state.fragment_lib = fragment_lib
     app.state.agents = agents
+    # Allow NPCAgents to find each other (used by the dialog pipeline).
+    try:
+        from app.agents.agent import NPCAgent as _NPCAgent
+        _NPCAgent.set_registry(agents)
+    except Exception as _exc:
+        log.warning("failed to publish NPCAgent registry: %s", _exc)
 
     if sim and settings.sim_autostart:
         await sim.start()

@@ -19,15 +19,26 @@ from app.agents.memory.short_term import ShortTermItem
 from .timeline import DailyTimeline, Slot, SlotKind
 
 
-def schedule_item_to_stm(slot: Slot, agent_id: str) -> ShortTermItem:
+def schedule_item_to_stm(slot: Slot, agent_id: str, now: datetime | None = None) -> ShortTermItem:
+    """Build an STM entry tagged with the in-game time.
+
+    `ts` defaults to `slot.start` (the in-game start of the slot) so that
+    memories chronologically align with the sim clock rather than wall-clock.
+    Caller may override with `now` (e.g. `world.sim_time`) to record at the
+    precise tick when the slot was confirmed.
+    """
     text = (
         f"[{slot.start.strftime('%H:%M')}-{slot.end.strftime('%H:%M')}] "
         f"{slot.activity or '(no activity)'}@{slot.location_uid or '?'}"
     )
+    # English mirror — activity names are already snake_case English (move,
+    # sleep, lab_work, attend_class…) so the same shape reads fine in English.
+    text_en = text
     return ShortTermItem(
         id=f"stm_{uuid.uuid4().hex[:8]}",
         text=text,
-        ts=datetime.utcnow(),
+        text_en=text_en,
+        ts=now or slot.start,
         source=f"schedule:{slot.source_id}",
         meta={
             "agent_id": agent_id,
@@ -35,6 +46,8 @@ def schedule_item_to_stm(slot: Slot, agent_id: str) -> ShortTermItem:
             "kind": slot.kind.value,
             "activity": slot.activity,
             "location_uid": slot.location_uid,
+            "slot_start": slot.start.isoformat(),
+            "slot_end": slot.end.isoformat(),
         },
     )
 
@@ -71,7 +84,8 @@ def bulk_build_for_day(timeline: DailyTimeline, agent_id: str) -> list[ShortTerm
     """One STM entry per contiguous activity range across the whole day.
 
     Used at the start of the day to bootstrap STM with the day's plan
-    rather than waiting for slot-by-slot ticking.
+    rather than waiting for slot-by-slot ticking. `ts` is the in-game start
+    of each contiguous run.
     """
     items: list[ShortTermItem] = []
     for first, last in _runs(timeline):
@@ -83,7 +97,8 @@ def bulk_build_for_day(timeline: DailyTimeline, agent_id: str) -> list[ShortTerm
             ShortTermItem(
                 id=f"stm_{uuid.uuid4().hex[:8]}",
                 text=text,
-                ts=datetime.utcnow(),
+                text_en=text,
+                ts=first.start,
                 source=f"schedule:{first.source_id}",
                 meta={
                     "agent_id": agent_id,
@@ -92,6 +107,8 @@ def bulk_build_for_day(timeline: DailyTimeline, agent_id: str) -> list[ShortTerm
                     "kind": first.kind.value,
                     "activity": first.activity,
                     "location_uid": first.location_uid,
+                    "slot_start": first.start.isoformat(),
+                    "slot_end": last.end.isoformat(),
                 },
             )
         )

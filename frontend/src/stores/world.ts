@@ -8,6 +8,7 @@ export const useWorldStore = defineStore('world', () => {
   const worldSnapshot = ref<any | null>(null);
   const lastTickAt = ref<string | null>(null);
   const usingMock = ref(false);
+  let pollHandle: number | null = null;
 
   async function loadScene() {
     try {
@@ -35,5 +36,21 @@ export const useWorldStore = defineStore('world', () => {
     if (payload.world) worldSnapshot.value = payload.world;
   }
 
-  return { sceneGraph, worldSnapshot, lastTickAt, usingMock, loadScene, loadWorld, applyTick };
+  /** Begin polling /api/world every `intervalMs` ms. Safe to call repeatedly. */
+  function startPolling(intervalMs = 3000) {
+    if (pollHandle !== null) return;
+    pollHandle = window.setInterval(() => { void loadWorld(); }, intervalMs);
+  }
+  function stopPolling() {
+    if (pollHandle !== null) {
+      window.clearInterval(pollHandle);
+      pollHandle = null;
+    }
+  }
+
+  return {
+    sceneGraph, worldSnapshot, lastTickAt, usingMock,
+    loadScene, loadWorld, applyTick,
+    startPolling, stopPolling,
+  };
 });

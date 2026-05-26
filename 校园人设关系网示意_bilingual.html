@@ -167,6 +167,45 @@ body.resizing iframe, body.resizing canvas { pointer-events:none; }
 .hm-colorbar { flex:1; max-width:300px; height:14px; border-radius:3px; box-shadow:inset 0 0 0 1px #1a2240; }
 .hm-cb-tick { display:flex; justify-content:space-between; max-width:300px; flex:1; font-size:9px; color:#78909c; font-family:Consolas,monospace; }
 .hm-section-hint { font-size:11px; color:#78909c; line-height:1.55; margin-bottom:8px; padding:6px 8px; background:#0d1220; border-left:2px solid #42a5f5; border-radius:0 4px 4px 0; }
+/* ===== Rooms tab ===== */
+.rm-floor-title { font-size:13px; color:#90caf9; margin:10px 0 6px; padding-bottom:3px; border-bottom:1px dashed #1e2a45; font-weight:bold; display:flex; justify-content:space-between; align-items:baseline; }
+.rm-floor-title .muted { font-size:10.5px; }
+.rm-card { background:#0d1220; border-radius:8px; padding:11px 13px; margin-bottom:8px; border-left:3px solid #ffa726; }
+.rm-card-head { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px; flex-wrap:wrap; gap:6px; }
+.rm-name { font-size:14px; color:#ffe082; font-weight:bold; }
+.rm-name-en { font-size:11px; color:#90a4ae; font-weight:normal; margin-left:6px; }
+.rm-uid { font-size:10px; color:#546e7a; font-family:Consolas,monospace; }
+.rm-tag-row { margin-bottom:6px; }
+.rm-tag { display:inline-block; padding:2px 8px; border-radius:10px; font-size:10.5px; margin-right:4px; }
+.rm-tag-daily { background:#FFA72622; color:#FFA726; border:1px solid #FFA72655; }
+.rm-tag-study { background:#42A5F522; color:#42A5F5; border:1px solid #42A5F555; }
+.rm-tag-social { background:#66BB6A22; color:#66BB6A; border:1px solid #66BB6A55; }
+.rm-tag-leisure { background:#AB47BC22; color:#AB47BC; border:1px solid #AB47BC55; }
+.rm-tag-fitness { background:#26C6DA22; color:#26C6DA; border:1px solid #26C6DA55; }
+.rm-desc { font-size:11.5px; color:#cfd8dc; line-height:1.55; margin:5px 0; }
+.rm-cap-row { display:flex; align-items:center; gap:8px; margin:5px 0; }
+.rm-cap-label { font-size:11px; color:#78909c; min-width:34px; }
+.rm-cap-track { flex:1; height:8px; background:#0a0e17; border-radius:4px; box-shadow:inset 0 0 0 1px #1a2240; overflow:hidden; }
+.rm-cap-fill { height:100%; background:linear-gradient(90deg,#42a5f5,#ce93d8); border-radius:4px; }
+.rm-cap-num { color:#ffe082; font-size:11px; font-family:Consolas,monospace; min-width:30px; text-align:right; }
+.rm-sub-title { font-size:10.5px; color:#78909c; margin:6px 0 3px; text-transform:uppercase; letter-spacing:1px; }
+.rm-furn-list, .rm-adj-list { display:flex; flex-wrap:wrap; gap:4px; }
+.rm-furn { background:#1a2240; padding:2px 8px; border-radius:10px; font-size:10.5px; color:#cfd8dc; }
+.rm-furn b { color:#ffa726; margin-left:3px; }
+.rm-adj { background:#263259; padding:2px 8px; border-radius:10px; font-size:10.5px; color:#90caf9; cursor:pointer; transition:background .12s; }
+.rm-adj:hover { background:#37474f; color:#fff; }
+.rm-adj.cross { border:1px dashed #ef9a9a55; color:#ef9a9a; }
+.rm-overview { background:#0d1220; border-radius:8px; padding:10px 12px; margin-bottom:10px; border-left:3px solid #42a5f5; }
+.rm-ov-row { display:flex; justify-content:space-between; font-size:12px; margin-bottom:3px; }
+.rm-ov-row .v { color:#ffe082; font-family:Consolas,monospace; }
+.rm-map-wrap { background:#0a0e17; border-radius:8px; padding:10px; margin:8px 0 12px; box-shadow:inset 0 0 0 1px #1a2240; }
+.rm-map-title { font-size:11px; color:#78909c; margin-bottom:6px; display:flex; justify-content:space-between; }
+.rm-map { display:block; width:100%; }
+.rm-map-room { stroke:#0a0e17; stroke-width:1.5; cursor:pointer; transition:filter .12s; }
+.rm-map-room:hover { filter:brightness(1.4); }
+.rm-map-room.active { stroke:#fff; stroke-width:2.5; }
+.rm-map-link { stroke:#42a5f5; stroke-width:1; opacity:0.45; }
+.rm-map-label { font-size:9px; fill:#0a0e17; text-anchor:middle; pointer-events:none; font-weight:bold; }
 </style>
 </head>
 <body>
@@ -197,6 +236,7 @@ body.resizing iframe, body.resizing canvas { pointer-events:none; }
       <div class="tab" data-tab="scenes" data-zh="场景库" data-en="Scenes">场景库</div>
       <div class="tab" data-tab="timeline" data-zh="时间线" data-en="Timeline">时间线</div>
       <div class="tab" data-tab="heatmap" data-zh="热度" data-en="Heat">热度</div>
+      <div class="tab" data-tab="rooms" data-zh="场地" data-en="Rooms">场地</div>
     </div>
     <div id="fp-tooltip" class="fp-tooltip"></div>
     <div class="panel-content" id="panel-body">
@@ -711,6 +751,8 @@ function switchTab(tab) {
     renderTimeline();
   } else if (tab === 'heatmap') {
     renderHeatmap();
+  } else if (tab === 'rooms') {
+    renderRooms();
   }
 }
 
@@ -943,6 +985,243 @@ function renderHeatmap() {
 
   document.getElementById('panel-body').innerHTML = h;
   bindPanelClicks();
+}
+
+// ===== Rooms (guoyi_rooms_v2) =====
+const ROOMS_DATA = {
+  "rooms": [
+    {"index":0,"uid":"a7934434","name":"Kitchen","tag":["daily life"],"adjacent":["438038e3","6943e822","8dc3960a"],"description":"A cooking area where meals are prepared.","position":[79.6,9.6,0],"containment":10,"furniture":[{"name":"trolley","num":2}]},
+    {"index":1,"uid":"9a49343c","name":"Dining Area","tag":["daily life","social"],"adjacent":["438038e3","a62839dd"],"description":"A seating area where students can eat and socialise during meals.","position":[54.1,9.6,0],"containment":80,"furniture":[{"name":"dining table","num":20},{"name":"chair","num":80}]},
+    {"index":2,"uid":"99883bc6","name":"Discussion Area","tag":["study","social"],"adjacent":["438038e3","4d7a7e81","7a281fd7","a62839dd"],"description":"An open area for group discussion, planning, and peer review of experiments.","position":[5.8,44.1,0],"containment":20,"furniture":[{"name":"round table","num":4},{"name":"chair","num":16}]},
+    {"index":3,"uid":"3877431b","name":"Lab Area","tag":["study"],"adjacent":["4d7a7e81","4ef146d8","64a9bc35","66cb10e7","7a281fd7","cb0199d8"],"description":"A dedicated bench space for conducting scientific experiments and practical work.","position":[33.6,90.4,0],"containment":30,"furniture":[{"name":"stool","num":20}]},
+    {"index":4,"uid":"6943e822","name":"Halal Restaurant","tag":["daily life","social"],"adjacent":["438038e3","a7934434"],"description":"A dining outlet serving halal-certified meals for students.","position":[140.8,3.4,4],"containment":50,"furniture":[{"name":"dining table","num":12},{"name":"chair","num":48}]},
+    {"index":5,"uid":"8dc3960a","name":"Club Activities","tag":["social","leisure"],"adjacent":["438038e3","a7934434"],"description":"A flexible space for student clubs to host meetings, events, and activities.","position":[91.4,14.2,4],"containment":40,"furniture":[{"name":"folding table","num":8},{"name":"chair","num":40}]},
+    {"index":6,"uid":"a62839dd","name":"Café","tag":["leisure","social","daily life"],"adjacent":["438038e3","7a281fd7","99883bc6","9a49343c"],"description":"A café where students can get drinks and snacks and relax between activities.","position":[60.2,17.7,4],"containment":30,"furniture":[{"name":"café table","num":8},{"name":"chair","num":24}]},
+    {"index":7,"uid":"4d7a7e81","name":"Classroom","tag":["study"],"adjacent":["3877431b","438038e3","4ef146d8","64a9bc35","7a281fd7","99883bc6"],"description":"A standard classroom for lectures, lessons, and teacher-led instruction.","position":[9.9,87.7,4],"containment":40,"furniture":[{"name":"student desk","num":40},{"name":"chair","num":40}]},
+    {"index":8,"uid":"9a4098e7","name":"Discussion Area","tag":["study","social"],"adjacent":[],"description":"A collaborative space for group study, seminars, and academic discussion.","position":[14.8,97.1,4],"containment":20,"furniture":[{"name":"round table","num":4},{"name":"chair","num":20}]},
+    {"index":9,"uid":"66cb10e7","name":"Garden Space","tag":["leisure","fitness"],"adjacent":["3877431b","4ef146d8","64a9bc35"],"description":"An open garden terrace for relaxing, reading, light exercise, and outdoor socialising.","position":[42.9,136.1,4],"containment":60,"furniture":[{"name":"outdoor bench","num":10},{"name":"outdoor table","num":4}]},
+    {"index":10,"uid":"cb0199d8","name":"Lecture Hall","tag":["study","social"],"adjacent":["3877431b","64a9bc35"],"description":"The main seating and presentation area within the lecture hall.","position":[79,108.8,4],"containment":150,"furniture":[{"name":"podium","num":1}]},
+    {"index":11,"uid":"438038e3","name":"Dorm Rooms","tag":["daily life","study"],"adjacent":["4d7a7e81","6943e822","8dc3960a","99883bc6","9a49343c","a62839dd","a7934434"],"description":"Private or shared bedrooms where students sleep, rest, and do personal study.","position":[62.5,7,8],"containment":4,"furniture":[{"name":"study desk","num":4},{"name":"chair","num":4}]},
+    {"index":12,"uid":"da2afe02","name":"Discussion Area","tag":["study","social"],"adjacent":[],"description":"A communal area near the dorms for quiet group work and casual conversation.","position":[62.5,9,8],"containment":16,"furniture":[{"name":"sofa","num":4},{"name":"coffee table","num":2}]},
+    {"index":13,"uid":"7a281fd7","name":"Garden Space","tag":["leisure","fitness"],"adjacent":["3877431b","4d7a7e81","99883bc6","a62839dd"],"description":"An open rooftop garden for exercise, relaxation, and outdoor activities.","position":[10.1,58.2,8],"containment":50,"furniture":[{"name":"outdoor bench","num":8},{"name":"outdoor table","num":4}]},
+    {"index":14,"uid":"64a9bc35","name":"Study Area","tag":["study"],"adjacent":["3877431b","4d7a7e81","66cb10e7","cb0199d8"],"description":"A silent zone with desks and resources for focused individual study.","position":[50.7,112.7,8],"containment":60,"furniture":[{"name":"study desk","num":30},{"name":"chair","num":60}]},
+    {"index":15,"uid":"4ef146d8","name":"Café","tag":["leisure","daily life"],"adjacent":["3877431b","4d7a7e81","66cb10e7"],"description":"A small café within the library for drinks and light refreshments during study breaks.","position":[10.3,108.3,8],"containment":20,"furniture":[{"name":"café table","num":5},{"name":"chair","num":20}]}
+  ]
+};
+const ROOM_NAME_ZH = {"Kitchen":"厨房","Dining Area":"餐饮区","Discussion Area":"讨论区","Lab Area":"实验区","Halal Restaurant":"清真餐厅","Club Activities":"社团活动室","Café":"咖啡厅","Classroom":"教室","Garden Space":"花园露台","Lecture Hall":"阶梯报告厅","Dorm Rooms":"学生宿舍","Study Area":"自习室"};
+const ROOM_TAG_ZH = {"daily life":"日常起居","study":"学习","social":"社交","leisure":"休闲","fitness":"健身"};
+const ROOM_FURN_ZH = {"trolley":"餐车","dining table":"餐桌","chair":"椅子","round table":"圆桌","stool":"凳子","folding table":"折叠桌","café table":"咖啡桌","student desk":"学生课桌","study desk":"书桌","podium":"讲台","sofa":"沙发","coffee table":"茶几","outdoor bench":"户外长椅","outdoor table":"户外桌"};
+const ROOM_DESC_ZH = {
+  "Kitchen":"用于准备餐食的烹饪区。",
+  "Dining Area":"学生用餐和社交的座位区。",
+  "Discussion Area_0":"用于小组讨论、规划与实验同行评议的开放区域。",
+  "Lab Area":"用于开展科学实验和实践操作的专用台位。",
+  "Halal Restaurant":"提供清真认证餐食的食堂。",
+  "Club Activities":"供学生社团举办会议、活动的多功能空间。",
+  "Café_4":"学生在活动间隙获取饮品、零食并放松的咖啡馆。",
+  "Classroom":"用于授课、教学的标准教室。",
+  "Discussion Area_4":"用于小组学习、研讨与学术讨论的协作空间。",
+  "Garden Space_4":"开放的花园露台，可放松、阅读、轻度运动、户外社交。",
+  "Lecture Hall":"阶梯报告厅的主要座席与演讲区。",
+  "Dorm Rooms":"学生用于睡眠、休息与个人学习的单人/合住卧室。",
+  "Discussion Area_8":"宿舍附近的共用区域，适合安静的小组工作和闲聊。",
+  "Garden Space_8":"开放的屋顶花园，用于锻炼、放松与户外活动。",
+  "Study Area":"配有书桌与资源的安静自习区。",
+  "Café_8":"图书馆内的小型咖啡馆，学习间隙提供饮品与轻食。"
+};
+const ROOM_FLOOR_LABEL = {0:"1F",4:"2F",8:"3F"};
+const ROOM_TAG_COLOR = {"daily life":"#FFA726","study":"#42A5F5","social":"#66BB6A","leisure":"#AB47BC","fitness":"#26C6DA"};
+const ROOM_TAG_CLASS = {"daily life":"rm-tag-daily","study":"rm-tag-study","social":"rm-tag-social","leisure":"rm-tag-leisure","fitness":"rm-tag-fitness"};
+const ROOM_MAP_BY_UID = {};
+ROOMS_DATA.rooms.forEach(function(r){ ROOM_MAP_BY_UID[r.uid] = r; });
+let roomFloorFilter = 'all';
+let roomSelectedUid = null;
+
+function roomDispName(r){ return currentLang === 'en' ? r.name : (ROOM_NAME_ZH[r.name] || r.name); }
+function roomDispTag(t){ return currentLang === 'en' ? t : (ROOM_TAG_ZH[t] || t); }
+function roomDispFurn(name){ return currentLang === 'en' ? name : (ROOM_FURN_ZH[name] || name); }
+function roomDispDesc(r){
+  if (currentLang === 'en') return r.description;
+  const key = r.name + '_' + r.position[2];
+  return ROOM_DESC_ZH[key] || ROOM_DESC_ZH[r.name] || r.description;
+}
+function roomPrimaryTag(r){ return r.tag[0] || 'study'; }
+function roomColor(r){ return ROOM_TAG_COLOR[roomPrimaryTag(r)] || '#90A4AE'; }
+
+function renderRoomMap(floorZ){
+  const rooms = ROOMS_DATA.rooms.filter(function(r){ return r.position[2] === floorZ; });
+  if (!rooms.length) return '';
+  const xs = rooms.map(function(r){ return r.position[0]; });
+  const ys = rooms.map(function(r){ return r.position[1]; });
+  const minX = Math.min.apply(null, xs) - 10;
+  const maxX = Math.max.apply(null, xs) + 15;
+  const minY = Math.min.apply(null, ys) - 10;
+  const maxY = Math.max.apply(null, ys) + 12;
+  const W = 400, padX = 20, padY = 12;
+  const sx = (W - padX * 2) / (maxX - minX);
+  const H = Math.max(120, (maxY - minY) * sx + padY * 2);
+  const sy = (H - padY * 2) / (maxY - minY);
+
+  const seen = new Set();
+  let lines = '';
+  rooms.forEach(function(r){
+    r.adjacent.forEach(function(o){
+      const other = ROOM_MAP_BY_UID[o];
+      if (!other || other.position[2] !== floorZ) return;
+      const key = [r.uid, o].sort().join('|');
+      if (seen.has(key)) return;
+      seen.add(key);
+      const x1 = padX + (r.position[0] - minX) * sx;
+      const y1 = padY + (r.position[1] - minY) * sy;
+      const x2 = padX + (other.position[0] - minX) * sx;
+      const y2 = padY + (other.position[1] - minY) * sy;
+      lines += '<line class="rm-map-link" x1="' + x1.toFixed(1) + '" y1="' + y1.toFixed(1) + '" x2="' + x2.toFixed(1) + '" y2="' + y2.toFixed(1) + '" />';
+    });
+  });
+
+  let nodes = '';
+  rooms.forEach(function(r){
+    const cx = padX + (r.position[0] - minX) * sx;
+    const cy = padY + (r.position[1] - minY) * sy;
+    const w = 56, h = 18;
+    const x = cx - w / 2, y = cy - h / 2;
+    const c = roomColor(r);
+    const isActive = r.uid === roomSelectedUid ? ' active' : '';
+    const lbl = roomDispName(r);
+    nodes += '<rect class="rm-map-room' + isActive + '" data-room-uid="' + r.uid + '" x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + w + '" height="' + h + '" rx="3" fill="' + c + '"><title>' + escapeHtml(lbl) + ' · ' + ROOM_FLOOR_LABEL[floorZ] + '</title></rect>';
+    nodes += '<text class="rm-map-label" x="' + cx.toFixed(1) + '" y="' + (cy + 3.5).toFixed(1) + '">' + escapeHtml(lbl) + '</text>';
+  });
+
+  return '<div class="rm-map-wrap"><div class="rm-map-title"><span>' + ROOM_FLOOR_LABEL[floorZ] + ' ' + T('平面示意（基于 position）','Layout (by position)') + '</span><span class="muted">' + rooms.length + ' ' + T('间','rooms') + '</span></div>' +
+         '<svg class="rm-map" viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg">' + lines + nodes + '</svg></div>';
+}
+
+function renderRoomCard(r){
+  const fLabel = ROOM_FLOOR_LABEL[r.position[2]] || r.position[2];
+  const color = roomColor(r);
+  const isActive = r.uid === roomSelectedUid;
+  const cardStyle = 'border-left-color:' + color + (isActive ? ';background:#152040' : '');
+  let h = '<div class="rm-card" id="rm-card-' + r.uid + '" data-room-card-uid="' + r.uid + '" style="' + cardStyle + '">';
+  h += '<div class="rm-card-head">';
+  h += '<div><span class="rm-name" style="color:' + color + '">' + escapeHtml(roomDispName(r)) + '</span>';
+  if (currentLang === 'zh') h += '<span class="rm-name-en">' + escapeHtml(r.name) + '</span>';
+  h += '</div>';
+  h += '<span class="rm-uid">' + fLabel + ' · ' + r.uid + '</span>';
+  h += '</div>';
+
+  h += '<div class="rm-tag-row">';
+  r.tag.forEach(function(t){
+    h += '<span class="rm-tag ' + ROOM_TAG_CLASS[t] + '">' + escapeHtml(roomDispTag(t)) + '</span>';
+  });
+  h += '</div>';
+
+  h += '<div class="rm-desc">' + escapeHtml(roomDispDesc(r)) + '</div>';
+
+  const capPct = Math.min(100, r.containment / 150 * 100);
+  h += '<div class="rm-cap-row"><span class="rm-cap-label">' + T('容量','Cap') + '</span>';
+  h += '<div class="rm-cap-track"><div class="rm-cap-fill" style="width:' + capPct + '%"></div></div>';
+  h += '<span class="rm-cap-num">' + r.containment + '</span></div>';
+
+  if (r.furniture && r.furniture.length){
+    h += '<div class="rm-sub-title">' + T('家具','Furniture') + '</div><div class="rm-furn-list">';
+    r.furniture.forEach(function(f){
+      h += '<span class="rm-furn">' + escapeHtml(roomDispFurn(f.name)) + '<b>×' + f.num + '</b></span>';
+    });
+    h += '</div>';
+  }
+
+  if (r.adjacent && r.adjacent.length){
+    h += '<div class="rm-sub-title">' + T('相邻','Adjacent') + ' (' + r.adjacent.length + ')</div><div class="rm-adj-list">';
+    r.adjacent.forEach(function(uid){
+      const a = ROOM_MAP_BY_UID[uid];
+      if (!a) return;
+      const cross = a.position[2] !== r.position[2] ? ' cross' : '';
+      const fl = ROOM_FLOOR_LABEL[a.position[2]];
+      h += '<span class="rm-adj' + cross + '" data-jump-room="' + a.uid + '">' + escapeHtml(roomDispName(a)) + ' · ' + fl + '</span>';
+    });
+    h += '</div>';
+  }
+
+  h += '</div>';
+  return h;
+}
+
+function renderRooms(){
+  document.getElementById('panel-title').textContent = T('校园场地布局','Campus Rooms Layout');
+
+  const rooms = ROOMS_DATA.rooms;
+  const totalCap = rooms.reduce(function(s,r){ return s + r.containment; }, 0);
+  const seenEdges = new Set();
+  rooms.forEach(function(r){
+    r.adjacent.forEach(function(o){
+      if (ROOM_MAP_BY_UID[o]) seenEdges.add([r.uid, o].sort().join('|'));
+    });
+  });
+  const floors = Array.from(new Set(rooms.map(function(r){ return r.position[2]; }))).sort(function(a,b){ return a-b; });
+
+  let h = '<div class="muted" style="margin-bottom:8px">' + T('数据来源 ','Source ') + '<b style="color:#90caf9">guoyi_rooms_v2.json</b> · ' + T('节点为房间，连线为 adjacent 邻接关系','nodes = rooms, edges = adjacent links') + '</div>';
+
+  h += '<div class="rm-overview">';
+  h += '<div class="rm-ov-row"><span>' + T('房间总数','Total Rooms') + '</span><span class="v">' + rooms.length + '</span></div>';
+  h += '<div class="rm-ov-row"><span>' + T('邻接边数（去重）','Adjacency Edges') + '</span><span class="v">' + seenEdges.size + '</span></div>';
+  h += '<div class="rm-ov-row"><span>' + T('楼层数','Floors') + '</span><span class="v">' + floors.length + '</span></div>';
+  h += '<div class="rm-ov-row"><span>' + T('总容量','Total Capacity') + '</span><span class="v">' + totalCap + '</span></div>';
+  h += '</div>';
+
+  h += '<div class="muted" style="margin:6px 0">' + T('按楼层筛选','Filter by floor') + '</div><div class="scene-filters">';
+  const opts = [['all', T('全部','All')]].concat(floors.map(function(z){ return [String(z), ROOM_FLOOR_LABEL[z] || ('z=' + z)]; }));
+  opts.forEach(function(o){
+    const cls = roomFloorFilter === o[0] ? 'filter-chip active' : 'filter-chip';
+    h += '<span class="' + cls + '" data-room-floor="' + o[0] + '">' + escapeHtml(o[1]) + '</span>';
+  });
+  h += '</div>';
+
+  const showFloors = roomFloorFilter === 'all' ? floors : [Number(roomFloorFilter)];
+  showFloors.forEach(function(z){
+    const inFloor = rooms.filter(function(r){ return r.position[2] === z; });
+    const capSum = inFloor.reduce(function(s,r){ return s + r.containment; }, 0);
+    h += '<div class="rm-floor-title"><span>' + ROOM_FLOOR_LABEL[z] + ' · ' + inFloor.length + ' ' + T('间','rooms') + '</span><span class="muted">' + T('容量合计','total capacity') + ' ' + capSum + '</span></div>';
+    h += renderRoomMap(z);
+    inFloor.sort(function(a,b){ return a.index - b.index; }).forEach(function(r){
+      h += renderRoomCard(r);
+    });
+  });
+
+  document.getElementById('panel-body').innerHTML = h;
+
+  document.querySelectorAll('[data-room-floor]').forEach(function(el){
+    el.addEventListener('click', function(){
+      roomFloorFilter = el.getAttribute('data-room-floor');
+      renderRooms();
+    });
+  });
+  document.querySelectorAll('[data-jump-room]').forEach(function(el){
+    el.addEventListener('click', function(){
+      const uid = el.getAttribute('data-jump-room');
+      jumpToRoom(uid);
+    });
+  });
+  document.querySelectorAll('[data-room-uid]').forEach(function(el){
+    el.addEventListener('click', function(){
+      const uid = el.getAttribute('data-room-uid');
+      jumpToRoom(uid);
+    });
+  });
+}
+
+function jumpToRoom(uid){
+  const r = ROOM_MAP_BY_UID[uid];
+  if (!r) return;
+  roomSelectedUid = uid;
+  const z = r.position[2];
+  if (roomFloorFilter !== 'all' && Number(roomFloorFilter) !== z){
+    roomFloorFilter = String(z);
+  }
+  renderRooms();
+  setTimeout(function(){
+    const card = document.getElementById('rm-card-' + uid);
+    if (card && card.scrollIntoView) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 30);
 }
 
 function rerenderCurrentTab() {

@@ -68,11 +68,14 @@ class MemoryGraph:
         agent_id: str,
         events: list[str],
         llm: "LLMAdapter",
+        now: datetime | None = None,
     ) -> list[Triplet]:
         """Ask the LLM to extract triplets and append them to the graph.
 
         On any failure (bad JSON, network), append nothing and return [];
         callers wishing to capture degradation should wrap in `safe_call`.
+        `now` should be the in-game time (`world.sim_time`) so triplets
+        align with the simulation timeline.
         """
         if not events:
             return []
@@ -82,7 +85,7 @@ class MemoryGraph:
             return []
 
         added: list[Triplet] = []
-        now = datetime.utcnow()
+        ts = now or datetime.utcnow()
         for raw in raw_triplets:
             if not isinstance(raw, dict):
                 continue
@@ -96,7 +99,7 @@ class MemoryGraph:
                 subject=subj,
                 predicate=pred,
                 obj=obj,
-                ts=now,
+                ts=ts,
                 location_uid=raw.get("location_uid"),
                 tone=raw.get("tone"),
                 meta={k: v for k, v in raw.items()

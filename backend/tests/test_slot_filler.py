@@ -52,6 +52,7 @@ class _GoodLLM:
         persona: dict,
         memories: list[str],
         candidates: list[dict[str, Any]],
+        context: dict[str, Any] | None = None,
     ) -> tuple[str, str]:
         self.calls += 1
         return "frag_read_lab", "测试LLM选了文献"

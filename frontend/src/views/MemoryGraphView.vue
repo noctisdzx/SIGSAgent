@@ -43,9 +43,9 @@
         </div>
         <div v-for="(t, i) in triplets" :key="i" class="triplet" :style="{ borderLeftColor: toneColor(t.tone) }">
           <div class="line">
-            <span class="subj">{{ t.subject }}</span>
+            <span class="subj">{{ entityLabel(t.subject) }}</span>
             <span class="pred"> {{ t.predicate }} </span>
-            <span class="obj">{{ t.object }}</span>
+            <span class="obj">{{ entityLabel(t.object) }}</span>
           </div>
           <div v-if="t.location_uid" class="loc">@{{ t.location_uid }}</div>
         </div>
@@ -76,14 +76,41 @@ interface Triplet {
 const triplets = ref<Triplet[]>([]);
 const graphRef = ref<InstanceType<typeof NetworkGraph> | null>(null);
 
+/** Map an entity id to a human-readable label.
+ *  - if it matches a known agent id  → return that NPC's display name;
+ *  - if it looks like an NPC id pattern (`npcNN_xxx`) → return last seg as
+ *    a guess so we never show raw `npc19_…` in the UI;
+ *  - otherwise return the original string (room uids, free-text objects, …). */
+function entityLabel(id: string): string {
+  if (!id) return '?';
+  const a = agents.list.find(x => String(x.id) === id);
+  if (a) {
+    if (lang.lang === 'en') return (a as any).name_en || a.name || id;
+    return a.name || (a as any).name_en || id;
+  }
+  // best-effort NPC-id cleanup so we still avoid leaking npcXX_yyy
+  if (/^npc\d+_/i.test(id)) return id.split('_').slice(1).join('_') || id;
+  return id;
+}
+
 const vNodes = computed(() => {
   const nodes = new Map<string, any>();
   for (const t of triplets.value) {
     if (t.subject && !nodes.has(t.subject)) {
-      nodes.set(t.subject, { id: t.subject, label: t.subject, color: { background: '#1a2240', border: '#90caf9' } });
+      nodes.set(t.subject, {
+        id: t.subject,
+        label: entityLabel(t.subject),
+        title: `${entityLabel(t.subject)} (${t.subject})`,
+        color: { background: '#1a2240', border: '#90caf9' },
+      });
     }
     if (t.object && !nodes.has(t.object)) {
-      nodes.set(t.object, { id: t.object, label: t.object, color: { background: '#1a2240', border: '#a5d6a7' } });
+      nodes.set(t.object, {
+        id: t.object,
+        label: entityLabel(t.object),
+        title: `${entityLabel(t.object)} (${t.object})`,
+        color: { background: '#1a2240', border: '#a5d6a7' },
+      });
     }
   }
   return Array.from(nodes.values());

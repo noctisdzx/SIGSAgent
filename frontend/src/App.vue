@@ -31,6 +31,40 @@
 
       <span class="spacer" />
 
+      <!-- Sim control cluster -->
+      <span class="sim-clock" :title="lang.t('当前游戏时间', 'In-game time')">
+        ⏱ {{ shortSim(sim.simTime) || '—' }}
+      </span>
+      <span class="sim-state" :class="sim.running ? 'on' : 'off'">
+        {{ sim.running
+          ? lang.t('运行中', 'Running')
+          : lang.t('已暂停', 'Paused') }}
+      </span>
+      <button
+        v-if="sim.running"
+        class="nav-btn sim-btn"
+        @click="sim.pause()"
+        :title="lang.t('暂停模拟', 'Pause simulation')"
+      >⏸ {{ lang.t('暂停', 'Pause') }}</button>
+      <button
+        v-else
+        class="nav-btn sim-btn sim-btn--primary"
+        @click="sim.resume()"
+        :title="sim.isAwaitingNextDay
+          ? lang.t('开启下一天', 'Start next day')
+          : lang.t('继续模拟', 'Resume simulation')"
+      >
+        ▶ {{ sim.isAwaitingNextDay
+          ? lang.t('下一天', 'Next day')
+          : lang.t('继续', 'Resume') }}
+      </button>
+      <button
+        v-if="sim.summaries.length"
+        class="nav-btn sim-btn"
+        @click="sim.openLatestSummary()"
+        :title="lang.t('查看最近一天的旁白', 'Open latest day-summary')"
+      >📜 {{ lang.t('旁白', 'Recap') }}</button>
+
       <span class="ws-indicator" :title="wsTitle">
         <span class="ws-dot" :class="events.connectionStatus" />
         {{ wsLabel }}
@@ -42,17 +76,21 @@
     <main class="page">
       <router-view />
     </main>
+    <DaySummaryModal />
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue';
+import { computed, onBeforeUnmount, onMounted } from 'vue';
 import { connectWs } from '@/api/ws';
 import { useLangStore } from '@/stores/lang';
 import { useEventsStore } from '@/stores/events';
+import { useSimStore } from '@/stores/sim';
+import DaySummaryModal from '@/components/DaySummaryModal.vue';
 
 const lang = useLangStore();
 const events = useEventsStore();
+const sim = useSimStore();
 
 const wsLabel = computed(() => {
   switch (events.connectionStatus) {
@@ -65,11 +103,21 @@ const wsLabel = computed(() => {
 });
 const wsTitle = computed(() => `WebSocket · ${events.connectionStatus}`);
 
-onMounted(() => {
-  // Sync html lang attribute on first paint.
+function shortSim(iso?: string): string {
+  if (!iso) return '';
+  try { return iso.replace('T', ' ').slice(5, 16); } catch { return iso; }
+}
+
+onMounted(async () => {
   if (typeof document !== 'undefined') {
     document.documentElement.lang = lang.lang === 'en' ? 'en' : 'zh-CN';
   }
   connectWs();
+  await sim.refreshStatus();
+  await sim.loadSummaries();
+  sim.startPolling(4000);
+});
+onBeforeUnmount(() => {
+  sim.stopPolling();
 });
 </script>

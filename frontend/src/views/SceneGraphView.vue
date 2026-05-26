@@ -8,23 +8,67 @@
     <div class="scene-graph">
       <NetworkGraph
         ref="graphRef"
-        :nodes="vNodes"
-        :edges="vEdges"
+        :nodes="vNodesAll"
+        :edges="vEdgesAll"
         :options="opts"
-        @select-node="onSelectRoom"
+        @select-node="onSelectNode"
       />
       <div class="stats">
         <span>{{ lang.t('房间', 'Rooms') }}
           <b>{{ rooms.length }}</b></span>
         <span>{{ lang.t('相邻边', 'Adjacencies') }}
           <b>{{ vEdges.length }}</b></span>
+        <span>{{ lang.t('追踪中', 'Tracking') }}
+          <b>{{ trackedAgents.length }}</b></span>
+        <span v-if="world.lastTickAt" class="sim-clock">
+          ⏱ {{ shortTime(world.lastTickAt) }}
+        </span>
       </div>
+
+      <div class="tracker-panel">
+        <div class="tracker-header">
+          <strong>{{ lang.t('NPC 实时追踪', 'Track NPC moves') }}</strong>
+          <div class="tracker-actions">
+            <button @click="trackAll" class="micro-btn">{{ lang.t('全部', 'All') }}</button>
+            <button @click="trackNone" class="micro-btn">{{ lang.t('清空', 'None') }}</button>
+          </div>
+        </div>
+        <input
+          v-model="filterText"
+          :placeholder="lang.t('按姓名/id 过滤…', 'filter by name/id…')"
+          class="tracker-filter"
+        />
+        <div class="tracker-list">
+          <label v-for="a in filteredAgents" :key="String(a.id)" class="tracker-item">
+            <input
+              type="checkbox"
+              :checked="trackedSet.has(String(a.id))"
+              @change="toggleTrack(String(a.id))"
+            />
+            <span class="dot" :style="{ background: colorForAgent(String(a.id)) }"></span>
+            <span class="tracker-name">{{ npcName(a) }}</span>
+            <span class="tracker-loc">@{{ roomLabel(currentLocation(String(a.id))) }}</span>
+          </label>
+          <div v-if="!filteredAgents.length" class="empty-small">
+            {{ lang.t('无匹配的 NPC', 'no NPC matched') }}
+          </div>
+        </div>
+      </div>
+
       <button class="ctrl-btn topright" @click="resetView">
         {{ lang.t('重置视图', 'Reset View') }}
       </button>
     </div>
 
     <aside class="scene-side">
+      <RoomHeatPanel
+        :rooms="rooms"
+        :world-agents="world.worldSnapshot?.agents || null"
+        :highlight-uid="selectedUid"
+        :filter-agent-ids="trackedAgents"
+        @select-room="onSelectNode"
+      />
+
       <div class="panel-header">
         <h2>{{ lang.t('房间详情', 'Room Detail') }}</h2>
       </div>
@@ -87,8 +131,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import NetworkGraph from '@/components/NetworkGraph.vue';
+import RoomHeatPanel from '@/components/RoomHeatPanel.vue';
 import Chip from '@/components/Chip.vue';
 import { useWorldStore } from '@/stores/world';
 import { useAgentsStore } from '@/stores/agents';
@@ -101,6 +146,11 @@ const agents = useAgentsStore();
 
 const graphRef = ref<InstanceType<typeof NetworkGraph> | null>(null);
 const selectedUid = ref<string | null>(null);
+
+// ---- NPC tracking state ----
+const trackedAgents = ref<string[]>([]);  // ordered list of agent ids
+const trackedSet = computed(() => new Set(trackedAgents.value));
+const filterText = ref('');
 
 const rooms = computed<Room[]>(() => world.sceneGraph?.rooms || []);
 const roomMap = computed<Record<string, Room>>(() => {
@@ -159,7 +209,105 @@ const opts = {
   },
 };
 
-function onSelectRoom(uid: string) { selectedUid.value = uid; }
+// ---- NPC tracking: derive nodes + edges to merge into the graph ----
+function colorForAgent(id: string): string {
+  // stable HSL hash so the same NPC always gets the same hue
+  let h = 0;
+  for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) >>> 0;
+  return `hsl(${h % 360}, 70%, 60%)`;
+}
+
+function currentLocation(id: string): string | null {
+  const snap = (world.worldSnapshot?.agents) as any;
+  if (snap && snap[id]) return snap[id].location_uid || null;
+  const a = agents.list.find(x => String(x.id) === id);
+  return a ? (a.location_uid || null) : null;
+}
+
+const vNpcNodes = computed(() => {
+  const out: any[] = [];
+  for (const id of trackedAgents.value) {
+    const loc = currentLocation(id);
+    if (!loc || !roomMap.value[loc]) continue;
+    const a = agents.list.find(x => String(x.id) === id);
+    const label = a ? npcName(a) : id;
+    out.push({
+      id: `npc:${id}`,
+      label,
+      title: `${label}\n@${roomMap.value[loc]?.name || loc}`,
+      shape: 'dot',
+      size: 12,
+      color: { background: colorForAgent(id), border: '#0a0e17' },
+      font: { color: '#fff', size: 11 },
+      borderWidth: 2,
+      // mass < 1 makes the NPC node "orbit" the room without dragging it.
+      mass: 0.4,
+    });
+  }
+  return out;
+});
+const vNpcEdges = computed(() => {
+  const out: any[] = [];
+  for (const id of trackedAgents.value) {
+    const loc = currentLocation(id);
+    if (!loc || !roomMap.value[loc]) continue;
+    out.push({
+      id: `npc-edge:${id}`,
+      from: `npc:${id}`,
+      to: loc,
+      dashes: true,
+      color: { color: colorForAgent(id), opacity: 0.55 },
+      width: 1.5,
+      length: 90,
+    });
+  }
+  return out;
+});
+const vNodesAll = computed(() => [...vNodes.value, ...vNpcNodes.value]);
+const vEdgesAll = computed(() => [...vEdges.value, ...vNpcEdges.value]);
+
+const filteredAgents = computed<AgentLite[]>(() => {
+  const q = filterText.value.trim().toLowerCase();
+  const list = agents.list || [];
+  if (!q) return list;
+  return list.filter(a => {
+    const id = String(a.id).toLowerCase();
+    const name = (a.name || '').toLowerCase();
+    const ne = ((a as any).name_en || '').toLowerCase();
+    return id.includes(q) || name.includes(q) || ne.includes(q);
+  });
+});
+
+function toggleTrack(id: string) {
+  const i = trackedAgents.value.indexOf(id);
+  if (i >= 0) trackedAgents.value.splice(i, 1);
+  else trackedAgents.value.push(id);
+}
+function trackAll() {
+  trackedAgents.value = (agents.list || []).map(a => String(a.id));
+}
+function trackNone() { trackedAgents.value = []; }
+
+function shortTime(iso: string): string {
+  // 2026-05-26T07:35:00 → 05-26 07:35
+  try {
+    return iso.replace('T', ' ').slice(5, 16);
+  } catch {
+    return iso;
+  }
+}
+
+function onSelectNode(nodeId: string) {
+  // virtual NPC nodes start with "npc:" — clicking one routes to that agent.
+  if (nodeId.startsWith('npc:')) {
+    const aid = nodeId.slice(4);
+    // navigate to AgentDetailView
+    (window as any).__lastClickedAgent = aid;
+    window.location.hash = `#/agent/${aid}`;
+    return;
+  }
+  selectedUid.value = nodeId;
+}
 function jumpToRoom(uid: string) {
   selectedUid.value = uid;
   graphRef.value?.focus?.(uid);
@@ -196,6 +344,12 @@ onMounted(async () => {
     world.loadWorld(),
     agents.loadList(),
   ]);
+  // Poll world snapshot every 3s so tracked NPC nodes re-attach when an NPC
+  // changes room (vis-network animates the edge re-layout).
+  world.startPolling(3000);
+});
+onBeforeUnmount(() => {
+  world.stopPolling();
 });
 </script>
 
@@ -208,6 +362,11 @@ onMounted(async () => {
   border-left: 1px solid var(--border-soft);
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+}
+.scene-side > .rhp {
+  border-bottom: 1px solid var(--border-soft);
+  background: var(--bg-elevated);
 }
 
 .stats {
@@ -258,4 +417,64 @@ onMounted(async () => {
   line-height: 1.6;
 }
 .empty { color: var(--text-disabled); font-size: 12px; padding: 4px 0; }
+
+/* ---- NPC tracker panel ---- */
+.tracker-panel {
+  position: absolute;
+  bottom: 16px; left: 16px;
+  width: 280px;
+  max-height: 50vh;
+  display: flex; flex-direction: column;
+  background: rgba(18,24,43,0.94);
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  padding: 10px 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  z-index: 5;
+}
+.tracker-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 8px;
+}
+.tracker-header strong { color: var(--accent-primary); font-size: 13px; }
+.tracker-actions { display: flex; gap: 6px; }
+.micro-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  color: var(--text-secondary);
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.micro-btn:hover { background: var(--bg-elevated); color: var(--accent-primary); }
+.tracker-filter {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  color: var(--text-primary);
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  outline: none;
+  box-sizing: border-box;
+}
+.tracker-list { overflow-y: auto; max-height: 30vh; }
+.tracker-item {
+  display: flex; align-items: center; gap: 6px;
+  padding: 3px 0;
+  font-size: 12px;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+.tracker-item:hover { color: var(--text-primary); }
+.tracker-item .dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  display: inline-block;
+}
+.tracker-name { flex: 1; }
+.tracker-loc { color: var(--text-very-dim); font-size: 10.5px; }
+.sim-clock { color: var(--accent-warm-soft); margin-left: auto; }
+.empty-small { color: var(--text-disabled); font-size: 11px; padding: 4px; text-align: center; }
 </style>

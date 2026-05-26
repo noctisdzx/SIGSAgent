@@ -27,6 +27,7 @@ class ShortTermItem:
     source: str  # e.g. "schedule:<schedule_item_id>"
     hit_count: int = 0
     meta: dict = field(default_factory=dict)
+    text_en: str | None = None  # optional English mirror of `text`
 
 
 class ShortTermMemory:

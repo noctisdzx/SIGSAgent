@@ -4,10 +4,46 @@
       "id": "frag_chat_cafe",
       "label": "去咖啡角和朋友闲聊",
       "duration_minutes": 15,
-      "tags": ["social", "leisure"],
+      "tags": ["social", "chat", "leisure"],
       "preferred_location_uids": ["a62839dd", "4ef146d8"],
       "cost": 1,
       "preconditions": { "min_energy": 1 }
+    },
+    {
+      "id": "frag_approach_friend",
+      "label": "主动找熟人聊几句",
+      "duration_minutes": 10,
+      "tags": ["social", "chat"],
+      "preferred_location_uids": [],
+      "cost": 1,
+      "preconditions": {}
+    },
+    {
+      "id": "frag_group_chat",
+      "label": "凑一群人闲聊新鲜事",
+      "duration_minutes": 20,
+      "tags": ["social", "chat", "leisure"],
+      "preferred_location_uids": ["a62839dd", "4ef146d8", "9a49343c"],
+      "cost": 1,
+      "preconditions": {}
+    },
+    {
+      "id": "frag_discussion_drop_in",
+      "label": "顺道串个门讨论作业",
+      "duration_minutes": 30,
+      "tags": ["social", "study"],
+      "preferred_location_uids": ["99883bc6", "da2afe02", "9a4098e7"],
+      "cost": 1,
+      "preconditions": {}
+    },
+    {
+      "id": "frag_quick_call",
+      "label": "给朋友打个电话",
+      "duration_minutes": 5,
+      "tags": ["social"],
+      "preferred_location_uids": [],
+      "cost": 0,
+      "preconditions": {}
     },
     {
       "id": "frag_quick_snack",
@@ -19,9 +55,27 @@
       "preconditions": { "min_money": 1 }
     },
     {
+      "id": "frag_coffee_solo",
+      "label": "一个人去喝杯咖啡",
+      "duration_minutes": 15,
+      "tags": ["leisure", "rest"],
+      "preferred_location_uids": ["4ef146d8", "a62839dd"],
+      "cost": 1,
+      "preconditions": {}
+    },
+    {
       "id": "frag_walk_garden",
       "label": "在花园散步",
       "duration_minutes": 10,
+      "tags": ["leisure", "fitness"],
+      "preferred_location_uids": ["66cb10e7", "7a281fd7"],
+      "cost": 0,
+      "preconditions": {}
+    },
+    {
+      "id": "frag_long_walk",
+      "label": "校园里慢慢散步一圈",
+      "duration_minutes": 25,
       "tags": ["leisure", "fitness"],
       "preferred_location_uids": ["66cb10e7", "7a281fd7"],
       "cost": 0,
@@ -37,12 +91,75 @@
       "preconditions": {}
     },
     {
+      "id": "frag_review_notes",
+      "label": "回顾今天的笔记",
+      "duration_minutes": 15,
+      "tags": ["study"],
+      "preferred_location_uids": ["64a9bc35", "438038e3"],
+      "cost": 1,
+      "preconditions": {}
+    },
+    {
+      "id": "frag_brainstorm_alone",
+      "label": "在窗边发呆想想问题",
+      "duration_minutes": 10,
+      "tags": ["study", "rest"],
+      "preferred_location_uids": ["64a9bc35", "4ef146d8"],
+      "cost": 0,
+      "preconditions": {}
+    },
+    {
       "id": "frag_back_dorm",
       "label": "回宿舍小坐",
       "duration_minutes": 10,
       "tags": ["daily life"],
       "preferred_location_uids": ["438038e3"],
       "cost": 0,
+      "preconditions": {}
+    },
+    {
+      "id": "frag_dorm_chat",
+      "label": "在宿舍和室友聊会儿",
+      "duration_minutes": 20,
+      "tags": ["social", "chat"],
+      "preferred_location_uids": ["438038e3"],
+      "cost": 0,
+      "preconditions": {}
+    },
+    {
+      "id": "frag_phone_browse",
+      "label": "刷手机休息一下",
+      "duration_minutes": 10,
+      "tags": ["leisure", "rest"],
+      "preferred_location_uids": [],
+      "cost": 0,
+      "preconditions": {}
+    },
+    {
+      "id": "frag_stretch",
+      "label": "起身活动活动",
+      "duration_minutes": 5,
+      "tags": ["rest", "fitness"],
+      "preferred_location_uids": [],
+      "cost": 0,
+      "preconditions": {}
+    },
+    {
+      "id": "frag_grab_snack_with_friend",
+      "label": "和朋友一起去买点吃的",
+      "duration_minutes": 20,
+      "tags": ["social", "daily life"],
+      "preferred_location_uids": ["9a49343c", "6943e822", "a62839dd"],
+      "cost": 1,
+      "preconditions": {}
+    },
+    {
+      "id": "frag_long_study",
+      "label": "找张安静的桌子专心做事",
+      "duration_minutes": 45,
+      "tags": ["study"],
+      "preferred_location_uids": ["64a9bc35", "99883bc6"],
+      "cost": 1,
       "preconditions": {}
     }
   ]

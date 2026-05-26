@@ -48,13 +48,16 @@ class MemoryCompressor:
         self.ltm = ltm
         self.llm = llm
 
-    async def maybe_compress(self) -> CompressionResult | None:
-        """Compress iff STM is over capacity. No-op otherwise (idempotent)."""
+    async def maybe_compress(self, now: datetime | None = None) -> CompressionResult | None:
+        """Compress iff STM is over capacity. No-op otherwise (idempotent).
+
+        `now` is the in-game timestamp recorded on any LTM item produced.
+        """
         if self.stm.size() <= self.stm.capacity:
             return None
-        return await self.compress()
+        return await self.compress(now=now)
 
-    async def compress(self) -> CompressionResult:
+    async def compress(self, now: datetime | None = None) -> CompressionResult:
         replaced: list[str] = []
         any_degraded = False
 
@@ -62,14 +65,14 @@ class MemoryCompressor:
         if self.ltm.free_slots() < LTM_FREE_SLOT_THRESHOLD:
             bottom = self.ltm.bottom(LTM_BOTTOM_COMPRESS_COUNT)
             if bottom:
-                merged_ltm = await self._llm_compress(bottom)
+                merged_ltm = await self._llm_compress(bottom, now=now)
                 self.ltm.replace([b.id for b in bottom], merged_ltm)
                 replaced = [b.id for b in bottom]
                 any_degraded = any_degraded or merged_ltm.degraded
 
         # Step B: compress STM top-10 → 1 LTM, drop STM back-20.
         top10 = self.stm.top_for_compress(10)
-        new_ltm = await self._llm_compress(top10)
+        new_ltm = await self._llm_compress(top10, now=now)
         self.ltm.add(new_ltm)
         any_degraded = any_degraded or new_ltm.degraded
 
@@ -87,17 +90,24 @@ class MemoryCompressor:
     async def _llm_compress(
         self,
         items: list[ShortTermItem] | list[LongTermItem],
+        now: datetime | None = None,
     ) -> LongTermItem:
-        """Summarize a batch (STM or LTM) into one LTM item, with fallback."""
+        """Summarize a batch (STM or LTM) into one LTM item, with fallback.
+
+        Resulting LTM `ts` defaults to `now` (the in-game time when caller
+        decided to compress); if `now` is None and items exist, falls back
+        to the newest item's ts; only as a last resort uses wall-clock.
+        """
         if not items:
-            # Defensive: never invent text out of nothing.
             return LongTermItem(
                 id=f"ltm_{uuid.uuid4().hex[:8]}",
                 text="(empty)",
-                ts=datetime.utcnow(),
+                ts=now or datetime.utcnow(),
                 source_ids=[],
                 degraded=True,
             )
+
+        ts = now or max(it.ts for it in items)
 
         texts = [f"[{it.ts.isoformat()}] {it.text}" for it in items]
 
@@ -105,13 +115,25 @@ class MemoryCompressor:
             return await self.llm.summarize_memories(texts)
 
         async def _fallback() -> str:
-            return " | ".join(texts)
+            joined = " | ".join(texts)
+            return f"{joined}\u241F{joined}"  # mirror as both zh and en
 
         summary, degraded = await with_fallback(_primary, _fallback)
+
+        # The adapter encodes bilingual output as "<zh>\u241F<en>". Split it
+        # back into the two text fields; degrade gracefully if only one half is
+        # present.
+        zh_text, en_text = summary, None
+        if "\u241F" in summary:
+            zh_text, _, en_text = summary.partition("\u241F")
+            zh_text = zh_text.strip() or summary
+            en_text = en_text.strip() or None
+
         return LongTermItem(
             id=f"ltm_{uuid.uuid4().hex[:8]}",
-            text=summary,
-            ts=datetime.utcnow(),
+            text=zh_text,
+            text_en=en_text,
+            ts=ts,
             source_ids=[it.id for it in items],
             degraded=degraded,
         )

@@ -44,8 +44,14 @@ class LLMAdapter(Protocol):
         persona: dict,
         memories: list[str],
         candidates: list[dict[str, Any]],
+        context: dict[str, Any] | None = None,
     ) -> tuple[str, str]:
-        """Return (fragment_id, rationale)."""
+        """Return (fragment_id, rationale).
+
+        `context` may carry runtime hints (sim_time, here_uid, visible_agents,
+        visible_items, last_activity, weekday) so the LLM can reason about the
+        current situation in addition to persona+memory.
+        """
         ...
 
     async def extract_triplets(
@@ -53,6 +59,31 @@ class LLMAdapter(Protocol):
         agent_id: str,
         events: list[str],
     ) -> list[dict[str, Any]]: ...
+
+    async def generate_dialog(
+        self,
+        speaker: dict[str, Any],
+        listener: dict[str, Any],
+        speaker_memories: list[str],
+        situation: dict[str, Any],
+    ) -> dict[str, Any]:
+        """Generate one short two-line dialog.
+
+        Returns dict: {speaker_line, listener_line, topic, tone}.
+        """
+        ...
+
+    async def narrate_day(
+        self,
+        day: str,
+        bullets: list[str],
+        stats: dict[str, Any],
+    ) -> dict[str, Any]:
+        """Produce an omniscient-narrator paragraph for a finished sim day.
+
+        Returns {zh, en, degraded}.
+        """
+        ...
 
 
 # ---------------------------------------------------------------------------
@@ -75,13 +106,19 @@ class MockLLMAdapter:
         persona: dict,
         memories: list[str],
         candidates: list[dict[str, Any]],
+        context: dict[str, Any] | None = None,
     ) -> tuple[str, str]:
         if not candidates:
             raise ValueError("MockLLMAdapter.choose_fragment: empty candidates")
         favs = set(persona.get("preferences", {}).get("favorite_tags", []) or [])
+        visible = set((context or {}).get("visible_agents", []) or [])
 
         def score(c: dict[str, Any]) -> int:
-            return len(favs & set(c.get("tags", []) or []))
+            s = len(favs & set(c.get("tags", []) or []))
+            # if someone is around and the fragment is "social", give a small bump
+            if visible and "social" in (c.get("tags", []) or []):
+                s += 1
+            return s
 
         best = max(candidates, key=score)
         return best["id"], "mock: best tag-overlap with persona"
@@ -95,6 +132,39 @@ class MockLLMAdapter:
             {"subject": agent_id, "predicate": "did", "object": ev[:30]}
             for ev in events
         ]
+
+    async def generate_dialog(
+        self,
+        speaker: dict[str, Any],
+        listener: dict[str, Any],
+        speaker_memories: list[str],
+        situation: dict[str, Any],
+    ) -> dict[str, Any]:
+        sname = speaker.get("name") or speaker.get("id") or "对方"
+        lname = listener.get("name") or listener.get("id") or "TA"
+        return {
+            "speaker_line": f"{lname}你好，最近怎么样？",
+            "listener_line": f"还行，{sname}你呢？",
+            "speaker_line_en": f"Hi {lname}, how have you been?",
+            "listener_line_en": f"Doing OK, you {sname}?",
+            "topic": "寒暄",
+            "topic_en": "greetings",
+            "tone": "friendly",
+        }
+
+    async def narrate_day(
+        self,
+        day: str,
+        bullets: list[str],
+        stats: dict[str, Any],
+    ) -> dict[str, Any]:
+        head = bullets[:3] if bullets else ["（无事可记）"]
+        zh = f"{day} 这一天，校园里共发生约 {stats.get('n_behaviors', 0)} 次行为、{stats.get('n_dialogs', 0)} 段对话。"
+        en = f"On {day}, the campus saw roughly {stats.get('n_behaviors', 0)} actions and {stats.get('n_dialogs', 0)} conversations."
+        if head:
+            zh += " 例如：" + "；".join(h[:60] for h in head)
+            en += " e.g. " + "; ".join(h[:60] for h in head)
+        return {"zh": zh, "en": en, "degraded": True}
 
 
 # ---------------------------------------------------------------------------
@@ -200,6 +270,7 @@ class DeepSeekAdapter:
         persona: dict,
         memories: list[str],
         candidates: list[dict[str, Any]],
+        context: dict[str, Any] | None = None,
     ) -> tuple[str, str]:
         if not candidates:
             raise ValueError("choose_fragment: empty candidates")
@@ -209,6 +280,7 @@ class DeepSeekAdapter:
             persona=persona,
             memories=memories,
             candidates=candidates,
+            context=context or {},
         )
         out = await self._chat_text(prompt, json_mode=True)
         data = _parse_json_object(out)
@@ -266,6 +338,61 @@ class DeepSeekAdapter:
             raise ValueError("extract_triplets: no valid triplet in response")
         return cleaned
 
+    async def narrate_day(
+        self,
+        day: str,
+        bullets: list[str],
+        stats: dict[str, Any],
+    ) -> dict[str, Any]:
+        prompt = (
+            "You are the omniscient narrator of a campus simulation. Given a day's worth of "
+            "raw event bullets, write ONE vivid paragraph in Chinese and ONE in English describing "
+            "what happened that day on campus — pace, tensions, relationships, small details. "
+            "Stay grounded in the bullets; don't invent named characters not present.\n\n"
+            f"DAY: {day}\nSTATS: {stats}\nEVENTS (chronological):\n"
+            + "\n".join(f"- {b}" for b in bullets)
+            + "\n\nReturn STRICTLY this JSON: {\"zh\": \"<≤200汉字>\", \"en\": \"<≤180 words>\"}."
+        )
+        out = await self._chat_text(prompt, json_mode=True)
+        data = _parse_json_object(out)
+        if not isinstance(data, dict):
+            raise ValueError(f"narrate_day: expected object, got {type(data).__name__}")
+        return {
+            "zh": str(data.get("zh", "")).strip(),
+            "en": str(data.get("en", "")).strip(),
+            "degraded": False,
+        }
+
+    async def generate_dialog(
+        self,
+        speaker: dict[str, Any],
+        listener: dict[str, Any],
+        speaker_memories: list[str],
+        situation: dict[str, Any],
+    ) -> dict[str, Any]:
+        prompt = self._render(
+            "generate_dialog.j2",
+            speaker=speaker,
+            listener=listener,
+            speaker_memories=speaker_memories,
+            sim_time=situation.get("sim_time", "?"),
+            weekday=situation.get("weekday", "?"),
+            here_uid=situation.get("here_uid", "?"),
+            here_name=situation.get("here_name", "?"),
+            current_activity=situation.get("current_activity", "?"),
+        )
+        out = await self._chat_text(prompt, json_mode=True)
+        data = _parse_json_object(out)
+        if not isinstance(data, dict):
+            raise ValueError(f"generate_dialog: expected object, got {type(data).__name__}")
+        # Defensive defaults so callers can rely on the keys existing.
+        return {
+            "speaker_line": str(data.get("speaker_line", "")).strip() or "（无内容）",
+            "listener_line": str(data.get("listener_line", "")).strip() or "（无回应）",
+            "topic": str(data.get("topic", "")).strip() or "杂谈",
+            "tone": str(data.get("tone", "neutral")).strip() or "neutral",
+        }
+
 
 # ---------------------------------------------------------------------------
 # SafeLLMAdapter — primary + fallback, exposes `last_degraded`
@@ -309,15 +436,16 @@ class SafeLLMAdapter:
         persona: dict,
         memories: list[str],
         candidates: list[dict[str, Any]],
+        context: dict[str, Any] | None = None,
     ) -> tuple[str, str]:
         async def _primary() -> tuple[str, str]:
             return await self.primary.choose_fragment(
-                gap_minutes, persona, memories, candidates
+                gap_minutes, persona, memories, candidates, context=context,
             )
 
         async def _fallback() -> tuple[str, str]:
             return await self.fallback.choose_fragment(
-                gap_minutes, persona, memories, candidates
+                gap_minutes, persona, memories, candidates, context=context,
             )
 
         result, degraded = await safe_call(_primary, _fallback)
@@ -337,6 +465,46 @@ class SafeLLMAdapter:
 
         result, degraded = await safe_call(_primary, _fallback)
         self._record("extract_triplets", degraded)
+        return result
+
+    async def generate_dialog(
+        self,
+        speaker: dict[str, Any],
+        listener: dict[str, Any],
+        speaker_memories: list[str],
+        situation: dict[str, Any],
+    ) -> dict[str, Any]:
+        async def _primary() -> dict[str, Any]:
+            return await self.primary.generate_dialog(
+                speaker, listener, speaker_memories, situation,
+            )
+
+        async def _fallback() -> dict[str, Any]:
+            return await self.fallback.generate_dialog(
+                speaker, listener, speaker_memories, situation,
+            )
+
+        result, degraded = await safe_call(_primary, _fallback)
+        self._record("generate_dialog", degraded)
+        return result
+
+    async def narrate_day(
+        self,
+        day: str,
+        bullets: list[str],
+        stats: dict[str, Any],
+    ) -> dict[str, Any]:
+        async def _primary() -> dict[str, Any]:
+            return await self.primary.narrate_day(day, bullets, stats)
+
+        async def _fallback() -> dict[str, Any]:
+            return await self.fallback.narrate_day(day, bullets, stats)
+
+        result, degraded = await safe_call(_primary, _fallback)
+        self._record("narrate_day", degraded)
+        # propagate degraded flag into the payload too
+        if isinstance(result, dict):
+            result = {**result, "degraded": bool(result.get("degraded") or degraded)}
         return result
 
 

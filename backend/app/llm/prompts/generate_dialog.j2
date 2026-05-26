@@ -1,0 +1,32 @@
+You are scripting ONE short interaction between two NPCs in a campus simulator.
+
+Speaker (主动方):
+- id   : {{ speaker.id }}
+- name : {{ speaker.name }}
+- role : {{ speaker.role }}
+- traits: {{ speaker.personality | tojson }}
+- recent memories:
+{% for m in speaker_memories %}  - {{ m }}
+{% endfor %}
+
+Listener (被搭话方):
+- id   : {{ listener.id }}
+- name : {{ listener.name }}
+- role : {{ listener.role }}
+
+Situation:
+- in-game time : {{ sim_time }}  (weekday={{ weekday }})
+- room         : {{ here_uid }}  ({{ here_name }})
+- speaker's current activity : {{ current_activity }}
+
+Output STRICTLY this single JSON object (no markdown fences, no prose):
+{
+  "speaker_line"   : "<Chinese sentence the speaker says, ≤ 35 Chinese chars>",
+  "listener_line"  : "<Chinese reply from the listener, ≤ 35 Chinese chars>",
+  "topic"          : "<3-7 Chinese chars summarising the topic>",
+  "tone"           : "<one of: friendly | neutral | tense | playful | curious>"
+}
+
+Make both lines sound natural for a campus setting. Reflect the speaker's
+recent memories if any are relevant. Avoid generic greetings unless they
+truly haven't met today.

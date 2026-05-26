@@ -74,11 +74,28 @@ def _try_literal(token: str) -> Any | None:
         return None
 
 
+def _initial_sim_time() -> datetime:
+    """Pick the simulation start time, honoring SIM_START_TIME if set.
+
+    The env var accepts an ISO-8601 timestamp such as "2026-05-26T23:55:00".
+    Useful when you want to quickly observe a midnight rollover without
+    waiting for a whole simulated day.
+    """
+    import os
+    raw = os.getenv("SIM_START_TIME")
+    if raw:
+        try:
+            return datetime.fromisoformat(raw)
+        except Exception:
+            pass
+    return datetime(2026, 5, 26, 7, 0)
+
+
 class WorldState:
     def __init__(self) -> None:
         self.agents: dict[str, AgentState] = {}
         self.items: dict[str, ItemState] = {}
-        self.sim_time: datetime = datetime(2026, 5, 26, 7, 0)
+        self.sim_time: datetime = _initial_sim_time()
 
     # ----- mutation -----
 

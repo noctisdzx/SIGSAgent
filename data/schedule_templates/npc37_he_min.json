@@ -5,6 +5,17 @@
   "week": {
     "monday": [
       {
+        "start": "00:00",
+        "end": "06:05",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "凌晨睡眠",
+        "target_state": {
+          "agent.location_uid": "438038e3",
+          "agent.energy": ">=3"
+        }
+      },
+      {
         "start": "06:05",
         "end": "06:35",
         "activity": "wake_up",
@@ -15,49 +26,29 @@
         }
       },
       {
-        "start": "06:35",
-        "end": "07:05",
-        "activity": "have_breakfast",
-        "location_uid": "9a49343c",
-        "narrative_zh": "早饭",
-        "target_state": {
-          "agent.location_uid": "9a49343c"
-        }
-      },
-      {
         "start": "07:05",
-        "end": "11:05",
+        "end": "09:35",
         "activity": "patrol",
         "location_uid": "66cb10e7",
-        "narrative_zh": "上午巡查/值班",
+        "narrative_zh": "上午巡查",
         "target_state": {
           "agent.location_uid": "66cb10e7",
           "agent.mood": ">=2"
         }
       },
       {
-        "start": "11:05",
-        "end": "12:35",
+        "start": "11:35",
+        "end": "12:05",
         "activity": "have_lunch",
         "location_uid": "a7934434",
-        "narrative_zh": "后厨吃饭",
+        "narrative_zh": "午饭",
         "target_state": {
           "agent.location_uid": "a7934434"
         }
       },
       {
-        "start": "12:35",
-        "end": "13:35",
-        "activity": "midday_rest",
-        "location_uid": "438038e3",
-        "narrative_zh": "午休",
-        "target_state": {
-          "agent.location_uid": "438038e3"
-        }
-      },
-      {
-        "start": "13:35",
-        "end": "17:35",
+        "start": "14:05",
+        "end": "16:35",
         "activity": "patrol",
         "location_uid": "66cb10e7",
         "narrative_zh": "下午继续值班",
@@ -68,7 +59,7 @@
       },
       {
         "start": "17:35",
-        "end": "18:35",
+        "end": "18:05",
         "activity": "have_dinner",
         "location_uid": "a7934434",
         "narrative_zh": "晚饭",
@@ -77,30 +68,8 @@
         }
       },
       {
-        "start": "18:35",
-        "end": "21:05",
-        "activity": "patrol",
-        "location_uid": "66cb10e7",
-        "narrative_zh": "夜间巡查",
-        "target_state": {
-          "agent.location_uid": "66cb10e7",
-          "agent.mood": ">=2"
-        }
-      },
-      {
-        "start": "21:35",
-        "end": "22:35",
-        "activity": "leisure_media",
-        "location_uid": "438038e3",
-        "narrative_zh": "宿舍看电视",
-        "target_state": {
-          "agent.location_uid": "438038e3",
-          "agent.mood": ">=1"
-        }
-      },
-      {
         "start": "23:05",
-        "end": "23:59",
+        "end": "23:35",
         "activity": "sleep",
         "location_uid": "438038e3",
         "narrative_zh": "睡觉",
@@ -112,8 +81,19 @@
     ],
     "tuesday": [
       {
-        "start": "06:00",
-        "end": "06:30",
+        "start": "00:00",
+        "end": "05:55",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "凌晨睡眠",
+        "target_state": {
+          "agent.location_uid": "438038e3",
+          "agent.energy": ">=3"
+        }
+      },
+      {
+        "start": "05:55",
+        "end": "06:25",
         "activity": "wake_up",
         "location_uid": "438038e3",
         "narrative_zh": "早起",
@@ -122,18 +102,8 @@
         }
       },
       {
-        "start": "06:30",
-        "end": "07:00",
-        "activity": "have_breakfast",
-        "location_uid": "9a49343c",
-        "narrative_zh": "早饭",
-        "target_state": {
-          "agent.location_uid": "9a49343c"
-        }
-      },
-      {
-        "start": "07:00",
-        "end": "11:30",
+        "start": "06:55",
+        "end": "09:25",
         "activity": "patrol",
         "location_uid": "7a281fd7",
         "narrative_zh": "周二屋顶花园检查",
@@ -143,8 +113,8 @@
         }
       },
       {
-        "start": "11:30",
-        "end": "12:30",
+        "start": "11:25",
+        "end": "11:55",
         "activity": "have_lunch",
         "location_uid": "a7934434",
         "narrative_zh": "午饭",
@@ -153,18 +123,8 @@
         }
       },
       {
-        "start": "12:30",
-        "end": "13:30",
-        "activity": "midday_rest",
-        "location_uid": "438038e3",
-        "narrative_zh": "午休",
-        "target_state": {
-          "agent.location_uid": "438038e3"
-        }
-      },
-      {
-        "start": "13:30",
-        "end": "17:00",
+        "start": "13:55",
+        "end": "15:55",
         "activity": "patrol",
         "location_uid": "438038e3",
         "narrative_zh": "宿舍楼下午巡查",
@@ -174,8 +134,8 @@
         }
       },
       {
-        "start": "17:00",
-        "end": "18:00",
+        "start": "17:25",
+        "end": "17:55",
         "activity": "have_dinner",
         "location_uid": "a7934434",
         "narrative_zh": "晚饭",
@@ -184,30 +144,8 @@
         }
       },
       {
-        "start": "18:00",
-        "end": "21:30",
-        "activity": "patrol",
-        "location_uid": "438038e3",
-        "narrative_zh": "夜间宿舍值守",
-        "target_state": {
-          "agent.location_uid": "438038e3",
-          "agent.mood": ">=2"
-        }
-      },
-      {
-        "start": "22:00",
-        "end": "23:00",
-        "activity": "leisure_media",
-        "location_uid": "438038e3",
-        "narrative_zh": "看新闻",
-        "target_state": {
-          "agent.location_uid": "438038e3",
-          "agent.mood": ">=1"
-        }
-      },
-      {
-        "start": "23:00",
-        "end": "23:59",
+        "start": "22:55",
+        "end": "23:25",
         "activity": "sleep",
         "location_uid": "438038e3",
         "narrative_zh": "睡觉",
@@ -219,6 +157,17 @@
     ],
     "wednesday": [
       {
+        "start": "00:00",
+        "end": "06:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "凌晨睡眠",
+        "target_state": {
+          "agent.location_uid": "438038e3",
+          "agent.energy": ">=3"
+        }
+      },
+      {
         "start": "06:00",
         "end": "06:30",
         "activity": "wake_up",
@@ -229,18 +178,8 @@
         }
       },
       {
-        "start": "06:30",
-        "end": "07:00",
-        "activity": "have_breakfast",
-        "location_uid": "9a49343c",
-        "narrative_zh": "早饭",
-        "target_state": {
-          "agent.location_uid": "9a49343c"
-        }
-      },
-      {
         "start": "07:00",
-        "end": "11:30",
+        "end": "09:30",
         "activity": "patrol",
         "location_uid": "64a9bc35",
         "narrative_zh": "周三图书馆区巡查",
@@ -251,7 +190,7 @@
       },
       {
         "start": "11:30",
-        "end": "12:30",
+        "end": "12:00",
         "activity": "have_lunch",
         "location_uid": "a7934434",
         "narrative_zh": "午饭",
@@ -260,18 +199,8 @@
         }
       },
       {
-        "start": "12:30",
-        "end": "13:30",
-        "activity": "midday_rest",
-        "location_uid": "438038e3",
-        "narrative_zh": "午休",
-        "target_state": {
-          "agent.location_uid": "438038e3"
-        }
-      },
-      {
-        "start": "13:30",
-        "end": "17:30",
+        "start": "14:00",
+        "end": "16:00",
         "activity": "patrol",
         "location_uid": "cb0199d8",
         "narrative_zh": "周三下午教学楼",
@@ -282,7 +211,7 @@
       },
       {
         "start": "17:30",
-        "end": "18:30",
+        "end": "18:00",
         "activity": "have_dinner",
         "location_uid": "a7934434",
         "narrative_zh": "晚饭",
@@ -291,30 +220,8 @@
         }
       },
       {
-        "start": "19:00",
-        "end": "21:00",
-        "activity": "patrol",
-        "location_uid": "8dc3960a",
-        "narrative_zh": "晚间社团区巡查",
-        "target_state": {
-          "agent.location_uid": "8dc3960a",
-          "agent.mood": ">=2"
-        }
-      },
-      {
-        "start": "22:00",
-        "end": "23:00",
-        "activity": "leisure_media",
-        "location_uid": "438038e3",
-        "narrative_zh": "宿舍看电视",
-        "target_state": {
-          "agent.location_uid": "438038e3",
-          "agent.mood": ">=1"
-        }
-      },
-      {
-        "start": "23:30",
-        "end": "23:59",
+        "start": "23:00",
+        "end": "23:30",
         "activity": "sleep",
         "location_uid": "438038e3",
         "narrative_zh": "睡觉",
@@ -326,8 +233,19 @@
     ],
     "thursday": [
       {
-        "start": "06:00",
-        "end": "06:30",
+        "start": "00:00",
+        "end": "05:55",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "凌晨睡眠",
+        "target_state": {
+          "agent.location_uid": "438038e3",
+          "agent.energy": ">=3"
+        }
+      },
+      {
+        "start": "05:55",
+        "end": "06:25",
         "activity": "wake_up",
         "location_uid": "438038e3",
         "narrative_zh": "早起",
@@ -336,18 +254,8 @@
         }
       },
       {
-        "start": "06:30",
-        "end": "07:00",
-        "activity": "have_breakfast",
-        "location_uid": "9a49343c",
-        "narrative_zh": "早饭",
-        "target_state": {
-          "agent.location_uid": "9a49343c"
-        }
-      },
-      {
-        "start": "07:00",
-        "end": "11:00",
+        "start": "06:55",
+        "end": "09:25",
         "activity": "patrol",
         "location_uid": "3877431b",
         "narrative_zh": "周四实验楼检查",
@@ -357,8 +265,8 @@
         }
       },
       {
-        "start": "11:00",
-        "end": "12:00",
+        "start": "11:25",
+        "end": "11:55",
         "activity": "have_lunch",
         "location_uid": "a7934434",
         "narrative_zh": "午饭",
@@ -367,18 +275,8 @@
         }
       },
       {
-        "start": "12:00",
-        "end": "13:00",
-        "activity": "midday_rest",
-        "location_uid": "438038e3",
-        "narrative_zh": "午休",
-        "target_state": {
-          "agent.location_uid": "438038e3"
-        }
-      },
-      {
-        "start": "13:00",
-        "end": "17:30",
+        "start": "13:55",
+        "end": "15:55",
         "activity": "patrol",
         "location_uid": "3877431b",
         "narrative_zh": "下午继续",
@@ -388,8 +286,8 @@
         }
       },
       {
-        "start": "17:30",
-        "end": "18:30",
+        "start": "17:25",
+        "end": "17:55",
         "activity": "have_dinner",
         "location_uid": "a7934434",
         "narrative_zh": "晚饭",
@@ -398,30 +296,8 @@
         }
       },
       {
-        "start": "18:30",
-        "end": "21:00",
-        "activity": "patrol",
-        "location_uid": "66cb10e7",
-        "narrative_zh": "夜间花园巡查",
-        "target_state": {
-          "agent.location_uid": "66cb10e7",
-          "agent.mood": ">=2"
-        }
-      },
-      {
-        "start": "21:00",
-        "end": "22:30",
-        "activity": "social_chat",
-        "location_uid": "a7934434",
-        "narrative_zh": "和同事聊聊",
-        "target_state": {
-          "agent.location_uid": "a7934434",
-          "agent.mood": ">=2"
-        }
-      },
-      {
-        "start": "23:00",
-        "end": "23:59",
+        "start": "22:55",
+        "end": "23:25",
         "activity": "sleep",
         "location_uid": "438038e3",
         "narrative_zh": "睡觉",
@@ -433,8 +309,19 @@
     ],
     "friday": [
       {
-        "start": "06:05",
-        "end": "06:35",
+        "start": "00:00",
+        "end": "06:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "凌晨睡眠",
+        "target_state": {
+          "agent.location_uid": "438038e3",
+          "agent.energy": ">=3"
+        }
+      },
+      {
+        "start": "06:00",
+        "end": "06:30",
         "activity": "wake_up",
         "location_uid": "438038e3",
         "narrative_zh": "早起",
@@ -443,18 +330,8 @@
         }
       },
       {
-        "start": "06:35",
-        "end": "07:05",
-        "activity": "have_breakfast",
-        "location_uid": "9a49343c",
-        "narrative_zh": "早饭",
-        "target_state": {
-          "agent.location_uid": "9a49343c"
-        }
-      },
-      {
-        "start": "07:05",
-        "end": "11:35",
+        "start": "07:00",
+        "end": "09:30",
         "activity": "patrol",
         "location_uid": "4d7a7e81",
         "narrative_zh": "周五教学楼",
@@ -464,8 +341,8 @@
         }
       },
       {
-        "start": "11:35",
-        "end": "12:35",
+        "start": "11:30",
+        "end": "12:00",
         "activity": "have_lunch",
         "location_uid": "a7934434",
         "narrative_zh": "午饭",
@@ -474,18 +351,8 @@
         }
       },
       {
-        "start": "12:35",
-        "end": "13:35",
-        "activity": "midday_rest",
-        "location_uid": "438038e3",
-        "narrative_zh": "午休",
-        "target_state": {
-          "agent.location_uid": "438038e3"
-        }
-      },
-      {
-        "start": "13:35",
-        "end": "17:35",
+        "start": "14:00",
+        "end": "16:00",
         "activity": "patrol",
         "location_uid": "64a9bc35",
         "narrative_zh": "下午图书馆",
@@ -495,8 +362,8 @@
         }
       },
       {
-        "start": "17:35",
-        "end": "18:35",
+        "start": "17:30",
+        "end": "18:00",
         "activity": "have_dinner",
         "location_uid": "a7934434",
         "narrative_zh": "晚饭",
@@ -505,30 +372,8 @@
         }
       },
       {
-        "start": "18:35",
-        "end": "22:05",
-        "activity": "patrol",
-        "location_uid": "8dc3960a",
-        "narrative_zh": "周五夜社团区",
-        "target_state": {
-          "agent.location_uid": "8dc3960a",
-          "agent.mood": ">=2"
-        }
-      },
-      {
-        "start": "22:35",
-        "end": "23:35",
-        "activity": "leisure_media",
-        "location_uid": "438038e3",
-        "narrative_zh": "宿舍放松",
-        "target_state": {
-          "agent.location_uid": "438038e3",
-          "agent.mood": ">=1"
-        }
-      },
-      {
-        "start": "23:35",
-        "end": "23:59",
+        "start": "23:00",
+        "end": "23:30",
         "activity": "sleep",
         "location_uid": "438038e3",
         "narrative_zh": "睡觉",
@@ -540,8 +385,19 @@
     ],
     "saturday": [
       {
-        "start": "07:00",
-        "end": "07:30",
+        "start": "00:00",
+        "end": "06:50",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "凌晨睡眠",
+        "target_state": {
+          "agent.location_uid": "438038e3",
+          "agent.energy": ">=3"
+        }
+      },
+      {
+        "start": "06:50",
+        "end": "07:20",
         "activity": "wake_up",
         "location_uid": "438038e3",
         "narrative_zh": "起床",
@@ -550,18 +406,8 @@
         }
       },
       {
-        "start": "07:30",
-        "end": "08:00",
-        "activity": "have_breakfast",
-        "location_uid": "9a49343c",
-        "narrative_zh": "早饭",
-        "target_state": {
-          "agent.location_uid": "9a49343c"
-        }
-      },
-      {
-        "start": "08:00",
-        "end": "12:00",
+        "start": "07:50",
+        "end": "09:50",
         "activity": "patrol",
         "location_uid": "66cb10e7",
         "narrative_zh": "周末花园巡查",
@@ -571,8 +417,8 @@
         }
       },
       {
-        "start": "12:00",
-        "end": "13:00",
+        "start": "11:50",
+        "end": "12:20",
         "activity": "have_lunch",
         "location_uid": "a7934434",
         "narrative_zh": "午饭",
@@ -581,29 +427,8 @@
         }
       },
       {
-        "start": "13:00",
-        "end": "14:30",
-        "activity": "midday_rest",
-        "location_uid": "438038e3",
-        "narrative_zh": "午休",
-        "target_state": {
-          "agent.location_uid": "438038e3"
-        }
-      },
-      {
-        "start": "14:30",
-        "end": "17:30",
-        "activity": "patrol",
-        "location_uid": "438038e3",
-        "narrative_zh": "宿舍区周末检查",
-        "target_state": {
-          "agent.location_uid": "438038e3",
-          "agent.mood": ">=2"
-        }
-      },
-      {
-        "start": "17:30",
-        "end": "18:30",
+        "start": "17:20",
+        "end": "17:50",
         "activity": "have_dinner",
         "location_uid": "a7934434",
         "narrative_zh": "晚饭",
@@ -612,30 +437,8 @@
         }
       },
       {
-        "start": "18:30",
-        "end": "21:00",
-        "activity": "social_chat",
-        "location_uid": "a7934434",
-        "narrative_zh": "周末同事聚",
-        "target_state": {
-          "agent.location_uid": "a7934434",
-          "agent.mood": ">=2"
-        }
-      },
-      {
-        "start": "21:00",
-        "end": "22:30",
-        "activity": "leisure_media",
-        "location_uid": "438038e3",
-        "narrative_zh": "电视",
-        "target_state": {
-          "agent.location_uid": "438038e3",
-          "agent.mood": ">=1"
-        }
-      },
-      {
-        "start": "23:30",
-        "end": "23:59",
+        "start": "22:50",
+        "end": "23:20",
         "activity": "sleep",
         "location_uid": "438038e3",
         "narrative_zh": "睡觉",
@@ -647,8 +450,19 @@
     ],
     "sunday": [
       {
-        "start": "07:00",
-        "end": "07:30",
+        "start": "00:00",
+        "end": "06:50",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "凌晨睡眠",
+        "target_state": {
+          "agent.location_uid": "438038e3",
+          "agent.energy": ">=3"
+        }
+      },
+      {
+        "start": "06:50",
+        "end": "07:20",
         "activity": "wake_up",
         "location_uid": "438038e3",
         "narrative_zh": "起床",
@@ -657,18 +471,8 @@
         }
       },
       {
-        "start": "07:30",
-        "end": "08:00",
-        "activity": "have_breakfast",
-        "location_uid": "9a49343c",
-        "narrative_zh": "早饭",
-        "target_state": {
-          "agent.location_uid": "9a49343c"
-        }
-      },
-      {
-        "start": "08:00",
-        "end": "11:30",
+        "start": "07:50",
+        "end": "09:50",
         "activity": "patrol",
         "location_uid": "7a281fd7",
         "narrative_zh": "周日屋顶巡查",
@@ -678,8 +482,8 @@
         }
       },
       {
-        "start": "11:30",
-        "end": "12:30",
+        "start": "11:50",
+        "end": "12:20",
         "activity": "have_lunch",
         "location_uid": "a7934434",
         "narrative_zh": "午饭",
@@ -688,29 +492,8 @@
         }
       },
       {
-        "start": "12:30",
-        "end": "14:00",
-        "activity": "midday_rest",
-        "location_uid": "438038e3",
-        "narrative_zh": "长午休",
-        "target_state": {
-          "agent.location_uid": "438038e3"
-        }
-      },
-      {
-        "start": "14:00",
-        "end": "17:00",
-        "activity": "patrol",
-        "location_uid": "66cb10e7",
-        "narrative_zh": "下午低层花园",
-        "target_state": {
-          "agent.location_uid": "66cb10e7",
-          "agent.mood": ">=2"
-        }
-      },
-      {
-        "start": "17:00",
-        "end": "18:00",
+        "start": "17:20",
+        "end": "17:50",
         "activity": "have_dinner",
         "location_uid": "a7934434",
         "narrative_zh": "晚饭",
@@ -719,30 +502,8 @@
         }
       },
       {
-        "start": "18:00",
-        "end": "20:30",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "宿舍休息",
-        "target_state": {
-          "agent.location_uid": "438038e3",
-          "agent.mood": ">=1"
-        }
-      },
-      {
-        "start": "21:00",
-        "end": "22:30",
-        "activity": "leisure_media",
-        "location_uid": "438038e3",
-        "narrative_zh": "电视",
-        "target_state": {
-          "agent.location_uid": "438038e3",
-          "agent.mood": ">=1"
-        }
-      },
-      {
-        "start": "23:00",
-        "end": "23:59",
+        "start": "22:50",
+        "end": "23:20",
         "activity": "sleep",
         "location_uid": "438038e3",
         "narrative_zh": "早睡",
