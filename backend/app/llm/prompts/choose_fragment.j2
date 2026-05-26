@@ -1,0 +1,15 @@
+You decide what an NPC does in a {{ gap_minutes }}-minute gap.
+
+Persona (JSON):
+{{ persona | tojson }}
+
+Recent memories (most relevant first):
+{% for m in memories %}- {{ m }}
+{% endfor %}
+
+Candidate activity fragments:
+{% for c in candidates %}- id={{ c.id }}, label={{ c.label }}, tags={{ c.tags }}
+{% endfor %}
+
+Reply STRICTLY in JSON:
+{"id": "<one of the candidate ids>", "rationale": "<one short Chinese sentence>"}

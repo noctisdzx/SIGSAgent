@@ -1,0 +1,7 @@
+Extract (subject, predicate, object) triplets from the following events of NPC "{{ agent_id }}".
+
+Events:
+{% for ev in events %}- {{ ev }}
+{% endfor %}
+
+Reply STRICTLY in JSON: a list of objects with keys subject / predicate / object / location_uid / tone.

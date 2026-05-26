@@ -1,0 +1,19 @@
+{
+  "id": "demo_alice",
+  "name": "Alice",
+  "role": "undergraduate",
+  "personality": {
+    "openness": 0.7,
+    "conscientiousness": 0.8,
+    "extraversion": 0.5,
+    "agreeableness": 0.6,
+    "neuroticism": 0.3
+  },
+  "preferences": {
+    "favorite_locations": ["64a9bc35", "4ef146d8"],
+    "favorite_tags": ["study", "leisure"]
+  },
+  "relations": {},
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "demo_alice"
+}

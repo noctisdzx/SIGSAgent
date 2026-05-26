@@ -1,0 +1,487 @@
+{
+  "rooms": [
+    {
+      "index": 0,
+      "uid": "a7934434",
+      "name": "Kitchen",
+      "tag": [
+        "daily life"
+      ],
+      "adjacent": [
+        "438038e3",
+        "6943e822",
+        "8dc3960a"
+      ],
+      "description": "A cooking area where meals are prepared.",
+      "position": [
+        79.6,
+        9.6,
+        0
+      ],
+      "containment": 10,
+      "furniture": [
+        {
+          "name": "trolley",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "uid": "9a49343c",
+      "name": "Dining Area",
+      "tag": [
+        "daily life",
+        "social"
+      ],
+      "adjacent": [
+        "438038e3",
+        "a62839dd"
+      ],
+      "description": "A seating area where students can eat and socialise during meals.",
+      "position": [
+        54.1,
+        9.6,
+        0
+      ],
+      "containment": 80,
+      "furniture": [
+        {
+          "name": "dining table",
+          "num": 20
+        },
+        {
+          "name": "chair",
+          "num": 80
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "uid": "99883bc6",
+      "name": "Discussion Area",
+      "tag": [
+        "study",
+        "social"
+      ],
+      "adjacent": [
+        "438038e3",
+        "4d7a7e81",
+        "7a281fd7",
+        "a62839dd"
+      ],
+      "description": "An open area for group discussion, planning, and peer review of experiments.",
+      "position": [
+        5.8,
+        44.1,
+        0
+      ],
+      "containment": 20,
+      "furniture": [
+        {
+          "name": "round table",
+          "num": 4
+        },
+        {
+          "name": "chair",
+          "num": 16
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "uid": "3877431b",
+      "name": "Lab Area",
+      "tag": [
+        "study"
+      ],
+      "adjacent": [
+        "4d7a7e81",
+        "4ef146d8",
+        "64a9bc35",
+        "66cb10e7",
+        "7a281fd7",
+        "cb0199d8"
+      ],
+      "description": "A dedicated bench space for conducting scientific experiments and practical work.",
+      "position": [
+        33.6,
+        90.4,
+        0
+      ],
+      "containment": 30,
+      "furniture": [
+        {
+          "name": "stool",
+          "num": 20
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "uid": "6943e822",
+      "name": "Halal Restaurant",
+      "tag": [
+        "daily life",
+        "social"
+      ],
+      "adjacent": [
+        "438038e3",
+        "a7934434"
+      ],
+      "description": "A dining outlet serving halal-certified meals for students.",
+      "position": [
+        140.8,
+        3.4,
+        4
+      ],
+      "containment": 50,
+      "furniture": [
+        {
+          "name": "dining table",
+          "num": 12
+        },
+        {
+          "name": "chair",
+          "num": 48
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "uid": "8dc3960a",
+      "name": "Club Activities",
+      "tag": [
+        "social",
+        "leisure"
+      ],
+      "adjacent": [
+        "438038e3",
+        "a7934434"
+      ],
+      "description": "A flexible space for student clubs to host meetings, events, and activities.",
+      "position": [
+        91.4,
+        14.2,
+        4
+      ],
+      "containment": 40,
+      "furniture": [
+        {
+          "name": "folding table",
+          "num": 8
+        },
+        {
+          "name": "chair",
+          "num": 40
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "uid": "a62839dd",
+      "name": "Café",
+      "tag": [
+        "leisure",
+        "social",
+        "daily life"
+      ],
+      "adjacent": [
+        "438038e3",
+        "7a281fd7",
+        "99883bc6",
+        "9a49343c"
+      ],
+      "description": "A café where students can get drinks and snacks and relax between activities.",
+      "position": [
+        60.2,
+        17.7,
+        4
+      ],
+      "containment": 30,
+      "furniture": [
+        {
+          "name": "café table",
+          "num": 8
+        },
+        {
+          "name": "chair",
+          "num": 24
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "uid": "4d7a7e81",
+      "name": "Classroom",
+      "tag": [
+        "study"
+      ],
+      "adjacent": [
+        "3877431b",
+        "438038e3",
+        "4ef146d8",
+        "64a9bc35",
+        "7a281fd7",
+        "99883bc6"
+      ],
+      "description": "A standard classroom for lectures, lessons, and teacher-led instruction.",
+      "position": [
+        9.9,
+        87.7,
+        4
+      ],
+      "containment": 40,
+      "furniture": [
+        {
+          "name": "student desk",
+          "num": 40
+        },
+        {
+          "name": "chair",
+          "num": 40
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "uid": "9a4098e7",
+      "name": "Discussion Area",
+      "tag": [
+        "study",
+        "social"
+      ],
+      "adjacent": [],
+      "description": "A collaborative space for group study, seminars, and academic discussion.",
+      "position": [
+        14.8,
+        97.1,
+        4
+      ],
+      "containment": 20,
+      "furniture": [
+        {
+          "name": "round table",
+          "num": 4
+        },
+        {
+          "name": "chair",
+          "num": 20
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "uid": "66cb10e7",
+      "name": "Garden Space",
+      "tag": [
+        "leisure",
+        "fitness"
+      ],
+      "adjacent": [
+        "3877431b",
+        "4ef146d8",
+        "64a9bc35"
+      ],
+      "description": "An open garden terrace for relaxing, reading, light exercise, and outdoor socialising.",
+      "position": [
+        42.9,
+        136.1,
+        4
+      ],
+      "containment": 60,
+      "furniture": [
+        {
+          "name": "outdoor bench",
+          "num": 10
+        },
+        {
+          "name": "outdoor table",
+          "num": 4
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "uid": "cb0199d8",
+      "name": "Lecture Hall",
+      "tag": [
+        "study",
+        "social"
+      ],
+      "adjacent": [
+        "3877431b",
+        "64a9bc35"
+      ],
+      "description": "The main seating and presentation area within the lecture hall.",
+      "position": [
+        79,
+        108.8,
+        4
+      ],
+      "containment": 150,
+      "furniture": [
+        {
+          "name": "podium",
+          "num": 1
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "uid": "438038e3",
+      "name": "Dorm Rooms",
+      "tag": [
+        "daily life",
+        "study"
+      ],
+      "adjacent": [
+        "4d7a7e81",
+        "6943e822",
+        "8dc3960a",
+        "99883bc6",
+        "9a49343c",
+        "a62839dd",
+        "a7934434"
+      ],
+      "description": "Private or shared bedrooms where students sleep, rest, and do personal study.",
+      "position": [
+        62.5,
+        7,
+        8
+      ],
+      "containment": 4,
+      "furniture": [
+        {
+          "name": "study desk",
+          "num": 4
+        },
+        {
+          "name": "chair",
+          "num": 4
+        }
+      ]
+    },
+    {
+      "index": 12,
+      "uid": "da2afe02",
+      "name": "Discussion Area",
+      "tag": [
+        "study",
+        "social"
+      ],
+      "adjacent": [],
+      "description": "A communal area near the dorms for quiet group work and casual conversation.",
+      "position": [
+        62.5,
+        9,
+        8
+      ],
+      "containment": 16,
+      "furniture": [
+        {
+          "name": "sofa",
+          "num": 4
+        },
+        {
+          "name": "coffee table",
+          "num": 2
+        }
+      ]
+    },
+    {
+      "index": 13,
+      "uid": "7a281fd7",
+      "name": "Garden Space",
+      "tag": [
+        "leisure",
+        "fitness"
+      ],
+      "adjacent": [
+        "3877431b",
+        "4d7a7e81",
+        "99883bc6",
+        "a62839dd"
+      ],
+      "description": "An open rooftop garden for exercise, relaxation, and outdoor activities.",
+      "position": [
+        10.1,
+        58.2,
+        8
+      ],
+      "containment": 50,
+      "furniture": [
+        {
+          "name": "outdoor bench",
+          "num": 8
+        },
+        {
+          "name": "outdoor table",
+          "num": 4
+        }
+      ]
+    },
+    {
+      "index": 14,
+      "uid": "64a9bc35",
+      "name": "Study Area",
+      "tag": [
+        "study"
+      ],
+      "adjacent": [
+        "3877431b",
+        "4d7a7e81",
+        "66cb10e7",
+        "cb0199d8"
+      ],
+      "description": "A silent zone with desks and resources for focused individual study.",
+      "position": [
+        50.7,
+        112.7,
+        8
+      ],
+      "containment": 60,
+      "furniture": [
+        {
+          "name": "study desk",
+          "num": 30
+        },
+        {
+          "name": "chair",
+          "num": 60
+        }
+      ]
+    },
+    {
+      "index": 15,
+      "uid": "4ef146d8",
+      "name": "Café",
+      "tag": [
+        "leisure",
+        "daily life"
+      ],
+      "adjacent": [
+        "3877431b",
+        "4d7a7e81",
+        "66cb10e7"
+      ],
+      "description": "A small café within the library for drinks and light refreshments during study breaks.",
+      "position": [
+        10.3,
+        108.3,
+        8
+      ],
+      "containment": 20,
+      "furniture": [
+        {
+          "name": "café table",
+          "num": 5
+        },
+        {
+          "name": "chair",
+          "num": 20
+        }
+      ]
+    }
+  ]
+}

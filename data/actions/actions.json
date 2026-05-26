@@ -1,0 +1,88 @@
+{
+  "actions": [
+    {
+      "id": "move",
+      "label": "move(target_uid)",
+      "cost": 2,
+      "duration_minutes": 5,
+      "params": ["target_uid"],
+      "preconditions": {
+        "agent.location_uid": "!= target_uid",
+        "agent.energy": ">= 1"
+      },
+      "effects": {
+        "agent.location_uid": "= target_uid",
+        "agent.energy": "-= 1"
+      },
+      "concurrent_with": ["phone_call"]
+    },
+    {
+      "id": "interact",
+      "label": "interact(item_id)",
+      "cost": 1,
+      "duration_minutes": 5,
+      "params": ["item_id"],
+      "preconditions": {
+        "item.location_uid": "== agent.location_uid"
+      },
+      "effects": {},
+      "concurrent_with": []
+    },
+    {
+      "id": "talk",
+      "label": "talk(target_agent_id)",
+      "cost": 1,
+      "duration_minutes": 5,
+      "params": ["target_agent_id"],
+      "preconditions": {
+        "target.location_uid": "== agent.location_uid"
+      },
+      "effects": {
+        "agent.mood": "+= 1"
+      },
+      "concurrent_with": []
+    },
+    {
+      "id": "phone_call",
+      "label": "phone_call(target_agent_id)",
+      "cost": 2,
+      "duration_minutes": 5,
+      "params": ["target_agent_id"],
+      "preconditions": {},
+      "effects": {
+        "agent.retry_count": "+= 1"
+      },
+      "concurrent_with": ["move"],
+      "stochastic": { "success_rate": 0.7 }
+    },
+    {
+      "id": "find",
+      "label": "find(entity_id)",
+      "cost": 1,
+      "duration_minutes": 5,
+      "params": ["entity_id"],
+      "preconditions": {
+        "agent.energy": "> 0"
+      },
+      "effects": {
+        "agent.knows.entity_id": "= true",
+        "agent.energy": "-= 1"
+      },
+      "concurrent_with": []
+    },
+    {
+      "id": "idle",
+      "label": "idle",
+      "cost": 1,
+      "duration_minutes": 5,
+      "params": [],
+      "preconditions": {
+        "agent.energy": "< 3"
+      },
+      "effects": {
+        "agent.energy": "+= 1"
+      },
+      "concurrent_with": []
+    }
+  ]
+}

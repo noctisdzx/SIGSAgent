@@ -1,0 +1,59 @@
+/* Dark theme aligned with reference HTMLs. */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body, #app {
+  height: 100%;
+  background: #0a0e17;
+  color: #e0e0e0;
+  font-family: 'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+a { color: #42a5f5; text-decoration: none; }
+a:hover { color: #90caf9; }
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.top-nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 12px 24px;
+  background: rgba(10, 14, 23, 0.92);
+  border-bottom: 1px solid #1e2a45;
+}
+.top-nav .brand {
+  font-weight: 600;
+  color: #90caf9;
+  letter-spacing: .5px;
+}
+.top-nav .nav-link {
+  padding: 6px 12px;
+  border-radius: 14px;
+  color: #cfd8dc;
+  font-size: 13px;
+}
+.top-nav .nav-link.router-link-active {
+  background: #1a2240;
+  color: #90caf9;
+}
+.page {
+  flex: 1;
+  overflow: hidden;
+}
+.placeholder-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #78909c;
+  font-size: 15px;
+  padding: 40px;
+  text-align: center;
+}
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #0a0e17; }
+::-webkit-scrollbar-thumb { background: #1e2a45; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #42a5f5; }

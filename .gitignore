@@ -1,0 +1,50 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+.eggs/
+*.egg-info/
+*.egg
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+
+# ===== Node / Frontend =====
+node_modules/
+dist/
+dist-ssr/
+.vite/
+*.local
+.cache/
+coverage/
+
+# ===== Editor / OS =====
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# ===== Runtime artifacts (重开一局即清空) =====
+runtime/memory.db
+runtime/memory.db-journal
+runtime/memory.db-wal
+runtime/memory.db-shm
+runtime/snapshots/*
+!runtime/snapshots/.gitkeep
+runtime/logs/*
+!runtime/logs/.gitkeep
+
+# ===== Secrets =====
+.env
+.env.*
+!.env.example

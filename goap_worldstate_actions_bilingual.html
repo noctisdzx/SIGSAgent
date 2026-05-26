@@ -1,0 +1,2763 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-zh="校园多智能体 · GOAP 世界状态与行为定义" data-en="Campus Multi-Agent · GOAP WorldState & Action Spec">校园多智能体 · GOAP 世界状态与行为定义</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Microsoft YaHei','PingFang SC','Segoe UI',sans-serif;background:#0a0e17;color:#e0e0e0;line-height:1.6;padding:0 0 80px}
+a{color:#42a5f5;text-decoration:none}
+a:hover{color:#90caf9}
+header{position:sticky;top:0;z-index:50;background:rgba(10,14,23,.92);backdrop-filter:blur(10px);border-bottom:1px solid #1e2a45;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+header h1{font-size:18px;color:#90caf9;font-weight:600;letter-spacing:.5px}
+header .subtitle{font-size:12px;color:#78909c;margin-top:2px}
+.topbar-right{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn{padding:6px 14px;border-radius:16px;border:1px solid #1e2a45;background:#1a2240;color:#90caf9;font-size:12px;cursor:pointer;font-weight:600}
+.btn:hover{background:#263259}
+.btn.primary{background:#42a5f5;color:#0a0e17;border-color:#42a5f5}
+.btn.primary:hover{background:#90caf9}
+nav.toc{position:sticky;top:62px;background:#0d1220;border-bottom:1px solid #1e2a45;padding:10px 28px;display:flex;flex-wrap:wrap;gap:6px;z-index:40;font-size:12px}
+nav.toc a{padding:4px 10px;border-radius:12px;background:#12182b;border:1px solid #1e2a45;color:#90caf9}
+nav.toc a:hover{background:#263259;color:#fff}
+main{max-width:1200px;margin:0 auto;padding:24px 28px}
+section{margin:36px 0;padding:24px 28px;background:#12182b;border:1px solid #1e2a45;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.18)}
+section h2{font-size:20px;color:#ffa726;margin-bottom:6px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+section h2 .sec-num{color:#42a5f5;font-family:Consolas,monospace;font-size:18px}
+section h2 .sec-en{color:#78909c;font-size:13px;font-weight:400}
+section h3{font-size:15px;color:#ffe082;margin:18px 0 8px;padding-left:8px;border-left:3px solid #ffa726}
+section p{font-size:14px;color:#cfd8dc;margin:8px 0}
+.lead{font-size:14px;color:#b0bec5;background:#0d1220;padding:12px 16px;border-radius:8px;border-left:3px solid #42a5f5;margin:10px 0 18px}
+.lead .en{display:block;color:#78909c;font-size:12.5px;margin-top:4px;font-style:italic}
+table{width:100%;border-collapse:collapse;background:#0d1220;border-radius:8px;overflow:hidden;margin:10px 0;font-size:12.5px}
+th{background:#1a2240;color:#90caf9;text-align:left;padding:9px 12px;font-weight:600;border-bottom:1px solid #1e2a45;font-size:12px;letter-spacing:.5px}
+td{padding:9px 12px;border-bottom:1px solid #1a2240;color:#cfd8dc;vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#1a2240}
+code{background:#1a2240;color:#ffe082;padding:1px 6px;border-radius:4px;font-family:Consolas,monospace;font-size:12px}
+pre{background:#0d1220;border:1px solid #1e2a45;border-radius:8px;padding:16px;overflow-x:auto;font-family:Consolas,monospace;font-size:12.5px;color:#cfd8dc;line-height:1.55;margin:10px 0}
+pre code{background:none;color:inherit;padding:0}
+.tree{font-family:Consolas,monospace;font-size:13px;color:#cfd8dc;line-height:1.7;background:#0d1220;border-radius:8px;padding:18px 20px;border:1px solid #1e2a45;overflow-x:auto;white-space:pre;margin:10px 0}
+.tree .root{color:#ffa726;font-weight:600}
+.tree .dist{color:#42a5f5;font-weight:600}
+.tree .place{color:#a5d6a7}
+.tree .meta{color:#78909c;font-size:11px}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-family:Consolas,monospace;margin:0 3px;background:#1a2240;color:#90caf9;border:1px solid #263259}
+.badge.body{background:#1f3a52;color:#90caf9;border-color:#2a5378}
+.badge.dialog{background:#3a2f52;color:#ce93d8;border-color:#5a4878}
+.badge.cost{background:#3a2a1a;color:#ffb74d;border-color:#5a4a2a}
+.badge.dur{background:#1a3a2a;color:#a5d6a7;border-color:#2a5a3a}
+.badge.warn{background:#3a1a1a;color:#ef9a9a;border-color:#5a2a2a}
+.badge.tag{background:#263259;color:#90caf9}
+.action-card{background:#0d1220;border:1px solid #1e2a45;border-left:4px solid #42a5f5;border-radius:8px;padding:14px 18px;margin:14px 0}
+.action-card.dialog{border-left-color:#ce93d8}
+.action-card .ac-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.action-card .ac-name-zh{font-size:17px;font-weight:700;color:#ffe082}
+.action-card .ac-name-en{color:#78909c;font-size:13px;font-style:italic}
+.action-card .ac-intent{font-size:12.5px;color:#b0bec5;margin:6px 0 10px}
+.action-card .ac-intent .en{display:block;color:#78909c;font-style:italic;margin-top:2px}
+.kv-grid{display:grid;grid-template-columns:130px 1fr;gap:6px 14px;font-size:12.5px;margin-top:6px}
+.kv-grid .k{color:#78909c;text-align:right;font-weight:600;padding-top:2px}
+.kv-grid .v{color:#cfd8dc}
+.kv-grid .v ul{margin:0;padding-left:18px}
+.kv-grid .v li{margin:2px 0}
+.behavior-card{background:#0d1220;border:1px solid #1e2a45;border-left:4px solid #ffa726;border-radius:8px;padding:14px 18px;margin:14px 0}
+.behavior-card.multi{border-left-color:#26c6da}
+.behavior-card.concurrent{border-left-color:#a5d6a7}
+.behavior-card.find{border-left-color:#ce93d8}
+.behavior-card .bc-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+.behavior-card .bc-num{color:#42a5f5;font-family:Consolas,monospace;font-size:13px;font-weight:700}
+.behavior-card .bc-name-zh{font-size:16px;font-weight:700;color:#ffe082}
+.behavior-card .bc-name-en{color:#78909c;font-size:12.5px;font-style:italic}
+.chain{font-family:Consolas,monospace;font-size:12px;background:#1a2240;padding:8px 12px;border-radius:6px;color:#cfd8dc;margin:6px 0;line-height:1.7;overflow-x:auto;white-space:nowrap}
+.chain .step{color:#ffe082}
+.chain .arr{color:#42a5f5;margin:0 4px}
+.chain .par{color:#a5d6a7;font-weight:700;margin:0 4px}
+.chain .delta{color:#90a4ae;font-size:11px}
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 14px;font-size:11.5px;color:#90a4ae}
+.legend .item{display:inline-flex;align-items:center;gap:4px}
+.legend .sw{width:14px;height:14px;border-radius:3px}
+.callout{background:#0d1220;border-left:3px solid #ffa726;padding:10px 14px;border-radius:0 6px 6px 0;margin:10px 0;font-size:12.5px;color:#cfd8dc}
+.callout .label{color:#ffa726;font-weight:700;margin-right:6px}
+.callout .en{display:block;color:#78909c;font-style:italic;margin-top:4px;font-size:12px}
+.note{font-size:11.5px;color:#78909c;margin-top:6px;font-style:italic}
+.bilingual{display:block}
+.bilingual .zh{color:#cfd8dc}
+.bilingual .en{color:#78909c;font-style:italic;font-size:.92em;margin-top:3px;display:block}
+body.lang-en .zh-only{display:none}
+body.lang-en .en-only{display:block}
+body.lang-en .bilingual .zh{display:none}
+body.lang-en .bilingual .en{color:#cfd8dc;font-style:normal;font-size:1em;margin-top:0}
+body:not(.lang-en) .en-only{display:none}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:#0a0e17}
+::-webkit-scrollbar-thumb{background:#1e2a45;border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:#42a5f5}
+.matrix{font-size:12px}
+.matrix th,.matrix td{text-align:center;padding:6px 8px}
+.matrix td:first-child{text-align:left;color:#90caf9;font-weight:600}
+.matrix .ok{background:#1a3a2a;color:#a5d6a7;font-weight:700}
+.matrix .mx{background:#3a1a1a;color:#ef9a9a;font-weight:700}
+.matrix .cond{background:#3a2a1a;color:#ffb74d;font-weight:700}
+.formula{font-family:Consolas,monospace;font-size:12px;background:#1a2240;padding:6px 10px;border-radius:4px;color:#ffe082;display:inline-block;margin:2px 0}
+.kpi-row{display:flex;flex-wrap:wrap;gap:14px;margin:8px 0 14px}
+.kpi{flex:1;min-width:150px;background:#0d1220;border:1px solid #1e2a45;border-radius:8px;padding:12px 14px}
+.kpi .num{font-size:24px;color:#ffa726;font-weight:700;font-family:Consolas,monospace}
+.kpi .label{font-size:11.5px;color:#78909c;margin-top:2px}
+.kpi .label-en{font-size:10.5px;color:#546e7a;font-style:italic}
+@media(max-width:720px){header h1{font-size:16px}main{padding:16px 14px}section{padding:18px 16px}.kv-grid{grid-template-columns:100px 1fr;gap:4px 8px}}
+
+/* ============= CANVAS-CENTRIC LAYOUT ============= */
+body.canvas-mode{padding-bottom:0}
+body.canvas-mode .page-grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(360px,1fr);gap:0;align-items:stretch}
+body.canvas-mode .canvas-pane{position:sticky;top:62px;height:calc(100vh - 62px);overflow:hidden;display:flex;flex-direction:column;background:#0a0e17;border-right:1px solid #1e2a45}
+body.canvas-mode .docs-pane{max-height:calc(100vh - 62px);overflow-y:auto;background:#0a0e17;padding:0 12px 60px}
+body.canvas-mode nav.toc{position:static;background:#0d1220;padding:10px 12px;border-bottom:none;border-radius:8px;margin:8px 0;display:flex;flex-wrap:wrap;gap:5px;font-size:11px}
+body.canvas-mode nav.toc a{padding:3px 8px;font-size:10.5px}
+body.canvas-mode main{max-width:none;padding:0}
+body.canvas-mode section{margin:14px 0;padding:16px 18px;font-size:13px}
+body.canvas-mode section h2{font-size:16px}
+body.canvas-mode section h3{font-size:13px}
+body.canvas-mode .kpi-row{gap:8px}
+body.canvas-mode .kpi{padding:8px 10px;min-width:120px}
+body.canvas-mode .kpi .num{font-size:18px}
+body.canvas-mode .docs-toggle{display:inline-block}
+@media(max-width:980px){
+  body.canvas-mode .page-grid{grid-template-columns:1fr}
+  body.canvas-mode .canvas-pane{position:static;height:auto}
+  body.canvas-mode .docs-pane{max-height:none}
+}
+
+.canvas-tabbar{display:flex;gap:4px;background:#0d1220;border-bottom:1px solid #1e2a45;padding:8px 12px;flex-wrap:wrap;flex-shrink:0}
+.canvas-tab{padding:7px 14px;border-radius:8px 8px 0 0;background:transparent;border:1px solid transparent;color:#78909c;cursor:pointer;font-size:12.5px;font-weight:600;font-family:inherit;transition:all .15s;white-space:nowrap}
+.canvas-tab:hover{color:#90caf9;background:#1a2240}
+.canvas-tab.active{color:#ffe082;background:#12182b;border-color:#1e2a45;border-bottom-color:#12182b;position:relative;top:1px}
+.canvas-tab .tab-icon{margin-right:6px}
+.canvas-stage{flex:1;min-height:0;background:#12182b;overflow:auto;position:relative;display:flex;flex-direction:column}
+.canvas-panel{display:none;flex:1;min-height:0;flex-direction:column}
+.canvas-panel.active{display:flex}
+.canvas-hint{padding:8px 16px;background:#0d1220;border-top:1px solid #1e2a45;color:#90a4ae;font-size:11.5px;flex-shrink:0}
+.canvas-hint b{color:#ffa726}
+.canvas-body{flex:1;overflow:auto;padding:14px 18px}
+
+/* Section close button on docs-pane sections */
+body.canvas-mode .docs-pane section{box-shadow:none}
+
+/* ============= ATOM CARD WITH PRECOND/EFFECT NODES ============= */
+.atom-cards-svg-wrap{flex:1;min-height:0;overflow:auto;padding:10px}
+.atom-cards-svg-wrap svg{display:block}
+.acard-bg{fill:#1a2240;stroke-width:2;rx:14;ry:14}
+.acard-bg.body{stroke:#42a5f5}
+.acard-bg.dialog{stroke:#ce93d8}
+.acard-icon-text{font-size:24px;text-anchor:middle;dominant-baseline:central}
+.acard-name-en{font-family:Consolas,monospace;font-weight:700;font-size:12.5px;fill:#ffe082;text-anchor:middle}
+.acard-name-zh{font-size:9.5px;fill:#90a4ae;text-anchor:middle}
+.acard-cost{font-family:Consolas,monospace;font-size:9.5px;fill:#ffb74d;text-anchor:middle}
+.acard-tag-pre,.acard-tag-eff{rx:5;ry:5}
+.acard-tag-pre{fill:#0d2030;stroke:#26c6da;stroke-width:1}
+.acard-tag-eff{fill:#1a2010;stroke:#a5d6a7;stroke-width:1}
+.acard-tag-text{font-family:Consolas,monospace;font-size:9.5px;dominant-baseline:central}
+.acard-tag-text.pre{fill:#80deea}
+.acard-tag-text.eff{fill:#a5d6a7}
+.acard-edge{fill:none;stroke-width:1.2}
+.acard-edge.pre{stroke:#26c6da;opacity:.55}
+.acard-edge.eff{stroke:#66bb6a;opacity:.55}
+.acard-section-label{fill:#78909c;font-family:Consolas,monospace;font-size:10.5px;font-weight:700;letter-spacing:1px}
+.acard-channel-divider{stroke:#1e2a45;stroke-width:1;stroke-dasharray:4 3}
+.acard-channel-title{fill:#90caf9;font-family:Consolas,monospace;font-size:13px;font-weight:700;letter-spacing:1.5px}
+.acard-channel-title.dialog{fill:#ce93d8}
+.acard-new-tag{fill:#ffa726;rx:6;ry:6}
+.acard-new-tag-text{fill:#0a0e17;font-family:Consolas,monospace;font-size:8.5px;font-weight:700;text-anchor:middle;dominant-baseline:central}
+
+/* ============= COMPOSE LAB ============= */
+.compose-area{display:grid;grid-template-rows:auto auto 1fr auto auto;height:100%;min-height:0}
+.compose-toolbar{padding:10px 16px;background:#0d1220;border-bottom:1px solid #1e2a45;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12px;flex-shrink:0}
+.compose-toolbar .compose-goal{flex:1;min-width:200px;color:#cfd8dc;font-family:Consolas,monospace;font-size:11.5px}
+.compose-toolbar .compose-goal b{color:#ffa726}
+.compose-toolbar button{padding:5px 12px;font-size:11.5px;border-radius:6px;border:1px solid #1e2a45;background:#1a2240;color:#90caf9;cursor:pointer;font-family:inherit}
+.compose-toolbar button:hover{background:#263259}
+.compose-toolbar button.primary{background:#42a5f5;color:#0a0e17;border-color:#42a5f5}
+.compose-main{display:grid;grid-template-rows:auto 1fr;min-height:0;overflow:hidden}
+.compose-palette{padding:10px 14px;background:#0d1220;border-bottom:1px solid #1e2a45;display:flex;flex-wrap:wrap;gap:8px}
+.compose-palette .pal-label{font-size:11px;color:#78909c;letter-spacing:1px;font-weight:700;align-self:center;margin-right:6px}
+.pal-atom{padding:6px 12px;border-radius:8px;border:1.5px solid #42a5f5;background:#1a2240;color:#ffe082;font-family:Consolas,monospace;font-size:11.5px;cursor:pointer;transition:all .12s;font-weight:700;user-select:none}
+.pal-atom:hover{background:#263259;transform:translateY(-1px)}
+.pal-atom.dialog{border-color:#ce93d8}
+.pal-atom.disabled{opacity:.4;cursor:not-allowed;border-color:#546e7a}
+.pal-atom .pal-target{font-size:9.5px;color:#78909c;font-weight:400;margin-left:4px}
+.compose-canvas{padding:14px 16px;overflow:auto;background:#12182b}
+.plan-chain{display:flex;flex-wrap:wrap;align-items:center;gap:6px;min-height:80px;background:#0d1220;border:1.5px dashed #1e2a45;border-radius:8px;padding:14px;margin:6px 0}
+.plan-chain.empty:before{content:attr(data-empty);color:#546e7a;font-size:12px;font-style:italic}
+.plan-step{display:inline-flex;flex-direction:column;align-items:stretch;background:#1a2240;border:1.5px solid #42a5f5;border-radius:8px;padding:0;min-width:120px;position:relative}
+.plan-step.dialog{border-color:#ce93d8}
+.plan-step.invalid{border-color:#ef5350;box-shadow:0 0 0 2px rgba(239,83,80,.18)}
+.plan-step.met{box-shadow:0 0 0 2px rgba(165,214,167,.25)}
+.plan-step .ps-head{padding:5px 10px;background:#1a2240;border-radius:6px 6px 0 0;display:flex;justify-content:space-between;align-items:center;gap:6px}
+.plan-step .ps-name{font-family:Consolas,monospace;font-weight:700;color:#ffe082;font-size:11.5px}
+.plan-step .ps-rm{cursor:pointer;color:#ef9a9a;font-size:12px;background:none;border:none;padding:0}
+.plan-step .ps-rm:hover{color:#ef5350}
+.plan-step .ps-pre,.plan-step .ps-eff{padding:4px 8px;font-family:Consolas,monospace;font-size:9.5px;line-height:1.55;border-top:1px dashed #1e2a45}
+.plan-step .ps-pre{background:#0d1f25;color:#80deea}
+.plan-step .ps-eff{background:#0d1f15;color:#a5d6a7;border-radius:0 0 6px 6px}
+.plan-step .pre-line.met{color:#66bb6a}
+.plan-step .pre-line.unmet{color:#ef9a9a;font-weight:700}
+.plan-arrow{color:#42a5f5;font-size:18px;font-weight:700;letter-spacing:-2px}
+.compose-status{padding:10px 16px;background:#0d1220;border-top:1px solid #1e2a45;display:flex;flex-wrap:wrap;gap:14px;font-size:11.5px;color:#cfd8dc;flex-shrink:0}
+.compose-status .stat{display:flex;align-items:center;gap:5px}
+.compose-status .stat b{color:#ffa726;font-family:Consolas,monospace}
+.compose-status .stat.ok b{color:#66bb6a}
+.compose-status .stat.bad b{color:#ef5350}
+.coverage-grid{padding:8px 12px;background:#0d1220;border-top:1px solid #1e2a45;font-size:10.5px;font-family:Consolas,monospace}
+.coverage-grid .cov-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:3px 0}
+.coverage-grid .cov-label{color:#78909c;min-width:140px}
+.cov-chip{padding:1px 6px;border-radius:4px;font-size:9.5px}
+.cov-chip.met{background:#1a3020;color:#a5d6a7;border:1px solid #2a5a3a}
+.cov-chip.unmet{background:#3a1a1a;color:#ef9a9a;border:1px solid #5a2a2a}
+.cov-chip.changed{background:#2a2010;color:#ffb74d;border:1px solid #5a3a1a}
+
+/* ============= ACTION NODE GALLERY ============= */
+.action-gallery{background:#0d1220;border:1px solid #1e2a45;border-radius:10px;padding:18px 14px;margin:14px 0;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:760px){.action-gallery{grid-template-columns:1fr}}
+.action-gallery .channel-col{display:flex;flex-direction:column;align-items:center;gap:10px;padding:12px;background:#12182b;border-radius:8px}
+.action-gallery .channel-label{font-size:12px;font-weight:700;letter-spacing:1.2px;padding:4px 14px;border-radius:14px;text-transform:uppercase;font-family:Consolas,monospace}
+.action-gallery .channel-label.body{color:#42a5f5;background:#0d2030;border:1px solid #2a5378}
+.action-gallery .channel-label.dialog{color:#ce93d8;background:#1f1530;border:1px solid #5a4878}
+.action-gallery .nodes-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:flex-start}
+.action-node{position:relative;display:flex;flex-direction:column;align-items:center;width:108px;min-height:118px;padding:14px 8px 10px;background:#1a2240;border:2px solid #1e2a45;border-radius:14px;text-align:center;cursor:default;transition:transform .15s,box-shadow .15s,border-color .15s}
+.action-node:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(66,165,245,.28)}
+.action-node.body{border-color:#42a5f5}
+.action-node.body:hover{box-shadow:0 8px 20px rgba(66,165,245,.4)}
+.action-node.dialog{border-color:#ce93d8}
+.action-node.dialog:hover{box-shadow:0 8px 20px rgba(206,147,216,.4)}
+.action-node.new{border-style:dashed}
+.action-node .layer-tag{position:absolute;top:-9px;right:-6px;padding:2px 7px;border-radius:9px;font-size:9.5px;font-weight:700;font-family:Consolas,monospace;letter-spacing:.5px}
+.action-node.body .layer-tag{background:#42a5f5;color:#0a0e17}
+.action-node.dialog .layer-tag{background:#ce93d8;color:#0a0e17}
+.action-node .new-tag{position:absolute;top:-8px;left:-8px;padding:2px 6px;border-radius:8px;font-size:9px;font-weight:700;background:#ffa726;color:#0a0e17}
+.action-node .icon{font-size:30px;line-height:1;margin:2px 0 6px}
+.action-node .name-en{font-family:Consolas,monospace;font-size:13px;font-weight:700;color:#ffe082}
+.action-node .name-zh{font-size:11px;color:#90a4ae;margin-top:2px}
+.action-node .meta{display:flex;gap:4px;margin-top:8px;flex-wrap:wrap;justify-content:center}
+.action-node .mb{font-family:Consolas,monospace;font-size:9.5px;padding:2px 5px;background:#0d1220;border-radius:4px;color:#cfd8dc}
+.action-node .mb.cost{color:#ffb74d}
+.action-node .mb.dur{color:#a5d6a7}
+
+/* ============= COMPOSITE CHAIN GRAPH ============= */
+.chain-graph{background:#0d1220;border-radius:8px;padding:12px 14px;margin:8px 0;overflow-x:auto}
+.chain-row{display:flex;flex-wrap:nowrap;align-items:center;gap:6px;min-width:max-content}
+.chain-row.parallel{padding-left:10px;border-left:2px dashed #a5d6a7;margin-top:6px}
+.chain-row.parallel-label{font-size:10px;color:#a5d6a7;font-weight:700;border:none;padding:0;margin-bottom:2px;font-family:Consolas,monospace}
+.cn{display:inline-flex;flex-direction:column;align-items:center;padding:6px 10px;background:#1a2240;border:1.5px solid #42a5f5;border-radius:8px;min-width:78px;flex-shrink:0;transition:transform .12s}
+.cn:hover{transform:translateY(-2px)}
+.cn.dialog{border-color:#ce93d8}
+.cn .cn-name{font-family:Consolas,monospace;font-size:11.5px;color:#ffe082;font-weight:700}
+.cn .cn-target{font-size:9.5px;color:#78909c;margin-top:2px;font-family:Consolas,monospace}
+.cn .cn-cost{position:absolute;display:none}
+.cn-arrow{color:#42a5f5;font-size:18px;font-weight:700;padding:0 1px;flex-shrink:0;letter-spacing:-3px}
+.cn-par{display:inline-flex;align-items:center;color:#a5d6a7;font-weight:700;font-size:18px;padding:0 3px}
+.cn-or{color:#ff8a65;font-size:11px;font-weight:700;font-family:Consolas,monospace;padding:0 3px}
+.cn-bracket{color:#ffa726;font-size:13px;padding:0 1px;font-family:Consolas,monospace}
+
+/* ============= SCENE TREE SVG ============= */
+.scene-tree-vis{background:#0a0e17;border-radius:10px;padding:18px 12px;border:1px solid #1e2a45;overflow-x:auto;margin:14px 0}
+.scene-tree-vis svg{display:block;margin:0 auto;min-width:1180px}
+.tn-rect{stroke-width:1.5;transition:filter .15s}
+.tn-rect.root{fill:#3a2a1a;stroke:#ffa726;stroke-width:2.5}
+.tn-rect.dist{fill:#0d2030;stroke:#42a5f5;stroke-width:2}
+.tn-rect.place{fill:#0d1f15;stroke:#66bb6a;stroke-width:1.5}
+.tn-rect.place.outdoor{fill:#10202b;stroke:#80deea;stroke-dasharray:4 2.5}
+.tn-rect:hover{filter:drop-shadow(0 0 8px #42a5f5)}
+.tn-text{font-family:Consolas,'Microsoft YaHei',monospace;pointer-events:none;dominant-baseline:central}
+.tn-text.root{fill:#ffe082;font-weight:700;font-size:14px;text-anchor:middle}
+.tn-text.dist-en{fill:#90caf9;font-weight:700;font-size:11.5px;text-anchor:middle}
+.tn-text.dist-zh{fill:#78909c;font-size:9.5px;text-anchor:middle}
+.tn-text.place-en{fill:#a5d6a7;font-size:10.5px;text-anchor:start}
+.tn-text.place-zh{fill:#78909c;font-size:8.5px;text-anchor:start}
+.tn-edge{stroke:#1e2a45;fill:none}
+.tn-edge.r-d{stroke:#ffa726;stroke-width:1.5;opacity:.65}
+.tn-edge.d-p{stroke:#42a5f5;stroke-width:1;opacity:.45}
+
+/* ============= GOAP PLANNER DEMO ============= */
+.planner-demo{background:#0d1220;border-radius:10px;padding:18px;border:1px solid #1e2a45;margin:14px 0}
+.planner-grid{display:grid;grid-template-columns:300px 1fr;gap:14px}
+@media(max-width:920px){.planner-grid{grid-template-columns:1fr}}
+.planner-side{display:flex;flex-direction:column;gap:10px}
+.planner-card{background:#12182b;border:1px solid #1e2a45;border-radius:8px;padding:10px 12px}
+.planner-card h4{font-size:11.5px;color:#ffa726;margin-bottom:6px;letter-spacing:1.3px;font-weight:700;text-transform:uppercase;font-family:Consolas,monospace}
+.state-block{font-family:Consolas,monospace;font-size:11.5px;line-height:1.7;color:#cfd8dc}
+.state-block .k{color:#78909c;margin-right:6px}
+.state-block .v{color:#ffe082}
+.state-block .v.met{color:#66bb6a;font-weight:700}
+.state-block .v.unmet{color:#ef9a9a}
+.planner-controls{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.planner-controls button{padding:6px 12px;font-size:11.5px;border-radius:8px;border:1px solid #1e2a45;background:#1a2240;color:#90caf9;cursor:pointer;font-weight:600;font-family:inherit}
+.planner-controls button:hover:not(:disabled){background:#263259}
+.planner-controls button.primary{background:#42a5f5;color:#0a0e17;border-color:#42a5f5}
+.planner-controls button.primary:hover:not(:disabled){background:#90caf9}
+.planner-controls button:disabled{opacity:.4;cursor:not-allowed}
+.planner-frame{font-size:11px;color:#78909c;margin-top:4px;font-family:Consolas,monospace}
+.planner-frame b{color:#ffa726}
+.planner-svg-wrap{background:#0a0e17;border-radius:8px;border:1px solid #1e2a45;padding:8px;min-height:380px;overflow:auto}
+.planner-svg-wrap svg{display:block;margin:0 auto}
+.snode .rect{stroke-width:1.5;transition:fill .25s,stroke .25s,stroke-width .25s}
+.snode.open .rect{fill:#1a2240;stroke:#42a5f5}
+.snode.closed .rect{fill:#0d1220;stroke:#546e7a;opacity:.55}
+.snode.current .rect{fill:#2a2010;stroke:#ffa726;stroke-width:2.6;filter:drop-shadow(0 0 6px #ffa72688)}
+.snode.goal .rect{fill:#1a3020;stroke:#66bb6a;stroke-width:3;filter:drop-shadow(0 0 8px #66bb6a99)}
+.snode.pruned .rect{fill:#2a1010;stroke:#ef5350;stroke-dasharray:3 2;opacity:.5}
+.snode .title{fill:#ffe082;font-weight:700;font-size:10px;font-family:Consolas,monospace;pointer-events:none}
+.snode .body-text{fill:#cfd8dc;font-size:9.5px;font-family:Consolas,monospace;pointer-events:none}
+.snode .fgh{fill:#ffa726;font-size:10px;font-weight:700;font-family:Consolas,monospace;pointer-events:none}
+.snode.goal .fgh{fill:#66bb6a}
+.sedge{stroke:#374e7a;stroke-width:1.6;fill:none;transition:stroke .3s,stroke-width .3s}
+.sedge.path{stroke:#ffd54f;stroke-width:3.2;stroke-dasharray:8 5;stroke-linecap:round;filter:drop-shadow(0 0 6px rgba(255,213,79,.65));animation:dashFlow 1.1s linear infinite}
+.sedge-label{fill:#ffa726;font-family:Consolas,monospace;font-size:10px;pointer-events:none;text-anchor:middle}
+.sedge-label.path{fill:#ffd54f;font-weight:700;text-shadow:0 0 4px rgba(255,213,79,.8)}
+@keyframes dashFlow{from{stroke-dashoffset:0}to{stroke-dashoffset:-26}}
+@keyframes nodeAppear{0%{opacity:0}55%{opacity:.85}100%{opacity:1}}
+@keyframes edgeDraw{from{stroke-dashoffset:280;opacity:.35}to{stroke-dashoffset:0;opacity:1}}
+@keyframes goalPulse{0%,100%{filter:drop-shadow(0 0 4px rgba(255,213,79,.55))}50%{filter:drop-shadow(0 0 14px rgba(255,213,79,1))}}
+@keyframes goalRing{0%{stroke-width:3;opacity:1}100%{stroke-width:18;opacity:0}}
+.snode.appearing{animation:nodeAppear .4s ease-out backwards}
+.sedge.drawing{stroke-dasharray:280;animation:edgeDraw .58s ease-out backwards}
+.snode.path .rect{fill:#2a2410;stroke:#ffd54f;stroke-width:3;animation:goalPulse 1.6s ease-in-out infinite}
+.snode.path .title{fill:#ffecb3}
+.snode.path .fgh{fill:#ffd54f}
+.goal-pulse-ring{fill:none;stroke:#ffd54f;stroke-width:3;animation:goalRing 1.4s ease-out infinite;pointer-events:none}
+
+/* === BLUEPRINT-STYLE GRAPH (compose lab + reusable for any tab) === */
+.bp-canvas-wrap{flex:1;min-height:0;overflow:auto;background:#0a0e17;background-image:radial-gradient(circle, #1e2a45 1px, transparent 1px);background-size:18px 18px;position:relative;cursor:grab}
+.bp-canvas-wrap.panning{cursor:grabbing}
+.bp-svg{display:block;min-width:100%;min-height:100%;font-family:Consolas,monospace}
+.bp-node{cursor:grab;transition:filter .15s}
+.bp-node.dragging{cursor:grabbing}
+.bp-node:hover .bp-node-bg{filter:drop-shadow(0 6px 14px rgba(0,0,0,.55))}
+.bp-node.dragging .bp-node-bg{filter:drop-shadow(0 10px 22px rgba(66,165,245,.55))}
+.bp-node-bg{fill:#0d1322;stroke:#1e2a45;stroke-width:1.6;filter:drop-shadow(0 4px 8px rgba(0,0,0,.45))}
+.bp-node-bg.body{stroke:#1e88e5}
+.bp-node-bg.dialog{stroke:#9c27b0}
+.bp-node-bg.invalid{stroke:#ef5350;stroke-width:2.2;filter:drop-shadow(0 0 8px rgba(239,83,80,.5))}
+.bp-node-hdr-rect{fill:#1976d2}
+.bp-node-hdr-rect.dialog{fill:#7b1fa2}
+.bp-node-hdr-shine{fill:rgba(255,255,255,.12)}
+.bp-node-title{fill:#fff;font-size:11.5px;font-weight:700;dominant-baseline:central;pointer-events:none;letter-spacing:.3px}
+.bp-node-icon{font-size:14px;dominant-baseline:central;pointer-events:none}
+.bp-node-step{fill:rgba(255,255,255,.7);font-size:9.5px;font-weight:700;dominant-baseline:central;text-anchor:end;pointer-events:none}
+.bp-node-rm{fill:rgba(255,255,255,.55);font-size:13px;font-weight:700;dominant-baseline:central;text-anchor:middle;cursor:pointer}
+.bp-node-rm:hover{fill:#ef5350}
+.bp-pin-row-bg{fill:#0a0f1c}
+.bp-pin{stroke-width:1.6;cursor:pointer;transition:r .15s,fill .2s}
+.bp-pin.pre{fill:#0a0f1c;stroke:#26c6da}
+.bp-pin.eff{fill:#0a0f1c;stroke:#66bb6a}
+.bp-pin.connected.pre{fill:#26c6da}
+.bp-pin.connected.eff{fill:#66bb6a}
+.bp-pin.unmet{stroke:#ef5350;fill:rgba(239,83,80,.18);animation:pinPulse 1.3s ease-in-out infinite}
+@keyframes pinPulse{0%,100%{r:5}50%{r:6.5}}
+.bp-pin-label{font-size:10px;dominant-baseline:central;pointer-events:none;fill:#cfd8dc}
+.bp-pin-label.pre{text-anchor:start}
+.bp-pin-label.eff{text-anchor:end}
+.bp-pin-label.unmet{fill:#ef9a9a;font-weight:700}
+.bp-pin-label.met{fill:#a5d6a7}
+.bp-edge{fill:none;stroke-width:2.4;cursor:default;pointer-events:none}
+.bp-edge.met{stroke:url(#edgeGradMet);filter:drop-shadow(0 0 3px rgba(102,187,106,.45))}
+.bp-edge.unmet{stroke:#ef5350;stroke-dasharray:6 4;opacity:.55;animation:dashFlowSlow 1.6s linear infinite}
+.bp-edge.path-highlight{stroke:url(#edgeGradGold)!important;stroke-width:3.5!important;filter:drop-shadow(0 0 6px rgba(255,213,79,.7));stroke-dasharray:none;animation:none}
+@keyframes dashFlowSlow{from{stroke-dashoffset:0}to{stroke-dashoffset:-20}}
+.bp-edge-arrow{fill:#66bb6a;stroke:none}
+.bp-grid-label{fill:#37474f;font-size:9.5px;letter-spacing:1.2px;pointer-events:none}
+.bp-init-tag{fill:#1a2535;stroke:#37474f;stroke-width:1.2}
+.bp-init-tag-text{fill:#90caf9;font-size:10px;dominant-baseline:central;pointer-events:none}
+.bp-goal-tag{fill:#2a2410;stroke:#ffd54f;stroke-width:1.4}
+.bp-goal-tag-text{fill:#ffd54f;font-size:10.5px;font-weight:700;dominant-baseline:central;pointer-events:none}
+.planner-log{background:#0a0e17;border:1px solid #1e2a45;border-radius:6px;padding:8px 10px;font-family:Consolas,monospace;font-size:10.5px;color:#cfd8dc;max-height:160px;overflow-y:auto;line-height:1.7;margin-top:8px}
+.planner-log .ll{padding:1px 0}
+.planner-log .ll.event{color:#ffe082}
+.planner-log .ll.expand{color:#42a5f5}
+.planner-log .ll.prune{color:#ef9a9a}
+.planner-log .ll.goal{color:#66bb6a;font-weight:700}
+.planner-log .ll.init{color:#90a4ae}
+.planner-legend{display:flex;flex-wrap:wrap;gap:10px;font-size:11px;margin:8px 0;color:#90a4ae}
+.planner-legend .leg{display:inline-flex;align-items:center;gap:5px}
+.planner-legend .swl{width:14px;height:12px;border:1.5px solid;border-radius:3px;display:inline-block}
+</style>
+</head>
+<body class="canvas-mode">
+<header>
+  <div>
+    <h1 data-zh="校园多智能体 · GOAP 世界状态与行为定义" data-en="Campus Multi-Agent · GOAP WorldState &amp; Action Spec">校园多智能体 · GOAP 世界状态与行为定义</h1>
+    <div class="subtitle" data-zh="基于双层 FSM（身体: move/interact/find/idle · 对话: talk/mutter/phone_call）的最小 GOAP 设计稿" data-en="Minimal GOAP design over dual-layer FSM (Body: move/interact/find/idle · Dialog: talk/mutter/phone_call)">基于双层 FSM（身体: move/interact/find/idle · 对话: talk/mutter/phone_call）的最小 GOAP 设计稿</div>
+  </div>
+  <div class="topbar-right">
+    <button class="btn primary" id="btn-lang">EN</button>
+    <button class="btn" id="btn-top" data-zh="回到顶部" data-en="Top">回到顶部</button>
+  </div>
+</header>
+
+<div class="page-grid">
+  <!-- ====== LEFT: CANVAS PANE (2/3) ====== -->
+  <div class="canvas-pane">
+    <div class="canvas-tabbar" id="canvas-tabbar">
+      <button class="canvas-tab active" data-panel="scene-tree"><span class="tab-icon">🏛</span><span data-zh="场景树" data-en="Scene Tree">场景树</span></button>
+      <button class="canvas-tab" data-panel="atoms"><span class="tab-icon">⚛</span><span data-zh="原子动作" data-en="Atom Cards">原子动作</span></button>
+      <button class="canvas-tab" data-panel="compose"><span class="tab-icon">🔗</span><span data-zh="复合组合" data-en="Compose Lab">复合组合</span></button>
+      <button class="canvas-tab" data-panel="planner"><span class="tab-icon">🎯</span><span data-zh="GOAP 规划" data-en="GOAP Search">GOAP 规划</span></button>
+    </div>
+    <div class="canvas-stage">
+      <div class="canvas-panel active" id="canvas-panel-scene-tree">
+        <div class="canvas-body" id="canvas-scene-tree-mount"></div>
+        <div class="canvas-hint"><b data-zh="提示" data-en="Hint">提示</b>：
+          <span data-zh="WorldState = 共享场景树 + 私有 agent 状态。鼠标悬停 place 节点查看英文名。" data-en="WorldState = shared scene tree + private agent state. Hover any place to see English name.">WorldState = 共享场景树 + 私有 agent 状态。鼠标悬停 place 节点查看英文名。</span>
+        </div>
+      </div>
+      <div class="canvas-panel" id="canvas-panel-atoms">
+        <div class="canvas-body" id="canvas-atom-cards-mount"></div>
+        <div class="canvas-hint"><b data-zh="原子卡解读" data-en="How to read">原子卡解读</b>：
+          <span data-zh="中央 = 原子动作；左侧蓝色小节点 = 前置条件 (preconditions)；右侧绿色小节点 = 效果 (effects)。线表示因果。" data-en="Center = atomic action; cyan chips on left = preconditions; green chips on right = effects. Lines are causal links.">中央 = 原子动作；左侧蓝色小节点 = 前置条件 (preconditions)；右侧绿色小节点 = 效果 (effects)。线表示因果。</span>
+        </div>
+      </div>
+      <div class="canvas-panel" id="canvas-panel-compose">
+        <div class="compose-area" id="canvas-compose-mount"></div>
+        <div class="canvas-hint"><b data-zh="操作" data-en="How">操作</b>：
+          <span data-zh="点击上方原子动作即可追加到下方 plan 链。系统会实时检查每一步的 precondition 是否被前序 effect 满足；未满足项标红。" data-en="Click any atom above to append to the plan chain below. The validator highlights each step's preconditions: green if satisfied by prior effects, red if not.">点击上方原子动作即可追加到下方 plan 链。系统会实时检查每一步的 precondition 是否被前序 effect 满足；未满足项标红。</span>
+        </div>
+      </div>
+      <div class="canvas-panel" id="canvas-panel-planner">
+        <div class="canvas-body" id="canvas-planner-mount"></div>
+        <div class="canvas-hint"><b data-zh="9 跳搜索" data-en="9-hop search">9 跳搜索</b>：
+          <span data-zh='"研究生通宵论文+外卖"目标：project_done ∧ hunger=0 ∧ holding=meal_done。点"下一步"逐节点观察 A* 扩展、闭合、剪枝、回溯。' data-en='"Grad overnight: paper+delivery" goal: project_done ∧ hunger=0 ∧ holding=meal_done. Click Step to watch A* expand / close / prune / backtrack node by node.'>"研究生通宵论文+外卖"目标：project_done ∧ hunger=0 ∧ holding=meal_done。点"下一步"逐节点观察 A* 扩展、闭合、剪枝、回溯。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== RIGHT: DOCS PANE (1/3) ====== -->
+  <aside class="docs-pane">
+
+<nav class="toc">
+  <a href="#sec-overview" data-zh="0. 概览" data-en="0. Overview">0. 概览</a>
+  <a href="#sec-tree" data-zh="1. 场景树" data-en="1. Scene Tree">1. 场景树</a>
+  <a href="#sec-place" data-zh="2. Place 字段" data-en="2. Place Fields">2. Place 字段</a>
+  <a href="#sec-agent" data-zh="3. Agent 字段" data-en="3. Agent Fields">3. Agent 字段</a>
+  <a href="#sec-json" data-zh="4. WorldState 示例" data-en="4. WorldState JSON">4. WorldState 示例</a>
+  <a href="#sec-atomic" data-zh="5. 原子动作" data-en="5. Atomic Actions">5. 原子动作</a>
+  <a href="#sec-concur" data-zh="6. 并发互斥" data-en="6. Concurrency">6. 并发互斥</a>
+  <a href="#sec-comp-idx" data-zh="7. 复合行为总表" data-en="7. Composite Index">7. 复合行为总表</a>
+  <a href="#sec-comp-card" data-zh="8. 复合行为卡" data-en="8. Behavior Cards">8. 复合行为卡</a>
+  <a href="#sec-search" data-zh="9. GOAP 搜索条件" data-en="9. GOAP Search">9. GOAP 搜索条件</a>
+  <a href="#sec-mapping" data-zh="10. 旧→新映射" data-en="10. Old→New Mapping">10. 旧→新映射</a>
+  <a href="#sec-planner" data-zh="11. 规划演示 ▶" data-en="11. Planning Demo ▶">11. 规划演示 ▶</a>
+  <a href="#sec-antibloat" data-zh="12. 反膨胀策略" data-en="12. Anti-bloat">12. 反膨胀策略</a>
+</nav>
+
+<main>
+
+<!-- ============ 0. OVERVIEW ============ -->
+<section id="sec-overview">
+  <h2><span class="sec-num">§0</span><span data-zh="概览" data-en="Overview">概览</span><span class="sec-en">/ Overview</span></h2>
+  <div class="lead">
+    <span class="zh-only"><b>问题：</b> 原始 9 类粗粒度行为枚举（MOVE / STAY / STUDY_WORK / EAT_BUY / SOCIAL / USE_SPACE / GOVERNANCE / EMERGENCY / IDLE）粒度过粗，无法用作 GOAP 的搜索单元；同时多智能体架构里已固定双层 FSM——身体 <code>move / interact / find / idle</code>、对话 <code>talk / mutter / phone_call</code>。本文以这 7 个原子动作为搜索单元，重建一套<b>极简 worldState + GOAP 前置/效果/代价</b>，并用复合行为示范 GOAP 搜索如何把旧 9 类完整覆盖。</span>
+    <span class="en en-only"><b>Problem:</b> The original 9-bucket action enum (MOVE / STAY / STUDY_WORK / EAT_BUY / SOCIAL / USE_SPACE / GOVERNANCE / EMERGENCY / IDLE) is too coarse to serve as GOAP search atoms. The multi-agent stack already fixes a dual-layer FSM — Body <code>move / interact / find / idle</code>, Dialog <code>talk / mutter / phone_call</code>. We rebuild a <b>minimal worldState + GOAP precond/effect/cost</b> on these 7 atoms, and demonstrate via composite behaviors how the old 9 enums are fully recovered by GOAP search.</span>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi"><div class="num">7</div><div class="label">原子动作 / Atomic actions</div><div class="label-en">2 channels: body × 4, dialog × 3</div></div>
+    <div class="kpi"><div class="num">25</div><div class="label">Place 节点 / Places</div><div class="label-en">6 districts under root <code>campus</code></div></div>
+    <div class="kpi"><div class="num">8</div><div class="label">Place 字段 / Place fields</div><div class="label-en">+1 outdoor-only field</div></div>
+    <div class="kpi"><div class="num">11</div><div class="label">Agent 字段 / Agent fields</div><div class="label-en">all closed enums or 0..3 buckets</div></div>
+    <div class="kpi"><div class="num">11</div><div class="label">复合行为示例 / Composite behaviors</div><div class="label-en">covers all 9 old enums</div></div>
+    <div class="kpi"><div class="num">1..6</div><div class="label">cost 区间 / Cost range</div><div class="label-en">A* admissible heuristic</div></div>
+  </div>
+
+  <h3 data-zh="设计原则（4 点）" data-en="Design Principles (4)">设计原则（4 点）</h3>
+  <ul style="font-size:13px;color:#cfd8dc;padding-left:24px;line-height:1.9">
+    <li><span class="bilingual"><span class="zh"><b>分层解耦</b>：场景树只放<i>共享 Place 事实</i>；agent 只放<i>私有 11 字段</i>；二者通过 <code>location</code> 路径耦合。</span><span class="en"><b>Layer split:</b> scene tree carries shared Place facts only; agents hold 11 private fields; coupled via a dotted <code>location</code> path.</span></span></li>
+    <li><span class="bilingual"><span class="zh"><b>桶位优先</b>：所有强度量（hunger/energy/focus/social_need/occupancy）用 0..3 桶位，money 用 0..2，避免浮点状态空间爆炸。</span><span class="en"><b>Buckets over scalars:</b> all intensities use 0..3 (money 0..2) integer buckets; no floats in state space.</span></span></li>
+    <li><span class="bilingual"><span class="zh"><b>能枚举不字符串</b>：mood / holding / role / noise 全部封闭枚举；新增需改 schema。</span><span class="en"><b>Enums over free text:</b> mood / holding / role / noise are closed enums; extension requires schema change.</span></span></li>
+    <li><span class="bilingual"><span class="zh"><b>3 层定深</b>：<code>campus → district → place</code>，物件粒度全部下沉到 <code>agent.holding</code>，杜绝"为剧情临时挂字段"。</span><span class="en"><b>Fixed depth 3:</b> <code>campus → district → place</code>; sub-place objects collapse into <code>agent.holding</code>; no ad-hoc fields per scenario.</span></span></li>
+  </ul>
+</section>
+
+<!-- ============ 1. SCENE TREE ============ -->
+<section id="sec-tree">
+  <h2><span class="sec-num">§1</span><span data-zh="WorldState 场景树" data-en="WorldState Scene Tree">WorldState 场景树</span><span class="sec-en">/ Scene Tree</span></h2>
+  <p class="bilingual"><span class="zh">根节点 = <code>campus</code>；下分 6 个 district（教学/生活/运动/办公/边界/医疗），共 25 个 place。每个 place 仅挂 5–8 个核心字段；district 节点不挂字段，仅作语义分组与"区域级广播"挂点。</span><span class="en">Root = <code>campus</code>; 6 districts (teaching/life/sports/admin/edge/medical) host 25 places. Each place carries 5–8 core fields; districts hold no fields and serve only as grouping nodes and broadcast pivots.</span></p>
+
+  <div class="legend">
+    <span class="item"><span class="sw" style="background:#ffa726"></span> root</span>
+    <span class="item"><span class="sw" style="background:#42a5f5"></span> district</span>
+    <span class="item"><span class="sw" style="background:#66bb6a"></span> place (indoor)</span>
+    <span class="item"><span class="sw" style="background:#80deea;border:1px dashed"></span> place (outdoor)</span>
+  </div>
+
+  <!-- ===== SVG TREE VIEW ===== -->
+  <div class="scene-tree-vis" id="scene-tree-vis">
+    <!-- rendered by JS at bottom of page -->
+  </div>
+
+  <details style="margin-top:12px"><summary style="cursor:pointer;color:#90caf9;font-size:12px;padding:6px 10px;background:#0d1220;border-radius:6px;display:inline-block">▸ <span data-zh="展开 ASCII 文本树（备用视图）" data-en="Expand ASCII text tree (fallback view)">展开 ASCII 文本树（备用视图）</span></summary>
+<div class="tree"><span class="root">campus</span>                              <span class="meta">[0 fields · root]</span>
+├── <span class="dist">teaching</span>                        <span class="meta">[0 · 教学区 / Teaching]</span>
+│   ├── <span class="place">classroom</span>                   <span class="meta">[6 · 教室]</span>
+│   ├── <span class="place">lab</span>                         <span class="meta">[7 · 实验室]</span>
+│   ├── <span class="place">study_room</span>                  <span class="meta">[6 · 自习室]</span>
+│   ├── <span class="place">library</span>                     <span class="meta">[7 · 图书馆]</span>
+│   ├── <span class="place">library_4f_corner</span>           <span class="meta">[7 · 图书馆四楼角落]</span>
+│   ├── <span class="place">lecture_hall</span>                <span class="meta">[6 · 报告厅]</span>
+│   ├── <span class="place">music_hall</span>                  <span class="meta">[6 · 音乐厅]</span>
+│   ├── <span class="place">piano_room</span>                  <span class="meta">[6 · 琴房]</span>
+│   └── <span class="place">art_studio</span>                  <span class="meta">[6 · 画室]</span>
+├── <span class="dist">life</span>                            <span class="meta">[0 · 生活区 / Life]</span>
+│   ├── <span class="place">dorm</span>                        <span class="meta">[6 · 宿舍]</span>
+│   ├── <span class="place">dorm_lounge</span>                 <span class="meta">[6 · 宿舍楼公共区]</span>
+│   ├── <span class="place">canteen</span>                     <span class="meta">[7 · 食堂]</span>
+│   ├── <span class="place">cafe</span>                        <span class="meta">[7 · 咖啡厅]</span>
+│   └── <span class="place">express_station</span>             <span class="meta">[5 · 快递站]</span>
+├── <span class="dist">sports</span>                          <span class="meta">[0 · 运动区 / Sports]</span>
+│   ├── <span class="place">track</span>                       <span class="meta">[7 · 操场 outdoor]</span>
+│   ├── <span class="place">basketball</span>                  <span class="meta">[7 · 篮球场 outdoor]</span>
+│   └── <span class="place">gym</span>                         <span class="meta">[6 · 体育馆]</span>
+├── <span class="dist">admin</span>                           <span class="meta">[0 · 办公区 / Admin]</span>
+│   ├── <span class="place">office</span>                      <span class="meta">[6 · 办公室]</span>
+│   ├── <span class="place">admin_building</span>              <span class="meta">[6 · 行政楼]</span>
+│   └── <span class="place">news_room</span>                   <span class="meta">[6 · 校报编辑室]</span>
+├── <span class="dist">edge</span>                            <span class="meta">[0 · 边界区 / Edge]</span>
+│   ├── <span class="place">gate</span>                        <span class="meta">[6 · 校门 outdoor]</span>
+│   ├── <span class="place">boulevard</span>                   <span class="meta">[7 · 林荫道 outdoor]</span>
+│   ├── <span class="place">lake</span>                        <span class="meta">[7 · 湖边 outdoor]</span>
+│   └── <span class="place">rooftop</span>                     <span class="meta">[7 · 天台 outdoor]</span>
+└── <span class="dist">medical</span>                         <span class="meta">[0 · 医疗区 / Medical]</span>
+    └── <span class="place">clinic</span>                      <span class="meta">[6 · 校医院]</span></div>
+  </details>
+
+  <p class="note bilingual"><span class="zh">复杂度公式 / Complexity: <code>state_size ≈ places × 8 + agents × 11</code> — 与 <code>O(places × agents × attrs)</code> 相比为加性增长，不会随 agent 数爆炸。</span><span class="en">Growth is additive: <code>state_size ≈ places × 8 + agents × 11</code> — never multiplicative across agents.</span></p>
+</section>
+
+<!-- ============ 2. PLACE FIELDS ============ -->
+<section id="sec-place">
+  <h2><span class="sec-num">§2</span><span data-zh="Place 节点字段表" data-en="Place Node Fields">Place 节点字段表</span><span class="sec-en">/ Place Fields</span></h2>
+  <p class="bilingual"><span class="zh">每个 place 节点只挂以下 8 个字段（其中 <code>weather_outdoor</code> 仅出现在户外节点，避免无意义字段下沉到室内节点）。</span><span class="en">Each place node carries only the 8 fields below; <code>weather_outdoor</code> appears on outdoor nodes only, preventing field bleed to indoor places.</span></p>
+  <table>
+    <thead><tr><th>name</th><th>type</th><th>range / enum</th><th data-zh="说明" data-en="desc">说明</th><th>desc_en</th></tr></thead>
+    <tbody>
+      <tr><td><code>occupancy</code></td><td>int</td><td>0..3</td><td>0 空 · 1 稀 · 2 中 · 3 满</td><td>crowding bucket</td></tr>
+      <tr><td><code>is_open</code></td><td>bool</td><td>true / false</td><td>当前时段是否营业/开放</td><td>open in current time bucket</td></tr>
+      <tr><td><code>noise</code></td><td>enum</td><td>quiet / medium / loud</td><td>安静度（用于聚焦/社交决策）</td><td>ambient noise level</td></tr>
+      <tr><td><code>has_seat</code></td><td>bool</td><td>true / false</td><td>是否提供可坐席位</td><td>seating available</td></tr>
+      <tr><td><code>has_food</code></td><td>bool</td><td>true / false</td><td>是否可获取餐/饮</td><td>food/drink obtainable</td></tr>
+      <tr><td><code>has_compute</code></td><td>bool</td><td>true / false</td><td>是否有电源/WiFi/电脑</td><td>power &amp; compute access</td></tr>
+      <tr><td><code>has_ddl_pressure</code></td><td>bool</td><td>true / false</td><td>当前氛围是否有 DDL 紧迫感</td><td>deadline-pressure aura</td></tr>
+      <tr><td><code>weather_outdoor</code> <span class="badge">outdoor only</span></td><td>enum</td><td>sunny / cloudy / rainy / cold / hot / snow</td><td>仅户外节点；影响停留意愿</td><td>outdoor-only weather tag</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <span class="label" data-zh="Place affordance（派生）：" data-en="Place affordance (derived):">Place affordance（派生）：</span>
+    <span class="bilingual"><span class="zh"><code>has_food</code> → eat · <code>has_seat &amp;&amp; noise=='quiet'</code> → study/rest · <code>has_compute</code> → code/research · <code>has_ddl_pressure</code> → 高强度自习。这些不是独立字段，而是 <code>interact</code> 的条件式 effects 派生项。</span><span class="en"><code>has_food</code> → eat · <code>has_seat &amp;&amp; noise=='quiet'</code> → study/rest · <code>has_compute</code> → code/research · <code>has_ddl_pressure</code> → high-intensity study. These are not independent fields; they are conditional-effect derivations inside <code>interact</code>.</span></span>
+  </div>
+</section>
+
+<!-- ============ 3. AGENT FIELDS ============ -->
+<section id="sec-agent">
+  <h2><span class="sec-num">§3</span><span data-zh="Agent 局部状态字段表" data-en="Agent Local State Fields">Agent 局部状态字段表</span><span class="sec-en">/ Agent Fields</span></h2>
+  <p class="bilingual"><span class="zh">每个 agent 仅挂以下 11 个私有字段。<code>location</code> 是引用到场景树的点分路径（如 <code>campus.life.canteen</code>），保证场景树与 agent 解耦。</span><span class="en">Each agent carries only 11 private fields. <code>location</code> is a dotted path referencing the scene tree (e.g. <code>campus.life.canteen</code>), keeping scene and agents decoupled.</span></p>
+  <table>
+    <thead><tr><th>name</th><th>type</th><th>range / enum</th><th data-zh="说明" data-en="desc">说明</th><th>desc_en</th></tr></thead>
+    <tbody>
+      <tr><td><code>role</code></td><td>enum</td><td>ug / grad / teacher / admin / staff / visitor / courier / special</td><td>角色：决定可达 place 与目标库</td><td>role gates places &amp; goals</td></tr>
+      <tr><td><code>location</code></td><td>path</td><td><code>campus.&lt;district&gt;.&lt;place&gt;</code></td><td>当前 place 的引用路径</td><td>dotted path into scene tree</td></tr>
+      <tr><td><code>hunger</code></td><td>int</td><td>0..3</td><td>饥饿等级</td><td>hunger bucket</td></tr>
+      <tr><td><code>energy</code></td><td>int</td><td>0..3</td><td>精力等级</td><td>energy bucket</td></tr>
+      <tr><td><code>focus</code></td><td>int</td><td>0..3</td><td>专注度（写作业/科研需高）</td><td>focus bucket</td></tr>
+      <tr><td><code>social_need</code></td><td>int</td><td>0..3</td><td>社交需求</td><td>social need bucket</td></tr>
+      <tr><td><code>money</code></td><td>int</td><td>0..2</td><td>可支配金钱</td><td>money bucket</td></tr>
+      <tr><td><code>mood</code></td><td>enum</td><td>calm / anxious / tired / excited / down</td><td>平静 / 焦虑 / 疲惫 / 兴奋 / 沮丧</td><td>mood tag</td></tr>
+      <tr><td><code>holding</code></td><td>enum</td><td>none / meal / coffee / book / phone / homework / tool</td><td>手持物</td><td>held item</td></tr>
+      <tr><td><code>in_dialog</code></td><td>id|null</td><td>agent_id 或 null</td><td>正在对话的对端（含电话）</td><td>dialog peer (incl. phone call)</td></tr>
+      <tr><td><code>last_action</code></td><td>enum</td><td>move / interact / find / idle / talk / mutter / phone_call</td><td>上一原子动作</td><td>last atomic action</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <span class="label" data-zh="派生 / 传感器字段（不持久化，每 tick 重算）：" data-en="Derived sensor fields (re-computed each tick, not persisted):">派生 / 传感器字段（不持久化，每 tick 重算）：</span>
+    <span class="bilingual"><span class="zh"><code>knows_target_location</code> · <code>target_in_range</code>（物理可达半径） · <code>interlocutor_available</code>（同位置 + 对端 in_dialog == null）。这些用于 <code>find / talk</code> 的前置判断，不进入 state hash。</span><span class="en"><code>knows_target_location</code> · <code>target_in_range</code> (physical radius) · <code>interlocutor_available</code> (co-located + peer.in_dialog == null). Used as preconds for <code>find / talk</code>; excluded from state hash.</span></span>
+  </div>
+</section>
+
+<!-- ============ 4. WORLDSTATE JSON EXAMPLE ============ -->
+<section id="sec-json">
+  <h2><span class="sec-num">§4</span><span data-zh="WorldState JSON 示例" data-en="WorldState JSON Example">WorldState JSON 示例</span><span class="sec-en">/ Example JSON</span></h2>
+  <p class="bilingual"><span class="zh">下方是某 tick 的完整 worldState 快照（裁剪显示），包含 7 个 place + 1 名学生 agent。其余 place 在引擎中是默认值，不必显式枚举。</span><span class="en">Snapshot of a single tick (trimmed): 7 places + 1 student agent. Remaining places stay at engine defaults and need not be enumerated.</span></p>
+
+<pre><code>{
+  "tick": 1247,                                  // <span class="zh-only">// 仿真步数</span><span class="en-only">// simulation tick</span>
+  "wallclock": "Mon 12:14",
+  "campus": {
+    "teaching": {
+      "library_4f_corner": {
+        "occupancy": 1, "is_open": true, "noise": "quiet",
+        "has_seat": true,  "has_food": false,
+        "has_compute": true, "has_ddl_pressure": true
+      },
+      "classroom": {
+        "occupancy": 2, "is_open": true, "noise": "medium",
+        "has_seat": true,  "has_food": false,
+        "has_compute": false, "has_ddl_pressure": false
+      },
+      "lab": {
+        "occupancy": 2, "is_open": true, "noise": "medium",
+        "has_seat": true,  "has_food": false,
+        "has_compute": true, "has_ddl_pressure": true
+      }
+    },
+    "life": {
+      "canteen": {
+        "occupancy": 3, "is_open": true, "noise": "loud",
+        "has_seat": true,  "has_food": true,
+        "has_compute": false, "has_ddl_pressure": false
+      },
+      "cafe": {
+        "occupancy": 2, "is_open": true, "noise": "medium",
+        "has_seat": true,  "has_food": true,
+        "has_compute": true, "has_ddl_pressure": false
+      },
+      "dorm": {
+        "occupancy": 1, "is_open": true, "noise": "quiet",
+        "has_seat": true,  "has_food": false,
+        "has_compute": true, "has_ddl_pressure": false
+      }
+    },
+    "edge": {
+      "lake": {
+        "occupancy": 0, "is_open": true, "noise": "quiet",
+        "has_seat": true,  "has_food": false, "has_compute": false,
+        "weather_outdoor": "cloudy"
+      }
+    }
+  },
+  "agents": {
+    "u_023": {                                   // <span class="zh-only">// 学生 林晓薇 / Lin Xiaowei</span><span class="en-only">// student Lin Xiaowei</span>
+      "role": "ug",
+      "location": "campus.life.canteen",
+      "hunger": 3, "energy": 2, "focus": 1,
+      "social_need": 1, "money": 1,
+      "mood": "anxious",
+      "holding": "phone",
+      "in_dialog": null,
+      "last_action": "move"
+    }
+  }
+}
+</code></pre>
+
+  <p class="note bilingual"><span class="zh">关键：<code>agent.location = "campus.life.canteen"</code> 用点分路径直接索引到场景树节点，不复制 place 内容；<code>occupancy</code> 由引擎在 agent 进出时自动维护，不由 agent 显式写入。</span><span class="en">Key: <code>agent.location</code> is a dotted path into the scene tree — places are not copied per agent. <code>occupancy</code> is engine-maintained on enter/leave; agents never write it directly.</span></p>
+</section>
+
+<!-- ============ 5. ATOMIC ACTIONS ============ -->
+<section id="sec-atomic">
+  <h2><span class="sec-num">§5</span><span data-zh="原子动作（GOAP 卡片）" data-en="Atomic Actions (GOAP Cards)">原子动作（GOAP 卡片）</span><span class="sec-en">/ Atomic Action GOAP Cards</span></h2>
+  <p class="bilingual"><span class="zh">7 个原子动作 = 身体 4（<code>move/interact/find/idle</code>）+ 对话 3（<code>talk/mutter/phone_call</code>）。复合行为在 §7–§8 完全由这 7 个原子组合得到，不再增设新动词。</span><span class="en">7 atoms = Body 4 (<code>move/interact/find/idle</code>) + Dialog 3 (<code>talk/mutter/phone_call</code>). Every composite behavior in §7–§8 is built solely from these atoms — no new verbs introduced.</span></p>
+
+  <!-- ===== ATOMIC ACTION NODE GALLERY ===== -->
+  <div class="action-gallery">
+    <div class="channel-col">
+      <span class="channel-label body">BODY · <span data-zh="身体通道" data-en="body channel">身体通道</span></span>
+      <div class="nodes-row">
+        <div class="action-node body" title="move(target)">
+          <span class="layer-tag">BODY</span>
+          <div class="icon">🚶</div>
+          <div class="name-en">move</div>
+          <div class="name-zh">移动</div>
+          <div class="meta"><span class="mb cost">2..6</span><span class="mb dur">d 1-3</span></div>
+        </div>
+        <div class="action-node body" title="interact(target)">
+          <span class="layer-tag">BODY</span>
+          <div class="icon">🤝</div>
+          <div class="name-en">interact</div>
+          <div class="name-zh">交互</div>
+          <div class="meta"><span class="mb cost">1..4</span><span class="mb dur">d 1-3</span></div>
+        </div>
+        <div class="action-node body" title="find(query)">
+          <span class="layer-tag">BODY</span>
+          <div class="icon">🔍</div>
+          <div class="name-en">find</div>
+          <div class="name-zh">寻找</div>
+          <div class="meta"><span class="mb cost">1..3</span><span class="mb dur">d 1-2</span></div>
+        </div>
+        <div class="action-node body" title="idle">
+          <span class="layer-tag">BODY</span>
+          <div class="icon">💤</div>
+          <div class="name-en">idle</div>
+          <div class="name-zh">闲置</div>
+          <div class="meta"><span class="mb cost">1..3</span><span class="mb dur">d 1-2</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="channel-col">
+      <span class="channel-label dialog">DIALOG · <span data-zh="对话通道" data-en="dialog channel">对话通道</span></span>
+      <div class="nodes-row">
+        <div class="action-node dialog" title="talk(target_agent)">
+          <span class="layer-tag">DIALOG</span>
+          <div class="icon">💬</div>
+          <div class="name-en">talk</div>
+          <div class="name-zh">对话</div>
+          <div class="meta"><span class="mb cost">1..5</span><span class="mb dur">d 1-2</span></div>
+        </div>
+        <div class="action-node dialog" title="mutter (self-talk)">
+          <span class="layer-tag">DIALOG</span>
+          <div class="icon">🗯️</div>
+          <div class="name-en">mutter</div>
+          <div class="name-zh">自语</div>
+          <div class="meta"><span class="mb cost">1</span><span class="mb dur">d 0-1</span></div>
+        </div>
+        <div class="action-node dialog new" title="phone_call(target_agent) - NEW; no distance limit, probabilistic connect">
+          <span class="layer-tag">DIALOG</span>
+          <span class="new-tag">NEW</span>
+          <div class="icon">📞</div>
+          <div class="name-en">phone_call</div>
+          <div class="name-zh">电话</div>
+          <div class="meta"><span class="mb cost">2..4</span><span class="mb dur">d 1-2</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="note bilingual" style="text-align:center"><span class="zh">每个节点 = 1 个原子动作；hover 查看英文 signature。每帧每个 agent 至多激活 1 个 body + 1 个 dialog 节点（见 §6 互斥矩阵）。</span><span class="en">Each box = 1 atomic action; hover for English signature. Each tick, each agent activates at most 1 body + 1 dialog node (see §6 mutex matrix).</span></p>
+
+  <h3 data-zh="5.0 总表" data-en="5.0 Summary Table">5.0 总表 / Summary Table</h3>
+  <table>
+    <thead><tr><th>name_zh</th><th>name_en</th><th>layer</th><th>base cost</th><th data-zh="时长" data-en="duration">时长</th><th data-zh="一句话意图" data-en="one-line intent">一句话意图 / intent</th></tr></thead>
+    <tbody>
+      <tr><td>移动</td><td><code>move</code></td><td><span class="badge body">body</span></td><td><span class="badge cost">2</span></td><td><span class="badge dur">1–3</span></td><td>已知坐标 → 物理位移到目标 / Travel to a known location</td></tr>
+      <tr><td>交互</td><td><code>interact</code></td><td><span class="badge body">body</span></td><td><span class="badge cost">1</span></td><td><span class="badge dur">1–3</span></td><td>由 target.affordance 决定的通用交互 / Generic affordance-driven interaction</td></tr>
+      <tr><td>寻找</td><td><code>find</code></td><td><span class="badge body">body</span></td><td><span class="badge cost">1</span></td><td><span class="badge dur">1–2</span></td><td>位置未知 → 搜索/打听以获得目标坐标 / Discover target location</td></tr>
+      <tr><td>闲置</td><td><code>idle</code></td><td><span class="badge body">body</span></td><td><span class="badge cost">1</span></td><td><span class="badge dur">1–2</span></td><td>显式休息：恢复 energy，衰减 focus/social / Explicit rest, regen energy</td></tr>
+      <tr><td>对话</td><td><code>talk</code></td><td><span class="badge dialog">dialog</span></td><td><span class="badge cost">1</span></td><td><span class="badge dur">1–2</span></td><td>同位置面对面双向交流 / Co-located two-party exchange</td></tr>
+      <tr><td>自语</td><td><code>mutter</code></td><td><span class="badge dialog">dialog</span></td><td><span class="badge cost">1</span></td><td><span class="badge dur">0–1</span></td><td>无对象自言自语，微调情绪/focus / Self-talk, micro emotional regulation</td></tr>
+      <tr><td>电话 <span class="badge tag">NEW</span></td><td><code>phone_call</code></td><td><span class="badge dialog">dialog</span></td><td><span class="badge cost">2</span></td><td><span class="badge dur">1–2</span></td><td>无距离限制；有概率打不通 / Remote dialog, no distance limit, probabilistic connect</td></tr>
+    </tbody>
+  </table>
+
+  <p class="note bilingual"><span class="zh">动态 cost = base + 各动态系数（distance/duration/uncertainty/role_friction/connect_retry），所有动态项各 0–2 桶位，最终 cost ∈ [1..6]，使 A* 启发式 admissible。</span><span class="en">Dynamic cost = base + dynamic terms (distance/duration/uncertainty/role_friction/connect_retry), each in 0–2; final cost ∈ [1..6], keeping the A* heuristic admissible.</span></p>
+
+  <!-- 5.1 move -->
+  <h3 data-zh="5.1 move 移动" data-en="5.1 move">5.1 <code>move</code> · <span data-zh="移动" data-en="travel">移动</span></h3>
+  <div class="action-card">
+    <div class="ac-head"><span class="ac-name-zh">移动</span><span class="ac-name-en">move(target) · body channel</span><span><span class="badge body">body</span><span class="badge cost">cost 2..6</span><span class="badge dur">dur 1..3</span></span></div>
+    <div class="ac-intent bilingual"><span class="zh">已知目标坐标后，物理位移到该 place 或紧邻 agent。</span><span class="en">Physically traverse to a known place / nearby agent after coordinates are known.</span></div>
+    <div class="kv-grid">
+      <div class="k">preconditions</div><div class="v"><ul>
+        <li><code>agent.knows_target_location == true</code></li>
+        <li><code>agent.target_in_range == false</code></li>
+        <li><code>target.is_open == true</code> (if target is Place)</li>
+        <li><code>agent.energy &gt; 0</code></li>
+        <li><code>agent.in_dialog == null</code> <span class="note">(默认不可边对话边走 / no walk-and-talk by default — see §6 for walk + phone_call exception)</span></li>
+      </ul></div>
+      <div class="k">effects</div><div class="v"><ul>
+        <li><code>agent.location := path_to(target)</code></li>
+        <li><code>agent.target_in_range := true</code></li>
+        <li><code>agent.energy −= 1</code> <span class="note">(clamp 0..3)</span></li>
+        <li><code>if path.is_outdoor &amp;&amp; weather ∈ {rain, snow, cold, hot}: agent.mood ← tired</code></li>
+        <li><code>agent.last_action := "move"</code></li>
+      </ul></div>
+      <div class="k">cost</div><div class="v"><span class="formula">2 + distance_bucket(0..2) + weather_penalty(0..2)</span> → [2..6]</div>
+      <div class="k">duration</div><div class="v">1 (短距) / 2 (跨建筑) / 3 (跨校园)</div>
+      <div class="k">typical targets</div><div class="v">Place（主） · Agent（跟随） · Object（携取处）</div>
+      <div class="k">failure modes</div><div class="v">路径阻塞 / target.is_open→false 中途变化 / energy 耗尽 / knows_target_location 失效 → replan 至 <code>find</code></div>
+    </div>
+  </div>
+
+  <!-- 5.2 interact -->
+  <h3 data-zh="5.2 interact 交互（通用占位）" data-en="5.2 interact (universal placeholder)">5.2 <code>interact</code> · <span data-zh="交互（通用占位）" data-en="universal placeholder">交互（通用占位）</span></h3>
+  <div class="action-card">
+    <div class="ac-head"><span class="ac-name-zh">交互</span><span class="ac-name-en">interact(target) · body channel · affordance-driven</span><span><span class="badge body">body</span><span class="badge cost">cost 1..4</span><span class="badge dur">dur 1..3</span></span></div>
+    <div class="ac-intent bilingual"><span class="zh">最通用的占位动作：吃饭/上机/上课/休息全部走它。effects 由 target 的 affordance 字段（has_food / has_seat &amp; quiet / has_compute / ddl_pressure）条件式决定，<b>不在原子层硬编码</b>。</span><span class="en">The universal placeholder. Eating / coding / lecturing / resting all route through this verb. Effects are conditional on target affordance fields (has_food / has_seat &amp; quiet / has_compute / ddl_pressure) — <b>never hard-coded per scenario at the atomic layer</b>.</span></div>
+    <div class="kv-grid">
+      <div class="k">preconditions</div><div class="v"><ul>
+        <li><code>agent.target_in_range == true</code> (co-located with target)</li>
+        <li><code>target.is_open == true</code></li>
+        <li><code>target.occupancy &lt; 3</code></li>
+        <li><code>if target.has_food: agent.money &gt; 0</code></li>
+        <li><code>if target.has_compute: agent.holding ∈ {none, homework, tool}</code></li>
+        <li><code>agent.energy &gt; 0</code> (除非 affordance == rest)</li>
+      </ul></div>
+      <div class="k">effects (条件式)</div><div class="v"><ul>
+        <li>通用：<code>target.occupancy += 1</code>; <code>agent.last_action := "interact"</code></li>
+        <li><code>if target.has_food: hunger −= 2; money −= 1; holding := meal_done; mood ← calm</code></li>
+        <li><code>if target.has_seat &amp;&amp; noise=="quiet": focus += 1</code></li>
+        <li><code>if target.has_compute: focus += 1; energy −= 1; holding := homework</code></li>
+        <li><code>if target.has_ddl_pressure: focus += 2; mood := anxious</code></li>
+        <li><code>if target.affordance == "sport": energy −= 2; mood := excited; hunger += 1</code></li>
+        <li>所有数值 clamp 0..3</li>
+      </ul></div>
+      <div class="k">cost</div><div class="v"><span class="formula">1 + duration_bucket(0..2) + paid_term(0..1)</span> → [1..4]</div>
+      <div class="k">duration</div><div class="v">1 (买咖啡) / 2 (吃饭/运动) / 3 (自习/写代码)</div>
+      <div class="k">typical targets</div><div class="v">Place（食堂/教室/机房/操场） · Object（自动售货机/床/外卖柜）</div>
+      <div class="k">failure modes</div><div class="v">occupancy 已满 / money 不足 / target.is_open 中途关闭 / holding 冲突（meal 想写代码） / affordance 与 role 不匹配</div>
+    </div>
+  </div>
+
+  <!-- 5.3 find -->
+  <h3 data-zh="5.3 find 寻找" data-en="5.3 find">5.3 <code>find</code> · <span data-zh="寻找" data-en="discover">寻找</span></h3>
+  <div class="action-card">
+    <div class="ac-head"><span class="ac-name-zh">寻找</span><span class="ac-name-en">find(query) · body channel · cognitive</span><span><span class="badge body">body</span><span class="badge cost">cost 1..3</span><span class="badge dur">dur 1..2</span></span></div>
+    <div class="ac-intent bilingual"><span class="zh">"位置未知"显式建模：将 <code>knows_target_location</code> 从 false 翻为 true。不要让 planner 把"不知道在哪"塞进 move 失败重试循环。</span><span class="en">Explicitly models "I don't know where it is": flips <code>knows_target_location</code> from false to true. Prevents planner from masking ignorance behind move-fail loops.</span></div>
+    <div class="kv-grid">
+      <div class="k">preconditions</div><div class="v"><ul>
+        <li><code>agent.knows_target_location == false</code></li>
+        <li><code>agent.energy &gt; 0</code></li>
+        <li><code>agent.in_dialog == null</code> (除非 phone_call 并发, 见 §6)</li>
+      </ul></div>
+      <div class="k">effects</div><div class="v"><ul>
+        <li><code>agent.knows_target_location := true</code> <span class="note">(成功率 ≈ 0.8；失败保持 false 触发 replan)</span></li>
+        <li><code>agent.energy −= 1</code></li>
+        <li><code>if 通过询问 NPC 完成: social_need −= 1</code></li>
+        <li><code>agent.last_action := "find"</code></li>
+        <li>失败回退：自动发射子目标 <code>interlocutor_available</code> → planner 插入 <code>talk(staff)</code> 或 <code>phone_call(friend)</code></li>
+      </ul></div>
+      <div class="k">cost</div><div class="v"><span class="formula">1 + uncertainty_bucket(0..2)</span> → [1..3]</div>
+      <div class="k">duration</div><div class="v">1（问路成功）/ 2（无指示牌反复搜索）</div>
+      <div class="k">typical targets</div><div class="v">Place（陌生教室） · Agent（找某人） · Object（失物）</div>
+      <div class="k">failure modes</div><div class="v">周围无可询问者 + 无指示牌 / 反复 find 仍失败 → 抛回 planner / energy 耗尽中断</div>
+    </div>
+  </div>
+
+  <!-- 5.4 idle -->
+  <h3 data-zh="5.4 idle 闲置" data-en="5.4 idle">5.4 <code>idle</code> · <span data-zh="闲置" data-en="rest">闲置</span></h3>
+  <div class="action-card">
+    <div class="ac-head"><span class="ac-name-zh">闲置</span><span class="ac-name-en">idle · body channel · explicit rest</span><span><span class="badge body">body</span><span class="badge cost">cost 1..3</span><span class="badge dur">dur 1..2</span></span></div>
+    <div class="ac-intent bilingual"><span class="zh">显式休息动作（不是空状态）：energy 恢复，但 focus 涣散、social_need 累积。让 planner 主动选择"歇一会"，而不是陷入饥饿/疲劳死循环。</span><span class="en">An explicit rest action (not a null state): energy regenerates, focus drifts, social_need accumulates. Lets the planner actively choose a break instead of looping into hunger/fatigue.</span></div>
+    <div class="kv-grid">
+      <div class="k">preconditions</div><div class="v"><ul>
+        <li>无硬约束 / none</li>
+        <li>软约束：<code>!(weather ∈ {rain, snow} &amp;&amp; location.is_outdoor)</code> 否则 cost +2</li>
+      </ul></div>
+      <div class="k">effects</div><div class="v"><ul>
+        <li><code>agent.energy += 1</code> <span class="note">(clamp 0..3)</span></li>
+        <li><code>agent.social_need += 1</code> <span class="note">(轻微累积)</span></li>
+        <li><code>agent.focus −= 1</code> <span class="note">(注意力涣散)</span></li>
+        <li><code>if mood == tired: mood := calm</code></li>
+        <li><code>agent.last_action := "idle"</code></li>
+      </ul></div>
+      <div class="k">cost</div><div class="v"><span class="formula">1 + outdoor_bad_weather_penalty(0..2)</span> → [1..3]</div>
+      <div class="k">duration</div><div class="v">1（发呆）/ 2（久坐）</div>
+      <div class="k">typical targets</div><div class="v">self / 可坐 Place</div>
+      <div class="k">failure modes</div><div class="v">恶劣天气 outdoor 被动中断 / occupancy 挤占被驱赶</div>
+    </div>
+  </div>
+
+  <!-- 5.5 talk -->
+  <h3 data-zh="5.5 talk 对话" data-en="5.5 talk">5.5 <code>talk</code> · <span data-zh="对话" data-en="face-to-face">对话</span></h3>
+  <div class="action-card dialog">
+    <div class="ac-head"><span class="ac-name-zh">对话</span><span class="ac-name-en">talk(target_agent) · dialog channel · co-located</span><span><span class="badge dialog">dialog</span><span class="badge cost">cost 1..5</span><span class="badge dur">dur 1..2</span></span></div>
+    <div class="ac-intent bilingual"><span class="zh">面对面双向口头交流，需双方同位置且都未在对话中。区别于 <code>phone_call</code>（无距离限制但概率失败）。</span><span class="en">Face-to-face two-party verbal exchange. Both parties must be co-located and not already in a dialog. Differs from <code>phone_call</code> (no distance, probabilistic).</span></div>
+    <div class="kv-grid">
+      <div class="k">preconditions</div><div class="v"><ul>
+        <li><code>agent.interlocutor_available == true</code></li>
+        <li><code>distance(agent, target) ≤ social_radius</code> (target_in_range)</li>
+        <li><code>target.in_dialog == null</code></li>
+        <li><code>agent.in_dialog == null</code></li>
+        <li>软约束：<code>!(target.role=="teacher" &amp;&amp; location.has_ddl_pressure &amp;&amp; agent.holding != "homework")</code></li>
+      </ul></div>
+      <div class="k">effects</div><div class="v"><ul>
+        <li><code>agent.in_dialog := target.id</code>; <code>target.in_dialog := agent.id</code></li>
+        <li><code>agent.social_need −= 1</code>; <code>target.social_need −= 1</code></li>
+        <li><code>if agent.mood ∈ {down, anxious}: mood := calm</code></li>
+        <li><code>agent.focus −= 1</code> <span class="note">(分神)</span></li>
+        <li><code>agent.last_action := "talk"</code></li>
+      </ul></div>
+      <div class="k">cost</div><div class="v"><span class="formula">1 + topic_complexity(0..2) + role_friction(0..2)</span> → [1..5]</div>
+      <div class="k">duration</div><div class="v">1（寒暄）/ 2（实质沟通）</div>
+      <div class="k">typical targets</div><div class="v">Agent</div>
+      <div class="k">failure modes</div><div class="v">target.in_dialog 已被占 / target 移出 social_radius / 环境 noise=="quiet" 强制低音被打断 / target.mood==down 拒绝</div>
+    </div>
+  </div>
+
+  <!-- 5.6 mutter -->
+  <h3 data-zh="5.6 mutter 自语" data-en="5.6 mutter">5.6 <code>mutter</code> · <span data-zh="自语" data-en="self-talk">自语</span></h3>
+  <div class="action-card dialog">
+    <div class="ac-head"><span class="ac-name-zh">自语</span><span class="ac-name-en">mutter · dialog channel · self-directed</span><span><span class="badge dialog">dialog</span><span class="badge cost">cost 1</span><span class="badge dur">dur 0..1</span></span></div>
+    <div class="ac-intent bilingual"><span class="zh">无对象自言自语，用于情绪 / focus 微调。可与多数身体动作并发（"路上嘟囔"、"写作业前自我打气"）。</span><span class="en">Object-less self-talk for micro emotion / focus regulation. Concurrent with most body actions ("muttering while walking", "self-pep before homework").</span></div>
+    <div class="kv-grid">
+      <div class="k">preconditions</div><div class="v"><ul>
+        <li><code>agent.in_dialog == null</code></li>
+        <li>无目标要求</li>
+      </ul></div>
+      <div class="k">effects</div><div class="v"><ul>
+        <li><code>if mood == anxious: mood := calm</code></li>
+        <li><code>focus += 1</code> <span class="note">(整理思路, p≈0.7)</span> · <code>else focus −= 1</code> <span class="note">(走神, p≈0.3)</span></li>
+        <li><code>social_need</code> 不变</li>
+        <li><code>agent.last_action := "mutter"</code> <span class="note">(不覆盖 body 通道的 last_action)</span></li>
+      </ul></div>
+      <div class="k">cost</div><div class="v"><span class="formula">1</span> (恒定 / constant)</div>
+      <div class="k">duration</div><div class="v">0（瞬时）/ 1（一两句）</div>
+      <div class="k">typical targets</div><div class="v">self</div>
+      <div class="k">failure modes</div><div class="v">几乎无；location.noise=="quiet" 时被周围注视社交惩罚（mood ← down，软失败）</div>
+    </div>
+  </div>
+
+  <!-- 5.7 phone_call NEW -->
+  <h3 data-zh="5.7 phone_call 电话（新增）" data-en="5.7 phone_call (NEW)">5.7 <code>phone_call</code> · <span data-zh="电话" data-en="remote dialog">电话</span> <span class="badge tag">NEW</span></h3>
+  <div class="action-card dialog">
+    <div class="ac-head"><span class="ac-name-zh">电话</span><span class="ac-name-en">phone_call(target_agent) · dialog channel · remote · probabilistic</span><span><span class="badge dialog">dialog</span><span class="badge cost">cost 2..4</span><span class="badge dur">dur 1..2</span><span class="badge warn">prob fail</span></span></div>
+    <div class="ac-intent bilingual"><span class="zh">远程双向通话。<b>无距离限制</b>（双方可在任意 place 甚至校外），但<b>有概率打不通</b>（被占线 / 静音 / 信号差），失败时 mood 轻微变 down，<code>knows_target_location</code> 不变。与 <code>move</code> 可并发——这是它存在的核心价值。</span><span class="en">Remote two-party call. <b>No distance constraint</b> (both ends may be at any place, even off-campus), but <b>probabilistic connect failure</b> (busy / muted / weak signal). On failure, caller's mood drifts toward down. <b>Concurrent with <code>move</code></b> — this is its core value over <code>talk</code>.</span></div>
+    <div class="kv-grid">
+      <div class="k">preconditions</div><div class="v"><ul>
+        <li><code>agent.in_dialog == null</code></li>
+        <li><code>agent.holding ∈ {none, phone, ...}</code> <span class="note">(可空闲一只手 / one hand free)</span></li>
+        <li><code>target</code> 是 Agent（任意 location，<b>不要求 target_in_range</b> / no co-location required）</li>
+        <li><code>target.role != special_no_phone</code> (软约束)</li>
+        <li>派生：<code>connect_p</code> = 0.6（基础）+ 0.2 × 𝟙[target.in_dialog == null] − 0.2 × 𝟙[target.location.is_outdoor &amp;&amp; weather=="rain"] − 0.2 × 𝟙[location.noise=="loud"]</li>
+      </ul></div>
+      <div class="k">effects (概率分支)</div><div class="v">
+        <b>case A · 接通 / connected</b> (with probability <code>connect_p</code>):
+        <ul>
+          <li><code>agent.in_dialog := target.id</code>; <code>target.in_dialog := agent.id</code></li>
+          <li><code>agent.social_need −= 1</code>; <code>target.social_need −= 1</code></li>
+          <li><code>if mood ∈ {down, anxious}: mood := calm</code></li>
+          <li><code>agent.last_action := "phone_call"</code></li>
+        </ul>
+        <b>case B · 未接通 / no answer</b> (with probability <code>1 − connect_p</code>):
+        <ul>
+          <li><code>agent.mood := down</code> (轻微 / mild)</li>
+          <li><code>retry_count += 1</code> (派生; retry_count≥2 时 mood := anxious)</li>
+          <li><code>agent.last_action := "phone_call"</code></li>
+          <li>不产生 <code>in_dialog</code> 状态变化；planner 自动触发 replan（重拨 / 改 mutter / 改 talk）</li>
+        </ul>
+      </div>
+      <div class="k">cost</div><div class="v"><span class="formula">2 + retry_bucket(0..2)</span> → [2..4]</div>
+      <div class="k">duration</div><div class="v">1（短促确认）/ 2（实质沟通）；与并发的 <code>move</code> 共享时长 = max(channels)</div>
+      <div class="k">typical targets</div><div class="v">Agent（含校外 agent，例如父母 / 外卖员 / 远端导师）</div>
+      <div class="k">failure modes</div><div class="v">未接通（概率） / target.in_dialog ≠ null（占线） / 自身 location.noise=="loud" 失败率高 / 极弱信号节点（如 rooftop 雨天）</div>
+    </div>
+    <div class="callout">
+      <span class="label" data-zh="为何 phone_call 与 talk 必须分开：" data-en="Why phone_call must be separate from talk:">为何 phone_call 与 talk 必须分开：</span>
+      <span class="bilingual"><span class="zh">(1) <code>talk</code> 强制要求 <code>target_in_range</code>（同位置），是 GOAP planner 决定"是否要先 move"的关键；如把电话归入 talk，planner 会错误地为"打电话"也插入 <code>move(target)</code>。(2) <code>phone_call</code> 的<b>概率失败</b>是真随机性，进入 worldState 的方式是更新 <code>retry_count</code> 与 <code>mood</code>，不是 plan-time 失败 — 这要求把它显式建模为带概率分支的动作。(3) 它能与 <code>move</code> 并发，这是 <code>talk</code> 严格禁止的；并发槽位规则不同。</span><span class="en">(1) <code>talk</code> mandates <code>target_in_range</code> (co-location), which the planner uses to decide whether to insert a <code>move</code>. Folding calls into talk would force unnecessary <code>move(target)</code>. (2) <code>phone_call</code>'s probabilistic failure is real stochasticity expressed via <code>retry_count</code> &amp; <code>mood</code> updates — a runtime fact, not a plan-time failure. (3) It is concurrent with <code>move</code>, which <code>talk</code> strictly forbids; the concurrency slots differ.</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. CONCURRENCY ============ -->
+<section id="sec-concur">
+  <h2><span class="sec-num">§6</span><span data-zh="并发与互斥" data-en="Concurrency &amp; Mutex">并发与互斥</span><span class="sec-en">/ Concurrency Matrix</span></h2>
+  <p class="bilingual"><span class="zh">每个 agent 每 tick = 至多 1 个 body 原子 + 至多 1 个 dialog 原子，二者并发。下表给出 7 个原子两两组合的合法性。</span><span class="en">Each agent per tick = at most 1 body atom + at most 1 dialog atom in parallel. The matrix below enumerates legality of all atom pairs.</span></p>
+
+  <div class="legend">
+    <span class="item"><span class="sw" style="background:#1a3a2a"></span> <span data-zh="可并发" data-en="OK / concurrent">可并发</span></span>
+    <span class="item"><span class="sw" style="background:#3a2a1a"></span> <span data-zh="条件并发" data-en="conditional">条件并发</span></span>
+    <span class="item"><span class="sw" style="background:#3a1a1a"></span> <span data-zh="互斥" data-en="mutex">互斥</span></span>
+  </div>
+
+  <table class="matrix">
+    <thead><tr><th></th>
+      <th><code>move</code></th><th><code>interact</code></th><th><code>find</code></th><th><code>idle</code></th>
+      <th><code>talk</code></th><th><code>mutter</code></th><th><code>phone_call</code></th>
+    </tr></thead>
+    <tbody>
+      <tr><td><code>move</code></td>
+        <td class="mx">×</td><td class="mx">×</td><td class="mx">×</td><td class="mx">×</td>
+        <td class="mx">×</td><td class="ok">∥</td><td class="ok">∥*</td>
+      </tr>
+      <tr><td><code>interact</code></td>
+        <td class="mx">×</td><td class="mx">×</td><td class="mx">×</td><td class="mx">×</td>
+        <td class="cond">?</td><td class="cond">?</td><td class="cond">?</td>
+      </tr>
+      <tr><td><code>find</code></td>
+        <td class="mx">×</td><td class="mx">×</td><td class="mx">×</td><td class="mx">×</td>
+        <td class="mx">×</td><td class="ok">∥</td><td class="ok">∥</td>
+      </tr>
+      <tr><td><code>idle</code></td>
+        <td class="mx">×</td><td class="mx">×</td><td class="mx">×</td><td class="mx">×</td>
+        <td class="ok">∥</td><td class="ok">∥</td><td class="ok">∥</td>
+      </tr>
+      <tr><td><code>talk</code></td>
+        <td class="mx">×</td><td class="cond">?</td><td class="mx">×</td><td class="ok">∥</td>
+        <td class="mx">×</td><td class="mx">×</td><td class="mx">×</td>
+      </tr>
+      <tr><td><code>mutter</code></td>
+        <td class="ok">∥</td><td class="cond">?</td><td class="ok">∥</td><td class="ok">∥</td>
+        <td class="mx">×</td><td class="mx">×</td><td class="mx">×</td>
+      </tr>
+      <tr><td><code>phone_call</code></td>
+        <td class="ok">∥*</td><td class="cond">?</td><td class="ok">∥</td><td class="ok">∥</td>
+        <td class="mx">×</td><td class="mx">×</td><td class="mx">×</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="note bilingual"><span class="zh">注：<b>*</b> = <code>move ∥ phone_call</code> 是 <code>phone_call</code> 的核心特权（"边走边打电话"），但 cost +1 且 connect_p −0.1（边走边打更易掉线）。"条件并发 ?" 见下文。</span><span class="en">Note: <b>*</b> = <code>move ∥ phone_call</code> is the core privilege of <code>phone_call</code> ("walk and call"), at +1 cost and connect_p −0.1 (more drops while walking). "Conditional ?" rows are explained below.</span></p>
+
+  <h3 data-zh="6.1 条件并发的语义" data-en="6.1 Semantics of Conditional Concurrency">6.1 <span data-zh="条件并发的语义" data-en="Semantics of Conditional Concurrency">条件并发的语义</span></h3>
+  <table>
+    <thead><tr><th data-zh="组合" data-en="pair">组合</th><th data-zh="允许条件" data-en="allowed when">允许条件</th><th data-zh="禁止条件" data-en="forbidden when">禁止条件</th></tr></thead>
+    <tbody>
+      <tr><td><code>interact ∥ talk</code></td><td>interact.affordance ∈ {eat, rest}（吃饭聊天 / sitting and chatting）</td><td>affordance ∈ {study, code, exam, sport}（写作业/上机/比赛 → 强 focus 占用）</td></tr>
+      <tr><td><code>interact ∥ mutter</code></td><td>affordance ∈ {eat, rest, walk-task}（轻量任务）</td><td>affordance ∈ {code, exam}（mutter 干扰 focus）</td></tr>
+      <tr><td><code>interact ∥ phone_call</code></td><td>affordance ∈ {eat, rest}（吃饭通电话 / 排队通电话）</td><td>affordance ∈ {study, code, exam, sport, perform}</td></tr>
+    </tbody>
+  </table>
+  <p class="note bilingual"><span class="zh">规则：dialog 与 interact 共享 <code>focus</code> 资源；当 interact 的 affordance 需要 focus≥2 时，任何 dialog 并发都会强制 focus -=1，形成软冲突，planner 倾向不并发。</span><span class="en">Rule: dialog and interact share the <code>focus</code> resource; when interact's affordance needs focus≥2, any dialog concurrency triggers focus −= 1 and the planner prefers serialization.</span></p>
+
+  <h3 data-zh="6.2 通道成本规则" data-en="6.2 Channel Cost Rule">6.2 <span data-zh="通道成本规则" data-en="Channel Cost Rule">通道成本规则</span></h3>
+  <table>
+    <thead><tr><th>channel</th><th data-zh="可执行原子" data-en="atoms">可执行原子</th><th data-zh="调度" data-en="scheduling">调度</th><th data-zh="A* 计费" data-en="A* cost">A* 计费</th><th data-zh="仿真时长" data-en="sim duration">仿真时长</th></tr></thead>
+    <tbody>
+      <tr><td>body</td><td><code>move / interact / find / idle</code></td><td data-zh="串行 serial" data-en="serial">串行</td><td>累加 sum</td><td>累加</td></tr>
+      <tr><td>dialog</td><td><code>talk / mutter / phone_call</code></td><td data-zh="串行 serial" data-en="serial">串行</td><td>累加 sum</td><td>累加</td></tr>
+      <tr><td data-zh="行为级 behavior-level" data-en="behavior-level">行为级</td><td colspan="2" data-zh="二者并行 in parallel" data-en="two channels in parallel">二者并行</td><td><b>总 cost = body_cost + dialog_cost</b>（保持 admissible）</td><td><code>duration = max(body_t, dialog_t)</code></td></tr>
+    </tbody>
+  </table>
+  <p class="note bilingual"><span class="zh">A* 用 sum 排序避免低估、保启发式 admissible；仿真渲染用 max 反映真实并行时长，避免"白送时间"。</span><span class="en">A* uses <i>sum</i> for ordering (admissible heuristic preserved); the simulator uses <i>max</i> for real wall-clock duration so concurrent ticks aren't double-counted.</span></p>
+</section>
+
+<!-- ============ 7. COMPOSITE INDEX ============ -->
+<section id="sec-comp-idx">
+  <h2><span class="sec-num">§7</span><span data-zh="复合行为总表" data-en="Composite Behavior Index">复合行为总表</span><span class="sec-en">/ Composite Index</span></h2>
+  <p class="bilingual"><span class="zh">11 条复合行为 = §5 中 7 个原子的<b>组合图</b>。每条行为下方的节点链图直接呈现执行结构：单链 / 并发分支 / 未知 find / 多 agent 协作。<code>∥</code> 并发 · <code>†</code> 多 agent · <code>‡</code> 含并发 · <code>★</code> 含 find · <code>☎</code> 用 phone_call。</span><span class="en">11 composites are <b>graphs</b> over the 7 atoms in §5. Each chain graph directly visualises the execution structure: linear / parallel / unknown-find / multi-agent. <code>∥</code> parallel · <code>†</code> multi-agent · <code>‡</code> concurrent · <code>★</code> with find · <code>☎</code> uses phone_call.</span></p>
+
+  <div id="composite-index-graphs"><!-- rendered by JS --></div>
+
+  <p class="note bilingual"><span class="zh">cost 为 A* 视角下的 plan 总和（并发通道分别累加再求和，仍 admissible）；多 agent 行为分别给出每个 agent 的 cost。详细前置/效果/重规划见 §8 各卡。</span><span class="en">Costs are A*-style sums (each channel accumulates, then summed — still admissible); multi-agent behaviors list per-agent cost. Full preconds/effects/replan logic in §8 cards below.</span></p>
+</section>
+
+<!-- ============ 8. COMPOSITE BEHAVIOR CARDS ============ -->
+<section id="sec-comp-card">
+  <h2><span class="sec-num">§8</span><span data-zh="复合行为详细卡" data-en="Composite Behavior Cards">复合行为详细卡</span><span class="sec-en">/ Detailed Behavior Cards</span></h2>
+  <p class="bilingual"><span class="zh">每张卡按 7 字段：<b>goal · preconditions · chain (Δeffect) · cost · replan triggers · old-enum mapping · 备注</b>。</span><span class="en">Each card uses 7 fields: <b>goal · preconditions · chain (Δeffect) · cost · replan triggers · old-enum mapping · notes</b>.</span></p>
+
+  <!-- 8.1 -->
+  <div class="behavior-card">
+    <div class="bc-head"><span><span class="bc-num">8.1</span> <span class="bc-name-zh">食堂午餐</span> <span class="bc-name-en">/ LunchAtCanteen</span></span><span><span class="badge">EAT_BUY</span></span></div>
+    <div class="kv-grid">
+      <div class="k">goal</div><div class="v"><code>hunger == 0 &amp;&amp; holding == "meal_done"</code></div>
+      <div class="k">preconds</div><div class="v"><code>hunger ≥ 2 &amp;&amp; money ≥ 1 &amp;&amp; canteen.is_open &amp;&amp; canteen.occupancy &lt; 3</code></div>
+      <div class="k">chain</div><div class="v"><div class="chain"><span class="step">move(canteen)</span><span class="delta"> Δ{location:=canteen}</span><span class="arr"> → </span><span class="step">interact(canteen)</span><span class="delta"> Δ{hunger:=0, holding:='meal_done', money−=1}</span></div></div>
+      <div class="k">cost</div><div class="v"><b>3</b> = move(2) + interact(1)</div>
+      <div class="k">replan</div><div class="v"><code>canteen.is_open → false</code> · <code>canteen.occupancy == 3</code> · <code>money == 0</code> · 应急中断</div>
+      <div class="k">old enum</div><div class="v">EAT_BUY ⇒ <code>move + interact</code></div>
+    </div>
+  </div>
+
+  <!-- 8.2 -->
+  <div class="behavior-card concurrent">
+    <div class="bc-head"><span><span class="bc-num">8.2 ‡</span> <span class="bc-name-zh">图书馆 DDL 冲刺</span> <span class="bc-name-en">/ LibraryDDLSprint</span></span><span><span class="badge">STUDY_WORK</span><span class="badge">USE_SPACE</span><span class="badge">concurrent</span></span></div>
+    <div class="kv-grid">
+      <div class="k">goal</div><div class="v"><code>holding == "hw_done" &amp;&amp; focus == 0</code> <span class="note">(focus 被 DDL 燃尽)</span></div>
+      <div class="k">preconds</div><div class="v"><code>library_4F.is_open &amp;&amp; library_4F.has_seat &amp;&amp; library_4F.noise == "quiet" &amp;&amp; focus ≥ 2</code></div>
+      <div class="k">chain</div><div class="v"><div class="chain"><span class="step">move(library_4F)</span><span class="arr"> → </span><span class="step">interact(seat)</span><span class="delta"> Δ{focus−=2, holding:='hw_done', energy−=1}</span><span class="par"> ∥ </span><span class="step">mutter</span><span class="delta"> Δ{mood:='excited'}</span></div></div>
+      <div class="k">cost</div><div class="v"><b>5</b> = body[move(2)+interact(2)] + dialog[mutter(1)]</div>
+      <div class="k">replan</div><div class="v"><code>has_ddl_pressure → false</code> 改 QuietSelfStudy · <code>energy == 0</code> · <code>has_seat → false</code></div>
+      <div class="k">old enum</div><div class="v">STUDY_WORK + USE_SPACE ⇒ <code>move + interact + mutter</code></div>
+      <div class="k" data-zh="备注" data-en="note">备注</div><div class="v">body 与 dialog 并发；duration = max(2,1) = 2 tick，但 cost 仍按 sum 计入 A*。</div>
+    </div>
+  </div>
+
+  <!-- 8.3 -->
+  <div class="behavior-card multi">
+    <div class="bc-head"><span><span class="bc-num">8.3 †</span> <span class="bc-name-zh">操场偶遇闲聊</span> <span class="bc-name-en">/ TrackEncounterChat</span></span><span><span class="badge">SOCIAL</span><span class="badge">multi-agent</span></span></div>
+    <div class="kv-grid">
+      <div class="k">goal</div><div class="v"><code>social_need == 0 &amp;&amp; in_dialog != null</code></div>
+      <div class="k">preconds</div><div class="v"><code>social_need ≥ 2 &amp;&amp; track.is_open &amp;&amp; track.weather_outdoor != "rain"</code></div>
+      <div class="k">chain</div><div class="v"><div class="chain"><span class="step">move(track)</span><span class="arr"> → </span><span class="step">find(friend)</span><span class="delta"> Δ{knows_target_location:=true, target_in_range:=true}</span><span class="arr"> → </span><span class="step">talk(friend)</span><span class="delta"> Δ{in_dialog:=friend, social_need:=0, mood:='calm'}</span></div></div>
+      <div class="k">cost</div><div class="v"><b>4</b> = move(2) + find(1) + talk(1)</div>
+      <div class="k">replan</div><div class="v"><code>friend.location != track</code> 改去他常去地 · <code>weather → rain</code> · <code>interlocutor_available → false</code></div>
+      <div class="k">old enum</div><div class="v">SOCIAL ⇒ <code>move + find + talk</code></div>
+    </div>
+  </div>
+
+  <!-- 8.4 -->
+  <div class="behavior-card">
+    <div class="bc-head"><span><span class="bc-num">8.4</span> <span class="bc-name-zh">深夜回寝睡觉</span> <span class="bc-name-en">/ LateDormSleep</span></span><span><span class="badge">STAY</span><span class="badge">IDLE</span></span></div>
+    <div class="kv-grid">
+      <div class="k">goal</div><div class="v"><code>energy == 3 &amp;&amp; location == dorm</code></div>
+      <div class="k">preconds</div><div class="v"><code>energy ≤ 1 &amp;&amp; dorm.is_open</code></div>
+      <div class="k">chain</div><div class="v"><div class="chain"><span class="step">move(dorm)</span><span class="arr"> → </span><span class="step">interact(bed)</span><span class="delta"> Δ{energy:=3, focus:=3}</span><span class="arr"> → </span><span class="step">idle</span><span class="delta"> Δ{mood:='calm'}</span></div></div>
+      <div class="k">cost</div><div class="v"><b>4</b> = move(2) + interact(1) + idle(1)</div>
+      <div class="k">replan</div><div class="v"><code>dorm.is_open → false</code> 走应急通道 · 突发 EMERGENCY 抢占</div>
+      <div class="k">old enum</div><div class="v">STAY + IDLE ⇒ <code>move + interact + idle</code></div>
+    </div>
+  </div>
+
+  <!-- 8.5 -->
+  <div class="behavior-card find">
+    <div class="bc-head"><span><span class="bc-num">8.5 ☎</span> <span class="bc-name-zh">实验室通宵+外卖</span> <span class="bc-name-en">/ LabOvernightGrind</span></span><span><span class="badge">STUDY_WORK</span><span class="badge">EAT_BUY</span><span class="badge">phone</span></span></div>
+    <div class="kv-grid">
+      <div class="k">goal</div><div class="v"><code>holding == "project_done" &amp;&amp; hunger ≤ 1</code></div>
+      <div class="k">preconds</div><div class="v"><code>lab.is_open &amp;&amp; lab.has_compute &amp;&amp; energy ≥ 1 &amp;&amp; money ≥ 1</code></div>
+      <div class="k">chain</div><div class="v"><div class="chain" style="white-space:normal;line-height:2"><span class="step">move(lab)</span><span class="arr"> → </span><span class="step">interact(compute)</span><span class="delta"> Δ{focus−=1, energy−=1}</span><span class="arr"> → </span><span class="step">phone_call(courier)</span><span class="delta"> Δ{social_need−=1, schedules courier}</span><span class="arr"> → </span><span class="step">move(gate)</span><span class="arr"> → </span><span class="step">interact(courier)</span><span class="delta"> Δ{hunger−=2, holding:='meal_done', money−=1}</span><span class="arr"> → </span><span class="step">move(lab)</span><span class="arr"> → </span><span class="step">interact(compute)</span><span class="delta"> Δ{holding:='project_done'}</span></div></div>
+      <div class="k">cost</div><div class="v"><b>11</b> = move(2)×3 + interact(1)×3 + phone_call(2) <span class="note">(若 phone_call 失败重拨：cost+1，触发 replan)</span></div>
+      <div class="k">replan</div><div class="v"><code>lab.has_compute → false</code> · <code>energy == 0</code> 强制 LateDormSleep · <code>phone_call</code> 连失败 ≥ 2 → 改 <code>find(courier)</code> 或就近 EAT_BUY · courier 取消订单</div>
+      <div class="k">old enum</div><div class="v">STUDY_WORK + EAT_BUY ⇒ <code>move + interact + phone_call</code></div>
+      <div class="k" data-zh="备注" data-en="note">备注</div><div class="v"><span class="bilingual"><span class="zh">原 chain 用 <code>find(courier)</code>，但外卖员一定不在校园里——这是 phone_call 唯一合理选择，体现"无距离限制"价值。</span><span class="en">Original chain used <code>find(courier)</code>, but couriers are off-campus — phone_call is the only correct atom here, showcasing its "no-distance" value.</span></span></div>
+    </div>
+  </div>
+
+  <!-- 8.6 -->
+  <div class="behavior-card multi">
+    <div class="bc-head"><span><span class="bc-num">8.6 †</span> <span class="bc-name-zh">教师授课</span> <span class="bc-name-en">/ TeacherLecture</span></span><span><span class="badge">GOVERNANCE</span><span class="badge">STUDY_WORK</span><span class="badge">multi-agent</span></span></div>
+    <div class="kv-grid">
+      <div class="k">goal</div><div class="v"><code>in_dialog != null &amp;&amp; classroom.occupancy ≥ 1 &amp;&amp; last_action == "talk"</code></div>
+      <div class="k">preconds</div><div class="v"><code>role == "teacher" &amp;&amp; classroom.is_open &amp;&amp; classroom.has_seat</code></div>
+      <div class="k">chain</div><div class="v"><div class="chain"><span class="step">move(classroom)</span><span class="arr"> → </span><span class="step">interact(podium)</span><span class="delta"> Δ{focus−=1}</span><span class="arr"> → </span><span class="step">talk(students)</span><span class="delta"> Δ{in_dialog:=true, ∀s.focus+=1}</span></div></div>
+      <div class="k">cost</div><div class="v"><b>5</b> = move(2) + interact(1) + talk(2)</div>
+      <div class="k">replan</div><div class="v"><code>classroom.occupancy == 0</code> 改 office hours · <code>interlocutor_available → false</code></div>
+      <div class="k">old enum</div><div class="v">GOVERNANCE + STUDY_WORK ⇒ <code>move + interact + talk</code></div>
+    </div>
+  </div>
+
+  <!-- 8.7 -->
+  <div class="behavior-card find">
+    <div class="bc-head"><span><span class="bc-num">8.7 ★</span> <span class="bc-name-zh">后勤巡查+应急响应</span> <span class="bc-name-en">/ PatrolAndRespond</span></span><span><span class="badge">GOVERNANCE</span><span class="badge">EMERGENCY</span></span></div>
+    <div class="kv-grid">
+      <div class="k">goal</div><div class="v"><code>∀p ∈ zones: p.verified == true</code> <b>OR</b> <code>incident.resolved == true</code></div>
+      <div class="k">preconds</div><div class="v"><code>role == "staff" &amp;&amp; energy ≥ 2</code></div>
+      <div class="k">chain (常态)</div><div class="v"><div class="chain"><span class="step">move(zoneA)</span><span class="arr"> → </span><span class="step">interact(check)</span><span class="arr"> → </span><span class="step">move(zoneB)</span><span class="arr"> → </span><span class="step">interact(check)</span></div></div>
+      <div class="k">chain (应急)</div><div class="v"><div class="chain"><span class="step">find(incident)</span><span class="arr"> → </span><span class="step">move(incident)</span><span class="arr"> → </span><span class="step">interact(incident)</span><span class="delta"> Δ{incident.resolved:=true}</span></div></div>
+      <div class="k">cost</div><div class="v">常态 <b>6</b> · 应急 <b>9</b></div>
+      <div class="k">replan</div><div class="v"><code>incident.flag → true</code> 高优先重规划 · <code>energy ≤ 1</code> 交接班</div>
+      <div class="k">old enum</div><div class="v">GOVERNANCE + EMERGENCY ⇒ <code>move + interact + find</code></div>
+    </div>
+  </div>
+
+  <!-- 8.8 -->
+  <div class="behavior-card find">
+    <div class="bc-head"><span><span class="bc-num">8.8 ★</span> <span class="bc-name-zh">访客问路找门</span> <span class="bc-name-en">/ VisitorWayfinding</span></span><span><span class="badge">MOVE</span><span class="badge">SOCIAL</span></span></div>
+    <div class="kv-grid">
+      <div class="k">goal</div><div class="v"><code>location == B203 &amp;&amp; knows_target_location == true</code></div>
+      <div class="k">preconds</div><div class="v"><code>role == "visitor" &amp;&amp; knows_target_location == false</code></div>
+      <div class="k">chain</div><div class="v"><div class="chain"><span class="step">find(B203)</span><span class="delta"> [本地知识失败 → 子目标 interlocutor_available]</span><span class="arr"> → </span><span class="step">talk(staff)</span><span class="delta"> Δ{knows_target_location:=true}</span><span class="arr"> → </span><span class="step">move(B203)</span></div></div>
+      <div class="k">cost</div><div class="v"><b>5</b> = find(1) + talk(2) + move(2)</div>
+      <div class="k">replan</div><div class="v"><code>find</code> 直接命中 → 跳过 talk，cost 降到 3 · 附近无 staff → 改 <code>phone_call(校园服务)</code> 或 <code>mutter</code>+wander</div>
+      <div class="k">old enum</div><div class="v">MOVE + SOCIAL ⇒ <code>find + talk + move</code></div>
+      <div class="k" data-zh="备注" data-en="note">备注</div><div class="v"><span class="bilingual"><span class="zh"><code>find</code> 失败可发射子目标 <code>interlocutor_available</code>，planner 自动插入 <code>talk(staff)</code> — 这是 GOAP "子目标分解"的典型用法。</span><span class="en"><code>find</code> on miss emits sub-goal <code>interlocutor_available</code>; planner auto-inserts <code>talk(staff)</code> — canonical GOAP sub-goal decomposition.</span></span></div>
+    </div>
+  </div>
+
+  <!-- 8.9 -->
+  <div class="behavior-card multi">
+    <div class="bc-head"><span><span class="bc-num">8.9 †</span> <span class="bc-name-zh">湖边二人偶遇</span> <span class="bc-name-en">/ LakesideDuoMeet</span></span><span><span class="badge">SOCIAL</span><span class="badge">multi-agent</span></span></div>
+    <div class="kv-grid">
+      <div class="k">joint goal</div><div class="v"><code>A.in_dialog == B.id &amp;&amp; B.in_dialog == A.id &amp;&amp; A.location == B.location == lake</code></div>
+      <div class="k">preconds</div><div class="v"><code>A.social_need ≥ 2 &amp;&amp; B.social_need ≥ 1 &amp;&amp; lake.is_open &amp;&amp; lake.weather_outdoor != "rain"</code></div>
+      <div class="k">chain A</div><div class="v"><div class="chain"><span class="step">move(lake)</span><span class="arr"> → </span><span class="step">find(B)</span><span class="arr"> → </span><span class="step">talk(B)</span><span class="delta"> Δ{A.in_dialog:=B, A.social_need:=0}</span></div></div>
+      <div class="k">chain B</div><div class="v"><div class="chain"><span class="step">move(lake)</span><span class="arr"> → </span><span class="step">talk(A)</span><span class="delta"> Δ{B.in_dialog:=A, B.social_need−=1}</span><span class="note"> &nbsp;由 A 的 talk 通过事件总线触发 B.interlocutor_available:=true</span></div></div>
+      <div class="k">cost</div><div class="v">A=<b>4</b> · B=<b>3</b> · joint=<b>7</b></div>
+      <div class="k">replan</div><div class="v"><code>B.location != lake</code> 在 A 抵达前 → A 改 TrackEncounterChat 或 <code>phone_call(B)</code> · <code>weather → rain</code> 双方撤离</div>
+      <div class="k">old enum</div><div class="v">SOCIAL (multi-agent) ⇒ <code>move + find + talk</code></div>
+    </div>
+  </div>
+
+  <!-- 8.10 -->
+  <div class="behavior-card concurrent">
+    <div class="bc-head"><span><span class="bc-num">8.10 ‡</span> <span class="bc-name-zh">自习室静学</span> <span class="bc-name-en">/ QuietSelfStudy</span></span><span><span class="badge">STUDY_WORK</span><span class="badge">USE_SPACE</span><span class="badge">concurrent</span></span></div>
+    <div class="kv-grid">
+      <div class="k">goal</div><div class="v"><code>focus ≤ 1 &amp;&amp; holding == "hw_done"</code></div>
+      <div class="k">preconds</div><div class="v"><code>study_room.is_open &amp;&amp; study_room.noise == "quiet" &amp;&amp; study_room.has_seat</code></div>
+      <div class="k">chain</div><div class="v"><div class="chain"><span class="step">move(study_room)</span><span class="arr"> → </span><span class="step">interact(seat)</span><span class="delta"> Δ{focus−=2, holding:='hw_done'}</span><span class="par"> ∥ </span><span class="step">idle</span><span class="delta"> Δ{mood:='calm'}</span></div></div>
+      <div class="k">cost</div><div class="v"><b>4</b> = body[move(2)+interact(1)] + dialog/body[idle(1)] <span class="note">(idle 在 body 通道，但与 interact 互斥；此处把 idle 换成 mutter 以并发——若严格按 §6 矩阵需用 mutter)</span></div>
+      <div class="k">replan</div><div class="v"><code>noise → "loud"</code> 改 LibraryDDLSprint · <code>has_seat → false</code></div>
+      <div class="k">old enum</div><div class="v">STUDY_WORK + USE_SPACE ⇒ <code>move + interact + mutter/idle</code></div>
+    </div>
+  </div>
+
+  <!-- 8.11 NEW with phone_call -->
+  <div class="behavior-card concurrent">
+    <div class="bc-head"><span><span class="bc-num">8.11 ☎ ‡ †</span> <span class="bc-name-zh">路上电话约见导师</span> <span class="bc-name-en">/ WalkAndCallAdvisor</span></span><span><span class="badge">SOCIAL</span><span class="badge">STUDY_WORK</span><span class="badge">phone</span><span class="badge">concurrent</span></span></div>
+    <div class="kv-grid">
+      <div class="k">goal</div><div class="v"><code>location == office &amp;&amp; advisor.knows(meeting_request) == true</code></div>
+      <div class="k">preconds</div><div class="v"><code>role == "grad" &amp;&amp; advisor.location_unknown</code> (不必同位置即可发起电话) <code>&amp;&amp; agent.holding ∈ {none, phone}</code></div>
+      <div class="k">chain</div><div class="v"><div class="chain"><span class="step">move(office)</span><span class="par"> ∥ </span><span class="step">phone_call(advisor)</span><span class="delta"> Δ{agent.in_dialog:=advisor, advisor.in_dialog:=agent, social_need−=1}</span><span class="arr"> → </span><span class="step">interact(office)</span><span class="delta"> Δ{focus+=1}</span></div></div>
+      <div class="k">cost</div><div class="v"><b>5</b> = body[move(2)+interact(1)] + dialog[phone_call(2)]<br><span class="note">duration = max(move=2, phone_call=1) + interact=1 ≈ 3 ticks · 若 phone_call 未接通 cost+1（重拨）</span></div>
+      <div class="k">replan</div><div class="v"><code>connect_p</code> 失败 → 即时 <code>retry phone_call</code> ≤ 2 次；连失败则改 <code>idle</code> 在 office 等候 · <code>advisor.in_dialog ≠ null</code> 改 phone_call 等候 · <code>noise=="loud"</code>（如经过球场）将 cost+1</div>
+      <div class="k">old enum</div><div class="v">SOCIAL + MOVE ⇒ <code>move ∥ phone_call + interact</code></div>
+      <div class="k" data-zh="备注" data-en="note">备注</div><div class="v"><span class="bilingual"><span class="zh">这是 <code>phone_call</code> 唯一不可替代的复合行为：导师在校外开会，学生不能等导师回来才敲门——必须"边走边打"。<code>talk</code> 严格禁止 <code>move</code> 并发，<code>phone_call</code> 是唯一例外。</span><span class="en">This is the irreplaceable use of <code>phone_call</code>: the advisor is off-campus in a meeting; the student can't wait for them to return before knocking. Must "walk and call". <code>talk</code> strictly forbids concurrency with <code>move</code>; <code>phone_call</code> is the sole exception.</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9. GOAP SEARCH CONDITIONS ============ -->
+<section id="sec-search">
+  <h2><span class="sec-num">§9</span><span data-zh="GOAP 搜索条件" data-en="GOAP Search Conditions">GOAP 搜索条件</span><span class="sec-en">/ Solvability &amp; Optimality</span></h2>
+  <div class="lead">
+    <span class="zh-only"><b>定义。</b> 给定初始世界状态 <code>s₀</code>、目标谓词 <code>G</code>、原子动作集 <code>A</code>。一条复合行为视为 GOAP 可解，<b>当且仅当</b>存在动作序列 <code>a₁, …, aₙ ∈ A</code>，同时满足以下三条：
+    <br>(a) <b>前置可达</b>：对任意 <code>i</code>，<code>aᵢ.preconditions</code> 在状态 <code>sᵢ₋₁ = apply(s₀, a₁ … aᵢ₋₁)</code> 下为真；
+    <br>(b) <b>末态成目标</b>：goal predicate <code>G</code> 在 <code>sₙ</code> 上求值为真；
+    <br>(c) <b>代价最小</b>：<code>Σᵢ cost(aᵢ)</code> 在所有满足 (a)(b) 的序列中最小，使用 A* 启发式 <code>h(s) = |{p ∈ G : s ⊭ p}|</code>（未满足子目标计数；admissible，因每条至少需 1 个动作消解）。</span>
+    <span class="en en-only"><b>Definition.</b> Given initial world state <code>s₀</code>, goal predicate <code>G</code>, and atomic action set <code>A</code>. A composite behavior is GOAP-solvable <b>iff</b> there exists an action sequence <code>a₁, …, aₙ ∈ A</code> satisfying:
+    <br>(a) <b>Precond reachability</b>: for each <code>i</code>, <code>aᵢ.preconditions</code> hold in state <code>sᵢ₋₁ = apply(s₀, a₁ … aᵢ₋₁)</code>;
+    <br>(b) <b>Goal in terminal state</b>: <code>G</code> evaluates true at <code>sₙ</code>;
+    <br>(c) <b>Cost-minimal</b>: <code>Σᵢ cost(aᵢ)</code> is minimum among all sequences satisfying (a)(b), under A* with heuristic <code>h(s) = |{p ∈ G : s ⊭ p}|</code> — count of unmet sub-goals; admissible since each unmet predicate needs at least one action to resolve.</span>
+  </div>
+
+  <h3 data-zh="9.1 复合行为存在性 ⇔ 子目标可分解" data-en="9.1 Composite Existence ⇔ Sub-goal Decomposability">9.1 <span data-zh="复合行为存在性 ⇔ 子目标可分解" data-en="Composite Existence ⇔ Sub-goal Decomposability">复合行为存在性 ⇔ 子目标可分解</span></h3>
+  <p class="bilingual"><span class="zh">每条 §8 卡里的 chain 都是 (a)(b) 的<b>构造性证明</b>——给出动作序列即给出存在证明；总 cost 是上界，A* 在原子集合上闭合搜索得到下界，两者相等即最优。</span><span class="en">The chain in each §8 card is a <b>constructive proof</b> of (a)(b) — providing a sequence is providing existence; its total cost is an upper bound, and A* over the atom set yields the lower bound. Equality = optimality.</span></p>
+
+  <h3 data-zh="9.2 概率动作 phone_call 的处理" data-en="9.2 Handling Probabilistic Action phone_call">9.2 <span data-zh="概率动作 phone_call 的处理" data-en="Handling Probabilistic Action phone_call">概率动作 phone_call 的处理</span></h3>
+  <p class="bilingual"><span class="zh"><b>plan-time</b>：把 <code>phone_call</code> 视作期望 cost 的确定性动作，<code>cost = 2 + (1 − connect_p) × retry_cost ≈ 2 + 0.4 × 1 ≈ 2.4</code>，舍入为 2。这样 A* 不需展开概率分支。<br><b>run-time</b>：失败时仅修改 <code>retry_count</code> 与 <code>mood</code>，触发 L1 即时重排（见 §6 表）；retry≥2 时 planner 替换为 <code>find / mutter</code>。</span><span class="en"><b>Plan-time:</b> treat <code>phone_call</code> as a deterministic action with expected cost <code>2 + (1 − connect_p) × retry_cost ≈ 2.4</code>, rounded to 2. A* never branches on probabilities.<br><b>Run-time:</b> on failure, only <code>retry_count</code> and <code>mood</code> mutate; triggers L1 immediate replan; after retry ≥ 2 the planner substitutes <code>find</code> or <code>mutter</code>.</span></p>
+
+  <h3 data-zh="9.3 重规划等级" data-en="9.3 Replan Triggers Taxonomy">9.3 <span data-zh="重规划等级" data-en="Replan Triggers Taxonomy">重规划等级</span></h3>
+  <table>
+    <thead><tr><th data-zh="等级" data-en="level">等级</th><th data-zh="触发场景" data-en="trigger">触发场景</th><th data-zh="处理策略" data-en="strategy">处理策略</th></tr></thead>
+    <tbody>
+      <tr><td><b>L0</b> 软重排</td><td><code>occupancy</code> / <code>weather</code> 渐变</td><td>当前 plan 保留，下一 tick 检查 / keep plan, recheck next tick</td></tr>
+      <tr><td><b>L1</b> 即时重排</td><td><code>is_open → false</code> · <code>has_seat → false</code> · <code>money == 0</code> · <code>phone_call</code> fail</td><td>当前 atomic 完成后立刻 replan / replan after current atom finishes</td></tr>
+      <tr><td><b>L2</b> 抢占</td><td><code>EMERGENCY.flag → true</code> · <code>energy == 0</code> · <code>role == staff</code> 调度</td><td>立即丢弃 plan，进入应急/IDLE/sleep 流 / drop plan, switch to emergency / idle / sleep</td></tr>
+      <tr><td><b>L3</b> 多 agent 失谐</td><td>peer <code>location</code> 偏移 · <code>interlocutor_available → false</code></td><td>切换备选社交目标，或降级为 <code>mutter / phone_call</code> / pick alt peer or downgrade to mutter / phone_call</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- §10 A* 伪代码已移除：代码细节请直接见 §14 互动演示 -->
+<!-- §10 A* pseudocode removed: see live demo in §14 instead -->
+
+
+<!-- ============ 11. OLD -> NEW MAPPING ============ -->
+<section id="sec-mapping">
+  <h2><span class="sec-num">§11</span><span data-zh="docx 9 类 → 原子组合映射" data-en="docx 9-Enum → Atomic Mapping">docx 9 类 → 原子组合映射</span><span class="sec-en">/ Old → New Mapping</span></h2>
+  <p class="bilingual"><span class="zh">每一个旧粗枚举都被一个或多个 §8 复合行为<b>完整覆盖</b>，且只用 §5 的 7 个原子。</span><span class="en">Each old coarse enum is fully covered by one or more §8 composites, using only the 7 atoms from §5.</span></p>
+  <table>
+    <thead><tr><th data-zh="旧枚举" data-en="old enum">旧枚举</th><th data-zh="涉及复合行为" data-en="composites">涉及复合行为</th><th data-zh="原子组合" data-en="atomic primitives">原子组合</th><th data-zh="关键世界字段" data-en="fields touched">关键世界字段</th></tr></thead>
+    <tbody>
+      <tr><td><b>MOVE</b></td><td>§8.8 VisitorWayfinding</td><td><code>find</code> + <code>move</code> (+ <code>talk</code>)</td><td><code>location, knows_target_location</code></td></tr>
+      <tr><td><b>STAY</b></td><td>§8.4 LateDormSleep · §8.10 QuietSelfStudy</td><td><code>move</code> + <code>interact</code> + <code>idle</code></td><td><code>location, energy, mood</code></td></tr>
+      <tr><td><b>STUDY_WORK</b></td><td>§8.2 LibraryDDLSprint · §8.5 LabOvernightGrind · §8.6 TeacherLecture · §8.10 QuietSelfStudy · §8.11 WalkAndCallAdvisor</td><td><code>move</code> + <code>interact</code> (+ <code>mutter</code> / <code>talk</code> / <code>phone_call</code>)</td><td><code>focus, holding, has_seat, has_compute, has_ddl_pressure</code></td></tr>
+      <tr><td><b>EAT_BUY</b></td><td>§8.1 LunchAtCanteen · §8.5 LabOvernightGrind (外卖段)</td><td><code>move</code> + <code>interact</code> (+ <code>find</code> / <code>phone_call</code>)</td><td><code>hunger, money, holding, has_food</code></td></tr>
+      <tr><td><b>SOCIAL</b></td><td>§8.3 TrackEncounterChat · §8.9 LakesideDuoMeet · §8.8 VisitorWayfinding · §8.11 WalkAndCallAdvisor</td><td><code>move</code> + <code>find</code> + <code>talk</code> · (+ <code>phone_call</code>)</td><td><code>social_need, in_dialog, interlocutor_available</code></td></tr>
+      <tr><td><b>USE_SPACE</b></td><td>§8.2 LibraryDDLSprint · §8.10 QuietSelfStudy</td><td><code>move</code> + <code>interact</code></td><td><code>is_open, noise, has_seat, occupancy</code></td></tr>
+      <tr><td><b>GOVERNANCE</b></td><td>§8.6 TeacherLecture · §8.7 PatrolAndRespond</td><td><code>move</code> + <code>interact</code> + <code>talk</code></td><td><code>role, occupancy, is_open</code></td></tr>
+      <tr><td><b>EMERGENCY</b></td><td>§8.7 PatrolAndRespond (应急分支)</td><td><code>find</code> + <code>move</code> + <code>interact</code></td><td><code>incident.flag, incident.resolved</code></td></tr>
+      <tr><td><b>IDLE</b></td><td>§8.4 LateDormSleep · §8.10 QuietSelfStudy</td><td><code>idle</code> (+ <code>mutter</code>)</td><td><code>mood, energy</code></td></tr>
+    </tbody>
+  </table>
+  <p class="note bilingual"><span class="zh">结论：旧 9 类 100% 被覆盖，且 GOAP 还能表达旧枚举无法刻画的"并发"（§8.2 / §8.10 / §8.11）与"概率失败"（§8.5 / §8.11）。</span><span class="en">Conclusion: 100% coverage of the old 9 enums; GOAP additionally expresses concurrency (§8.2 / §8.10 / §8.11) and probabilistic failure (§8.5 / §8.11), which the old enums cannot.</span></p>
+</section>
+
+<!-- §12 详细 trace 表已移除：代码细节请直接见 §14 互动演示 -->
+<!-- §12 worked trace removed: see §14 live demo for step-by-step expansion -->
+
+
+<!-- ============ 14. GOAP PLANNING DEMO ============ -->
+<section id="sec-planner">
+  <h2><span class="sec-num">§14</span><span data-zh="GOAP 规划过程演示（交互）" data-en="GOAP Planning Demo (interactive)">GOAP 规划过程演示（交互）</span><span class="sec-en">/ Step-through A*</span></h2>
+  <p class="bilingual"><span class="zh">外部输入 worldState <b>目标谓词</b>，GOAP 用 A* 逐节点搜索。本演示用<b>9 跳</b>的"<b>研究生通宵写论文 + 外卖</b>"案例：初始 = 学生在宿舍 + 饿 + 有钱、不知导师位置、未读文献、项目未完；目标 = <code>project_done ∧ hunger == 0 ∧ holding == "meal_done"</code>。最优 plan 恰好 9 个原子动作，串起 <code>find / phone_call / move / interact</code> 全部 4 类 body+dialog 原子，体现远程电话、跨场所流转、并行叫外卖等真实场景。点击 <b>下一步 / 自动播放</b> 观察搜索树如何生长，<b>橙色 current</b> 节点扩展、灰色 closed 闭合、红色虚线 pruned 剪枝、绿色 goal 路径回溯。</span><span class="en">An external worldState <b>goal predicate</b> drives the A* planner. This 9-hop demo uses "<b>Grad student overnight: paper + delivery</b>": initial = in dorm + hungry + has money + advisor unknown + no literature + project not done; goal = <code>project_done ∧ hunger == 0 ∧ holding == "meal_done"</code>. The optimal plan is exactly 9 atoms, threading <code>find / phone_call / move / interact</code> together — covering remote calls, cross-place flow, and parallel delivery dispatch. Click <b>Step / Auto-play</b> to watch the search tree grow: the <b>orange current</b> node expands, gray closed, red-dashed pruned, green goal with backtraced path.</span></p>
+
+  <div class="planner-demo">
+    <div class="planner-grid">
+      <div class="planner-side">
+        <div class="planner-card">
+          <h4 data-zh="📥 外部输入：目标谓词" data-en="📥 External Input: Goal Predicate">📥 外部输入：目标谓词</h4>
+          <div class="state-block" id="planner-goal"></div>
+        </div>
+        <div class="planner-card">
+          <h4 data-zh="🌱 初始状态 s₀" data-en="🌱 Initial State s₀">🌱 初始状态 s₀</h4>
+          <div class="state-block" id="planner-init"></div>
+        </div>
+        <div class="planner-card">
+          <h4 data-zh="🎯 当前节点状态" data-en="🎯 Current Node State">🎯 当前节点状态</h4>
+          <div class="state-block" id="planner-current"></div>
+          <div class="planner-frame" id="planner-frame-info"></div>
+        </div>
+        <div class="planner-card">
+          <h4 data-zh="🎬 控制" data-en="🎬 Controls">🎬 控制</h4>
+          <div class="planner-controls">
+            <button id="pl-reset" data-zh="重置" data-en="Reset">重置</button>
+            <button id="pl-step" class="primary" data-zh="下一步 ▸" data-en="Step ▸">下一步 ▸</button>
+            <button id="pl-auto" data-zh="自动 ▶" data-en="Auto ▶">自动 ▶</button>
+            <button id="pl-end" data-zh="跳到终态 ⤇" data-en="Skip to End ⤇">跳到终态 ⤇</button>
+          </div>
+        </div>
+        <div class="planner-card">
+          <h4 data-zh="📜 事件日志" data-en="📜 Event Log">📜 事件日志</h4>
+          <div class="planner-log" id="planner-log"></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="planner-legend">
+          <span class="leg"><span class="swl" style="border-color:#42a5f5;background:#1a2240"></span> <span data-zh="open（前沿）" data-en="open (frontier)">open（前沿）</span></span>
+          <span class="leg"><span class="swl" style="border-color:#ffa726;background:#2a2010"></span> <span data-zh="current（正在 expand）" data-en="current (expanding)">current（正在 expand）</span></span>
+          <span class="leg"><span class="swl" style="border-color:#546e7a;background:#0d1220"></span> <span data-zh="closed" data-en="closed">closed</span></span>
+          <span class="leg"><span class="swl" style="border-color:#ef5350;background:#2a1010;border-style:dashed"></span> <span data-zh="pruned（剪枝）" data-en="pruned">pruned（剪枝）</span></span>
+          <span class="leg"><span class="swl" style="border-color:#66bb6a;background:#1a3020"></span> <span data-zh="goal（达成）" data-en="goal">goal（达成）</span></span>
+          <span class="leg"><span style="display:inline-block;width:18px;height:3px;background:#66bb6a;border-radius:2px"></span> <span data-zh="最优 plan" data-en="optimal plan">最优 plan</span></span>
+        </div>
+        <div class="planner-svg-wrap" id="planner-svg-wrap">
+          <svg id="planner-svg" width="100%" viewBox="0 0 980 480" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#42a5f5"/>
+              </marker>
+              <marker id="arrow-path" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#66bb6a"/>
+              </marker>
+            </defs>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="label" data-zh="规划器内部逻辑：" data-en="Planner internals:">规划器内部逻辑：</span>
+    <span class="bilingual"><span class="zh">动作集 = {find(advisor), phone_call(advisor), move(library), interact(library), move(lab), phone_call(courier), interact(compute), move(gate), interact(courier), idle, move(canteen)}（9 个必经 + 2 个旁路诱惑）；启发式 <code>h(s)</code> = 未满足 goal 谓词数 + 项目链路缺口（无 idea / 无 book / 不知导师，每缺 +1）。状态 hash 含 10 个字段。<b>每点一次"下一步"画布右图增长一个节点</b>，可看到搜索如何探索 idle / 直奔食堂 等劣解再回到主线。</span><span class="en">Action set: {find(advisor), phone_call(advisor), move(library), interact(library), move(lab), phone_call(courier), interact(compute), move(gate), interact(courier), idle, move(canteen)} — 9 path-mandatory + 2 temptation actions. Heuristic <code>h(s)</code> = unmet goal count + missing-prereq bonus (no_idea / no_book / advisor_unknown each +1). State hash carries 10 fields. <b>Each Step grows one node</b>; you can watch the search probe idle / "skip to canteen" inferior options before backtracking to the main line.</span></span>
+  </div>
+</section>
+
+<!-- ============ 13. ANTI-BLOAT ============ -->
+<section id="sec-antibloat">
+  <h2><span class="sec-num">§13</span><span data-zh="反膨胀策略" data-en="Anti-bloat Strategy">反膨胀策略</span><span class="sec-en">/ Why this stays small</span></h2>
+
+  <div class="lead">
+    <span class="zh-only"><b>四道闸门 ⇒ 状态空间复杂度 <code>O(places × 8 + agents × 11)</code> 加性增长。</b><br>(1) 场景树只放共享事实，agent 只放私有状态；(2) 树深固定 3 层，物件粒度全部下沉到 <code>holding</code>；(3) 桶位 / 枚举 / 布尔代替自由量；(4) 派生字段（如 <code>knows_target_location</code>）每 tick 重算，不进 state hash。新增地点不动 agent，新增 agent 不动场景，"为剧情临时挂字段"被结构上拒绝。</span>
+    <span class="en en-only"><b>Four gates ⇒ state space grows additively as <code>O(places × 8 + agents × 11)</code>.</b><br>(1) scene tree carries shared facts, agents only private ones; (2) depth capped at 3, sub-place objects collapse into <code>holding</code>; (3) buckets / enums / bools replace free scalars and strings; (4) derived sensor fields (e.g. <code>knows_target_location</code>) are re-computed each tick and excluded from state hash. Adding places doesn't touch agents, adding agents doesn't touch scenes, ad-hoc per-scenario fields are structurally rejected.</span>
+  </div>
+
+  <h3 data-zh="13.1 复杂度对比" data-en="13.1 Complexity Comparison">13.1 <span data-zh="复杂度对比" data-en="Complexity Comparison">复杂度对比</span></h3>
+  <table>
+    <thead><tr><th data-zh="方案" data-en="approach">方案</th><th data-zh="state 大小" data-en="state size">state 大小</th><th data-zh="60 agent × 25 place 估算" data-en="estimate at 60 × 25">60 agent × 25 place 估算</th><th data-zh="新增 1 个 place 成本" data-en="cost of +1 place">新增 1 个 place 成本</th></tr></thead>
+    <tbody>
+      <tr><td data-zh="天真：所有事实展开到一棵大树" data-en="naive: one big tree">天真：所有事实展开到一棵大树</td><td><code>places × agents × attrs ≈ 60×25×20</code></td><td>≈ 30,000 字段</td><td>O(agents) — 每个 agent 都要更新</td></tr>
+      <tr><td data-zh="本方案：场景 + agent 解耦" data-en="ours: scene + agent decoupled">本方案：场景 + agent 解耦</td><td><code>25×8 + 60×11 = 860</code></td><td><b>≈ 860 字段</b> （≈ 1/35）</td><td><b>O(1)</b> — 只动场景树</td></tr>
+    </tbody>
+  </table>
+
+  <h3 data-zh="13.2 拒绝清单" data-en="13.2 Rejected Patterns">13.2 <span data-zh="拒绝清单（不要做这些）" data-en="Rejected Patterns (don't do these)">拒绝清单</span></h3>
+  <ul style="font-size:13px;color:#cfd8dc;padding-left:24px;line-height:1.9">
+    <li><span class="bilingual"><span class="zh">❌ 把每件家具/小物挂到场景树（"床/桌子/咖啡机"）→ 用 <code>holding</code> 表达。</span><span class="en">❌ Hanging every piece of furniture on the scene tree ("bed/desk/coffee-machine") — use <code>holding</code> instead.</span></span></li>
+    <li><span class="bilingual"><span class="zh">❌ 给 mood 加 10+ 档（"轻微焦虑/中度焦虑/严重焦虑/濒临崩溃…"）→ 5 档枚举 + 派生 trigger。</span><span class="en">❌ Adding 10+ mood levels ("mild/medium/severe anxious…") — keep 5-tag enum + derived triggers.</span></span></li>
+    <li><span class="bilingual"><span class="zh">❌ 为每个 NPC 加私有 history 字段 → memory 走<i>外部存储</i>，不进 state hash。</span><span class="en">❌ Adding per-NPC history fields — memory goes to <i>external storage</i>, not state hash.</span></span></li>
+    <li><span class="bilingual"><span class="zh">❌ 在原子层硬编码"吃饭/学习/写代码"等场景动词 → 全部走 <code>interact</code> + 条件式 effects。</span><span class="en">❌ Hard-coding scene verbs ("eat/study/code") at atomic layer — all route through <code>interact</code> + conditional effects.</span></span></li>
+    <li><span class="bilingual"><span class="zh">❌ 把概率分支展开到 A* 搜索图 → 用期望 cost 折叠（§9.2）。</span><span class="en">❌ Expanding probabilistic branches into the A* graph — fold via expected cost (§9.2).</span></span></li>
+  </ul>
+
+  <h3 data-zh="13.3 一句话总结" data-en="13.3 One-line Takeaway">13.3 <span data-zh="一句话总结" data-en="One-line Takeaway">一句话总结</span></h3>
+  <p class="bilingual" style="font-size:14px"><span class="zh">把 <b>"做什么"（7 个原子动作 + 11 条复合行为）</b>与 <b>"在哪 / 谁 / 现在如何"（25 places × 8 字段 + 11 agent 字段）</b>分开建模——这是这套设计能同时支持 60+ NPC 且不爆炸的根本原因。</span><span class="en">Decouple <b>"what to do"</b> (7 atoms + 11 composites) from <b>"where / who / how"</b> (25 places × 8 fields + 11 agent fields). That decoupling is why this design scales to 60+ NPCs without blowing up.</span></p>
+</section>
+
+<footer style="text-align:center;padding:30px 16px;color:#546e7a;font-size:11.5px;border-top:1px solid #1e2a45;margin-top:40px">
+  <span class="bilingual"><span class="zh">基于双层 FSM（move/interact/find/idle · talk/mutter/phone_call）的最小 GOAP 设计稿 · 2026</span><span class="en">Minimal GOAP design over the dual-layer FSM (move/interact/find/idle · talk/mutter/phone_call) · 2026</span></span>
+</footer>
+
+</main>
+  </aside><!-- /docs-pane -->
+</div><!-- /page-grid -->
+
+<!-- ============ DATA + RENDER + PLANNER JS ============ -->
+<script>
+/* ====== Scene tree SVG render ====== */
+const SCENE_TREE_DATA = {
+  root: { id: 'campus', en: 'campus', zh: '校园' },
+  districts: [
+    { id: 'teaching', en: 'Teaching', zh: '教学区', places: [
+      { id: 'classroom', en: 'classroom', zh: '教室' },
+      { id: 'lab', en: 'lab', zh: '实验室' },
+      { id: 'study_room', en: 'study_room', zh: '自习室' },
+      { id: 'library', en: 'library', zh: '图书馆' },
+      { id: 'library_4f', en: 'library_4f_corner', zh: '图书馆4F角' },
+      { id: 'lecture_hall', en: 'lecture_hall', zh: '报告厅' },
+      { id: 'music_hall', en: 'music_hall', zh: '音乐厅' },
+      { id: 'piano_room', en: 'piano_room', zh: '琴房' },
+      { id: 'art_studio', en: 'art_studio', zh: '画室' }
+    ]},
+    { id: 'life', en: 'Life', zh: '生活区', places: [
+      { id: 'dorm', en: 'dorm', zh: '宿舍' },
+      { id: 'dorm_lounge', en: 'dorm_lounge', zh: '宿舍公区' },
+      { id: 'canteen', en: 'canteen', zh: '食堂' },
+      { id: 'cafe', en: 'cafe', zh: '咖啡厅' },
+      { id: 'express_station', en: 'express_station', zh: '快递站' }
+    ]},
+    { id: 'sports', en: 'Sports', zh: '运动区', places: [
+      { id: 'track', en: 'track', zh: '操场', outdoor: true },
+      { id: 'basketball', en: 'basketball', zh: '篮球场', outdoor: true },
+      { id: 'gym', en: 'gym', zh: '体育馆' }
+    ]},
+    { id: 'admin', en: 'Admin', zh: '办公区', places: [
+      { id: 'office', en: 'office', zh: '办公室' },
+      { id: 'admin_building', en: 'admin_building', zh: '行政楼' },
+      { id: 'news_room', en: 'news_room', zh: '校报编辑室' }
+    ]},
+    { id: 'edge', en: 'Edge', zh: '边界区', places: [
+      { id: 'gate', en: 'gate', zh: '校门', outdoor: true },
+      { id: 'boulevard', en: 'boulevard', zh: '林荫道', outdoor: true },
+      { id: 'lake', en: 'lake', zh: '湖边', outdoor: true },
+      { id: 'rooftop', en: 'rooftop', zh: '天台', outdoor: true }
+    ]},
+    { id: 'medical', en: 'Medical', zh: '医疗区', places: [
+      { id: 'clinic', en: 'clinic', zh: '校医院' }
+    ]}
+  ]
+};
+
+function renderSceneTree(){
+  const container = document.getElementById('scene-tree-vis');
+  if(!container) return;
+  const data = SCENE_TREE_DATA;
+  const W = 1200, dCount = data.districts.length;
+  const distSpacing = W / dCount;
+  const distY = 110, placeY0 = 175, placeStep = 28;
+  const distW = 130, distH = 32, placeW = 158, placeH = 24;
+
+  // Compute height
+  const maxPlaces = Math.max(...data.districts.map(d => d.places.length));
+  const H = placeY0 + maxPlaces * placeStep + 30;
+
+  let svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg">';
+
+  // root
+  const rootCx = W/2, rootCy = 30;
+  svg += '<rect class="tn-rect root" x="' + (rootCx-65) + '" y="' + (rootCy-20) + '" width="130" height="40" rx="10"/>';
+  svg += '<text class="tn-text root" x="' + rootCx + '" y="' + (rootCy-3) + '">' + data.root.en + '</text>';
+  svg += '<text class="tn-text dist-zh" x="' + rootCx + '" y="' + (rootCy+12) + '">' + data.root.zh + '</text>';
+
+  // districts + edges
+  data.districts.forEach((d, di) => {
+    const dCx = distSpacing/2 + di * distSpacing;
+    // edge root → district (orthogonal: down, across, down)
+    const midY = (rootCy + 20 + distY) / 2;
+    svg += '<path class="tn-edge r-d" d="M ' + rootCx + ' ' + (rootCy+20) + ' V ' + midY + ' H ' + dCx + ' V ' + (distY - distH/2) + '"/>';
+    // district rect
+    svg += '<rect class="tn-rect dist" x="' + (dCx-distW/2) + '" y="' + (distY-distH/2) + '" width="' + distW + '" height="' + distH + '" rx="6"/>';
+    svg += '<text class="tn-text dist-en" x="' + dCx + '" y="' + (distY-3) + '">' + d.en + '</text>';
+    svg += '<text class="tn-text dist-zh" x="' + dCx + '" y="' + (distY+10) + '">' + d.zh + ' · ' + d.places.length + '</text>';
+
+    // places under district
+    d.places.forEach((p, pi) => {
+      const pCx = dCx, pCy = placeY0 + pi * placeStep;
+      // edge district → place
+      svg += '<path class="tn-edge d-p" d="M ' + dCx + ' ' + (distY+distH/2) + ' V ' + (pCy - 4) + '"/>';
+      const pX = pCx - placeW/2, pY = pCy - placeH/2;
+      const cls = 'tn-rect place' + (p.outdoor ? ' outdoor' : '');
+      svg += '<rect class="' + cls + '" x="' + pX + '" y="' + pY + '" width="' + placeW + '" height="' + placeH + '" rx="4">';
+      svg += '<title>' + p.en + ' / ' + p.zh + (p.outdoor ? ' (outdoor)' : '') + '</title>';
+      svg += '</rect>';
+      svg += '<text class="tn-text place-en" x="' + (pX + 8) + '" y="' + (pCy-2) + '">' + p.en + '</text>';
+      svg += '<text class="tn-text place-zh" x="' + (pX + 8) + '" y="' + (pCy+9) + '">' + p.zh + '</text>';
+    });
+  });
+  svg += '</svg>';
+  container.innerHTML = svg;
+}
+
+/* ====== Composite behavior chain graphs render ====== */
+const COMPOSITES = [
+  { num: 1, zh: '食堂午餐', en: 'LunchAtCanteen', cost: 3, oldEnum: 'EAT_BUY', tags: [],
+    chain: [{a:'move',t:'canteen',l:'body'},{a:'interact',t:'canteen',l:'body'}] },
+  { num: 2, zh: '图书馆 DDL 冲刺', en: 'LibraryDDLSprint', cost: 5, oldEnum: 'STUDY_WORK + USE_SPACE', tags: ['concurrent'],
+    chain: [
+      {a:'move',t:'library_4F',l:'body'},
+      {par:[
+        [{a:'interact',t:'seat',l:'body'}],
+        [{a:'mutter',t:'',l:'dialog'}]
+      ]}
+    ]},
+  { num: 3, zh: '操场偶遇闲聊', en: 'TrackEncounterChat', cost: 4, oldEnum: 'SOCIAL', tags: ['multi'],
+    chain: [{a:'move',t:'track',l:'body'},{a:'find',t:'friend',l:'body'},{a:'talk',t:'friend',l:'dialog'}] },
+  { num: 4, zh: '深夜回寝睡觉', en: 'LateDormSleep', cost: 4, oldEnum: 'STAY + IDLE', tags: [],
+    chain: [{a:'move',t:'dorm',l:'body'},{a:'interact',t:'bed',l:'body'},{a:'idle',t:'',l:'body'}] },
+  { num: 5, zh: '实验室通宵+外卖', en: 'LabOvernightGrind', cost: 11, oldEnum: 'STUDY_WORK + EAT_BUY', tags: ['phone'],
+    chain: [
+      {a:'move',t:'lab',l:'body'},{a:'interact',t:'compute',l:'body'},
+      {a:'phone_call',t:'courier',l:'dialog'},
+      {a:'move',t:'gate',l:'body'},{a:'interact',t:'courier',l:'body'},
+      {a:'move',t:'lab',l:'body'},{a:'interact',t:'compute',l:'body'}
+    ]},
+  { num: 6, zh: '教师授课', en: 'TeacherLecture', cost: 5, oldEnum: 'GOVERNANCE + STUDY_WORK', tags: ['multi'],
+    chain: [{a:'move',t:'classroom',l:'body'},{a:'interact',t:'podium',l:'body'},{a:'talk',t:'students',l:'dialog'}] },
+  { num: 7, zh: '后勤巡查+应急', en: 'PatrolAndRespond', cost: '6 / 9', oldEnum: 'GOVERNANCE + EMERGENCY', tags: ['find'],
+    chain: [
+      {a:'move',t:'zoneA',l:'body'},{a:'interact',t:'check',l:'body'},
+      {br:'emergency',steps:[
+        {a:'find',t:'incident',l:'body'},{a:'move',t:'incident',l:'body'},{a:'interact',t:'incident',l:'body'}
+      ]}
+    ]},
+  { num: 8, zh: '访客问路找门', en: 'VisitorWayfinding', cost: 5, oldEnum: 'MOVE + SOCIAL', tags: ['find'],
+    chain: [{a:'find',t:'B203',l:'body'},{a:'talk',t:'staff',l:'dialog'},{a:'move',t:'B203',l:'body'}] },
+  { num: 9, zh: '湖边二人偶遇', en: 'LakesideDuoMeet', cost: '7 (4+3)', oldEnum: 'SOCIAL × 2', tags: ['multi'],
+    chain: [
+      {agent:'A',steps:[{a:'move',t:'lake',l:'body'},{a:'find',t:'B',l:'body'},{a:'talk',t:'B',l:'dialog'}]},
+      {agent:'B',steps:[{a:'move',t:'lake',l:'body'},{a:'talk',t:'A',l:'dialog'}]}
+    ]},
+  { num: 10, zh: '自习室静学', en: 'QuietSelfStudy', cost: 4, oldEnum: 'STUDY_WORK + USE_SPACE', tags: ['concurrent'],
+    chain: [
+      {a:'move',t:'study_room',l:'body'},
+      {par:[
+        [{a:'interact',t:'seat',l:'body'}],
+        [{a:'mutter',t:'',l:'dialog'}]
+      ]}
+    ]},
+  { num: 11, zh: '路上电话约见导师', en: 'WalkAndCallAdvisor', cost: 5, oldEnum: 'SOCIAL + MOVE', tags: ['phone','concurrent'],
+    chain: [
+      {par:[
+        [{a:'move',t:'office',l:'body'}],
+        [{a:'phone_call',t:'advisor',l:'dialog'}]
+      ]},
+      {a:'interact',t:'office',l:'body'}
+    ]}
+];
+
+function chainNodeHTML(step){
+  const cls = 'cn ' + (step.l === 'dialog' ? 'dialog' : '');
+  return '<div class="' + cls + '" title="' + step.a + (step.t ? '(' + step.t + ')' : '') + '">'
+    + '<div class="cn-name">' + step.a + '</div>'
+    + (step.t ? '<div class="cn-target">' + step.t + '</div>' : '<div class="cn-target">&nbsp;</div>')
+    + '</div>';
+}
+
+function renderChain(chain){
+  let h = '<div class="chain-row">';
+  let first = true;
+  chain.forEach(seg => {
+    if(seg.a){
+      if(!first) h += '<span class="cn-arrow">▶</span>';
+      h += chainNodeHTML(seg);
+      first = false;
+    } else if(seg.par){
+      if(!first) h += '<span class="cn-arrow">▶</span>';
+      h += '<span class="cn-bracket">[</span>';
+      seg.par.forEach((branch, i) => {
+        if(i>0) h += '<span class="cn-par">∥</span>';
+        let bf = true;
+        branch.forEach(s => {
+          if(!bf) h += '<span class="cn-arrow">▶</span>';
+          h += chainNodeHTML(s);
+          bf = false;
+        });
+      });
+      h += '<span class="cn-bracket">]</span>';
+      first = false;
+    } else if(seg.br){
+      if(!first) h += '<span class="cn-arrow">▶</span>';
+      h += '<span class="cn-bracket">[' + seg.br + ':</span>';
+      let bf = true;
+      seg.steps.forEach(s => {
+        if(!bf) h += '<span class="cn-arrow">▶</span>';
+        h += chainNodeHTML(s);
+        bf = false;
+      });
+      h += '<span class="cn-bracket">]</span>';
+      first = false;
+    } else if(seg.agent){
+      // multi-agent: render as separate row inline
+    }
+  });
+  h += '</div>';
+  return h;
+}
+
+function renderCompositeIndex(){
+  const container = document.getElementById('composite-index-graphs');
+  if(!container) return;
+  const lang = document.body.classList.contains('lang-en') ? 'en' : 'zh';
+  let html = '';
+  COMPOSITES.forEach(b => {
+    const tagBadges = b.tags.map(t => '<span class="badge tag">' + t + '</span>').join('');
+    html += '<div class="behavior-card" style="margin:10px 0;padding:12px 14px">';
+    html += '<div class="bc-head"><span><span class="bc-num">#' + b.num + '</span> '
+         + '<span class="bc-name-zh">' + b.zh + '</span> '
+         + '<span class="bc-name-en">/ ' + b.en + '</span></span>'
+         + '<span><span class="badge cost">cost ' + b.cost + '</span> '
+         + '<span class="badge">' + b.oldEnum + '</span> ' + tagBadges + '</span></div>';
+    html += '<div class="chain-graph">';
+    if(b.chain[0] && b.chain[0].agent){
+      // multi-agent: each agent on own line
+      b.chain.forEach(ag => {
+        html += '<div style="display:flex;align-items:center;gap:6px;margin:3px 0;flex-wrap:nowrap">';
+        html += '<span style="color:#26c6da;font-family:Consolas,monospace;font-size:11px;font-weight:700;min-width:48px">Agent ' + ag.agent + ':</span>';
+        html += renderChain(ag.steps).replace('<div class="chain-row">','<div class="chain-row" style="flex-grow:1">');
+        html += '</div>';
+      });
+    } else {
+      html += renderChain(b.chain);
+    }
+    html += '</div></div>';
+  });
+  container.innerHTML = html;
+}
+
+/* ====== GOAP planner: A* over 9-hop "Grad Overnight Paper + Delivery" ======
+   故事 / Story: 研究生在宿舍 → 联系导师 → 查文献 → 实验室写论文 → 中途叫外卖 → 取餐 → 交论文。
+   Goal: project_done && hunger==0 && holding=='meal_done'
+   一条最短路径恰好 9 跳：find→phone_call→move→interact→move→phone_call→interact→move→interact
+   预期总 cost = 14
+   该例特意设计：必经 9 个原子，搜索过程中会试探 idle / 直奔食堂 等"诱惑"动作。
+*/
+const PLANNER = (function(){
+  const goal = { project_done: true, hunger: 0, holding: 'meal_done' };
+  const actions = {
+    find_advisor: {
+      label: 'find(advisor)',
+      pre: s => !s.knows_advisor && s.energy > 0,
+      eff: s => ({ ...s, knows_advisor: true, energy: s.energy - 1 }),
+      cost: 1
+    },
+    call_advisor: {
+      label: 'phone_call(advisor)',
+      pre: s => s.knows_advisor && !s.has_idea,
+      eff: s => ({ ...s, has_idea: true }),
+      cost: 2
+    },
+    move_library: {
+      label: 'move(library)',
+      pre: s => s.location !== 'library' && s.energy > 0,
+      eff: s => ({ ...s, location: 'library', energy: s.energy - 1 }),
+      cost: 2
+    },
+    interact_library: {
+      label: 'interact(library)',
+      pre: s => s.location === 'library' && s.has_idea && !s.has_book,
+      eff: s => ({ ...s, has_book: true, holding: 'book' }),
+      cost: 1
+    },
+    move_lab: {
+      label: 'move(lab)',
+      pre: s => s.location !== 'lab' && s.energy > 0,
+      eff: s => ({ ...s, location: 'lab', energy: s.energy - 1 }),
+      cost: 2
+    },
+    call_courier: {
+      label: 'phone_call(courier)',
+      pre: s => !s.courier_otw && s.hunger >= 2 && s.money >= 1,
+      eff: s => ({ ...s, courier_otw: true }),
+      cost: 2
+    },
+    interact_compute: {
+      label: 'interact(compute)',
+      pre: s => s.location === 'lab' && s.has_book && !s.project_done,
+      eff: s => ({ ...s, project_done: true, holding: 'project_done' }),
+      cost: 1
+    },
+    move_gate: {
+      label: 'move(gate)',
+      pre: s => s.location !== 'gate' && s.courier_otw && s.energy > 0,
+      eff: s => ({ ...s, location: 'gate', energy: s.energy - 1 }),
+      cost: 2
+    },
+    interact_courier: {
+      label: 'interact(courier)',
+      pre: s => s.location === 'gate' && s.courier_otw && s.money >= 1,
+      eff: s => ({ ...s, hunger: 0, holding: 'meal_done', money: s.money - 1 }),
+      cost: 1
+    },
+    /* ---- 诱惑/旁路动作 / temptation actions (会被搜索探索但 h 不降, 体现 A* 剪枝) ---- */
+    idle: {
+      label: 'idle',
+      pre: s => s.energy < 3,
+      eff: s => ({ ...s, energy: Math.min(3, s.energy + 1) }),
+      cost: 1
+    },
+    move_canteen: {
+      label: 'move(canteen)',
+      pre: s => s.location !== 'canteen' && s.energy > 0,
+      eff: s => ({ ...s, location: 'canteen', energy: s.energy - 1 }),
+      cost: 2
+    }
+  };
+
+  // h: count of unmet goal predicates + simple precondition-distance hint for project_done
+  function h(s){
+    let n = 0;
+    for(const k in goal) if(s[k] !== goal[k]) n++;
+    // Soft hint: project_done requires has_book → has_idea → knows_advisor (3 prereqs)
+    if(!s.project_done){
+      if(!s.has_book) n += 1;
+      if(!s.has_idea) n += 1;
+      if(!s.knows_advisor) n += 1;
+    }
+    if(s.hunger > 0 && !s.courier_otw && s.location !== 'canteen') n += 1;
+    return n;
+  }
+  function key(s){
+    return s.location + '|p' + (s.project_done?1:0) + '|h' + s.hunger + '|m' + s.money + '|hold:' + s.holding
+      + '|e' + s.energy + '|kA' + (s.knows_advisor?1:0) + '|i' + (s.has_idea?1:0)
+      + '|b' + (s.has_book?1:0) + '|c' + (s.courier_otw?1:0);
+  }
+
+  function compileFrames(s0){
+    const frames = [];
+    let cnt = 0;
+    const allNodes = [];
+    const allEdges = [];
+
+    const root = { id: 'n0', s: s0, parent: null, action: null, g: 0, h: h(s0), depth: 0, status: 'open' };
+    root.f = root.g + root.h;
+    allNodes.push(root);
+    cnt = 1;
+
+    const open = [root];
+    const closed = new Map();
+
+    frames.push({
+      type: 'init',
+      log_zh: '初始化：push s₀ (f=' + root.f + ', g=0, h=' + root.h + ')',
+      log_en: 'init: push s₀ (f=' + root.f + ', g=0, h=' + root.h + ')',
+      currentId: null,
+      nodes: cloneNodes(allNodes),
+      edges: cloneEdges(allEdges)
+    });
+
+    let safety = 80;
+    while(open.length > 0 && safety-- > 0){
+      open.sort((a,b) => a.f - b.f || a.g - b.g);
+      const cur = open.shift();
+      cur.status = 'current';
+      const k = key(cur.s);
+
+      frames.push({
+        type: 'pop',
+        log_zh: 'pop ' + cur.id + ' (f=' + cur.f + ', g=' + cur.g + ', h=' + cur.h + ')',
+        log_en: 'pop ' + cur.id + ' (f=' + cur.f + ', g=' + cur.g + ', h=' + cur.h + ')',
+        currentId: cur.id,
+        nodes: cloneNodes(allNodes),
+        edges: cloneEdges(allEdges)
+      });
+
+      if(h(cur.s) === 0){
+        cur.status = 'goal';
+        // mark path
+        let p = cur;
+        while(p && p.parent){
+          const e = allEdges.find(e => e.to === p.id);
+          if(e) e.status = 'path';
+          const parent = allNodes.find(n => n.id === p.parent);
+          p = parent;
+        }
+        const plan = buildPlan(cur, allNodes);
+        frames.push({
+          type: 'goal',
+          log_zh: '🎯 GOAL！plan = [' + plan.join(' → ') + ']，总 cost = ' + cur.g,
+          log_en: '🎯 GOAL! plan = [' + plan.join(' → ') + '], cost = ' + cur.g,
+          currentId: cur.id,
+          plan: plan,
+          totalCost: cur.g,
+          nodes: cloneNodes(allNodes),
+          edges: cloneEdges(allEdges)
+        });
+        break;
+      }
+
+      if(closed.has(k) && closed.get(k) <= cur.g){
+        cur.status = 'pruned';
+        frames.push({
+          type: 'prune',
+          log_zh: '✂ 剪枝 ' + cur.id + '：状态已闭合（g 更优）',
+          log_en: '✂ prune ' + cur.id + ': state closed (better g exists)',
+          currentId: cur.id,
+          nodes: cloneNodes(allNodes),
+          edges: cloneEdges(allEdges)
+        });
+        continue;
+      }
+      closed.set(k, cur.g);
+      cur.status = 'closed';
+
+      const expanded = [];
+      for(const [name, a] of Object.entries(actions)){
+        if(!a.pre(cur.s)) continue;
+        const s2 = a.eff(cur.s);
+        const g2 = cur.g + a.cost;
+        const k2 = key(s2);
+        if(closed.has(k2) && closed.get(k2) <= g2) continue;
+        const child = {
+          id: 'n' + cnt, s: s2, parent: cur.id, action: a.label,
+          g: g2, h: h(s2), f: g2 + h(s2),
+          depth: cur.depth + 1, status: 'open'
+        };
+        cnt++;
+        allNodes.push(child);
+        allEdges.push({ from: cur.id, to: child.id, action: a.label, status: 'normal' });
+        open.push(child);
+        expanded.push(a.label);
+      }
+      frames.push({
+        type: 'expand',
+        log_zh: 'expand ' + cur.id + '：展开 ' + expanded.length + ' 个子 [' + expanded.join(', ') + ']',
+        log_en: 'expand ' + cur.id + ': pushed ' + expanded.length + ' [' + expanded.join(', ') + ']',
+        currentId: cur.id,
+        nodes: cloneNodes(allNodes),
+        edges: cloneEdges(allEdges)
+      });
+    }
+    return frames;
+  }
+
+  function cloneNodes(ns){ return ns.map(n => ({ id:n.id, s:{...n.s}, parent:n.parent, action:n.action, g:n.g, h:n.h, f:n.f, depth:n.depth, status:n.status })); }
+  function cloneEdges(es){ return es.map(e => ({...e})); }
+
+  function buildPlan(node, allNodes){
+    const plan = [];
+    let p = node;
+    while(p && p.parent){
+      plan.unshift(p.action);
+      p = allNodes.find(n => n.id === p.parent);
+    }
+    return plan;
+  }
+
+  return { compileFrames, goal };
+})();
+
+/* ====== Planner UI binding ====== */
+(function(){
+  const initState = {
+    location: 'dorm',
+    knows_advisor: false,
+    has_idea: false,
+    has_book: false,
+    project_done: false,
+    courier_otw: false,
+    hunger: 3,
+    money: 2,
+    energy: 3,
+    holding: 'none'
+  };
+  const goalEl = document.getElementById('planner-goal');
+  const initEl = document.getElementById('planner-init');
+  const curEl = document.getElementById('planner-current');
+  const frameInfoEl = document.getElementById('planner-frame-info');
+  const logEl = document.getElementById('planner-log');
+  const svgEl = document.getElementById('planner-svg');
+  const btnReset = document.getElementById('pl-reset');
+  const btnStep = document.getElementById('pl-step');
+  const btnAuto = document.getElementById('pl-auto');
+  const btnEnd = document.getElementById('pl-end');
+
+  if(!goalEl) return;
+
+  let frames = PLANNER.compileFrames(initState);
+  let frameIdx = 0;
+  let autoTimer = null;
+
+  function fmtState(s, marks){
+    marks = marks || {};
+    const lang = document.body.classList.contains('lang-en') ? 'en' : 'zh';
+    const labels = lang === 'en' ?
+      { location:'loc', hunger:'hunger', money:'money', holding:'hold', energy:'energy',
+        knows_advisor:'knows_adv', has_idea:'has_idea', has_book:'has_book',
+        project_done:'project_done', courier_otw:'courier_otw' } :
+      { location:'位置', hunger:'饿', money:'钱', holding:'手持', energy:'精力',
+        knows_advisor:'知导师位置', has_idea:'有论文方向', has_book:'有文献',
+        project_done:'论文完成', courier_otw:'外卖在路上' };
+    return Object.entries(s).map(([k,v]) => {
+      const isGoal = (PLANNER.goal[k] !== undefined);
+      const cls = isGoal ? (PLANNER.goal[k] === v ? 'v met' : 'v unmet') : 'v';
+      const dispV = (typeof v === 'boolean') ? (v ? '✓' : '✗') : v;
+      return '<div><span class="k">' + labels[k] + ':</span><span class="' + cls + '">' + dispV + '</span></div>';
+    }).join('');
+  }
+
+  function renderGoalAndInit(){
+    goalEl.innerHTML = Object.entries(PLANNER.goal).map(([k,v])=>'<div><span class="k">'+k+':</span><span class="v">'+v+'</span></div>').join('');
+    initEl.innerHTML = fmtState(initState);
+  }
+
+  function layout(nodes){
+    const byDepth = {};
+    nodes.forEach(n => { (byDepth[n.depth] = byDepth[n.depth] || []).push(n); });
+    const xStep = 180, yStep = 92, xOff = 50, yOff = 40;
+    const NW = 152, NH = 82;
+    const positions = {};
+    Object.keys(byDepth).forEach(d => {
+      const list = byDepth[d];
+      list.forEach((n, i) => {
+        positions[n.id] = { x: xOff + (+d) * xStep, y: yOff + i * yStep, w: NW, h: NH };
+      });
+    });
+    return positions;
+  }
+
+  let prevNodeIds = new Set();
+  let prevEdgeKeys = new Set();
+
+  function renderFrame(){
+    const f = frames[frameIdx];
+    const lang = document.body.classList.contains('lang-en') ? 'en' : 'zh';
+    const positions = layout(f.nodes);
+
+    // Compute SVG dimensions
+    let maxX = 0, maxY = 0;
+    Object.values(positions).forEach(p => { if(p.x+p.w > maxX) maxX = p.x+p.w; if(p.y+p.h > maxY) maxY = p.y+p.h; });
+    const W = Math.max(980, maxX + 30);
+    const H = Math.max(380, maxY + 30);
+    svgEl.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+
+    // Determine which nodes/edges are NEW for animation
+    const newNodeIds = new Set();
+    f.nodes.forEach(n => { if(!prevNodeIds.has(n.id)) newNodeIds.add(n.id); });
+    const newEdgeKeys = new Set();
+    f.edges.forEach(e => {
+      const k = e.from + '->' + e.to;
+      if(!prevEdgeKeys.has(k)) newEdgeKeys.add(k);
+    });
+
+    let svg = '<defs>'
+      + '<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#42a5f5"/></marker>'
+      + '<marker id="arrow-path" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#ffd54f"/></marker>'
+      + '<linearGradient id="edgeGradGold" x1="0%" y1="0%" x2="100%" y2="0%">'
+      + '<stop offset="0%" stop-color="#ffb300"/><stop offset="100%" stop-color="#fff59d"/></linearGradient>'
+      + '</defs>';
+
+    // edges
+    f.edges.forEach(e => {
+      const p1 = positions[e.from], p2 = positions[e.to];
+      if(!p1 || !p2) return;
+      const x1 = p1.x + p1.w, y1 = p1.y + p1.h/2;
+      const x2 = p2.x, y2 = p2.y + p2.h/2;
+      const cx = (x1 + x2) / 2;
+      const isPath = e.status === 'path';
+      const k = e.from + '->' + e.to;
+      const isNew = newEdgeKeys.has(k);
+      const cls = 'sedge' + (isPath ? ' path' : '') + (isNew && !isPath ? ' drawing' : '');
+      const marker = isPath ? 'url(#arrow-path)' : 'url(#arrow)';
+      svg += '<path class="' + cls + '" d="M ' + x1 + ' ' + y1 + ' C ' + cx + ' ' + y1 + ', ' + cx + ' ' + y2 + ', ' + (x2-3) + ' ' + y2 + '" marker-end="' + marker + '"/>';
+      const lblY = (y1 + y2) / 2 - 6;
+      const labelCls = 'sedge-label' + (isPath ? ' path' : '');
+      svg += '<text class="' + labelCls + '" x="' + cx + '" y="' + lblY + '">' + e.action + '</text>';
+    });
+
+    // nodes
+    f.nodes.forEach(n => {
+      const p = positions[n.id];
+      if(!p) return;
+      const status = n.status;
+      const isNew = newNodeIds.has(n.id);
+      // Compact flags string e.g. "K I B P C" highlighting which preconditions/state bits are set
+      const flags = (n.s.knows_advisor?'K':'·') + (n.s.has_idea?'I':'·') + (n.s.has_book?'B':'·')
+                  + (n.s.project_done?'P':'·') + (n.s.courier_otw?'C':'·');
+      const cls = 'snode ' + status + (isNew ? ' appearing' : '');
+      svg += '<g class="' + cls + '" transform="translate(' + p.x + ' ' + p.y + ')">';
+      svg += '<rect class="rect" width="' + p.w + '" height="' + p.h + '" rx="8"/>';
+      svg += '<text class="title" x="8" y="13">' + n.id + ' · ' + (status.toUpperCase()) + '</text>';
+      svg += '<text class="body-text" x="8" y="28">loc=' + n.s.location + '</text>';
+      svg += '<text class="body-text" x="8" y="42">h=' + n.s.hunger + '  $=' + n.s.money + '  hold=' + n.s.holding + '</text>';
+      svg += '<text class="body-text" x="8" y="55" style="fill:#90caf9">flags: ' + flags + '</text>';
+      svg += '<text class="fgh" x="8" y="72">f=' + n.f + '  g=' + n.g + '  h=' + n.h + '</text>';
+      // Goal frame: emit expanding ring on the goal node
+      if(status === 'goal' && f.type === 'goal'){
+        svg += '<circle class="goal-pulse-ring" cx="' + (p.w/2) + '" cy="' + (p.h/2) + '" r="' + (Math.max(p.w,p.h)/2 + 4) + '"/>';
+      }
+      svg += '</g>';
+    });
+
+    svgEl.innerHTML = svg;
+    prevNodeIds = new Set(f.nodes.map(n => n.id));
+    prevEdgeKeys = new Set(f.edges.map(e => e.from + '->' + e.to));
+
+    // Side panel
+    const cur = f.currentId ? f.nodes.find(n => n.id === f.currentId) : null;
+    if(cur){
+      curEl.innerHTML = fmtState(cur.s) + '<div style="margin-top:6px;color:#ffa726">f=' + cur.f + '  g=' + cur.g + '  h=' + cur.h + '</div>';
+    } else {
+      curEl.innerHTML = '<span style="color:#78909c">' + (lang==='en'?'(no current)':'（暂无 current）') + '</span>';
+    }
+    frameInfoEl.innerHTML = (lang==='en'?'frame ':'帧 ') + '<b>' + (frameIdx+1) + ' / ' + frames.length + '</b>　type=<b>' + f.type + '</b>'
+      + (f.type === 'goal' ? '　<span style="color:#66bb6a">cost=' + f.totalCost + '</span>' : '');
+
+    // Update log: show last 12 lines
+    const upto = frames.slice(0, frameIdx + 1);
+    let logHtml = '';
+    upto.forEach((fr, i) => {
+      const cls = 'll ' + fr.type;
+      const txt = lang === 'en' ? fr.log_en : fr.log_zh;
+      logHtml += '<div class="' + cls + '">' + (i+1).toString().padStart(2,'0') + '. ' + txt + '</div>';
+    });
+    logEl.innerHTML = logHtml;
+    logEl.scrollTop = logEl.scrollHeight;
+
+    // Buttons
+    btnStep.disabled = (frameIdx >= frames.length - 1);
+    btnEnd.disabled = (frameIdx >= frames.length - 1);
+    btnAuto.disabled = (frameIdx >= frames.length - 1);
+  }
+
+  function step(){
+    if(frameIdx < frames.length - 1){ frameIdx++; renderFrame(); }
+    else stopAuto();
+  }
+  function reset(){
+    stopAuto();
+    frames = PLANNER.compileFrames(initState);
+    frameIdx = 0;
+    prevNodeIds = new Set();
+    prevEdgeKeys = new Set();
+    renderFrame();
+  }
+  function endAll(){
+    stopAuto();
+    // Skip-to-end: don't trigger animations on every node, mark all as already-known
+    prevNodeIds = new Set(frames[frames.length - 1].nodes.map(n => n.id));
+    prevEdgeKeys = new Set(frames[frames.length - 1].edges.map(e => e.from + '->' + e.to));
+    frameIdx = frames.length - 1;
+    renderFrame();
+  }
+  function startAuto(){
+    if(autoTimer) return;
+    autoTimer = setInterval(() => {
+      if(frameIdx < frames.length - 1){ frameIdx++; renderFrame(); }
+      else stopAuto();
+    }, 800);
+    btnAuto.textContent = (document.body.classList.contains('lang-en') ? '⏸ Pause' : '⏸ 暂停');
+  }
+  function stopAuto(){
+    if(autoTimer){ clearInterval(autoTimer); autoTimer = null; }
+    btnAuto.textContent = (document.body.classList.contains('lang-en') ? 'Auto ▶' : '自动 ▶');
+  }
+  btnStep.addEventListener('click', step);
+  btnReset.addEventListener('click', reset);
+  btnEnd.addEventListener('click', endAll);
+  btnAuto.addEventListener('click', () => { if(autoTimer) stopAuto(); else startAuto(); });
+
+  renderGoalAndInit();
+  renderFrame();
+
+  // Re-render on lang change
+  window.addEventListener('plang-changed', () => {
+    renderGoalAndInit();
+    renderFrame();
+    renderCompositeIndex();
+  });
+})();
+
+/* ====== ATOM CARDS WITH PRECOND/EFFECT NODES (canvas tab 2) ====== */
+const ATOM_DEFS = [
+  { name:'move', zh:'移动', layer:'body', icon:'🚶', cost:'2..6',
+    pre_zh:['知目标位置','target_in_range=false','target.is_open','energy>0','in_dialog=null'],
+    pre_en:['knows_target_loc','target_in_range=F','target.is_open','energy>0','in_dialog=null'],
+    eff_zh:['location:=target','target_in_range:=true','energy−=1','last_action:=move'],
+    eff_en:['location:=target','target_in_range:=T','energy−=1','last_action:=move'] },
+  { name:'interact', zh:'交互', layer:'body', icon:'🤝', cost:'1..4',
+    pre_zh:['target_in_range=true','target.is_open','occupancy<3','holding 兼容'],
+    pre_en:['target_in_range=T','target.is_open','occupancy<3','holding compatible'],
+    eff_zh:['affordance 决定','if has_food: hunger:=0','if has_compute: focus+=1','occupancy+=1'],
+    eff_en:['affordance-driven','if has_food: hunger:=0','if has_compute: focus+=1','occupancy+=1'] },
+  { name:'find', zh:'寻找', layer:'body', icon:'🔍', cost:'1..3',
+    pre_zh:['knows_target_loc=false','energy>0','in_dialog=null'],
+    pre_en:['knows_target_loc=F','energy>0','in_dialog=null'],
+    eff_zh:['knows_target_loc:=true','energy−=1','可能 social_need−=1'],
+    eff_en:['knows_target_loc:=T','energy−=1','maybe social_need−=1'] },
+  { name:'idle', zh:'闲置', layer:'body', icon:'💤', cost:'1..3',
+    pre_zh:['(无硬约束)'],
+    pre_en:['(no hard precond)'],
+    eff_zh:['energy+=1','social_need+=1','focus−=1','if mood=tired: calm'],
+    eff_en:['energy+=1','social_need+=1','focus−=1','if mood=tired: calm'] },
+  { name:'talk', zh:'对话', layer:'dialog', icon:'💬', cost:'1..5',
+    pre_zh:['interlocutor_available','distance<=social_radius','target.in_dialog=null','agent.in_dialog=null'],
+    pre_en:['interlocutor_available','distance<=social_r','target.in_dialog=null','agent.in_dialog=null'],
+    eff_zh:['agent.in_dialog:=tgt','target.in_dialog:=agent','social_need−=1','focus−=1'],
+    eff_en:['in_dialog:=target','target.in_dialog:=self','social_need−=1','focus−=1'] },
+  { name:'mutter', zh:'自语', layer:'dialog', icon:'🗯️', cost:'1',
+    pre_zh:['in_dialog=null'],
+    pre_en:['in_dialog=null'],
+    eff_zh:['if anxious: calm','focus±1','last_action:=mutter'],
+    eff_en:['if anxious: calm','focus±1','last_action:=mutter'] },
+  { name:'phone_call', zh:'电话', layer:'dialog', icon:'📞', cost:'2..4', isNew:true,
+    pre_zh:['in_dialog=null','target 是 Agent','无距离要求 ★','holding 容许'],
+    pre_en:['in_dialog=null','target is Agent','NO distance limit ★','holding allows'],
+    eff_zh:['p≈0.6 接通: in_dialog↔','social_need−=1','失败: mood→down, retry+=1'],
+    eff_en:['p≈0.6 connect: in_dialog↔','social_need−=1','fail: mood→down, retry+=1'] }
+];
+
+function renderAtomCards(){
+  const mount = document.getElementById('canvas-atom-cards-mount');
+  if(!mount) return;
+  const lang = document.body.classList.contains('lang-en') ? 'en' : 'zh';
+
+  const colW = 580, rowH = 220;
+  const bodyAtoms = ATOM_DEFS.filter(a=>a.layer==='body');
+  const dialogAtoms = ATOM_DEFS.filter(a=>a.layer==='dialog');
+  const cols = 2;
+  const cardW = 330, cardH = 200;
+  const W = 1200;
+  const H = 70 + Math.ceil(bodyAtoms.length/cols)*rowH + 70 + Math.ceil(dialogAtoms.length/cols)*rowH + 30;
+
+  let svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg">';
+
+  function renderCard(a, x, y){
+    const cx = x + cardW/2;
+    const mainW = 130, mainH = 78;
+    const mainX = cx - mainW/2, mainY = y + 60;
+
+    // Channel divider line on the card top
+    let s = '';
+    // Title row of card not needed (each atom self-contained)
+
+    // Main action node
+    s += '<rect class="acard-bg ' + a.layer + '" x="' + mainX + '" y="' + mainY + '" width="' + mainW + '" height="' + mainH + '" rx="14" ry="14"/>';
+    s += '<text class="acard-icon-text" x="' + cx + '" y="' + (mainY+22) + '">' + a.icon + '</text>';
+    s += '<text class="acard-name-en" x="' + cx + '" y="' + (mainY+44) + '">' + a.name + '</text>';
+    s += '<text class="acard-name-zh" x="' + cx + '" y="' + (mainY+57) + '">' + a.zh + '</text>';
+    s += '<text class="acard-cost" x="' + cx + '" y="' + (mainY+71) + '">cost ' + a.cost + '</text>';
+
+    if(a.isNew){
+      s += '<rect class="acard-new-tag" x="' + (mainX + mainW - 28) + '" y="' + (mainY - 8) + '" width="28" height="14"/>';
+      s += '<text class="acard-new-tag-text" x="' + (mainX + mainW - 14) + '" y="' + (mainY - 1) + '">NEW</text>';
+    }
+
+    // PRE label
+    s += '<text class="acard-section-label" x="' + (x + 8) + '" y="' + (y + 22) + '">PRE</text>';
+    // EFF label
+    s += '<text class="acard-section-label" x="' + (x + cardW - 35) + '" y="' + (y + 22) + '">EFF</text>';
+
+    // Precondition chips on left
+    const pres = (lang === 'en' ? a.pre_en : a.pre_zh);
+    const chipH = 16, chipGap = 4;
+    const chipMaxW = 110;
+    pres.forEach((txt, i) => {
+      const cy = y + 38 + i * (chipH + chipGap);
+      const chipW = Math.min(chipMaxW, txt.length * 6 + 12);
+      const chipX = x + 4;
+      s += '<rect class="acard-tag-pre" x="' + chipX + '" y="' + cy + '" width="' + chipW + '" height="' + chipH + '" rx="5" ry="5"/>';
+      s += '<text class="acard-tag-text pre" x="' + (chipX + 6) + '" y="' + (cy + chipH/2) + '">' + escapeXml(txt) + '</text>';
+      // Edge from chip to main node
+      const fromX = chipX + chipW;
+      const fromY = cy + chipH/2;
+      const toX = mainX;
+      const toY = mainY + mainH/2;
+      const cx1 = (fromX + toX) / 2;
+      s += '<path class="acard-edge pre" d="M ' + fromX + ' ' + fromY + ' C ' + cx1 + ' ' + fromY + ', ' + cx1 + ' ' + toY + ', ' + (toX-1) + ' ' + toY + '"/>';
+    });
+
+    // Effect chips on right
+    const effs = (lang === 'en' ? a.eff_en : a.eff_zh);
+    effs.forEach((txt, i) => {
+      const cy = y + 38 + i * (chipH + chipGap);
+      const chipW = Math.min(chipMaxW, txt.length * 6 + 12);
+      const chipX = x + cardW - chipW - 4;
+      s += '<rect class="acard-tag-eff" x="' + chipX + '" y="' + cy + '" width="' + chipW + '" height="' + chipH + '" rx="5" ry="5"/>';
+      s += '<text class="acard-tag-text eff" x="' + (chipX + 6) + '" y="' + (cy + chipH/2) + '">' + escapeXml(txt) + '</text>';
+      // Edge from main node to chip
+      const fromX = mainX + mainW;
+      const fromY = mainY + mainH/2;
+      const toX = chipX;
+      const toY = cy + chipH/2;
+      const cx1 = (fromX + toX) / 2;
+      s += '<path class="acard-edge eff" d="M ' + fromX + ' ' + fromY + ' C ' + cx1 + ' ' + fromY + ', ' + cx1 + ' ' + toY + ', ' + (toX+1) + ' ' + toY + '"/>';
+    });
+
+    return s;
+  }
+
+  // BODY channel section
+  svg += '<text class="acard-channel-title" x="20" y="32">BODY · ' + (lang==='en'?'body channel':'身体通道') + '</text>';
+  bodyAtoms.forEach((a, i) => {
+    const col = i % cols, row = Math.floor(i / cols);
+    const x = 30 + col * (cardW + 30);
+    const y = 50 + row * rowH;
+    svg += renderCard(a, x, y);
+  });
+
+  // Divider
+  const bodyEndY = 50 + Math.ceil(bodyAtoms.length/cols) * rowH + 10;
+  svg += '<line class="acard-channel-divider" x1="20" y1="' + bodyEndY + '" x2="' + (W - 20) + '" y2="' + bodyEndY + '"/>';
+
+  // DIALOG channel section
+  svg += '<text class="acard-channel-title dialog" x="20" y="' + (bodyEndY + 32) + '">DIALOG · ' + (lang==='en'?'dialog channel':'对话通道') + '</text>';
+  dialogAtoms.forEach((a, i) => {
+    const col = i % cols, row = Math.floor(i / cols);
+    const x = 30 + col * (cardW + 30);
+    const y = bodyEndY + 50 + row * rowH;
+    svg += renderCard(a, x, y);
+  });
+
+  svg += '</svg>';
+  mount.innerHTML = svg;
+}
+
+function escapeXml(s){
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&apos;');
+}
+
+/* ====== COMPOSE LAB (canvas tab 3) ====== */
+const COMPOSE_ATOMS = [
+  { id:'find_advisor', label:'find(advisor)', layer:'body',
+    pre:['!knows_advisor','energy>0'],
+    eff:['knows_advisor:=T','energy−=1'] },
+  { id:'call_advisor', label:'phone_call(advisor)', layer:'dialog',
+    pre:['knows_advisor','!has_idea','in_dialog=null'],
+    eff:['has_idea:=T','social_need−=1'] },
+  { id:'move_library', label:'move(library)', layer:'body',
+    pre:['location≠library','energy>0'],
+    eff:['location:=library','energy−=1'] },
+  { id:'interact_library', label:'interact(library)', layer:'body',
+    pre:['location=library','has_idea','!has_book'],
+    eff:['has_book:=T','holding:=book'] },
+  { id:'move_lab', label:'move(lab)', layer:'body',
+    pre:['location≠lab','energy>0'],
+    eff:['location:=lab','energy−=1'] },
+  { id:'call_courier', label:'phone_call(courier)', layer:'dialog',
+    pre:['hunger>=2','money>=1','!courier_otw'],
+    eff:['courier_otw:=T'] },
+  { id:'interact_compute', label:'interact(compute)', layer:'body',
+    pre:['location=lab','has_book','!project_done'],
+    eff:['project_done:=T','holding:=project_done'] },
+  { id:'move_gate', label:'move(gate)', layer:'body',
+    pre:['location≠gate','courier_otw','energy>0'],
+    eff:['location:=gate','energy−=1'] },
+  { id:'interact_courier', label:'interact(courier)', layer:'body',
+    pre:['location=gate','courier_otw','money>=1'],
+    eff:['hunger:=0','holding:=meal_done','money−=1'] },
+  { id:'idle', label:'idle', layer:'body',
+    pre:['energy<3'],
+    eff:['energy+=1','social_need+=1','focus−=1'] },
+  { id:'mutter', label:'mutter', layer:'dialog',
+    pre:['in_dialog=null'],
+    eff:['if anxious: calm','focus±1'] }
+];
+
+const COMPOSE_INITIAL = {
+  location:'dorm', knows_advisor:false, has_idea:false, has_book:false,
+  project_done:false, courier_otw:false, hunger:3, money:2, energy:3,
+  holding:'none', social_need:1, focus:2
+};
+
+const COMPOSE_GOAL = ['project_done=T', 'hunger=0', 'holding=meal_done'];
+
+let composeState = { steps: [] };  // each step: { atomId, x, y }
+let composeNodeCounter = 0;
+
+function matchVar(s){
+  if(!s) return null;
+  let str = String(s);
+  if(str.startsWith('!')) str = str.slice(1);
+  const m = str.match(/^([a-zA-Z_]\w*)/);
+  return m ? m[1] : null;
+}
+
+function evalCompose(){
+  const trace = [];
+  const edges = [];
+  let s = JSON.parse(JSON.stringify(COMPOSE_INITIAL));
+  let allMet = true;
+  composeState.steps.forEach((step, idx) => {
+    const a = COMPOSE_ATOMS.find(x => x.id === step.atomId);
+    if(!a){ trace.push({err:true}); return; }
+
+    const preStatus = a.pre.map((p, pIdx) => {
+      const met = checkPredicate(p, s);
+      // Find source: most recent prior step whose effects modify the variable mentioned in `p`
+      const varName = matchVar(p);
+      let srcStepIdx = -1, srcEffIdx = -1;
+      if(varName){
+        for(let j = idx - 1; j >= 0; j--){
+          const aj = COMPOSE_ATOMS.find(x => x.id === composeState.steps[j].atomId);
+          if(!aj) continue;
+          let found = false;
+          for(let k = aj.eff.length - 1; k >= 0; k--){
+            if(matchVar(aj.eff[k]) === varName){
+              srcStepIdx = j; srcEffIdx = k; found = true; break;
+            }
+          }
+          if(found) break;
+        }
+      }
+      // Edges:
+      //   met + has source -> green met edge
+      //   met + no source (initial state) -> no edge (implicit input from INIT zone)
+      //   unmet -> no edge (PRE pin shows red ring)
+      if(met && srcStepIdx >= 0){
+        edges.push({ targetIdx: idx, targetPin: pIdx, sourceIdx: srcStepIdx, sourcePin: srcEffIdx, met: true });
+      }
+      return { txt: p, met, srcStepIdx };
+    });
+
+    const stepValid = preStatus.every(x => x.met);
+    if(!stepValid) allMet = false;
+    a.eff.forEach(e => applyEffect(e, s));
+    trace.push({ atom: a, preStatus, stepValid, stateAfter: { ...s } });
+  });
+  const goalStatus = COMPOSE_GOAL.map(g => ({ txt: g, met: checkPredicate(g, s) }));
+  const goalAllMet = goalStatus.every(x => x.met);
+  return { trace, edges, finalState: s, goalStatus, goalAllMet, allStepsValid: allMet };
+}
+
+function checkPredicate(p, s){
+  // Parse simple predicates like "knows_advisor", "!has_book", "hunger>=2", "location=library", "money>=1", "in_dialog=null", "energy<3", "location≠library"
+  let neg = false;
+  if(p.startsWith('!')){ neg = true; p = p.slice(1); }
+  let m;
+  if((m = p.match(/^(\w+)>=(\d+)$/))){ return (s[m[1]] >= +m[2]) !== neg; }
+  if((m = p.match(/^(\w+)<(\d+)$/))){ return (s[m[1]] < +m[2]) !== neg; }
+  if((m = p.match(/^(\w+)=null$/))){ return (s[m[1]] === null || s[m[1]] === undefined) !== neg; }
+  if((m = p.match(/^(\w+)=(\w+)$/))){
+    const k = m[1], v = m[2];
+    if(v === 'T') return (s[k] === true) !== neg;
+    if(v === 'F') return (s[k] === false) !== neg;
+    return (String(s[k]) === v) !== neg;
+  }
+  if((m = p.match(/^(\w+)≠(\w+)$/))){
+    const k = m[1], v = m[2];
+    return (String(s[k]) !== v) !== neg;
+  }
+  // Bool var alone
+  if((m = p.match(/^(\w+)$/))){ return Boolean(s[m[1]]) !== neg; }
+  // Free-text predicates we can't parse: treat as ignored (assume met) and label
+  return true;
+}
+
+function applyEffect(e, s){
+  let m;
+  if((m = e.match(/^(\w+):=T$/))){ s[m[1]] = true; return; }
+  if((m = e.match(/^(\w+):=F$/))){ s[m[1]] = false; return; }
+  if((m = e.match(/^(\w+):=0$/))){ s[m[1]] = 0; return; }
+  if((m = e.match(/^(\w+):=(\w+)$/))){ s[m[1]] = m[2]; return; }
+  if((m = e.match(/^(\w+)\+=(\d+)$/))){ s[m[1]] = (+s[m[1]] || 0) + +m[2]; return; }
+  if((m = e.match(/^(\w+)−=(\d+)$/))){ s[m[1]] = (+s[m[1]] || 0) - +m[2]; return; }
+  if((m = e.match(/^(\w+)-=(\d+)$/))){ s[m[1]] = (+s[m[1]] || 0) - +m[2]; return; }
+  // Conditional / non-parseable: ignore (real engine handles)
+}
+
+/* Blueprint geometry constants */
+const BP_NODE_W = 230;
+const BP_HDR_H = 26;
+const BP_PIN_R = 5;
+const BP_PIN_GAP = 16;
+const BP_PIN_TOP = 38;
+const BP_NS = 'http://www.w3.org/2000/svg';
+
+function bpNodeHeight(atomId){
+  const a = COMPOSE_ATOMS.find(x => x.id === atomId);
+  if(!a) return 60;
+  const rows = Math.max(a.pre.length, a.eff.length);
+  return BP_PIN_TOP + rows * BP_PIN_GAP + 14;
+}
+
+function autoLayoutCompose(){
+  composeState.steps.forEach((step, i) => {
+    step.x = 100 + i * (BP_NODE_W + 50);
+    step.y = 80 + (i % 3) * 28;
+  });
+}
+
+function renderCompose(){
+  const mount = document.getElementById('canvas-compose-mount');
+  if(!mount) return;
+  const lang = document.body.classList.contains('lang-en') ? 'en' : 'zh';
+
+  // Auto layout newly added nodes
+  composeState.steps.forEach((step, i) => {
+    if(step.x == null || step.y == null){
+      const last = i > 0 ? composeState.steps[i-1] : null;
+      step.x = last ? last.x + BP_NODE_W + 50 : 100;
+      step.y = last ? Math.max(80, last.y + (i % 2 === 0 ? -22 : 28)) : 80;
+    }
+  });
+
+  const result = evalCompose();
+
+  let html = '<div class="compose-toolbar">';
+  html += '<div class="compose-goal">' + (lang==='en'?'GOAL':'目标') + ': <b>' + COMPOSE_GOAL.join(' ∧ ') + '</b></div>';
+  html += '<button id="compose-undo">↶ ' + (lang==='en'?'Undo':'撤销') + '</button>';
+  html += '<button id="compose-clear">' + (lang==='en'?'Clear':'清空') + '</button>';
+  html += '<button id="compose-relayout">' + (lang==='en'?'⇆ Auto-layout':'⇆ 自动布局') + '</button>';
+  html += '<button id="compose-fillbest" class="primary">⚡ ' + (lang==='en'?'Show Optimal Plan':'显示最优 plan') + '</button>';
+  html += '</div>';
+
+  html += '<div class="compose-palette">';
+  html += '<span class="pal-label">' + (lang==='en'?'ATOMS':'原子') + ':</span>';
+  COMPOSE_ATOMS.forEach(a => {
+    html += '<div class="pal-atom ' + a.layer + '" data-atom="' + a.id + '" title="' + (lang==='en'?'click to add to canvas':'点击添加到画布') + '">' + a.label + '</div>';
+  });
+  html += '</div>';
+
+  html += '<div class="bp-canvas-wrap" id="bp-wrap">';
+  html += renderBPSvg(result, lang);
+  html += '</div>';
+
+  // Status bar
+  html += '<div class="compose-status">';
+  html += '<div class="stat ' + (result.goalAllMet && result.allStepsValid ? 'ok' : 'bad') + '">'
+       + (lang==='en'?'Goal':'目标') + ' <b>' + ((result.goalAllMet && result.allStepsValid) ? (lang==='en'?'REACHED ✓':'已达成 ✓') : (lang==='en'?'NOT REACHED':'未达成')) + '</b></div>';
+  html += '<div class="stat ' + (result.allStepsValid ? 'ok' : 'bad') + '">' + (lang==='en'?'Plan validity':'plan 有效')
+       + ' <b>' + (result.allStepsValid ? '✓' : '✗ ' + (composeState.steps.length === 0 ? '' : (lang==='en'?'(missing preconds, see red pins)':'(有 precond 未满足, 见红圈)'))) + '</b></div>';
+  html += '<div class="stat">' + (lang==='en'?'Steps':'步数') + ' <b>' + composeState.steps.length + '</b></div>';
+  html += '<div class="stat">' + (lang==='en'?'Edges':'连线') + ' <b>' + result.edges.filter(e => e.met).length + '</b></div>';
+  html += '</div>';
+
+  html += '<div class="coverage-grid"><div class="cov-row"><span class="cov-label">'
+       + (lang==='en'?'Goal coverage':'目标覆盖') + ':</span>';
+  result.goalStatus.forEach(g => {
+    html += '<span class="cov-chip ' + (g.met ? 'met' : 'unmet') + '">' + (g.met?'✓':'✗') + ' ' + g.txt + '</span>';
+  });
+  html += '</div></div>';
+
+  mount.innerHTML = html;
+  bindComposeEvents();
+}
+
+function renderBPSvg(result, lang){
+  let maxX = 700, maxY = 320;
+  composeState.steps.forEach(step => {
+    const h = bpNodeHeight(step.atomId);
+    if(step.x + BP_NODE_W > maxX) maxX = step.x + BP_NODE_W;
+    if(step.y + h > maxY) maxY = step.y + h;
+  });
+  const W = maxX + 100;
+  const H = maxY + 60;
+
+  const isPath = result.allStepsValid && result.goalAllMet && composeState.steps.length > 0;
+
+  let svg = '<svg id="bp-svg" class="bp-svg" viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg">';
+  svg += '<defs>'
+    + '<linearGradient id="hdrGradBody" x1="0%" y1="0%" x2="100%" y2="0%">'
+    + '<stop offset="0%" stop-color="#1565c0"/><stop offset="100%" stop-color="#42a5f5"/></linearGradient>'
+    + '<linearGradient id="hdrGradDialog" x1="0%" y1="0%" x2="100%" y2="0%">'
+    + '<stop offset="0%" stop-color="#7b1fa2"/><stop offset="100%" stop-color="#ce93d8"/></linearGradient>'
+    + '<linearGradient id="edgeGradMet" x1="0%" y1="0%" x2="100%" y2="0%">'
+    + '<stop offset="0%" stop-color="#66bb6a"/><stop offset="100%" stop-color="#26c6da"/></linearGradient>'
+    + '<linearGradient id="edgeGradGold" x1="0%" y1="0%" x2="100%" y2="0%">'
+    + '<stop offset="0%" stop-color="#ffb300"/><stop offset="100%" stop-color="#fff59d"/></linearGradient>'
+    + '</defs>';
+
+  // INIT zone (left vertical strip)
+  const stripY = 56, stripH = Math.max(140, H - 100);
+  svg += '<g class="bp-init-zone">';
+  svg += '<rect class="bp-init-tag" x="20" y="' + stripY + '" width="46" height="' + stripH + '" rx="6"/>';
+  svg += '<text class="bp-init-tag-text" x="43" y="' + (stripY + 16) + '" text-anchor="middle" style="font-weight:700">INIT</text>';
+  svg += '<text class="bp-init-tag-text" x="43" y="' + (stripY + 30) + '" text-anchor="middle">STATE</text>';
+  svg += '<text class="bp-init-tag-text" x="43" y="' + (stripY + 50) + '" text-anchor="middle" style="fill:#78909c;font-size:9px">dorm</text>';
+  svg += '<text class="bp-init-tag-text" x="43" y="' + (stripY + 64) + '" text-anchor="middle" style="fill:#78909c;font-size:9px">h=3 $=2</text>';
+  svg += '<text class="bp-init-tag-text" x="43" y="' + (stripY + 78) + '" text-anchor="middle" style="fill:#78909c;font-size:9px">e=3</text>';
+  svg += '</g>';
+
+  // GOAL zone (right vertical strip)
+  svg += '<g class="bp-goal-zone">';
+  svg += '<rect class="bp-goal-tag" x="' + (W - 70) + '" y="' + stripY + '" width="46" height="' + stripH + '" rx="6"/>';
+  svg += '<text class="bp-goal-tag-text" x="' + (W - 47) + '" y="' + (stripY + 16) + '" text-anchor="middle">' + (lang==='en'?'GOAL':'目标') + '</text>';
+  svg += '<text class="bp-goal-tag-text" x="' + (W - 47) + '" y="' + (stripY + 32) + '" text-anchor="middle" style="font-size:9px;font-weight:400">project</text>';
+  svg += '<text class="bp-goal-tag-text" x="' + (W - 47) + '" y="' + (stripY + 44) + '" text-anchor="middle" style="font-size:9px;font-weight:400">_done</text>';
+  svg += '<text class="bp-goal-tag-text" x="' + (W - 47) + '" y="' + (stripY + 60) + '" text-anchor="middle" style="font-size:9px;font-weight:400">hunger</text>';
+  svg += '<text class="bp-goal-tag-text" x="' + (W - 47) + '" y="' + (stripY + 72) + '" text-anchor="middle" style="font-size:9px;font-weight:400">=0</text>';
+  svg += '<text class="bp-goal-tag-text" x="' + (W - 47) + '" y="' + (stripY + 86) + '" text-anchor="middle" style="font-size:9px;font-weight:400">meal</text>';
+  svg += '<text class="bp-goal-tag-text" x="' + (W - 47) + '" y="' + (stripY + 98) + '" text-anchor="middle" style="font-size:9px;font-weight:400">_done</text>';
+  svg += '</g>';
+
+  // Edges
+  svg += '<g class="bp-edges">';
+  svg += renderBPEdges(result, isPath);
+  svg += '</g>';
+
+  // Implicit INIT-state edge to first step's met PRE pins (visual nicety)
+  // (Only show a couple of subtle initial-state hints to avoid clutter; first node only)
+  if(composeState.steps.length > 0){
+    const first = composeState.steps[0];
+    const a0 = COMPOSE_ATOMS.find(x => x.id === first.atomId);
+    if(a0){
+      svg += '<g class="bp-init-edges">';
+      a0.pre.forEach((p, pIdx) => {
+        const trc = result.trace[0];
+        if(!trc || !trc.preStatus[pIdx].met) return;
+        const py = first.y + BP_PIN_TOP + pIdx * BP_PIN_GAP;
+        const sx = 66, sy = stripY + Math.min(stripH - 20, 60 + pIdx * 12);
+        const tx = first.x;
+        const ty = py;
+        const dx = Math.max(40, (tx - sx) * 0.4);
+        svg += '<path class="bp-edge met" style="opacity:.45" d="M ' + sx + ' ' + sy + ' C ' + (sx + dx) + ' ' + sy + ', ' + (tx - dx) + ' ' + ty + ', ' + tx + ' ' + ty + '"/>';
+      });
+      svg += '</g>';
+    }
+  }
+
+  // Goal-edge from last step (if path)
+  if(isPath){
+    const last = composeState.steps[composeState.steps.length - 1];
+    const aL = COMPOSE_ATOMS.find(x => x.id === last.atomId);
+    if(aL){
+      const sx = last.x + BP_NODE_W;
+      const sy = last.y + BP_PIN_TOP + Math.floor((aL.eff.length - 1) / 2) * BP_PIN_GAP;
+      const tx = W - 70;
+      const ty = stripY + 50;
+      const dx = Math.max(50, (tx - sx) * 0.4);
+      svg += '<path class="bp-edge path-highlight" d="M ' + sx + ' ' + sy + ' C ' + (sx + dx) + ' ' + sy + ', ' + (tx - dx) + ' ' + ty + ', ' + tx + ' ' + ty + '"/>';
+    }
+  }
+
+  // Nodes
+  svg += '<g class="bp-nodes">';
+  composeState.steps.forEach((step, i) => {
+    svg += renderBPNode(step, i, result.trace[i], isPath);
+  });
+  svg += '</g>';
+
+  // Empty state hint
+  if(composeState.steps.length === 0){
+    svg += '<text x="' + (W/2) + '" y="' + (H/2) + '" fill="#546e7a" font-family="Consolas,monospace" font-size="14" text-anchor="middle" font-style="italic">'
+         + (lang==='en'?'⬆ Click any atom above to drop a node here':'⬆ 点击上方原子按钮，把节点投放到画布')
+         + '</text>';
+    svg += '<text x="' + (W/2) + '" y="' + (H/2 + 24) + '" fill="#37474f" font-family="Consolas,monospace" font-size="11" text-anchor="middle">'
+         + (lang==='en'?'or click "Show Optimal Plan" to auto-fill the 9-hop solution':'或点击"显示最优 plan"自动填入 9 跳解') + '</text>';
+  }
+
+  svg += '</svg>';
+  return svg;
+}
+
+function renderBPEdges(result, isPath){
+  let s = '';
+  result.edges.forEach(e => {
+    if(e.sourceIdx < 0) return;
+    const srcStep = composeState.steps[e.sourceIdx];
+    const tgtStep = composeState.steps[e.targetIdx];
+    if(!srcStep || !tgtStep) return;
+    const sx = srcStep.x + BP_NODE_W;
+    const sy = srcStep.y + BP_PIN_TOP + e.sourcePin * BP_PIN_GAP;
+    const tx = tgtStep.x;
+    const ty = tgtStep.y + BP_PIN_TOP + e.targetPin * BP_PIN_GAP;
+    const dx = Math.max(40, Math.abs(tx - sx) * 0.5);
+    const cls = 'bp-edge ' + (e.met ? 'met' : 'unmet') + (isPath && e.met ? ' path-highlight' : '');
+    s += '<path class="' + cls + '" d="M ' + sx + ' ' + sy + ' C ' + (sx + dx) + ' ' + sy + ', ' + (tx - dx) + ' ' + ty + ', ' + tx + ' ' + ty + '"/>';
+  });
+  return s;
+}
+
+function renderBPNode(step, idx, traceItem, isPath){
+  const a = COMPOSE_ATOMS.find(x => x.id === step.atomId);
+  if(!a) return '';
+  const h = bpNodeHeight(step.atomId);
+  const isInvalid = traceItem && !traceItem.stepValid;
+  const nodeCls = 'bp-node ' + a.layer + (isInvalid ? ' invalid' : '');
+  const bgCls = 'bp-node-bg ' + a.layer + (isInvalid ? ' invalid' : '');
+  const hdrGrad = a.layer === 'dialog' ? 'hdrGradDialog' : 'hdrGradBody';
+
+  let s = '<g class="' + nodeCls + '" data-step-idx="' + idx + '" transform="translate(' + step.x + ' ' + step.y + ')">';
+
+  s += '<rect class="' + bgCls + '" x="0" y="0" width="' + BP_NODE_W + '" height="' + h + '" rx="9" ry="9"/>';
+
+  // Header: rounded top, square bottom
+  s += '<path d="M 0 9 Q 0 0 9 0 L ' + (BP_NODE_W - 9) + ' 0 Q ' + BP_NODE_W + ' 0 ' + BP_NODE_W + ' 9 L ' + BP_NODE_W + ' ' + BP_HDR_H + ' L 0 ' + BP_HDR_H + ' Z" fill="url(#' + hdrGrad + ')"/>';
+  // Header shine
+  s += '<rect class="bp-node-hdr-shine" x="3" y="3" width="' + (BP_NODE_W - 6) + '" height="6" rx="3"/>';
+
+  // Title text
+  s += '<text class="bp-node-icon" x="11" y="' + (BP_HDR_H/2 + 1) + '" fill="#fff">' + (a.layer === 'body' ? '⚙' : '💬') + '</text>';
+  s += '<text class="bp-node-title" x="29" y="' + (BP_HDR_H/2 + 1) + '">' + escapeXml(a.label) + '</text>';
+  s += '<text class="bp-node-step" x="' + (BP_NODE_W - 30) + '" y="' + (BP_HDR_H/2 + 1) + '">#' + (idx + 1) + '</text>';
+  s += '<text class="bp-node-rm" x="' + (BP_NODE_W - 13) + '" y="' + (BP_HDR_H/2 + 1) + '" data-rm="' + idx + '">×</text>';
+
+  // Pin row backgrounds (subtle alternating bands for readability)
+  const rows = Math.max(a.pre.length, a.eff.length);
+  for(let r = 0; r < rows; r++){
+    if(r % 2 === 1){
+      s += '<rect class="bp-pin-row-bg" x="2" y="' + (BP_PIN_TOP + r * BP_PIN_GAP - 8) + '" width="' + (BP_NODE_W - 4) + '" height="' + BP_PIN_GAP + '" opacity=".35"/>';
+    }
+  }
+
+  // PRE pins (left)
+  a.pre.forEach((p, pIdx) => {
+    const py = BP_PIN_TOP + pIdx * BP_PIN_GAP;
+    const met = traceItem ? traceItem.preStatus[pIdx].met : false;
+    const pinClass = 'bp-pin pre' + (met ? ' connected' : ' unmet');
+    const labelClass = 'bp-pin-label pre ' + (met ? 'met' : 'unmet');
+    s += '<circle class="' + pinClass + '" cx="0" cy="' + py + '" r="' + BP_PIN_R + '" data-pin="pre" data-pin-idx="' + pIdx + '"/>';
+    s += '<text class="' + labelClass + '" x="' + (BP_PIN_R + 7) + '" y="' + py + '">' + (met ? '◉' : '○') + ' ' + escapeXml(p) + '</text>';
+  });
+
+  // EFF pins (right)
+  a.eff.forEach((e, eIdx) => {
+    const py = BP_PIN_TOP + eIdx * BP_PIN_GAP;
+    s += '<circle class="bp-pin eff connected" cx="' + BP_NODE_W + '" cy="' + py + '" r="' + BP_PIN_R + '" data-pin="eff" data-pin-idx="' + eIdx + '"/>';
+    s += '<text class="bp-pin-label eff met" x="' + (BP_NODE_W - BP_PIN_R - 7) + '" y="' + py + '">' + escapeXml(e) + '</text>';
+  });
+
+  s += '</g>';
+  return s;
+}
+
+function bindComposeEvents(){
+  const mount = document.getElementById('canvas-compose-mount');
+  if(!mount) return;
+
+  // Palette atoms - click to add
+  mount.querySelectorAll('.pal-atom').forEach(el => {
+    el.addEventListener('click', () => {
+      const atomId = el.getAttribute('data-atom');
+      composeState.steps.push({ id: ++composeNodeCounter, atomId });
+      renderCompose();
+    });
+  });
+
+  const undoBtn = document.getElementById('compose-undo');
+  if(undoBtn) undoBtn.addEventListener('click', () => { composeState.steps.pop(); renderCompose(); });
+  const clrBtn = document.getElementById('compose-clear');
+  if(clrBtn) clrBtn.addEventListener('click', () => { composeState.steps = []; renderCompose(); });
+  const relBtn = document.getElementById('compose-relayout');
+  if(relBtn) relBtn.addEventListener('click', () => { autoLayoutCompose(); renderCompose(); });
+  const fillBtn = document.getElementById('compose-fillbest');
+  if(fillBtn) fillBtn.addEventListener('click', () => {
+    const ids = ['find_advisor','call_advisor','move_library','interact_library','move_lab','call_courier','interact_compute','move_gate','interact_courier'];
+    composeState.steps = ids.map((id, i) => ({
+      id: ++composeNodeCounter,
+      atomId: id,
+      x: 100 + i * (BP_NODE_W + 50),
+      y: 80 + (i % 3) * 28
+    }));
+    renderCompose();
+  });
+
+  bindBPDrag();
+}
+
+function bindBPDrag(){
+  const svg = document.getElementById('bp-svg');
+  if(!svg) return;
+
+  let dragging = null;
+  let startMouse = null;
+  let startNodePos = null;
+
+  svg.addEventListener('mousedown', e => {
+    const node = e.target.closest('.bp-node');
+    if(!node) return;
+    const idx = +node.getAttribute('data-step-idx');
+    // Click on remove button?
+    const cls = e.target.getAttribute('class') || '';
+    if(cls.indexOf('bp-node-rm') >= 0){
+      composeState.steps.splice(idx, 1);
+      renderCompose();
+      e.stopPropagation();
+      return;
+    }
+    const pt = svgPoint(svg, e.clientX, e.clientY);
+    const localY = pt.y - composeState.steps[idx].y;
+    if(localY > BP_HDR_H + 4) return;  // drag only on header
+    dragging = idx;
+    startMouse = { x: pt.x, y: pt.y };
+    startNodePos = { x: composeState.steps[idx].x, y: composeState.steps[idx].y };
+    node.classList.add('dragging');
+    e.preventDefault();
+  });
+
+  function onMove(e){
+    if(dragging == null) return;
+    const cur = document.getElementById('bp-svg');
+    if(!cur) return;
+    const pt = svgPoint(cur, e.clientX, e.clientY);
+    composeState.steps[dragging].x = Math.max(80, startNodePos.x + (pt.x - startMouse.x));
+    composeState.steps[dragging].y = Math.max(50, startNodePos.y + (pt.y - startMouse.y));
+    refreshBPGeometry(dragging);
+  }
+  function onUp(){
+    if(dragging != null){
+      const cur = document.getElementById('bp-svg');
+      if(cur){
+        const ng = cur.querySelector('[data-step-idx="' + dragging + '"]');
+        if(ng) ng.classList.remove('dragging');
+      }
+      dragging = null;
+      // Re-bind mousedown on the (replaced) SVG after drag ends
+      bindBPDrag();
+    }
+  }
+
+  // Use document-level listeners for move/up so drag continues even when cursor leaves SVG
+  if(window._bpDragMove) document.removeEventListener('mousemove', window._bpDragMove);
+  if(window._bpDragUp) document.removeEventListener('mouseup', window._bpDragUp);
+  window._bpDragMove = onMove;
+  window._bpDragUp = onUp;
+  document.addEventListener('mousemove', onMove);
+  document.addEventListener('mouseup', onUp);
+}
+
+function svgPoint(svg, clientX, clientY){
+  if(!svg || !svg.createSVGPoint) return { x: clientX, y: clientY };
+  const pt = svg.createSVGPoint();
+  pt.x = clientX; pt.y = clientY;
+  const ctm = svg.getScreenCTM();
+  if(!ctm) return { x: clientX, y: clientY };
+  return pt.matrixTransform(ctm.inverse());
+}
+
+function refreshBPGeometry(draggingIdx){
+  const wrap = document.getElementById('bp-wrap');
+  if(!wrap) return;
+  const lang = document.body.classList.contains('lang-en') ? 'en' : 'zh';
+  const result = evalCompose();
+  wrap.innerHTML = renderBPSvg(result, lang);
+  if(draggingIdx != null){
+    const cur = document.getElementById('bp-svg');
+    if(cur){
+      const node = cur.querySelector('[data-step-idx="' + draggingIdx + '"]');
+      if(node) node.classList.add('dragging');
+    }
+  }
+}
+
+/* ====== Tab switching + canvas teleport ====== */
+function setupCanvasTabs(){
+  const tabbar = document.getElementById('canvas-tabbar');
+  if(!tabbar) return;
+  const tabs = tabbar.querySelectorAll('.canvas-tab');
+  tabs.forEach(t => t.addEventListener('click', () => {
+    const panelId = t.getAttribute('data-panel');
+    tabs.forEach(x => x.classList.toggle('active', x === t));
+    document.querySelectorAll('.canvas-panel').forEach(p => {
+      p.classList.toggle('active', p.id === 'canvas-panel-' + panelId);
+    });
+  }));
+}
+
+function teleportToCanvas(){
+  // Move scene-tree-vis from §1 to canvas tab 1
+  const sceneSrc = document.getElementById('scene-tree-vis');
+  const sceneDst = document.getElementById('canvas-scene-tree-mount');
+  if(sceneSrc && sceneDst){
+    sceneDst.appendChild(sceneSrc);
+  }
+  // Move planner-demo from §14 to canvas tab 4
+  const plannerSrc = document.querySelector('#sec-planner .planner-demo');
+  const plannerDst = document.getElementById('canvas-planner-mount');
+  if(plannerSrc && plannerDst){
+    plannerDst.appendChild(plannerSrc);
+    // Mark §14 with note that demo is on the left canvas
+    const sec = document.getElementById('sec-planner');
+    if(sec){
+      const note = document.createElement('div');
+      note.className = 'callout';
+      note.innerHTML = '<span class="label">▶</span> <span class="bilingual"><span class="zh">交互演示已置于左侧画布"GOAP 规划"标签页 — 请在那里点击下一步/自动播放。</span><span class="en">The interactive demo is on the left canvas under the "GOAP Search" tab — click Step / Auto there.</span></span>';
+      sec.appendChild(note);
+    }
+  }
+}
+
+/* ====== Language toggle (existing) + boot ====== */
+(function(){
+  var btn = document.getElementById('btn-lang');
+  var btnTop = document.getElementById('btn-top');
+  function setLang(l){
+    document.body.classList.toggle('lang-en', l==='en');
+    document.documentElement.lang = (l==='en'?'en':'zh-CN');
+    document.querySelectorAll('[data-zh][data-en]').forEach(function(el){
+      el.textContent = (l==='en' ? el.getAttribute('data-en') : el.getAttribute('data-zh'));
+    });
+    btn.textContent = (l==='en' ? '中文' : 'EN');
+    try{ localStorage.setItem('goap_lang', l); }catch(e){}
+    window.dispatchEvent(new Event('plang-changed'));
+  }
+  btn.addEventListener('click', function(){
+    var cur = document.body.classList.contains('lang-en') ? 'en' : 'zh';
+    setLang(cur === 'en' ? 'zh' : 'en');
+  });
+  btnTop.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+
+  // Re-render canvas content on language change
+  window.addEventListener('plang-changed', () => {
+    renderAtomCards();
+    renderCompose();
+    renderSceneTree();
+    renderCompositeIndex();
+  });
+
+  var saved = 'zh';
+  try{ saved = localStorage.getItem('goap_lang') || 'zh'; }catch(e){}
+  setLang(saved);
+
+  // Initial renders
+  renderSceneTree();
+  renderCompositeIndex();
+  renderAtomCards();
+  renderCompose();
+  setupCanvasTabs();
+  // Teleport big visualizations into canvas pane (deferred to next tick to ensure mounts exist)
+  setTimeout(teleportToCanvas, 0);
+})();
+</script>
+</body>
+</html>

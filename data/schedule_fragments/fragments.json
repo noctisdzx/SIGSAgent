@@ -1,0 +1,49 @@
+{
+  "fragments": [
+    {
+      "id": "frag_chat_cafe",
+      "label": "去咖啡角和朋友闲聊",
+      "duration_minutes": 15,
+      "tags": ["social", "leisure"],
+      "preferred_location_uids": ["a62839dd", "4ef146d8"],
+      "cost": 1,
+      "preconditions": { "min_energy": 1 }
+    },
+    {
+      "id": "frag_quick_snack",
+      "label": "去食堂打份小点心",
+      "duration_minutes": 10,
+      "tags": ["daily life"],
+      "preferred_location_uids": ["9a49343c", "6943e822"],
+      "cost": 1,
+      "preconditions": { "min_money": 1 }
+    },
+    {
+      "id": "frag_walk_garden",
+      "label": "在花园散步",
+      "duration_minutes": 10,
+      "tags": ["leisure", "fitness"],
+      "preferred_location_uids": ["66cb10e7", "7a281fd7"],
+      "cost": 0,
+      "preconditions": {}
+    },
+    {
+      "id": "frag_read_lab",
+      "label": "在自习区翻几页文献",
+      "duration_minutes": 20,
+      "tags": ["study"],
+      "preferred_location_uids": ["64a9bc35", "4ef146d8"],
+      "cost": 1,
+      "preconditions": {}
+    },
+    {
+      "id": "frag_back_dorm",
+      "label": "回宿舍小坐",
+      "duration_minutes": 10,
+      "tags": ["daily life"],
+      "preferred_location_uids": ["438038e3"],
+      "cost": 0,
+      "preconditions": {}
+    }
+  ]
+}

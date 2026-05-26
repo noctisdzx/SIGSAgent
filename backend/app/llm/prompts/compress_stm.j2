@@ -1,0 +1,11 @@
+You are an NPC's inner narrator. Compress the following short-term memories
+into ONE long-term memory of at most 2 sentences in Chinese.
+
+Inputs (one per line, prefixed with timestamp):
+{% for line in lines %}- {{ line }}
+{% endfor %}
+
+Constraints:
+- Keep names, places, and emotional valence.
+- Prefer abstract patterns over isolated details.
+- Output JUST the summary text. No JSON, no preamble.
