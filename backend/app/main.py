@@ -12,10 +12,18 @@ import logging
 from contextlib import asynccontextmanager
 from pathlib import Path
 
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app import __version__
+# Load repo-root .env (works both when launched from backend/ and from repo root).
+for candidate in (Path(__file__).resolve().parents[2] / ".env",
+                  Path(__file__).resolve().parents[1] / ".env"):
+    if candidate.exists():
+        load_dotenv(candidate, override=False)
+        break
+
+from app import __version__  # noqa: E402
 from app.api import rest_router, ws_router
 from app.config.loader import ConfigLoader
 from app.config.registry import get_registry

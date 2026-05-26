@@ -30,10 +30,10 @@ class Settings:
     data_dir: Path = field(default_factory=lambda: Path(os.getenv("DATA_DIR", "../data")).resolve())
     runtime_dir: Path = field(default_factory=lambda: Path(os.getenv("RUNTIME_DIR", "../runtime")).resolve())
 
-    # LLM
-    llm_base_url: str = os.getenv("LLM_BASE_URL", "https://api.openai.com/v1")
+    # LLM (default = DeepSeek, OpenAI-compatible)
+    llm_base_url: str = os.getenv("LLM_BASE_URL", "https://api.deepseek.com/v1")
     llm_api_key: str = os.getenv("LLM_API_KEY", "")
-    llm_model: str = os.getenv("LLM_MODEL", "gpt-4o-mini")
+    llm_model: str = os.getenv("LLM_MODEL", "deepseek-chat")
     llm_timeout: int = _env_int("LLM_TIMEOUT", 30)
     llm_max_retries: int = _env_int("LLM_MAX_RETRIES", 3)
 
