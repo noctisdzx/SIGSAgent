@@ -1,16 +1,77 @@
-/* Dark theme aligned with reference HTMLs. */
+/* =============================================================================
+ * SIGSAgent · Global theme
+ * Mirrors the reference HTML 校园人设关系网示意_bilingual.html.
+ * ============================================================================= */
+
+:root {
+  /* base surfaces */
+  --bg-base:           #0a0e17;
+  --bg-panel:          #12182b;
+  --bg-card:           #0d1220;
+  --bg-elevated:       #1a2240;
+  --bg-elevated-hover: #263259;
+  --border-soft:       #1e2a45;
+
+  /* text */
+  --text-primary:   #e0e0e0;
+  --text-secondary: #cfd8dc;
+  --text-muted:     #b0bec5;
+  --text-dim:       #90a4ae;
+  --text-very-dim:  #78909c;
+  --text-disabled:  #546e7a;
+
+  /* accents */
+  --accent-primary:       #90caf9;
+  --accent-active:        #42a5f5;
+  --accent-warn:          #ffa726;
+  --accent-warm-soft:     #ffe082;
+  --accent-danger:        #ef5350;
+  --accent-danger-soft:   #ef9a9a;
+  --accent-good-soft:     #a5d6a7;
+  --accent-purple-soft:   #ce93d8;
+  --accent-cyan-soft:     #80cbc4;
+
+  /* edge palette */
+  --edge-pink:          #E91E63;
+  --edge-purple:        #AB47BC;
+  --edge-yellow-soft:   #FFD54F;
+  --edge-orange-soft:   #FF8A65;
+  --edge-orange-strong: #FF7043;
+  --edge-green:         #66BB6A;
+  --edge-blue-soft:     #4FC3F7;
+  --edge-grey:          #E0E0E0;
+
+  /* tone (memory left-border) */
+  --tone-warm:     #ffa726;
+  --tone-tense:    #ef5350;
+  --tone-focused:  #26c6da;
+  --tone-casual:   #78909c;
+  --tone-curious:  #ce93d8;
+  --tone-gentle:   #a5d6a7;
+  --tone-playful:  #fff176;
+  --tone-decisive: #ff8a65;
+  --tone-default:  #42a5f5;
+
+  /* ws status */
+  --ws-connected:   #66bb6a;
+  --ws-reconnect:   #ffa726;
+  --ws-closed:      #ef5350;
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html, body, #app {
   height: 100%;
-  background: #0a0e17;
-  color: #e0e0e0;
+  background: var(--bg-base);
+  color: var(--text-primary);
   font-family: 'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif;
   font-size: 14px;
   line-height: 1.6;
+  overflow: hidden;
 }
-a { color: #42a5f5; text-decoration: none; }
-a:hover { color: #90caf9; }
+a { color: var(--accent-active); text-decoration: none; }
+a:hover { color: var(--accent-primary); }
 
+/* App-shell layout */
 .app-shell {
   display: flex;
   flex-direction: column;
@@ -19,41 +80,161 @@ a:hover { color: #90caf9; }
 .top-nav {
   display: flex;
   align-items: center;
-  gap: 18px;
-  padding: 12px 24px;
-  background: rgba(10, 14, 23, 0.92);
-  border-bottom: 1px solid #1e2a45;
+  gap: 8px;
+  padding: 10px 18px;
+  background: rgba(10, 14, 23, 0.96);
+  border-bottom: 1px solid var(--border-soft);
+  z-index: 50;
 }
 .top-nav .brand {
   font-weight: 600;
-  color: #90caf9;
+  color: var(--accent-primary);
   letter-spacing: .5px;
+  margin-right: 18px;
+  font-size: 14px;
 }
 .top-nav .nav-link {
   padding: 6px 12px;
   border-radius: 14px;
-  color: #cfd8dc;
+  color: var(--text-secondary);
   font-size: 13px;
 }
+.top-nav .nav-link:hover { background: var(--bg-elevated); }
 .top-nav .nav-link.router-link-active {
-  background: #1a2240;
-  color: #90caf9;
+  background: var(--bg-elevated);
+  color: var(--accent-primary);
 }
+.top-nav .spacer { flex: 1; }
+.top-nav .nav-btn {
+  padding: 6px 14px;
+  border-radius: 16px;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-elevated);
+  color: var(--accent-primary);
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.top-nav .nav-btn:hover { background: var(--bg-elevated-hover); }
+.ws-indicator {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; color: var(--text-very-dim);
+  padding: 4px 10px;
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  background: rgba(18,24,43,0.6);
+}
+.ws-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--text-disabled);
+  box-shadow: 0 0 6px transparent;
+  transition: background .2s, box-shadow .2s;
+}
+.ws-dot.connected   { background: var(--ws-connected); box-shadow: 0 0 6px var(--ws-connected); }
+.ws-dot.connecting,
+.ws-dot.reconnecting{ background: var(--ws-reconnect); box-shadow: 0 0 6px var(--ws-reconnect); animation: pulse 1.2s infinite; }
+.ws-dot.closed      { background: var(--ws-closed);    box-shadow: 0 0 6px var(--ws-closed); }
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: .35; }
+}
+
 .page {
   flex: 1;
   overflow: hidden;
+  position: relative;
 }
 .placeholder-page {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
-  color: #78909c;
+  color: var(--text-disabled);
   font-size: 15px;
   padding: 40px;
   text-align: center;
 }
-::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: #0a0e17; }
-::-webkit-scrollbar-thumb { background: #1e2a45; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #42a5f5; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb { background: var(--border-soft); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-active); }
+
+/* Generic chips */
+.chip {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 12px;
+  background: var(--bg-elevated);
+  color: var(--accent-primary);
+  border: 1px solid var(--bg-elevated-hover);
+  font-size: 11px;
+  margin: 0 4px 4px 0;
+  cursor: default;
+}
+.chip.click { cursor: pointer; }
+.chip.click:hover { background: var(--bg-elevated-hover); }
+.chip.taboo {
+  background: #3a1a1a;
+  color: var(--accent-danger-soft);
+  border-color: #5a2a2a;
+}
+.chip.comfort {
+  background: #1a3a2a;
+  color: var(--accent-good-soft);
+  border-color: #2a5a3a;
+}
+.filter-chip {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 12px;
+  background: var(--bg-elevated);
+  color: var(--text-very-dim);
+  border: 1px solid var(--bg-elevated-hover);
+  font-size: 11px;
+  margin: 0 4px 4px 0;
+  cursor: pointer;
+}
+.filter-chip:hover { color: var(--text-muted); }
+.filter-chip.active {
+  background: var(--bg-elevated-hover);
+  color: var(--accent-primary);
+  border-color: var(--accent-active);
+}
+.tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  margin-right: 4px;
+}
+
+/* Section headings (used inside detail panels) */
+.section-title {
+  margin: 14px 0 6px;
+  color: var(--accent-warn);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: .3px;
+}
+
+/* Generic ctrl button (used by graph overlays). */
+.ctrl-btn {
+  padding: 6px 14px;
+  border-radius: 16px;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-elevated);
+  color: var(--accent-primary);
+  font-size: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+.ctrl-btn:hover { background: var(--bg-elevated-hover); }
+
+/* While dragging the resize handle. */
+body.resizing {
+  cursor: col-resize;
+  user-select: none;
+}
+body.resizing iframe, body.resizing canvas { pointer-events: none; }
