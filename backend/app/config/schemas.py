@@ -55,6 +55,10 @@ class TemplateBlockSchema(_BaseModel):
     end: str
     activity: str
     location_uid: str
+    # Optional goal state for GOAP planner. Values may be plain literals
+    # (e.g. "room123" / 3) or comparator strings (">=3", "<=2", "==foo").
+    target_state: dict[str, Any] = Field(default_factory=dict)
+    narrative_zh: str | None = None
 
 
 class ScheduleTemplateSchema(_BaseModel):

@@ -37,6 +37,8 @@ class Slot:
     activity: str | None = None
     location_uid: str | None = None
     source_id: str | None = None   # template block id or fragment id
+    # GOAP goal state authored by the template (forwarded to planner).
+    target_state: dict = field(default_factory=dict)
     meta: dict = field(default_factory=dict)
 
 
@@ -73,7 +75,8 @@ class DailyTimeline:
     # ----- mutation -----
 
     def set_template(self, idx_from: int, idx_to: int, activity: str, location_uid: str,
-                     source_id: str) -> None:
+                     source_id: str, target_state: dict | None = None) -> None:
+        ts = dict(target_state or {})
         for k in range(idx_from, idx_to):
             self.slots[k] = Slot(
                 index=k,
@@ -83,6 +86,7 @@ class DailyTimeline:
                 activity=activity,
                 location_uid=location_uid,
                 source_id=source_id,
+                target_state=dict(ts),
             )
 
     def set_fragment(self, idx_from: int, idx_to: int, activity: str,
@@ -139,6 +143,7 @@ class DailyTimeline:
                 activity=block.activity,
                 location_uid=block.location_uid,
                 source_id=block_id,
+                target_state=getattr(block, "target_state", None) or {},
             )
             n_written += end_idx - start_idx
         return n_written

@@ -149,8 +149,48 @@ class GoapPlanner:
     # ----- helpers -----
 
     @staticmethod
+    def _parse_spec(spec: Any) -> tuple[str, Any]:
+        """Parse a goal value into `(op, rhs)`.
+
+        Supports plain literals (treated as `==`) or comparator strings like
+        ">=3", "<=2", ">5", "<10", "==foo", "!=bar". Comparator parsing only
+        kicks in for strings beginning with one of those tokens.
+        """
+        if not isinstance(spec, str):
+            return ("==", spec)
+        s = spec.strip()
+        for op in (">=", "<=", "==", "!="):
+            if s.startswith(op):
+                rhs = s[len(op):].strip()
+                return (op, _try_num(rhs))
+        if s and s[0] in (">", "<"):
+            return (s[0], _try_num(s[1:].strip()))
+        return ("==", spec)
+
+    @staticmethod
+    def _matches(actual: Any, spec: Any) -> bool:
+        op, rhs = GoapPlanner._parse_spec(spec)
+        if op == "==":
+            return actual == rhs
+        if op == "!=":
+            return actual != rhs
+        # numeric comparisons; coerce actual if possible
+        an = _try_num(actual)
+        if not (isinstance(an, (int, float)) and isinstance(rhs, (int, float))):
+            return False
+        if op == ">=":
+            return an >= rhs
+        if op == "<=":
+            return an <= rhs
+        if op == ">":
+            return an > rhs
+        if op == "<":
+            return an < rhs
+        return False
+
+    @staticmethod
     def _satisfies(state: State, goal: State) -> bool:
-        return all(state.get(k) == v for k, v in goal.items())
+        return all(GoapPlanner._matches(state.get(k), v) for k, v in goal.items())
 
     @staticmethod
     def _default_heuristic(state: State, goal: State) -> int:
@@ -160,13 +200,31 @@ class GoapPlanner:
         score = 0
         for k, v in goal.items():
             sv = state.get(k)
-            if sv == v:
+            if GoapPlanner._matches(sv, v):
                 continue
             score += 1
-            if isinstance(v, (int, float)) and isinstance(sv, (int, float)):
-                score += min(5, int(abs(v - sv)))
+            # extract numeric rhs for delta hint
+            _, rhs = GoapPlanner._parse_spec(v)
+            svn = _try_num(sv)
+            if isinstance(rhs, (int, float)) and isinstance(svn, (int, float)):
+                score += min(5, int(abs(rhs - svn)))
         return score
 
     @staticmethod
     def _key(state: State) -> str:
         return "|".join(f"{k}={state[k]}" for k in sorted(state.keys()))
+
+
+def _try_num(x: Any) -> Any:
+    """Try to coerce `x` to int/float; otherwise return as-is."""
+    if isinstance(x, (int, float)) and not isinstance(x, bool):
+        return x
+    if isinstance(x, str):
+        s = x.strip()
+        try:
+            if "." in s or "e" in s or "E" in s:
+                return float(s)
+            return int(s)
+        except (TypeError, ValueError):
+            return x
+    return x

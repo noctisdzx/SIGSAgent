@@ -8,8 +8,9 @@ the `FragmentLibrary`.
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
+from typing import Any
 
 
 @dataclass
@@ -18,6 +19,22 @@ class TemplateBlock:
     end: str    # "HH:MM"
     activity: str
     location_uid: str
+    # Optional GOAP goal state (e.g. {"agent.location_uid": "...", "agent.energy": ">=3"}).
+    target_state: dict[str, Any] = field(default_factory=dict)
+    # Narrative copy for the frontend; runtime ignores.
+    narrative_zh: str | None = None
+
+    @classmethod
+    def from_dict(cls, d: dict[str, Any]) -> "TemplateBlock":
+        """Construct from a JSON dict, tolerating extra fields."""
+        return cls(
+            start=d["start"],
+            end=d["end"],
+            activity=d["activity"],
+            location_uid=d["location_uid"],
+            target_state=dict(d.get("target_state") or {}),
+            narrative_zh=d.get("narrative_zh"),
+        )
 
 
 @dataclass
@@ -30,7 +47,7 @@ class ScheduleTemplate:
     def from_json(cls, path: Path) -> "ScheduleTemplate":
         raw = json.loads(path.read_text(encoding="utf-8"))
         week = {
-            day: [TemplateBlock(**b) for b in blocks]
+            day: [TemplateBlock.from_dict(b) for b in blocks]
             for day, blocks in raw.get("week", {}).items()
         }
         return cls(id=raw["id"], description=raw.get("description", ""), week=week)

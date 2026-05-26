@@ -1,551 +1,755 @@
 {
   "id": "npc37_he_min",
-  "description": "基于参考 HTML 的 何敏 周课表（工作日相同，周末略简）。",
+  "description": "何敏 的周课表（archetype=logistics，自动生成、每天差异化、含 target_state）。",
+  "archetype": "logistics",
   "week": {
     "monday": [
       {
-        "start": "04:30",
-        "end": "05:00",
-        "activity": "wake_up_and_wash",
+        "start": "06:05",
+        "end": "06:35",
+        "activity": "wake_up",
         "location_uid": "438038e3",
-        "narrative_zh": "起床"
+        "narrative_zh": "早起",
+        "target_state": {
+          "agent.location_uid": "438038e3"
+        }
       },
       {
-        "start": "05:00",
-        "end": "06:30",
-        "activity": "free_time",
+        "start": "06:35",
+        "end": "07:05",
+        "activity": "have_breakfast",
         "location_uid": "9a49343c",
-        "narrative_zh": "到食堂开始准备早餐"
+        "narrative_zh": "早饭",
+        "target_state": {
+          "agent.location_uid": "9a49343c"
+        }
       },
       {
-        "start": "06:30",
-        "end": "09:00",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "早餐开始供应"
+        "start": "07:05",
+        "end": "11:05",
+        "activity": "patrol",
+        "location_uid": "66cb10e7",
+        "narrative_zh": "上午巡查/值班",
+        "target_state": {
+          "agent.location_uid": "66cb10e7",
+          "agent.mood": ">=2"
+        }
       },
       {
-        "start": "09:00",
-        "end": "11:00",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "早餐结束·准备午餐食材"
-      },
-      {
-        "start": "11:00",
-        "end": "11:30",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "开始做午餐"
-      },
-      {
-        "start": "11:30",
-        "end": "13:30",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "午餐供应·在窗口打菜"
-      },
-      {
-        "start": "13:30",
-        "end": "14:30",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "午餐结束·清理"
-      },
-      {
-        "start": "14:30",
-        "end": "15:00",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "短暂休息"
-      },
-      {
-        "start": "15:00",
-        "end": "17:00",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "准备晚餐食材"
-      },
-      {
-        "start": "17:00",
-        "end": "17:30",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "开始做晚餐"
-      },
-      {
-        "start": "17:30",
-        "end": "19:00",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "晚餐供应"
-      },
-      {
-        "start": "19:00",
-        "end": "20:00",
-        "activity": "cook",
+        "start": "11:05",
+        "end": "12:35",
+        "activity": "have_lunch",
         "location_uid": "a7934434",
-        "narrative_zh": "晚餐结束·清理厨房"
+        "narrative_zh": "后厨吃饭",
+        "target_state": {
+          "agent.location_uid": "a7934434"
+        }
       },
       {
-        "start": "20:00",
-        "end": "21:00",
-        "activity": "free_time",
+        "start": "12:35",
+        "end": "13:35",
+        "activity": "midday_rest",
         "location_uid": "438038e3",
-        "narrative_zh": "下班回家"
+        "narrative_zh": "午休",
+        "target_state": {
+          "agent.location_uid": "438038e3"
+        }
       },
       {
-        "start": "21:00",
+        "start": "13:35",
+        "end": "17:35",
+        "activity": "patrol",
+        "location_uid": "66cb10e7",
+        "narrative_zh": "下午继续值班",
+        "target_state": {
+          "agent.location_uid": "66cb10e7",
+          "agent.mood": ">=2"
+        }
+      },
+      {
+        "start": "17:35",
+        "end": "18:35",
+        "activity": "have_dinner",
+        "location_uid": "a7934434",
+        "narrative_zh": "晚饭",
+        "target_state": {
+          "agent.location_uid": "a7934434"
+        }
+      },
+      {
+        "start": "18:35",
+        "end": "21:05",
+        "activity": "patrol",
+        "location_uid": "66cb10e7",
+        "narrative_zh": "夜间巡查",
+        "target_state": {
+          "agent.location_uid": "66cb10e7",
+          "agent.mood": ">=2"
+        }
+      },
+      {
+        "start": "21:35",
+        "end": "22:35",
+        "activity": "leisure_media",
+        "location_uid": "438038e3",
+        "narrative_zh": "宿舍看电视",
+        "target_state": {
+          "agent.location_uid": "438038e3",
+          "agent.mood": ">=1"
+        }
+      },
+      {
+        "start": "23:05",
         "end": "23:59",
         "activity": "sleep",
         "location_uid": "438038e3",
-        "narrative_zh": "入睡"
+        "narrative_zh": "睡觉",
+        "target_state": {
+          "agent.location_uid": "438038e3",
+          "agent.energy": ">=3"
+        }
       }
     ],
     "tuesday": [
       {
-        "start": "04:30",
-        "end": "05:00",
-        "activity": "wake_up_and_wash",
-        "location_uid": "438038e3",
-        "narrative_zh": "起床"
-      },
-      {
-        "start": "05:00",
+        "start": "06:00",
         "end": "06:30",
-        "activity": "free_time",
-        "location_uid": "9a49343c",
-        "narrative_zh": "到食堂开始准备早餐"
+        "activity": "wake_up",
+        "location_uid": "438038e3",
+        "narrative_zh": "早起",
+        "target_state": {
+          "agent.location_uid": "438038e3"
+        }
       },
       {
         "start": "06:30",
-        "end": "09:00",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "早餐开始供应"
+        "end": "07:00",
+        "activity": "have_breakfast",
+        "location_uid": "9a49343c",
+        "narrative_zh": "早饭",
+        "target_state": {
+          "agent.location_uid": "9a49343c"
+        }
       },
       {
-        "start": "09:00",
-        "end": "11:00",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "早餐结束·准备午餐食材"
-      },
-      {
-        "start": "11:00",
+        "start": "07:00",
         "end": "11:30",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "开始做午餐"
+        "activity": "patrol",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "周二屋顶花园检查",
+        "target_state": {
+          "agent.location_uid": "7a281fd7",
+          "agent.mood": ">=2"
+        }
       },
       {
         "start": "11:30",
+        "end": "12:30",
+        "activity": "have_lunch",
+        "location_uid": "a7934434",
+        "narrative_zh": "午饭",
+        "target_state": {
+          "agent.location_uid": "a7934434"
+        }
+      },
+      {
+        "start": "12:30",
         "end": "13:30",
-        "activity": "free_time",
+        "activity": "midday_rest",
         "location_uid": "438038e3",
-        "narrative_zh": "午餐供应·在窗口打菜"
+        "narrative_zh": "午休",
+        "target_state": {
+          "agent.location_uid": "438038e3"
+        }
       },
       {
         "start": "13:30",
-        "end": "14:30",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "午餐结束·清理"
-      },
-      {
-        "start": "14:30",
-        "end": "15:00",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "短暂休息"
-      },
-      {
-        "start": "15:00",
         "end": "17:00",
-        "activity": "free_time",
+        "activity": "patrol",
         "location_uid": "438038e3",
-        "narrative_zh": "准备晚餐食材"
+        "narrative_zh": "宿舍楼下午巡查",
+        "target_state": {
+          "agent.location_uid": "438038e3",
+          "agent.mood": ">=2"
+        }
       },
       {
         "start": "17:00",
-        "end": "17:30",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "开始做晚餐"
-      },
-      {
-        "start": "17:30",
-        "end": "19:00",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "晚餐供应"
-      },
-      {
-        "start": "19:00",
-        "end": "20:00",
-        "activity": "cook",
+        "end": "18:00",
+        "activity": "have_dinner",
         "location_uid": "a7934434",
-        "narrative_zh": "晚餐结束·清理厨房"
+        "narrative_zh": "晚饭",
+        "target_state": {
+          "agent.location_uid": "a7934434"
+        }
       },
       {
-        "start": "20:00",
-        "end": "21:00",
-        "activity": "free_time",
+        "start": "18:00",
+        "end": "21:30",
+        "activity": "patrol",
         "location_uid": "438038e3",
-        "narrative_zh": "下班回家"
+        "narrative_zh": "夜间宿舍值守",
+        "target_state": {
+          "agent.location_uid": "438038e3",
+          "agent.mood": ">=2"
+        }
       },
       {
-        "start": "21:00",
+        "start": "22:00",
+        "end": "23:00",
+        "activity": "leisure_media",
+        "location_uid": "438038e3",
+        "narrative_zh": "看新闻",
+        "target_state": {
+          "agent.location_uid": "438038e3",
+          "agent.mood": ">=1"
+        }
+      },
+      {
+        "start": "23:00",
         "end": "23:59",
         "activity": "sleep",
         "location_uid": "438038e3",
-        "narrative_zh": "入睡"
+        "narrative_zh": "睡觉",
+        "target_state": {
+          "agent.location_uid": "438038e3",
+          "agent.energy": ">=3"
+        }
       }
     ],
     "wednesday": [
       {
-        "start": "04:30",
-        "end": "05:00",
-        "activity": "wake_up_and_wash",
-        "location_uid": "438038e3",
-        "narrative_zh": "起床"
-      },
-      {
-        "start": "05:00",
+        "start": "06:00",
         "end": "06:30",
-        "activity": "free_time",
-        "location_uid": "9a49343c",
-        "narrative_zh": "到食堂开始准备早餐"
+        "activity": "wake_up",
+        "location_uid": "438038e3",
+        "narrative_zh": "早起",
+        "target_state": {
+          "agent.location_uid": "438038e3"
+        }
       },
       {
         "start": "06:30",
-        "end": "09:00",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "早餐开始供应"
+        "end": "07:00",
+        "activity": "have_breakfast",
+        "location_uid": "9a49343c",
+        "narrative_zh": "早饭",
+        "target_state": {
+          "agent.location_uid": "9a49343c"
+        }
       },
       {
-        "start": "09:00",
-        "end": "11:00",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "早餐结束·准备午餐食材"
-      },
-      {
-        "start": "11:00",
+        "start": "07:00",
         "end": "11:30",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "开始做午餐"
+        "activity": "patrol",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "周三图书馆区巡查",
+        "target_state": {
+          "agent.location_uid": "64a9bc35",
+          "agent.mood": ">=2"
+        }
       },
       {
         "start": "11:30",
+        "end": "12:30",
+        "activity": "have_lunch",
+        "location_uid": "a7934434",
+        "narrative_zh": "午饭",
+        "target_state": {
+          "agent.location_uid": "a7934434"
+        }
+      },
+      {
+        "start": "12:30",
         "end": "13:30",
-        "activity": "free_time",
+        "activity": "midday_rest",
         "location_uid": "438038e3",
-        "narrative_zh": "午餐供应·在窗口打菜"
+        "narrative_zh": "午休",
+        "target_state": {
+          "agent.location_uid": "438038e3"
+        }
       },
       {
         "start": "13:30",
-        "end": "14:30",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "午餐结束·清理"
-      },
-      {
-        "start": "14:30",
-        "end": "15:00",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "短暂休息"
-      },
-      {
-        "start": "15:00",
-        "end": "17:00",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "准备晚餐食材"
-      },
-      {
-        "start": "17:00",
         "end": "17:30",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "开始做晚餐"
+        "activity": "patrol",
+        "location_uid": "cb0199d8",
+        "narrative_zh": "周三下午教学楼",
+        "target_state": {
+          "agent.location_uid": "cb0199d8",
+          "agent.mood": ">=2"
+        }
       },
       {
         "start": "17:30",
-        "end": "19:00",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "晚餐供应"
+        "end": "18:30",
+        "activity": "have_dinner",
+        "location_uid": "a7934434",
+        "narrative_zh": "晚饭",
+        "target_state": {
+          "agent.location_uid": "a7934434"
+        }
       },
       {
         "start": "19:00",
-        "end": "20:00",
-        "activity": "cook",
-        "location_uid": "a7934434",
-        "narrative_zh": "晚餐结束·清理厨房"
-      },
-      {
-        "start": "20:00",
         "end": "21:00",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "下班回家"
+        "activity": "patrol",
+        "location_uid": "8dc3960a",
+        "narrative_zh": "晚间社团区巡查",
+        "target_state": {
+          "agent.location_uid": "8dc3960a",
+          "agent.mood": ">=2"
+        }
       },
       {
-        "start": "21:00",
+        "start": "22:00",
+        "end": "23:00",
+        "activity": "leisure_media",
+        "location_uid": "438038e3",
+        "narrative_zh": "宿舍看电视",
+        "target_state": {
+          "agent.location_uid": "438038e3",
+          "agent.mood": ">=1"
+        }
+      },
+      {
+        "start": "23:30",
         "end": "23:59",
         "activity": "sleep",
         "location_uid": "438038e3",
-        "narrative_zh": "入睡"
+        "narrative_zh": "睡觉",
+        "target_state": {
+          "agent.location_uid": "438038e3",
+          "agent.energy": ">=3"
+        }
       }
     ],
     "thursday": [
       {
-        "start": "04:30",
-        "end": "05:00",
-        "activity": "wake_up_and_wash",
-        "location_uid": "438038e3",
-        "narrative_zh": "起床"
-      },
-      {
-        "start": "05:00",
+        "start": "06:00",
         "end": "06:30",
-        "activity": "free_time",
-        "location_uid": "9a49343c",
-        "narrative_zh": "到食堂开始准备早餐"
+        "activity": "wake_up",
+        "location_uid": "438038e3",
+        "narrative_zh": "早起",
+        "target_state": {
+          "agent.location_uid": "438038e3"
+        }
       },
       {
         "start": "06:30",
-        "end": "09:00",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "早餐开始供应"
+        "end": "07:00",
+        "activity": "have_breakfast",
+        "location_uid": "9a49343c",
+        "narrative_zh": "早饭",
+        "target_state": {
+          "agent.location_uid": "9a49343c"
+        }
       },
       {
-        "start": "09:00",
+        "start": "07:00",
         "end": "11:00",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "早餐结束·准备午餐食材"
+        "activity": "patrol",
+        "location_uid": "3877431b",
+        "narrative_zh": "周四实验楼检查",
+        "target_state": {
+          "agent.location_uid": "3877431b",
+          "agent.mood": ">=2"
+        }
       },
       {
         "start": "11:00",
-        "end": "11:30",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "开始做午餐"
+        "end": "12:00",
+        "activity": "have_lunch",
+        "location_uid": "a7934434",
+        "narrative_zh": "午饭",
+        "target_state": {
+          "agent.location_uid": "a7934434"
+        }
       },
       {
-        "start": "11:30",
-        "end": "13:30",
-        "activity": "free_time",
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "midday_rest",
         "location_uid": "438038e3",
-        "narrative_zh": "午餐供应·在窗口打菜"
+        "narrative_zh": "午休",
+        "target_state": {
+          "agent.location_uid": "438038e3"
+        }
       },
       {
-        "start": "13:30",
-        "end": "14:30",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "午餐结束·清理"
-      },
-      {
-        "start": "14:30",
-        "end": "15:00",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "短暂休息"
-      },
-      {
-        "start": "15:00",
-        "end": "17:00",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "准备晚餐食材"
-      },
-      {
-        "start": "17:00",
+        "start": "13:00",
         "end": "17:30",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "开始做晚餐"
+        "activity": "patrol",
+        "location_uid": "3877431b",
+        "narrative_zh": "下午继续",
+        "target_state": {
+          "agent.location_uid": "3877431b",
+          "agent.mood": ">=2"
+        }
       },
       {
         "start": "17:30",
-        "end": "19:00",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "晚餐供应"
-      },
-      {
-        "start": "19:00",
-        "end": "20:00",
-        "activity": "cook",
+        "end": "18:30",
+        "activity": "have_dinner",
         "location_uid": "a7934434",
-        "narrative_zh": "晚餐结束·清理厨房"
+        "narrative_zh": "晚饭",
+        "target_state": {
+          "agent.location_uid": "a7934434"
+        }
       },
       {
-        "start": "20:00",
+        "start": "18:30",
         "end": "21:00",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "下班回家"
+        "activity": "patrol",
+        "location_uid": "66cb10e7",
+        "narrative_zh": "夜间花园巡查",
+        "target_state": {
+          "agent.location_uid": "66cb10e7",
+          "agent.mood": ">=2"
+        }
       },
       {
         "start": "21:00",
+        "end": "22:30",
+        "activity": "social_chat",
+        "location_uid": "a7934434",
+        "narrative_zh": "和同事聊聊",
+        "target_state": {
+          "agent.location_uid": "a7934434",
+          "agent.mood": ">=2"
+        }
+      },
+      {
+        "start": "23:00",
         "end": "23:59",
         "activity": "sleep",
         "location_uid": "438038e3",
-        "narrative_zh": "入睡"
+        "narrative_zh": "睡觉",
+        "target_state": {
+          "agent.location_uid": "438038e3",
+          "agent.energy": ">=3"
+        }
       }
     ],
     "friday": [
       {
-        "start": "04:30",
-        "end": "05:00",
-        "activity": "wake_up_and_wash",
+        "start": "06:05",
+        "end": "06:35",
+        "activity": "wake_up",
         "location_uid": "438038e3",
-        "narrative_zh": "起床"
+        "narrative_zh": "早起",
+        "target_state": {
+          "agent.location_uid": "438038e3"
+        }
       },
       {
-        "start": "05:00",
-        "end": "06:30",
-        "activity": "free_time",
+        "start": "06:35",
+        "end": "07:05",
+        "activity": "have_breakfast",
         "location_uid": "9a49343c",
-        "narrative_zh": "到食堂开始准备早餐"
+        "narrative_zh": "早饭",
+        "target_state": {
+          "agent.location_uid": "9a49343c"
+        }
       },
       {
-        "start": "06:30",
-        "end": "09:00",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "早餐开始供应"
+        "start": "07:05",
+        "end": "11:35",
+        "activity": "patrol",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "周五教学楼",
+        "target_state": {
+          "agent.location_uid": "4d7a7e81",
+          "agent.mood": ">=2"
+        }
       },
       {
-        "start": "09:00",
-        "end": "11:00",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "早餐结束·准备午餐食材"
-      },
-      {
-        "start": "11:00",
-        "end": "11:30",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "开始做午餐"
-      },
-      {
-        "start": "11:30",
-        "end": "13:30",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "午餐供应·在窗口打菜"
-      },
-      {
-        "start": "13:30",
-        "end": "14:30",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "午餐结束·清理"
-      },
-      {
-        "start": "14:30",
-        "end": "15:00",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "短暂休息"
-      },
-      {
-        "start": "15:00",
-        "end": "17:00",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "准备晚餐食材"
-      },
-      {
-        "start": "17:00",
-        "end": "17:30",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "开始做晚餐"
-      },
-      {
-        "start": "17:30",
-        "end": "19:00",
-        "activity": "free_time",
-        "location_uid": "438038e3",
-        "narrative_zh": "晚餐供应"
-      },
-      {
-        "start": "19:00",
-        "end": "20:00",
-        "activity": "cook",
+        "start": "11:35",
+        "end": "12:35",
+        "activity": "have_lunch",
         "location_uid": "a7934434",
-        "narrative_zh": "晚餐结束·清理厨房"
+        "narrative_zh": "午饭",
+        "target_state": {
+          "agent.location_uid": "a7934434"
+        }
       },
       {
-        "start": "20:00",
-        "end": "21:00",
-        "activity": "free_time",
+        "start": "12:35",
+        "end": "13:35",
+        "activity": "midday_rest",
         "location_uid": "438038e3",
-        "narrative_zh": "下班回家"
+        "narrative_zh": "午休",
+        "target_state": {
+          "agent.location_uid": "438038e3"
+        }
       },
       {
-        "start": "21:00",
+        "start": "13:35",
+        "end": "17:35",
+        "activity": "patrol",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "下午图书馆",
+        "target_state": {
+          "agent.location_uid": "64a9bc35",
+          "agent.mood": ">=2"
+        }
+      },
+      {
+        "start": "17:35",
+        "end": "18:35",
+        "activity": "have_dinner",
+        "location_uid": "a7934434",
+        "narrative_zh": "晚饭",
+        "target_state": {
+          "agent.location_uid": "a7934434"
+        }
+      },
+      {
+        "start": "18:35",
+        "end": "22:05",
+        "activity": "patrol",
+        "location_uid": "8dc3960a",
+        "narrative_zh": "周五夜社团区",
+        "target_state": {
+          "agent.location_uid": "8dc3960a",
+          "agent.mood": ">=2"
+        }
+      },
+      {
+        "start": "22:35",
+        "end": "23:35",
+        "activity": "leisure_media",
+        "location_uid": "438038e3",
+        "narrative_zh": "宿舍放松",
+        "target_state": {
+          "agent.location_uid": "438038e3",
+          "agent.mood": ">=1"
+        }
+      },
+      {
+        "start": "23:35",
         "end": "23:59",
         "activity": "sleep",
         "location_uid": "438038e3",
-        "narrative_zh": "入睡"
+        "narrative_zh": "睡觉",
+        "target_state": {
+          "agent.location_uid": "438038e3",
+          "agent.energy": ">=3"
+        }
       }
     ],
     "saturday": [
       {
-        "start": "04:30",
-        "end": "05:00",
-        "activity": "wake_up_and_wash",
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "wake_up",
         "location_uid": "438038e3",
-        "narrative_zh": "起床"
+        "narrative_zh": "起床",
+        "target_state": {
+          "agent.location_uid": "438038e3"
+        }
       },
       {
-        "start": "14:00",
-        "end": "17:00",
-        "activity": "chat",
-        "location_uid": "7a281fd7",
-        "narrative_zh": "周末自由活动"
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "have_breakfast",
+        "location_uid": "9a49343c",
+        "narrative_zh": "早饭",
+        "target_state": {
+          "agent.location_uid": "9a49343c"
+        }
+      },
+      {
+        "start": "08:00",
+        "end": "12:00",
+        "activity": "patrol",
+        "location_uid": "66cb10e7",
+        "narrative_zh": "周末花园巡查",
+        "target_state": {
+          "agent.location_uid": "66cb10e7",
+          "agent.mood": ">=2"
+        }
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "a7934434",
+        "narrative_zh": "午饭",
+        "target_state": {
+          "agent.location_uid": "a7934434"
+        }
+      },
+      {
+        "start": "13:00",
+        "end": "14:30",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休",
+        "target_state": {
+          "agent.location_uid": "438038e3"
+        }
+      },
+      {
+        "start": "14:30",
+        "end": "17:30",
+        "activity": "patrol",
+        "location_uid": "438038e3",
+        "narrative_zh": "宿舍区周末检查",
+        "target_state": {
+          "agent.location_uid": "438038e3",
+          "agent.mood": ">=2"
+        }
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "have_dinner",
+        "location_uid": "a7934434",
+        "narrative_zh": "晚饭",
+        "target_state": {
+          "agent.location_uid": "a7934434"
+        }
+      },
+      {
+        "start": "18:30",
+        "end": "21:00",
+        "activity": "social_chat",
+        "location_uid": "a7934434",
+        "narrative_zh": "周末同事聚",
+        "target_state": {
+          "agent.location_uid": "a7934434",
+          "agent.mood": ">=2"
+        }
       },
       {
         "start": "21:00",
+        "end": "22:30",
+        "activity": "leisure_media",
+        "location_uid": "438038e3",
+        "narrative_zh": "电视",
+        "target_state": {
+          "agent.location_uid": "438038e3",
+          "agent.mood": ">=1"
+        }
+      },
+      {
+        "start": "23:30",
         "end": "23:59",
         "activity": "sleep",
         "location_uid": "438038e3",
-        "narrative_zh": "入睡"
+        "narrative_zh": "睡觉",
+        "target_state": {
+          "agent.location_uid": "438038e3",
+          "agent.energy": ">=3"
+        }
       }
     ],
     "sunday": [
       {
-        "start": "04:30",
-        "end": "05:00",
-        "activity": "wake_up_and_wash",
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "wake_up",
         "location_uid": "438038e3",
-        "narrative_zh": "起床"
+        "narrative_zh": "起床",
+        "target_state": {
+          "agent.location_uid": "438038e3"
+        }
+      },
+      {
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "have_breakfast",
+        "location_uid": "9a49343c",
+        "narrative_zh": "早饭",
+        "target_state": {
+          "agent.location_uid": "9a49343c"
+        }
+      },
+      {
+        "start": "08:00",
+        "end": "11:30",
+        "activity": "patrol",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "周日屋顶巡查",
+        "target_state": {
+          "agent.location_uid": "7a281fd7",
+          "agent.mood": ">=2"
+        }
+      },
+      {
+        "start": "11:30",
+        "end": "12:30",
+        "activity": "have_lunch",
+        "location_uid": "a7934434",
+        "narrative_zh": "午饭",
+        "target_state": {
+          "agent.location_uid": "a7934434"
+        }
+      },
+      {
+        "start": "12:30",
+        "end": "14:00",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "长午休",
+        "target_state": {
+          "agent.location_uid": "438038e3"
+        }
       },
       {
         "start": "14:00",
         "end": "17:00",
-        "activity": "leisure_media",
-        "location_uid": "4ef146d8",
-        "narrative_zh": "周末闲聊"
+        "activity": "patrol",
+        "location_uid": "66cb10e7",
+        "narrative_zh": "下午低层花园",
+        "target_state": {
+          "agent.location_uid": "66cb10e7",
+          "agent.mood": ">=2"
+        }
+      },
+      {
+        "start": "17:00",
+        "end": "18:00",
+        "activity": "have_dinner",
+        "location_uid": "a7934434",
+        "narrative_zh": "晚饭",
+        "target_state": {
+          "agent.location_uid": "a7934434"
+        }
+      },
+      {
+        "start": "18:00",
+        "end": "20:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "宿舍休息",
+        "target_state": {
+          "agent.location_uid": "438038e3",
+          "agent.mood": ">=1"
+        }
       },
       {
         "start": "21:00",
+        "end": "22:30",
+        "activity": "leisure_media",
+        "location_uid": "438038e3",
+        "narrative_zh": "电视",
+        "target_state": {
+          "agent.location_uid": "438038e3",
+          "agent.mood": ">=1"
+        }
+      },
+      {
+        "start": "23:00",
         "end": "23:59",
         "activity": "sleep",
         "location_uid": "438038e3",
-        "narrative_zh": "入睡"
+        "narrative_zh": "早睡",
+        "target_state": {
+          "agent.location_uid": "438038e3",
+          "agent.energy": ">=3"
+        }
       }
     ]
   }

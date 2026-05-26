@@ -222,7 +222,7 @@ class NPCAgent:
             except (ValueError, AttributeError):
                 continue
             from_idx = (a_h * 60 + a_m) // SLOT_MINUTES
-            to_idx = (e_h * 60 + e_m + SLOT_MINUTES - 1) // SLOT_MINUTES
+            to_idx = (e_h * 60 + e_m) // SLOT_MINUTES
             from_idx = max(0, min(SLOTS_PER_DAY, from_idx))
             to_idx = max(from_idx, min(SLOTS_PER_DAY, to_idx))
             if to_idx <= from_idx:
@@ -232,6 +232,7 @@ class NPCAgent:
                 activity=b.activity,
                 location_uid=b.location_uid,
                 source_id=f"tpl:{self.template.id}:{b.start}-{b.end}",
+                target_state=getattr(b, "target_state", None) or {},
             )
 
     def _current_slot(self) -> Slot:
@@ -291,6 +292,11 @@ class NPCAgent:
             goal: dict[str, Any] = {}
             if slot.location_uid:
                 goal["agent.location_uid"] = slot.location_uid
+            # Template-authored goal (may carry comparator strings like ">=3").
+            # Overrides the bare location goal so a richer goal wins when present.
+            tpl_goal = getattr(slot, "target_state", None) or {}
+            if tpl_goal:
+                goal.update(tpl_goal)
 
             plan = None
             try:
@@ -464,11 +470,14 @@ class NPCAgent:
                     except ValueError:
                         continue
                     from_idx = (a_h * 60 + a_m) // SLOT_MINUTES
-                    to_idx = (e_h * 60 + e_m + SLOT_MINUTES - 1) // SLOT_MINUTES
+                    to_idx = (e_h * 60 + e_m) // SLOT_MINUTES
                     if to_idx <= from_idx:
                         continue
-                    tl.set_template(from_idx, to_idx, b.activity, b.location_uid,
-                                    source_id=f"tpl:{self.template.id}:{b.start}-{b.end}")
+                    tl.set_template(
+                        from_idx, to_idx, b.activity, b.location_uid,
+                        source_id=f"tpl:{self.template.id}:{b.start}-{b.end}",
+                        target_state=getattr(b, "target_state", None) or {},
+                    )
             day_name = d.isoformat()
 
         return {
@@ -505,6 +514,8 @@ def template_from_schema(tpl_schema: Any) -> ScheduleTemplate:
                 end=b.end,
                 activity=b.activity,
                 location_uid=b.location_uid,
+                target_state=dict(getattr(b, "target_state", None) or {}),
+                narrative_zh=getattr(b, "narrative_zh", None),
             ))
         week[day] = out
     return ScheduleTemplate(
