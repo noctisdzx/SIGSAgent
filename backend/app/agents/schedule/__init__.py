@@ -1,9 +1,9 @@
 """Schedule subsystem: weekly template + fragment library + 5-min timeline + STM builder."""
 
-from .template import ScheduleTemplate, TemplateBlock
+from .builder import bulk_build_for_day, schedule_item_to_stm
 from .fragments import Fragment, FragmentLibrary
+from .template import ScheduleTemplate, TemplateBlock
 from .timeline import DailyTimeline, Slot, SlotKind
-from .builder import schedule_item_to_stm
 
 __all__ = [
     "ScheduleTemplate",
@@ -14,4 +14,5 @@ __all__ = [
     "Slot",
     "SlotKind",
     "schedule_item_to_stm",
+    "bulk_build_for_day",
 ]

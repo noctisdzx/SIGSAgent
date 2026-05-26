@@ -1,4 +1,4 @@
-You decide what an NPC does in a {{ gap_minutes }}-minute gap.
+You decide what an NPC does in a {{ gap_minutes }}-minute gap of their day.
 
 Persona (JSON):
 {{ persona | tojson }}
@@ -7,9 +7,18 @@ Recent memories (most relevant first):
 {% for m in memories %}- {{ m }}
 {% endfor %}
 
-Candidate activity fragments:
+Candidate activity fragments (you MUST pick exactly one of these ids):
 {% for c in candidates %}- id={{ c.id }}, label={{ c.label }}, tags={{ c.tags }}
 {% endfor %}
 
-Reply STRICTLY in JSON:
-{"id": "<one of the candidate ids>", "rationale": "<one short Chinese sentence>"}
+Rules:
+- The picked id MUST appear verbatim in the candidates list above.
+- Prefer fragments whose tags overlap with the persona's favorite_tags.
+- Keep "rationale" to ONE short Chinese sentence (≤ 30 字).
+
+Reply STRICTLY as a single JSON object, no prose, no markdown fences.
+
+Example output:
+{"id": "frag_read_lab", "rationale": "她偏好study, 趁空隙翻文献"}
+
+Now produce the JSON for this case:

@@ -1,18 +1,28 @@
-"""Pydantic v2 schemas mirrored against the JSON files in `data/`."""
+"""Pydantic v2 schemas mirrored against the JSON files in `data/`.
+
+Pydantic v2's default `extra='ignore'` is fine for our purposes — most NPC
+JSON files carry rich `profile` / `narrative_*` annotations that the runtime
+does not consume directly but still wants to expose to the frontend; we allow
+them through with `extra='allow'` so they remain accessible.
+"""
 
 from __future__ import annotations
 
 from typing import Any
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
-class FurnitureSchema(BaseModel):
+class _BaseModel(BaseModel):
+    model_config = ConfigDict(extra="allow")
+
+
+class FurnitureSchema(_BaseModel):
     name: str
     num: int
 
 
-class RoomSchema(BaseModel):
+class RoomSchema(_BaseModel):
     index: int
     uid: str
     name: str
@@ -24,11 +34,11 @@ class RoomSchema(BaseModel):
     furniture: list[FurnitureSchema] = Field(default_factory=list)
 
 
-class SceneFileSchema(BaseModel):
+class SceneFileSchema(_BaseModel):
     rooms: list[RoomSchema]
 
 
-class PersonaSchema(BaseModel):
+class PersonaSchema(_BaseModel):
     id: str
     name: str
     role: str
@@ -37,22 +47,23 @@ class PersonaSchema(BaseModel):
     relations: dict[str, Any] = Field(default_factory=dict)
     initial_location_uid: str
     schedule_template_id: str
+    profile: dict[str, Any] = Field(default_factory=dict)
 
 
-class TemplateBlockSchema(BaseModel):
+class TemplateBlockSchema(_BaseModel):
     start: str
     end: str
     activity: str
     location_uid: str
 
 
-class ScheduleTemplateSchema(BaseModel):
+class ScheduleTemplateSchema(_BaseModel):
     id: str
     description: str = ""
     week: dict[str, list[TemplateBlockSchema]] = Field(default_factory=dict)
 
 
-class FragmentSchema(BaseModel):
+class FragmentSchema(_BaseModel):
     id: str
     label: str
     duration_minutes: int
@@ -62,11 +73,11 @@ class FragmentSchema(BaseModel):
     preconditions: dict[str, Any] = Field(default_factory=dict)
 
 
-class FragmentFileSchema(BaseModel):
+class FragmentFileSchema(_BaseModel):
     fragments: list[FragmentSchema]
 
 
-class ActionSchema(BaseModel):
+class ActionSchema(_BaseModel):
     id: str
     label: str
     cost: int
@@ -78,5 +89,71 @@ class ActionSchema(BaseModel):
     stochastic: dict[str, Any] | None = None
 
 
-class ActionFileSchema(BaseModel):
+class ActionFileSchema(_BaseModel):
     actions: list[ActionSchema]
+
+
+# ---------- Newly added auxiliary datasets ----------
+
+class RelationEdgeSchema(_BaseModel):
+    source: str
+    target: str
+    label: str
+    weight: float = 0.5
+    tone: str | None = None
+    color: str | None = None
+    label_en: str | None = None
+    label_zh: str | None = None
+
+
+class RelationsSchema(_BaseModel):
+    edges: list[RelationEdgeSchema] = Field(default_factory=list)
+
+
+class SocialSceneSchema(_BaseModel):
+    id: str
+    title: str
+    tags: list[str] = Field(default_factory=list)
+    people: list[str] = Field(default_factory=list)
+    location_uid: str | None = None
+    trigger: str | None = None
+
+
+class ScenesLibrarySchema(_BaseModel):
+    scenes: list[SocialSceneSchema] = Field(default_factory=list)
+
+
+class TimelineEventSchema(_BaseModel):
+    day: str
+    time: str
+    title: str
+    location_uid: str | None = None
+    people: list[str] = Field(default_factory=list)
+
+
+class TimelineSeedSchema(_BaseModel):
+    events: list[TimelineEventSchema] = Field(default_factory=list)
+
+
+class MemorySeedItemSchema(_BaseModel):
+    text: str
+    text_en: str | None = None
+    tone: str | None = None
+    ts: str | None = None
+
+
+class MemorySeedTripletSchema(_BaseModel):
+    subject: str
+    predicate: str
+    object: str
+    narrative_zh: str | None = None
+    narrative_en: str | None = None
+
+
+class MemorySeedEntrySchema(_BaseModel):
+    memories: list[MemorySeedItemSchema] = Field(default_factory=list)
+    triplets: list[MemorySeedTripletSchema] = Field(default_factory=list)
+
+
+class MemorySeedSchema(_BaseModel):
+    per_agent: dict[str, MemorySeedEntrySchema] = Field(default_factory=dict)

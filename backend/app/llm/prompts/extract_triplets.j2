@@ -4,4 +4,20 @@ Events:
 {% for ev in events %}- {{ ev }}
 {% endfor %}
 
-Reply STRICTLY in JSON: a list of objects with keys subject / predicate / object / location_uid / tone.
+Rules:
+- Each triplet MUST have keys: subject, predicate, object.
+- Optional keys: location_uid, tone.
+- Subject is normally "{{ agent_id }}" but may be another entity if the event clearly refers to one.
+- Predicate is a short verb phrase in 中文 or English.
+- Object is the thing the subject acted on / felt.
+
+Reply STRICTLY as a JSON object with a single top-level key "triplets" whose value is an array.
+No prose, no markdown fences.
+
+Example output:
+{"triplets": [
+  {"subject": "{{ agent_id }}", "predicate": "去了", "object": "图书馆", "location_uid": "64a9bc35", "tone": "calm"},
+  {"subject": "{{ agent_id }}", "predicate": "遇见", "object": "demo_bob", "tone": "warm"}
+]}
+
+Now produce the JSON for this case:

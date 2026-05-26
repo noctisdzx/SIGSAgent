@@ -1,6 +1,6 @@
 """Decision subsystem: slot filling (LLM) + GOAP A* planner."""
 
-from .slot_filler import SlotFiller
-from .goap_planner import GoapPlanner, PlanStep
+from .goap_planner import ActionSpec, GoapPlanner, PlanStep
+from .slot_filler import SlotFillChoice, SlotFiller
 
-__all__ = ["SlotFiller", "GoapPlanner", "PlanStep"]
+__all__ = ["SlotFiller", "SlotFillChoice", "GoapPlanner", "ActionSpec", "PlanStep"]

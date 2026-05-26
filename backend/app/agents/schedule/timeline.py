@@ -12,6 +12,10 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import date, datetime, time, timedelta
 from enum import Enum
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:  # pragma: no cover
+    from .template import ScheduleTemplate
 
 
 SLOT_MINUTES = 5
@@ -93,3 +97,61 @@ class DailyTimeline:
                 location_uid=location_uid,
                 source_id=fragment_id,
             )
+
+    # ----- helpers -----
+
+    def slot_at(self, dt: datetime) -> Slot | None:
+        """Return the slot covering `dt` on this day, or None if `dt` falls
+        outside the day. Aligns to 5-min boundaries from midnight.
+        """
+        if dt.date() != self.day:
+            return None
+        minutes = dt.hour * 60 + dt.minute
+        idx = minutes // SLOT_MINUTES
+        if 0 <= idx < SLOTS_PER_DAY:
+            return self.slots[idx]
+        return None
+
+    def populate_from_template(
+        self,
+        template: "ScheduleTemplate",
+        weekday_name: str,
+    ) -> int:
+        """Mark TEMPLATE slots from a parsed template's blocks for `weekday_name`.
+
+        Returns the number of slots written. Skips blocks that cannot be parsed.
+        Idempotent: re-running for the same weekday overwrites the same slots.
+        """
+        n_written = 0
+        for block in template.blocks_for(weekday_name):
+            try:
+                start_idx = _hhmm_to_slot_idx(block.start)
+                end_idx = _hhmm_to_slot_idx(block.end)
+            except ValueError:
+                continue
+            if end_idx <= start_idx:
+                continue
+            end_idx = min(end_idx, SLOTS_PER_DAY)
+            block_id = f"{template.id}:{weekday_name}:{block.start}-{block.end}"
+            self.set_template(
+                idx_from=start_idx,
+                idx_to=end_idx,
+                activity=block.activity,
+                location_uid=block.location_uid,
+                source_id=block_id,
+            )
+            n_written += end_idx - start_idx
+        return n_written
+
+
+def _hhmm_to_slot_idx(hh_mm: str) -> int:
+    """Convert "HH:MM" to a slot index in [0, SLOTS_PER_DAY]."""
+    if not isinstance(hh_mm, str) or ":" not in hh_mm:
+        raise ValueError(f"bad HH:MM string: {hh_mm!r}")
+    hh, mm = hh_mm.split(":", 1)
+    h = int(hh)
+    m = int(mm)
+    if not (0 <= h <= 24 and 0 <= m < 60):
+        raise ValueError(f"bad HH:MM: {hh_mm!r}")
+    minutes = h * 60 + m
+    return minutes // SLOT_MINUTES

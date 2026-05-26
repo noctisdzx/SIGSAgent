@@ -72,3 +72,17 @@ class ShortTermMemory:
 
     def load(self, items: Iterable[ShortTermItem]) -> None:
         self._items = list(items)
+
+    def to_dict_list(self) -> list[dict]:
+        """JSON-friendly snapshot for REST/WS responses."""
+        return [
+            {
+                "id": it.id,
+                "text": it.text,
+                "ts": it.ts.isoformat(),
+                "source": it.source,
+                "hit_count": it.hit_count,
+                "meta": dict(it.meta),
+            }
+            for it in self._items
+        ]

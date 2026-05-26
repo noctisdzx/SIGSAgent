@@ -1,10 +1,11 @@
-"""Memory subsystem: short-term, long-term, narrative graph, retriever, compressor."""
+"""Memory subsystem: short-term, long-term, narrative graph, retriever, compressor, store."""
 
-from .short_term import ShortTermMemory, ShortTermItem
-from .long_term import LongTermMemory, LongTermItem
+from .compressor import CompressionResult, MemoryCompressor
+from .long_term import LongTermItem, LongTermMemory
 from .memory_graph import MemoryGraph, Triplet
-from .retriever import MemoryRetriever
-from .compressor import MemoryCompressor
+from .retriever import MemoryRetriever, RetrievedMemory
+from .short_term import ShortTermItem, ShortTermMemory
+from .store import MemoryStore
 
 __all__ = [
     "ShortTermMemory",
@@ -14,5 +15,8 @@ __all__ = [
     "MemoryGraph",
     "Triplet",
     "MemoryRetriever",
+    "RetrievedMemory",
     "MemoryCompressor",
+    "CompressionResult",
+    "MemoryStore",
 ]

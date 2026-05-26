@@ -39,3 +39,9 @@ class FragmentLibrary:
 
     def fits(self, duration_minutes: int) -> list[Fragment]:
         return [f for f in self._by_id.values() if f.duration_minutes <= duration_minutes]
+
+    def by_tag(self, tag: str) -> list[Fragment]:
+        return [f for f in self._by_id.values() if tag in f.tags]
+
+    def by_preferred_loc(self, uid: str) -> list[Fragment]:
+        return [f for f in self._by_id.values() if uid in f.preferred_location_uids]

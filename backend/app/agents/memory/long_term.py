@@ -68,3 +68,18 @@ class LongTermMemory:
 
     def load(self, items: Iterable[LongTermItem]) -> None:
         self._items = list(items)
+
+    def to_dict_list(self) -> list[dict]:
+        """JSON-friendly snapshot for REST/WS responses."""
+        return [
+            {
+                "id": it.id,
+                "text": it.text,
+                "ts": it.ts.isoformat(),
+                "source_ids": list(it.source_ids),
+                "hit_count": it.hit_count,
+                "degraded": it.degraded,
+                "meta": dict(it.meta),
+            }
+            for it in self._items
+        ]

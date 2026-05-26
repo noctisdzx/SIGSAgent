@@ -37,3 +37,18 @@ class ScheduleTemplate:
 
     def blocks_for(self, weekday_name: str) -> list[TemplateBlock]:
         return list(self.week.get(weekday_name, []))
+
+    def current_block_for(
+        self,
+        weekday_name: str,
+        hh_mm: str,
+    ) -> TemplateBlock | None:
+        """Return the template block covering `hh_mm` on `weekday_name`, if any.
+
+        Boundary: block is `[start, end)` so a query at exactly `end` is *not*
+        covered; this matches how `DailyTimeline` slots are aligned.
+        """
+        for b in self.week.get(weekday_name, []):
+            if b.start <= hh_mm < b.end:
+                return b
+        return None
