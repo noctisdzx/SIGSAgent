@@ -1,0 +1,76 @@
+{
+  "id": "npc52_tian_zirui",
+  "name": "田子睿",
+  "role": "undergraduate_science",
+  "personality": {
+    "openness": 0.75,
+    "conscientiousness": 0.8,
+    "extraversion": 0.5,
+    "agreeableness": 0.55,
+    "neuroticism": 0.4
+  },
+  "preferences": {
+    "favorite_locations": [
+      "64a9bc35",
+      "3877431b"
+    ],
+    "favorite_tags": [
+      "study",
+      "leisure"
+    ]
+  },
+  "relations": {
+    "npc16_lu_xiaoman": "环保同盟",
+    "npc46_qin_ling": "环境数据合作"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc52_tian_zirui",
+  "profile": {
+    "id_num": 52,
+    "name_zh": "田子睿",
+    "name_en": "Tian Zirui",
+    "age": 21,
+    "role_zh": "环境学院大三·环保行动派",
+    "role_en": "Envir Yr3 · Eco Action-er",
+    "major_zh": "环境工程",
+    "major_en": "Environmental Engineering",
+    "group_zh": "理学院",
+    "group_en": "",
+    "mbti": "INTJ",
+    "ocean_raw": "O75 C80 E50 A55 N40",
+    "innate_zh": "行动力强、数据敏感、执着",
+    "innate_en": "Action-oriented, data-sensitive, stubborn",
+    "learned_zh": "多次环保项目实践积累的数据分析和项目管理能力",
+    "learned_en": "Eco projects honed data analysis and PM skills",
+    "belief_zh": "数据不会说谎，地球正在求救",
+    "belief_en": "Data doesn't lie; Earth is crying for help",
+    "goal_zh": "用技术手段解决环境污染问题",
+    "goal_en": "Solve pollution via engineering",
+    "contradiction_zh": "理性分析告诉他形势严峻 vs 不想变成悲观主义者",
+    "contradiction_en": "Data says urgent vs. doesn't want to become a pessimist",
+    "surface_zh": "理性冷静、数据说话",
+    "surface_en": "Rational, data-first",
+    "deep_zh": "对环境破坏有一种控制不住的愤怒",
+    "deep_en": "Rage he can barely contain at environmental damage",
+    "fear_zh": "技术进步追不上环境恶化的速度",
+    "fear_en": "Tech progress falling behind environmental decline",
+    "desire_zh": "用工程方案而非口号解决问题",
+    "desire_en": "Engineering solutions, not slogans",
+    "lifestyle_zh": "规律高效",
+    "lifestyle_en": "Regular, efficient",
+    "rhythm_zh": "上午实验，下午数据分析，晚上阅读",
+    "rhythm_en": "Experiments AM, analysis PM, reading at night",
+    "spaces_zh": "环境实验室、污水处理站（实习）、图书馆",
+    "spaces_en": "Environmental lab, WWTP internship, library",
+    "long_desire_zh": "毕业设计方案拿到企业投资",
+    "long_desire_en": "Graduation design attracts enterprise funding",
+    "short_goal_zh": "今天分析完上周的水质检测数据",
+    "short_goal_en": "Analyze last week's water-quality data",
+    "constraint_zh": "实验设备老旧；环保行业薪资不高动摇了一些人",
+    "constraint_en": "Old equipment; low pay in industry shakes peers",
+    "bias_zh": "倾向低估政策和商业在环保中的作用",
+    "bias_en": "Underestimates policy & business in eco work",
+    "narrative_zh": "不要和我说环保不赚钱，地球没了什么都不赚",
+    "narrative_en": "Don't tell me eco doesn't pay; if Earth dies, nothing pays"
+  }
+}

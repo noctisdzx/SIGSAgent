@@ -1,0 +1,78 @@
+{
+  "id": "npc14_jiang_yuyan",
+  "name": "蒋语嫣",
+  "role": "undergraduate_architecture",
+  "personality": {
+    "openness": 0.9,
+    "conscientiousness": 0.45,
+    "extraversion": 0.5,
+    "agreeableness": 0.65,
+    "neuroticism": 0.45
+  },
+  "preferences": {
+    "favorite_locations": [
+      "3877431b"
+    ],
+    "favorite_tags": [
+      "study",
+      "creative"
+    ]
+  },
+  "relations": {
+    "npc03_su_yutong": "工作室邻桌",
+    "npc36_zhang_weimin": "课程师生",
+    "npc13_tang_yichen": "工作室好友",
+    "npc27_he_jiaqi": "画画同好",
+    "npc47_bai_lu": "艺术审美同好"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc14_jiang_yuyan",
+  "profile": {
+    "id_num": 14,
+    "name_zh": "蒋语嫣",
+    "name_en": "Jiang Yuyan",
+    "age": 20,
+    "role_zh": "建筑学院大二·艺术跨界者",
+    "role_en": "Arch Yr2 · Arts Crossover",
+    "major_zh": "景观设计",
+    "major_en": "Landscape Design",
+    "group_zh": "建筑学院",
+    "group_en": "",
+    "mbti": "ISFP",
+    "ocean_raw": "O90 C45 E50 A65 N45",
+    "innate_zh": "色彩感觉极好、跨界思维、动手能力强",
+    "innate_en": "Great color sense, cross-disciplinary mind, hands-on",
+    "learned_zh": "从小学画画的功底让她在设计中有独特的艺术表达",
+    "learned_en": "Years of childhood painting give her a unique artistic voice",
+    "belief_zh": "设计不只是解决问题，是创造美",
+    "belief_en": "Design isn't just solving problems, it's creating beauty",
+    "goal_zh": "把艺术装置融入景观设计",
+    "goal_en": "Fuse art installation into landscape design",
+    "contradiction_zh": "老师要求实用理性 vs 自己想做艺术化表达",
+    "contradiction_en": "Teachers demand rational function vs. she wants artistic expression",
+    "surface_zh": "安静但有主见",
+    "surface_en": "Quiet but opinionated",
+    "deep_zh": "对审美有极强的执着，不愿妥协",
+    "deep_en": "Stubborn about aesthetics; won't compromise",
+    "fear_zh": "被迫做千篇一律的设计",
+    "fear_en": "Being forced to make cookie-cutter designs",
+    "desire_zh": "在理性和感性之间找到自己的风格",
+    "desire_en": "Find her style between reason and feeling",
+    "lifestyle_zh": "随性但有创作节奏",
+    "lifestyle_en": "Flowy but with creative rhythm",
+    "rhythm_zh": "灵感来了就创作，没灵感就到处看展",
+    "rhythm_en": "Creates when inspired, otherwise visits exhibits",
+    "spaces_zh": "建筑系工作室、美术馆、校园各处写生",
+    "spaces_en": "Arch studio, art museums, sketching across campus",
+    "long_desire_zh": "形成自己辨识度高的设计语言",
+    "long_desire_en": "Develop a distinctive design language",
+    "short_goal_zh": "完成景观课的写生作业",
+    "short_goal_en": "Finish the sketching assignment",
+    "constraint_zh": "手绘作业量大；颜料快用完了",
+    "constraint_en": "Lots of hand-drawing homework; paints running out",
+    "bias_zh": "倾向认为美学价值高于功能价值",
+    "bias_en": "Prioritizes aesthetic over function",
+    "narrative_zh": "好看就是最大的功能",
+    "narrative_en": "Beauty is the biggest function"
+  }
+}

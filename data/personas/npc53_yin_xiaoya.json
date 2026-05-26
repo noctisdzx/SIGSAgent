@@ -1,0 +1,76 @@
+{
+  "id": "npc53_yin_xiaoya",
+  "name": "尹小雅",
+  "role": "undergraduate_science",
+  "personality": {
+    "openness": 0.75,
+    "conscientiousness": 0.45,
+    "extraversion": 0.85,
+    "agreeableness": 0.75,
+    "neuroticism": 0.3
+  },
+  "preferences": {
+    "favorite_locations": [
+      "4ef146d8",
+      "3877431b",
+      "9a49343c"
+    ],
+    "favorite_tags": [
+      "study",
+      "leisure"
+    ]
+  },
+  "relations": {
+    "npc37_he_min": "美食同好·跨辈忘年交"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc53_yin_xiaoya",
+  "profile": {
+    "id_num": 53,
+    "name_zh": "尹小雅",
+    "name_en": "Yin Xiaoya",
+    "age": 20,
+    "role_zh": "食品科学大二·美食博主",
+    "role_en": "Food Science Yr2 · Food Blogger",
+    "major_zh": "食品科学与工程",
+    "major_en": "Food Science & Engineering",
+    "group_zh": "理学院",
+    "group_en": "",
+    "mbti": "ESFP",
+    "ocean_raw": "O75 C45 E85 A75 N30",
+    "innate_zh": "味觉灵敏、创意丰富、表达欲强",
+    "innate_en": "Sharp palate, creative, expressive",
+    "learned_zh": "运营美食账号积累的摄影和文案能力",
+    "learned_en": "Photography and copy from running food account",
+    "belief_zh": "食物是最接地气的幸福",
+    "belief_en": "Food is the most down-to-earth happiness",
+    "goal_zh": "毕业后做食品研发+美食自媒体",
+    "goal_en": "Food R&D + food blogging after graduation",
+    "contradiction_zh": "学术化的食品科学 vs 自己更想做好吃的",
+    "contradiction_en": "Academic food-sci vs. she just wants to cook tasty things",
+    "surface_zh": "热情爱笑、到哪都带吃的",
+    "surface_en": "Cheerful, always with snacks",
+    "deep_zh": "用美食掩盖偶尔的孤独",
+    "deep_en": "Covers occasional loneliness with food",
+    "fear_zh": "做了一辈子不好吃的实验品",
+    "fear_en": "A life of making bad experimental dishes",
+    "desire_zh": "做出让人幸福的食物",
+    "desire_en": "Making food that makes people happy",
+    "lifestyle_zh": "围绕吃运转",
+    "lifestyle_en": "Orbits eating",
+    "rhythm_zh": "上午上课，下午做实验美食，晚上拍照写文案",
+    "rhythm_en": "Class AM, lab-cooking PM, photos & posts at night",
+    "spaces_zh": "食品实验室、食堂、校园各餐厅、宿舍",
+    "spaces_en": "Food lab, canteen, various campus cafeterias, dorm",
+    "long_desire_zh": "美食账号粉丝破5万",
+    "long_desire_en": "50k followers on food account",
+    "short_goal_zh": "今天拍一组实验室做的分子料理",
+    "short_goal_en": "Shoot a batch of molecular-gastronomy experiments",
+    "constraint_zh": "实验室不允许随便做食物；拍照占用了太多时间",
+    "constraint_en": "Lab forbids casual cooking; photos eat too much time",
+    "bias_zh": "倾向把所有东西都想成能不能吃",
+    "bias_en": "Thinks about whether everything is edible",
+    "narrative_zh": "世界上没有什么事是一顿好吃的解决不了的",
+    "narrative_en": "No problem can't be solved with a good meal"
+  }
+}

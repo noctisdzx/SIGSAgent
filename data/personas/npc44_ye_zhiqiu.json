@@ -1,0 +1,76 @@
+{
+  "id": "npc44_ye_zhiqiu",
+  "name": "叶知秋",
+  "role": "graduate_master",
+  "personality": {
+    "openness": 0.95,
+    "conscientiousness": 0.5,
+    "extraversion": 0.4,
+    "agreeableness": 0.55,
+    "neuroticism": 0.45
+  },
+  "preferences": {
+    "favorite_locations": [
+      "4ef146d8"
+    ],
+    "favorite_tags": [
+      "leisure"
+    ]
+  },
+  "relations": {
+    "npc04_zhang_heming": "学术讨论伙伴",
+    "npc21_li_moran": "跨系旁听认识",
+    "npc60_tao_ran": "科学哲学同好",
+    "npc22_zhou_xiaomeng": "深度对话后的特别感觉"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc44_ye_zhiqiu",
+  "profile": {
+    "id_num": 44,
+    "name_zh": "叶知秋",
+    "name_en": "Ye Zhiqiu",
+    "age": 23,
+    "role_zh": "哲学系研一·跨界思考者",
+    "role_en": "Philosophy M1 · Cross-Disciplinary Thinker",
+    "major_zh": "科学哲学",
+    "major_en": "Philosophy of Science",
+    "group_zh": "哲学系",
+    "group_en": "",
+    "mbti": "INTP",
+    "ocean_raw": "O95 C50 E40 A55 N45",
+    "innate_zh": "跨领域联想能力强、好奇心无边界",
+    "innate_en": "Cross-domain associative mind, unbounded curiosity",
+    "learned_zh": "理工科本科转到哲学研究生的经历赋予了独特视角",
+    "learned_en": "STEM-to-Philosophy switch gave unique viewpoint",
+    "belief_zh": "科学和哲学本质上在追问同一个问题",
+    "belief_en": "Science and philosophy ask the same question at the core",
+    "goal_zh": "把科学哲学做成可被科学家理解的东西",
+    "goal_en": "Make science philosophy digestible to scientists",
+    "contradiction_zh": "两个学科都觉得他不够纯粹",
+    "contradiction_en": "Neither field thinks he's pure enough",
+    "surface_zh": "话不多但一说就很有意思",
+    "surface_en": "Quiet but says sharp things",
+    "deep_zh": "在两个世界之间寻找归属",
+    "deep_en": "Searching for belonging between two worlds",
+    "fear_zh": "成为两个领域的局外人",
+    "fear_en": "Being an outsider in both fields",
+    "desire_zh": "建起一座桥梁",
+    "desire_en": "Building a bridge",
+    "lifestyle_zh": "不太规律但有思考节奏",
+    "lifestyle_en": "Irregular but thinking-driven",
+    "rhythm_zh": "灵感随时来，经常半夜写笔记",
+    "rhythm_en": "Inspiration anytime - often writes at midnight",
+    "spaces_zh": "哲学系、物理楼旁听、咖啡厅",
+    "spaces_en": "Philosophy dept, auditing physics, cafes",
+    "long_desire_zh": "找到论文的核心问题",
+    "long_desire_en": "Find the core thesis question",
+    "short_goal_zh": "去物理系旁听一节量子力学课",
+    "short_goal_en": "Audit a quantum-mechanics class today",
+    "constraint_zh": "哲学系同学不懂他在说什么；物理系觉得他不够专业",
+    "constraint_en": "Philosophy peers don't get him; physicists think him unprofessional",
+    "bias_zh": "倾向在两个领域间反复跳跃而不深入",
+    "bias_en": "Flits between fields without depth",
+    "narrative_zh": "这两个问题其实是一个问题",
+    "narrative_en": "These two questions are actually one"
+  }
+}

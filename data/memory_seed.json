@@ -1,0 +1,3463 @@
+{
+  "per_agent": {
+    "npc01_lin_xiaowei": {
+      "memories": [
+        {
+          "text": "我不是在发呆，我是在采集素材",
+          "text_en": "I'm not zoning out, I'm collecting material",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：找一个安静但有人流的地方观察别人并记笔记",
+          "text_en": "Today's small goal: Find a quiet-yet-populated place to observe people and take notes",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：刚起床精神还没进入状态；下午有编辑会",
+          "text_en": "Current state: Still groggy after waking; editorial meeting in the afternoon",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起贺云舒：同门学姐妹。",
+          "text_en": "Thinking of He Yunshu: 同门学姐妹.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc01_lin_xiaowei",
+          "predicate": "同门学姐妹",
+          "object": "npc06_he_yunshu",
+          "narrative_zh": "林晓薇 与 贺云舒 的关系：同门学姐妹。",
+          "narrative_en": "Relation: Lin Xiaowei ↔ He Yunshu — 同门学姐妹."
+        },
+        {
+          "subject": "npc01_lin_xiaowei",
+          "predicate": "师生·受指导",
+          "object": "npc33_li_huimin",
+          "narrative_zh": "林晓薇 与 李慧敏 的关系：师生·受指导。",
+          "narrative_en": "Relation: Lin Xiaowei ↔ Li Huimin — 师生·受指导."
+        },
+        {
+          "subject": "npc01_lin_xiaowei",
+          "predicate": "believes",
+          "object": "文字是理解世界最诚实的方式",
+          "narrative_zh": "林晓薇 的核心信念：文字是理解世界最诚实的方式。",
+          "narrative_en": "Core belief of Lin Xiaowei: Words are the most honest way to understand the world."
+        },
+        {
+          "subject": "npc01_lin_xiaowei",
+          "predicate": "longs_for",
+          "object": "保持创作状态，积累可讲述的生活素材",
+          "narrative_zh": "林晓薇 的长期渴望：保持创作状态，积累可讲述的生活素材。",
+          "narrative_en": "Long-term desire of Lin Xiaowei: Stay in creative mode, collect narratable life material."
+        }
+      ]
+    },
+    "npc02_chen_yuanhang": {
+      "memories": [
+        {
+          "text": "再跑一个epoch就好了，我马上就能收敛",
+          "text_en": "One more epoch, it'll converge",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：调通昨晚崩溃的训练脚本",
+          "text_en": "Today's small goal: Fix the training script that crashed overnight",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：GPU服务器排队中；导师催进度；连续熬夜身体疲惫",
+          "text_en": "Current state: GPU queue is long; advisor chasing progress; exhausted from all-nighters",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起王建国：导师-研究生。",
+          "text_en": "Thinking of Wang Jianguo: 导师-研究生.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc02_chen_yuanhang",
+          "predicate": "导师-研究生",
+          "object": "npc34_wang_jianguo",
+          "narrative_zh": "陈远航 与 王建国 的关系：导师-研究生。",
+          "narrative_en": "Relation: Chen Yuanhang ↔ Wang Jianguo — 导师-研究生."
+        },
+        {
+          "subject": "npc02_chen_yuanhang",
+          "predicate": "实验室同门·暗中竞争",
+          "object": "npc08_xu_qinglan",
+          "narrative_zh": "陈远航 与 许晴岚 的关系：实验室同门·暗中竞争。",
+          "narrative_en": "Relation: Chen Yuanhang ↔ Xu Qinglan — 实验室同门·暗中竞争."
+        },
+        {
+          "subject": "npc02_chen_yuanhang",
+          "predicate": "believes",
+          "object": "技术能解决大部分问题，解决不了的是人的问题",
+          "narrative_zh": "陈远航 的核心信念：技术能解决大部分问题，解决不了的是人的问题。",
+          "narrative_en": "Core belief of Chen Yuanhang: Tech solves most problems; what it can't is human."
+        },
+        {
+          "subject": "npc02_chen_yuanhang",
+          "predicate": "longs_for",
+          "object": "在deadline前跑通实验拿到结果",
+          "narrative_zh": "陈远航 的长期渴望：在deadline前跑通实验拿到结果。",
+          "narrative_en": "Long-term desire of Chen Yuanhang: Get experiments to converge before deadline."
+        }
+      ]
+    },
+    "npc03_su_yutong": {
+      "memories": [
+        {
+          "text": "多认识一个人就多一种可能性",
+          "text_en": "One more person I know is one more possibility",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：约几个跨专业同学聊设计灵感",
+          "text_en": "Today's small goal: Meet a few cross-major friends to swap design inspiration",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：竞赛图纸下周交；手头同时开着三个项目",
+          "text_en": "Current state: Competition drawings due next week; three parallel projects",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起唐亦辰：竞赛搭档·暧昧不明。",
+          "text_en": "Thinking of Tang Yichen: 竞赛搭档·暧昧不明.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc03_su_yutong",
+          "predicate": "竞赛搭档·暧昧不明",
+          "object": "npc13_tang_yichen",
+          "narrative_zh": "苏雨桐 与 唐亦辰 的关系：竞赛搭档·暧昧不明。",
+          "narrative_en": "Relation: Su Yutong ↔ Tang Yichen — 竞赛搭档·暧昧不明."
+        },
+        {
+          "subject": "npc03_su_yutong",
+          "predicate": "工作室邻桌",
+          "object": "npc14_jiang_yuyan",
+          "narrative_zh": "苏雨桐 与 蒋语嫣 的关系：工作室邻桌。",
+          "narrative_en": "Relation: Su Yutong ↔ Jiang Yuyan — 工作室邻桌."
+        },
+        {
+          "subject": "npc03_su_yutong",
+          "predicate": "believes",
+          "object": "大学不只是学习，是认识世界和自己的最佳窗口",
+          "narrative_zh": "苏雨桐 的核心信念：大学不只是学习，是认识世界和自己的最佳窗口。",
+          "narrative_en": "Core belief of Su Yutong: College is the best window to meet the world and yourself, not just to study."
+        },
+        {
+          "subject": "npc03_su_yutong",
+          "predicate": "longs_for",
+          "object": "拓展人脉同时推进竞赛方案",
+          "narrative_zh": "苏雨桐 的长期渴望：拓展人脉同时推进竞赛方案。",
+          "narrative_en": "Long-term desire of Su Yutong: Expand network while advancing competition design."
+        }
+      ]
+    },
+    "npc04_zhang_heming": {
+      "memories": [
+        {
+          "text": "这个问题如果我不想清楚，后面都是白写",
+          "text_en": "If I can't think this through, the rest is worthless",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：把昨天读到的一段海德格尔理清楚",
+          "text_en": "Today's small goal: Clarify yesterday's passage from Heidegger",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：导师对论文框架有不同意见；眼睛因长期阅读不太舒服",
+          "text_en": "Current state: Advisor disagrees on framework; eyes strained from reading",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起李默然：偶尔在湖边相遇·思想交流。",
+          "text_en": "Thinking of Li Moran: 偶尔在湖边相遇·思想交流.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc04_zhang_heming",
+          "predicate": "偶尔在湖边相遇·思想交流",
+          "object": "npc21_li_moran",
+          "narrative_zh": "张鹤鸣 与 李默然 的关系：偶尔在湖边相遇·思想交流。",
+          "narrative_en": "Relation: Zhang Heming ↔ Li Moran — 偶尔在湖边相遇·思想交流."
+        },
+        {
+          "subject": "npc04_zhang_heming",
+          "predicate": "学术讨论伙伴",
+          "object": "npc44_ye_zhiqiu",
+          "narrative_zh": "张鹤鸣 与 叶知秋 的关系：学术讨论伙伴。",
+          "narrative_en": "Relation: Zhang Heming ↔ Ye Zhiqiu — 学术讨论伙伴."
+        },
+        {
+          "subject": "npc04_zhang_heming",
+          "predicate": "believes",
+          "object": "未经审视的生活不值得过",
+          "narrative_zh": "张鹤鸣 的核心信念：未经审视的生活不值得过。",
+          "narrative_en": "Core belief of Zhang Heming: An unexamined life is not worth living."
+        },
+        {
+          "subject": "npc04_zhang_heming",
+          "predicate": "longs_for",
+          "object": "推进博士论文第四章",
+          "narrative_zh": "张鹤鸣 的长期渴望：推进博士论文第四章。",
+          "narrative_en": "Long-term desire of Zhang Heming: Advance dissertation Chapter 4."
+        }
+      ]
+    },
+    "npc05_fang_zhiqing": {
+      "memories": [
+        {
+          "text": "把这个项目做好，就能证明我不只是会说几门语言",
+          "text_en": "Nailing this project proves I'm more than a polyglot",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：回复三封来自合作院校的邮件",
+          "text_en": "Today's small goal: Reply to three emails from partner universities",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：项目审批流程卡住了；同时要准备GRE",
+          "text_en": "Current state: Program approval stuck; also preparing GRE",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起柳如烟：语言学习互助。",
+          "text_en": "Thinking of Liu Ruyan: 语言学习互助.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc05_fang_zhiqing",
+          "predicate": "语言学习互助",
+          "object": "npc49_liu_ruyan",
+          "narrative_zh": "方芷晴 与 柳如烟 的关系：语言学习互助。",
+          "narrative_en": "Relation: Fang Zhiqing ↔ Liu Ruyan — 语言学习互助."
+        },
+        {
+          "subject": "npc05_fang_zhiqing",
+          "predicate": "校园活动合作",
+          "object": "npc32_luo_chenxi",
+          "narrative_zh": "方芷晴 与 罗晨曦 的关系：校园活动合作。",
+          "narrative_en": "Relation: Fang Zhiqing ↔ Luo Chenxi — 校园活动合作."
+        },
+        {
+          "subject": "npc05_fang_zhiqing",
+          "predicate": "believes",
+          "object": "语言是桥梁，沟通能化解大部分冲突",
+          "narrative_zh": "方芷晴 的核心信念：语言是桥梁，沟通能化解大部分冲突。",
+          "narrative_en": "Core belief of Fang Zhiqing: Language is a bridge; communication dissolves most conflicts."
+        },
+        {
+          "subject": "npc05_fang_zhiqing",
+          "predicate": "longs_for",
+          "object": "推进下学期交换生项目的落地",
+          "narrative_zh": "方芷晴 的长期渴望：推进下学期交换生项目的落地。",
+          "narrative_en": "Long-term desire of Fang Zhiqing: Land next semester's exchange program."
+        }
+      ]
+    },
+    "npc06_he_yunshu": {
+      "memories": [
+        {
+          "text": "别人在玩的时候我在学，这就是我的优势",
+          "text_en": "While others play, I study - that's my edge",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天必须背完30个文学术语",
+          "text_en": "Today's small goal: Memorize 30 literary terms today",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：模拟考成绩不理想；室友打游戏影响休息",
+          "text_en": "Current state: Mock exam score unsatisfactory; gaming roommates disturb sleep",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起林晓薇：同门学姐妹。",
+          "text_en": "Thinking of Lin Xiaowei: 同门学姐妹.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc06_he_yunshu",
+          "predicate": "同门学姐妹",
+          "object": "npc01_lin_xiaowei",
+          "narrative_zh": "贺云舒 与 林晓薇 的关系：同门学姐妹。",
+          "narrative_en": "Relation: He Yunshu ↔ Lin Xiaowei — 同门学姐妹."
+        },
+        {
+          "subject": "npc06_he_yunshu",
+          "predicate": "师生·考研指导",
+          "object": "npc33_li_huimin",
+          "narrative_zh": "贺云舒 与 李慧敏 的关系：师生·考研指导。",
+          "narrative_en": "Relation: He Yunshu ↔ Li Huimin — 师生·考研指导."
+        },
+        {
+          "subject": "npc06_he_yunshu",
+          "predicate": "believes",
+          "object": "努力不一定成功，但不努力一定不行",
+          "narrative_zh": "贺云舒 的核心信念：努力不一定成功，但不努力一定不行。",
+          "narrative_en": "Core belief of He Yunshu: Effort doesn't guarantee success, but no effort guarantees failure."
+        },
+        {
+          "subject": "npc06_he_yunshu",
+          "predicate": "longs_for",
+          "object": "12月前把所有科目过完第三轮",
+          "narrative_zh": "贺云舒 的长期渴望：12月前把所有科目过完第三轮。",
+          "narrative_en": "Long-term desire of He Yunshu: Finish third pass of all subjects by December."
+        }
+      ]
+    },
+    "npc07_shen_yifan": {
+      "memories": [
+        {
+          "text": "先跑通这个再说，基础以后可以补",
+          "text_en": "Get this running first, I can backfill theory later",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：把昨天看的PyTorch教程跑通",
+          "text_en": "Today's small goal: Get yesterday's PyTorch tutorial running",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：高数作业还没写；社团纳新要帮忙",
+          "text_en": "Current state: Calculus homework undone; club recruitment needs help",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起郑浩宇：室友。",
+          "text_en": "Thinking of Zheng Haoyu: 室友.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc07_shen_yifan",
+          "predicate": "室友",
+          "object": "npc11_zheng_haoyu",
+          "narrative_zh": "沈一凡 与 郑浩宇 的关系：室友。",
+          "narrative_en": "Relation: Shen Yifan ↔ Zheng Haoyu — 室友."
+        },
+        {
+          "subject": "npc07_shen_yifan",
+          "predicate": "技术崇拜",
+          "object": "npc09_han_zimo",
+          "narrative_zh": "沈一凡 与 韩子墨 的关系：技术崇拜。",
+          "narrative_en": "Relation: Shen Yifan ↔ Han Zimo — 技术崇拜."
+        },
+        {
+          "subject": "npc07_shen_yifan",
+          "predicate": "believes",
+          "object": "有趣比有用重要",
+          "narrative_zh": "沈一凡 的核心信念：有趣比有用重要。",
+          "narrative_en": "Core belief of Shen Yifan: Interesting beats useful."
+        },
+        {
+          "subject": "npc07_shen_yifan",
+          "predicate": "longs_for",
+          "object": "搞清楚AI和安全和系统方向到底该选哪个",
+          "narrative_zh": "沈一凡 的长期渴望：搞清楚AI和安全和系统方向到底该选哪个。",
+          "narrative_en": "Long-term desire of Shen Yifan: Figure out whether to pick AI, security, or systems."
+        }
+      ]
+    },
+    "npc08_xu_qinglan": {
+      "memories": [
+        {
+          "text": "休息是弱者的借口",
+          "text_en": "Rest is an excuse for the weak",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天把实验对比表格整理完",
+          "text_en": "Today's small goal: Finish experiment comparison table today",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：合作者拖延了数据标注进度；身体有些不舒服",
+          "text_en": "Current state: Collaborator delayed labeling; body feels off",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起王建国：导师-研究生。",
+          "text_en": "Thinking of Wang Jianguo: 导师-研究生.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc08_xu_qinglan",
+          "predicate": "导师-研究生",
+          "object": "npc34_wang_jianguo",
+          "narrative_zh": "许晴岚 与 王建国 的关系：导师-研究生。",
+          "narrative_en": "Relation: Xu Qinglan ↔ Wang Jianguo — 导师-研究生."
+        },
+        {
+          "subject": "npc08_xu_qinglan",
+          "predicate": "实验室同门·暗中竞争",
+          "object": "npc02_chen_yuanhang",
+          "narrative_zh": "许晴岚 与 陈远航 的关系：实验室同门·暗中竞争。",
+          "narrative_en": "Relation: Xu Qinglan ↔ Chen Yuanhang — 实验室同门·暗中竞争."
+        },
+        {
+          "subject": "npc08_xu_qinglan",
+          "predicate": "believes",
+          "object": "在学术界，数量和质量都不能少",
+          "narrative_zh": "许晴岚 的核心信念：在学术界，数量和质量都不能少。",
+          "narrative_en": "Core belief of Xu Qinglan: In academia you need both quantity and quality."
+        },
+        {
+          "subject": "npc08_xu_qinglan",
+          "predicate": "longs_for",
+          "object": "投稿CVPR的论文再改一版",
+          "narrative_zh": "许晴岚 的长期渴望：投稿CVPR的论文再改一版。",
+          "narrative_en": "Long-term desire of Xu Qinglan: Another revision of CVPR submission."
+        }
+      ]
+    },
+    "npc09_han_zimo": {
+      "memories": [
+        {
+          "text": "课堂教的那些东西，我早就在项目里用过了",
+          "text_en": "What they teach in class, I already shipped",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：把支付接口调通",
+          "text_en": "Today's small goal: Get the payment API working",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：课程还是要应付；服务器费用在上涨",
+          "text_en": "Current state: Still must pass courses; server costs rising",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起沈一凡：技术崇拜。",
+          "text_en": "Thinking of Shen Yifan: 技术崇拜.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc09_han_zimo",
+          "predicate": "技术崇拜",
+          "object": "npc07_shen_yifan",
+          "narrative_zh": "韩子墨 与 沈一凡 的关系：技术崇拜。",
+          "narrative_en": "Relation: Han Zimo ↔ Shen Yifan — 技术崇拜."
+        },
+        {
+          "subject": "npc09_han_zimo",
+          "predicate": "同级朋友",
+          "object": "npc11_zheng_haoyu",
+          "narrative_zh": "韩子墨 与 郑浩宇 的关系：同级朋友。",
+          "narrative_en": "Relation: Han Zimo ↔ Zheng Haoyu — 同级朋友."
+        },
+        {
+          "subject": "npc09_han_zimo",
+          "predicate": "believes",
+          "object": "做出有人用的东西比论文重要",
+          "narrative_zh": "韩子墨 的核心信念：做出有人用的东西比论文重要。",
+          "narrative_en": "Core belief of Han Zimo: Making something people use beats papers."
+        },
+        {
+          "subject": "npc09_han_zimo",
+          "predicate": "longs_for",
+          "object": "把新产品的MVP做出来",
+          "narrative_zh": "韩子墨 的长期渴望：把新产品的MVP做出来。",
+          "narrative_en": "Long-term desire of Han Zimo: Ship the new product MVP."
+        }
+      ]
+    },
+    "npc10_wu_ruolin": {
+      "memories": [
+        {
+          "text": "先帮他们搞懂这个再说，我的实验晚上赶",
+          "text_en": "Let me help them first; I'll run experiments tonight",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：准备今晚的答疑材料",
+          "text_en": "Today's small goal: Prepare tonight's office-hour materials",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：学生问题太多占用了太多时间；自己的实验也要推进",
+          "text_en": "Current state: Student questions consume time; own experiments must advance",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起王建国：导师-研究生。",
+          "text_en": "Thinking of Wang Jianguo: 导师-研究生.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc10_wu_ruolin",
+          "predicate": "导师-研究生",
+          "object": "npc34_wang_jianguo",
+          "narrative_zh": "吴若琳 与 王建国 的关系：导师-研究生。",
+          "narrative_en": "Relation: Wu Ruolin ↔ Wang Jianguo — 导师-研究生."
+        },
+        {
+          "subject": "npc10_wu_ruolin",
+          "predicate": "实验室同门·互助",
+          "object": "npc02_chen_yuanhang",
+          "narrative_zh": "吴若琳 与 陈远航 的关系：实验室同门·互助。",
+          "narrative_en": "Relation: Wu Ruolin ↔ Chen Yuanhang — 实验室同门·互助."
+        },
+        {
+          "subject": "npc10_wu_ruolin",
+          "predicate": "believes",
+          "object": "教学相长，帮助别人也是在帮助自己",
+          "narrative_zh": "吴若琳 的核心信念：教学相长，帮助别人也是在帮助自己。",
+          "narrative_en": "Core belief of Wu Ruolin: Helping others teaches you."
+        },
+        {
+          "subject": "npc10_wu_ruolin",
+          "predicate": "longs_for",
+          "object": "论文实验结果能再提两个点",
+          "narrative_zh": "吴若琳 的长期渴望：论文实验结果能再提两个点。",
+          "narrative_en": "Long-term desire of Wu Ruolin: Push experiment metrics up another 2 points."
+        }
+      ]
+    },
+    "npc11_zheng_haoyu": {
+      "memories": [
+        {
+          "text": "考试临时抱佛脚就行，训练赛不能缺席",
+          "text_en": "I can cram the exam, but I can't skip scrim",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：安排今晚的训练赛阵容",
+          "text_en": "Today's small goal: Set tonight's scrim roster",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：这周有两门考试；队员之间有矛盾需要调解",
+          "text_en": "Current state: Two exams this week; team infighting to mediate",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起沈一凡：室友。",
+          "text_en": "Thinking of Shen Yifan: 室友.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc11_zheng_haoyu",
+          "predicate": "室友",
+          "object": "npc07_shen_yifan",
+          "narrative_zh": "郑浩宇 与 沈一凡 的关系：室友。",
+          "narrative_en": "Relation: Zheng Haoyu ↔ Shen Yifan — 室友."
+        },
+        {
+          "subject": "npc11_zheng_haoyu",
+          "predicate": "同级朋友",
+          "object": "npc09_han_zimo",
+          "narrative_zh": "郑浩宇 与 韩子墨 的关系：同级朋友。",
+          "narrative_en": "Relation: Zheng Haoyu ↔ Han Zimo — 同级朋友."
+        },
+        {
+          "subject": "npc11_zheng_haoyu",
+          "predicate": "believes",
+          "object": "做什么就要做到最好，包括打游戏",
+          "narrative_zh": "郑浩宇 的核心信念：做什么就要做到最好，包括打游戏。",
+          "narrative_en": "Core belief of Zheng Haoyu: Whatever you do, be the best - including gaming."
+        },
+        {
+          "subject": "npc11_zheng_haoyu",
+          "predicate": "longs_for",
+          "object": "校队成绩提升+自己的专业课不挂科",
+          "narrative_zh": "郑浩宇 的长期渴望：校队成绩提升+自己的专业课不挂科。",
+          "narrative_en": "Long-term desire of Zheng Haoyu: Team performance up · keep grades passing."
+        }
+      ]
+    },
+    "npc12_liu_sihan": {
+      "memories": [
+        {
+          "text": "我只是还没准备好告诉他们我的决定",
+          "text_en": "I'm just not ready to tell them my decision yet",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今晚跟着教程做完一个UI练习",
+          "text_en": "Today's small goal: Finish a UI exercise from a tutorial tonight",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：专业课不能挂；父母不支持转行",
+          "text_en": "Current state: Can't fail major courses; parents oppose change",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起吴若琳：答疑学妹。",
+          "text_en": "Thinking of Wu Ruolin: 答疑学妹.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc12_liu_sihan",
+          "predicate": "答疑学妹",
+          "object": "npc10_wu_ruolin",
+          "narrative_zh": "刘思涵 与 吴若琳 的关系：答疑学妹。",
+          "narrative_en": "Relation: Liu Sihan ↔ Wu Ruolin — 答疑学妹."
+        },
+        {
+          "subject": "npc12_liu_sihan",
+          "predicate": "跨专业好友·设计兴趣",
+          "object": "npc27_he_jiaqi",
+          "narrative_zh": "刘思涵 与 何佳琪 的关系：跨专业好友·设计兴趣。",
+          "narrative_en": "Relation: Liu Sihan ↔ He Jiaqi — 跨专业好友·设计兴趣."
+        },
+        {
+          "subject": "npc12_liu_sihan",
+          "predicate": "believes",
+          "object": "找到喜欢的事比什么都重要",
+          "narrative_zh": "刘思涵 的核心信念：找到喜欢的事比什么都重要。",
+          "narrative_en": "Core belief of Liu Sihan: Finding what you love beats everything."
+        },
+        {
+          "subject": "npc12_liu_sihan",
+          "predicate": "longs_for",
+          "object": "建立自己的设计作品集",
+          "narrative_zh": "刘思涵 的长期渴望：建立自己的设计作品集。",
+          "narrative_en": "Long-term desire of Liu Sihan: Build a design portfolio."
+        }
+      ]
+    },
+    "npc13_tang_yichen": {
+      "memories": [
+        {
+          "text": "再改一版就完美了",
+          "text_en": "One more pass and it'll be perfect",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天把立面图改到第三版",
+          "text_en": "Today's small goal: Third revision of the elevation drawings today",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：导师对方案又有新意见；3D打印机排队",
+          "text_en": "Current state: Advisor has new feedback; 3D printer queue is long",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起苏雨桐：竞赛搭档·暧昧不明。",
+          "text_en": "Thinking of Su Yutong: 竞赛搭档·暧昧不明.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc13_tang_yichen",
+          "predicate": "竞赛搭档·暧昧不明",
+          "object": "npc03_su_yutong",
+          "narrative_zh": "唐亦辰 与 苏雨桐 的关系：竞赛搭档·暧昧不明。",
+          "narrative_en": "Relation: Tang Yichen ↔ Su Yutong — 竞赛搭档·暧昧不明."
+        },
+        {
+          "subject": "npc13_tang_yichen",
+          "predicate": "导师-毕设指导",
+          "object": "npc36_zhang_weimin",
+          "narrative_zh": "唐亦辰 与 张伟民 的关系：导师-毕设指导。",
+          "narrative_en": "Relation: Tang Yichen ↔ Zhang Weimin — 导师-毕设指导."
+        },
+        {
+          "subject": "npc13_tang_yichen",
+          "predicate": "believes",
+          "object": "建筑是凝固的音乐",
+          "narrative_zh": "唐亦辰 的核心信念：建筑是凝固的音乐。",
+          "narrative_en": "Core belief of Tang Yichen: Architecture is frozen music."
+        },
+        {
+          "subject": "npc13_tang_yichen",
+          "predicate": "longs_for",
+          "object": "毕业设计完成度达到90%",
+          "narrative_zh": "唐亦辰 的长期渴望：毕业设计完成度达到90%。",
+          "narrative_en": "Long-term desire of Tang Yichen: 90% completion on thesis."
+        }
+      ]
+    },
+    "npc14_jiang_yuyan": {
+      "memories": [
+        {
+          "text": "好看就是最大的功能",
+          "text_en": "Beauty is the biggest function",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：完成景观课的写生作业",
+          "text_en": "Today's small goal: Finish the sketching assignment",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：手绘作业量大；颜料快用完了",
+          "text_en": "Current state: Lots of hand-drawing homework; paints running out",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起苏雨桐：工作室邻桌。",
+          "text_en": "Thinking of Su Yutong: 工作室邻桌.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc14_jiang_yuyan",
+          "predicate": "工作室邻桌",
+          "object": "npc03_su_yutong",
+          "narrative_zh": "蒋语嫣 与 苏雨桐 的关系：工作室邻桌。",
+          "narrative_en": "Relation: Jiang Yuyan ↔ Su Yutong — 工作室邻桌."
+        },
+        {
+          "subject": "npc14_jiang_yuyan",
+          "predicate": "课程师生",
+          "object": "npc36_zhang_weimin",
+          "narrative_zh": "蒋语嫣 与 张伟民 的关系：课程师生。",
+          "narrative_en": "Relation: Jiang Yuyan ↔ Zhang Weimin — 课程师生."
+        },
+        {
+          "subject": "npc14_jiang_yuyan",
+          "predicate": "believes",
+          "object": "设计不只是解决问题，是创造美",
+          "narrative_zh": "蒋语嫣 的核心信念：设计不只是解决问题，是创造美。",
+          "narrative_en": "Core belief of Jiang Yuyan: Design isn't just solving problems, it's creating beauty."
+        },
+        {
+          "subject": "npc14_jiang_yuyan",
+          "predicate": "longs_for",
+          "object": "形成自己辨识度高的设计语言",
+          "narrative_zh": "蒋语嫣 的长期渴望：形成自己辨识度高的设计语言。",
+          "narrative_en": "Long-term desire of Jiang Yuyan: Develop a distinctive design language."
+        }
+      ]
+    },
+    "npc15_ma_tianxiang": {
+      "memories": [
+        {
+          "text": "没有谈不拢的合作，只有不够好的条件",
+          "text_en": "No deal is impossible, only terms are insufficient",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天下午和一家设计公司谈合作",
+          "text_en": "Today's small goal: Afternoon meeting with a design firm",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：期末考试临近；学生会换届压力",
+          "text_en": "Current state: Finals approaching; union election pressure",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起苏雨桐：社团认识。",
+          "text_en": "Thinking of Su Yutong: 社团认识.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc15_ma_tianxiang",
+          "predicate": "社团认识",
+          "object": "npc03_su_yutong",
+          "narrative_zh": "马天翔 与 苏雨桐 的关系：社团认识。",
+          "narrative_en": "Relation: Ma Tianxiang ↔ Su Yutong — 社团认识."
+        },
+        {
+          "subject": "npc15_ma_tianxiang",
+          "predicate": "学生会同事",
+          "object": "npc17_wang_siyao",
+          "narrative_zh": "马天翔 与 王思瑶 的关系：学生会同事。",
+          "narrative_en": "Relation: Ma Tianxiang ↔ Wang Siyao — 学生会同事."
+        },
+        {
+          "subject": "npc15_ma_tianxiang",
+          "predicate": "believes",
+          "object": "资源和人脉是最重要的资本",
+          "narrative_zh": "马天翔 的核心信念：资源和人脉是最重要的资本。",
+          "narrative_en": "Core belief of Ma Tianxiang: Resources and network are the most important capital."
+        },
+        {
+          "subject": "npc15_ma_tianxiang",
+          "predicate": "longs_for",
+          "object": "拉到建筑学院年度展的赞助",
+          "narrative_zh": "马天翔 的长期渴望：拉到建筑学院年度展的赞助。",
+          "narrative_en": "Long-term desire of Ma Tianxiang: Secure sponsorship for arch dept annual show."
+        }
+      ]
+    },
+    "npc16_lu_xiaoman": {
+      "memories": [
+        {
+          "text": "总有人要先站出来，为什么不能是我",
+          "text_en": "Someone has to step up first - why not me",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：整理上周采集的屋顶绿化数据",
+          "text_en": "Today's small goal: Sort last week's roof-greening data",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：研究经费有限；部分教师不理解绿色建筑的商业价值",
+          "text_en": "Current state: Limited research funds; some teachers don't see business value",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起张伟民：研究生-导师。",
+          "text_en": "Thinking of Zhang Weimin: 研究生-导师.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc16_lu_xiaoman",
+          "predicate": "研究生-导师",
+          "object": "npc36_zhang_weimin",
+          "narrative_zh": "陆小曼 与 张伟民 的关系：研究生-导师。",
+          "narrative_en": "Relation: Lu Xiaoman ↔ Zhang Weimin — 研究生-导师."
+        },
+        {
+          "subject": "npc16_lu_xiaoman",
+          "predicate": "环保同盟",
+          "object": "npc52_tian_zirui",
+          "narrative_zh": "陆小曼 与 田子睿 的关系：环保同盟。",
+          "narrative_en": "Relation: Lu Xiaoman ↔ Tian Zirui — 环保同盟."
+        },
+        {
+          "subject": "npc16_lu_xiaoman",
+          "predicate": "believes",
+          "object": "建筑应该与自然共生而非对抗",
+          "narrative_zh": "陆小曼 的核心信念：建筑应该与自然共生而非对抗。",
+          "narrative_en": "Core belief of Lu Xiaoman: Architecture should coexist with nature, not oppose it."
+        },
+        {
+          "subject": "npc16_lu_xiaoman",
+          "predicate": "longs_for",
+          "object": "完成校园碳排放调研报告",
+          "narrative_zh": "陆小曼 的长期渴望：完成校园碳排放调研报告。",
+          "narrative_en": "Long-term desire of Lu Xiaoman: Finish the campus carbon-emission study."
+        }
+      ]
+    },
+    "npc17_wang_siyao": {
+      "memories": [
+        {
+          "text": "如果我不盯着，这些事没人能做好",
+          "text_en": "If I'm not watching, nothing will be done well",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：处理今天三个会议的议程",
+          "text_en": "Today's small goal: Handle today's three meeting agendas",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：换届期间各方利益要平衡；保研材料还没准备完",
+          "text_en": "Current state: Interests to balance in handover; MBA materials unfinished",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起马天翔：学生会同事。",
+          "text_en": "Thinking of Ma Tianxiang: 学生会同事.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc17_wang_siyao",
+          "predicate": "学生会同事",
+          "object": "npc15_ma_tianxiang",
+          "narrative_zh": "王思瑶 与 马天翔 的关系：学生会同事。",
+          "narrative_en": "Relation: Wang Siyao ↔ Ma Tianxiang — 学生会同事."
+        },
+        {
+          "subject": "npc17_wang_siyao",
+          "predicate": "院内认识",
+          "object": "npc18_yang_mingzhe",
+          "narrative_zh": "王思瑶 与 杨明哲 的关系：院内认识。",
+          "narrative_en": "Relation: Wang Siyao ↔ Yang Mingzhe — 院内认识."
+        },
+        {
+          "subject": "npc17_wang_siyao",
+          "predicate": "believes",
+          "object": "影响力是争取来的，不是等来的",
+          "narrative_zh": "王思瑶 的核心信念：影响力是争取来的，不是等来的。",
+          "narrative_en": "Core belief of Wang Siyao: Influence is earned, not given."
+        },
+        {
+          "subject": "npc17_wang_siyao",
+          "predicate": "longs_for",
+          "object": "顺利完成学生会换届·保研面试准备",
+          "narrative_zh": "王思瑶 的长期渴望：顺利完成学生会换届·保研面试准备。",
+          "narrative_en": "Long-term desire of Wang Siyao: Smooth handover; successful MBA interview prep."
+        }
+      ]
+    },
+    "npc18_yang_mingzhe": {
+      "memories": [
+        {
+          "text": "现在的辛苦是为了以后的选择权",
+          "text_en": "Grinding now buys choices later",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天做完两套行测题",
+          "text_en": "Today's small goal: Two aptitude-test sets today",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：实习和课程冲突严重；简历还需要再打磨",
+          "text_en": "Current state: Internship conflicts with classes; resume needs polishing",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起王思瑶：院内认识。",
+          "text_en": "Thinking of Wang Siyao: 院内认识.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc18_yang_mingzhe",
+          "predicate": "院内认识",
+          "object": "npc17_wang_siyao",
+          "narrative_zh": "杨明哲 与 王思瑶 的关系：院内认识。",
+          "narrative_en": "Relation: Yang Mingzhe ↔ Wang Siyao — 院内认识."
+        },
+        {
+          "subject": "npc18_yang_mingzhe",
+          "predicate": "商业观点交锋",
+          "object": "npc19_sun_yuetong",
+          "narrative_zh": "杨明哲 与 孙悦彤 的关系：商业观点交锋。",
+          "narrative_en": "Relation: Yang Mingzhe ↔ Sun Yuetong — 商业观点交锋."
+        },
+        {
+          "subject": "npc18_yang_mingzhe",
+          "predicate": "believes",
+          "object": "年轻时就该拼命积累资本和履历",
+          "narrative_zh": "杨明哲 的核心信念：年轻时就该拼命积累资本和履历。",
+          "narrative_en": "Core belief of Yang Mingzhe: Stack capital and resume while young."
+        },
+        {
+          "subject": "npc18_yang_mingzhe",
+          "predicate": "longs_for",
+          "object": "下个月投行笔试全过",
+          "narrative_zh": "杨明哲 的长期渴望：下个月投行笔试全过。",
+          "narrative_en": "Long-term desire of Yang Mingzhe: Pass all bank written tests next month."
+        }
+      ]
+    },
+    "npc19_sun_yuetong": {
+      "memories": [
+        {
+          "text": "这次我准备得更充分了，不会再重蹈覆辙",
+          "text_en": "I'm better prepared this time, no repeat",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：做完用户调研问卷",
+          "text_en": "Today's small goal: Finish the user-survey questionnaire",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：团队成员不够稳定；缺少技术合伙人",
+          "text_en": "Current state: Team turnover; lacks a technical co-founder",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起韩子墨：创业合伙人。",
+          "text_en": "Thinking of Han Zimo: 创业合伙人.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc19_sun_yuetong",
+          "predicate": "创业合伙人",
+          "object": "npc09_han_zimo",
+          "narrative_zh": "孙悦彤 与 韩子墨 的关系：创业合伙人。",
+          "narrative_en": "Relation: Sun Yuetong ↔ Han Zimo — 创业合伙人."
+        },
+        {
+          "subject": "npc19_sun_yuetong",
+          "predicate": "商业观点交锋",
+          "object": "npc18_yang_mingzhe",
+          "narrative_zh": "孙悦彤 与 杨明哲 的关系：商业观点交锋。",
+          "narrative_en": "Relation: Sun Yuetong ↔ Yang Mingzhe — 商业观点交锋."
+        },
+        {
+          "subject": "npc19_sun_yuetong",
+          "predicate": "believes",
+          "object": "试错是最好的学习方式",
+          "narrative_zh": "孙悦彤 的核心信念：试错是最好的学习方式。",
+          "narrative_en": "Core belief of Sun Yuetong: Trial and error is the best teacher."
+        },
+        {
+          "subject": "npc19_sun_yuetong",
+          "predicate": "longs_for",
+          "object": "新项目两个月内拿到种子用户",
+          "narrative_zh": "孙悦彤 的长期渴望：新项目两个月内拿到种子用户。",
+          "narrative_en": "Long-term desire of Sun Yuetong: Seed users in two months for the new project."
+        }
+      ]
+    },
+    "npc20_chen_zhiruo": {
+      "memories": [
+        {
+          "text": "多考一个证就多一层保障",
+          "text_en": "One more cert = one more safety net",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天做完一套模拟题",
+          "text_en": "Today's small goal: Finish one mock set today",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：学习时间已经接近极限；偶尔头痛",
+          "text_en": "Current state: Near her study limit; occasional headaches",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起王思瑶：同院不同圈。",
+          "text_en": "Thinking of Wang Siyao: 同院不同圈.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc20_chen_zhiruo",
+          "predicate": "同院不同圈",
+          "object": "npc17_wang_siyao",
+          "narrative_zh": "陈芷若 与 王思瑶 的关系：同院不同圈。",
+          "narrative_en": "Relation: Chen Zhiruo ↔ Wang Siyao — 同院不同圈."
+        },
+        {
+          "subject": "npc20_chen_zhiruo",
+          "predicate": "辅导员关注对象",
+          "object": "npc35_zhao_lihua",
+          "narrative_zh": "陈芷若 与 赵丽华 的关系：辅导员关注对象。",
+          "narrative_en": "Relation: Chen Zhiruo ↔ Zhao Lihua — 辅导员关注对象."
+        },
+        {
+          "subject": "npc20_chen_zhiruo",
+          "predicate": "believes",
+          "object": "按部就班才是最安全的",
+          "narrative_zh": "陈芷若 的核心信念：按部就班才是最安全的。",
+          "narrative_en": "Core belief of Chen Zhiruo: Step by step is the safe path."
+        },
+        {
+          "subject": "npc20_chen_zhiruo",
+          "predicate": "longs_for",
+          "object": "这学期过CPA会计和审计",
+          "narrative_zh": "陈芷若 的长期渴望：这学期过CPA会计和审计。",
+          "narrative_en": "Long-term desire of Chen Zhiruo: Pass CPA accounting + auditing this semester."
+        }
+      ]
+    },
+    "npc21_li_moran": {
+      "memories": [
+        {
+          "text": "如果这个积分能解出来，后面的都能通了",
+          "text_en": "If I can solve this, the rest follows",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：推导昨天卡住的那个积分",
+          "text_en": "Today's small goal: Crack yesterday's stuck integral",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：课程考试还是要应付；生活自理能力较差",
+          "text_en": "Current state: Still has to pass courses; poor at self-care",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起张鹤鸣：偶尔在湖边相遇·思想交流。",
+          "text_en": "Thinking of Zhang Heming: 偶尔在湖边相遇·思想交流.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc21_li_moran",
+          "predicate": "偶尔在湖边相遇·思想交流",
+          "object": "npc04_zhang_heming",
+          "narrative_zh": "李默然 与 张鹤鸣 的关系：偶尔在湖边相遇·思想交流。",
+          "narrative_en": "Relation: Li Moran ↔ Zhang Heming — 偶尔在湖边相遇·思想交流."
+        },
+        {
+          "subject": "npc21_li_moran",
+          "predicate": "理科天才联盟",
+          "object": "npc23_huang_zixuan",
+          "narrative_zh": "李默然 与 黄子轩 的关系：理科天才联盟。",
+          "narrative_en": "Relation: Li Moran ↔ Huang Zixuan — 理科天才联盟."
+        },
+        {
+          "subject": "npc21_li_moran",
+          "predicate": "believes",
+          "object": "宇宙的终极答案藏在数学里",
+          "narrative_zh": "李默然 的核心信念：宇宙的终极答案藏在数学里。",
+          "narrative_en": "Core belief of Li Moran: The ultimate answer lies in mathematics."
+        },
+        {
+          "subject": "npc21_li_moran",
+          "predicate": "longs_for",
+          "object": "理解量子引力的某个特定问题",
+          "narrative_zh": "李默然 的长期渴望：理解量子引力的某个特定问题。",
+          "narrative_en": "Long-term desire of Li Moran: Understand a specific problem in quantum gravity."
+        }
+      ]
+    },
+    "npc22_zhou_xiaomeng": {
+      "memories": [
+        {
+          "text": "我可以多承受一些，他们比我更需要支持",
+          "text_en": "I can bear a bit more; they need it more than I do",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：整理今天两个来访者的咨询记录",
+          "text_en": "Today's small goal: Write up today's two session notes",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：来访者突然增多，时间排得很满",
+          "text_en": "Current state: Sudden uptick in clients; schedule packed",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起赵丽华：心理危机合作。",
+          "text_en": "Thinking of Zhao Lihua: 心理危机合作.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc22_zhou_xiaomeng",
+          "predicate": "心理危机合作",
+          "object": "npc35_zhao_lihua",
+          "narrative_zh": "周小梦 与 赵丽华 的关系：心理危机合作。",
+          "narrative_en": "Relation: Zhou Xiaomeng ↔ Zhao Lihua — 心理危机合作."
+        },
+        {
+          "subject": "npc22_zhou_xiaomeng",
+          "predicate": "心理转介合作",
+          "object": "npc40_sun_fang",
+          "narrative_zh": "周小梦 与 孙芳 的关系：心理转介合作。",
+          "narrative_en": "Relation: Zhou Xiaomeng ↔ Sun Fang — 心理转介合作."
+        },
+        {
+          "subject": "npc22_zhou_xiaomeng",
+          "predicate": "believes",
+          "object": "每个人都值得被倾听",
+          "narrative_zh": "周小梦 的核心信念：每个人都值得被倾听。",
+          "narrative_en": "Core belief of Zhou Xiaomeng: Everyone deserves to be heard."
+        },
+        {
+          "subject": "npc22_zhou_xiaomeng",
+          "predicate": "longs_for",
+          "object": "完成硕士论文·积累更多咨询时数",
+          "narrative_zh": "周小梦 的长期渴望：完成硕士论文·积累更多咨询时数。",
+          "narrative_en": "Long-term desire of Zhou Xiaomeng: Finish thesis · accrue counseling hours."
+        }
+      ]
+    },
+    "npc23_huang_zixuan": {
+      "memories": [
+        {
+          "text": "如果连这道题都做不出来，金奖就别想了",
+          "text_en": "If I can't solve this, forget the gold",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：攻克昨天没做出来的那道积分不等式",
+          "text_en": "Today's small goal: Crack yesterday's integral-inequality problem",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：分析课太难了；缺乏和高水平选手交流的机会",
+          "text_en": "Current state: Analysis class is brutal; lacks high-level peers",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起李默然：理科天才联盟。",
+          "text_en": "Thinking of Li Moran: 理科天才联盟.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc23_huang_zixuan",
+          "predicate": "理科天才联盟",
+          "object": "npc21_li_moran",
+          "narrative_zh": "黄子轩 与 李默然 的关系：理科天才联盟。",
+          "narrative_en": "Relation: Huang Zixuan ↔ Li Moran — 理科天才联盟."
+        },
+        {
+          "subject": "npc23_huang_zixuan",
+          "predicate": "理工科天才交流",
+          "object": "npc48_long_feiyu",
+          "narrative_zh": "黄子轩 与 龙飞宇 的关系：理工科天才交流。",
+          "narrative_en": "Relation: Huang Zixuan ↔ Long Feiyu — 理工科天才交流."
+        },
+        {
+          "subject": "npc23_huang_zixuan",
+          "predicate": "believes",
+          "object": "数学之美在于它的确定性",
+          "narrative_zh": "黄子轩 的核心信念：数学之美在于它的确定性。",
+          "narrative_en": "Core belief of Huang Zixuan: Math's beauty lies in its certainty."
+        },
+        {
+          "subject": "npc23_huang_zixuan",
+          "predicate": "longs_for",
+          "object": "竞赛前把历年真题全部刷完",
+          "narrative_zh": "黄子轩 的长期渴望：竞赛前把历年真题全部刷完。",
+          "narrative_en": "Long-term desire of Huang Zixuan: Finish all past papers before the contest."
+        }
+      ]
+    },
+    "npc24_zhao_xinyi": {
+      "memories": [
+        {
+          "text": "失败了就再来一次，总会成功的",
+          "text_en": "Fail once, redo; eventually it works",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天的合成反应必须成功",
+          "text_en": "Today's small goal: Today's synthesis must succeed",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：试剂到货延迟了；通风橱有一台坏了",
+          "text_en": "Current state: Reagents delayed; one fume hood broken",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起秦岭：理学院同楼·偶尔聊天。",
+          "text_en": "Thinking of Qin Ling: 理学院同楼·偶尔聊天.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc24_zhao_xinyi",
+          "predicate": "理学院同楼·偶尔聊天",
+          "object": "npc46_qin_ling",
+          "narrative_zh": "赵心怡 与 秦岭 的关系：理学院同楼·偶尔聊天。",
+          "narrative_en": "Relation: Zhao Xinyi ↔ Qin Ling — 理学院同楼·偶尔聊天."
+        },
+        {
+          "subject": "npc24_zhao_xinyi",
+          "predicate": "believes",
+          "object": "实验科学需要耐得住寂寞",
+          "narrative_zh": "赵心怡 的核心信念：实验科学需要耐得住寂寞。",
+          "narrative_en": "Core belief of Zhao Xinyi: Experimental science rewards patience."
+        },
+        {
+          "subject": "npc24_zhao_xinyi",
+          "predicate": "longs_for",
+          "object": "这批实验数据能支撑一篇论文",
+          "narrative_zh": "赵心怡 的长期渴望：这批实验数据能支撑一篇论文。",
+          "narrative_en": "Long-term desire of Zhao Xinyi: This batch supports a paper."
+        }
+      ]
+    },
+    "npc25_lin_yuxuan": {
+      "memories": [
+        {
+          "text": "昨天那个地方又弹错了，不能原谅自己",
+          "text_en": "I hit that same wrong note again - unforgivable",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：把肖邦叙事曲的技术难点攻克",
+          "text_en": "Today's small goal: Crack the technical passage in Chopin's Ballade",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：琴房排队紧张；手指有些酸痛",
+          "text_en": "Current state: Practice-room queue; sore fingers",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起白露：排练厅邻居。",
+          "text_en": "Thinking of Bai Lu: 排练厅邻居.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc25_lin_yuxuan",
+          "predicate": "排练厅邻居",
+          "object": "npc47_bai_lu",
+          "narrative_zh": "林雨萱 与 白露 的关系：排练厅邻居。",
+          "narrative_en": "Relation: Lin Yuxuan ↔ Bai Lu — 排练厅邻居."
+        },
+        {
+          "subject": "npc25_lin_yuxuan",
+          "predicate": "文艺圈好友",
+          "object": "npc01_lin_xiaowei",
+          "narrative_zh": "林雨萱 与 林晓薇 的关系：文艺圈好友。",
+          "narrative_en": "Relation: Lin Yuxuan ↔ Lin Xiaowei — 文艺圈好友."
+        },
+        {
+          "subject": "npc25_lin_yuxuan",
+          "predicate": "believes",
+          "object": "音乐是不需要翻译的语言",
+          "narrative_zh": "林雨萱 的核心信念：音乐是不需要翻译的语言。",
+          "narrative_en": "Core belief of Lin Yuxuan: Music is the language needing no translation."
+        },
+        {
+          "subject": "npc25_lin_yuxuan",
+          "predicate": "longs_for",
+          "object": "下个月比赛曲目练到炉火纯青",
+          "narrative_zh": "林雨萱 的长期渴望：下个月比赛曲目练到炉火纯青。",
+          "narrative_en": "Long-term desire of Lin Yuxuan: Master next month's repertoire."
+        }
+      ]
+    },
+    "npc26_zhao_tianlei": {
+      "memories": [
+        {
+          "text": "队长不能第一个倒下",
+          "text_en": "Captain can't fall first",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天的体能训练不能偷懒",
+          "text_en": "Today's small goal: No slacking on today's conditioning",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：膝盖旧伤偶尔发作；两个队员闹矛盾",
+          "text_en": "Current state: Old knee acting up; two teammates feuding",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起郑浩宇：体育圈好友。",
+          "text_en": "Thinking of Zheng Haoyu: 体育圈好友.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc26_zhao_tianlei",
+          "predicate": "体育圈好友",
+          "object": "npc11_zheng_haoyu",
+          "narrative_zh": "赵天磊 与 郑浩宇 的关系：体育圈好友。",
+          "narrative_en": "Relation: Zhao Tianlei ↔ Zheng Haoyu — 体育圈好友."
+        },
+        {
+          "subject": "npc26_zhao_tianlei",
+          "predicate": "食堂常客·多打一勺",
+          "object": "npc37_he_min",
+          "narrative_zh": "赵天磊 与 何敏 的关系：食堂常客·多打一勺。",
+          "narrative_en": "Relation: Zhao Tianlei ↔ He Min — 食堂常客·多打一勺."
+        },
+        {
+          "subject": "npc26_zhao_tianlei",
+          "predicate": "believes",
+          "object": "赛场上见真章",
+          "narrative_zh": "赵天磊 的核心信念：赛场上见真章。",
+          "narrative_en": "Core belief of Zhao Tianlei: The court decides."
+        },
+        {
+          "subject": "npc26_zhao_tianlei",
+          "predicate": "longs_for",
+          "object": "球队磨合到最佳状态",
+          "narrative_zh": "赵天磊 的长期渴望：球队磨合到最佳状态。",
+          "narrative_en": "Long-term desire of Zhao Tianlei: Team hits peak chemistry."
+        }
+      ]
+    },
+    "npc27_he_jiaqi": {
+      "memories": [
+        {
+          "text": "我再调一下这个颜色就好了",
+          "text_en": "Just let me tweak this color a bit more",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今晚画完一张约稿",
+          "text_en": "Today's small goal: Finish a commission tonight",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：学校课程任务重；约稿deadline快到了",
+          "text_en": "Current state: Heavy school workload; commission deadline looming",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起刘思涵：跨专业好友·设计兴趣。",
+          "text_en": "Thinking of Liu Sihan: 跨专业好友·设计兴趣.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc27_he_jiaqi",
+          "predicate": "跨专业好友·设计兴趣",
+          "object": "npc12_liu_sihan",
+          "narrative_zh": "何佳琪 与 刘思涵 的关系：跨专业好友·设计兴趣。",
+          "narrative_en": "Relation: He Jiaqi ↔ Liu Sihan — 跨专业好友·设计兴趣."
+        },
+        {
+          "subject": "npc27_he_jiaqi",
+          "predicate": "画画同好",
+          "object": "npc14_jiang_yuyan",
+          "narrative_zh": "何佳琪 与 蒋语嫣 的关系：画画同好。",
+          "narrative_en": "Relation: He Jiaqi ↔ Jiang Yuyan — 画画同好."
+        },
+        {
+          "subject": "npc27_he_jiaqi",
+          "predicate": "believes",
+          "object": "画画是我和世界沟通的方式",
+          "narrative_zh": "何佳琪 的核心信念：画画是我和世界沟通的方式。",
+          "narrative_en": "Core belief of He Jiaqi: Drawing is how I talk to the world."
+        },
+        {
+          "subject": "npc27_he_jiaqi",
+          "predicate": "longs_for",
+          "object": "粉丝破万·接到第一个商业稿",
+          "narrative_zh": "何佳琪 的长期渴望：粉丝破万·接到第一个商业稿。",
+          "narrative_en": "Long-term desire of He Jiaqi: 10k followers · first commission."
+        }
+      ]
+    },
+    "npc28_xu_jiaming": {
+      "memories": [
+        {
+          "text": "下一条一定会爆",
+          "text_en": "The next one will blow up for sure",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天把上周拍的素材剪完",
+          "text_en": "Today's small goal: Cut last week's footage today",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：本周课多；上一条视频数据不好",
+          "text_en": "Current state: Heavy class week; last video underperformed",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起韩子墨：内容合作。",
+          "text_en": "Thinking of Han Zimo: 内容合作.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc28_xu_jiaming",
+          "predicate": "内容合作",
+          "object": "npc09_han_zimo",
+          "narrative_zh": "徐嘉铭 与 韩子墨 的关系：内容合作。",
+          "narrative_en": "Relation: Xu Jiaming ↔ Han Zimo — 内容合作."
+        },
+        {
+          "subject": "npc28_xu_jiaming",
+          "predicate": "内容创作交流",
+          "object": "npc27_he_jiaqi",
+          "narrative_zh": "徐嘉铭 与 何佳琪 的关系：内容创作交流。",
+          "narrative_en": "Relation: Xu Jiaming ↔ He Jiaqi — 内容创作交流."
+        },
+        {
+          "subject": "npc28_xu_jiaming",
+          "predicate": "believes",
+          "object": "内容为王，但包装也很重要",
+          "narrative_zh": "徐嘉铭 的核心信念：内容为王，但包装也很重要。",
+          "narrative_en": "Core belief of Xu Jiaming: Content is king, but packaging matters."
+        },
+        {
+          "subject": "npc28_xu_jiaming",
+          "predicate": "longs_for",
+          "object": "找到自己的差异化内容赛道",
+          "narrative_zh": "徐嘉铭 的长期渴望：找到自己的差异化内容赛道。",
+          "narrative_en": "Long-term desire of Xu Jiaming: Find a differentiated content niche."
+        }
+      ]
+    },
+    "npc29_cheng_siyuan": {
+      "memories": [
+        {
+          "text": "再多听一个人的故事，论文就会更真实",
+          "text_en": "One more story heard makes the paper more real",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：整理昨天访谈的录音转写",
+          "text_en": "Today's small goal: Transcribe yesterday's interview",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：受访者时间不好约；经费快用完了",
+          "text_en": "Current state: Hard to schedule interviewees; funds drying up",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起张鹤鸣：博士同读书会。",
+          "text_en": "Thinking of Zhang Heming: 博士同读书会.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc29_cheng_siyuan",
+          "predicate": "博士同读书会",
+          "object": "npc04_zhang_heming",
+          "narrative_zh": "程思远 与 张鹤鸣 的关系：博士同读书会。",
+          "narrative_en": "Relation: Cheng Siyuan ↔ Zhang Heming — 博士同读书会."
+        },
+        {
+          "subject": "npc29_cheng_siyuan",
+          "predicate": "田野采访中的默契",
+          "object": "npc32_luo_chenxi",
+          "narrative_zh": "程思远 与 罗晨曦 的关系：田野采访中的默契。",
+          "narrative_en": "Relation: Cheng Siyuan ↔ Luo Chenxi — 田野采访中的默契."
+        },
+        {
+          "subject": "npc29_cheng_siyuan",
+          "predicate": "believes",
+          "object": "真正的知识在课堂之外",
+          "narrative_zh": "程思远 的核心信念：真正的知识在课堂之外。",
+          "narrative_en": "Core belief of Cheng Siyuan: Real knowledge lives outside the classroom."
+        },
+        {
+          "subject": "npc29_cheng_siyuan",
+          "predicate": "longs_for",
+          "object": "完成本轮田野调查",
+          "narrative_zh": "程思远 的长期渴望：完成本轮田野调查。",
+          "narrative_en": "Long-term desire of Cheng Siyuan: Finish this field-study phase."
+        }
+      ]
+    },
+    "npc30_zhong_jiayi": {
+      "memories": [
+        {
+          "text": "法律人的底气来自对法条的烂熟于心",
+          "text_en": "A lawyer's confidence comes from flawless command of statutes",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天背完民法总则第三章",
+          "text_en": "Today's small goal: Memorize Civil Code General Part Ch.3",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：课程和备考同时进行；模拟法庭还有比赛要准备",
+          "text_en": "Current state: Classes + bar prep overlap; moot-court match coming",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起王思瑶：辩论赛认识。",
+          "text_en": "Thinking of Wang Siyao: 辩论赛认识.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc30_zhong_jiayi",
+          "predicate": "辩论赛认识",
+          "object": "npc17_wang_siyao",
+          "narrative_zh": "钟嘉宜 与 王思瑶 的关系：辩论赛认识。",
+          "narrative_en": "Relation: Zhong Jiayi ↔ Wang Siyao — 辩论赛认识."
+        },
+        {
+          "subject": "npc30_zhong_jiayi",
+          "predicate": "辩论对手",
+          "object": "npc50_gao_yuan",
+          "narrative_zh": "钟嘉宜 与 高远 的关系：辩论对手。",
+          "narrative_en": "Relation: Zhong Jiayi ↔ Gao Yuan — 辩论对手."
+        },
+        {
+          "subject": "npc30_zhong_jiayi",
+          "predicate": "believes",
+          "object": "法律是社会的底线也是希望",
+          "narrative_zh": "钟嘉宜 的核心信念：法律是社会的底线也是希望。",
+          "narrative_en": "Core belief of Zhong Jiayi: Law is society's floor and its hope."
+        },
+        {
+          "subject": "npc30_zhong_jiayi",
+          "predicate": "longs_for",
+          "object": "司法考试一次过",
+          "narrative_zh": "钟嘉宜 的长期渴望：司法考试一次过。",
+          "narrative_en": "Long-term desire of Zhong Jiayi: Pass bar on first try."
+        }
+      ]
+    },
+    "npc31_xie_anran": {
+      "memories": [
+        {
+          "text": "这个字如果读错了，整段历史的解释都会不同",
+          "text_en": "Misreading one character changes the whole interpretation",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：查证一个先秦地名的演变",
+          "text_en": "Today's small goal: Verify evolution of a pre-Qin place name",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：资料获取困难；需要学古文字",
+          "text_en": "Current state: Hard to access materials; must learn ancient scripts",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起刘正清：借古籍交流。",
+          "text_en": "Thinking of Liu Zhengqing: 借古籍交流.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc31_xie_anran",
+          "predicate": "借古籍交流",
+          "object": "npc38_liu_zhengqing",
+          "narrative_zh": "谢安然 与 刘正清 的关系：借古籍交流。",
+          "narrative_en": "Relation: Xie Anran ↔ Liu Zhengqing — 借古籍交流."
+        },
+        {
+          "subject": "npc31_xie_anran",
+          "predicate": "传统文化同好",
+          "object": "npc42_fu_wanqing",
+          "narrative_zh": "谢安然 与 傅婉清 的关系：传统文化同好。",
+          "narrative_en": "Relation: Xie Anran ↔ Fu Wanqing — 传统文化同好."
+        },
+        {
+          "subject": "npc31_xie_anran",
+          "predicate": "believes",
+          "object": "历史的真相在于细节",
+          "narrative_zh": "谢安然 的核心信念：历史的真相在于细节。",
+          "narrative_en": "Core belief of Xie Anran: Truth of history lies in details."
+        },
+        {
+          "subject": "npc31_xie_anran",
+          "predicate": "longs_for",
+          "object": "完成对一批新出土简牍的释读",
+          "narrative_zh": "谢安然 的长期渴望：完成对一批新出土简牍的释读。",
+          "narrative_en": "Long-term desire of Xie Anran: Decipher a batch of newly unearthed bamboo slips."
+        }
+      ]
+    },
+    "npc32_luo_chenxi": {
+      "memories": [
+        {
+          "text": "这个故事不应该被忽视",
+          "text_en": "This story deserves not to be overlooked",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天采访完食堂阿姨的专题",
+          "text_en": "Today's small goal: Finish interview with canteen aunt today",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：受访者不愿意被报道；编辑部要求改稿",
+          "text_en": "Current state: Interviewee reluctant; editor wants revisions",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起程思远：田野采访中的默契。",
+          "text_en": "Thinking of Cheng Siyuan: 田野采访中的默契.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc32_luo_chenxi",
+          "predicate": "田野采访中的默契",
+          "object": "npc29_cheng_siyuan",
+          "narrative_zh": "罗晨曦 与 程思远 的关系：田野采访中的默契。",
+          "narrative_en": "Relation: Luo Chenxi ↔ Cheng Siyuan — 田野采访中的默契."
+        },
+        {
+          "subject": "npc32_luo_chenxi",
+          "predicate": "校园媒体合作",
+          "object": "npc01_lin_xiaowei",
+          "narrative_zh": "罗晨曦 与 林晓薇 的关系：校园媒体合作。",
+          "narrative_en": "Relation: Luo Chenxi ↔ Lin Xiaowei — 校园媒体合作."
+        },
+        {
+          "subject": "npc32_luo_chenxi",
+          "predicate": "believes",
+          "object": "记录就是一种力量",
+          "narrative_zh": "罗晨曦 的核心信念：记录就是一种力量。",
+          "narrative_en": "Core belief of Luo Chenxi: Recording is a form of power."
+        },
+        {
+          "subject": "npc32_luo_chenxi",
+          "predicate": "longs_for",
+          "object": "做出一篇有影响力的深度报道",
+          "narrative_zh": "罗晨曦 的长期渴望：做出一篇有影响力的深度报道。",
+          "narrative_en": "Long-term desire of Luo Chenxi: Produce an influential long-form piece."
+        }
+      ]
+    },
+    "npc33_li_huimin": {
+      "memories": [
+        {
+          "text": "学生的一句'我想明白了'比任何奖项都值得",
+          "text_en": "A student's 'I get it now' beats any award",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：准备下午的创意写作课教案",
+          "text_en": "Today's small goal: Prepare this afternoon's creative-writing lesson plan",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：行政会议太多；科研基金申请截止日临近",
+          "text_en": "Current state: Too many admin meetings; grant deadline near",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起林晓薇：师生·受指导。",
+          "text_en": "Thinking of Lin Xiaowei: 师生·受指导.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc33_li_huimin",
+          "predicate": "师生·受指导",
+          "object": "npc01_lin_xiaowei",
+          "narrative_zh": "李慧敏 与 林晓薇 的关系：师生·受指导。",
+          "narrative_en": "Relation: Li Huimin ↔ Lin Xiaowei — 师生·受指导."
+        },
+        {
+          "subject": "npc33_li_huimin",
+          "predicate": "师生·考研指导",
+          "object": "npc06_he_yunshu",
+          "narrative_zh": "李慧敏 与 贺云舒 的关系：师生·考研指导。",
+          "narrative_en": "Relation: Li Huimin ↔ He Yunshu — 师生·考研指导."
+        },
+        {
+          "subject": "npc33_li_huimin",
+          "predicate": "believes",
+          "object": "好的教育是点燃而不是灌满",
+          "narrative_zh": "李慧敏 的核心信念：好的教育是点燃而不是灌满。",
+          "narrative_en": "Core belief of Li Huimin: Good education lights a fire, not fills a bucket."
+        },
+        {
+          "subject": "npc33_li_huimin",
+          "predicate": "longs_for",
+          "object": "今年完成专著初稿",
+          "narrative_zh": "李慧敏 的长期渴望：今年完成专著初稿。",
+          "narrative_en": "Long-term desire of Li Huimin: Finish monograph draft this year."
+        }
+      ]
+    },
+    "npc34_wang_jianguo": {
+      "memories": [
+        {
+          "text": "我对你们严格，是因为外面的世界更严格",
+          "text_en": "I'm strict because the outside world is stricter",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：审阅学生提交的论文初稿",
+          "text_en": "Today's small goal: Review submitted student drafts",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：行政事务占用大量时间；经费审批流程繁琐",
+          "text_en": "Current state: Admin eats time; grants slow",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起陈远航：导师-研究生。",
+          "text_en": "Thinking of Chen Yuanhang: 导师-研究生.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc34_wang_jianguo",
+          "predicate": "导师-研究生",
+          "object": "npc02_chen_yuanhang",
+          "narrative_zh": "王建国 与 陈远航 的关系：导师-研究生。",
+          "narrative_en": "Relation: Wang Jianguo ↔ Chen Yuanhang — 导师-研究生."
+        },
+        {
+          "subject": "npc34_wang_jianguo",
+          "predicate": "导师-研究生",
+          "object": "npc08_xu_qinglan",
+          "narrative_zh": "王建国 与 许晴岚 的关系：导师-研究生。",
+          "narrative_en": "Relation: Wang Jianguo ↔ Xu Qinglan — 导师-研究生."
+        },
+        {
+          "subject": "npc34_wang_jianguo",
+          "predicate": "believes",
+          "object": "学术要做就做到极致",
+          "narrative_zh": "王建国 的核心信念：学术要做就做到极致。",
+          "narrative_en": "Core belief of Wang Jianguo: If you do academia, do it to the extreme."
+        },
+        {
+          "subject": "npc34_wang_jianguo",
+          "predicate": "longs_for",
+          "object": "推进团队最新的研究方向",
+          "narrative_zh": "王建国 的长期渴望：推进团队最新的研究方向。",
+          "narrative_en": "Long-term desire of Wang Jianguo: Advance the team's newest research direction."
+        }
+      ]
+    },
+    "npc35_zhao_lihua": {
+      "memories": [
+        {
+          "text": "只要学生好好的，我辛苦点没关系",
+          "text_en": "As long as students are okay, my grind is fine",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：处理今天两个学生的心理问题",
+          "text_en": "Today's small goal: Handle two students' mental issues today",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：学生数量多管不过来；上级检查要交材料",
+          "text_en": "Current state: Student-to-counselor ratio too high; admin inspection pending",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起王思瑶：辅导员管辖。",
+          "text_en": "Thinking of Wang Siyao: 辅导员管辖.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc35_zhao_lihua",
+          "predicate": "辅导员管辖",
+          "object": "npc17_wang_siyao",
+          "narrative_zh": "赵丽华 与 王思瑶 的关系：辅导员管辖。",
+          "narrative_en": "Relation: Zhao Lihua ↔ Wang Siyao — 辅导员管辖."
+        },
+        {
+          "subject": "npc35_zhao_lihua",
+          "predicate": "辅导员关注对象",
+          "object": "npc20_chen_zhiruo",
+          "narrative_zh": "赵丽华 与 陈芷若 的关系：辅导员关注对象。",
+          "narrative_en": "Relation: Zhao Lihua ↔ Chen Zhiruo — 辅导员关注对象."
+        },
+        {
+          "subject": "npc35_zhao_lihua",
+          "predicate": "believes",
+          "object": "每个学生背后都有一个家庭在期待",
+          "narrative_zh": "赵丽华 的核心信念：每个学生背后都有一个家庭在期待。",
+          "narrative_en": "Core belief of Zhao Lihua: Behind every student is a family waiting."
+        },
+        {
+          "subject": "npc35_zhao_lihua",
+          "predicate": "longs_for",
+          "object": "这一届学生顺利毕业",
+          "narrative_zh": "赵丽华 的长期渴望：这一届学生顺利毕业。",
+          "narrative_en": "Long-term desire of Zhao Lihua: This cohort graduates smoothly."
+        }
+      ]
+    },
+    "npc36_zhang_weimin": {
+      "memories": [
+        {
+          "text": "你们要习惯被批评，因为甲方比我更残酷",
+          "text_en": "Get used to being criticized - clients will be even crueler",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天的评图给学生足够的刺激",
+          "text_en": "Today's small goal: Give students real stimulation in today's review",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：太多学生方案需要看；自己事务所也有项目",
+          "text_en": "Current state: Too many schemes to see; own firm has projects too",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起唐亦辰：导师-毕设指导。",
+          "text_en": "Thinking of Tang Yichen: 导师-毕设指导.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc36_zhang_weimin",
+          "predicate": "导师-毕设指导",
+          "object": "npc13_tang_yichen",
+          "narrative_zh": "张伟民 与 唐亦辰 的关系：导师-毕设指导。",
+          "narrative_en": "Relation: Zhang Weimin ↔ Tang Yichen — 导师-毕设指导."
+        },
+        {
+          "subject": "npc36_zhang_weimin",
+          "predicate": "课程师生",
+          "object": "npc14_jiang_yuyan",
+          "narrative_zh": "张伟民 与 蒋语嫣 的关系：课程师生。",
+          "narrative_en": "Relation: Zhang Weimin ↔ Jiang Yuyan — 课程师生."
+        },
+        {
+          "subject": "npc36_zhang_weimin",
+          "predicate": "believes",
+          "object": "设计是解决问题的艺术",
+          "narrative_zh": "张伟民 的核心信念：设计是解决问题的艺术。",
+          "narrative_en": "Core belief of Zhang Weimin: Design is the art of solving problems."
+        },
+        {
+          "subject": "npc36_zhang_weimin",
+          "predicate": "longs_for",
+          "object": "学生作品在威尼斯双年展上获奖",
+          "narrative_zh": "张伟民 的长期渴望：学生作品在威尼斯双年展上获奖。",
+          "narrative_en": "Long-term desire of Zhang Weimin: Student work in Venice Biennale."
+        }
+      ]
+    },
+    "npc37_he_min": {
+      "memories": [
+        {
+          "text": "看你们瘦的，多吃点",
+          "text_en": "Look how thin you are - eat more",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天的红烧肉要做出小时候的味道",
+          "text_en": "Today's small goal: Make today's red-braised pork taste like childhood",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：食材成本在上涨；人手不够",
+          "text_en": "Current state: Ingredient costs rising; short-staffed",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起刘正清：后勤老同事。",
+          "text_en": "Thinking of Liu Zhengqing: 后勤老同事.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc37_he_min",
+          "predicate": "后勤老同事",
+          "object": "npc38_liu_zhengqing",
+          "narrative_zh": "何敏 与 刘正清 的关系：后勤老同事。",
+          "narrative_en": "Relation: He Min ↔ Liu Zhengqing — 后勤老同事."
+        },
+        {
+          "subject": "npc37_he_min",
+          "predicate": "后勤同事",
+          "object": "npc39_chen_zhigang",
+          "narrative_zh": "何敏 与 陈志刚 的关系：后勤同事。",
+          "narrative_en": "Relation: He Min ↔ Chen Zhigang — 后勤同事."
+        },
+        {
+          "subject": "npc37_he_min",
+          "predicate": "believes",
+          "object": "学生吃好了才能学好",
+          "narrative_zh": "何敏 的核心信念：学生吃好了才能学好。",
+          "narrative_en": "Core belief of He Min: Students fed well, learn well."
+        },
+        {
+          "subject": "npc37_he_min",
+          "predicate": "longs_for",
+          "object": "研发两道新菜式",
+          "narrative_zh": "何敏 的长期渴望：研发两道新菜式。",
+          "narrative_en": "Long-term desire of He Min: Develop two new dishes."
+        }
+      ]
+    },
+    "npc38_liu_zhengqing": {
+      "memories": [
+        {
+          "text": "这些书比你们年纪都大，请温柔对待",
+          "text_en": "These books are older than you - be gentle",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天整理完新到的一批书",
+          "text_en": "Today's small goal: Shelve today's new arrivals",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：预算有限；年轻同事对古籍不感兴趣",
+          "text_en": "Current state: Budget limits; younger colleagues uninterested in rare books",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起谢安然：借古籍交流。",
+          "text_en": "Thinking of Xie Anran: 借古籍交流.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc38_liu_zhengqing",
+          "predicate": "借古籍交流",
+          "object": "npc31_xie_anran",
+          "narrative_zh": "刘正清 与 谢安然 的关系：借古籍交流。",
+          "narrative_en": "Relation: Liu Zhengqing ↔ Xie Anran — 借古籍交流."
+        },
+        {
+          "subject": "npc38_liu_zhengqing",
+          "predicate": "后勤老同事",
+          "object": "npc37_he_min",
+          "narrative_zh": "刘正清 与 何敏 的关系：后勤老同事。",
+          "narrative_en": "Relation: Liu Zhengqing ↔ He Min — 后勤老同事."
+        },
+        {
+          "subject": "npc38_liu_zhengqing",
+          "predicate": "believes",
+          "object": "图书馆是大学的灵魂",
+          "narrative_zh": "刘正清 的核心信念：图书馆是大学的灵魂。",
+          "narrative_en": "Core belief of Liu Zhengqing: The library is the soul of the university."
+        },
+        {
+          "subject": "npc38_liu_zhengqing",
+          "predicate": "longs_for",
+          "object": "古籍数字化项目推进到50%",
+          "narrative_zh": "刘正清 的长期渴望：古籍数字化项目推进到50%。",
+          "narrative_en": "Long-term desire of Liu Zhengqing: 50% progress on digitization."
+        }
+      ]
+    },
+    "npc39_chen_zhigang": {
+      "memories": [
+        {
+          "text": "没出事的时候没人觉得我们重要",
+          "text_en": "No one cares about us until something goes wrong",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：检查下周大型活动的安保方案",
+          "text_en": "Today's small goal: Review security plan for next week's event",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：安保经费不足；外来人员管理难度大",
+          "text_en": "Current state: Budget limited; outsider management tough",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起何敏：后勤同事。",
+          "text_en": "Thinking of He Min: 后勤同事.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc39_chen_zhigang",
+          "predicate": "后勤同事",
+          "object": "npc37_he_min",
+          "narrative_zh": "陈志刚 与 何敏 的关系：后勤同事。",
+          "narrative_en": "Relation: Chen Zhigang ↔ He Min — 后勤同事."
+        },
+        {
+          "subject": "npc39_chen_zhigang",
+          "predicate": "后勤同事",
+          "object": "npc38_liu_zhengqing",
+          "narrative_zh": "陈志刚 与 刘正清 的关系：后勤同事。",
+          "narrative_en": "Relation: Chen Zhigang ↔ Liu Zhengqing — 后勤同事."
+        },
+        {
+          "subject": "npc39_chen_zhigang",
+          "predicate": "believes",
+          "object": "安全是一切活动的前提",
+          "narrative_zh": "陈志刚 的核心信念：安全是一切活动的前提。",
+          "narrative_en": "Core belief of Chen Zhigang: Safety precedes everything."
+        },
+        {
+          "subject": "npc39_chen_zhigang",
+          "predicate": "longs_for",
+          "object": "升级校园安防系统",
+          "narrative_zh": "陈志刚 的长期渴望：升级校园安防系统。",
+          "narrative_en": "Long-term desire of Chen Zhigang: Upgrade campus security system."
+        }
+      ]
+    },
+    "npc40_sun_fang": {
+      "memories": [
+        {
+          "text": "你说的'没事'，让我来判断",
+          "text_en": "Let me decide if you're 'fine', not you",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天的门诊尽量不拖时间",
+          "text_en": "Today's small goal: Keep today's clinic on time",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：设备老旧；学生不愿意来校医院",
+          "text_en": "Current state: Old equipment; students reluctant to visit",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起周小梦：心理转介合作。",
+          "text_en": "Thinking of Zhou Xiaomeng: 心理转介合作.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc40_sun_fang",
+          "predicate": "心理转介合作",
+          "object": "npc22_zhou_xiaomeng",
+          "narrative_zh": "孙芳 与 周小梦 的关系：心理转介合作。",
+          "narrative_en": "Relation: Sun Fang ↔ Zhou Xiaomeng — 心理转介合作."
+        },
+        {
+          "subject": "npc40_sun_fang",
+          "predicate": "学生健康联动",
+          "object": "npc35_zhao_lihua",
+          "narrative_zh": "孙芳 与 赵丽华 的关系：学生健康联动。",
+          "narrative_en": "Relation: Sun Fang ↔ Zhao Lihua — 学生健康联动."
+        },
+        {
+          "subject": "npc40_sun_fang",
+          "predicate": "believes",
+          "object": "预防胜于治疗",
+          "narrative_zh": "孙芳 的核心信念：预防胜于治疗。",
+          "narrative_en": "Core belief of Sun Fang: Prevention beats cure."
+        },
+        {
+          "subject": "npc40_sun_fang",
+          "predicate": "longs_for",
+          "object": "建立学生健康档案系统",
+          "narrative_zh": "孙芳 的长期渴望：建立学生健康档案系统。",
+          "narrative_en": "Long-term desire of Sun Fang: Build student health-record system."
+        }
+      ]
+    },
+    "npc41_wei_zihan": {
+      "memories": [
+        {
+          "text": "我在社会上学到的比课堂多得多",
+          "text_en": "I learn more in the real world than in class",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天下午的家教课准备好",
+          "text_en": "Today's small goal: Prep this afternoon's tutoring session",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：上课和兼职时间冲突越来越多",
+          "text_en": "Current state: Class-gig schedule clash worsening",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起孙悦彤：创业圈朋友。",
+          "text_en": "Thinking of Sun Yuetong: 创业圈朋友.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc41_wei_zihan",
+          "predicate": "创业圈朋友",
+          "object": "npc19_sun_yuetong",
+          "narrative_zh": "魏子涵 与 孙悦彤 的关系：创业圈朋友。",
+          "narrative_en": "Relation: Wei Zihan ↔ Sun Yuetong — 创业圈朋友."
+        },
+        {
+          "subject": "npc41_wei_zihan",
+          "predicate": "食堂常客·打工人默契",
+          "object": "npc37_he_min",
+          "narrative_zh": "魏子涵 与 何敏 的关系：食堂常客·打工人默契。",
+          "narrative_en": "Relation: Wei Zihan ↔ He Min — 食堂常客·打工人默契."
+        },
+        {
+          "subject": "npc41_wei_zihan",
+          "predicate": "believes",
+          "object": "经验比学历值钱",
+          "narrative_zh": "魏子涵 的核心信念：经验比学历值钱。",
+          "narrative_en": "Core belief of Wei Zihan: Experience beats credentials."
+        },
+        {
+          "subject": "npc41_wei_zihan",
+          "predicate": "longs_for",
+          "object": "攒够下学期的生活费",
+          "narrative_zh": "魏子涵 的长期渴望：攒够下学期的生活费。",
+          "narrative_en": "Long-term desire of Wei Zihan: Save up next semester's living expenses."
+        }
+      ]
+    },
+    "npc42_fu_wanqing": {
+      "memories": [
+        {
+          "text": "中医需要的是时间和耐心，不是速效",
+          "text_en": "TCM needs time and patience, not quick fixes",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天把脉诊实习记录整理好",
+          "text_en": "Today's small goal: Organize today's pulse-diagnosis notes",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：实习时间长很累；需要记大量方剂",
+          "text_en": "Current state: Long internship hours; tons of formulas to memorize",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起谢安然：传统文化同好。",
+          "text_en": "Thinking of Xie Anran: 传统文化同好.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc42_fu_wanqing",
+          "predicate": "传统文化同好",
+          "object": "npc31_xie_anran",
+          "narrative_zh": "傅婉清 与 谢安然 的关系：传统文化同好。",
+          "narrative_en": "Relation: Fu Wanqing ↔ Xie Anran — 传统文化同好."
+        },
+        {
+          "subject": "npc42_fu_wanqing",
+          "predicate": "野外采药和地质的交集",
+          "object": "npc46_qin_ling",
+          "narrative_zh": "傅婉清 与 秦岭 的关系：野外采药和地质的交集。",
+          "narrative_en": "Relation: Fu Wanqing ↔ Qin Ling — 野外采药和地质的交集."
+        },
+        {
+          "subject": "npc42_fu_wanqing",
+          "predicate": "believes",
+          "object": "中医是活的文化遗产",
+          "narrative_zh": "傅婉清 的核心信念：中医是活的文化遗产。",
+          "narrative_en": "Core belief of Fu Wanqing: TCM is living cultural heritage."
+        },
+        {
+          "subject": "npc42_fu_wanqing",
+          "predicate": "longs_for",
+          "object": "临床实习表现获得带教老师认可",
+          "narrative_zh": "傅婉清 的长期渴望：临床实习表现获得带教老师认可。",
+          "narrative_en": "Long-term desire of Fu Wanqing: Good reviews from her internship supervisor."
+        }
+      ]
+    },
+    "npc43_jiang_haotian": {
+      "memories": [
+        {
+          "text": "别人能学会，我多花时间也能学会",
+          "text_en": "Others can learn it, so can I with more time",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天晚上把高数作业做完",
+          "text_en": "Today's small goal: Finish calculus homework tonight",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：课程难度大跨度大；不敢问老师问题",
+          "text_en": "Current state: Courses leap in difficulty; too shy to ask",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起唐亦辰：学长崇拜。",
+          "text_en": "Thinking of Tang Yichen: 学长崇拜.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc43_jiang_haotian",
+          "predicate": "学长崇拜",
+          "object": "npc13_tang_yichen",
+          "narrative_zh": "姜浩天 与 唐亦辰 的关系：学长崇拜。",
+          "narrative_en": "Relation: Jiang Haotian ↔ Tang Yichen — 学长崇拜."
+        },
+        {
+          "subject": "npc43_jiang_haotian",
+          "predicate": "请教学姐",
+          "object": "npc03_su_yutong",
+          "narrative_zh": "姜浩天 与 苏雨桐 的关系：请教学姐。",
+          "narrative_en": "Relation: Jiang Haotian ↔ Su Yutong — 请教学姐."
+        },
+        {
+          "subject": "npc43_jiang_haotian",
+          "predicate": "believes",
+          "object": "踏踏实实才是真本事",
+          "narrative_zh": "姜浩天 的核心信念：踏踏实实才是真本事。",
+          "narrative_en": "Core belief of Jiang Haotian: Solid work is true skill."
+        },
+        {
+          "subject": "npc43_jiang_haotian",
+          "predicate": "longs_for",
+          "object": "高数和力学不挂科",
+          "narrative_zh": "姜浩天 的长期渴望：高数和力学不挂科。",
+          "narrative_en": "Long-term desire of Jiang Haotian: Not fail calculus or mechanics."
+        }
+      ]
+    },
+    "npc44_ye_zhiqiu": {
+      "memories": [
+        {
+          "text": "这两个问题其实是一个问题",
+          "text_en": "These two questions are actually one",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：去物理系旁听一节量子力学课",
+          "text_en": "Today's small goal: Audit a quantum-mechanics class today",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：哲学系同学不懂他在说什么；物理系觉得他不够专业",
+          "text_en": "Current state: Philosophy peers don't get him; physicists think him unprofessional",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起张鹤鸣：学术讨论伙伴。",
+          "text_en": "Thinking of Zhang Heming: 学术讨论伙伴.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc44_ye_zhiqiu",
+          "predicate": "学术讨论伙伴",
+          "object": "npc04_zhang_heming",
+          "narrative_zh": "叶知秋 与 张鹤鸣 的关系：学术讨论伙伴。",
+          "narrative_en": "Relation: Ye Zhiqiu ↔ Zhang Heming — 学术讨论伙伴."
+        },
+        {
+          "subject": "npc44_ye_zhiqiu",
+          "predicate": "跨系旁听认识",
+          "object": "npc21_li_moran",
+          "narrative_zh": "叶知秋 与 李默然 的关系：跨系旁听认识。",
+          "narrative_en": "Relation: Ye Zhiqiu ↔ Li Moran — 跨系旁听认识."
+        },
+        {
+          "subject": "npc44_ye_zhiqiu",
+          "predicate": "believes",
+          "object": "科学和哲学本质上在追问同一个问题",
+          "narrative_zh": "叶知秋 的核心信念：科学和哲学本质上在追问同一个问题。",
+          "narrative_en": "Core belief of Ye Zhiqiu: Science and philosophy ask the same question at the core."
+        },
+        {
+          "subject": "npc44_ye_zhiqiu",
+          "predicate": "longs_for",
+          "object": "找到论文的核心问题",
+          "narrative_zh": "叶知秋 的长期渴望：找到论文的核心问题。",
+          "narrative_en": "Long-term desire of Ye Zhiqiu: Find the core thesis question."
+        }
+      ]
+    },
+    "npc45_xia_qing": {
+      "memories": [
+        {
+          "text": "患者对我笑的那一刻，一切都值了",
+          "text_en": "A patient's smile makes it all worth it",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今晚把静脉穿刺再练20次",
+          "text_en": "Today's small goal: 20 more IV-insertion practices tonight",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：实习很累；需要背大量护理流程",
+          "text_en": "Current state: Rotation is exhausting; many protocols to memorize",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起孙芳：见习带教。",
+          "text_en": "Thinking of Sun Fang: 见习带教.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc45_xia_qing",
+          "predicate": "见习带教",
+          "object": "npc40_sun_fang",
+          "narrative_zh": "夏晴 与 孙芳 的关系：见习带教。",
+          "narrative_en": "Relation: Xia Qing ↔ Sun Fang — 见习带教."
+        },
+        {
+          "subject": "npc45_xia_qing",
+          "predicate": "公共卫生+护理联动",
+          "object": "npc58_song_qingxue",
+          "narrative_zh": "夏晴 与 宋清雪 的关系：公共卫生+护理联动。",
+          "narrative_en": "Relation: Xia Qing ↔ Song Qingxue — 公共卫生+护理联动."
+        },
+        {
+          "subject": "npc45_xia_qing",
+          "predicate": "believes",
+          "object": "护理是一门需要爱的技术",
+          "narrative_zh": "夏晴 的核心信念：护理是一门需要爱的技术。",
+          "narrative_en": "Core belief of Xia Qing: Nursing is a technology requiring love."
+        },
+        {
+          "subject": "npc45_xia_qing",
+          "predicate": "longs_for",
+          "object": "临床操作考试全部通过",
+          "narrative_zh": "夏晴 的长期渴望：临床操作考试全部通过。",
+          "narrative_en": "Long-term desire of Xia Qing: Pass all clinical-skill exams."
+        }
+      ]
+    },
+    "npc46_qin_ling": {
+      "memories": [
+        {
+          "text": "先把数据做扎实，论文自然就写出来了",
+          "text_en": "Solid data first, paper follows",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：处理上次野外采集的土壤样本",
+          "text_en": "Today's small goal: Process last trip's soil samples",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：样本处理设备排队；论文进度严重落后",
+          "text_en": "Current state: Equipment queue; thesis lagging",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起赵心怡：理学院同楼·偶尔聊天。",
+          "text_en": "Thinking of Zhao Xinyi: 理学院同楼·偶尔聊天.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc46_qin_ling",
+          "predicate": "理学院同楼·偶尔聊天",
+          "object": "npc24_zhao_xinyi",
+          "narrative_zh": "秦岭 与 赵心怡 的关系：理学院同楼·偶尔聊天。",
+          "narrative_en": "Relation: Qin Ling ↔ Zhao Xinyi — 理学院同楼·偶尔聊天."
+        },
+        {
+          "subject": "npc46_qin_ling",
+          "predicate": "野外采药和地质的交集",
+          "object": "npc42_fu_wanqing",
+          "narrative_zh": "秦岭 与 傅婉清 的关系：野外采药和地质的交集。",
+          "narrative_en": "Relation: Qin Ling ↔ Fu Wanqing — 野外采药和地质的交集."
+        },
+        {
+          "subject": "npc46_qin_ling",
+          "predicate": "believes",
+          "object": "地球是最好的实验室",
+          "narrative_zh": "秦岭 的核心信念：地球是最好的实验室。",
+          "narrative_en": "Core belief of Qin Ling: Earth is the best lab."
+        },
+        {
+          "subject": "npc46_qin_ling",
+          "predicate": "longs_for",
+          "object": "这个月完成一章论文",
+          "narrative_zh": "秦岭 的长期渴望：这个月完成一章论文。",
+          "narrative_en": "Long-term desire of Qin Ling: Finish a chapter this month."
+        }
+      ]
+    },
+    "npc47_bai_lu": {
+      "memories": [
+        {
+          "text": "疼是暂时的，遗憾是永远的",
+          "text_en": "Pain is temporary; regret is forever",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天把新舞段记完",
+          "text_en": "Today's small goal: Memorize new choreography today",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：腰伤未愈；排练时间和其他课冲突",
+          "text_en": "Current state: Waist injury unhealed; rehearsal conflicts with classes",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起林雨萱：排练厅邻居。",
+          "text_en": "Thinking of Lin Yuxuan: 排练厅邻居.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc47_bai_lu",
+          "predicate": "排练厅邻居",
+          "object": "npc25_lin_yuxuan",
+          "narrative_zh": "白露 与 林雨萱 的关系：排练厅邻居。",
+          "narrative_en": "Relation: Bai Lu ↔ Lin Yuxuan — 排练厅邻居."
+        },
+        {
+          "subject": "npc47_bai_lu",
+          "predicate": "舞蹈伤病常来看",
+          "object": "npc40_sun_fang",
+          "narrative_zh": "白露 与 孙芳 的关系：舞蹈伤病常来看。",
+          "narrative_en": "Relation: Bai Lu ↔ Sun Fang — 舞蹈伤病常来看."
+        },
+        {
+          "subject": "npc47_bai_lu",
+          "predicate": "believes",
+          "object": "身体是最诚实的表达工具",
+          "narrative_zh": "白露 的核心信念：身体是最诚实的表达工具。",
+          "narrative_en": "Core belief of Bai Lu: The body is the most honest instrument."
+        },
+        {
+          "subject": "npc47_bai_lu",
+          "predicate": "longs_for",
+          "object": "下个月汇报演出完美呈现",
+          "narrative_zh": "白露 的长期渴望：下个月汇报演出完美呈现。",
+          "narrative_en": "Long-term desire of Bai Lu: Flawless show next month."
+        }
+      ]
+    },
+    "npc48_long_feiyu": {
+      "memories": [
+        {
+          "text": "先飞起来再说，理论可以在飞的过程中补",
+          "text_en": "Let it fly first; theory can catch up",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天把航模的发动机装好",
+          "text_en": "Today's small goal: Install model engine today",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：课程难度大；航模经费有限",
+          "text_en": "Current state: Tough courses; limited model club budget",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起沈一凡：工科男宿舍串门。",
+          "text_en": "Thinking of Shen Yifan: 工科男宿舍串门.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc48_long_feiyu",
+          "predicate": "工科男宿舍串门",
+          "object": "npc07_shen_yifan",
+          "narrative_zh": "龙飞宇 与 沈一凡 的关系：工科男宿舍串门。",
+          "narrative_en": "Relation: Long Feiyu ↔ Shen Yifan — 工科男宿舍串门."
+        },
+        {
+          "subject": "npc48_long_feiyu",
+          "predicate": "理工科天才交流",
+          "object": "npc23_huang_zixuan",
+          "narrative_zh": "龙飞宇 与 黄子轩 的关系：理工科天才交流。",
+          "narrative_en": "Relation: Long Feiyu ↔ Huang Zixuan — 理工科天才交流."
+        },
+        {
+          "subject": "npc48_long_feiyu",
+          "predicate": "believes",
+          "object": "星辰大海不是梦话",
+          "narrative_zh": "龙飞宇 的核心信念：星辰大海不是梦话。",
+          "narrative_en": "Core belief of Long Feiyu: Stars and seas aren't pipe dreams."
+        },
+        {
+          "subject": "npc48_long_feiyu",
+          "predicate": "longs_for",
+          "object": "完成飞行器课设",
+          "narrative_zh": "龙飞宇 的长期渴望：完成飞行器课设。",
+          "narrative_en": "Long-term desire of Long Feiyu: Complete aircraft course project."
+        }
+      ]
+    },
+    "npc49_liu_ruyan": {
+      "memories": [
+        {
+          "text": "翻译一段台词比写一篇论文有意义多了",
+          "text_en": "Translating a line means more than writing a paper",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天翻译完一段游戏文本练习",
+          "text_en": "Today's small goal: Translate a game-text snippet today",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：上课内容和兴趣方向有差距；室友不理解",
+          "text_en": "Current state: Classwork diverges from interest; roommates don't get her",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起方芷晴：语言学习互助。",
+          "text_en": "Thinking of Fang Zhiqing: 语言学习互助.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc49_liu_ruyan",
+          "predicate": "语言学习互助",
+          "object": "npc05_fang_zhiqing",
+          "narrative_zh": "柳如烟 与 方芷晴 的关系：语言学习互助。",
+          "narrative_en": "Relation: Liu Ruyan ↔ Fang Zhiqing — 语言学习互助."
+        },
+        {
+          "subject": "npc49_liu_ruyan",
+          "predicate": "NLP+日语翻译讨论",
+          "object": "npc10_wu_ruolin",
+          "narrative_zh": "柳如烟 与 吴若琳 的关系：NLP+日语翻译讨论。",
+          "narrative_en": "Relation: Liu Ruyan ↔ Wu Ruolin — NLP+日语翻译讨论."
+        },
+        {
+          "subject": "npc49_liu_ruyan",
+          "predicate": "believes",
+          "object": "二次元比三次元更真实",
+          "narrative_zh": "柳如烟 的核心信念：二次元比三次元更真实。",
+          "narrative_en": "Core belief of Liu Ruyan: 2D is more real than 3D."
+        },
+        {
+          "subject": "npc49_liu_ruyan",
+          "predicate": "longs_for",
+          "object": "日语N1满分·积累翻译作品集",
+          "narrative_zh": "柳如烟 的长期渴望：日语N1满分·积累翻译作品集。",
+          "narrative_en": "Long-term desire of Liu Ruyan: Perfect JLPT N1; build translation portfolio."
+        }
+      ]
+    },
+    "npc50_gao_yuan": {
+      "memories": [
+        {
+          "text": "如果理论不能解释现实，那是理论的问题",
+          "text_en": "If theory doesn't explain reality, theory is wrong",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：整理上次基层调研的数据",
+          "text_en": "Today's small goal: Organize last field-trip data",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：导师意见和自己不一致；写作速度慢",
+          "text_en": "Current state: Advisor disagrees; writing is slow",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起张鹤鸣：哲学系读书会。",
+          "text_en": "Thinking of Zhang Heming: 哲学系读书会.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc50_gao_yuan",
+          "predicate": "哲学系读书会",
+          "object": "npc04_zhang_heming",
+          "narrative_zh": "高远 与 张鹤鸣 的关系：哲学系读书会。",
+          "narrative_en": "Relation: Gao Yuan ↔ Zhang Heming — 哲学系读书会."
+        },
+        {
+          "subject": "npc50_gao_yuan",
+          "predicate": "社会调研学术同盟",
+          "object": "npc29_cheng_siyuan",
+          "narrative_zh": "高远 与 程思远 的关系：社会调研学术同盟。",
+          "narrative_en": "Relation: Gao Yuan ↔ Cheng Siyuan — 社会调研学术同盟."
+        },
+        {
+          "subject": "npc50_gao_yuan",
+          "predicate": "believes",
+          "object": "哲学不能脱离现实",
+          "narrative_zh": "高远 的核心信念：哲学不能脱离现实。",
+          "narrative_en": "Core belief of Gao Yuan: Philosophy can't detach from reality."
+        },
+        {
+          "subject": "npc50_gao_yuan",
+          "predicate": "longs_for",
+          "object": "发一篇有分量的核心期刊",
+          "narrative_zh": "高远 的长期渴望：发一篇有分量的核心期刊。",
+          "narrative_en": "Long-term desire of Gao Yuan: Publish in a major core journal."
+        }
+      ]
+    },
+    "npc51_xu_anqi": {
+      "memories": [
+        {
+          "text": "只要能让一个孩子看到不一样的世界，就值了",
+          "text_en": "If I can show one child a different world, it's worth it",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天去附属小学观摩教学",
+          "text_en": "Today's small goal: Observe teaching at affiliated primary today",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：课程任务重；支教项目还在申请中",
+          "text_en": "Current state: Heavy coursework; rural program still in application",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起罗晨曦：志愿报道合作。",
+          "text_en": "Thinking of Luo Chenxi: 志愿报道合作.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc51_xu_anqi",
+          "predicate": "志愿报道合作",
+          "object": "npc32_luo_chenxi",
+          "narrative_zh": "许安琪 与 罗晨曦 的关系：志愿报道合作。",
+          "narrative_en": "Relation: Xu Anqi ↔ Luo Chenxi — 志愿报道合作."
+        },
+        {
+          "subject": "npc51_xu_anqi",
+          "predicate": "志愿+护理公益合作",
+          "object": "npc45_xia_qing",
+          "narrative_zh": "许安琪 与 夏晴 的关系：志愿+护理公益合作。",
+          "narrative_en": "Relation: Xu Anqi ↔ Xia Qing — 志愿+护理公益合作."
+        },
+        {
+          "subject": "npc51_xu_anqi",
+          "predicate": "believes",
+          "object": "每个孩子都值得好的教育",
+          "narrative_zh": "许安琪 的核心信念：每个孩子都值得好的教育。",
+          "narrative_en": "Core belief of Xu Anqi: Every child deserves good education."
+        },
+        {
+          "subject": "npc51_xu_anqi",
+          "predicate": "longs_for",
+          "object": "加入学校支教团·假期去支教",
+          "narrative_zh": "许安琪 的长期渴望：加入学校支教团·假期去支教。",
+          "narrative_en": "Long-term desire of Xu Anqi: Join the school's rural-teaching team."
+        }
+      ]
+    },
+    "npc52_tian_zirui": {
+      "memories": [
+        {
+          "text": "不要和我说环保不赚钱，地球没了什么都不赚",
+          "text_en": "Don't tell me eco doesn't pay; if Earth dies, nothing pays",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天分析完上周的水质检测数据",
+          "text_en": "Today's small goal: Analyze last week's water-quality data",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：实验设备老旧；环保行业薪资不高动摇了一些人",
+          "text_en": "Current state: Old equipment; low pay in industry shakes peers",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起陆小曼：环保同盟。",
+          "text_en": "Thinking of Lu Xiaoman: 环保同盟.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc52_tian_zirui",
+          "predicate": "环保同盟",
+          "object": "npc16_lu_xiaoman",
+          "narrative_zh": "田子睿 与 陆小曼 的关系：环保同盟。",
+          "narrative_en": "Relation: Tian Zirui ↔ Lu Xiaoman — 环保同盟."
+        },
+        {
+          "subject": "npc52_tian_zirui",
+          "predicate": "环境数据合作",
+          "object": "npc46_qin_ling",
+          "narrative_zh": "田子睿 与 秦岭 的关系：环境数据合作。",
+          "narrative_en": "Relation: Tian Zirui ↔ Qin Ling — 环境数据合作."
+        },
+        {
+          "subject": "npc52_tian_zirui",
+          "predicate": "believes",
+          "object": "数据不会说谎，地球正在求救",
+          "narrative_zh": "田子睿 的核心信念：数据不会说谎，地球正在求救。",
+          "narrative_en": "Core belief of Tian Zirui: Data doesn't lie; Earth is crying for help."
+        },
+        {
+          "subject": "npc52_tian_zirui",
+          "predicate": "longs_for",
+          "object": "毕业设计方案拿到企业投资",
+          "narrative_zh": "田子睿 的长期渴望：毕业设计方案拿到企业投资。",
+          "narrative_en": "Long-term desire of Tian Zirui: Graduation design attracts enterprise funding."
+        }
+      ]
+    },
+    "npc53_yin_xiaoya": {
+      "memories": [
+        {
+          "text": "世界上没有什么事是一顿好吃的解决不了的",
+          "text_en": "No problem can't be solved with a good meal",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天拍一组实验室做的分子料理",
+          "text_en": "Today's small goal: Shoot a batch of molecular-gastronomy experiments",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：实验室不允许随便做食物；拍照占用了太多时间",
+          "text_en": "Current state: Lab forbids casual cooking; photos eat too much time",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起何敏：美食同好·跨辈忘年交。",
+          "text_en": "Thinking of He Min: 美食同好·跨辈忘年交.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc53_yin_xiaoya",
+          "predicate": "美食同好·跨辈忘年交",
+          "object": "npc37_he_min",
+          "narrative_zh": "尹小雅 与 何敏 的关系：美食同好·跨辈忘年交。",
+          "narrative_en": "Relation: Yin Xiaoya ↔ He Min — 美食同好·跨辈忘年交."
+        },
+        {
+          "subject": "npc53_yin_xiaoya",
+          "predicate": "believes",
+          "object": "食物是最接地气的幸福",
+          "narrative_zh": "尹小雅 的核心信念：食物是最接地气的幸福。",
+          "narrative_en": "Core belief of Yin Xiaoya: Food is the most down-to-earth happiness."
+        },
+        {
+          "subject": "npc53_yin_xiaoya",
+          "predicate": "longs_for",
+          "object": "美食账号粉丝破5万",
+          "narrative_zh": "尹小雅 的长期渴望：美食账号粉丝破5万。",
+          "narrative_en": "Long-term desire of Yin Xiaoya: 50k followers on food account."
+        }
+      ]
+    },
+    "npc54_chang_le": {
+      "memories": [
+        {
+          "text": "你不开心的时候，来撸猫就好了",
+          "text_en": "When you're sad, come pet a cat",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天给猫咖进一批新玩具",
+          "text_en": "Today's small goal: Order new cat toys today",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：房租压力大；有只猫生病了",
+          "text_en": "Current state: High rent; one cat is ill",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起孙悦彤：创业者互相打气。",
+          "text_en": "Thinking of Sun Yuetong: 创业者互相打气.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc54_chang_le",
+          "predicate": "创业者互相打气",
+          "object": "npc19_sun_yuetong",
+          "narrative_zh": "常乐 与 孙悦彤 的关系：创业者互相打气。",
+          "narrative_en": "Relation: Chang Le ↔ Sun Yuetong — 创业者互相打气."
+        },
+        {
+          "subject": "npc54_chang_le",
+          "predicate": "心理学同学",
+          "object": "npc22_zhou_xiaomeng",
+          "narrative_zh": "常乐 与 周小梦 的关系：心理学同学。",
+          "narrative_en": "Relation: Chang Le ↔ Zhou Xiaomeng — 心理学同学."
+        },
+        {
+          "subject": "npc54_chang_le",
+          "predicate": "believes",
+          "object": "治愈别人也是治愈自己",
+          "narrative_zh": "常乐 的核心信念：治愈别人也是治愈自己。",
+          "narrative_en": "Core belief of Chang Le: Healing others heals yourself."
+        },
+        {
+          "subject": "npc54_chang_le",
+          "predicate": "longs_for",
+          "object": "猫咖盈利·论文也不落下",
+          "narrative_zh": "常乐 的长期渴望：猫咖盈利·论文也不落下。",
+          "narrative_en": "Long-term desire of Chang Le: Cafe profits and thesis both on track."
+        }
+      ]
+    },
+    "npc55_shi_lei": {
+      "memories": [
+        {
+          "text": "笨鸟先飞，我多花两倍时间就好了",
+          "text_en": "Dumb birds fly first; I just put in twice the time",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今晚看完固体物理第三章",
+          "text_en": "Today's small goal: Finish solid-state physics Ch.3 tonight",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：基础知识缺口大；实验操作需要从零学起",
+          "text_en": "Current state: Large knowledge gap; needs lab basics from scratch",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起姜浩天：同为吃苦型学生·互相鼓励。",
+          "text_en": "Thinking of Jiang Haotian: 同为吃苦型学生·互相鼓励.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc55_shi_lei",
+          "predicate": "同为吃苦型学生·互相鼓励",
+          "object": "npc43_jiang_haotian",
+          "narrative_zh": "石磊 与 姜浩天 的关系：同为吃苦型学生·互相鼓励。",
+          "narrative_en": "Relation: Shi Lei ↔ Jiang Haotian — 同为吃苦型学生·互相鼓励."
+        },
+        {
+          "subject": "npc55_shi_lei",
+          "predicate": "实验室邻居·工科苦逼联盟",
+          "object": "npc57_yue_pengcheng",
+          "narrative_zh": "石磊 与 岳鹏程 的关系：实验室邻居·工科苦逼联盟。",
+          "narrative_en": "Relation: Shi Lei ↔ Yue Pengcheng — 实验室邻居·工科苦逼联盟."
+        },
+        {
+          "subject": "npc55_shi_lei",
+          "predicate": "believes",
+          "object": "既然选了就要做到最好",
+          "narrative_zh": "石磊 的核心信念：既然选了就要做到最好。",
+          "narrative_en": "Core belief of Shi Lei: If I chose it, I'll do it right."
+        },
+        {
+          "subject": "npc55_shi_lei",
+          "predicate": "longs_for",
+          "object": "这学期把三门补修课全部通过",
+          "narrative_zh": "石磊 的长期渴望：这学期把三门补修课全部通过。",
+          "narrative_en": "Long-term desire of Shi Lei: Pass all three make-up courses this term."
+        }
+      ]
+    },
+    "npc56_wen_wanru": {
+      "memories": [
+        {
+          "text": "我的读者比文学评论家更懂我",
+          "text_en": "My readers understand me better than critics",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天日更4000字",
+          "text_en": "Today's small goal: Update 4000 words today",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：课程论文和网文更新同时压来；读者催更压力大",
+          "text_en": "Current state: Paper deadlines collide with updates; reader pressure",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起林晓薇：校报同事+文友。",
+          "text_en": "Thinking of Lin Xiaowei: 校报同事+文友.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc56_wen_wanru",
+          "predicate": "校报同事+文友",
+          "object": "npc01_lin_xiaowei",
+          "narrative_zh": "温婉如 与 林晓薇 的关系：校报同事+文友。",
+          "narrative_en": "Relation: Wen Wanru ↔ Lin Xiaowei — 校报同事+文友."
+        },
+        {
+          "subject": "npc56_wen_wanru",
+          "predicate": "选修课师生",
+          "object": "npc33_li_huimin",
+          "narrative_zh": "温婉如 与 李慧敏 的关系：选修课师生。",
+          "narrative_en": "Relation: Wen Wanru ↔ Li Huimin — 选修课师生."
+        },
+        {
+          "subject": "npc56_wen_wanru",
+          "predicate": "believes",
+          "object": "故事是最好的避难所",
+          "narrative_zh": "温婉如 的核心信念：故事是最好的避难所。",
+          "narrative_en": "Core belief of Wen Wanru: Stories are the best refuge."
+        },
+        {
+          "subject": "npc56_wen_wanru",
+          "predicate": "longs_for",
+          "object": "本月订阅量突破一万",
+          "narrative_zh": "温婉如 的长期渴望：本月订阅量突破一万。",
+          "narrative_en": "Long-term desire of Wen Wanru: Monthly subscriptions break 10k."
+        }
+      ]
+    },
+    "npc57_yue_pengcheng": {
+      "memories": [
+        {
+          "text": "论文可以晚点写，零件公差不能等",
+          "text_en": "Papers can wait; tolerances cannot",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天把那个轴承座车出来",
+          "text_en": "Today's small goal: Turn the bearing seat today",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：车间排队等设备；零件精度不够需要返工",
+          "text_en": "Current state: Machine queue; tolerance fails, needs rework",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起许晴岚：跨组技术交流。",
+          "text_en": "Thinking of Xu Qinglan: 跨组技术交流.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc57_yue_pengcheng",
+          "predicate": "跨组技术交流",
+          "object": "npc08_xu_qinglan",
+          "narrative_zh": "岳鹏程 与 许晴岚 的关系：跨组技术交流。",
+          "narrative_en": "Relation: Yue Pengcheng ↔ Xu Qinglan — 跨组技术交流."
+        },
+        {
+          "subject": "npc57_yue_pengcheng",
+          "predicate": "跨学科结构讨论",
+          "object": "npc13_tang_yichen",
+          "narrative_zh": "岳鹏程 与 唐亦辰 的关系：跨学科结构讨论。",
+          "narrative_en": "Relation: Yue Pengcheng ↔ Tang Yichen — 跨学科结构讨论."
+        },
+        {
+          "subject": "npc57_yue_pengcheng",
+          "predicate": "believes",
+          "object": "理论再好不如一个能跑的原型",
+          "narrative_zh": "岳鹏程 的核心信念：理论再好不如一个能跑的原型。",
+          "narrative_en": "Core belief of Yue Pengcheng: A running prototype beats a pretty theory."
+        },
+        {
+          "subject": "npc57_yue_pengcheng",
+          "predicate": "longs_for",
+          "object": "原型机在月底跑起来",
+          "narrative_zh": "岳鹏程 的长期渴望：原型机在月底跑起来。",
+          "narrative_en": "Long-term desire of Yue Pengcheng: Prototype running by month-end."
+        }
+      ]
+    },
+    "npc58_song_qingxue": {
+      "memories": [
+        {
+          "text": "改变不了世界，至少可以改变身边的人",
+          "text_en": "Can't change the world; at least change those near me",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天发完剩余的调查问卷",
+          "text_en": "Today's small goal: Distribute remaining surveys today",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：志愿者人手不够；数据收集比想象中困难",
+          "text_en": "Current state: Short on volunteers; data collection harder than expected",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起夏晴：公共卫生+护理联动。",
+          "text_en": "Thinking of Xia Qing: 公共卫生+护理联动.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc58_song_qingxue",
+          "predicate": "公共卫生+护理联动",
+          "object": "npc45_xia_qing",
+          "narrative_zh": "宋清雪 与 夏晴 的关系：公共卫生+护理联动。",
+          "narrative_en": "Relation: Song Qingxue ↔ Xia Qing — 公共卫生+护理联动."
+        },
+        {
+          "subject": "npc58_song_qingxue",
+          "predicate": "believes",
+          "object": "公共健康是社会的根基",
+          "narrative_zh": "宋清雪 的核心信念：公共健康是社会的根基。",
+          "narrative_en": "Core belief of Song Qingxue: Public health is society's foundation."
+        },
+        {
+          "subject": "npc58_song_qingxue",
+          "predicate": "longs_for",
+          "object": "带领志愿队完成校园健康调查",
+          "narrative_zh": "宋清雪 的长期渴望：带领志愿队完成校园健康调查。",
+          "narrative_en": "Long-term desire of Song Qingxue: Lead volunteers through campus health survey."
+        }
+      ]
+    },
+    "npc59_guo_yiming": {
+      "memories": [
+        {
+          "text": "这个bug不解决今晚谁都别走",
+          "text_en": "Nobody leaves tonight until this bug is dead",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：今天解决机械臂的抖动问题",
+          "text_en": "Today's small goal: Fix the robot arm jitter today",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：电路板烧了一块；比赛只剩三周",
+          "text_en": "Current state: Fried one PCB; three weeks to contest",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起陈远航：技术交流·帮调AI模型。",
+          "text_en": "Thinking of Chen Yuanhang: 技术交流·帮调AI模型.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc59_guo_yiming",
+          "predicate": "技术交流·帮调AI模型",
+          "object": "npc02_chen_yuanhang",
+          "narrative_zh": "郭一鸣 与 陈远航 的关系：技术交流·帮调AI模型。",
+          "narrative_en": "Relation: Guo Yiming ↔ Chen Yuanhang — 技术交流·帮调AI模型."
+        },
+        {
+          "subject": "npc59_guo_yiming",
+          "predicate": "工科竞赛圈好友",
+          "object": "npc48_long_feiyu",
+          "narrative_zh": "郭一鸣 与 龙飞宇 的关系：工科竞赛圈好友。",
+          "narrative_en": "Relation: Guo Yiming ↔ Long Feiyu — 工科竞赛圈好友."
+        },
+        {
+          "subject": "npc59_guo_yiming",
+          "predicate": "believes",
+          "object": "做工程就是不断试错",
+          "narrative_zh": "郭一鸣 的核心信念：做工程就是不断试错。",
+          "narrative_en": "Core belief of Guo Yiming: Engineering is iterative failure."
+        },
+        {
+          "subject": "npc59_guo_yiming",
+          "predicate": "longs_for",
+          "object": "比赛前一个月完成全部调试",
+          "narrative_zh": "郭一鸣 的长期渴望：比赛前一个月完成全部调试。",
+          "narrative_en": "Long-term desire of Guo Yiming: Done debugging a month before the contest."
+        }
+      ]
+    },
+    "npc60_tao_ran": {
+      "memories": [
+        {
+          "text": "我见过技术不受约束的样子，所以我来了",
+          "text_en": "I've seen tech without constraints; that's why I'm here",
+          "tone": "focused",
+          "ts": "T-1d 23:50"
+        },
+        {
+          "text": "今天的小目标：读完导师推荐的伦理学入门清单",
+          "text_en": "Today's small goal: Finish advisor-recommended intro list",
+          "tone": "decisive",
+          "ts": "T 07:05"
+        },
+        {
+          "text": "当前状态：哲学功底需要大量补课；同学比自己年轻很多",
+          "text_en": "Current state: Needs to catch up on philosophy basics; peers are younger",
+          "tone": "casual",
+          "ts": "T 07:30"
+        },
+        {
+          "text": "想起叶知秋：科学哲学同好。",
+          "text_en": "Thinking of Ye Zhiqiu: 科学哲学同好.",
+          "tone": "warm",
+          "ts": "T 08:10"
+        }
+      ],
+      "triplets": [
+        {
+          "subject": "npc60_tao_ran",
+          "predicate": "科学哲学同好",
+          "object": "npc44_ye_zhiqiu",
+          "narrative_zh": "陶然 与 叶知秋 的关系：科学哲学同好。",
+          "narrative_en": "Relation: Tao Ran ↔ Ye Zhiqiu — 科学哲学同好."
+        },
+        {
+          "subject": "npc60_tao_ran",
+          "predicate": "哲学系同门",
+          "object": "npc04_zhang_heming",
+          "narrative_zh": "陶然 与 张鹤鸣 的关系：哲学系同门。",
+          "narrative_en": "Relation: Tao Ran ↔ Zhang Heming — 哲学系同门."
+        },
+        {
+          "subject": "npc60_tao_ran",
+          "predicate": "believes",
+          "object": "技术发展需要伦理的缰绳",
+          "narrative_zh": "陶然 的核心信念：技术发展需要伦理的缰绳。",
+          "narrative_en": "Core belief of Tao Ran: Tech needs the reins of ethics."
+        },
+        {
+          "subject": "npc60_tao_ran",
+          "predicate": "longs_for",
+          "object": "确定博士论文的研究方向",
+          "narrative_zh": "陶然 的长期渴望：确定博士论文的研究方向。",
+          "narrative_en": "Long-term desire of Tao Ran: Decide on dissertation direction."
+        }
+      ]
+    }
+  }
+}

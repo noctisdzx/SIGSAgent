@@ -1,0 +1,78 @@
+{
+  "id": "npc26_zhao_tianlei",
+  "name": "赵天磊",
+  "role": "undergraduate_arts",
+  "personality": {
+    "openness": 0.5,
+    "conscientiousness": 0.55,
+    "extraversion": 0.9,
+    "agreeableness": 0.65,
+    "neuroticism": 0.25
+  },
+  "preferences": {
+    "favorite_locations": [
+      "7a281fd7",
+      "9a49343c"
+    ],
+    "favorite_tags": [
+      "creative",
+      "leisure"
+    ]
+  },
+  "relations": {
+    "npc11_zheng_haoyu": "体育圈好友",
+    "npc37_he_min": "食堂常客·多打一勺",
+    "npc39_chen_zhigang": "运动会安保认识",
+    "npc25_lin_yuxuan": "音乐+体育·反差吸引"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc26_zhao_tianlei",
+  "profile": {
+    "id_num": 26,
+    "name_zh": "赵天磊",
+    "name_en": "Zhao Tianlei",
+    "age": 21,
+    "role_zh": "体育学院大二·校篮球队队长",
+    "role_en": "PE Yr2 · School Basketball Captain",
+    "major_zh": "体育教育",
+    "major_en": "Physical Education",
+    "group_zh": "艺术学院",
+    "group_en": "",
+    "mbti": "ESTP",
+    "ocean_raw": "O50 C55 E90 A65 N25",
+    "innate_zh": "运动天赋、领导力、抗压能力强",
+    "innate_en": "Athletic gift, leadership, stress-tolerant",
+    "learned_zh": "带队比赛积累的战术理解和团队管理经验",
+    "learned_en": "Tactical sense and team management from leading teams",
+    "belief_zh": "赛场上见真章",
+    "belief_en": "The court decides",
+    "goal_zh": "带队拿省级联赛冠军",
+    "goal_en": "Lead team to provincial championship",
+    "contradiction_zh": "热爱运动 vs 文化课成绩堪忧",
+    "contradiction_en": "Loves sport vs. struggling with academics",
+    "surface_zh": "阳光热血、大哥范",
+    "surface_en": "Sunny, big-brother vibe",
+    "deep_zh": "害怕受伤后一切归零",
+    "deep_en": "Fears injury erasing everything",
+    "fear_zh": "运动生涯因伤病终结",
+    "fear_en": "Career-ending injury",
+    "desire_zh": "在赛场上留下自己的传说",
+    "desire_en": "Leaving a legend on the court",
+    "lifestyle_zh": "运动员作息·早睡早起",
+    "lifestyle_en": "Athlete's early-to-bed routine",
+    "rhythm_zh": "上午训练，下午恢复+上课，晚上战术分析",
+    "rhythm_en": "AM training, PM recovery + class, evening tactics",
+    "spaces_zh": "体育馆、篮球场、食堂、康复室",
+    "spaces_en": "Gym, court, canteen, rehab room",
+    "long_desire_zh": "球队磨合到最佳状态",
+    "long_desire_en": "Team hits peak chemistry",
+    "short_goal_zh": "今天的体能训练不能偷懒",
+    "short_goal_en": "No slacking on today's conditioning",
+    "constraint_zh": "膝盖旧伤偶尔发作；两个队员闹矛盾",
+    "constraint_en": "Old knee acting up; two teammates feuding",
+    "bias_zh": "倾向低估休息和恢复的重要性",
+    "bias_en": "Underestimates rest and recovery",
+    "narrative_zh": "队长不能第一个倒下",
+    "narrative_en": "Captain can't fall first"
+  }
+}

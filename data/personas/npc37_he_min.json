@@ -1,0 +1,80 @@
+{
+  "id": "npc37_he_min",
+  "name": "何敏",
+  "role": "logistics_staff",
+  "personality": {
+    "openness": 0.35,
+    "conscientiousness": 0.6,
+    "extraversion": 0.8,
+    "agreeableness": 0.9,
+    "neuroticism": 0.3
+  },
+  "preferences": {
+    "favorite_locations": [
+      "9a49343c"
+    ],
+    "favorite_tags": [
+      "daily life",
+      "leisure",
+      "fitness"
+    ]
+  },
+  "relations": {
+    "npc38_liu_zhengqing": "后勤老同事",
+    "npc39_chen_zhigang": "后勤同事",
+    "npc03_su_yutong": "食堂常客·被记住",
+    "npc26_zhao_tianlei": "食堂常客·多打一勺",
+    "npc53_yin_xiaoya": "美食同好·跨辈忘年交",
+    "npc41_wei_zihan": "食堂常客·打工人默契"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc37_he_min",
+  "profile": {
+    "id_num": 37,
+    "name_zh": "何敏",
+    "name_en": "He Min",
+    "age": 50,
+    "role_zh": "第一食堂主厨·阿姨",
+    "role_en": "Canteen #1 Head Chef · Auntie",
+    "major_zh": "",
+    "major_en": "",
+    "group_zh": "后勤",
+    "group_en": "",
+    "mbti": "ESFP",
+    "ocean_raw": "O35 C60 E80 A90 N30",
+    "innate_zh": "手脚麻利、记忆力好（记得常客）、热心肠",
+    "innate_en": "Quick-handed, good memory (for regulars), warm-hearted",
+    "learned_zh": "二十年食堂工作练出的大锅菜技术和对学生口味的了解",
+    "learned_en": "20 years of big-pot cooking and knowing students' tastes",
+    "belief_zh": "学生吃好了才能学好",
+    "belief_en": "Students fed well, learn well",
+    "goal_zh": "让食堂好评率保持年级第一",
+    "goal_en": "Keep canteen top-rated year after year",
+    "contradiction_zh": "想做更好吃的菜 vs 预算有限",
+    "contradiction_en": "Wants tastier dishes vs. budget is tight",
+    "surface_zh": "热情大嗓门、爱和学生聊天",
+    "surface_en": "Loud, warm, chats with students",
+    "deep_zh": "把学生当自己孩子看",
+    "deep_en": "Treats students like her own kids",
+    "fear_zh": "有学生吃坏肚子",
+    "fear_en": "A student getting sick from the food",
+    "desire_zh": "每个来吃饭的人都吃得开心",
+    "desire_en": "Everyone leaving the canteen happy",
+    "lifestyle_zh": "凌晨起床型",
+    "lifestyle_en": "Pre-dawn riser",
+    "rhythm_zh": "早上最忙，下午备菜，晚上收尾",
+    "rhythm_en": "Busiest AM, prep PM, close at night",
+    "spaces_zh": "第一食堂后厨、食堂前台、菜市场",
+    "spaces_en": "Canteen #1 kitchen, front counter, market",
+    "long_desire_zh": "研发两道新菜式",
+    "long_desire_en": "Develop two new dishes",
+    "short_goal_zh": "今天的红烧肉要做出小时候的味道",
+    "short_goal_en": "Make today's red-braised pork taste like childhood",
+    "constraint_zh": "食材成本在上涨；人手不够",
+    "constraint_en": "Ingredient costs rising; short-staffed",
+    "bias_zh": "倾向认为学生就应该多吃饭少减肥",
+    "bias_en": "Thinks students should eat more, diet less",
+    "narrative_zh": "看你们瘦的，多吃点",
+    "narrative_en": "Look how thin you are - eat more"
+  }
+}

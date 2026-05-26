@@ -1,0 +1,489 @@
+{
+  "id": "npc42_fu_wanqing",
+  "description": "基于参考 HTML 的 傅婉清 周课表（工作日相同，周末略简）。",
+  "week": {
+    "monday": [
+      {
+        "start": "06:30",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床·打太极"
+      },
+      {
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "07:30",
+        "end": "12:00",
+        "activity": "clinic_work",
+        "location_uid": "438038e3",
+        "narrative_zh": "去附属医院实习"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "午饭"
+      },
+      {
+        "start": "12:30",
+        "end": "14:00",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休（养生必须）"
+      },
+      {
+        "start": "14:00",
+        "end": "16:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续跟诊"
+      },
+      {
+        "start": "16:30",
+        "end": "18:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回校·去药圃认草药"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "20:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "整理实习笔记"
+      },
+      {
+        "start": "20:30",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "背方剂"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "泡脚·入睡"
+      }
+    ],
+    "tuesday": [
+      {
+        "start": "06:30",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床·打太极"
+      },
+      {
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "07:30",
+        "end": "12:00",
+        "activity": "clinic_work",
+        "location_uid": "438038e3",
+        "narrative_zh": "去附属医院实习"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "午饭"
+      },
+      {
+        "start": "12:30",
+        "end": "14:00",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休（养生必须）"
+      },
+      {
+        "start": "14:00",
+        "end": "16:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续跟诊"
+      },
+      {
+        "start": "16:30",
+        "end": "18:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回校·去药圃认草药"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "20:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "整理实习笔记"
+      },
+      {
+        "start": "20:30",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "背方剂"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "泡脚·入睡"
+      }
+    ],
+    "wednesday": [
+      {
+        "start": "06:30",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床·打太极"
+      },
+      {
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "07:30",
+        "end": "12:00",
+        "activity": "clinic_work",
+        "location_uid": "438038e3",
+        "narrative_zh": "去附属医院实习"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "午饭"
+      },
+      {
+        "start": "12:30",
+        "end": "14:00",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休（养生必须）"
+      },
+      {
+        "start": "14:00",
+        "end": "16:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续跟诊"
+      },
+      {
+        "start": "16:30",
+        "end": "18:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回校·去药圃认草药"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "20:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "整理实习笔记"
+      },
+      {
+        "start": "20:30",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "背方剂"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "泡脚·入睡"
+      }
+    ],
+    "thursday": [
+      {
+        "start": "06:30",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床·打太极"
+      },
+      {
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "07:30",
+        "end": "12:00",
+        "activity": "clinic_work",
+        "location_uid": "438038e3",
+        "narrative_zh": "去附属医院实习"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "午饭"
+      },
+      {
+        "start": "12:30",
+        "end": "14:00",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休（养生必须）"
+      },
+      {
+        "start": "14:00",
+        "end": "16:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续跟诊"
+      },
+      {
+        "start": "16:30",
+        "end": "18:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回校·去药圃认草药"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "20:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "整理实习笔记"
+      },
+      {
+        "start": "20:30",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "背方剂"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "泡脚·入睡"
+      }
+    ],
+    "friday": [
+      {
+        "start": "06:30",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床·打太极"
+      },
+      {
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "07:30",
+        "end": "12:00",
+        "activity": "clinic_work",
+        "location_uid": "438038e3",
+        "narrative_zh": "去附属医院实习"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "午饭"
+      },
+      {
+        "start": "12:30",
+        "end": "14:00",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休（养生必须）"
+      },
+      {
+        "start": "14:00",
+        "end": "16:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续跟诊"
+      },
+      {
+        "start": "16:30",
+        "end": "18:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回校·去药圃认草药"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "20:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "整理实习笔记"
+      },
+      {
+        "start": "20:30",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "背方剂"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "泡脚·入睡"
+      }
+    ],
+    "saturday": [
+      {
+        "start": "06:30",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床·打太极"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "午饭"
+      },
+      {
+        "start": "12:30",
+        "end": "14:00",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休（养生必须）"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "chat",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "周末自由活动"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "泡脚·入睡"
+      }
+    ],
+    "sunday": [
+      {
+        "start": "06:30",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床·打太极"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "午饭"
+      },
+      {
+        "start": "12:30",
+        "end": "14:00",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休（养生必须）"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "leisure_media",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "周末闲聊"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "泡脚·入睡"
+      }
+    ]
+  }
+}

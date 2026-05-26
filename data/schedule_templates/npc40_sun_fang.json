@@ -1,0 +1,426 @@
+{
+  "id": "npc40_sun_fang",
+  "description": "基于参考 HTML 的 孙芳 周课表（工作日相同，周末略简）。",
+  "week": {
+    "monday": [
+      {
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "clinic_work",
+        "location_uid": "438038e3",
+        "narrative_zh": "到校医院"
+      },
+      {
+        "start": "08:00",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "开始上午门诊"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "午饭"
+      },
+      {
+        "start": "12:30",
+        "end": "13:30",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休"
+      },
+      {
+        "start": "13:30",
+        "end": "15:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "下午门诊"
+      },
+      {
+        "start": "15:30",
+        "end": "16:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "整理病历"
+      },
+      {
+        "start": "16:30",
+        "end": "17:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "做健康宣教材料"
+      },
+      {
+        "start": "17:30",
+        "end": "18:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "下班"
+      },
+      {
+        "start": "18:00",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "回家·继续学习"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "tuesday": [
+      {
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "clinic_work",
+        "location_uid": "438038e3",
+        "narrative_zh": "到校医院"
+      },
+      {
+        "start": "08:00",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "开始上午门诊"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "午饭"
+      },
+      {
+        "start": "12:30",
+        "end": "13:30",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休"
+      },
+      {
+        "start": "13:30",
+        "end": "15:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "下午门诊"
+      },
+      {
+        "start": "15:30",
+        "end": "16:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "整理病历"
+      },
+      {
+        "start": "16:30",
+        "end": "17:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "做健康宣教材料"
+      },
+      {
+        "start": "17:30",
+        "end": "18:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "下班"
+      },
+      {
+        "start": "18:00",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "回家·继续学习"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "wednesday": [
+      {
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "clinic_work",
+        "location_uid": "438038e3",
+        "narrative_zh": "到校医院"
+      },
+      {
+        "start": "08:00",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "开始上午门诊"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "午饭"
+      },
+      {
+        "start": "12:30",
+        "end": "13:30",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休"
+      },
+      {
+        "start": "13:30",
+        "end": "15:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "下午门诊"
+      },
+      {
+        "start": "15:30",
+        "end": "16:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "整理病历"
+      },
+      {
+        "start": "16:30",
+        "end": "17:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "做健康宣教材料"
+      },
+      {
+        "start": "17:30",
+        "end": "18:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "下班"
+      },
+      {
+        "start": "18:00",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "回家·继续学习"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "thursday": [
+      {
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "clinic_work",
+        "location_uid": "438038e3",
+        "narrative_zh": "到校医院"
+      },
+      {
+        "start": "08:00",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "开始上午门诊"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "午饭"
+      },
+      {
+        "start": "12:30",
+        "end": "13:30",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休"
+      },
+      {
+        "start": "13:30",
+        "end": "15:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "下午门诊"
+      },
+      {
+        "start": "15:30",
+        "end": "16:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "整理病历"
+      },
+      {
+        "start": "16:30",
+        "end": "17:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "做健康宣教材料"
+      },
+      {
+        "start": "17:30",
+        "end": "18:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "下班"
+      },
+      {
+        "start": "18:00",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "回家·继续学习"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "friday": [
+      {
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "clinic_work",
+        "location_uid": "438038e3",
+        "narrative_zh": "到校医院"
+      },
+      {
+        "start": "08:00",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "开始上午门诊"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "午饭"
+      },
+      {
+        "start": "12:30",
+        "end": "13:30",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休"
+      },
+      {
+        "start": "13:30",
+        "end": "15:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "下午门诊"
+      },
+      {
+        "start": "15:30",
+        "end": "16:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "整理病历"
+      },
+      {
+        "start": "16:30",
+        "end": "17:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "做健康宣教材料"
+      },
+      {
+        "start": "17:30",
+        "end": "18:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "下班"
+      },
+      {
+        "start": "18:00",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "回家·继续学习"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "saturday": [
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "午饭"
+      },
+      {
+        "start": "12:30",
+        "end": "13:30",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "chat",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "周末自由活动"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "sunday": [
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "午饭"
+      },
+      {
+        "start": "12:30",
+        "end": "13:30",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "leisure_media",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "周末闲聊"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ]
+  }
+}

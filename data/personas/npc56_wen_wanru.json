@@ -1,0 +1,79 @@
+{
+  "id": "npc56_wen_wanru",
+  "name": "温婉如",
+  "role": "undergraduate_literature",
+  "personality": {
+    "openness": 0.85,
+    "conscientiousness": 0.45,
+    "extraversion": 0.3,
+    "agreeableness": 0.6,
+    "neuroticism": 0.6
+  },
+  "preferences": {
+    "favorite_locations": [
+      "64a9bc35",
+      "4ef146d8",
+      "438038e3"
+    ],
+    "favorite_tags": [
+      "creative",
+      "leisure"
+    ]
+  },
+  "relations": {
+    "npc01_lin_xiaowei": "校报同事+文友",
+    "npc33_li_huimin": "选修课师生",
+    "npc27_he_jiaqi": "插画+网文合作可能",
+    "npc49_liu_ruyan": "二次元+网文交集"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc56_wen_wanru",
+  "profile": {
+    "id_num": 56,
+    "name_zh": "温婉如",
+    "name_en": "Wen Wanru",
+    "age": 21,
+    "role_zh": "汉语言文学大三·网文写手",
+    "role_en": "Chinese Lit Yr3 · Web Novelist",
+    "major_zh": "汉语言文学",
+    "major_en": "Chinese Language & Literature",
+    "group_zh": "文学院",
+    "group_en": "",
+    "mbti": "INFP",
+    "ocean_raw": "O85 C45 E30 A60 N60",
+    "innate_zh": "想象力丰富、文字驾驭力强、情感充沛",
+    "innate_en": "Imaginative, command of language, emotional",
+    "learned_zh": "两年网文写作积累的日更能力和读者运营经验",
+    "learned_en": "Two years of web-fiction built daily-update and reader engagement skill",
+    "belief_zh": "故事是最好的避难所",
+    "belief_en": "Stories are the best refuge",
+    "goal_zh": "签约网文平台·成为全职写手",
+    "goal_en": "Sign with platform as full-time author",
+    "contradiction_zh": "文学系要求严肃文学 vs 自己写的是网文",
+    "contradiction_en": "Dept wants serious lit vs. she writes web fiction",
+    "surface_zh": "安静不起眼",
+    "surface_en": "Quiet, unnoticeable",
+    "deep_zh": "在虚构世界里她是全能的造物主",
+    "deep_en": "In fictional worlds she's an omnipotent creator",
+    "fear_zh": "被同专业的人看不起",
+    "fear_en": "Being looked down on by classmates",
+    "desire_zh": "写出让百万人追更的故事",
+    "desire_en": "Writing a story that a million people follow",
+    "lifestyle_zh": "日更倒逼的规律写作习惯",
+    "lifestyle_en": "Regularity forced by daily updates",
+    "rhythm_zh": "白天收集素材，晚上集中爆发写作",
+    "rhythm_en": "Gathers material by day, writes explosively at night",
+    "spaces_zh": "宿舍、图书馆、咖啡厅",
+    "spaces_en": "Dorm, library, cafes",
+    "long_desire_zh": "本月订阅量突破一万",
+    "long_desire_en": "Monthly subscriptions break 10k",
+    "short_goal_zh": "今天日更4000字",
+    "short_goal_en": "Update 4000 words today",
+    "constraint_zh": "课程论文和网文更新同时压来；读者催更压力大",
+    "constraint_en": "Paper deadlines collide with updates; reader pressure",
+    "bias_zh": "倾向认为点击量等于文学价值",
+    "bias_en": "Equates views with literary value",
+    "narrative_zh": "我的读者比文学评论家更懂我",
+    "narrative_en": "My readers understand me better than critics"
+  }
+}

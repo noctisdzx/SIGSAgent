@@ -1,0 +1,77 @@
+{
+  "id": "npc48_long_feiyu",
+  "name": "龙飞宇",
+  "role": "undergraduate_science",
+  "personality": {
+    "openness": 0.8,
+    "conscientiousness": 0.75,
+    "extraversion": 0.6,
+    "agreeableness": 0.45,
+    "neuroticism": 0.3
+  },
+  "preferences": {
+    "favorite_locations": [
+      "7a281fd7",
+      "3877431b"
+    ],
+    "favorite_tags": [
+      "study",
+      "leisure"
+    ]
+  },
+  "relations": {
+    "npc07_shen_yifan": "工科男宿舍串门",
+    "npc23_huang_zixuan": "理工科天才交流",
+    "npc59_guo_yiming": "工科竞赛圈好友"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc48_long_feiyu",
+  "profile": {
+    "id_num": 48,
+    "name_zh": "龙飞宇",
+    "name_en": "Long Feiyu",
+    "age": 20,
+    "role_zh": "航空航天学院大二·火箭梦",
+    "role_en": "Aerospace Yr2 · Rocket Dreamer",
+    "major_zh": "飞行器设计与工程",
+    "major_en": "Aircraft Design",
+    "group_zh": "理学院",
+    "group_en": "",
+    "mbti": "ENTJ",
+    "ocean_raw": "O80 C75 E60 A45 N30",
+    "innate_zh": "动手能力极强、系统思维、抗压",
+    "innate_en": "Hands-on, systems thinker, resilient",
+    "learned_zh": "航模社的经历让他从兴趣走向了工程实践",
+    "learned_en": "Model-plane club path from hobby to engineering",
+    "belief_zh": "星辰大海不是梦话",
+    "belief_en": "Stars and seas aren't pipe dreams",
+    "goal_zh": "毕业后进入航天院所",
+    "goal_en": "Work at an aerospace institute",
+    "contradiction_zh": "理想远大 vs 当前课程枯燥繁重",
+    "contradiction_en": "Grand dream vs. current coursework is dry and heavy",
+    "surface_zh": "热血上进、行动派",
+    "surface_en": "Fiery, action-first",
+    "deep_zh": "偶尔会怀疑自己的能力是否匹配梦想",
+    "deep_en": "Sometimes doubts skill matches dream",
+    "fear_zh": "一辈子只能在地面仰望天空",
+    "fear_en": "Looking up forever from the ground",
+    "desire_zh": "亲手把东西送上太空",
+    "desire_en": "Putting something of his own into space",
+    "lifestyle_zh": "高效且充实",
+    "lifestyle_en": "Packed and efficient",
+    "rhythm_zh": "上午上课，下午实验，晚上航模社",
+    "rhythm_en": "Class AM, lab PM, model club at night",
+    "spaces_zh": "航空楼实验室、航模社工作间、操场（试飞）",
+    "spaces_en": "Aerospace lab, model workshop, track (test flight)",
+    "long_desire_zh": "完成飞行器课设",
+    "long_desire_en": "Complete aircraft course project",
+    "short_goal_zh": "今天把航模的发动机装好",
+    "short_goal_en": "Install model engine today",
+    "constraint_zh": "课程难度大；航模经费有限",
+    "constraint_en": "Tough courses; limited model club budget",
+    "bias_zh": "倾向低估理论学习的重要性",
+    "bias_en": "Underestimates theory",
+    "narrative_zh": "先飞起来再说，理论可以在飞的过程中补",
+    "narrative_en": "Let it fly first; theory can catch up"
+  }
+}

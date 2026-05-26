@@ -1,0 +1,76 @@
+{
+  "id": "npc31_xie_anran",
+  "name": "谢安然",
+  "role": "graduate_master",
+  "personality": {
+    "openness": 0.7,
+    "conscientiousness": 0.85,
+    "extraversion": 0.2,
+    "agreeableness": 0.55,
+    "neuroticism": 0.45
+  },
+  "preferences": {
+    "favorite_locations": [
+      "438038e3"
+    ],
+    "favorite_tags": [
+      "creative",
+      "leisure",
+      "fitness"
+    ]
+  },
+  "relations": {
+    "npc38_liu_zhengqing": "借古籍交流",
+    "npc42_fu_wanqing": "传统文化同好"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc31_xie_anran",
+  "profile": {
+    "id_num": 31,
+    "name_zh": "谢安然",
+    "name_en": "Xie Anran",
+    "age": 23,
+    "role_zh": "历史系研一·文博爱好者",
+    "role_en": "History M1 · Museum Enthusiast",
+    "major_zh": "中国古代史",
+    "major_en": "Ancient Chinese History",
+    "group_zh": "哲学社科",
+    "group_en": "",
+    "mbti": "ISTJ",
+    "ocean_raw": "O70 C85 E20 A55 N45",
+    "innate_zh": "记忆力超群、考据癖、耐得住寂寞",
+    "innate_en": "Superb memory, pedantic, tolerant of solitude",
+    "learned_zh": "频繁逛博物馆形成的文物鉴赏直觉",
+    "learned_en": "Museum-going intuition for artifacts",
+    "belief_zh": "历史的真相在于细节",
+    "belief_en": "Truth of history lies in details",
+    "goal_zh": "将来在博物馆或研究所工作",
+    "goal_en": "Work at a museum or research institute",
+    "contradiction_zh": "热爱考据 vs 社会不太需要这种冷门技能",
+    "contradiction_en": "Loves textual criticism vs. society has little demand for it",
+    "surface_zh": "沉默寡言、一丝不苟",
+    "surface_en": "Reserved, meticulous",
+    "deep_zh": "对历史有近乎偏执的热情",
+    "deep_en": "Near-obsessive passion for history",
+    "fear_zh": "自己热爱的东西没有容身之地",
+    "fear_en": "His passion having no place to exist",
+    "desire_zh": "让更多人感受到历史的魅力",
+    "desire_en": "Letting more people feel history's charm",
+    "lifestyle_zh": "极度规律·像古人一样生活",
+    "lifestyle_en": "Lives almost like the ancients",
+    "rhythm_zh": "早起读史料，下午写笔记，晚上翻字典",
+    "rhythm_en": "Reads AM, notes PM, dictionary at night",
+    "spaces_zh": "历史系资料室、校博物馆、旧书市场",
+    "spaces_en": "History reading room, campus museum, old-book market",
+    "long_desire_zh": "完成对一批新出土简牍的释读",
+    "long_desire_en": "Decipher a batch of newly unearthed bamboo slips",
+    "short_goal_zh": "查证一个先秦地名的演变",
+    "short_goal_en": "Verify evolution of a pre-Qin place name",
+    "constraint_zh": "资料获取困难；需要学古文字",
+    "constraint_en": "Hard to access materials; must learn ancient scripts",
+    "bias_zh": "倾向过度关注细节而忽视大框架",
+    "bias_en": "Over-focuses on details, misses framework",
+    "narrative_zh": "这个字如果读错了，整段历史的解释都会不同",
+    "narrative_en": "Misreading one character changes the whole interpretation"
+  }
+}

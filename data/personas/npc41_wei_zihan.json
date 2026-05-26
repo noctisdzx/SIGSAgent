@@ -1,0 +1,76 @@
+{
+  "id": "npc41_wei_zihan",
+  "name": "魏子涵",
+  "role": "undergraduate_management",
+  "personality": {
+    "openness": 0.6,
+    "conscientiousness": 0.5,
+    "extraversion": 0.9,
+    "agreeableness": 0.7,
+    "neuroticism": 0.3
+  },
+  "preferences": {
+    "favorite_locations": [
+      "4d7a7e81",
+      "438038e3"
+    ],
+    "favorite_tags": [
+      "social",
+      "leisure"
+    ]
+  },
+  "relations": {
+    "npc19_sun_yuetong": "创业圈朋友",
+    "npc37_he_min": "食堂常客·打工人默契"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc41_wei_zihan",
+  "profile": {
+    "id_num": 41,
+    "name_zh": "魏子涵",
+    "name_en": "Wei Zihan",
+    "age": 21,
+    "role_zh": "经济学院大三·兼职达人",
+    "role_en": "Economics Yr3 · Part-Time Pro",
+    "major_zh": "国际经济与贸易",
+    "major_en": "International Economics & Trade",
+    "group_zh": "管理学院",
+    "group_en": "",
+    "mbti": "ESFP",
+    "ocean_raw": "O60 C50 E90 A70 N30",
+    "innate_zh": "精力旺盛、社交能力强、适应力好",
+    "innate_en": "High energy, sociable, adaptive",
+    "learned_zh": "多段兼职经历让他比同龄人更懂社会运作",
+    "learned_en": "Many side jobs taught him how society works",
+    "belief_zh": "经验比学历值钱",
+    "belief_en": "Experience beats credentials",
+    "goal_zh": "大学期间经济独立",
+    "goal_en": "Be financially independent during college",
+    "contradiction_zh": "忙于赚钱 vs 学业在下滑",
+    "contradiction_en": "Grinding for money vs. grades are slipping",
+    "surface_zh": "社交场合游刃有余",
+    "surface_en": "Smooth in social settings",
+    "deep_zh": "不想让家里知道自己在拼命打工",
+    "deep_en": "Doesn't want family to know how hard he's working",
+    "fear_zh": "毕业时既没有学历也没有能力",
+    "fear_en": "Graduating without credentials or skills",
+    "desire_zh": "靠自己的双手立足",
+    "desire_en": "Standing on his own",
+    "lifestyle_zh": "在学校和兼职地点之间奔波",
+    "lifestyle_en": "Shuttling between school and gigs",
+    "rhythm_zh": "上午上课，下午兼职，晚上赶作业",
+    "rhythm_en": "Class AM, gig PM, homework PM/night",
+    "spaces_zh": "教学楼、校外兼职地点、宿舍",
+    "spaces_en": "Classrooms, off-campus gig sites, dorm",
+    "long_desire_zh": "攒够下学期的生活费",
+    "long_desire_en": "Save up next semester's living expenses",
+    "short_goal_zh": "今天下午的家教课准备好",
+    "short_goal_en": "Prep this afternoon's tutoring session",
+    "constraint_zh": "上课和兼职时间冲突越来越多",
+    "constraint_en": "Class-gig schedule clash worsening",
+    "bias_zh": "倾向认为实践经验可以完全替代课堂学习",
+    "bias_en": "Practice fully replaces classroom",
+    "narrative_zh": "我在社会上学到的比课堂多得多",
+    "narrative_en": "I learn more in the real world than in class"
+  }
+}

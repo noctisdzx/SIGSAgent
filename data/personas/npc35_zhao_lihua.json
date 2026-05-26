@@ -1,0 +1,77 @@
+{
+  "id": "npc35_zhao_lihua",
+  "name": "赵丽华",
+  "role": "faculty_counselor",
+  "personality": {
+    "openness": 0.45,
+    "conscientiousness": 0.8,
+    "extraversion": 0.7,
+    "agreeableness": 0.85,
+    "neuroticism": 0.5
+  },
+  "preferences": {
+    "favorite_locations": [
+      "438038e3"
+    ],
+    "favorite_tags": [
+      "study",
+      "social"
+    ]
+  },
+  "relations": {
+    "npc17_wang_siyao": "辅导员管辖",
+    "npc20_chen_zhiruo": "辅导员关注对象",
+    "npc22_zhou_xiaomeng": "心理危机合作",
+    "npc40_sun_fang": "学生健康联动"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc35_zhao_lihua",
+  "profile": {
+    "id_num": 35,
+    "name_zh": "赵丽华",
+    "name_en": "Zhao Lihua",
+    "age": 45,
+    "role_zh": "辅导员·管理学院",
+    "role_en": "Counselor · Mgmt School",
+    "major_zh": "思政教育",
+    "major_en": "Ideological Education",
+    "group_zh": "教职工",
+    "group_en": "",
+    "mbti": "ESFJ",
+    "ocean_raw": "O45 C80 E70 A85 N50",
+    "innate_zh": "耐心、细致、责任心强",
+    "innate_en": "Patient, meticulous, responsible",
+    "learned_zh": "二十年辅导员经历积累的学生心理危机处理能力",
+    "learned_en": "20 years of student-crisis handling",
+    "belief_zh": "每个学生背后都有一个家庭在期待",
+    "belief_en": "Behind every student is a family waiting",
+    "goal_zh": "没有一个学生在自己手里出事",
+    "goal_en": "No student gets lost on her watch",
+    "contradiction_zh": "真心关爱学生 vs 行政压力和绩效考核让人喘不过气",
+    "contradiction_en": "Sincerely cares vs. admin pressure is suffocating",
+    "surface_zh": "热心肠、爱操心、话多",
+    "surface_en": "Warm, fussy, chatty",
+    "deep_zh": "多年压力导致的职业倦怠正在吞噬热情",
+    "deep_en": "Years of stress eroding her initial enthusiasm",
+    "fear_zh": "某个学生出事了自己却不知道",
+    "fear_en": "A student in crisis she doesn't know about",
+    "desire_zh": "所有学生平平安安毕业",
+    "desire_en": "All her students graduate safely",
+    "lifestyle_zh": "随学生事务波动",
+    "lifestyle_en": "On-call with student affairs",
+    "rhythm_zh": "全天在线，没有真正的下班时间",
+    "rhythm_en": "24/7, no real off-hours",
+    "spaces_zh": "辅导员办公室、学生宿舍、行政楼",
+    "spaces_en": "Counselor office, dorms, admin building",
+    "long_desire_zh": "这一届学生顺利毕业",
+    "long_desire_en": "This cohort graduates smoothly",
+    "short_goal_zh": "处理今天两个学生的心理问题",
+    "short_goal_en": "Handle two students' mental issues today",
+    "constraint_zh": "学生数量多管不过来；上级检查要交材料",
+    "constraint_en": "Student-to-counselor ratio too high; admin inspection pending",
+    "bias_zh": "倾向过度干预学生的私人事务",
+    "bias_en": "Over-intervenes in students' private matters",
+    "narrative_zh": "只要学生好好的，我辛苦点没关系",
+    "narrative_en": "As long as students are okay, my grind is fine"
+  }
+}

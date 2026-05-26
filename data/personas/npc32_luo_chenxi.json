@@ -1,0 +1,77 @@
+{
+  "id": "npc32_luo_chenxi",
+  "name": "罗晨曦",
+  "role": "graduate_humanities",
+  "personality": {
+    "openness": 0.75,
+    "conscientiousness": 0.6,
+    "extraversion": 0.8,
+    "agreeableness": 0.7,
+    "neuroticism": 0.45
+  },
+  "preferences": {
+    "favorite_locations": [
+      "9a49343c"
+    ],
+    "favorite_tags": [
+      "creative"
+    ]
+  },
+  "relations": {
+    "npc29_cheng_siyuan": "田野采访中的默契",
+    "npc01_lin_xiaowei": "校园媒体合作",
+    "npc28_xu_jiaming": "媒体圈同行",
+    "npc05_fang_zhiqing": "校园活动合作",
+    "npc51_xu_anqi": "志愿报道合作"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc32_luo_chenxi",
+  "profile": {
+    "id_num": 32,
+    "name_zh": "罗晨曦",
+    "name_en": "Luo Chenxi",
+    "age": 20,
+    "role_zh": "新闻系大二·校园记者",
+    "role_en": "Journalism Yr2 · Campus Reporter",
+    "major_zh": "新闻学",
+    "major_en": "Journalism",
+    "group_zh": "哲学社科",
+    "group_en": "",
+    "mbti": "ENFJ",
+    "ocean_raw": "O75 C60 E80 A70 N45",
+    "innate_zh": "好奇心强、表达欲旺盛、行动力快",
+    "innate_en": "Curious, expressive, fast mover",
+    "learned_zh": "一年校媒经历锻炼出的采访能力和新闻敏感度",
+    "learned_en": "Interviewing skill and news sense from a year in campus media",
+    "belief_zh": "记录就是一种力量",
+    "belief_en": "Recording is a form of power",
+    "goal_zh": "大学毕业进入一线媒体",
+    "goal_en": "Join a top-tier media outlet after graduation",
+    "contradiction_zh": "追求真相 vs 学校宣传要求正能量",
+    "contradiction_en": "Pursues truth vs. school wants only positive stories",
+    "surface_zh": "热情直率、不怕麻烦",
+    "surface_en": "Warm, blunt, unafraid of trouble",
+    "deep_zh": "有时因为报道被压而感到沮丧",
+    "deep_en": "Gets down when a piece is suppressed",
+    "fear_zh": "成为传声筒",
+    "fear_en": "Becoming a mouthpiece",
+    "desire_zh": "做有深度有态度的新闻",
+    "desire_en": "Depth, attitude journalism",
+    "lifestyle_zh": "随新闻事件波动",
+    "lifestyle_en": "Swings with news events",
+    "rhythm_zh": "有突发事件时全天在线，没有时正常作息",
+    "rhythm_en": "24/7 on breaking news; otherwise normal",
+    "spaces_zh": "校园媒体中心、食堂、校园各处采访",
+    "spaces_en": "Campus media center, canteen, interview sites",
+    "long_desire_zh": "做出一篇有影响力的深度报道",
+    "long_desire_en": "Produce an influential long-form piece",
+    "short_goal_zh": "今天采访完食堂阿姨的专题",
+    "short_goal_en": "Finish interview with canteen aunt today",
+    "constraint_zh": "受访者不愿意被报道；编辑部要求改稿",
+    "constraint_en": "Interviewee reluctant; editor wants revisions",
+    "bias_zh": "倾向把自己的观点带入报道中",
+    "bias_en": "Injects own opinion into reporting",
+    "narrative_zh": "这个故事不应该被忽视",
+    "narrative_en": "This story deserves not to be overlooked"
+  }
+}

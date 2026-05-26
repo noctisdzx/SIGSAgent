@@ -1,0 +1,75 @@
+{
+  "id": "npc59_guo_yiming",
+  "name": "郭一鸣",
+  "role": "undergraduate_science",
+  "personality": {
+    "openness": 0.7,
+    "conscientiousness": 0.75,
+    "extraversion": 0.7,
+    "agreeableness": 0.5,
+    "neuroticism": 0.3
+  },
+  "preferences": {
+    "favorite_locations": [
+      "7a281fd7",
+      "3877431b"
+    ],
+    "favorite_tags": [
+      "study"
+    ]
+  },
+  "relations": {
+    "npc02_chen_yuanhang": "技术交流·帮调AI模型",
+    "npc48_long_feiyu": "工科竞赛圈好友"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc59_guo_yiming",
+  "profile": {
+    "id_num": 59,
+    "name_zh": "郭一鸣",
+    "name_en": "Guo Yiming",
+    "age": 22,
+    "role_zh": "电气工程大三·机器人队队长",
+    "role_en": "Electrical Yr3 · Robot Team Captain",
+    "major_zh": "电气工程及自动化",
+    "major_en": "Electrical Engineering",
+    "group_zh": "理学院",
+    "group_en": "",
+    "mbti": "ENTJ",
+    "ocean_raw": "O70 C75 E70 A50 N30",
+    "innate_zh": "工程直觉好、领导力强、不怕失败",
+    "innate_en": "Engineering intuition, leader, fail-tolerant",
+    "learned_zh": "机器人竞赛训练出的调试能力和团队协作能力",
+    "learned_en": "Debugging and teamwork from robotics contests",
+    "belief_zh": "做工程就是不断试错",
+    "belief_en": "Engineering is iterative failure",
+    "goal_zh": "机器人竞赛国赛一等奖",
+    "goal_en": "First prize at national robotics contest",
+    "contradiction_zh": "想赢比赛 vs 队员能力参差不齐",
+    "contradiction_en": "Wants to win vs. teammates' levels vary",
+    "surface_zh": "果断高效、说干就干",
+    "surface_en": "Decisive, doer",
+    "deep_zh": "怕自己的决定让整个队吃亏",
+    "deep_en": "Fears his calls hurt the whole team",
+    "fear_zh": "关键时刻机器趴窝",
+    "fear_en": "Robot failing at game time",
+    "desire_zh": "在赛场上证明团队的实力",
+    "desire_en": "Proving team strength on the field",
+    "lifestyle_zh": "赛前高强度",
+    "lifestyle_en": "Intense pre-competition",
+    "rhythm_zh": "白天上课，所有空余时间都在调机器人",
+    "rhythm_en": "Classes by day; every spare minute debugging",
+    "spaces_zh": "机器人实验室、电气楼、操场（测试场地）",
+    "spaces_en": "Robotics lab, electrical bldg, track (test field)",
+    "long_desire_zh": "比赛前一个月完成全部调试",
+    "long_desire_en": "Done debugging a month before the contest",
+    "short_goal_zh": "今天解决机械臂的抖动问题",
+    "short_goal_en": "Fix the robot arm jitter today",
+    "constraint_zh": "电路板烧了一块；比赛只剩三周",
+    "constraint_en": "Fried one PCB; three weeks to contest",
+    "bias_zh": "倾向亲自动手而不是培养队员能力",
+    "bias_en": "Does too much himself, under-develops team",
+    "narrative_zh": "这个bug不解决今晚谁都别走",
+    "narrative_en": "Nobody leaves tonight until this bug is dead"
+  }
+}

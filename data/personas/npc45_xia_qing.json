@@ -1,0 +1,77 @@
+{
+  "id": "npc45_xia_qing",
+  "name": "夏晴",
+  "role": "undergraduate_science",
+  "personality": {
+    "openness": 0.5,
+    "conscientiousness": 0.75,
+    "extraversion": 0.65,
+    "agreeableness": 0.9,
+    "neuroticism": 0.45
+  },
+  "preferences": {
+    "favorite_locations": [
+      "3877431b",
+      "4d7a7e81"
+    ],
+    "favorite_tags": [
+      "study",
+      "leisure"
+    ]
+  },
+  "relations": {
+    "npc40_sun_fang": "见习带教",
+    "npc58_song_qingxue": "公共卫生+护理联动",
+    "npc51_xu_anqi": "志愿+护理公益合作"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc45_xia_qing",
+  "profile": {
+    "id_num": 45,
+    "name_zh": "夏晴",
+    "name_en": "Xia Qing",
+    "age": 20,
+    "role_zh": "护理学院大二·温暖天使",
+    "role_en": "Nursing Yr2 · Warm Angel",
+    "major_zh": "护理学",
+    "major_en": "Nursing",
+    "group_zh": "理学院",
+    "group_en": "",
+    "mbti": "ESFJ",
+    "ocean_raw": "O50 C75 E65 A90 N45",
+    "innate_zh": "温柔细心、动手能力好、同理心强",
+    "innate_en": "Gentle, dexterous, empathetic",
+    "learned_zh": "临床见习培养的急救能力和与患者沟通技巧",
+    "learned_en": "Clinical rotation built emergency skill and patient rapport",
+    "belief_zh": "护理是一门需要爱的技术",
+    "belief_en": "Nursing is a technology requiring love",
+    "goal_zh": "成为三甲医院ICU护士",
+    "goal_en": "ICU nurse at a top-3 hospital",
+    "contradiction_zh": "热爱护理工作 vs 社会对护士的刻板印象",
+    "contradiction_en": "Loves nursing vs. societal stereotypes",
+    "surface_zh": "开朗体贴、笑容常在",
+    "surface_en": "Sunny, considerate, smiling",
+    "deep_zh": "有时候会因为看到太多痛苦而难过",
+    "deep_en": "Sometimes saddened by all the pain witnessed",
+    "fear_zh": "在关键时刻手抖",
+    "fear_en": "Hands shaking at the critical moment",
+    "desire_zh": "在最需要的时刻给人力量",
+    "desire_en": "Being a source of strength when needed",
+    "lifestyle_zh": "规律且健康",
+    "lifestyle_en": "Regular and healthy",
+    "rhythm_zh": "上午实习，下午上课，晚上练操作",
+    "rhythm_en": "Rotation AM, class PM, skills drills at night",
+    "spaces_zh": "护理实训室、附属医院、教学楼",
+    "spaces_en": "Nursing lab, affiliated hospital, classrooms",
+    "long_desire_zh": "临床操作考试全部通过",
+    "long_desire_en": "Pass all clinical-skill exams",
+    "short_goal_zh": "今晚把静脉穿刺再练20次",
+    "short_goal_en": "20 more IV-insertion practices tonight",
+    "constraint_zh": "实习很累；需要背大量护理流程",
+    "constraint_en": "Rotation is exhausting; many protocols to memorize",
+    "bias_zh": "倾向过度关心别人而忽视自己的疲劳",
+    "bias_en": "Over-worries others; ignores own fatigue",
+    "narrative_zh": "患者对我笑的那一刻，一切都值了",
+    "narrative_en": "A patient's smile makes it all worth it"
+  }
+}

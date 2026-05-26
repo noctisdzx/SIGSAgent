@@ -1,0 +1,559 @@
+{
+  "id": "npc30_zhong_jiayi",
+  "description": "基于参考 HTML 的 钟嘉宜 周课表（工作日相同，周末略简）。",
+  "week": {
+    "monday": [
+      {
+        "start": "06:30",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床"
+      },
+      {
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "07:30",
+        "end": "09:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "自习室背法条"
+      },
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "法学院上课"
+      },
+      {
+        "start": "11:00",
+        "end": "12:30",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "模拟法庭训练"
+      },
+      {
+        "start": "12:30",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "15:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆做真题"
+      },
+      {
+        "start": "15:00",
+        "end": "16:30",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "下午课程"
+      },
+      {
+        "start": "16:30",
+        "end": "18:00",
+        "activity": "meeting",
+        "location_uid": "99883bc6",
+        "narrative_zh": "和队友讨论案例"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "21:30",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆继续备考"
+      },
+      {
+        "start": "21:30",
+        "end": "23:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍·看法律纪录片放松"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "tuesday": [
+      {
+        "start": "06:30",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床"
+      },
+      {
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "07:30",
+        "end": "09:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "自习室背法条"
+      },
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "法学院上课"
+      },
+      {
+        "start": "11:00",
+        "end": "12:30",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "模拟法庭训练"
+      },
+      {
+        "start": "12:30",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "15:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆做真题"
+      },
+      {
+        "start": "15:00",
+        "end": "16:30",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "下午课程"
+      },
+      {
+        "start": "16:30",
+        "end": "18:00",
+        "activity": "meeting",
+        "location_uid": "99883bc6",
+        "narrative_zh": "和队友讨论案例"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "21:30",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆继续备考"
+      },
+      {
+        "start": "21:30",
+        "end": "23:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍·看法律纪录片放松"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "wednesday": [
+      {
+        "start": "06:30",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床"
+      },
+      {
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "07:30",
+        "end": "09:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "自习室背法条"
+      },
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "法学院上课"
+      },
+      {
+        "start": "11:00",
+        "end": "12:30",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "模拟法庭训练"
+      },
+      {
+        "start": "12:30",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "15:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆做真题"
+      },
+      {
+        "start": "15:00",
+        "end": "16:30",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "下午课程"
+      },
+      {
+        "start": "16:30",
+        "end": "18:00",
+        "activity": "meeting",
+        "location_uid": "99883bc6",
+        "narrative_zh": "和队友讨论案例"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "21:30",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆继续备考"
+      },
+      {
+        "start": "21:30",
+        "end": "23:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍·看法律纪录片放松"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "thursday": [
+      {
+        "start": "06:30",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床"
+      },
+      {
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "07:30",
+        "end": "09:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "自习室背法条"
+      },
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "法学院上课"
+      },
+      {
+        "start": "11:00",
+        "end": "12:30",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "模拟法庭训练"
+      },
+      {
+        "start": "12:30",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "15:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆做真题"
+      },
+      {
+        "start": "15:00",
+        "end": "16:30",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "下午课程"
+      },
+      {
+        "start": "16:30",
+        "end": "18:00",
+        "activity": "meeting",
+        "location_uid": "99883bc6",
+        "narrative_zh": "和队友讨论案例"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "21:30",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆继续备考"
+      },
+      {
+        "start": "21:30",
+        "end": "23:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍·看法律纪录片放松"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "friday": [
+      {
+        "start": "06:30",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床"
+      },
+      {
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "07:30",
+        "end": "09:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "自习室背法条"
+      },
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "法学院上课"
+      },
+      {
+        "start": "11:00",
+        "end": "12:30",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "模拟法庭训练"
+      },
+      {
+        "start": "12:30",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "15:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆做真题"
+      },
+      {
+        "start": "15:00",
+        "end": "16:30",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "下午课程"
+      },
+      {
+        "start": "16:30",
+        "end": "18:00",
+        "activity": "meeting",
+        "location_uid": "99883bc6",
+        "narrative_zh": "和队友讨论案例"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "21:30",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆继续备考"
+      },
+      {
+        "start": "21:30",
+        "end": "23:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍·看法律纪录片放松"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "saturday": [
+      {
+        "start": "06:30",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床"
+      },
+      {
+        "start": "12:30",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "chat",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "周末自由活动"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "21:30",
+        "end": "23:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍·看法律纪录片放松"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "sunday": [
+      {
+        "start": "06:30",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床"
+      },
+      {
+        "start": "12:30",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "leisure_media",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "周末闲聊"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "21:30",
+        "end": "23:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍·看法律纪录片放松"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ]
+  }
+}

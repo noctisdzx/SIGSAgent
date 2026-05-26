@@ -1,0 +1,524 @@
+{
+  "id": "npc54_chang_le",
+  "description": "基于参考 HTML 的 常乐 周课表（工作日相同，周末略简）。",
+  "week": {
+    "monday": [
+      {
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床"
+      },
+      {
+        "start": "08:00",
+        "end": "08:30",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "08:30",
+        "end": "10:30",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "心理学系上课"
+      },
+      {
+        "start": "10:30",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "去猫咖检查·喂猫"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "在猫咖附近吃午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "16:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "猫咖营业·招待客人"
+      },
+      {
+        "start": "16:00",
+        "end": "17:30",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "回校上课"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "18:30",
+        "end": "20:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回猫咖处理事务"
+      },
+      {
+        "start": "20:00",
+        "end": "22:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍学习"
+      },
+      {
+        "start": "22:00",
+        "end": "22:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "视频查看猫咖监控"
+      },
+      {
+        "start": "22:30",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "tuesday": [
+      {
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床"
+      },
+      {
+        "start": "08:00",
+        "end": "08:30",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "08:30",
+        "end": "10:30",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "心理学系上课"
+      },
+      {
+        "start": "10:30",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "去猫咖检查·喂猫"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "在猫咖附近吃午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "16:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "猫咖营业·招待客人"
+      },
+      {
+        "start": "16:00",
+        "end": "17:30",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "回校上课"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "18:30",
+        "end": "20:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回猫咖处理事务"
+      },
+      {
+        "start": "20:00",
+        "end": "22:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍学习"
+      },
+      {
+        "start": "22:00",
+        "end": "22:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "视频查看猫咖监控"
+      },
+      {
+        "start": "22:30",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "wednesday": [
+      {
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床"
+      },
+      {
+        "start": "08:00",
+        "end": "08:30",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "08:30",
+        "end": "10:30",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "心理学系上课"
+      },
+      {
+        "start": "10:30",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "去猫咖检查·喂猫"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "在猫咖附近吃午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "16:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "猫咖营业·招待客人"
+      },
+      {
+        "start": "16:00",
+        "end": "17:30",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "回校上课"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "18:30",
+        "end": "20:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回猫咖处理事务"
+      },
+      {
+        "start": "20:00",
+        "end": "22:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍学习"
+      },
+      {
+        "start": "22:00",
+        "end": "22:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "视频查看猫咖监控"
+      },
+      {
+        "start": "22:30",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "thursday": [
+      {
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床"
+      },
+      {
+        "start": "08:00",
+        "end": "08:30",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "08:30",
+        "end": "10:30",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "心理学系上课"
+      },
+      {
+        "start": "10:30",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "去猫咖检查·喂猫"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "在猫咖附近吃午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "16:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "猫咖营业·招待客人"
+      },
+      {
+        "start": "16:00",
+        "end": "17:30",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "回校上课"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "18:30",
+        "end": "20:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回猫咖处理事务"
+      },
+      {
+        "start": "20:00",
+        "end": "22:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍学习"
+      },
+      {
+        "start": "22:00",
+        "end": "22:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "视频查看猫咖监控"
+      },
+      {
+        "start": "22:30",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "friday": [
+      {
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床"
+      },
+      {
+        "start": "08:00",
+        "end": "08:30",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "08:30",
+        "end": "10:30",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "心理学系上课"
+      },
+      {
+        "start": "10:30",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "去猫咖检查·喂猫"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "在猫咖附近吃午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "16:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "猫咖营业·招待客人"
+      },
+      {
+        "start": "16:00",
+        "end": "17:30",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "回校上课"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "18:30",
+        "end": "20:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回猫咖处理事务"
+      },
+      {
+        "start": "20:00",
+        "end": "22:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍学习"
+      },
+      {
+        "start": "22:00",
+        "end": "22:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "视频查看猫咖监控"
+      },
+      {
+        "start": "22:30",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "saturday": [
+      {
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "在猫咖附近吃午饭"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "chat",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "周末自由活动"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "20:00",
+        "end": "22:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍学习"
+      },
+      {
+        "start": "22:30",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "sunday": [
+      {
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "在猫咖附近吃午饭"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "leisure_media",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "周末闲聊"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "20:00",
+        "end": "22:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍学习"
+      },
+      {
+        "start": "22:30",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ]
+  }
+}

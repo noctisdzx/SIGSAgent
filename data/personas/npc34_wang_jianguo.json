@@ -1,0 +1,79 @@
+{
+  "id": "npc34_wang_jianguo",
+  "name": "王建国",
+  "role": "faculty_professor",
+  "personality": {
+    "openness": 0.6,
+    "conscientiousness": 0.9,
+    "extraversion": 0.35,
+    "agreeableness": 0.3,
+    "neuroticism": 0.35
+  },
+  "preferences": {
+    "favorite_locations": [
+      "3877431b"
+    ],
+    "favorite_tags": [
+      "study",
+      "social",
+      "leisure",
+      "fitness"
+    ]
+  },
+  "relations": {
+    "npc02_chen_yuanhang": "导师-研究生",
+    "npc08_xu_qinglan": "导师-研究生",
+    "npc10_wu_ruolin": "导师-研究生",
+    "npc33_li_huimin": "教授同事·偶尔碰面"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc34_wang_jianguo",
+  "profile": {
+    "id_num": 34,
+    "name_zh": "王建国",
+    "name_en": "Wang Jianguo",
+    "age": 52,
+    "role_zh": "计算机学院教授·博导",
+    "role_en": "CS Professor · PhD Advisor",
+    "major_zh": "人工智能",
+    "major_en": "Artificial Intelligence",
+    "group_zh": "教职工",
+    "group_en": "",
+    "mbti": "ISTJ",
+    "ocean_raw": "O60 C90 E35 A30 N35",
+    "innate_zh": "思维严谨、学术品味高、要求严格",
+    "innate_en": "Rigorous, high academic taste, demanding",
+    "learned_zh": "三十年学术生涯形成的行业洞察力和人脉网络",
+    "learned_en": "30 years of field insight and networks",
+    "belief_zh": "学术要做就做到极致",
+    "belief_en": "If you do academia, do it to the extreme",
+    "goal_zh": "团队3年内产出2篇顶刊论文",
+    "goal_en": "Two top-tier journal papers in 3 years",
+    "contradiction_zh": "追求高标准 vs 学生们承受不住压力",
+    "contradiction_en": "Demands high standards vs. students can't handle the pressure",
+    "surface_zh": "严肃权威、寡言少语",
+    "surface_en": "Serious, authoritative, laconic",
+    "deep_zh": "其实很关心学生，只是不善表达",
+    "deep_en": "Cares about students, just doesn't express it",
+    "fear_zh": "退休时发现自己没有培养出真正优秀的人",
+    "fear_en": "Retiring without having trained truly excellent people",
+    "desire_zh": "学术传承",
+    "desire_en": "Academic lineage",
+    "lifestyle_zh": "极度规律·几十年如一日",
+    "lifestyle_en": "Uniform schedule, decades unchanged",
+    "rhythm_zh": "清晨读论文，上午开会，下午指导，晚上写文章",
+    "rhythm_en": "Papers at dawn, meetings AM, advising PM, writing PM",
+    "spaces_zh": "实验室、办公室、会议室",
+    "spaces_en": "Lab, office, meeting rooms",
+    "long_desire_zh": "推进团队最新的研究方向",
+    "long_desire_en": "Advance the team's newest research direction",
+    "short_goal_zh": "审阅学生提交的论文初稿",
+    "short_goal_en": "Review submitted student drafts",
+    "constraint_zh": "行政事务占用大量时间；经费审批流程繁琐",
+    "constraint_en": "Admin eats time; grants slow",
+    "bias_zh": "倾向用自己当年的标准要求现在的学生",
+    "bias_en": "Measures today's students by his own era's standards",
+    "narrative_zh": "我对你们严格，是因为外面的世界更严格",
+    "narrative_en": "I'm strict because the outside world is stricter"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "id": "npc10_wu_ruolin",
+  "name": "吴若琳",
+  "role": "graduate_master",
+  "personality": {
+    "openness": 0.7,
+    "conscientiousness": 0.8,
+    "extraversion": 0.45,
+    "agreeableness": 0.8,
+    "neuroticism": 0.5
+  },
+  "preferences": {
+    "favorite_locations": [
+      "64a9bc35",
+      "3877431b"
+    ],
+    "favorite_tags": [
+      "study",
+      "leisure"
+    ]
+  },
+  "relations": {
+    "npc34_wang_jianguo": "导师-研究生",
+    "npc02_chen_yuanhang": "实验室同门·互助",
+    "npc08_xu_qinglan": "同门·微妙竞争",
+    "npc12_liu_sihan": "答疑学妹",
+    "npc49_liu_ruyan": "NLP+日语翻译讨论"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc10_wu_ruolin",
+  "profile": {
+    "id_num": 10,
+    "name_zh": "吴若琳",
+    "name_en": "Wu Ruolin",
+    "age": 24,
+    "role_zh": "计算机学院研二·助教",
+    "role_en": "CS M2 · Teaching Assistant",
+    "major_zh": "自然语言处理",
+    "major_en": "Natural Language Processing",
+    "group_zh": "计算机学院",
+    "group_en": "",
+    "mbti": "INFJ",
+    "ocean_raw": "O70 C80 E45 A80 N50",
+    "innate_zh": "耐心、条理清晰、语言表达力强",
+    "innate_en": "Patient, organized, articulate",
+    "learned_zh": "助教经历培养的教学能力和对新手视角的理解",
+    "learned_en": "Teaching skills and empathy for beginners from TA work",
+    "belief_zh": "教学相长，帮助别人也是在帮助自己",
+    "belief_en": "Helping others teaches you",
+    "goal_zh": "去工业界做NLP产品经理",
+    "goal_en": "PM for NLP products in industry",
+    "contradiction_zh": "喜欢教学的成就感 vs 学术产出压力大",
+    "contradiction_en": "Loves teaching's reward vs. heavy paper-output pressure",
+    "surface_zh": "温柔可靠、有问必答",
+    "surface_en": "Gentle, dependable, always answers",
+    "deep_zh": "有时候会觉得自己的善意被当成理所当然",
+    "deep_en": "Sometimes feels her kindness is taken for granted",
+    "fear_zh": "一直做帮助别人的角色而忘了自己",
+    "fear_en": "Always being the helper and forgetting herself",
+    "desire_zh": "在能力和人品上都被尊重",
+    "desire_en": "Respected for both ability and character",
+    "lifestyle_zh": "规律且留有弹性",
+    "lifestyle_en": "Regular with elasticity",
+    "rhythm_zh": "上午高效处理事务，下午研究，晚上答疑",
+    "rhythm_en": "Admin AM, research PM, office hours at night",
+    "spaces_zh": "实验室、教学楼答疑室、图书馆",
+    "spaces_en": "Lab, tutoring room, library",
+    "long_desire_zh": "论文实验结果能再提两个点",
+    "long_desire_en": "Push experiment metrics up another 2 points",
+    "short_goal_zh": "准备今晚的答疑材料",
+    "short_goal_en": "Prepare tonight's office-hour materials",
+    "constraint_zh": "学生问题太多占用了太多时间；自己的实验也要推进",
+    "constraint_en": "Student questions consume time; own experiments must advance",
+    "bias_zh": "倾向把学生的问题优先级放在自己之上",
+    "bias_en": "Prioritizes students over herself",
+    "narrative_zh": "先帮他们搞懂这个再说，我的实验晚上赶",
+    "narrative_en": "Let me help them first; I'll run experiments tonight"
+  }
+}

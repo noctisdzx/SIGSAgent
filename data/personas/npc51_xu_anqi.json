@@ -1,0 +1,74 @@
+{
+  "id": "npc51_xu_anqi",
+  "name": "许安琪",
+  "role": "graduate_humanities",
+  "personality": {
+    "openness": 0.7,
+    "conscientiousness": 0.55,
+    "extraversion": 0.8,
+    "agreeableness": 0.9,
+    "neuroticism": 0.4
+  },
+  "preferences": {
+    "favorite_locations": [
+      "438038e3"
+    ],
+    "favorite_tags": [
+      "creative"
+    ]
+  },
+  "relations": {
+    "npc32_luo_chenxi": "志愿报道合作",
+    "npc45_xia_qing": "志愿+护理公益合作"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc51_xu_anqi",
+  "profile": {
+    "id_num": 51,
+    "name_zh": "许安琪",
+    "name_en": "Xu Anqi",
+    "age": 19,
+    "role_zh": "教育学院大一·支教梦想家",
+    "role_en": "Education Yr1 · Teach-for-Rural Dreamer",
+    "major_zh": "小学教育",
+    "major_en": "Elementary Education",
+    "group_zh": "哲学社科",
+    "group_en": "",
+    "mbti": "ENFP",
+    "ocean_raw": "O70 C55 E80 A90 N40",
+    "innate_zh": "亲和力强、有爱心、表达清晰",
+    "innate_en": "Warm, loving, clear speaker",
+    "learned_zh": "高中支教社团经历种下的教育信念",
+    "learned_en": "HS teach-for-rural club planted a belief in education",
+    "belief_zh": "每个孩子都值得好的教育",
+    "belief_en": "Every child deserves good education",
+    "goal_zh": "毕业后去西部支教两年",
+    "goal_en": "Two years of rural teaching after graduation",
+    "contradiction_zh": "理想主义 vs 家人希望她考编留在城市",
+    "contradiction_en": "Idealistic vs. family wants her to be a city civil servant",
+    "surface_zh": "开朗活泼、充满正能量",
+    "surface_en": "Cheerful, positive",
+    "deep_zh": "对乡村教育不公平的现实有深深的痛感",
+    "deep_en": "Deeply pained by rural-education inequality",
+    "fear_zh": "梦想被现实消磨",
+    "fear_en": "Having her dream worn down by reality",
+    "desire_zh": "改变哪怕一个孩子的命运",
+    "desire_en": "Changing even one child's fate",
+    "lifestyle_zh": "积极向上型",
+    "lifestyle_en": "Positive, high-energy",
+    "rhythm_zh": "全天都充满能量",
+    "rhythm_en": "High energy all day",
+    "spaces_zh": "教育学院、志愿者服务中心、附属小学",
+    "spaces_en": "Ed school, volunteer center, affiliated primary school",
+    "long_desire_zh": "加入学校支教团·假期去支教",
+    "long_desire_en": "Join the school's rural-teaching team",
+    "short_goal_zh": "今天去附属小学观摩教学",
+    "short_goal_en": "Observe teaching at affiliated primary today",
+    "constraint_zh": "课程任务重；支教项目还在申请中",
+    "constraint_en": "Heavy coursework; rural program still in application",
+    "bias_zh": "倾向把支教浪漫化",
+    "bias_en": "Romanticizes rural teaching",
+    "narrative_zh": "只要能让一个孩子看到不一样的世界，就值了",
+    "narrative_en": "If I can show one child a different world, it's worth it"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "id": "npc09_han_zimo",
+  "name": "韩子墨",
+  "role": "graduate_cs",
+  "personality": {
+    "openness": 0.8,
+    "conscientiousness": 0.5,
+    "extraversion": 0.3,
+    "agreeableness": 0.45,
+    "neuroticism": 0.35
+  },
+  "preferences": {
+    "favorite_locations": [
+      "4ef146d8",
+      "438038e3"
+    ],
+    "favorite_tags": [
+      "study"
+    ]
+  },
+  "relations": {
+    "npc07_shen_yifan": "技术崇拜",
+    "npc11_zheng_haoyu": "同级朋友",
+    "npc19_sun_yuetong": "创业合伙人",
+    "npc28_xu_jiaming": "内容合作",
+    "npc18_yang_mingzhe": "商业思维碰撞"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc09_han_zimo",
+  "profile": {
+    "id_num": 9,
+    "name_zh": "韩子墨",
+    "name_en": "Han Zimo",
+    "age": 22,
+    "role_zh": "计算机学院大三·独立开发者",
+    "role_en": "CS Yr3 · Indie Developer",
+    "major_zh": "软件工程",
+    "major_en": "Software Engineering",
+    "group_zh": "计算机学院",
+    "group_en": "",
+    "mbti": "ISTP",
+    "ocean_raw": "O80 C50 E30 A45 N35",
+    "innate_zh": "创造力强、不喜欢被约束、自学能力突出",
+    "innate_en": "Creative, autonomy-loving, self-taught",
+    "learned_zh": "独立开发多个app的经历让他更相信市场而非学校",
+    "learned_en": "Shipping multiple apps taught him to trust market more than school",
+    "belief_zh": "做出有人用的东西比论文重要",
+    "belief_en": "Making something people use beats papers",
+    "goal_zh": "大学期间实现一个产品月入过万",
+    "goal_en": "Ship a product netting 10k+ RMB/month before graduation",
+    "contradiction_zh": "想退学全职创业 vs 不敢让父母失望",
+    "contradiction_en": "Wants to drop out and go full-time vs. won't disappoint parents",
+    "surface_zh": "酷酷的、不太合群",
+    "surface_en": "Cool, not too social",
+    "deep_zh": "其实渴望认同，只是不想从学术体系里获得",
+    "deep_en": "Actually craves recognition, just not from academia",
+    "fear_zh": "做了一辈子打工人",
+    "fear_en": "Being a wage-slave for life",
+    "desire_zh": "靠自己的产品养活自己",
+    "desire_en": "Supporting himself with his own product",
+    "lifestyle_zh": "不规律，但有自己的节奏",
+    "lifestyle_en": "Irregular but self-paced",
+    "rhythm_zh": "灵感来了连续工作8小时，没灵感就到处晃",
+    "rhythm_en": "8-hour bursts with inspiration, wandering without",
+    "spaces_zh": "宿舍（主要工作场所）、咖啡厅、创业孵化中心",
+    "spaces_en": "Dorm (main office), cafe, incubator",
+    "long_desire_zh": "把新产品的MVP做出来",
+    "long_desire_en": "Ship the new product MVP",
+    "short_goal_zh": "把支付接口调通",
+    "short_goal_en": "Get the payment API working",
+    "constraint_zh": "课程还是要应付；服务器费用在上涨",
+    "constraint_en": "Still must pass courses; server costs rising",
+    "bias_zh": "倾向高估自己产品的市场需求",
+    "bias_en": "Overestimates product-market demand",
+    "narrative_zh": "课堂教的那些东西，我早就在项目里用过了",
+    "narrative_en": "What they teach in class, I already shipped"
+  }
+}

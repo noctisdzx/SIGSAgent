@@ -1,0 +1,510 @@
+{
+  "id": "npc02_chen_yuanhang",
+  "description": "基于参考 HTML 的 陈远航 周课表（工作日相同，周末略简）。",
+  "week": {
+    "monday": [
+      {
+        "start": "01:30",
+        "end": "02:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "收工回宿舍"
+      },
+      {
+        "start": "02:00",
+        "end": "09:30",
+        "activity": "bug",
+        "location_uid": "438038e3",
+        "narrative_zh": "躺床上还在想bug"
+      },
+      {
+        "start": "09:30",
+        "end": "10:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "被闹钟叫醒·挣扎起床"
+      },
+      {
+        "start": "10:00",
+        "end": "10:30",
+        "activity": "coffee_break",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "便利店买面包+咖啡"
+      },
+      {
+        "start": "10:30",
+        "end": "12:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "实验室到岗·检查昨晚训练"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "3877431b",
+        "narrative_zh": "外卖午饭在实验室吃"
+      },
+      {
+        "start": "13:00",
+        "end": "14:30",
+        "activity": "meeting",
+        "location_uid": "3877431b",
+        "narrative_zh": "组会/和导师讨论"
+      },
+      {
+        "start": "14:30",
+        "end": "17:30",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "改代码·跑实验"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭（有时跳过）"
+      },
+      {
+        "start": "18:30",
+        "end": "21:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "继续实验"
+      },
+      {
+        "start": "21:00",
+        "end": "22:00",
+        "activity": "github",
+        "location_uid": "438038e3",
+        "narrative_zh": "短暂休息刷GitHub"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "进入深度编码"
+      }
+    ],
+    "tuesday": [
+      {
+        "start": "01:30",
+        "end": "02:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "收工回宿舍"
+      },
+      {
+        "start": "02:00",
+        "end": "09:30",
+        "activity": "bug",
+        "location_uid": "438038e3",
+        "narrative_zh": "躺床上还在想bug"
+      },
+      {
+        "start": "09:30",
+        "end": "10:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "被闹钟叫醒·挣扎起床"
+      },
+      {
+        "start": "10:00",
+        "end": "10:30",
+        "activity": "coffee_break",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "便利店买面包+咖啡"
+      },
+      {
+        "start": "10:30",
+        "end": "12:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "实验室到岗·检查昨晚训练"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "3877431b",
+        "narrative_zh": "外卖午饭在实验室吃"
+      },
+      {
+        "start": "13:00",
+        "end": "14:30",
+        "activity": "meeting",
+        "location_uid": "3877431b",
+        "narrative_zh": "组会/和导师讨论"
+      },
+      {
+        "start": "14:30",
+        "end": "17:30",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "改代码·跑实验"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭（有时跳过）"
+      },
+      {
+        "start": "18:30",
+        "end": "21:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "继续实验"
+      },
+      {
+        "start": "21:00",
+        "end": "22:00",
+        "activity": "github",
+        "location_uid": "438038e3",
+        "narrative_zh": "短暂休息刷GitHub"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "进入深度编码"
+      }
+    ],
+    "wednesday": [
+      {
+        "start": "01:30",
+        "end": "02:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "收工回宿舍"
+      },
+      {
+        "start": "02:00",
+        "end": "09:30",
+        "activity": "bug",
+        "location_uid": "438038e3",
+        "narrative_zh": "躺床上还在想bug"
+      },
+      {
+        "start": "09:30",
+        "end": "10:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "被闹钟叫醒·挣扎起床"
+      },
+      {
+        "start": "10:00",
+        "end": "10:30",
+        "activity": "coffee_break",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "便利店买面包+咖啡"
+      },
+      {
+        "start": "10:30",
+        "end": "12:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "实验室到岗·检查昨晚训练"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "3877431b",
+        "narrative_zh": "外卖午饭在实验室吃"
+      },
+      {
+        "start": "13:00",
+        "end": "14:30",
+        "activity": "meeting",
+        "location_uid": "3877431b",
+        "narrative_zh": "组会/和导师讨论"
+      },
+      {
+        "start": "14:30",
+        "end": "17:30",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "改代码·跑实验"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭（有时跳过）"
+      },
+      {
+        "start": "18:30",
+        "end": "21:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "继续实验"
+      },
+      {
+        "start": "21:00",
+        "end": "22:00",
+        "activity": "github",
+        "location_uid": "438038e3",
+        "narrative_zh": "短暂休息刷GitHub"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "进入深度编码"
+      }
+    ],
+    "thursday": [
+      {
+        "start": "01:30",
+        "end": "02:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "收工回宿舍"
+      },
+      {
+        "start": "02:00",
+        "end": "09:30",
+        "activity": "bug",
+        "location_uid": "438038e3",
+        "narrative_zh": "躺床上还在想bug"
+      },
+      {
+        "start": "09:30",
+        "end": "10:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "被闹钟叫醒·挣扎起床"
+      },
+      {
+        "start": "10:00",
+        "end": "10:30",
+        "activity": "coffee_break",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "便利店买面包+咖啡"
+      },
+      {
+        "start": "10:30",
+        "end": "12:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "实验室到岗·检查昨晚训练"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "3877431b",
+        "narrative_zh": "外卖午饭在实验室吃"
+      },
+      {
+        "start": "13:00",
+        "end": "14:30",
+        "activity": "meeting",
+        "location_uid": "3877431b",
+        "narrative_zh": "组会/和导师讨论"
+      },
+      {
+        "start": "14:30",
+        "end": "17:30",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "改代码·跑实验"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭（有时跳过）"
+      },
+      {
+        "start": "18:30",
+        "end": "21:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "继续实验"
+      },
+      {
+        "start": "21:00",
+        "end": "22:00",
+        "activity": "github",
+        "location_uid": "438038e3",
+        "narrative_zh": "短暂休息刷GitHub"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "进入深度编码"
+      }
+    ],
+    "friday": [
+      {
+        "start": "01:30",
+        "end": "02:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "收工回宿舍"
+      },
+      {
+        "start": "02:00",
+        "end": "09:30",
+        "activity": "bug",
+        "location_uid": "438038e3",
+        "narrative_zh": "躺床上还在想bug"
+      },
+      {
+        "start": "09:30",
+        "end": "10:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "被闹钟叫醒·挣扎起床"
+      },
+      {
+        "start": "10:00",
+        "end": "10:30",
+        "activity": "coffee_break",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "便利店买面包+咖啡"
+      },
+      {
+        "start": "10:30",
+        "end": "12:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "实验室到岗·检查昨晚训练"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "3877431b",
+        "narrative_zh": "外卖午饭在实验室吃"
+      },
+      {
+        "start": "13:00",
+        "end": "14:30",
+        "activity": "meeting",
+        "location_uid": "3877431b",
+        "narrative_zh": "组会/和导师讨论"
+      },
+      {
+        "start": "14:30",
+        "end": "17:30",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "改代码·跑实验"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭（有时跳过）"
+      },
+      {
+        "start": "18:30",
+        "end": "21:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "继续实验"
+      },
+      {
+        "start": "21:00",
+        "end": "22:00",
+        "activity": "github",
+        "location_uid": "438038e3",
+        "narrative_zh": "短暂休息刷GitHub"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "进入深度编码"
+      }
+    ],
+    "saturday": [
+      {
+        "start": "01:30",
+        "end": "02:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "收工回宿舍"
+      },
+      {
+        "start": "09:30",
+        "end": "10:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "被闹钟叫醒·挣扎起床"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "3877431b",
+        "narrative_zh": "外卖午饭在实验室吃"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "chat",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "周末自由活动"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭（有时跳过）"
+      }
+    ],
+    "sunday": [
+      {
+        "start": "01:30",
+        "end": "02:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "收工回宿舍"
+      },
+      {
+        "start": "09:30",
+        "end": "10:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "被闹钟叫醒·挣扎起床"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "3877431b",
+        "narrative_zh": "外卖午饭在实验室吃"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "leisure_media",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "周末闲聊"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭（有时跳过）"
+      }
+    ]
+  }
+}

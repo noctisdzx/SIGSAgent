@@ -1,0 +1,76 @@
+{
+  "id": "npc08_xu_qinglan",
+  "name": "许晴岚",
+  "role": "graduate_master",
+  "personality": {
+    "openness": 0.55,
+    "conscientiousness": 0.95,
+    "extraversion": 0.6,
+    "agreeableness": 0.3,
+    "neuroticism": 0.5
+  },
+  "preferences": {
+    "favorite_locations": [
+      "3877431b"
+    ],
+    "favorite_tags": [
+      "study"
+    ]
+  },
+  "relations": {
+    "npc34_wang_jianguo": "导师-研究生",
+    "npc02_chen_yuanhang": "实验室同门·暗中竞争",
+    "npc10_wu_ruolin": "同门·微妙竞争",
+    "npc57_yue_pengcheng": "跨组技术交流"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc08_xu_qinglan",
+  "profile": {
+    "id_num": 8,
+    "name_zh": "许晴岚",
+    "name_en": "Xu Qinglan",
+    "age": 23,
+    "role_zh": "计算机学院研二·卷王",
+    "role_en": "CS M2 · Over-achiever",
+    "major_zh": "计算机视觉",
+    "major_en": "Computer Vision",
+    "group_zh": "计算机学院",
+    "group_en": "",
+    "mbti": "ESTJ",
+    "ocean_raw": "O55 C95 E60 A30 N50",
+    "innate_zh": "执行力极强、目标导向、细节控",
+    "innate_en": "Extreme executor, goal-driven, detail-obsessed",
+    "learned_zh": "本科就开始发论文的超前节奏塑造了极强竞争意识",
+    "learned_en": "Publishing papers since undergrad bred fierce competitiveness",
+    "belief_zh": "在学术界，数量和质量都不能少",
+    "belief_en": "In academia you need both quantity and quality",
+    "goal_zh": "博士申请拿到海外top校offer",
+    "goal_en": "PhD offer from a top overseas school",
+    "contradiction_zh": "明知内卷不健康 vs 停不下来",
+    "contradiction_en": "Knows over-competition is unhealthy vs. can't stop",
+    "surface_zh": "干练高效、不闲聊",
+    "surface_en": "Crisp, efficient, no chit-chat",
+    "deep_zh": "对失败的恐惧驱动着一切行为",
+    "deep_en": "Every move driven by fear of failure",
+    "fear_zh": "被同龄人超越",
+    "fear_en": "Being overtaken by peers",
+    "desire_zh": "站在食物链顶端",
+    "desire_en": "Top of the food chain",
+    "lifestyle_zh": "军事化作息，精确到分钟",
+    "lifestyle_en": "Military-grade schedule, minute-precise",
+    "rhythm_zh": "全天高产出，但周末会突然崩溃一次",
+    "rhythm_en": "High output all day, one crash per weekend",
+    "spaces_zh": "实验室、会议室、健身房",
+    "spaces_en": "Lab, meeting room, gym",
+    "long_desire_zh": "投稿CVPR的论文再改一版",
+    "long_desire_en": "Another revision of CVPR submission",
+    "short_goal_zh": "今天把实验对比表格整理完",
+    "short_goal_en": "Finish experiment comparison table today",
+    "constraint_zh": "合作者拖延了数据标注进度；身体有些不舒服",
+    "constraint_en": "Collaborator delayed labeling; body feels off",
+    "bias_zh": "倾向把别人的放松看成懈怠；高估自己身体承受极限",
+    "bias_en": "Sees others' rest as slacking; overestimates her physical limits",
+    "narrative_zh": "休息是弱者的借口",
+    "narrative_en": "Rest is an excuse for the weak"
+  }
+}

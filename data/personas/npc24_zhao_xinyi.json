@@ -1,0 +1,75 @@
+{
+  "id": "npc24_zhao_xinyi",
+  "name": "赵心怡",
+  "role": "undergraduate_science",
+  "personality": {
+    "openness": 0.55,
+    "conscientiousness": 0.85,
+    "extraversion": 0.65,
+    "agreeableness": 0.8,
+    "neuroticism": 0.5
+  },
+  "preferences": {
+    "favorite_locations": [
+      "64a9bc35",
+      "3877431b",
+      "9a49343c"
+    ],
+    "favorite_tags": [
+      "study"
+    ]
+  },
+  "relations": {
+    "npc46_qin_ling": "理学院同楼·偶尔聊天"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc24_zhao_xinyi",
+  "profile": {
+    "id_num": 24,
+    "name_zh": "赵心怡",
+    "name_en": "Zhao Xinyi",
+    "age": 22,
+    "role_zh": "化学系大三·实验室女战士",
+    "role_en": "Chem Yr3 · Lab Warrior (F)",
+    "major_zh": "化学",
+    "major_en": "Chemistry",
+    "group_zh": "理学院",
+    "group_en": "",
+    "mbti": "ESFJ",
+    "ocean_raw": "O55 C85 E65 A80 N50",
+    "innate_zh": "动手能力强、细心耐心、抗挫力好",
+    "innate_en": "Hands-on, careful, resilient",
+    "learned_zh": "三年实验室训练出来的操作规范和安全意识",
+    "learned_en": "Three years of lab safety and protocol",
+    "belief_zh": "实验科学需要耐得住寂寞",
+    "belief_en": "Experimental science rewards patience",
+    "goal_zh": "发一篇SCI并顺利保研",
+    "goal_en": "Publish SCI paper; secure grad admission",
+    "contradiction_zh": "热爱实验操作 vs 讨厌写论文",
+    "contradiction_en": "Loves bench work vs. hates writing papers",
+    "surface_zh": "爽朗能干、乐于助人",
+    "surface_en": "Cheerful, capable, helpful",
+    "deep_zh": "对论文写作有深深的恐惧",
+    "deep_en": "Deeply fears writing",
+    "fear_zh": "实验做了一年结果发不出来",
+    "fear_en": "Year of experiments yielding no paper",
+    "desire_zh": "让自己的实验成果被看见",
+    "desire_en": "Her results being seen",
+    "lifestyle_zh": "实验室决定作息",
+    "lifestyle_en": "Lab dictates her schedule",
+    "rhythm_zh": "跟着实验节奏走，反应时间到了就得在",
+    "rhythm_en": "Follows reactions - you must be there when they finish",
+    "spaces_zh": "化学实验室、图书馆、食堂",
+    "spaces_en": "Chem lab, library, canteen",
+    "long_desire_zh": "这批实验数据能支撑一篇论文",
+    "long_desire_en": "This batch supports a paper",
+    "short_goal_zh": "今天的合成反应必须成功",
+    "short_goal_en": "Today's synthesis must succeed",
+    "constraint_zh": "试剂到货延迟了；通风橱有一台坏了",
+    "constraint_en": "Reagents delayed; one fume hood broken",
+    "bias_zh": "倾向认为只要多做实验就能出结果",
+    "bias_en": "Thinks doing more experiments always yields results",
+    "narrative_zh": "失败了就再来一次，总会成功的",
+    "narrative_en": "Fail once, redo; eventually it works"
+  }
+}

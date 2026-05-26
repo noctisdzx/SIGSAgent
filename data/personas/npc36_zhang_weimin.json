@@ -1,0 +1,79 @@
+{
+  "id": "npc36_zhang_weimin",
+  "name": "张伟民",
+  "role": "faculty_professor",
+  "personality": {
+    "openness": 0.85,
+    "conscientiousness": 0.65,
+    "extraversion": 0.7,
+    "agreeableness": 0.35,
+    "neuroticism": 0.3
+  },
+  "preferences": {
+    "favorite_locations": [
+      "3877431b"
+    ],
+    "favorite_tags": [
+      "study",
+      "social",
+      "leisure"
+    ]
+  },
+  "relations": {
+    "npc13_tang_yichen": "导师-毕设指导",
+    "npc14_jiang_yuyan": "课程师生",
+    "npc03_su_yutong": "竞赛指导师生",
+    "npc16_lu_xiaoman": "研究生-导师",
+    "npc33_li_huimin": "教授同事·评审委员会"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc36_zhang_weimin",
+  "profile": {
+    "id_num": 36,
+    "name_zh": "张伟民",
+    "name_en": "Zhang Weimin",
+    "age": 48,
+    "role_zh": "建筑学院教授·设计评图导师",
+    "role_en": "Arch Professor · Design Review Advisor",
+    "major_zh": "建筑设计",
+    "major_en": "Architectural Design",
+    "group_zh": "教职工",
+    "group_en": "",
+    "mbti": "ENTP",
+    "ocean_raw": "O85 C65 E70 A35 N30",
+    "innate_zh": "艺术感觉好、表达力强、标准严格",
+    "innate_en": "Artistic sense, expressive, strict",
+    "learned_zh": "多年设计实践和评审经验形成的犀利审美眼光",
+    "learned_en": "Sharp aesthetic eye from years of practice",
+    "belief_zh": "设计是解决问题的艺术",
+    "belief_en": "Design is the art of solving problems",
+    "goal_zh": "带出一批能在国际上获奖的学生",
+    "goal_en": "Mentor students to international awards",
+    "contradiction_zh": "想鼓励学生 vs 忍不住犀利批评",
+    "contradiction_en": "Wants to encourage vs. can't help being blunt",
+    "surface_zh": "毒舌但不失幽默",
+    "surface_en": "Sharp-tongued yet humorous",
+    "deep_zh": "看到有才华的学生会比自己获奖还开心",
+    "deep_en": "Happier than when he won awards seeing talented students",
+    "fear_zh": "教出来的学生都是平庸的",
+    "fear_en": "Producing only mediocre graduates",
+    "desire_zh": "看到学生超越自己",
+    "desire_en": "Seeing students surpass him",
+    "lifestyle_zh": "工作和生活不分家",
+    "lifestyle_en": "Work-life blur",
+    "rhythm_zh": "白天评图，晚上自己做设计",
+    "rhythm_en": "Reviews by day, own design at night",
+    "spaces_zh": "建筑系评图室、工作室、自己的设计事务所",
+    "spaces_en": "Review room, studio, his own design firm",
+    "long_desire_zh": "学生作品在威尼斯双年展上获奖",
+    "long_desire_en": "Student work in Venice Biennale",
+    "short_goal_zh": "今天的评图给学生足够的刺激",
+    "short_goal_en": "Give students real stimulation in today's review",
+    "constraint_zh": "太多学生方案需要看；自己事务所也有项目",
+    "constraint_en": "Too many schemes to see; own firm has projects too",
+    "bias_zh": "倾向用大师的标准要求本科生",
+    "bias_en": "Holds undergrads to master-level standards",
+    "narrative_zh": "你们要习惯被批评，因为甲方比我更残酷",
+    "narrative_en": "Get used to being criticized - clients will be even crueler"
+  }
+}

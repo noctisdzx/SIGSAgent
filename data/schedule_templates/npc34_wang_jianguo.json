@@ -1,0 +1,566 @@
+{
+  "id": "npc34_wang_jianguo",
+  "description": "基于参考 HTML 的 王建国 周课表（工作日相同，周末略简）。",
+  "week": {
+    "monday": [
+      {
+        "start": "06:00",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床·看arxiv最新论文"
+      },
+      {
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "早餐"
+      },
+      {
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "到办公室"
+      },
+      {
+        "start": "08:00",
+        "end": "09:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "审阅学生论文"
+      },
+      {
+        "start": "09:30",
+        "end": "11:30",
+        "activity": "meeting",
+        "location_uid": "3877431b",
+        "narrative_zh": "全体组会"
+      },
+      {
+        "start": "11:30",
+        "end": "12:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "午餐"
+      },
+      {
+        "start": "12:30",
+        "end": "14:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "处理行政邮件"
+      },
+      {
+        "start": "14:00",
+        "end": "16:00",
+        "activity": "meeting",
+        "location_uid": "99883bc6",
+        "narrative_zh": "和博士生一对一讨论"
+      },
+      {
+        "start": "16:00",
+        "end": "17:30",
+        "activity": "meeting",
+        "location_uid": "438038e3",
+        "narrative_zh": "学术委员会会议"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回办公室处理杂事"
+      },
+      {
+        "start": "18:30",
+        "end": "19:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "回家晚饭"
+      },
+      {
+        "start": "19:30",
+        "end": "22:00",
+        "activity": "write_paper",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "在家书房写论文"
+      },
+      {
+        "start": "22:00",
+        "end": "22:30",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "看书"
+      },
+      {
+        "start": "22:30",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "tuesday": [
+      {
+        "start": "06:00",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床·看arxiv最新论文"
+      },
+      {
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "早餐"
+      },
+      {
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "到办公室"
+      },
+      {
+        "start": "08:00",
+        "end": "09:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "审阅学生论文"
+      },
+      {
+        "start": "09:30",
+        "end": "11:30",
+        "activity": "meeting",
+        "location_uid": "3877431b",
+        "narrative_zh": "全体组会"
+      },
+      {
+        "start": "11:30",
+        "end": "12:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "午餐"
+      },
+      {
+        "start": "12:30",
+        "end": "14:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "处理行政邮件"
+      },
+      {
+        "start": "14:00",
+        "end": "16:00",
+        "activity": "meeting",
+        "location_uid": "99883bc6",
+        "narrative_zh": "和博士生一对一讨论"
+      },
+      {
+        "start": "16:00",
+        "end": "17:30",
+        "activity": "meeting",
+        "location_uid": "438038e3",
+        "narrative_zh": "学术委员会会议"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回办公室处理杂事"
+      },
+      {
+        "start": "18:30",
+        "end": "19:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "回家晚饭"
+      },
+      {
+        "start": "19:30",
+        "end": "22:00",
+        "activity": "write_paper",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "在家书房写论文"
+      },
+      {
+        "start": "22:00",
+        "end": "22:30",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "看书"
+      },
+      {
+        "start": "22:30",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "wednesday": [
+      {
+        "start": "06:00",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床·看arxiv最新论文"
+      },
+      {
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "早餐"
+      },
+      {
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "到办公室"
+      },
+      {
+        "start": "08:00",
+        "end": "09:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "审阅学生论文"
+      },
+      {
+        "start": "09:30",
+        "end": "11:30",
+        "activity": "meeting",
+        "location_uid": "3877431b",
+        "narrative_zh": "全体组会"
+      },
+      {
+        "start": "11:30",
+        "end": "12:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "午餐"
+      },
+      {
+        "start": "12:30",
+        "end": "14:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "处理行政邮件"
+      },
+      {
+        "start": "14:00",
+        "end": "16:00",
+        "activity": "meeting",
+        "location_uid": "99883bc6",
+        "narrative_zh": "和博士生一对一讨论"
+      },
+      {
+        "start": "16:00",
+        "end": "17:30",
+        "activity": "meeting",
+        "location_uid": "438038e3",
+        "narrative_zh": "学术委员会会议"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回办公室处理杂事"
+      },
+      {
+        "start": "18:30",
+        "end": "19:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "回家晚饭"
+      },
+      {
+        "start": "19:30",
+        "end": "22:00",
+        "activity": "write_paper",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "在家书房写论文"
+      },
+      {
+        "start": "22:00",
+        "end": "22:30",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "看书"
+      },
+      {
+        "start": "22:30",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "thursday": [
+      {
+        "start": "06:00",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床·看arxiv最新论文"
+      },
+      {
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "早餐"
+      },
+      {
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "到办公室"
+      },
+      {
+        "start": "08:00",
+        "end": "09:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "审阅学生论文"
+      },
+      {
+        "start": "09:30",
+        "end": "11:30",
+        "activity": "meeting",
+        "location_uid": "3877431b",
+        "narrative_zh": "全体组会"
+      },
+      {
+        "start": "11:30",
+        "end": "12:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "午餐"
+      },
+      {
+        "start": "12:30",
+        "end": "14:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "处理行政邮件"
+      },
+      {
+        "start": "14:00",
+        "end": "16:00",
+        "activity": "meeting",
+        "location_uid": "99883bc6",
+        "narrative_zh": "和博士生一对一讨论"
+      },
+      {
+        "start": "16:00",
+        "end": "17:30",
+        "activity": "meeting",
+        "location_uid": "438038e3",
+        "narrative_zh": "学术委员会会议"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回办公室处理杂事"
+      },
+      {
+        "start": "18:30",
+        "end": "19:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "回家晚饭"
+      },
+      {
+        "start": "19:30",
+        "end": "22:00",
+        "activity": "write_paper",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "在家书房写论文"
+      },
+      {
+        "start": "22:00",
+        "end": "22:30",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "看书"
+      },
+      {
+        "start": "22:30",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "friday": [
+      {
+        "start": "06:00",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床·看arxiv最新论文"
+      },
+      {
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "早餐"
+      },
+      {
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "到办公室"
+      },
+      {
+        "start": "08:00",
+        "end": "09:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "审阅学生论文"
+      },
+      {
+        "start": "09:30",
+        "end": "11:30",
+        "activity": "meeting",
+        "location_uid": "3877431b",
+        "narrative_zh": "全体组会"
+      },
+      {
+        "start": "11:30",
+        "end": "12:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "午餐"
+      },
+      {
+        "start": "12:30",
+        "end": "14:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "处理行政邮件"
+      },
+      {
+        "start": "14:00",
+        "end": "16:00",
+        "activity": "meeting",
+        "location_uid": "99883bc6",
+        "narrative_zh": "和博士生一对一讨论"
+      },
+      {
+        "start": "16:00",
+        "end": "17:30",
+        "activity": "meeting",
+        "location_uid": "438038e3",
+        "narrative_zh": "学术委员会会议"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回办公室处理杂事"
+      },
+      {
+        "start": "18:30",
+        "end": "19:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "回家晚饭"
+      },
+      {
+        "start": "19:30",
+        "end": "22:00",
+        "activity": "write_paper",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "在家书房写论文"
+      },
+      {
+        "start": "22:00",
+        "end": "22:30",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "看书"
+      },
+      {
+        "start": "22:30",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "saturday": [
+      {
+        "start": "06:00",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床·看arxiv最新论文"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "chat",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "周末自由活动"
+      },
+      {
+        "start": "18:30",
+        "end": "19:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "回家晚饭"
+      },
+      {
+        "start": "22:30",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "sunday": [
+      {
+        "start": "06:00",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床·看arxiv最新论文"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "leisure_media",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "周末闲聊"
+      },
+      {
+        "start": "18:30",
+        "end": "19:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "回家晚饭"
+      },
+      {
+        "start": "22:30",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ]
+  }
+}

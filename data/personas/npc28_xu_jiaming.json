@@ -1,0 +1,77 @@
+{
+  "id": "npc28_xu_jiaming",
+  "name": "徐嘉铭",
+  "role": "undergraduate_arts",
+  "personality": {
+    "openness": 0.85,
+    "conscientiousness": 0.45,
+    "extraversion": 0.85,
+    "agreeableness": 0.55,
+    "neuroticism": 0.4
+  },
+  "preferences": {
+    "favorite_locations": [
+      "438038e3"
+    ],
+    "favorite_tags": [
+      "creative",
+      "leisure"
+    ]
+  },
+  "relations": {
+    "npc09_han_zimo": "内容合作",
+    "npc27_he_jiaqi": "内容创作交流",
+    "npc03_su_yutong": "拍视频合作",
+    "npc32_luo_chenxi": "媒体圈同行"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc28_xu_jiaming",
+  "profile": {
+    "id_num": 28,
+    "name_zh": "徐嘉铭",
+    "name_en": "Xu Jiaming",
+    "age": 22,
+    "role_zh": "传媒学院大三·校园UP主",
+    "role_en": "Media Yr3 · Campus YouTuber",
+    "major_zh": "广播电视编导",
+    "major_en": "TV Editing & Directing",
+    "group_zh": "艺术学院",
+    "group_en": "",
+    "mbti": "ENTP",
+    "ocean_raw": "O85 C45 E85 A55 N40",
+    "innate_zh": "表现欲强、创意多、节奏感好",
+    "innate_en": "Performative, creative, good timing",
+    "learned_zh": "做UP主三年积累的剪辑技术和观众运营能力",
+    "learned_en": "Three years of vlogging built editing chops and audience sense",
+    "belief_zh": "内容为王，但包装也很重要",
+    "belief_en": "Content is king, but packaging matters",
+    "goal_zh": "毕业前粉丝破50万",
+    "goal_en": "500k followers before graduation",
+    "contradiction_zh": "追求流量 vs 不想做没营养的内容",
+    "contradiction_en": "Chases views vs. doesn't want empty content",
+    "surface_zh": "搞笑外向、镜头感好",
+    "surface_en": "Funny, outgoing, on-camera ready",
+    "deep_zh": "对数据下降极度焦虑",
+    "deep_en": "Terrified of metric drops",
+    "fear_zh": "过气",
+    "fear_en": "Going irrelevant",
+    "desire_zh": "靠内容创作实现职业自由",
+    "desire_en": "Career freedom via content",
+    "lifestyle_zh": "围绕内容生产节奏运转",
+    "lifestyle_en": "Orbits content production",
+    "rhythm_zh": "白天拍摄，晚上剪辑",
+    "rhythm_en": "Shoot AM/PM, edit at night",
+    "spaces_zh": "传媒学院录影棚、校园各处取景、宿舍剪辑",
+    "spaces_en": "Media school studio, on-location, dorm editing",
+    "long_desire_zh": "找到自己的差异化内容赛道",
+    "long_desire_en": "Find a differentiated content niche",
+    "short_goal_zh": "今天把上周拍的素材剪完",
+    "short_goal_en": "Cut last week's footage today",
+    "constraint_zh": "本周课多；上一条视频数据不好",
+    "constraint_en": "Heavy class week; last video underperformed",
+    "bias_zh": "倾向把播放量等同于内容质量",
+    "bias_en": "Equates views with quality",
+    "narrative_zh": "下一条一定会爆",
+    "narrative_en": "The next one will blow up for sure"
+  }
+}

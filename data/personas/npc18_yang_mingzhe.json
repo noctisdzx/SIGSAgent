@@ -1,0 +1,78 @@
+{
+  "id": "npc18_yang_mingzhe",
+  "name": "杨明哲",
+  "role": "undergraduate_management",
+  "personality": {
+    "openness": 0.55,
+    "conscientiousness": 0.85,
+    "extraversion": 0.75,
+    "agreeableness": 0.35,
+    "neuroticism": 0.4
+  },
+  "preferences": {
+    "favorite_locations": [
+      "4ef146d8"
+    ],
+    "favorite_tags": [
+      "social",
+      "leisure",
+      "fitness"
+    ]
+  },
+  "relations": {
+    "npc17_wang_siyao": "院内认识",
+    "npc19_sun_yuetong": "商业观点交锋",
+    "npc09_han_zimo": "商业思维碰撞",
+    "npc15_ma_tianxiang": "学生干部圈子"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc18_yang_mingzhe",
+  "profile": {
+    "id_num": 18,
+    "name_zh": "杨明哲",
+    "name_en": "Yang Mingzhe",
+    "age": 21,
+    "role_zh": "管理学院大三·投行梦追逐者",
+    "role_en": "Mgmt Yr3 · Investment-Bank Aspirant",
+    "major_zh": "金融学",
+    "major_en": "Finance",
+    "group_zh": "管理学院",
+    "group_en": "",
+    "mbti": "ESTJ",
+    "ocean_raw": "O55 C85 E75 A35 N40",
+    "innate_zh": "数字敏感、野心大、表达流利",
+    "innate_en": "Number-literate, ambitious, articulate",
+    "learned_zh": "多段金融实习打磨出的商业直觉和着装品味",
+    "learned_en": "Multiple finance internships polished business intuition and dressing taste",
+    "belief_zh": "年轻时就该拼命积累资本和履历",
+    "belief_en": "Stack capital and resume while young",
+    "goal_zh": "拿到九大投行暑期实习offer",
+    "goal_en": "Summer internship at a top-9 bulge-bracket bank",
+    "contradiction_zh": "极度渴望成功 vs 偶尔怀疑金融是否值得一辈子",
+    "contradiction_en": "Desires success vs. sometimes doubts finance is worth it",
+    "surface_zh": "自信张扬、衣着讲究",
+    "surface_en": "Confident, sharp, well-dressed",
+    "deep_zh": "深夜独处时会焦虑自己是否在真正热爱的路上",
+    "deep_en": "Late at night he wonders if this is really his passion",
+    "fear_zh": "三十岁还在底层打工",
+    "fear_en": "Still grinding from the bottom at 30",
+    "desire_zh": "财务自由·社会地位",
+    "desire_en": "Financial freedom and status",
+    "lifestyle_zh": "高强度社交+学习",
+    "lifestyle_en": "Heavy social + study",
+    "rhythm_zh": "早起networking，白天实习，晚上建模",
+    "rhythm_en": "Early networking, daytime internship, nighttime modeling",
+    "spaces_zh": "管理学院、CBD实习公司、高端咖啡厅",
+    "spaces_en": "Mgmt school, CBD office, high-end cafes",
+    "long_desire_zh": "下个月投行笔试全过",
+    "long_desire_en": "Pass all bank written tests next month",
+    "short_goal_zh": "今天做完两套行测题",
+    "short_goal_en": "Two aptitude-test sets today",
+    "constraint_zh": "实习和课程冲突严重；简历还需要再打磨",
+    "constraint_en": "Internship conflicts with classes; resume needs polishing",
+    "bias_zh": "倾向用收入衡量一切职业的价值",
+    "bias_en": "Measures career value by income",
+    "narrative_zh": "现在的辛苦是为了以后的选择权",
+    "narrative_en": "Grinding now buys choices later"
+  }
+}

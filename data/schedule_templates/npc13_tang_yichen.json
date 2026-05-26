@@ -1,0 +1,510 @@
+{
+  "id": "npc13_tang_yichen",
+  "description": "基于参考 HTML 的 唐亦辰 周课表（工作日相同，周末略简）。",
+  "week": {
+    "monday": [
+      {
+        "start": "01:00",
+        "end": "04:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "进入深夜高产模式"
+      },
+      {
+        "start": "04:00",
+        "end": "10:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "趴在桌上睡着"
+      },
+      {
+        "start": "10:00",
+        "end": "10:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "在工作室被闹钟叫醒（昨晚通宵）"
+      },
+      {
+        "start": "10:30",
+        "end": "11:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "便利店买早餐"
+      },
+      {
+        "start": "11:00",
+        "end": "12:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "开始画图"
+      },
+      {
+        "start": "12:30",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回工作室继续"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00",
+        "activity": "meeting",
+        "location_uid": "99883bc6",
+        "narrative_zh": "和导师讨论方案"
+      },
+      {
+        "start": "16:00",
+        "end": "18:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "根据反馈修改"
+      },
+      {
+        "start": "18:30",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "做实体模型"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回到电脑前改图"
+      }
+    ],
+    "tuesday": [
+      {
+        "start": "01:00",
+        "end": "04:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "进入深夜高产模式"
+      },
+      {
+        "start": "04:00",
+        "end": "10:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "趴在桌上睡着"
+      },
+      {
+        "start": "10:00",
+        "end": "10:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "在工作室被闹钟叫醒（昨晚通宵）"
+      },
+      {
+        "start": "10:30",
+        "end": "11:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "便利店买早餐"
+      },
+      {
+        "start": "11:00",
+        "end": "12:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "开始画图"
+      },
+      {
+        "start": "12:30",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回工作室继续"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00",
+        "activity": "meeting",
+        "location_uid": "99883bc6",
+        "narrative_zh": "和导师讨论方案"
+      },
+      {
+        "start": "16:00",
+        "end": "18:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "根据反馈修改"
+      },
+      {
+        "start": "18:30",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "做实体模型"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回到电脑前改图"
+      }
+    ],
+    "wednesday": [
+      {
+        "start": "01:00",
+        "end": "04:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "进入深夜高产模式"
+      },
+      {
+        "start": "04:00",
+        "end": "10:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "趴在桌上睡着"
+      },
+      {
+        "start": "10:00",
+        "end": "10:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "在工作室被闹钟叫醒（昨晚通宵）"
+      },
+      {
+        "start": "10:30",
+        "end": "11:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "便利店买早餐"
+      },
+      {
+        "start": "11:00",
+        "end": "12:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "开始画图"
+      },
+      {
+        "start": "12:30",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回工作室继续"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00",
+        "activity": "meeting",
+        "location_uid": "99883bc6",
+        "narrative_zh": "和导师讨论方案"
+      },
+      {
+        "start": "16:00",
+        "end": "18:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "根据反馈修改"
+      },
+      {
+        "start": "18:30",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "做实体模型"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回到电脑前改图"
+      }
+    ],
+    "thursday": [
+      {
+        "start": "01:00",
+        "end": "04:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "进入深夜高产模式"
+      },
+      {
+        "start": "04:00",
+        "end": "10:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "趴在桌上睡着"
+      },
+      {
+        "start": "10:00",
+        "end": "10:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "在工作室被闹钟叫醒（昨晚通宵）"
+      },
+      {
+        "start": "10:30",
+        "end": "11:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "便利店买早餐"
+      },
+      {
+        "start": "11:00",
+        "end": "12:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "开始画图"
+      },
+      {
+        "start": "12:30",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回工作室继续"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00",
+        "activity": "meeting",
+        "location_uid": "99883bc6",
+        "narrative_zh": "和导师讨论方案"
+      },
+      {
+        "start": "16:00",
+        "end": "18:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "根据反馈修改"
+      },
+      {
+        "start": "18:30",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "做实体模型"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回到电脑前改图"
+      }
+    ],
+    "friday": [
+      {
+        "start": "01:00",
+        "end": "04:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "进入深夜高产模式"
+      },
+      {
+        "start": "04:00",
+        "end": "10:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "趴在桌上睡着"
+      },
+      {
+        "start": "10:00",
+        "end": "10:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "在工作室被闹钟叫醒（昨晚通宵）"
+      },
+      {
+        "start": "10:30",
+        "end": "11:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "便利店买早餐"
+      },
+      {
+        "start": "11:00",
+        "end": "12:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "开始画图"
+      },
+      {
+        "start": "12:30",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回工作室继续"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00",
+        "activity": "meeting",
+        "location_uid": "99883bc6",
+        "narrative_zh": "和导师讨论方案"
+      },
+      {
+        "start": "16:00",
+        "end": "18:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "根据反馈修改"
+      },
+      {
+        "start": "18:30",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "做实体模型"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回到电脑前改图"
+      }
+    ],
+    "saturday": [
+      {
+        "start": "04:00",
+        "end": "10:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "趴在桌上睡着"
+      },
+      {
+        "start": "10:00",
+        "end": "10:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "在工作室被闹钟叫醒（昨晚通宵）"
+      },
+      {
+        "start": "12:30",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "chat",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "周末自由活动"
+      },
+      {
+        "start": "18:30",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      }
+    ],
+    "sunday": [
+      {
+        "start": "04:00",
+        "end": "10:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "趴在桌上睡着"
+      },
+      {
+        "start": "10:00",
+        "end": "10:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "在工作室被闹钟叫醒（昨晚通宵）"
+      },
+      {
+        "start": "12:30",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "leisure_media",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "周末闲聊"
+      },
+      {
+        "start": "18:30",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      }
+    ]
+  }
+}

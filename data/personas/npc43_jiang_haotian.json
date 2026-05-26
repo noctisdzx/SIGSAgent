@@ -1,0 +1,78 @@
+{
+  "id": "npc43_jiang_haotian",
+  "name": "姜浩天",
+  "role": "undergraduate_architecture",
+  "personality": {
+    "openness": 0.4,
+    "conscientiousness": 0.65,
+    "extraversion": 0.55,
+    "agreeableness": 0.75,
+    "neuroticism": 0.4
+  },
+  "preferences": {
+    "favorite_locations": [
+      "7a281fd7",
+      "4d7a7e81",
+      "9a49343c"
+    ],
+    "favorite_tags": [
+      "study",
+      "creative"
+    ]
+  },
+  "relations": {
+    "npc13_tang_yichen": "学长崇拜",
+    "npc03_su_yutong": "请教学姐",
+    "npc55_shi_lei": "同为吃苦型学生·互相鼓励"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc43_jiang_haotian",
+  "profile": {
+    "id_num": 43,
+    "name_zh": "姜浩天",
+    "name_en": "Jiang Haotian",
+    "age": 19,
+    "role_zh": "土木工程大一·军训标兵",
+    "role_en": "Civil Eng Yr1 · Model Soldier",
+    "major_zh": "土木工程",
+    "major_en": "Civil Engineering",
+    "group_zh": "建筑学院",
+    "group_en": "",
+    "mbti": "ISFJ",
+    "ocean_raw": "O40 C65 E55 A75 N40",
+    "innate_zh": "体能好、服从性强、朴实",
+    "innate_en": "Good stamina, obedient, honest",
+    "learned_zh": "高中住校培养的独立生活能力",
+    "learned_en": "Independence from boarding school",
+    "belief_zh": "踏踏实实才是真本事",
+    "belief_en": "Solid work is true skill",
+    "goal_zh": "学好专业课·找一份稳定工作",
+    "goal_en": "Learn core courses · find a stable job",
+    "contradiction_zh": "听说土木就业不好 vs 不敢转专业",
+    "contradiction_en": "Hears civil-eng job market is bad vs. too afraid to switch",
+    "surface_zh": "老实憨厚、不善言辞",
+    "surface_en": "Honest, inarticulate",
+    "deep_zh": "对未来的迷茫不敢和家里说",
+    "deep_en": "Doesn't dare tell family of his confusion",
+    "fear_zh": "专业没出路",
+    "fear_en": "No future in his major",
+    "desire_zh": "让家人放心",
+    "desire_en": "Making his family feel secure",
+    "lifestyle_zh": "规律朴素",
+    "lifestyle_en": "Regular, frugal",
+    "rhythm_zh": "上课-食堂-自习三点一线",
+    "rhythm_en": "Class-canteen-study triangle",
+    "spaces_zh": "教学楼、食堂、宿舍、操场",
+    "spaces_en": "Classrooms, canteen, dorm, track",
+    "long_desire_zh": "高数和力学不挂科",
+    "long_desire_en": "Not fail calculus or mechanics",
+    "short_goal_zh": "今天晚上把高数作业做完",
+    "short_goal_en": "Finish calculus homework tonight",
+    "constraint_zh": "课程难度大跨度大；不敢问老师问题",
+    "constraint_en": "Courses leap in difficulty; too shy to ask",
+    "bias_zh": "倾向认为自己不够聪明而非方法不对",
+    "bias_en": "Blames his own intellect rather than his method",
+    "narrative_zh": "别人能学会，我多花时间也能学会",
+    "narrative_en": "Others can learn it, so can I with more time"
+  }
+}

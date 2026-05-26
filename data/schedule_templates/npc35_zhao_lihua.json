@@ -1,0 +1,454 @@
+{
+  "id": "npc35_zhao_lihua",
+  "description": "基于参考 HTML 的 赵丽华 周课表（工作日相同，周末略简）。",
+  "week": {
+    "monday": [
+      {
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "到办公室·查看学生请假系统"
+      },
+      {
+        "start": "08:00",
+        "end": "09:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "处理邮件和微信消息"
+      },
+      {
+        "start": "09:00",
+        "end": "10:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "约谈有困难的学生"
+      },
+      {
+        "start": "10:30",
+        "end": "12:00",
+        "activity": "meeting",
+        "location_uid": "438038e3",
+        "narrative_zh": "行政会议"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_meal",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂和学生一起吃饭"
+      },
+      {
+        "start": "13:00",
+        "end": "14:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "去宿舍巡查"
+      },
+      {
+        "start": "14:00",
+        "end": "16:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "准备各种材料和报告"
+      },
+      {
+        "start": "16:00",
+        "end": "17:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "和学生谈话"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "处理突发情况"
+      },
+      {
+        "start": "18:30",
+        "end": "20:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回家·但手机不关"
+      },
+      {
+        "start": "20:00",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "在家处理学生微信"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "终于休息"
+      }
+    ],
+    "tuesday": [
+      {
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "到办公室·查看学生请假系统"
+      },
+      {
+        "start": "08:00",
+        "end": "09:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "处理邮件和微信消息"
+      },
+      {
+        "start": "09:00",
+        "end": "10:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "约谈有困难的学生"
+      },
+      {
+        "start": "10:30",
+        "end": "12:00",
+        "activity": "meeting",
+        "location_uid": "438038e3",
+        "narrative_zh": "行政会议"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_meal",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂和学生一起吃饭"
+      },
+      {
+        "start": "13:00",
+        "end": "14:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "去宿舍巡查"
+      },
+      {
+        "start": "14:00",
+        "end": "16:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "准备各种材料和报告"
+      },
+      {
+        "start": "16:00",
+        "end": "17:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "和学生谈话"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "处理突发情况"
+      },
+      {
+        "start": "18:30",
+        "end": "20:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回家·但手机不关"
+      },
+      {
+        "start": "20:00",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "在家处理学生微信"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "终于休息"
+      }
+    ],
+    "wednesday": [
+      {
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "到办公室·查看学生请假系统"
+      },
+      {
+        "start": "08:00",
+        "end": "09:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "处理邮件和微信消息"
+      },
+      {
+        "start": "09:00",
+        "end": "10:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "约谈有困难的学生"
+      },
+      {
+        "start": "10:30",
+        "end": "12:00",
+        "activity": "meeting",
+        "location_uid": "438038e3",
+        "narrative_zh": "行政会议"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_meal",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂和学生一起吃饭"
+      },
+      {
+        "start": "13:00",
+        "end": "14:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "去宿舍巡查"
+      },
+      {
+        "start": "14:00",
+        "end": "16:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "准备各种材料和报告"
+      },
+      {
+        "start": "16:00",
+        "end": "17:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "和学生谈话"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "处理突发情况"
+      },
+      {
+        "start": "18:30",
+        "end": "20:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回家·但手机不关"
+      },
+      {
+        "start": "20:00",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "在家处理学生微信"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "终于休息"
+      }
+    ],
+    "thursday": [
+      {
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "到办公室·查看学生请假系统"
+      },
+      {
+        "start": "08:00",
+        "end": "09:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "处理邮件和微信消息"
+      },
+      {
+        "start": "09:00",
+        "end": "10:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "约谈有困难的学生"
+      },
+      {
+        "start": "10:30",
+        "end": "12:00",
+        "activity": "meeting",
+        "location_uid": "438038e3",
+        "narrative_zh": "行政会议"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_meal",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂和学生一起吃饭"
+      },
+      {
+        "start": "13:00",
+        "end": "14:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "去宿舍巡查"
+      },
+      {
+        "start": "14:00",
+        "end": "16:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "准备各种材料和报告"
+      },
+      {
+        "start": "16:00",
+        "end": "17:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "和学生谈话"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "处理突发情况"
+      },
+      {
+        "start": "18:30",
+        "end": "20:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回家·但手机不关"
+      },
+      {
+        "start": "20:00",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "在家处理学生微信"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "终于休息"
+      }
+    ],
+    "friday": [
+      {
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "到办公室·查看学生请假系统"
+      },
+      {
+        "start": "08:00",
+        "end": "09:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "处理邮件和微信消息"
+      },
+      {
+        "start": "09:00",
+        "end": "10:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "约谈有困难的学生"
+      },
+      {
+        "start": "10:30",
+        "end": "12:00",
+        "activity": "meeting",
+        "location_uid": "438038e3",
+        "narrative_zh": "行政会议"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_meal",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂和学生一起吃饭"
+      },
+      {
+        "start": "13:00",
+        "end": "14:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "去宿舍巡查"
+      },
+      {
+        "start": "14:00",
+        "end": "16:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "准备各种材料和报告"
+      },
+      {
+        "start": "16:00",
+        "end": "17:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "和学生谈话"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "处理突发情况"
+      },
+      {
+        "start": "18:30",
+        "end": "20:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回家·但手机不关"
+      },
+      {
+        "start": "20:00",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "在家处理学生微信"
+      },
+      {
+        "start": "22:00",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "终于休息"
+      }
+    ],
+    "saturday": [
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "chat",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "周末自由活动"
+      }
+    ],
+    "sunday": [
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "leisure_media",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "周末闲聊"
+      }
+    ]
+  }
+}

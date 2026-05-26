@@ -1,0 +1,80 @@
+{
+  "id": "npc02_chen_yuanhang",
+  "name": "陈远航",
+  "role": "graduate_master",
+  "personality": {
+    "openness": 0.75,
+    "conscientiousness": 0.85,
+    "extraversion": 0.25,
+    "agreeableness": 0.4,
+    "neuroticism": 0.45
+  },
+  "preferences": {
+    "favorite_locations": [
+      "64a9bc35",
+      "3877431b"
+    ],
+    "favorite_tags": [
+      "study",
+      "leisure"
+    ]
+  },
+  "relations": {
+    "npc34_wang_jianguo": "导师-研究生",
+    "npc08_xu_qinglan": "实验室同门·暗中竞争",
+    "npc10_wu_ruolin": "实验室同门·互助",
+    "npc07_shen_yifan": "请教学长",
+    "npc60_tao_ran": "AI技术+AI伦理讨论",
+    "npc59_guo_yiming": "技术交流·帮调AI模型"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc02_chen_yuanhang",
+  "profile": {
+    "id_num": 2,
+    "name_zh": "陈远航",
+    "name_en": "Chen Yuanhang",
+    "age": 24,
+    "role_zh": "计算机学院研一·实验室搬砖人",
+    "role_en": "CS M1 · Lab Workhorse",
+    "major_zh": "人工智能",
+    "major_en": "Artificial Intelligence",
+    "group_zh": "计算机学院",
+    "group_en": "",
+    "mbti": "INTJ",
+    "ocean_raw": "O75 C85 E25 A40 N45",
+    "innate_zh": "逻辑强、耐压高、动手能力突出",
+    "innate_en": "Strong logic, stress-tolerant, hands-on",
+    "learned_zh": "研究生阶段学会的deadline驱动型工作节奏，习惯用代码思考问题",
+    "learned_en": "Deadline-driven workflow shaped in grad school; thinks through code",
+    "belief_zh": "技术能解决大部分问题，解决不了的是人的问题",
+    "belief_en": "Tech solves most problems; what it can't is human",
+    "goal_zh": "顶会一作论文·拿国奖",
+    "goal_en": "First-author paper at a top conference, national scholarship",
+    "contradiction_zh": "追求学术成就 vs 怀疑学术体制的意义",
+    "contradiction_en": "Pursues academic achievement vs. doubts its meaning",
+    "surface_zh": "沉默寡言、效率至上",
+    "surface_en": "Quiet, efficiency-first",
+    "deep_zh": "其实很在意同辈评价，害怕被认为平庸",
+    "deep_en": "Cares about peer judgment; fears being seen as mediocre",
+    "fear_zh": "毕业时没有拿得出手的成果",
+    "fear_en": "Graduating with no presentable results",
+    "desire_zh": "被认可为真正有能力的人",
+    "desire_en": "Recognition as truly capable",
+    "lifestyle_zh": "作息混乱型，经常熬夜调代码",
+    "lifestyle_en": "Chaotic sleep, often debugging past midnight",
+    "rhythm_zh": "上午低迷，下午渐入佳境，夜间巅峰",
+    "rhythm_en": "Low morning, ramping afternoon, peak late night",
+    "spaces_zh": "实验室、研究生自习室、便利店",
+    "spaces_en": "Lab, grad study room, convenience store",
+    "long_desire_zh": "在deadline前跑通实验拿到结果",
+    "long_desire_en": "Get experiments to converge before deadline",
+    "short_goal_zh": "调通昨晚崩溃的训练脚本",
+    "short_goal_en": "Fix the training script that crashed overnight",
+    "constraint_zh": "GPU服务器排队中；导师催进度；连续熬夜身体疲惫",
+    "constraint_en": "GPU queue is long; advisor chasing progress; exhausted from all-nighters",
+    "bias_zh": "倾向低估沟通成本，高估独立解决问题的效率",
+    "bias_en": "Underestimates communication cost; overestimates solo efficiency",
+    "narrative_zh": "再跑一个epoch就好了，我马上就能收敛",
+    "narrative_en": "One more epoch, it'll converge"
+  }
+}

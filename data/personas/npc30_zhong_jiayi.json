@@ -1,0 +1,75 @@
+{
+  "id": "npc30_zhong_jiayi",
+  "name": "钟嘉宜",
+  "role": "graduate_humanities",
+  "personality": {
+    "openness": 0.6,
+    "conscientiousness": 0.85,
+    "extraversion": 0.7,
+    "agreeableness": 0.45,
+    "neuroticism": 0.4
+  },
+  "preferences": {
+    "favorite_locations": [
+      "64a9bc35",
+      "7a281fd7"
+    ],
+    "favorite_tags": [
+      "creative"
+    ]
+  },
+  "relations": {
+    "npc17_wang_siyao": "辩论赛认识",
+    "npc50_gao_yuan": "辩论对手"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc30_zhong_jiayi",
+  "profile": {
+    "id_num": 30,
+    "name_zh": "钟嘉宜",
+    "name_en": "Zhong Jiayi",
+    "age": 21,
+    "role_zh": "法学院大三·模拟法庭冠军",
+    "role_en": "Law Yr3 · Moot Court Champion",
+    "major_zh": "法学",
+    "major_en": "Law",
+    "group_zh": "哲学社科",
+    "group_en": "",
+    "mbti": "ENTJ",
+    "ocean_raw": "O60 C85 E70 A45 N40",
+    "innate_zh": "逻辑缜密、口才好、正义感强",
+    "innate_en": "Rigorous logic, articulate, just",
+    "learned_zh": "模拟法庭训练出来的临场反应和法律检索能力",
+    "learned_en": "Courtroom reflexes and legal research from moot court",
+    "belief_zh": "法律是社会的底线也是希望",
+    "belief_en": "Law is society's floor and its hope",
+    "goal_zh": "通过司法考试·进入红圈所",
+    "goal_en": "Pass the bar; enter top-tier firm",
+    "contradiction_zh": "理想中的正义 vs 法律实务中的灰色地带",
+    "contradiction_en": "Ideal justice vs. legal gray zones in practice",
+    "surface_zh": "犀利果断、气场强",
+    "surface_en": "Sharp, decisive, commanding",
+    "deep_zh": "有时候会怀疑法律能否真正实现正义",
+    "deep_en": "Sometimes doubts law can achieve true justice",
+    "fear_zh": "成为一个只会打官司的工具人",
+    "fear_en": "Becoming a litigation robot",
+    "desire_zh": "用法律做一些真正有意义的事",
+    "desire_en": "Using law for real meaning",
+    "lifestyle_zh": "高强度学习型作息",
+    "lifestyle_en": "Intense study schedule",
+    "rhythm_zh": "上午记忆力最好，适合背法条",
+    "rhythm_en": "Memorizes best in AM",
+    "spaces_zh": "法学院模拟法庭、图书馆、自习室",
+    "spaces_en": "Moot court, library, study room",
+    "long_desire_zh": "司法考试一次过",
+    "long_desire_en": "Pass bar on first try",
+    "short_goal_zh": "今天背完民法总则第三章",
+    "short_goal_en": "Memorize Civil Code General Part Ch.3",
+    "constraint_zh": "课程和备考同时进行；模拟法庭还有比赛要准备",
+    "constraint_en": "Classes + bar prep overlap; moot-court match coming",
+    "bias_zh": "倾向把所有问题都用法律框架分析",
+    "bias_en": "Frames everything through law",
+    "narrative_zh": "法律人的底气来自对法条的烂熟于心",
+    "narrative_en": "A lawyer's confidence comes from flawless command of statutes"
+  }
+}

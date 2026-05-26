@@ -1,0 +1,76 @@
+{
+  "id": "npc55_shi_lei",
+  "name": "石磊",
+  "role": "graduate_master",
+  "personality": {
+    "openness": 0.5,
+    "conscientiousness": 0.85,
+    "extraversion": 0.3,
+    "agreeableness": 0.55,
+    "neuroticism": 0.5
+  },
+  "preferences": {
+    "favorite_locations": [
+      "64a9bc35",
+      "3877431b",
+      "438038e3"
+    ],
+    "favorite_tags": [
+      "study"
+    ]
+  },
+  "relations": {
+    "npc43_jiang_haotian": "同为吃苦型学生·互相鼓励",
+    "npc57_yue_pengcheng": "实验室邻居·工科苦逼联盟"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc55_shi_lei",
+  "profile": {
+    "id_num": 55,
+    "name_zh": "石磊",
+    "name_en": "Shi Lei",
+    "age": 24,
+    "role_zh": "材料科学研一·跨考生",
+    "role_en": "Materials M1 · Cross-Examiner",
+    "major_zh": "材料科学与工程",
+    "major_en": "Materials Science & Engineering",
+    "group_zh": "理学院",
+    "group_en": "",
+    "mbti": "ISTJ",
+    "ocean_raw": "O50 C85 E30 A55 N50",
+    "innate_zh": "毅力强、不服输、动手能力好",
+    "innate_en": "Resilient, stubborn, hands-on",
+    "learned_zh": "从文科跨考到材料的经历让他比谁都珍惜这个机会",
+    "learned_en": "Liberal-arts to materials switch taught him to cherish the chance",
+    "belief_zh": "既然选了就要做到最好",
+    "belief_en": "If I chose it, I'll do it right",
+    "goal_zh": "弥补本科知识短板·尽快进入科研状态",
+    "goal_en": "Fill the undergrad gap and enter research mode",
+    "contradiction_zh": "别人的基础比自己好 vs 不能让跨考背景成为借口",
+    "contradiction_en": "Others' foundations are stronger vs. can't use that as excuse",
+    "surface_zh": "低调沉默、埋头苦干",
+    "surface_en": "Low-profile, head-down",
+    "deep_zh": "内心承受着巨大的追赶压力",
+    "deep_en": "Enormous pressure to catch up",
+    "fear_zh": "永远补不上差距",
+    "fear_en": "Never bridging the gap",
+    "desire_zh": "用实力证明跨考生也可以",
+    "desire_en": "Proving cross-exam students can succeed",
+    "lifestyle_zh": "极度自律",
+    "lifestyle_en": "Extreme self-discipline",
+    "rhythm_zh": "全天学习，几乎没有娱乐",
+    "rhythm_en": "Studies all day; little leisure",
+    "spaces_zh": "材料实验室、图书馆、宿舍",
+    "spaces_en": "Materials lab, library, dorm",
+    "long_desire_zh": "这学期把三门补修课全部通过",
+    "long_desire_en": "Pass all three make-up courses this term",
+    "short_goal_zh": "今晚看完固体物理第三章",
+    "short_goal_en": "Finish solid-state physics Ch.3 tonight",
+    "constraint_zh": "基础知识缺口大；实验操作需要从零学起",
+    "constraint_en": "Large knowledge gap; needs lab basics from scratch",
+    "bias_zh": "倾向低估自己文科背景带来的独特视角",
+    "bias_en": "Underestimates the unique angle his LA background gives",
+    "narrative_zh": "笨鸟先飞，我多花两倍时间就好了",
+    "narrative_en": "Dumb birds fly first; I just put in twice the time"
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "id": "npc49_liu_ruyan",
+  "name": "柳如烟",
+  "role": "undergraduate_languages",
+  "personality": {
+    "openness": 0.8,
+    "conscientiousness": 0.5,
+    "extraversion": 0.35,
+    "agreeableness": 0.65,
+    "neuroticism": 0.55
+  },
+  "preferences": {
+    "favorite_locations": [
+      "438038e3"
+    ],
+    "favorite_tags": [
+      "creative",
+      "leisure"
+    ]
+  },
+  "relations": {
+    "npc05_fang_zhiqing": "语言学习互助",
+    "npc10_wu_ruolin": "NLP+日语翻译讨论",
+    "npc56_wen_wanru": "二次元+网文交集"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc49_liu_ruyan",
+  "profile": {
+    "id_num": 49,
+    "name_zh": "柳如烟",
+    "name_en": "Liu Ruyan",
+    "age": 22,
+    "role_zh": "外语学院大三·日语方向·二次元",
+    "role_en": "Lang Yr3 · Japanese Major · Otaku",
+    "major_zh": "日语",
+    "major_en": "Japanese",
+    "group_zh": "外语学院",
+    "group_en": "",
+    "mbti": "INFP",
+    "ocean_raw": "O80 C50 E35 A65 N55",
+    "innate_zh": "语言模仿能力强、想象力丰富、细腻",
+    "innate_en": "Mimicry, imagination, delicate",
+    "learned_zh": "大量动漫原声听力练出的地道日语口语",
+    "learned_en": "Native-level Japanese speech from anime",
+    "belief_zh": "二次元比三次元更真实",
+    "belief_en": "2D is more real than 3D",
+    "goal_zh": "去日本做游戏本地化工作",
+    "goal_en": "Work in game localization in Japan",
+    "contradiction_zh": "热爱二次元 vs 担心这不是一个正经的职业方向",
+    "contradiction_en": "Loves otaku culture vs. unsure it's a legit career",
+    "surface_zh": "安静内向、偶尔冒出很宅的话",
+    "surface_en": "Introverted, occasional otaku blurts",
+    "deep_zh": "在二次元世界里找到了真实的自我",
+    "deep_en": "Found her real self in the 2D world",
+    "fear_zh": "被迫做和兴趣无关的工作",
+    "fear_en": "Being forced into unrelated work",
+    "desire_zh": "把热爱变成职业",
+    "desire_en": "Turning love into career",
+    "lifestyle_zh": "熬夜追番型",
+    "lifestyle_en": "Anime-binge night owl",
+    "rhythm_zh": "白天上课，晚上进入二次元时间",
+    "rhythm_en": "Classes by day, 2D time by night",
+    "spaces_zh": "外语楼、宿舍、漫展（周末）",
+    "spaces_en": "Lang building, dorm, weekend cons",
+    "long_desire_zh": "日语N1满分·积累翻译作品集",
+    "long_desire_en": "Perfect JLPT N1; build translation portfolio",
+    "short_goal_zh": "今天翻译完一段游戏文本练习",
+    "short_goal_en": "Translate a game-text snippet today",
+    "constraint_zh": "上课内容和兴趣方向有差距；室友不理解",
+    "constraint_en": "Classwork diverges from interest; roommates don't get her",
+    "bias_zh": "倾向用二次元滤镜看所有事物",
+    "bias_en": "Filters everything through 2D lens",
+    "narrative_zh": "翻译一段台词比写一篇论文有意义多了",
+    "narrative_en": "Translating a line means more than writing a paper"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "id": "npc13_tang_yichen",
+  "name": "唐亦辰",
+  "role": "undergraduate_architecture",
+  "personality": {
+    "openness": 0.85,
+    "conscientiousness": 0.75,
+    "extraversion": 0.35,
+    "agreeableness": 0.4,
+    "neuroticism": 0.55
+  },
+  "preferences": {
+    "favorite_locations": [
+      "3877431b",
+      "9a49343c"
+    ],
+    "favorite_tags": [
+      "study",
+      "creative",
+      "leisure"
+    ]
+  },
+  "relations": {
+    "npc03_su_yutong": "竞赛搭档·暧昧不明",
+    "npc36_zhang_weimin": "导师-毕设指导",
+    "npc14_jiang_yuyan": "工作室好友",
+    "npc43_jiang_haotian": "学长崇拜",
+    "npc57_yue_pengcheng": "跨学科结构讨论"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc13_tang_yichen",
+  "profile": {
+    "id_num": 13,
+    "name_zh": "唐亦辰",
+    "name_en": "Tang Yichen",
+    "age": 23,
+    "role_zh": "建筑学院大四·毕设地狱",
+    "role_en": "Arch Yr4 · Thesis Hell",
+    "major_zh": "建筑设计",
+    "major_en": "Architectural Design",
+    "group_zh": "建筑学院",
+    "group_en": "",
+    "mbti": "INTJ",
+    "ocean_raw": "O85 C75 E35 A40 N55",
+    "innate_zh": "空间感极强、抗压能力不错、完美主义",
+    "innate_en": "Strong spatial sense, resilient, perfectionist",
+    "learned_zh": "四年图纸训练形成的极致审美标准和通宵耐力",
+    "learned_en": "Years of drafting forged aesthetic extremity and all-night stamina",
+    "belief_zh": "建筑是凝固的音乐",
+    "belief_en": "Architecture is frozen music",
+    "goal_zh": "毕业设计拿优秀+申请海外建筑硕士",
+    "goal_en": "Excellent thesis grade + overseas M.Arch offer",
+    "contradiction_zh": "追求极致设计 vs 现实时间根本不够",
+    "contradiction_en": "Wants perfection vs. not enough time",
+    "surface_zh": "冷静专注、不苟言笑",
+    "surface_en": "Calm, focused, unsmiling",
+    "deep_zh": "对毕设的焦虑已经开始影响睡眠",
+    "deep_en": "Thesis anxiety is starting to eat sleep",
+    "fear_zh": "做出平庸的毕业设计",
+    "fear_en": "Producing a mediocre thesis",
+    "desire_zh": "证明自己值得被最好的学校录取",
+    "desire_en": "Proving he deserves the best schools",
+    "lifestyle_zh": "长期通宵型，以周为单位崩溃一次",
+    "lifestyle_en": "Chronic all-nighter, crashes weekly",
+    "rhythm_zh": "白天平稳工作，深夜爆发式产出",
+    "rhythm_en": "Steady days, explosive late nights",
+    "spaces_zh": "建筑系工作室（几乎住在这里）、材料模型室、食堂",
+    "spaces_en": "Studio (practically lives there), model shop, canteen",
+    "long_desire_zh": "毕业设计完成度达到90%",
+    "long_desire_en": "90% completion on thesis",
+    "short_goal_zh": "今天把立面图改到第三版",
+    "short_goal_en": "Third revision of the elevation drawings today",
+    "constraint_zh": "导师对方案又有新意见；3D打印机排队",
+    "constraint_en": "Advisor has new feedback; 3D printer queue is long",
+    "bias_zh": "倾向不断推翻自己的方案；高估修改带来的提升",
+    "bias_en": "Keeps overhauling schemes; overestimates gains from revisions",
+    "narrative_zh": "再改一版就完美了",
+    "narrative_en": "One more pass and it'll be perfect"
+  }
+}

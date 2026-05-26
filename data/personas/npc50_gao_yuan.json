@@ -1,0 +1,77 @@
+{
+  "id": "npc50_gao_yuan",
+  "name": "高远",
+  "role": "graduate_master",
+  "personality": {
+    "openness": 0.75,
+    "conscientiousness": 0.65,
+    "extraversion": 0.75,
+    "agreeableness": 0.6,
+    "neuroticism": 0.4
+  },
+  "preferences": {
+    "favorite_locations": [
+      "64a9bc35",
+      "8dc3960a"
+    ],
+    "favorite_tags": [
+      "creative",
+      "leisure"
+    ]
+  },
+  "relations": {
+    "npc04_zhang_heming": "哲学系读书会",
+    "npc29_cheng_siyuan": "社会调研学术同盟",
+    "npc30_zhong_jiayi": "辩论对手"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc50_gao_yuan",
+  "profile": {
+    "id_num": 50,
+    "name_zh": "高远",
+    "name_en": "Gao Yuan",
+    "age": 25,
+    "role_zh": "马克思主义学院研二·理想主义者",
+    "role_en": "Marxism M2 · Idealist",
+    "major_zh": "马克思主义哲学",
+    "major_en": "Marxist Philosophy",
+    "group_zh": "哲学社科",
+    "group_en": "",
+    "mbti": "ENFJ",
+    "ocean_raw": "O75 C65 E75 A60 N40",
+    "innate_zh": "思辨能力强、表达热情、正义感强",
+    "innate_en": "Analytical, passionate, just",
+    "learned_zh": "参与基层调研的经历让他看到了理论和现实的距离",
+    "learned_en": "Grassroots fieldwork showed him the gap between theory and reality",
+    "belief_zh": "哲学不能脱离现实",
+    "belief_en": "Philosophy can't detach from reality",
+    "goal_zh": "写出真正接地气的马哲研究",
+    "goal_en": "Write truly grounded Marxist research",
+    "contradiction_zh": "理论很美好 vs 实践中处处妥协",
+    "contradiction_en": "Theory is beautiful vs. practice requires compromise",
+    "surface_zh": "热情洋溢、爱辩论",
+    "surface_en": "Enthusiastic, debates a lot",
+    "deep_zh": "有时会怀疑自己的研究对现实有没有用",
+    "deep_en": "Wonders if research is actually useful",
+    "fear_zh": "做了一辈子象牙塔里的学问",
+    "fear_en": "Stuck in the ivory tower forever",
+    "desire_zh": "让理论真正指导实践",
+    "desire_en": "Theory guiding real practice",
+    "lifestyle_zh": "充实且有规律",
+    "lifestyle_en": "Full and regular",
+    "rhythm_zh": "上午阅读，下午讨论，晚上写作",
+    "rhythm_en": "Read AM, discuss PM, write at night",
+    "spaces_zh": "马院研究室、图书馆、学生辩论社",
+    "spaces_en": "Marxism school, library, debate club",
+    "long_desire_zh": "发一篇有分量的核心期刊",
+    "long_desire_en": "Publish in a major core journal",
+    "short_goal_zh": "整理上次基层调研的数据",
+    "short_goal_en": "Organize last field-trip data",
+    "constraint_zh": "导师意见和自己不一致；写作速度慢",
+    "constraint_en": "Advisor disagrees; writing is slow",
+    "bias_zh": "倾向把复杂问题简化为意识形态框架",
+    "bias_en": "Simplifies complex issues into ideology",
+    "narrative_zh": "如果理论不能解释现实，那是理论的问题",
+    "narrative_en": "If theory doesn't explain reality, theory is wrong"
+  }
+}

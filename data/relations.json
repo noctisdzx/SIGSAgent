@@ -1,0 +1,1234 @@
+{
+  "edges": [
+    {
+      "source": "npc01_lin_xiaowei",
+      "target": "npc06_he_yunshu",
+      "label_zh": "同门学姐妹",
+      "label_en": "Senior/junior from same advisor",
+      "label": "同门学姐妹",
+      "color": "#4FC3F7",
+      "weight": 0.78,
+      "tone": "focused"
+    },
+    {
+      "source": "npc01_lin_xiaowei",
+      "target": "npc33_li_huimin",
+      "label_zh": "师生·受指导",
+      "label_en": "Teacher-student · mentored",
+      "label": "师生·受指导",
+      "color": "#AB47BC",
+      "weight": 0.82,
+      "tone": "focused"
+    },
+    {
+      "source": "npc06_he_yunshu",
+      "target": "npc33_li_huimin",
+      "label_zh": "师生·考研指导",
+      "label_en": "Grad-exam mentorship",
+      "label": "师生·考研指导",
+      "color": "#AB47BC",
+      "weight": 0.82,
+      "tone": "focused"
+    },
+    {
+      "source": "npc01_lin_xiaowei",
+      "target": "npc56_wen_wanru",
+      "label_zh": "校报同事+文友",
+      "label_en": "Newspaper colleagues & writing friends",
+      "label": "校报同事+文友",
+      "color": "#4FC3F7",
+      "weight": 0.78,
+      "tone": "focused"
+    },
+    {
+      "source": "npc56_wen_wanru",
+      "target": "npc33_li_huimin",
+      "label_zh": "选修课师生",
+      "label_en": "Elective course teacher-student",
+      "label": "选修课师生",
+      "color": "#AB47BC",
+      "weight": 0.82,
+      "tone": "focused"
+    },
+    {
+      "source": "npc02_chen_yuanhang",
+      "target": "npc34_wang_jianguo",
+      "label_zh": "导师-研究生",
+      "label_en": "Advisor - Grad student",
+      "label": "导师-研究生",
+      "color": "#AB47BC",
+      "weight": 0.82,
+      "tone": "focused"
+    },
+    {
+      "source": "npc08_xu_qinglan",
+      "target": "npc34_wang_jianguo",
+      "label_zh": "导师-研究生",
+      "label_en": "Advisor - Grad student",
+      "label": "导师-研究生",
+      "color": "#AB47BC",
+      "weight": 0.82,
+      "tone": "focused"
+    },
+    {
+      "source": "npc10_wu_ruolin",
+      "target": "npc34_wang_jianguo",
+      "label_zh": "导师-研究生",
+      "label_en": "Advisor - Grad student",
+      "label": "导师-研究生",
+      "color": "#AB47BC",
+      "weight": 0.82,
+      "tone": "focused"
+    },
+    {
+      "source": "npc02_chen_yuanhang",
+      "target": "npc08_xu_qinglan",
+      "label_zh": "实验室同门·暗中竞争",
+      "label_en": "Lab peers · subtle rivalry",
+      "label": "实验室同门·暗中竞争",
+      "color": "#FF7043",
+      "weight": 0.65,
+      "tone": "tense"
+    },
+    {
+      "source": "npc02_chen_yuanhang",
+      "target": "npc10_wu_ruolin",
+      "label_zh": "实验室同门·互助",
+      "label_en": "Lab peers · mutual help",
+      "label": "实验室同门·互助",
+      "color": "#4FC3F7",
+      "weight": 0.78,
+      "tone": "focused"
+    },
+    {
+      "source": "npc07_shen_yifan",
+      "target": "npc11_zheng_haoyu",
+      "label_zh": "室友",
+      "label_en": "Roommates",
+      "label": "室友",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc07_shen_yifan",
+      "target": "npc09_han_zimo",
+      "label_zh": "技术崇拜",
+      "label_en": "Tech idolization",
+      "label": "技术崇拜",
+      "color": "#FFD54F",
+      "weight": 0.6,
+      "tone": "curious"
+    },
+    {
+      "source": "npc09_han_zimo",
+      "target": "npc11_zheng_haoyu",
+      "label_zh": "同级朋友",
+      "label_en": "Peer friends",
+      "label": "同级朋友",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc07_shen_yifan",
+      "target": "npc02_chen_yuanhang",
+      "label_zh": "请教学长",
+      "label_en": "Asking a senior",
+      "label": "请教学长",
+      "color": "#FFD54F",
+      "weight": 0.6,
+      "tone": "curious"
+    },
+    {
+      "source": "npc08_xu_qinglan",
+      "target": "npc10_wu_ruolin",
+      "label_zh": "同门·微妙竞争",
+      "label_en": "Same lab · subtle rivalry",
+      "label": "同门·微妙竞争",
+      "color": "#FF7043",
+      "weight": 0.65,
+      "tone": "tense"
+    },
+    {
+      "source": "npc12_liu_sihan",
+      "target": "npc10_wu_ruolin",
+      "label_zh": "答疑学妹",
+      "label_en": "Tutoring junior",
+      "label": "答疑学妹",
+      "color": "#4FC3F7",
+      "weight": 0.78,
+      "tone": "focused"
+    },
+    {
+      "source": "npc12_liu_sihan",
+      "target": "npc27_he_jiaqi",
+      "label_zh": "跨专业好友·设计兴趣",
+      "label_en": "Cross-major friend · design interest",
+      "label": "跨专业好友·设计兴趣",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc09_han_zimo",
+      "target": "npc19_sun_yuetong",
+      "label_zh": "创业合伙人",
+      "label_en": "Startup co-founders",
+      "label": "创业合伙人",
+      "color": "#FF8A65",
+      "weight": 0.74,
+      "tone": "decisive"
+    },
+    {
+      "source": "npc09_han_zimo",
+      "target": "npc28_xu_jiaming",
+      "label_zh": "内容合作",
+      "label_en": "Content collaboration",
+      "label": "内容合作",
+      "color": "#FF8A65",
+      "weight": 0.74,
+      "tone": "decisive"
+    },
+    {
+      "source": "npc03_su_yutong",
+      "target": "npc13_tang_yichen",
+      "label_zh": "同门竞赛搭档",
+      "label_en": "Competition partners",
+      "label": "同门竞赛搭档",
+      "color": "#4FC3F7",
+      "weight": 0.78,
+      "tone": "focused"
+    },
+    {
+      "source": "npc03_su_yutong",
+      "target": "npc14_jiang_yuyan",
+      "label_zh": "工作室邻桌",
+      "label_en": "Studio desk neighbors",
+      "label": "工作室邻桌",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc03_su_yutong",
+      "target": "npc15_ma_tianxiang",
+      "label_zh": "社团认识",
+      "label_en": "Met via club",
+      "label": "社团认识",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc13_tang_yichen",
+      "target": "npc36_zhang_weimin",
+      "label_zh": "导师-毕设指导",
+      "label_en": "Thesis advisor",
+      "label": "导师-毕设指导",
+      "color": "#AB47BC",
+      "weight": 0.82,
+      "tone": "focused"
+    },
+    {
+      "source": "npc14_jiang_yuyan",
+      "target": "npc36_zhang_weimin",
+      "label_zh": "课程师生",
+      "label_en": "Course teacher-student",
+      "label": "课程师生",
+      "color": "#AB47BC",
+      "weight": 0.82,
+      "tone": "focused"
+    },
+    {
+      "source": "npc03_su_yutong",
+      "target": "npc36_zhang_weimin",
+      "label_zh": "竞赛指导师生",
+      "label_en": "Competition mentor-student",
+      "label": "竞赛指导师生",
+      "color": "#AB47BC",
+      "weight": 0.82,
+      "tone": "focused"
+    },
+    {
+      "source": "npc16_lu_xiaoman",
+      "target": "npc36_zhang_weimin",
+      "label_zh": "研究生-导师",
+      "label_en": "Grad student - Advisor",
+      "label": "研究生-导师",
+      "color": "#AB47BC",
+      "weight": 0.82,
+      "tone": "focused"
+    },
+    {
+      "source": "npc16_lu_xiaoman",
+      "target": "npc52_tian_zirui",
+      "label_zh": "环保理念同盟",
+      "label_en": "Eco-idealism allies",
+      "label": "环保理念同盟",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc13_tang_yichen",
+      "target": "npc14_jiang_yuyan",
+      "label_zh": "工作室好友",
+      "label_en": "Studio friends",
+      "label": "工作室好友",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc15_ma_tianxiang",
+      "target": "npc17_wang_siyao",
+      "label_zh": "学生会同事",
+      "label_en": "Student union colleagues",
+      "label": "学生会同事",
+      "color": "#4FC3F7",
+      "weight": 0.78,
+      "tone": "focused"
+    },
+    {
+      "source": "npc43_jiang_haotian",
+      "target": "npc13_tang_yichen",
+      "label_zh": "学长崇拜",
+      "label_en": "Senior admiration",
+      "label": "学长崇拜",
+      "color": "#FFD54F",
+      "weight": 0.6,
+      "tone": "curious"
+    },
+    {
+      "source": "npc43_jiang_haotian",
+      "target": "npc03_su_yutong",
+      "label_zh": "请教学姐",
+      "label_en": "Asking a senior (female)",
+      "label": "请教学姐",
+      "color": "#FFD54F",
+      "weight": 0.6,
+      "tone": "curious"
+    },
+    {
+      "source": "npc17_wang_siyao",
+      "target": "npc18_yang_mingzhe",
+      "label_zh": "院内认识",
+      "label_en": "Same college acquaintance",
+      "label": "院内认识",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc17_wang_siyao",
+      "target": "npc35_zhao_lihua",
+      "label_zh": "辅导员管辖",
+      "label_en": "Under counselor's charge",
+      "label": "辅导员管辖",
+      "color": "#AB47BC",
+      "weight": 0.82,
+      "tone": "focused"
+    },
+    {
+      "source": "npc17_wang_siyao",
+      "target": "npc20_chen_zhiruo",
+      "label_zh": "同院不同圈",
+      "label_en": "Same college, different circle",
+      "label": "同院不同圈",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc18_yang_mingzhe",
+      "target": "npc19_sun_yuetong",
+      "label_zh": "商业观点交锋",
+      "label_en": "Business-view clash",
+      "label": "商业观点交锋",
+      "color": "#FF7043",
+      "weight": 0.65,
+      "tone": "tense"
+    },
+    {
+      "source": "npc19_sun_yuetong",
+      "target": "npc41_wei_zihan",
+      "label_zh": "创业圈朋友",
+      "label_en": "Startup circle friends",
+      "label": "创业圈朋友",
+      "color": "#FF8A65",
+      "weight": 0.74,
+      "tone": "decisive"
+    },
+    {
+      "source": "npc20_chen_zhiruo",
+      "target": "npc35_zhao_lihua",
+      "label_zh": "辅导员关注对象",
+      "label_en": "On counselor's watch list",
+      "label": "辅导员关注对象",
+      "color": "#AB47BC",
+      "weight": 0.82,
+      "tone": "focused"
+    },
+    {
+      "source": "npc21_li_moran",
+      "target": "npc04_zhang_heming",
+      "label_zh": "偶尔在湖边相遇·思想交流",
+      "label_en": "Occasional lakeside meets · exchange of ideas",
+      "label": "偶尔在湖边相遇·思想交流",
+      "color": "#E0E0E0",
+      "weight": 0.4,
+      "tone": "casual"
+    },
+    {
+      "source": "npc21_li_moran",
+      "target": "npc23_huang_zixuan",
+      "label_zh": "理科天才联盟",
+      "label_en": "Science-genius alliance",
+      "label": "理科天才联盟",
+      "color": "#4FC3F7",
+      "weight": 0.78,
+      "tone": "focused"
+    },
+    {
+      "source": "npc22_zhou_xiaomeng",
+      "target": "npc35_zhao_lihua",
+      "label_zh": "心理危机转介合作",
+      "label_en": "Crisis referral cooperation",
+      "label": "心理危机转介合作",
+      "color": "#AB47BC",
+      "weight": 0.82,
+      "tone": "focused"
+    },
+    {
+      "source": "npc22_zhou_xiaomeng",
+      "target": "npc40_sun_fang",
+      "label_zh": "心理+医疗联动",
+      "label_en": "Psych + medical coordination",
+      "label": "心理+医疗联动",
+      "color": "#AB47BC",
+      "weight": 0.82,
+      "tone": "focused"
+    },
+    {
+      "source": "npc24_zhao_xinyi",
+      "target": "npc46_qin_ling",
+      "label_zh": "理学院同楼·偶尔聊天",
+      "label_en": "Science building neighbors · occasional chat",
+      "label": "理学院同楼·偶尔聊天",
+      "color": "#E0E0E0",
+      "weight": 0.4,
+      "tone": "casual"
+    },
+    {
+      "source": "npc44_ye_zhiqiu",
+      "target": "npc04_zhang_heming",
+      "label_zh": "学术讨论伙伴",
+      "label_en": "Academic discussion partners",
+      "label": "学术讨论伙伴",
+      "color": "#4FC3F7",
+      "weight": 0.78,
+      "tone": "focused"
+    },
+    {
+      "source": "npc44_ye_zhiqiu",
+      "target": "npc21_li_moran",
+      "label_zh": "跨系旁听认识",
+      "label_en": "Met via cross-dept audit",
+      "label": "跨系旁听认识",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc44_ye_zhiqiu",
+      "target": "npc60_tao_ran",
+      "label_zh": "科学哲学同好",
+      "label_en": "Philosophy-of-science peers",
+      "label": "科学哲学同好",
+      "color": "#4FC3F7",
+      "weight": 0.78,
+      "tone": "focused"
+    },
+    {
+      "source": "npc25_lin_yuxuan",
+      "target": "npc47_bai_lu",
+      "label_zh": "艺术系姐妹",
+      "label_en": "Arts-school sisters",
+      "label": "艺术系姐妹",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc26_zhao_tianlei",
+      "target": "npc11_zheng_haoyu",
+      "label_zh": "体育+电竞跨界好友",
+      "label_en": "Sports × esports crossover friends",
+      "label": "体育+电竞跨界好友",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc27_he_jiaqi",
+      "target": "npc14_jiang_yuyan",
+      "label_zh": "画画同好",
+      "label_en": "Painting peers",
+      "label": "画画同好",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc27_he_jiaqi",
+      "target": "npc28_xu_jiaming",
+      "label_zh": "内容创作交流",
+      "label_en": "Creator-community exchange",
+      "label": "内容创作交流",
+      "color": "#FF8A65",
+      "weight": 0.74,
+      "tone": "decisive"
+    },
+    {
+      "source": "npc28_xu_jiaming",
+      "target": "npc03_su_yutong",
+      "label_zh": "拍视频合作",
+      "label_en": "Video shooting collab",
+      "label": "拍视频合作",
+      "color": "#FF8A65",
+      "weight": 0.74,
+      "tone": "decisive"
+    },
+    {
+      "source": "npc47_bai_lu",
+      "target": "npc25_lin_yuxuan",
+      "label_zh": "排练厅邻居",
+      "label_en": "Rehearsal-room neighbors",
+      "label": "排练厅邻居",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc29_cheng_siyuan",
+      "target": "npc04_zhang_heming",
+      "label_zh": "博士同读书会",
+      "label_en": "PhD reading group",
+      "label": "博士同读书会",
+      "color": "#4FC3F7",
+      "weight": 0.78,
+      "tone": "focused"
+    },
+    {
+      "source": "npc29_cheng_siyuan",
+      "target": "npc32_luo_chenxi",
+      "label_zh": "采访合作",
+      "label_en": "Interview collaboration",
+      "label": "采访合作",
+      "color": "#FF8A65",
+      "weight": 0.74,
+      "tone": "decisive"
+    },
+    {
+      "source": "npc30_zhong_jiayi",
+      "target": "npc17_wang_siyao",
+      "label_zh": "辩论赛认识",
+      "label_en": "Met in debate competition",
+      "label": "辩论赛认识",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc31_xie_anran",
+      "target": "npc38_liu_zhengqing",
+      "label_zh": "图书馆常客·被认识",
+      "label_en": "Library regular · recognized",
+      "label": "图书馆常客·被认识",
+      "color": "#E0E0E0",
+      "weight": 0.4,
+      "tone": "casual"
+    },
+    {
+      "source": "npc32_luo_chenxi",
+      "target": "npc01_lin_xiaowei",
+      "label_zh": "校园媒体合作",
+      "label_en": "Campus media collaboration",
+      "label": "校园媒体合作",
+      "color": "#FF8A65",
+      "weight": 0.74,
+      "tone": "decisive"
+    },
+    {
+      "source": "npc32_luo_chenxi",
+      "target": "npc28_xu_jiaming",
+      "label_zh": "媒体圈同行",
+      "label_en": "Media-circle peers",
+      "label": "媒体圈同行",
+      "color": "#FF8A65",
+      "weight": 0.74,
+      "tone": "decisive"
+    },
+    {
+      "source": "npc50_gao_yuan",
+      "target": "npc04_zhang_heming",
+      "label_zh": "哲学系读书会",
+      "label_en": "Philosophy reading group",
+      "label": "哲学系读书会",
+      "color": "#4FC3F7",
+      "weight": 0.78,
+      "tone": "focused"
+    },
+    {
+      "source": "npc50_gao_yuan",
+      "target": "npc29_cheng_siyuan",
+      "label_zh": "社会调研合作",
+      "label_en": "Social-research collaboration",
+      "label": "社会调研合作",
+      "color": "#FF8A65",
+      "weight": 0.74,
+      "tone": "decisive"
+    },
+    {
+      "source": "npc60_tao_ran",
+      "target": "npc04_zhang_heming",
+      "label_zh": "哲学系同门",
+      "label_en": "Philosophy cohort",
+      "label": "哲学系同门",
+      "color": "#4FC3F7",
+      "weight": 0.78,
+      "tone": "focused"
+    },
+    {
+      "source": "npc60_tao_ran",
+      "target": "npc02_chen_yuanhang",
+      "label_zh": "前程序员·偶尔帮debug",
+      "label_en": "Ex-programmer · occasional debug help",
+      "label": "前程序员·偶尔帮debug",
+      "color": "#E0E0E0",
+      "weight": 0.4,
+      "tone": "casual"
+    },
+    {
+      "source": "npc60_tao_ran",
+      "target": "npc44_ye_zhiqiu",
+      "label_zh": "科学哲学同好",
+      "label_en": "Philosophy-of-science peers",
+      "label": "科学哲学同好",
+      "color": "#4FC3F7",
+      "weight": 0.78,
+      "tone": "focused"
+    },
+    {
+      "source": "npc33_li_huimin",
+      "target": "npc34_wang_jianguo",
+      "label_zh": "教授同事·偶尔碰面",
+      "label_en": "Faculty colleagues · occasional meets",
+      "label": "教授同事·偶尔碰面",
+      "color": "#E0E0E0",
+      "weight": 0.4,
+      "tone": "casual"
+    },
+    {
+      "source": "npc33_li_huimin",
+      "target": "npc36_zhang_weimin",
+      "label_zh": "教授同事·评审委员会",
+      "label_en": "Faculty colleagues · review committee",
+      "label": "教授同事·评审委员会",
+      "color": "#E0E0E0",
+      "weight": 0.4,
+      "tone": "casual"
+    },
+    {
+      "source": "npc35_zhao_lihua",
+      "target": "npc22_zhou_xiaomeng",
+      "label_zh": "心理危机合作",
+      "label_en": "Crisis cooperation",
+      "label": "心理危机合作",
+      "color": "#AB47BC",
+      "weight": 0.82,
+      "tone": "focused"
+    },
+    {
+      "source": "npc35_zhao_lihua",
+      "target": "npc40_sun_fang",
+      "label_zh": "学生健康联动",
+      "label_en": "Student health coordination",
+      "label": "学生健康联动",
+      "color": "#AB47BC",
+      "weight": 0.82,
+      "tone": "focused"
+    },
+    {
+      "source": "npc37_he_min",
+      "target": "npc38_liu_zhengqing",
+      "label_zh": "后勤老同事",
+      "label_en": "Veteran staff colleagues",
+      "label": "后勤老同事",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc37_he_min",
+      "target": "npc39_chen_zhigang",
+      "label_zh": "后勤同事",
+      "label_en": "Staff colleagues",
+      "label": "后勤同事",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc38_liu_zhengqing",
+      "target": "npc39_chen_zhigang",
+      "label_zh": "后勤同事",
+      "label_en": "Staff colleagues",
+      "label": "后勤同事",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc39_chen_zhigang",
+      "target": "npc40_sun_fang",
+      "label_zh": "校园安全协调",
+      "label_en": "Campus safety coordination",
+      "label": "校园安全协调",
+      "color": "#AB47BC",
+      "weight": 0.82,
+      "tone": "focused"
+    },
+    {
+      "source": "npc37_he_min",
+      "target": "npc03_su_yutong",
+      "label_zh": "食堂常客·被记住",
+      "label_en": "Cafeteria regular · remembered",
+      "label": "食堂常客·被记住",
+      "color": "#E0E0E0",
+      "weight": 0.4,
+      "tone": "casual"
+    },
+    {
+      "source": "npc37_he_min",
+      "target": "npc26_zhao_tianlei",
+      "label_zh": "食堂常客·多打一勺",
+      "label_en": "Cafeteria regular · extra ladle",
+      "label": "食堂常客·多打一勺",
+      "color": "#E0E0E0",
+      "weight": 0.4,
+      "tone": "casual"
+    },
+    {
+      "source": "npc37_he_min",
+      "target": "npc53_yin_xiaoya",
+      "label_zh": "美食博主经常来拍",
+      "label_en": "Food blogger shoots here often",
+      "label": "美食博主经常来拍",
+      "color": "#E0E0E0",
+      "weight": 0.4,
+      "tone": "casual"
+    },
+    {
+      "source": "npc38_liu_zhengqing",
+      "target": "npc06_he_yunshu",
+      "label_zh": "考研区常驻·被关心",
+      "label_en": "Grad-exam zone regular · cared for",
+      "label": "考研区常驻·被关心",
+      "color": "#E0E0E0",
+      "weight": 0.4,
+      "tone": "casual"
+    },
+    {
+      "source": "npc38_liu_zhengqing",
+      "target": "npc31_xie_anran",
+      "label_zh": "借古籍交流",
+      "label_en": "Ancient-books exchange",
+      "label": "借古籍交流",
+      "color": "#E0E0E0",
+      "weight": 0.4,
+      "tone": "casual"
+    },
+    {
+      "source": "npc38_liu_zhengqing",
+      "target": "npc21_li_moran",
+      "label_zh": "深夜图书馆相遇",
+      "label_en": "Late-night library meets",
+      "label": "深夜图书馆相遇",
+      "color": "#E0E0E0",
+      "weight": 0.4,
+      "tone": "casual"
+    },
+    {
+      "source": "npc39_chen_zhigang",
+      "target": "npc26_zhao_tianlei",
+      "label_zh": "运动会安保认识",
+      "label_en": "Met at sports-day security",
+      "label": "运动会安保认识",
+      "color": "#E0E0E0",
+      "weight": 0.4,
+      "tone": "casual"
+    },
+    {
+      "source": "npc40_sun_fang",
+      "target": "npc22_zhou_xiaomeng",
+      "label_zh": "心理转介合作",
+      "label_en": "Psych-referral cooperation",
+      "label": "心理转介合作",
+      "color": "#AB47BC",
+      "weight": 0.82,
+      "tone": "focused"
+    },
+    {
+      "source": "npc40_sun_fang",
+      "target": "npc45_xia_qing",
+      "label_zh": "见习带教",
+      "label_en": "Clinical teaching",
+      "label": "见习带教",
+      "color": "#AB47BC",
+      "weight": 0.82,
+      "tone": "focused"
+    },
+    {
+      "source": "npc40_sun_fang",
+      "target": "npc47_bai_lu",
+      "label_zh": "舞蹈伤病常来看",
+      "label_en": "Dance-injury frequent visitor",
+      "label": "舞蹈伤病常来看",
+      "color": "#E0E0E0",
+      "weight": 0.4,
+      "tone": "casual"
+    },
+    {
+      "source": "npc01_lin_xiaowei",
+      "target": "npc22_zhou_xiaomeng",
+      "label_zh": "文学+心理跨界好友",
+      "label_en": "Lit × psych crossover friends",
+      "label": "文学+心理跨界好友",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc01_lin_xiaowei",
+      "target": "npc29_cheng_siyuan",
+      "label_zh": "写作和调研的灵感交换",
+      "label_en": "Writing & fieldwork inspiration exchange",
+      "label": "写作和调研的灵感交换",
+      "color": "#4FC3F7",
+      "weight": 0.78,
+      "tone": "focused"
+    },
+    {
+      "source": "npc02_chen_yuanhang",
+      "target": "npc59_guo_yiming",
+      "label_zh": "技术交流·帮调AI模型",
+      "label_en": "Tech exchange · helps tune AI model",
+      "label": "技术交流·帮调AI模型",
+      "color": "#4FC3F7",
+      "weight": 0.78,
+      "tone": "focused"
+    },
+    {
+      "source": "npc02_chen_yuanhang",
+      "target": "npc60_tao_ran",
+      "label_zh": "AI技术+AI伦理讨论",
+      "label_en": "AI tech + AI ethics discussion",
+      "label": "AI技术+AI伦理讨论",
+      "color": "#4FC3F7",
+      "weight": 0.78,
+      "tone": "focused"
+    },
+    {
+      "source": "npc03_su_yutong",
+      "target": "npc16_lu_xiaoman",
+      "label_zh": "可持续建筑理念碰撞",
+      "label_en": "Sustainable-arch ideas clash",
+      "label": "可持续建筑理念碰撞",
+      "color": "#4FC3F7",
+      "weight": 0.78,
+      "tone": "focused"
+    },
+    {
+      "source": "npc05_fang_zhiqing",
+      "target": "npc49_liu_ruyan",
+      "label_zh": "语言学习互助",
+      "label_en": "Language learning mutual help",
+      "label": "语言学习互助",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc05_fang_zhiqing",
+      "target": "npc32_luo_chenxi",
+      "label_zh": "校园活动合作",
+      "label_en": "Campus-event collaboration",
+      "label": "校园活动合作",
+      "color": "#FF8A65",
+      "weight": 0.74,
+      "tone": "decisive"
+    },
+    {
+      "source": "npc07_shen_yifan",
+      "target": "npc48_long_feiyu",
+      "label_zh": "工科男宿舍串门",
+      "label_en": "Engineering-dorm visits",
+      "label": "工科男宿舍串门",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc08_xu_qinglan",
+      "target": "npc57_yue_pengcheng",
+      "label_zh": "跨组技术交流",
+      "label_en": "Cross-lab tech exchange",
+      "label": "跨组技术交流",
+      "color": "#4FC3F7",
+      "weight": 0.78,
+      "tone": "focused"
+    },
+    {
+      "source": "npc09_han_zimo",
+      "target": "npc18_yang_mingzhe",
+      "label_zh": "商业思维碰撞",
+      "label_en": "Business-mindset clash",
+      "label": "商业思维碰撞",
+      "color": "#FF7043",
+      "weight": 0.65,
+      "tone": "tense"
+    },
+    {
+      "source": "npc10_wu_ruolin",
+      "target": "npc49_liu_ruyan",
+      "label_zh": "NLP+日语翻译讨论",
+      "label_en": "NLP × Japanese-translation talks",
+      "label": "NLP+日语翻译讨论",
+      "color": "#4FC3F7",
+      "weight": 0.78,
+      "tone": "focused"
+    },
+    {
+      "source": "npc11_zheng_haoyu",
+      "target": "npc26_zhao_tianlei",
+      "label_zh": "体育圈好友",
+      "label_en": "Sports-circle friends",
+      "label": "体育圈好友",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc13_tang_yichen",
+      "target": "npc57_yue_pengcheng",
+      "label_zh": "跨学科结构讨论",
+      "label_en": "Interdisciplinary structure talks",
+      "label": "跨学科结构讨论",
+      "color": "#4FC3F7",
+      "weight": 0.78,
+      "tone": "focused"
+    },
+    {
+      "source": "npc14_jiang_yuyan",
+      "target": "npc47_bai_lu",
+      "label_zh": "艺术审美同好",
+      "label_en": "Art-aesthetics peers",
+      "label": "艺术审美同好",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc15_ma_tianxiang",
+      "target": "npc18_yang_mingzhe",
+      "label_zh": "学生干部圈子",
+      "label_en": "Student-leader circle",
+      "label": "学生干部圈子",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc16_lu_xiaoman",
+      "target": "npc52_tian_zirui",
+      "label_zh": "环保同盟",
+      "label_en": "Eco-alliance",
+      "label": "环保同盟",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc19_sun_yuetong",
+      "target": "npc54_chang_le",
+      "label_zh": "创业者互相打气",
+      "label_en": "Entrepreneurs cheer each other on",
+      "label": "创业者互相打气",
+      "color": "#FF8A65",
+      "weight": 0.74,
+      "tone": "decisive"
+    },
+    {
+      "source": "npc20_chen_zhiruo",
+      "target": "npc06_he_yunshu",
+      "label_zh": "考试焦虑互相理解",
+      "label_en": "Exam-anxiety mutual understanding",
+      "label": "考试焦虑互相理解",
+      "color": "#E0E0E0",
+      "weight": 0.4,
+      "tone": "casual"
+    },
+    {
+      "source": "npc22_zhou_xiaomeng",
+      "target": "npc54_chang_le",
+      "label_zh": "心理学同专业",
+      "label_en": "Same psychology major",
+      "label": "心理学同专业",
+      "color": "#4FC3F7",
+      "weight": 0.78,
+      "tone": "focused"
+    },
+    {
+      "source": "npc23_huang_zixuan",
+      "target": "npc48_long_feiyu",
+      "label_zh": "理工科天才交流",
+      "label_en": "STEM prodigies exchange",
+      "label": "理工科天才交流",
+      "color": "#4FC3F7",
+      "weight": 0.78,
+      "tone": "focused"
+    },
+    {
+      "source": "npc25_lin_yuxuan",
+      "target": "npc01_lin_xiaowei",
+      "label_zh": "文艺圈好友",
+      "label_en": "Arts-circle friends",
+      "label": "文艺圈好友",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc27_he_jiaqi",
+      "target": "npc56_wen_wanru",
+      "label_zh": "插画+网文合作可能",
+      "label_en": "Possible illustration × web-novel collab",
+      "label": "插画+网文合作可能",
+      "color": "#FF8A65",
+      "weight": 0.74,
+      "tone": "decisive"
+    },
+    {
+      "source": "npc29_cheng_siyuan",
+      "target": "npc50_gao_yuan",
+      "label_zh": "社会调研学术同盟",
+      "label_en": "Social-research academic ally",
+      "label": "社会调研学术同盟",
+      "color": "#4FC3F7",
+      "weight": 0.78,
+      "tone": "focused"
+    },
+    {
+      "source": "npc30_zhong_jiayi",
+      "target": "npc50_gao_yuan",
+      "label_zh": "辩论对手",
+      "label_en": "Debate opponents",
+      "label": "辩论对手",
+      "color": "#FF7043",
+      "weight": 0.65,
+      "tone": "tense"
+    },
+    {
+      "source": "npc31_xie_anran",
+      "target": "npc42_fu_wanqing",
+      "label_zh": "传统文化同好",
+      "label_en": "Traditional-culture peers",
+      "label": "传统文化同好",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc32_luo_chenxi",
+      "target": "npc51_xu_anqi",
+      "label_zh": "志愿报道合作",
+      "label_en": "Volunteer-reporting collaboration",
+      "label": "志愿报道合作",
+      "color": "#FF8A65",
+      "weight": 0.74,
+      "tone": "decisive"
+    },
+    {
+      "source": "npc41_wei_zihan",
+      "target": "npc37_he_min",
+      "label_zh": "食堂常客·打工人默契",
+      "label_en": "Cafeteria regular · working-folk rapport",
+      "label": "食堂常客·打工人默契",
+      "color": "#E0E0E0",
+      "weight": 0.4,
+      "tone": "casual"
+    },
+    {
+      "source": "npc42_fu_wanqing",
+      "target": "npc46_qin_ling",
+      "label_zh": "野外采药和地质的交集",
+      "label_en": "Herb gathering × geology overlap",
+      "label": "野外采药和地质的交集",
+      "color": "#E0E0E0",
+      "weight": 0.4,
+      "tone": "casual"
+    },
+    {
+      "source": "npc43_jiang_haotian",
+      "target": "npc55_shi_lei",
+      "label_zh": "同为吃苦型学生·互相鼓励",
+      "label_en": "Both hardworking students · mutual encouragement",
+      "label": "同为吃苦型学生·互相鼓励",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc45_xia_qing",
+      "target": "npc58_song_qingxue",
+      "label_zh": "公共卫生+护理联动",
+      "label_en": "Public health × nursing coordination",
+      "label": "公共卫生+护理联动",
+      "color": "#4FC3F7",
+      "weight": 0.78,
+      "tone": "focused"
+    },
+    {
+      "source": "npc46_qin_ling",
+      "target": "npc52_tian_zirui",
+      "label_zh": "环境数据合作",
+      "label_en": "Environmental data collaboration",
+      "label": "环境数据合作",
+      "color": "#FF8A65",
+      "weight": 0.74,
+      "tone": "decisive"
+    },
+    {
+      "source": "npc48_long_feiyu",
+      "target": "npc59_guo_yiming",
+      "label_zh": "工科竞赛圈好友",
+      "label_en": "Engineering-contest circle friends",
+      "label": "工科竞赛圈好友",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc51_xu_anqi",
+      "target": "npc45_xia_qing",
+      "label_zh": "志愿+护理公益合作",
+      "label_en": "Volunteer × nursing charity collab",
+      "label": "志愿+护理公益合作",
+      "color": "#FF8A65",
+      "weight": 0.74,
+      "tone": "decisive"
+    },
+    {
+      "source": "npc53_yin_xiaoya",
+      "target": "npc37_he_min",
+      "label_zh": "美食同好·跨辈忘年交",
+      "label_en": "Food peers · cross-generation friendship",
+      "label": "美食同好·跨辈忘年交",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc54_chang_le",
+      "target": "npc22_zhou_xiaomeng",
+      "label_zh": "心理学同学",
+      "label_en": "Psychology classmates",
+      "label": "心理学同学",
+      "color": "#4FC3F7",
+      "weight": 0.78,
+      "tone": "focused"
+    },
+    {
+      "source": "npc55_shi_lei",
+      "target": "npc57_yue_pengcheng",
+      "label_zh": "实验室邻居·工科苦逼联盟",
+      "label_en": "Lab neighbors · engineering-grind alliance",
+      "label": "实验室邻居·工科苦逼联盟",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc56_wen_wanru",
+      "target": "npc49_liu_ruyan",
+      "label_zh": "二次元+网文交集",
+      "label_en": "Anime × web-novel overlap",
+      "label": "二次元+网文交集",
+      "color": "#66BB6A",
+      "weight": 0.7,
+      "tone": "warm"
+    },
+    {
+      "source": "npc01_lin_xiaowei",
+      "target": "npc04_zhang_heming",
+      "label_zh": "灵魂对话·微妙吸引",
+      "label_en": "Soul talks · subtle attraction",
+      "label": "灵魂对话·微妙吸引",
+      "color": "#E91E63",
+      "weight": 0.72,
+      "tone": "playful"
+    },
+    {
+      "source": "npc03_su_yutong",
+      "target": "npc13_tang_yichen",
+      "label_zh": "竞赛搭档·暧昧不明",
+      "label_en": "Contest partners · ambiguous chemistry",
+      "label": "竞赛搭档·暧昧不明",
+      "color": "#E91E63",
+      "weight": 0.72,
+      "tone": "playful"
+    },
+    {
+      "source": "npc07_shen_yifan",
+      "target": "npc12_liu_sihan",
+      "label_zh": "偶遇几次·有好感",
+      "label_en": "Few chance encounters · crush forming",
+      "label": "偶遇几次·有好感",
+      "color": "#E91E63",
+      "weight": 0.72,
+      "tone": "playful"
+    },
+    {
+      "source": "npc25_lin_yuxuan",
+      "target": "npc26_zhao_tianlei",
+      "label_zh": "音乐+体育·反差吸引",
+      "label_en": "Music × sports · opposites attract",
+      "label": "音乐+体育·反差吸引",
+      "color": "#E91E63",
+      "weight": 0.72,
+      "tone": "playful"
+    },
+    {
+      "source": "npc29_cheng_siyuan",
+      "target": "npc32_luo_chenxi",
+      "label_zh": "田野采访中的默契",
+      "label_en": "Fieldwork-interview chemistry",
+      "label": "田野采访中的默契",
+      "color": "#E91E63",
+      "weight": 0.72,
+      "tone": "playful"
+    },
+    {
+      "source": "npc44_ye_zhiqiu",
+      "target": "npc22_zhou_xiaomeng",
+      "label_zh": "深度对话后的特别感觉",
+      "label_en": "Special feeling after deep talks",
+      "label": "深度对话后的特别感觉",
+      "color": "#E91E63",
+      "weight": 0.72,
+      "tone": "playful"
+    }
+  ]
+}

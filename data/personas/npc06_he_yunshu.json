@@ -1,0 +1,80 @@
+{
+  "id": "npc06_he_yunshu",
+  "name": "贺云舒",
+  "role": "graduate_master",
+  "personality": {
+    "openness": 0.6,
+    "conscientiousness": 0.9,
+    "extraversion": 0.3,
+    "agreeableness": 0.7,
+    "neuroticism": 0.6
+  },
+  "preferences": {
+    "favorite_locations": [
+      "64a9bc35",
+      "9a49343c",
+      "438038e3"
+    ],
+    "favorite_tags": [
+      "creative",
+      "leisure",
+      "fitness"
+    ]
+  },
+  "relations": {
+    "npc01_lin_xiaowei": "同门学姐妹",
+    "npc33_li_huimin": "师生·考研指导",
+    "npc38_liu_zhengqing": "考研区常驻·被关心",
+    "npc20_chen_zhiruo": "考试焦虑互相理解"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc06_he_yunshu",
+  "profile": {
+    "id_num": 6,
+    "name_zh": "贺云舒",
+    "name_en": "He Yunshu",
+    "age": 22,
+    "role_zh": "文学院大四·考研党",
+    "role_en": "Lit Yr4 · Grad-Exam Grinder",
+    "major_zh": "比较文学",
+    "major_en": "Comparative Literature",
+    "group_zh": "文学院",
+    "group_en": "",
+    "mbti": "ISFJ",
+    "ocean_raw": "O60 C90 E30 A70 N60",
+    "innate_zh": "专注力强、情感细腻、抗压韧性好",
+    "innate_en": "Focused, emotionally delicate, resilient under pressure",
+    "learned_zh": "考研备战养成的极度自律和信息筛选能力",
+    "learned_en": "Extreme self-discipline and info-filtering from exam prep",
+    "belief_zh": "努力不一定成功，但不努力一定不行",
+    "belief_en": "Effort doesn't guarantee success, but no effort guarantees failure",
+    "goal_zh": "考上北大比较文学研究生",
+    "goal_en": "Get into PKU Comparative Literature",
+    "contradiction_zh": "对考研结果极度焦虑 vs 不愿意让任何人看出来",
+    "contradiction_en": "Extreme anxiety about results vs. unwilling to let anyone see it",
+    "surface_zh": "安静踏实、从不抱怨",
+    "surface_en": "Quiet, steady, never complains",
+    "deep_zh": "内心压力巨大，经常失眠",
+    "deep_en": "Huge inner pressure, frequent insomnia",
+    "fear_zh": "所有的努力最后白费",
+    "fear_en": "All the effort ending in waste",
+    "desire_zh": "给自己一个交代",
+    "desire_en": "Give herself closure",
+    "lifestyle_zh": "极度规律的考研作息",
+    "lifestyle_en": "Extremely regular grad-exam grind",
+    "rhythm_zh": "从早到晚都在学习，只在饭点短暂休息",
+    "rhythm_en": "Studying dawn to night, only breaks at meals",
+    "spaces_zh": "图书馆三楼考研区、食堂、宿舍",
+    "spaces_en": "Library 3F exam zone, canteen, dorm",
+    "long_desire_zh": "12月前把所有科目过完第三轮",
+    "long_desire_en": "Finish third pass of all subjects by December",
+    "short_goal_zh": "今天必须背完30个文学术语",
+    "short_goal_en": "Memorize 30 literary terms today",
+    "constraint_zh": "模拟考成绩不理想；室友打游戏影响休息",
+    "constraint_en": "Mock exam score unsatisfactory; gaming roommates disturb sleep",
+    "bias_zh": "倾向高估竞争对手的实力；低估自己的积累",
+    "bias_en": "Overestimates rivals; underestimates her accumulation",
+    "narrative_zh": "别人在玩的时候我在学，这就是我的优势",
+    "narrative_en": "While others play, I study - that's my edge"
+  }
+}

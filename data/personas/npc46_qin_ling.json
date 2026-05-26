@@ -1,0 +1,75 @@
+{
+  "id": "npc46_qin_ling",
+  "name": "秦岭",
+  "role": "undergraduate_science",
+  "personality": {
+    "openness": 0.8,
+    "conscientiousness": 0.65,
+    "extraversion": 0.45,
+    "agreeableness": 0.5,
+    "neuroticism": 0.25
+  },
+  "preferences": {
+    "favorite_locations": [
+      "3877431b"
+    ],
+    "favorite_tags": [
+      "study"
+    ]
+  },
+  "relations": {
+    "npc24_zhao_xinyi": "理学院同楼·偶尔聊天",
+    "npc42_fu_wanqing": "野外采药和地质的交集",
+    "npc52_tian_zirui": "环境数据合作"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc46_qin_ling",
+  "profile": {
+    "id_num": 46,
+    "name_zh": "秦岭",
+    "name_en": "Qin Ling",
+    "age": 27,
+    "role_zh": "地理系博三·野外调查狂",
+    "role_en": "Geography PhD Yr3 · Field Maniac",
+    "major_zh": "自然地理学",
+    "major_en": "Physical Geography",
+    "group_zh": "理学院",
+    "group_en": "",
+    "mbti": "ISTP",
+    "ocean_raw": "O80 C65 E45 A50 N25",
+    "innate_zh": "体力好、方向感极强、热爱户外",
+    "innate_en": "Stamina, orientation, outdoorsman",
+    "learned_zh": "多次野外考察训练出的地质判断力和野外生存技能",
+    "learned_en": "Geological judgment and survival from field trips",
+    "belief_zh": "地球是最好的实验室",
+    "belief_en": "Earth is the best lab",
+    "goal_zh": "完成博士论文·去地调所工作",
+    "goal_en": "Finish dissertation, join geology institute",
+    "contradiction_zh": "热爱野外 vs 写论文需要长时间坐在办公室",
+    "contradiction_en": "Loves the field vs. writing needs a desk",
+    "surface_zh": "粗犷朴素、不拘小节",
+    "surface_en": "Rugged, easygoing",
+    "deep_zh": "在大自然面前会变得很柔软",
+    "deep_en": "Goes soft in front of nature",
+    "fear_zh": "被困在办公室一辈子",
+    "fear_en": "Trapped in an office forever",
+    "desire_zh": "一辈子和大自然打交道",
+    "desire_en": "A life with nature",
+    "lifestyle_zh": "在校和野外两种模式切换",
+    "lifestyle_en": "School/field dual mode",
+    "rhythm_zh": "在校时规律，出野外时随地形走",
+    "rhythm_en": "Regular on campus, follows terrain on field",
+    "spaces_zh": "地理系实验室、校园各种地质露头、办公室",
+    "spaces_en": "Geography lab, field outcrops, office",
+    "long_desire_zh": "这个月完成一章论文",
+    "long_desire_en": "Finish a chapter this month",
+    "short_goal_zh": "处理上次野外采集的土壤样本",
+    "short_goal_en": "Process last trip's soil samples",
+    "constraint_zh": "样本处理设备排队；论文进度严重落后",
+    "constraint_en": "Equipment queue; thesis lagging",
+    "bias_zh": "倾向花太多时间在样本处理上而拖延写作",
+    "bias_en": "Over-invests in sample processing, delays writing",
+    "narrative_zh": "先把数据做扎实，论文自然就写出来了",
+    "narrative_en": "Solid data first, paper follows"
+  }
+}

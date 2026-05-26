@@ -1,0 +1,78 @@
+{
+  "id": "npc39_chen_zhigang",
+  "name": "陈志刚",
+  "role": "logistics_staff",
+  "personality": {
+    "openness": 0.3,
+    "conscientiousness": 0.9,
+    "extraversion": 0.6,
+    "agreeableness": 0.45,
+    "neuroticism": 0.3
+  },
+  "preferences": {
+    "favorite_locations": [
+      "438038e3"
+    ],
+    "favorite_tags": [
+      "daily life",
+      "leisure",
+      "fitness"
+    ]
+  },
+  "relations": {
+    "npc37_he_min": "后勤同事",
+    "npc38_liu_zhengqing": "后勤同事",
+    "npc40_sun_fang": "校园安全协调",
+    "npc26_zhao_tianlei": "运动会安保认识"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc39_chen_zhigang",
+  "profile": {
+    "id_num": 39,
+    "name_zh": "陈志刚",
+    "name_en": "Chen Zhigang",
+    "age": 42,
+    "role_zh": "保卫处处长",
+    "role_en": "Security Chief",
+    "major_zh": "",
+    "major_en": "",
+    "group_zh": "后勤",
+    "group_en": "",
+    "mbti": "ESTJ",
+    "ocean_raw": "O30 C90 E60 A45 N30",
+    "innate_zh": "警觉性高、执行力强、责任心重",
+    "innate_en": "Alert, disciplined, responsible",
+    "learned_zh": "退伍军人背景带来的纪律性和危机处理能力",
+    "learned_en": "Military background · discipline and crisis handling",
+    "belief_zh": "安全是一切活动的前提",
+    "belief_en": "Safety precedes everything",
+    "goal_zh": "校园零重大安全事故",
+    "goal_en": "Zero major incidents on campus",
+    "contradiction_zh": "想保护学生 vs 学生觉得管太多",
+    "contradiction_en": "Wants to protect students vs. students find him too restrictive",
+    "surface_zh": "严肃不苟言笑",
+    "surface_en": "Serious, unsmiling",
+    "deep_zh": "其实看到学生平安就很满足",
+    "deep_en": "Content when all is calm",
+    "fear_zh": "出一次重大事故",
+    "fear_en": "One major incident",
+    "desire_zh": "所有人平平安安",
+    "desire_en": "Everyone safe",
+    "lifestyle_zh": "军事化作息",
+    "lifestyle_en": "Military schedule",
+    "rhythm_zh": "早起巡逻，白天处理事务，晚上再巡一遍",
+    "rhythm_en": "Morning patrol, admin day, night patrol",
+    "spaces_zh": "保卫处、校门口、校园各处巡逻",
+    "spaces_en": "Security office, gates, campus patrol",
+    "long_desire_zh": "升级校园安防系统",
+    "long_desire_en": "Upgrade campus security system",
+    "short_goal_zh": "检查下周大型活动的安保方案",
+    "short_goal_en": "Review security plan for next week's event",
+    "constraint_zh": "安保经费不足；外来人员管理难度大",
+    "constraint_en": "Budget limited; outsider management tough",
+    "bias_zh": "倾向把学生的自由活动看成安全隐患",
+    "bias_en": "Treats student free movement as a risk",
+    "narrative_zh": "没出事的时候没人觉得我们重要",
+    "narrative_en": "No one cares about us until something goes wrong"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "id": "npc19_sun_yuetong",
+  "name": "孙悦彤",
+  "role": "undergraduate_management",
+  "personality": {
+    "openness": 0.85,
+    "conscientiousness": 0.45,
+    "extraversion": 0.9,
+    "agreeableness": 0.7,
+    "neuroticism": 0.35
+  },
+  "preferences": {
+    "favorite_locations": [
+      "64a9bc35",
+      "4ef146d8"
+    ],
+    "favorite_tags": [
+      "social"
+    ]
+  },
+  "relations": {
+    "npc09_han_zimo": "创业合伙人",
+    "npc18_yang_mingzhe": "商业观点交锋",
+    "npc41_wei_zihan": "创业圈朋友",
+    "npc54_chang_le": "创业者互相打气"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc19_sun_yuetong",
+  "profile": {
+    "id_num": 19,
+    "name_zh": "孙悦彤",
+    "name_en": "Sun Yuetong",
+    "age": 20,
+    "role_zh": "管理学院大二·创业小白",
+    "role_en": "Mgmt Yr2 · Startup Newbie",
+    "major_zh": "市场营销",
+    "major_en": "Marketing",
+    "group_zh": "管理学院",
+    "group_en": "",
+    "mbti": "ENFP",
+    "ocean_raw": "O85 C45 E90 A70 N35",
+    "innate_zh": "点子多、行动力强、乐观",
+    "innate_en": "Idea machine, action-oriented, optimistic",
+    "learned_zh": "第一次创业失败后学会的市场验证思维",
+    "learned_en": "Market-validation mindset learned after first failed startup",
+    "belief_zh": "试错是最好的学习方式",
+    "belief_en": "Trial and error is the best teacher",
+    "goal_zh": "在校期间成功孵化一个商业项目",
+    "goal_en": "Incubate a real business on campus",
+    "contradiction_zh": "热情高但经验不足 vs 不愿意承认自己还是菜鸟",
+    "contradiction_en": "Enthusiasm > experience vs. won't admit being a rookie",
+    "surface_zh": "热情洋溢、充满干劲",
+    "surface_en": "Full of energy and drive",
+    "deep_zh": "上次创业失败的阴影还在，只是不愿提起",
+    "deep_en": "Still shadowed by first failure, just won't mention it",
+    "fear_zh": "再次失败",
+    "fear_en": "Failing again",
+    "desire_zh": "证明自己可以从0到1做出一个东西",
+    "desire_en": "Proving she can build 0-to-1",
+    "lifestyle_zh": "随项目节奏波动",
+    "lifestyle_en": "Swings with project phases",
+    "rhythm_zh": "有想法时连轴转，低谷期就很颓",
+    "rhythm_en": "Non-stop when fired up; slumps otherwise",
+    "spaces_zh": "创业孵化中心、咖啡厅、管理学院自习室",
+    "spaces_en": "Incubator, cafe, mgmt study room",
+    "long_desire_zh": "新项目两个月内拿到种子用户",
+    "long_desire_en": "Seed users in two months for the new project",
+    "short_goal_zh": "做完用户调研问卷",
+    "short_goal_en": "Finish the user-survey questionnaire",
+    "constraint_zh": "团队成员不够稳定；缺少技术合伙人",
+    "constraint_en": "Team turnover; lacks a technical co-founder",
+    "bias_zh": "倾向高估自己的商业判断力",
+    "bias_en": "Overestimates her business judgment",
+    "narrative_zh": "这次我准备得更充分了，不会再重蹈覆辙",
+    "narrative_en": "I'm better prepared this time, no repeat"
+  }
+}

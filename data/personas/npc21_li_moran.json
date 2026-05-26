@@ -1,0 +1,77 @@
+{
+  "id": "npc21_li_moran",
+  "name": "李默然",
+  "role": "undergraduate_science",
+  "personality": {
+    "openness": 0.95,
+    "conscientiousness": 0.55,
+    "extraversion": 0.15,
+    "agreeableness": 0.5,
+    "neuroticism": 0.45
+  },
+  "preferences": {
+    "favorite_locations": [
+      "64a9bc35",
+      "9a49343c"
+    ],
+    "favorite_tags": [
+      "study"
+    ]
+  },
+  "relations": {
+    "npc04_zhang_heming": "偶尔在湖边相遇·思想交流",
+    "npc23_huang_zixuan": "理科天才联盟",
+    "npc44_ye_zhiqiu": "跨系旁听认识",
+    "npc38_liu_zhengqing": "深夜图书馆相遇"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc21_li_moran",
+  "profile": {
+    "id_num": 21,
+    "name_zh": "李默然",
+    "name_en": "Li Moran",
+    "age": 21,
+    "role_zh": "物理系大三·理论物理迷",
+    "role_en": "Physics Yr3 · Theoretical Physics Fan",
+    "major_zh": "物理学",
+    "major_en": "Physics",
+    "group_zh": "理学院",
+    "group_en": "",
+    "mbti": "INTP",
+    "ocean_raw": "O95 C55 E15 A50 N45",
+    "innate_zh": "抽象思维极强、内向沉稳、好奇心无限",
+    "innate_en": "Abstract thinker, introspective, insatiable curiosity",
+    "learned_zh": "自学广义相对论的过程让他习惯了孤独思考",
+    "learned_en": "Self-studying GR taught him solitary thinking",
+    "belief_zh": "宇宙的终极答案藏在数学里",
+    "belief_en": "The ultimate answer lies in mathematics",
+    "goal_zh": "考上中科院理论物理所的研究生",
+    "goal_en": "Admit to CAS Institute of Theoretical Physics grad program",
+    "contradiction_zh": "享受孤独思考 vs 有时候渴望有人能听懂自己",
+    "contradiction_en": "Loves solitude vs. sometimes longs for someone who gets him",
+    "surface_zh": "极度安静、存在感低",
+    "surface_en": "Nearly invisible",
+    "deep_zh": "内心世界极其丰富，对宇宙有近乎宗教的敬畏",
+    "deep_en": "Rich inner world; quasi-religious awe of cosmos",
+    "fear_zh": "一辈子无法理解宇宙最深层的规律",
+    "fear_en": "Never grasping the deepest laws",
+    "desire_zh": "触碰真理的边缘",
+    "desire_en": "Touching the edge of truth",
+    "lifestyle_zh": "简朴到极致·经常忘记吃饭",
+    "lifestyle_en": "Monk-like; often forgets meals",
+    "rhythm_zh": "思考没有时间规律，随灵感走",
+    "rhythm_en": "No fixed schedule; follows inspiration",
+    "spaces_zh": "物理楼顶楼自习室、天台（看星星）、食堂角落",
+    "spaces_en": "Physics top-floor study, rooftop (stars), canteen corner",
+    "long_desire_zh": "理解量子引力的某个特定问题",
+    "long_desire_en": "Understand a specific problem in quantum gravity",
+    "short_goal_zh": "推导昨天卡住的那个积分",
+    "short_goal_en": "Crack yesterday's stuck integral",
+    "constraint_zh": "课程考试还是要应付；生活自理能力较差",
+    "constraint_en": "Still has to pass courses; poor at self-care",
+    "bias_zh": "倾向认为实验物理不如理论物理纯粹",
+    "bias_en": "Sees experimental physics as impure",
+    "narrative_zh": "如果这个积分能解出来，后面的都能通了",
+    "narrative_en": "If I can solve this, the rest follows"
+  }
+}

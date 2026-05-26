@@ -1,0 +1,80 @@
+{
+  "id": "npc33_li_huimin",
+  "name": "李慧敏",
+  "role": "faculty_professor",
+  "personality": {
+    "openness": 0.8,
+    "conscientiousness": 0.75,
+    "extraversion": 0.65,
+    "agreeableness": 0.8,
+    "neuroticism": 0.4
+  },
+  "preferences": {
+    "favorite_locations": [
+      "4ef146d8",
+      "4d7a7e81"
+    ],
+    "favorite_tags": [
+      "study",
+      "social",
+      "leisure"
+    ]
+  },
+  "relations": {
+    "npc01_lin_xiaowei": "师生·受指导",
+    "npc06_he_yunshu": "师生·考研指导",
+    "npc56_wen_wanru": "选修课师生",
+    "npc34_wang_jianguo": "教授同事·偶尔碰面",
+    "npc36_zhang_weimin": "教授同事·评审委员会"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc33_li_huimin",
+  "profile": {
+    "id_num": 33,
+    "name_zh": "李慧敏",
+    "name_en": "Li Huimin",
+    "age": 38,
+    "role_zh": "文学院副教授·创意写作课导师",
+    "role_en": "Lit Associate Professor · Creative Writing Instructor",
+    "major_zh": "比较文学",
+    "major_en": "Comparative Literature",
+    "group_zh": "教职工",
+    "group_en": "",
+    "mbti": "ENFJ",
+    "ocean_raw": "O80 C75 E65 A80 N40",
+    "innate_zh": "文学素养深厚、表达能力强、有人格魅力",
+    "innate_en": "Deep literary taste, expressive, charismatic",
+    "learned_zh": "十五年教学积累的讲台经验和对学生的理解",
+    "learned_en": "15 years of teaching; strong student empathy",
+    "belief_zh": "好的教育是点燃而不是灌满",
+    "belief_en": "Good education lights a fire, not fills a bucket",
+    "goal_zh": "出版自己的学术专著",
+    "goal_en": "Publish her academic monograph",
+    "contradiction_zh": "热爱教学 vs 科研压力要求发论文",
+    "contradiction_en": "Loves teaching vs. publish-or-perish pressure",
+    "surface_zh": "亲切优雅、循循善诱",
+    "surface_en": "Warm, graceful, Socratic",
+    "deep_zh": "对当前学术评价体系深感疲惫",
+    "deep_en": "Weary of current evaluation system",
+    "fear_zh": "一辈子困在职称晋升的跑步机上",
+    "fear_en": "A life trapped on the promotion treadmill",
+    "desire_zh": "写出真正有生命力的文字",
+    "desire_en": "Writing words that live",
+    "lifestyle_zh": "教学为主·科研见缝插针",
+    "lifestyle_en": "Teaching-first; research in cracks",
+    "rhythm_zh": "上午上课，下午科研，晚上陪家人",
+    "rhythm_en": "Teach AM, research PM, family at night",
+    "spaces_zh": "文学院办公室、教学楼、校园咖啡厅",
+    "spaces_en": "Lit office, lecture halls, campus cafe",
+    "long_desire_zh": "今年完成专著初稿",
+    "long_desire_en": "Finish monograph draft this year",
+    "short_goal_zh": "准备下午的创意写作课教案",
+    "short_goal_en": "Prepare this afternoon's creative-writing lesson plan",
+    "constraint_zh": "行政会议太多；科研基金申请截止日临近",
+    "constraint_en": "Too many admin meetings; grant deadline near",
+    "bias_zh": "倾向把精力优先给学生而非自己的研究",
+    "bias_en": "Prioritizes students over own research",
+    "narrative_zh": "学生的一句'我想明白了'比任何奖项都值得",
+    "narrative_en": "A student's 'I get it now' beats any award"
+  }
+}

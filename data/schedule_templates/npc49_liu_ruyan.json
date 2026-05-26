@@ -1,0 +1,559 @@
+{
+  "id": "npc49_liu_ruyan",
+  "description": "基于参考 HTML 的 柳如烟 周课表（工作日相同，周末略简）。",
+  "week": {
+    "monday": [
+      {
+        "start": "01:00",
+        "end": "08:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      },
+      {
+        "start": "08:00",
+        "end": "08:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "被闹钟叫醒"
+      },
+      {
+        "start": "08:30",
+        "end": "10:30",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "赶去上课"
+      },
+      {
+        "start": "10:30",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "日语听力课"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭·戴耳机听日语广播"
+      },
+      {
+        "start": "13:00",
+        "end": "14:00",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休"
+      },
+      {
+        "start": "14:00",
+        "end": "16:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "下午课程"
+      },
+      {
+        "start": "16:00",
+        "end": "18:00",
+        "activity": "leisure_media",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍翻译游戏文本"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "20:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续翻译"
+      },
+      {
+        "start": "20:30",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "追新番"
+      },
+      {
+        "start": "22:00",
+        "end": "23:30",
+        "activity": "meeting",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "在日语学习群讨论"
+      },
+      {
+        "start": "23:30",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "看轻小说"
+      }
+    ],
+    "tuesday": [
+      {
+        "start": "01:00",
+        "end": "08:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      },
+      {
+        "start": "08:00",
+        "end": "08:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "被闹钟叫醒"
+      },
+      {
+        "start": "08:30",
+        "end": "10:30",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "赶去上课"
+      },
+      {
+        "start": "10:30",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "日语听力课"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭·戴耳机听日语广播"
+      },
+      {
+        "start": "13:00",
+        "end": "14:00",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休"
+      },
+      {
+        "start": "14:00",
+        "end": "16:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "下午课程"
+      },
+      {
+        "start": "16:00",
+        "end": "18:00",
+        "activity": "leisure_media",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍翻译游戏文本"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "20:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续翻译"
+      },
+      {
+        "start": "20:30",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "追新番"
+      },
+      {
+        "start": "22:00",
+        "end": "23:30",
+        "activity": "meeting",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "在日语学习群讨论"
+      },
+      {
+        "start": "23:30",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "看轻小说"
+      }
+    ],
+    "wednesday": [
+      {
+        "start": "01:00",
+        "end": "08:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      },
+      {
+        "start": "08:00",
+        "end": "08:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "被闹钟叫醒"
+      },
+      {
+        "start": "08:30",
+        "end": "10:30",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "赶去上课"
+      },
+      {
+        "start": "10:30",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "日语听力课"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭·戴耳机听日语广播"
+      },
+      {
+        "start": "13:00",
+        "end": "14:00",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休"
+      },
+      {
+        "start": "14:00",
+        "end": "16:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "下午课程"
+      },
+      {
+        "start": "16:00",
+        "end": "18:00",
+        "activity": "leisure_media",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍翻译游戏文本"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "20:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续翻译"
+      },
+      {
+        "start": "20:30",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "追新番"
+      },
+      {
+        "start": "22:00",
+        "end": "23:30",
+        "activity": "meeting",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "在日语学习群讨论"
+      },
+      {
+        "start": "23:30",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "看轻小说"
+      }
+    ],
+    "thursday": [
+      {
+        "start": "01:00",
+        "end": "08:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      },
+      {
+        "start": "08:00",
+        "end": "08:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "被闹钟叫醒"
+      },
+      {
+        "start": "08:30",
+        "end": "10:30",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "赶去上课"
+      },
+      {
+        "start": "10:30",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "日语听力课"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭·戴耳机听日语广播"
+      },
+      {
+        "start": "13:00",
+        "end": "14:00",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休"
+      },
+      {
+        "start": "14:00",
+        "end": "16:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "下午课程"
+      },
+      {
+        "start": "16:00",
+        "end": "18:00",
+        "activity": "leisure_media",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍翻译游戏文本"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "20:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续翻译"
+      },
+      {
+        "start": "20:30",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "追新番"
+      },
+      {
+        "start": "22:00",
+        "end": "23:30",
+        "activity": "meeting",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "在日语学习群讨论"
+      },
+      {
+        "start": "23:30",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "看轻小说"
+      }
+    ],
+    "friday": [
+      {
+        "start": "01:00",
+        "end": "08:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      },
+      {
+        "start": "08:00",
+        "end": "08:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "被闹钟叫醒"
+      },
+      {
+        "start": "08:30",
+        "end": "10:30",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "赶去上课"
+      },
+      {
+        "start": "10:30",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "日语听力课"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭·戴耳机听日语广播"
+      },
+      {
+        "start": "13:00",
+        "end": "14:00",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休"
+      },
+      {
+        "start": "14:00",
+        "end": "16:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "下午课程"
+      },
+      {
+        "start": "16:00",
+        "end": "18:00",
+        "activity": "leisure_media",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍翻译游戏文本"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "20:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续翻译"
+      },
+      {
+        "start": "20:30",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "追新番"
+      },
+      {
+        "start": "22:00",
+        "end": "23:30",
+        "activity": "meeting",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "在日语学习群讨论"
+      },
+      {
+        "start": "23:30",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "看轻小说"
+      }
+    ],
+    "saturday": [
+      {
+        "start": "01:00",
+        "end": "08:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      },
+      {
+        "start": "08:00",
+        "end": "08:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "被闹钟叫醒"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭·戴耳机听日语广播"
+      },
+      {
+        "start": "13:00",
+        "end": "14:00",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "chat",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "周末自由活动"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      }
+    ],
+    "sunday": [
+      {
+        "start": "01:00",
+        "end": "08:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      },
+      {
+        "start": "08:00",
+        "end": "08:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "被闹钟叫醒"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭·戴耳机听日语广播"
+      },
+      {
+        "start": "13:00",
+        "end": "14:00",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "leisure_media",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "周末闲聊"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      }
+    ]
+  }
+}

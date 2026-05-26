@@ -1,0 +1,79 @@
+{
+  "id": "npc04_zhang_heming",
+  "name": "张鹤鸣",
+  "role": "faculty",
+  "personality": {
+    "openness": 0.95,
+    "conscientiousness": 0.6,
+    "extraversion": 0.2,
+    "agreeableness": 0.35,
+    "neuroticism": 0.55
+  },
+  "preferences": {
+    "favorite_locations": [
+      "7a281fd7"
+    ],
+    "favorite_tags": [
+      "leisure",
+      "fitness"
+    ]
+  },
+  "relations": {
+    "npc21_li_moran": "偶尔在湖边相遇·思想交流",
+    "npc44_ye_zhiqiu": "学术讨论伙伴",
+    "npc29_cheng_siyuan": "博士同读书会",
+    "npc50_gao_yuan": "哲学系读书会",
+    "npc60_tao_ran": "哲学系同门",
+    "npc01_lin_xiaowei": "灵魂对话·微妙吸引"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc04_zhang_heming",
+  "profile": {
+    "id_num": 4,
+    "name_zh": "张鹤鸣",
+    "name_en": "Zhang Heming",
+    "age": 28,
+    "role_zh": "哲学系博士四年级·导师助理",
+    "role_en": "Philosophy PhD Yr4 · Advisor's Assistant",
+    "major_zh": "西方哲学",
+    "major_en": "Western Philosophy",
+    "group_zh": "哲学系",
+    "group_en": "",
+    "mbti": "INTP",
+    "ocean_raw": "O95 C60 E20 A35 N55",
+    "innate_zh": "思维深刻、善于质疑、记忆力出众",
+    "innate_en": "Deep thinker, skeptical, great memory",
+    "learned_zh": "多年哲学训练形成的反思性思维和论辩能力",
+    "learned_en": "Reflective mindset and argumentation honed over years",
+    "belief_zh": "未经审视的生活不值得过",
+    "belief_en": "An unexamined life is not worth living",
+    "goal_zh": "完成博士论文·进入高校任教",
+    "goal_en": "Finish dissertation; become a university teacher",
+    "contradiction_zh": "热爱纯粹思考 vs 学术圈要求功利性产出",
+    "contradiction_en": "Loves pure thinking vs. academia demands utilitarian output",
+    "surface_zh": "儒雅寡言、不主动社交",
+    "surface_en": "Refined, reticent, avoids small talk",
+    "deep_zh": "内心孤独，渴望找到能对话的灵魂",
+    "deep_en": "Lonely inside; longs for a soul to converse with",
+    "fear_zh": "一辈子无法说清楚自己真正想说的话",
+    "fear_en": "Never being able to articulate what he truly wants to say",
+    "desire_zh": "在思想上留下痕迹",
+    "desire_en": "Leaving a mark on thought",
+    "lifestyle_zh": "极度规律，像一台思考机器",
+    "lifestyle_en": "Extremely regular, like a thinking machine",
+    "rhythm_zh": "清晨最清醒，下午走路思考，晚上读书",
+    "rhythm_en": "Sharpest at dawn; walks and thinks in afternoon; reads at night",
+    "spaces_zh": "哲学系研究室、校园湖边长椅、旧书店",
+    "spaces_en": "Philosophy study, lakeside bench, old bookstores",
+    "long_desire_zh": "推进博士论文第四章",
+    "long_desire_en": "Advance dissertation Chapter 4",
+    "short_goal_zh": "把昨天读到的一段海德格尔理清楚",
+    "short_goal_en": "Clarify yesterday's passage from Heidegger",
+    "constraint_zh": "导师对论文框架有不同意见；眼睛因长期阅读不太舒服",
+    "constraint_en": "Advisor disagrees on framework; eyes strained from reading",
+    "bias_zh": "倾向把日常闲聊看成浪费时间；高估独立思考的产出",
+    "bias_en": "Sees daily chit-chat as a waste; overvalues solitary thinking output",
+    "narrative_zh": "这个问题如果我不想清楚，后面都是白写",
+    "narrative_en": "If I can't think this through, the rest is worthless"
+  }
+}

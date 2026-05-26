@@ -1,0 +1,77 @@
+{
+  "id": "npc16_lu_xiaoman",
+  "name": "陆小曼",
+  "role": "graduate_master",
+  "personality": {
+    "openness": 0.8,
+    "conscientiousness": 0.7,
+    "extraversion": 0.75,
+    "agreeableness": 0.7,
+    "neuroticism": 0.4
+  },
+  "preferences": {
+    "favorite_locations": [
+      "3877431b",
+      "8dc3960a"
+    ],
+    "favorite_tags": [
+      "study",
+      "creative"
+    ]
+  },
+  "relations": {
+    "npc36_zhang_weimin": "研究生-导师",
+    "npc52_tian_zirui": "环保同盟",
+    "npc03_su_yutong": "可持续建筑理念碰撞"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc16_lu_xiaoman",
+  "profile": {
+    "id_num": 16,
+    "name_zh": "陆小曼",
+    "name_en": "Lu Xiaoman",
+    "age": 24,
+    "role_zh": "建筑学院研一·环保理想主义者",
+    "role_en": "Arch M1 · Eco-Idealist",
+    "major_zh": "绿色建筑",
+    "major_en": "Green Architecture",
+    "group_zh": "建筑学院",
+    "group_en": "",
+    "mbti": "ENFJ",
+    "ocean_raw": "O80 C70 E75 A70 N40",
+    "innate_zh": "理想主义、坚持原则、行动力强",
+    "innate_en": "Idealistic, principled, action-oriented",
+    "learned_zh": "NGO志愿经历塑造的环保理念和公众表达能力",
+    "learned_en": "NGO volunteer work shaped eco-vision and public speaking",
+    "belief_zh": "建筑应该与自然共生而非对抗",
+    "belief_en": "Architecture should coexist with nature, not oppose it",
+    "goal_zh": "推动校园建筑的碳中和改造",
+    "goal_en": "Push campus buildings toward carbon neutrality",
+    "contradiction_zh": "理想宏大 vs 现实推进处处受阻",
+    "contradiction_en": "Grand ideals vs. reality pushes back at every step",
+    "surface_zh": "热情坚定、有感染力",
+    "surface_en": "Warm, firm, infectious",
+    "deep_zh": "有时会因为没人支持自己的理念而沮丧",
+    "deep_en": "Gets dejected when no one backs her vision",
+    "fear_zh": "看着环境被破坏却无能为力",
+    "fear_en": "Watching the environment degrade helplessly",
+    "desire_zh": "做出真正改变世界的设计",
+    "desire_en": "Making designs that actually change the world",
+    "lifestyle_zh": "健康规律·素食主义者",
+    "lifestyle_en": "Healthy, regular, vegetarian",
+    "rhythm_zh": "上午活力最强，适合演讲和推广",
+    "rhythm_en": "Sharpest AM for outreach and speaking",
+    "spaces_zh": "建筑系实验室、环保社团活动室、校园绿化带",
+    "spaces_en": "Arch lab, eco-club room, campus greenery",
+    "long_desire_zh": "完成校园碳排放调研报告",
+    "long_desire_en": "Finish the campus carbon-emission study",
+    "short_goal_zh": "整理上周采集的屋顶绿化数据",
+    "short_goal_en": "Sort last week's roof-greening data",
+    "constraint_zh": "研究经费有限；部分教师不理解绿色建筑的商业价值",
+    "constraint_en": "Limited research funds; some teachers don't see business value",
+    "bias_zh": "倾向高估环保理念的说服力",
+    "bias_en": "Overestimates eco-ideas' persuasiveness",
+    "narrative_zh": "总有人要先站出来，为什么不能是我",
+    "narrative_en": "Someone has to step up first - why not me"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "id": "npc60_tao_ran",
+  "name": "陶然",
+  "role": "graduate_humanities",
+  "personality": {
+    "openness": 0.85,
+    "conscientiousness": 0.7,
+    "extraversion": 0.4,
+    "agreeableness": 0.6,
+    "neuroticism": 0.5
+  },
+  "preferences": {
+    "favorite_locations": [
+      "4ef146d8"
+    ],
+    "favorite_tags": [
+      "leisure"
+    ]
+  },
+  "relations": {
+    "npc44_ye_zhiqiu": "科学哲学同好",
+    "npc04_zhang_heming": "哲学系同门",
+    "npc02_chen_yuanhang": "AI技术+AI伦理讨论"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc60_tao_ran",
+  "profile": {
+    "id_num": 60,
+    "name_zh": "陶然",
+    "name_en": "Tao Ran",
+    "age": 26,
+    "role_zh": "哲学系博一·前程序员",
+    "role_en": "Philosophy PhD Yr1 · Ex-Programmer",
+    "major_zh": "伦理学",
+    "major_en": "Ethics",
+    "group_zh": "哲学系",
+    "group_en": "",
+    "mbti": "INFJ",
+    "ocean_raw": "O85 C70 E40 A60 N50",
+    "innate_zh": "逻辑清晰、反思能力强、有行业经验",
+    "innate_en": "Clear logic, reflective, industry experience",
+    "learned_zh": "三年互联网工作让他看清了技术伦理的紧迫性",
+    "learned_en": "Three years in tech revealed urgency of tech ethics",
+    "belief_zh": "技术发展需要伦理的缰绳",
+    "belief_en": "Tech needs the reins of ethics",
+    "goal_zh": "成为AI伦理领域的研究者",
+    "goal_en": "Researcher in AI ethics",
+    "contradiction_zh": "程序员背景让哲学系觉得他不纯粹 vs 哲学背景让技术圈觉得他太理想",
+    "contradiction_en": "Coder past makes philosophers doubt his purity vs. philosophy makes tech folks call him an idealist",
+    "surface_zh": "沉稳有深度",
+    "surface_en": "Steady, deep",
+    "deep_zh": "在两个世界之间寻找位置",
+    "deep_en": "Searching for a place between two worlds",
+    "fear_zh": "两边都不认可自己",
+    "fear_en": "Neither side accepting him",
+    "desire_zh": "在技术和人文之间架起桥梁",
+    "desire_en": "Bridging tech and humanities",
+    "lifestyle_zh": "保持程序员时期的高效习惯",
+    "lifestyle_en": "Keeps programmer-level efficiency",
+    "rhythm_zh": "上午读书，下午写作，晚上编程保持手感",
+    "rhythm_en": "Read AM, write PM, code at night to stay sharp",
+    "spaces_zh": "哲学系、计算机楼旁听、咖啡厅",
+    "spaces_en": "Philosophy school, auditing in CS, cafes",
+    "long_desire_zh": "确定博士论文的研究方向",
+    "long_desire_en": "Decide on dissertation direction",
+    "short_goal_zh": "读完导师推荐的伦理学入门清单",
+    "short_goal_en": "Finish advisor-recommended intro list",
+    "constraint_zh": "哲学功底需要大量补课；同学比自己年轻很多",
+    "constraint_en": "Needs to catch up on philosophy basics; peers are younger",
+    "bias_zh": "倾向用工程师思维解决哲学问题",
+    "bias_en": "Solves philosophy with engineering mindset",
+    "narrative_zh": "我见过技术不受约束的样子，所以我来了",
+    "narrative_en": "I've seen tech without constraints; that's why I'm here"
+  }
+}

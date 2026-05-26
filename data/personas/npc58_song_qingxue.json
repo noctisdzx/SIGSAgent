@@ -1,0 +1,74 @@
+{
+  "id": "npc58_song_qingxue",
+  "name": "宋清雪",
+  "role": "undergraduate_science",
+  "personality": {
+    "openness": 0.55,
+    "conscientiousness": 0.75,
+    "extraversion": 0.75,
+    "agreeableness": 0.85,
+    "neuroticism": 0.4
+  },
+  "preferences": {
+    "favorite_locations": [
+      "438038e3"
+    ],
+    "favorite_tags": [
+      "study",
+      "leisure"
+    ]
+  },
+  "relations": {
+    "npc45_xia_qing": "公共卫生+护理联动"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc58_song_qingxue",
+  "profile": {
+    "id_num": 58,
+    "name_zh": "宋清雪",
+    "name_en": "Song Qingxue",
+    "age": 20,
+    "role_zh": "公共卫生学院大二·志愿者队长",
+    "role_en": "Public Health Yr2 · Volunteer Captain",
+    "major_zh": "预防医学",
+    "major_en": "Preventive Medicine",
+    "group_zh": "理学院",
+    "group_en": "",
+    "mbti": "ESFJ",
+    "ocean_raw": "O55 C75 E75 A85 N40",
+    "innate_zh": "组织能力强、热心肠、细致",
+    "innate_en": "Organizer, kind, meticulous",
+    "learned_zh": "疫情期间志愿经历培养的公共卫生意识和领导力",
+    "learned_en": "Public-health sense from pandemic volunteering",
+    "belief_zh": "公共健康是社会的根基",
+    "belief_en": "Public health is society's foundation",
+    "goal_zh": "毕业后进入CDC或WHO工作",
+    "goal_en": "CDC or WHO after graduation",
+    "contradiction_zh": "理想宏大 vs 日常学习很枯燥",
+    "contradiction_en": "Grand ideal vs. daily study is tedious",
+    "surface_zh": "热情负责、闲不下来",
+    "surface_en": "Warm, can't sit still",
+    "deep_zh": "有时会质疑一个人能改变多少",
+    "deep_en": "Sometimes questions her impact",
+    "fear_zh": "下一次公共卫生危机来的时候自己还不够格",
+    "fear_en": "Unready for the next crisis",
+    "desire_zh": "在关键时刻有能力站出来",
+    "desire_en": "Able to step up when it matters",
+    "lifestyle_zh": "充实且高效",
+    "lifestyle_en": "Busy and efficient",
+    "rhythm_zh": "上午上课，下午志愿服务，晚上学习",
+    "rhythm_en": "Class AM, volunteer PM, study at night",
+    "spaces_zh": "公卫学院、社区卫生服务中心、志愿者活动站",
+    "spaces_en": "Public-health school, community center, volunteer hub",
+    "long_desire_zh": "带领志愿队完成校园健康调查",
+    "long_desire_en": "Lead volunteers through campus health survey",
+    "short_goal_zh": "今天发完剩余的调查问卷",
+    "short_goal_en": "Distribute remaining surveys today",
+    "constraint_zh": "志愿者人手不够；数据收集比想象中困难",
+    "constraint_en": "Short on volunteers; data collection harder than expected",
+    "bias_zh": "倾向高估宣传教育的效果",
+    "bias_en": "Overestimates awareness-campaign impact",
+    "narrative_zh": "改变不了世界，至少可以改变身边的人",
+    "narrative_en": "Can't change the world; at least change those near me"
+  }
+}

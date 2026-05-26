@@ -1,0 +1,573 @@
+{
+  "id": "npc04_zhang_heming",
+  "description": "基于参考 HTML 的 张鹤鸣 周课表（工作日相同，周末略简）。",
+  "week": {
+    "monday": [
+      {
+        "start": "06:30",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "自然醒·床上冥想10分钟"
+      },
+      {
+        "start": "07:00",
+        "end": "07:40",
+        "activity": "jog_or_walk",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "校园湖边散步"
+      },
+      {
+        "start": "07:40",
+        "end": "08:30",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐·读纸质书"
+      },
+      {
+        "start": "08:30",
+        "end": "11:30",
+        "activity": "write_paper",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "哲学系研究室写论文"
+      },
+      {
+        "start": "11:30",
+        "end": "12:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "研究室午休20分钟"
+      },
+      {
+        "start": "12:30",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续写作"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00",
+        "activity": "jog_or_walk",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "校园散步思考"
+      },
+      {
+        "start": "16:00",
+        "end": "18:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "旧书店或图书馆翻阅文献"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "21:30",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "研究室读书"
+      },
+      {
+        "start": "21:30",
+        "end": "23:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍泡茶·整理笔记"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "tuesday": [
+      {
+        "start": "06:30",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "自然醒·床上冥想10分钟"
+      },
+      {
+        "start": "07:00",
+        "end": "07:40",
+        "activity": "jog_or_walk",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "校园湖边散步"
+      },
+      {
+        "start": "07:40",
+        "end": "08:30",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐·读纸质书"
+      },
+      {
+        "start": "08:30",
+        "end": "11:30",
+        "activity": "write_paper",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "哲学系研究室写论文"
+      },
+      {
+        "start": "11:30",
+        "end": "12:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "研究室午休20分钟"
+      },
+      {
+        "start": "12:30",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续写作"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00",
+        "activity": "jog_or_walk",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "校园散步思考"
+      },
+      {
+        "start": "16:00",
+        "end": "18:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "旧书店或图书馆翻阅文献"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "21:30",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "研究室读书"
+      },
+      {
+        "start": "21:30",
+        "end": "23:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍泡茶·整理笔记"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "wednesday": [
+      {
+        "start": "06:30",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "自然醒·床上冥想10分钟"
+      },
+      {
+        "start": "07:00",
+        "end": "07:40",
+        "activity": "jog_or_walk",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "校园湖边散步"
+      },
+      {
+        "start": "07:40",
+        "end": "08:30",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐·读纸质书"
+      },
+      {
+        "start": "08:30",
+        "end": "11:30",
+        "activity": "write_paper",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "哲学系研究室写论文"
+      },
+      {
+        "start": "11:30",
+        "end": "12:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "研究室午休20分钟"
+      },
+      {
+        "start": "12:30",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续写作"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00",
+        "activity": "jog_or_walk",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "校园散步思考"
+      },
+      {
+        "start": "16:00",
+        "end": "18:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "旧书店或图书馆翻阅文献"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "21:30",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "研究室读书"
+      },
+      {
+        "start": "21:30",
+        "end": "23:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍泡茶·整理笔记"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "thursday": [
+      {
+        "start": "06:30",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "自然醒·床上冥想10分钟"
+      },
+      {
+        "start": "07:00",
+        "end": "07:40",
+        "activity": "jog_or_walk",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "校园湖边散步"
+      },
+      {
+        "start": "07:40",
+        "end": "08:30",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐·读纸质书"
+      },
+      {
+        "start": "08:30",
+        "end": "11:30",
+        "activity": "write_paper",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "哲学系研究室写论文"
+      },
+      {
+        "start": "11:30",
+        "end": "12:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "研究室午休20分钟"
+      },
+      {
+        "start": "12:30",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续写作"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00",
+        "activity": "jog_or_walk",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "校园散步思考"
+      },
+      {
+        "start": "16:00",
+        "end": "18:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "旧书店或图书馆翻阅文献"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "21:30",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "研究室读书"
+      },
+      {
+        "start": "21:30",
+        "end": "23:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍泡茶·整理笔记"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "friday": [
+      {
+        "start": "06:30",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "自然醒·床上冥想10分钟"
+      },
+      {
+        "start": "07:00",
+        "end": "07:40",
+        "activity": "jog_or_walk",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "校园湖边散步"
+      },
+      {
+        "start": "07:40",
+        "end": "08:30",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐·读纸质书"
+      },
+      {
+        "start": "08:30",
+        "end": "11:30",
+        "activity": "write_paper",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "哲学系研究室写论文"
+      },
+      {
+        "start": "11:30",
+        "end": "12:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "研究室午休20分钟"
+      },
+      {
+        "start": "12:30",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续写作"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00",
+        "activity": "jog_or_walk",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "校园散步思考"
+      },
+      {
+        "start": "16:00",
+        "end": "18:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "旧书店或图书馆翻阅文献"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "21:30",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "研究室读书"
+      },
+      {
+        "start": "21:30",
+        "end": "23:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍泡茶·整理笔记"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "saturday": [
+      {
+        "start": "06:30",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "自然醒·床上冥想10分钟"
+      },
+      {
+        "start": "11:30",
+        "end": "12:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "研究室午休20分钟"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "chat",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "周末自由活动"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "21:30",
+        "end": "23:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍泡茶·整理笔记"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "sunday": [
+      {
+        "start": "06:30",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "自然醒·床上冥想10分钟"
+      },
+      {
+        "start": "11:30",
+        "end": "12:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "研究室午休20分钟"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "leisure_media",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "周末闲聊"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "21:30",
+        "end": "23:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍泡茶·整理笔记"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ]
+  }
+}

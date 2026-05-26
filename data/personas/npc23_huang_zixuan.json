@@ -1,0 +1,76 @@
+{
+  "id": "npc23_huang_zixuan",
+  "name": "黄子轩",
+  "role": "undergraduate_science",
+  "personality": {
+    "openness": 0.8,
+    "conscientiousness": 0.8,
+    "extraversion": 0.3,
+    "agreeableness": 0.35,
+    "neuroticism": 0.45
+  },
+  "preferences": {
+    "favorite_locations": [
+      "64a9bc35",
+      "438038e3"
+    ],
+    "favorite_tags": [
+      "study",
+      "leisure"
+    ]
+  },
+  "relations": {
+    "npc21_li_moran": "理科天才联盟",
+    "npc48_long_feiyu": "理工科天才交流"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc23_huang_zixuan",
+  "profile": {
+    "id_num": 23,
+    "name_zh": "黄子轩",
+    "name_en": "Huang Zixuan",
+    "age": 20,
+    "role_zh": "数学系大二·竞赛选手",
+    "role_en": "Math Yr2 · Competition Contestant",
+    "major_zh": "数学与应用数学",
+    "major_en": "Mathematics",
+    "group_zh": "理学院",
+    "group_en": "",
+    "mbti": "INTJ",
+    "ocean_raw": "O80 C80 E30 A35 N45",
+    "innate_zh": "逻辑天赋异禀、钻研精神、好胜心强",
+    "innate_en": "Prodigious logic, diligent, competitive",
+    "learned_zh": "高中数学竞赛的训练节奏延续到了大学",
+    "learned_en": "HS competition rhythm carried into college",
+    "belief_zh": "数学之美在于它的确定性",
+    "belief_en": "Math's beauty lies in its certainty",
+    "goal_zh": "拿全国大学生数学竞赛金奖",
+    "goal_en": "Gold at National College Math Competition",
+    "contradiction_zh": "热爱纯数学 vs 周围人都在问数学能干嘛",
+    "contradiction_en": "Loves pure math vs. everyone asks what it's for",
+    "surface_zh": "严肃认真、话很少",
+    "surface_en": "Serious, quiet",
+    "deep_zh": "对数学有近乎偏执的热爱",
+    "deep_en": "Near-obsessive love for math",
+    "fear_zh": "数学天赋有极限",
+    "fear_en": "Hitting a talent ceiling",
+    "desire_zh": "证明一个属于自己的定理",
+    "desire_en": "Proving his own theorem",
+    "lifestyle_zh": "围绕做题和读书运转",
+    "lifestyle_en": "Orbits drills and reading",
+    "rhythm_zh": "上午做题效率最高，下午看书，晚上回顾",
+    "rhythm_en": "Drills AM, reading PM, review at night",
+    "spaces_zh": "数学楼讨论室、图书馆、宿舍",
+    "spaces_en": "Math discussion room, library, dorm",
+    "long_desire_zh": "竞赛前把历年真题全部刷完",
+    "long_desire_en": "Finish all past papers before the contest",
+    "short_goal_zh": "攻克昨天没做出来的那道积分不等式",
+    "short_goal_en": "Crack yesterday's integral-inequality problem",
+    "constraint_zh": "分析课太难了；缺乏和高水平选手交流的机会",
+    "constraint_en": "Analysis class is brutal; lacks high-level peers",
+    "bias_zh": "倾向把应用数学看成不纯粹的",
+    "bias_en": "Sees applied math as impure",
+    "narrative_zh": "如果连这道题都做不出来，金奖就别想了",
+    "narrative_en": "If I can't solve this, forget the gold"
+  }
+}

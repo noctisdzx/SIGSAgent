@@ -1,0 +1,83 @@
+{
+  "id": "npc01_lin_xiaowei",
+  "name": "林晓薇",
+  "role": "undergraduate_literature",
+  "personality": {
+    "openness": 0.9,
+    "conscientiousness": 0.55,
+    "extraversion": 0.35,
+    "agreeableness": 0.8,
+    "neuroticism": 0.65
+  },
+  "preferences": {
+    "favorite_locations": [
+      "64a9bc35",
+      "4ef146d8",
+      "8dc3960a"
+    ],
+    "favorite_tags": [
+      "creative",
+      "leisure"
+    ]
+  },
+  "relations": {
+    "npc06_he_yunshu": "同门学姐妹",
+    "npc33_li_huimin": "师生·受指导",
+    "npc56_wen_wanru": "校报同事+文友",
+    "npc32_luo_chenxi": "校园媒体合作",
+    "npc22_zhou_xiaomeng": "文学+心理跨界好友",
+    "npc29_cheng_siyuan": "写作和调研的灵感交换",
+    "npc25_lin_yuxuan": "文艺圈好友",
+    "npc04_zhang_heming": "灵魂对话·微妙吸引"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc01_lin_xiaowei",
+  "profile": {
+    "id_num": 1,
+    "name_zh": "林晓薇",
+    "name_en": "Lin Xiaowei",
+    "age": 21,
+    "role_zh": "文学院大三·校报主编",
+    "role_en": "Lit Yr3 · Campus-paper Chief Editor",
+    "major_zh": "中国现当代文学",
+    "major_en": "Modern Chinese Literature",
+    "group_zh": "文学院",
+    "group_en": "",
+    "mbti": "INFP",
+    "ocean_raw": "O90 C55 E35 A80 N65",
+    "innate_zh": "富有想象力、共情力强、语言天赋突出",
+    "innate_en": "Imaginative, empathetic, gifted with language",
+    "learned_zh": "长期写作训练形成的敏锐观察力，习惯用文字解构日常",
+    "learned_en": "Keen observation from years of writing; deconstructs daily life through words",
+    "belief_zh": "文字是理解世界最诚实的方式",
+    "belief_en": "Words are the most honest way to understand the world",
+    "goal_zh": "出版自己的第一本短篇小说集",
+    "goal_en": "Publish her first short-story collection",
+    "contradiction_zh": "渴望被阅读 vs 害怕被误读",
+    "contradiction_en": "Craves to be read vs. fears being misread",
+    "surface_zh": "温和安静、礼貌得体",
+    "surface_en": "Gentle, quiet, polite",
+    "deep_zh": "内心戏剧化，渴望深度连接却害怕暴露脆弱",
+    "deep_en": "Dramatic inner world; craves deep connection yet fears exposing vulnerability",
+    "fear_zh": "作品被忽视",
+    "fear_en": "Her work being ignored",
+    "desire_zh": "被真正理解",
+    "desire_en": "To be truly understood",
+    "lifestyle_zh": "晚睡晚起型，夜间创作效率最高",
+    "lifestyle_en": "Night owl; most productive in late-night writing",
+    "rhythm_zh": "上午缓慢启动，下午平稳，夜间爆发",
+    "rhythm_en": "Slow mornings, steady afternoons, explosive nights",
+    "spaces_zh": "图书馆四楼角落、咖啡厅靠窗位、校报编辑室",
+    "spaces_en": "Library 4F corner, cafe window seat, newspaper office",
+    "long_desire_zh": "保持创作状态，积累可讲述的生活素材",
+    "long_desire_en": "Stay in creative mode, collect narratable life material",
+    "short_goal_zh": "找一个安静但有人流的地方观察别人并记笔记",
+    "short_goal_en": "Find a quiet-yet-populated place to observe people and take notes",
+    "constraint_zh": "刚起床精神还没进入状态；下午有编辑会",
+    "constraint_en": "Still groggy after waking; editorial meeting in the afternoon",
+    "bias_zh": "倾向把人多的地方看成素材丰富；容易高估眼前灵感价值",
+    "bias_en": "Tends to treat crowded places as rich material; overvalues passing inspiration",
+    "narrative_zh": "我不是在发呆，我是在采集素材",
+    "narrative_en": "I'm not zoning out, I'm collecting material"
+  }
+}

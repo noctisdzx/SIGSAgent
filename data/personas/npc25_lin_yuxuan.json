@@ -1,0 +1,77 @@
+{
+  "id": "npc25_lin_yuxuan",
+  "name": "林雨萱",
+  "role": "undergraduate_arts",
+  "personality": {
+    "openness": 0.85,
+    "conscientiousness": 0.7,
+    "extraversion": 0.4,
+    "agreeableness": 0.6,
+    "neuroticism": 0.55
+  },
+  "preferences": {
+    "favorite_locations": [
+      "4d7a7e81",
+      "438038e3"
+    ],
+    "favorite_tags": [
+      "creative",
+      "leisure"
+    ]
+  },
+  "relations": {
+    "npc47_bai_lu": "排练厅邻居",
+    "npc01_lin_xiaowei": "文艺圈好友",
+    "npc26_zhao_tianlei": "音乐+体育·反差吸引"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc25_lin_yuxuan",
+  "profile": {
+    "id_num": 25,
+    "name_zh": "林雨萱",
+    "name_en": "Lin Yuxuan",
+    "age": 20,
+    "role_zh": "音乐系大二·钢琴专业",
+    "role_en": "Music Yr2 · Piano Major",
+    "major_zh": "钢琴表演",
+    "major_en": "Piano Performance",
+    "group_zh": "艺术学院",
+    "group_en": "",
+    "mbti": "ISFP",
+    "ocean_raw": "O85 C70 E40 A60 N55",
+    "innate_zh": "音乐天赋、情感表达力强、完美主义",
+    "innate_en": "Musical gift, expressive, perfectionist",
+    "learned_zh": "十余年钢琴训练形成的极致肌肉记忆和舞台经验",
+    "learned_en": "15 years of piano built muscle memory and stage poise",
+    "belief_zh": "音乐是不需要翻译的语言",
+    "belief_en": "Music is the language needing no translation",
+    "goal_zh": "在全国钢琴比赛中获奖",
+    "goal_en": "Place in a national piano competition",
+    "contradiction_zh": "台上自信 vs 台下极度敏感",
+    "contradiction_en": "Confident on stage vs. hypersensitive off it",
+    "surface_zh": "优雅安静",
+    "surface_en": "Elegant, quiet",
+    "deep_zh": "对表演失误有过度的恐惧",
+    "deep_en": "Excessively fears a single wrong note",
+    "fear_zh": "弹错一个音",
+    "fear_en": "Hitting one wrong note",
+    "desire_zh": "一次完美的演出",
+    "desire_en": "One perfect performance",
+    "lifestyle_zh": "围绕练琴运转",
+    "lifestyle_en": "Revolves around practice",
+    "rhythm_zh": "上午练技巧，下午练曲目，晚上听录音反思",
+    "rhythm_en": "Technique AM, repertoire PM, self-review at night",
+    "spaces_zh": "琴房、音乐厅、宿舍",
+    "spaces_en": "Practice room, concert hall, dorm",
+    "long_desire_zh": "下个月比赛曲目练到炉火纯青",
+    "long_desire_en": "Master next month's repertoire",
+    "short_goal_zh": "把肖邦叙事曲的技术难点攻克",
+    "short_goal_en": "Crack the technical passage in Chopin's Ballade",
+    "constraint_zh": "琴房排队紧张；手指有些酸痛",
+    "constraint_en": "Practice-room queue; sore fingers",
+    "bias_zh": "倾向放大每一个微小的失误",
+    "bias_en": "Magnifies tiny errors",
+    "narrative_zh": "昨天那个地方又弹错了，不能原谅自己",
+    "narrative_en": "I hit that same wrong note again - unforgivable"
+  }
+}

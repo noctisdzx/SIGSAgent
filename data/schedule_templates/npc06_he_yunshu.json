@@ -1,0 +1,699 @@
+{
+  "id": "npc06_he_yunshu",
+  "description": "基于参考 HTML 的 贺云舒 周课表（工作日相同，周末略简）。",
+  "week": {
+    "monday": [
+      {
+        "start": "06:00",
+        "end": "06:20",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床洗漱"
+      },
+      {
+        "start": "06:20",
+        "end": "06:30",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆门口排队"
+      },
+      {
+        "start": "06:30",
+        "end": "06:40",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆开门·占座"
+      },
+      {
+        "start": "06:40",
+        "end": "08:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "背英语单词"
+      },
+      {
+        "start": "08:00",
+        "end": "10:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "开始政治复习"
+      },
+      {
+        "start": "10:00",
+        "end": "11:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "专业课笔记"
+      },
+      {
+        "start": "11:30",
+        "end": "12:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭（15分钟解决）"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "图书馆午休趴桌上"
+      },
+      {
+        "start": "12:30",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续专业课"
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "英语阅读训练"
+      },
+      {
+        "start": "17:00",
+        "end": "17:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "17:30",
+        "end": "18:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "回图书馆"
+      },
+      {
+        "start": "18:00",
+        "end": "20:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "文学理论真题"
+      },
+      {
+        "start": "20:00",
+        "end": "21:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "背诵时间"
+      },
+      {
+        "start": "21:30",
+        "end": "22:00",
+        "activity": "self_study",
+        "location_uid": "438038e3",
+        "narrative_zh": "图书馆关门·回宿舍"
+      },
+      {
+        "start": "22:00",
+        "end": "23:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "宿舍再看一小时"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "强迫自己入睡"
+      }
+    ],
+    "tuesday": [
+      {
+        "start": "06:00",
+        "end": "06:20",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床洗漱"
+      },
+      {
+        "start": "06:20",
+        "end": "06:30",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆门口排队"
+      },
+      {
+        "start": "06:30",
+        "end": "06:40",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆开门·占座"
+      },
+      {
+        "start": "06:40",
+        "end": "08:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "背英语单词"
+      },
+      {
+        "start": "08:00",
+        "end": "10:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "开始政治复习"
+      },
+      {
+        "start": "10:00",
+        "end": "11:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "专业课笔记"
+      },
+      {
+        "start": "11:30",
+        "end": "12:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭（15分钟解决）"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "图书馆午休趴桌上"
+      },
+      {
+        "start": "12:30",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续专业课"
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "英语阅读训练"
+      },
+      {
+        "start": "17:00",
+        "end": "17:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "17:30",
+        "end": "18:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "回图书馆"
+      },
+      {
+        "start": "18:00",
+        "end": "20:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "文学理论真题"
+      },
+      {
+        "start": "20:00",
+        "end": "21:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "背诵时间"
+      },
+      {
+        "start": "21:30",
+        "end": "22:00",
+        "activity": "self_study",
+        "location_uid": "438038e3",
+        "narrative_zh": "图书馆关门·回宿舍"
+      },
+      {
+        "start": "22:00",
+        "end": "23:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "宿舍再看一小时"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "强迫自己入睡"
+      }
+    ],
+    "wednesday": [
+      {
+        "start": "06:00",
+        "end": "06:20",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床洗漱"
+      },
+      {
+        "start": "06:20",
+        "end": "06:30",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆门口排队"
+      },
+      {
+        "start": "06:30",
+        "end": "06:40",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆开门·占座"
+      },
+      {
+        "start": "06:40",
+        "end": "08:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "背英语单词"
+      },
+      {
+        "start": "08:00",
+        "end": "10:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "开始政治复习"
+      },
+      {
+        "start": "10:00",
+        "end": "11:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "专业课笔记"
+      },
+      {
+        "start": "11:30",
+        "end": "12:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭（15分钟解决）"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "图书馆午休趴桌上"
+      },
+      {
+        "start": "12:30",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续专业课"
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "英语阅读训练"
+      },
+      {
+        "start": "17:00",
+        "end": "17:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "17:30",
+        "end": "18:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "回图书馆"
+      },
+      {
+        "start": "18:00",
+        "end": "20:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "文学理论真题"
+      },
+      {
+        "start": "20:00",
+        "end": "21:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "背诵时间"
+      },
+      {
+        "start": "21:30",
+        "end": "22:00",
+        "activity": "self_study",
+        "location_uid": "438038e3",
+        "narrative_zh": "图书馆关门·回宿舍"
+      },
+      {
+        "start": "22:00",
+        "end": "23:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "宿舍再看一小时"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "强迫自己入睡"
+      }
+    ],
+    "thursday": [
+      {
+        "start": "06:00",
+        "end": "06:20",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床洗漱"
+      },
+      {
+        "start": "06:20",
+        "end": "06:30",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆门口排队"
+      },
+      {
+        "start": "06:30",
+        "end": "06:40",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆开门·占座"
+      },
+      {
+        "start": "06:40",
+        "end": "08:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "背英语单词"
+      },
+      {
+        "start": "08:00",
+        "end": "10:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "开始政治复习"
+      },
+      {
+        "start": "10:00",
+        "end": "11:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "专业课笔记"
+      },
+      {
+        "start": "11:30",
+        "end": "12:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭（15分钟解决）"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "图书馆午休趴桌上"
+      },
+      {
+        "start": "12:30",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续专业课"
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "英语阅读训练"
+      },
+      {
+        "start": "17:00",
+        "end": "17:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "17:30",
+        "end": "18:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "回图书馆"
+      },
+      {
+        "start": "18:00",
+        "end": "20:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "文学理论真题"
+      },
+      {
+        "start": "20:00",
+        "end": "21:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "背诵时间"
+      },
+      {
+        "start": "21:30",
+        "end": "22:00",
+        "activity": "self_study",
+        "location_uid": "438038e3",
+        "narrative_zh": "图书馆关门·回宿舍"
+      },
+      {
+        "start": "22:00",
+        "end": "23:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "宿舍再看一小时"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "强迫自己入睡"
+      }
+    ],
+    "friday": [
+      {
+        "start": "06:00",
+        "end": "06:20",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床洗漱"
+      },
+      {
+        "start": "06:20",
+        "end": "06:30",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆门口排队"
+      },
+      {
+        "start": "06:30",
+        "end": "06:40",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆开门·占座"
+      },
+      {
+        "start": "06:40",
+        "end": "08:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "背英语单词"
+      },
+      {
+        "start": "08:00",
+        "end": "10:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "开始政治复习"
+      },
+      {
+        "start": "10:00",
+        "end": "11:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "专业课笔记"
+      },
+      {
+        "start": "11:30",
+        "end": "12:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭（15分钟解决）"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "图书馆午休趴桌上"
+      },
+      {
+        "start": "12:30",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续专业课"
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "英语阅读训练"
+      },
+      {
+        "start": "17:00",
+        "end": "17:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "17:30",
+        "end": "18:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "回图书馆"
+      },
+      {
+        "start": "18:00",
+        "end": "20:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "文学理论真题"
+      },
+      {
+        "start": "20:00",
+        "end": "21:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "背诵时间"
+      },
+      {
+        "start": "21:30",
+        "end": "22:00",
+        "activity": "self_study",
+        "location_uid": "438038e3",
+        "narrative_zh": "图书馆关门·回宿舍"
+      },
+      {
+        "start": "22:00",
+        "end": "23:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "宿舍再看一小时"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "强迫自己入睡"
+      }
+    ],
+    "saturday": [
+      {
+        "start": "06:00",
+        "end": "06:20",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床洗漱"
+      },
+      {
+        "start": "11:30",
+        "end": "12:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭（15分钟解决）"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "图书馆午休趴桌上"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "chat",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "周末自由活动"
+      },
+      {
+        "start": "17:00",
+        "end": "17:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "强迫自己入睡"
+      }
+    ],
+    "sunday": [
+      {
+        "start": "06:00",
+        "end": "06:20",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床洗漱"
+      },
+      {
+        "start": "11:30",
+        "end": "12:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭（15分钟解决）"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "图书馆午休趴桌上"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "leisure_media",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "周末闲聊"
+      },
+      {
+        "start": "17:00",
+        "end": "17:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "强迫自己入睡"
+      }
+    ]
+  }
+}

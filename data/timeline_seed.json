@@ -1,0 +1,424 @@
+{
+  "events": [
+    {
+      "day": "Mon",
+      "time": "08:15",
+      "title": "晨间开馆 · 林晓薇 × 贺云舒",
+      "location_uid": "64a9bc35",
+      "people": [
+        "npc01_lin_xiaowei",
+        "npc06_he_yunshu"
+      ],
+      "narrative_zh": "晨间开馆 —— 林晓薇 与 贺云舒 在 Study Area，关系基调：同门学姐妹。",
+      "narrative_en": "Morning library opens — Lin Xiaowei & He Yunshu at Study Area, tone: Senior/junior from same advisor."
+    },
+    {
+      "day": "Mon",
+      "time": "12:30",
+      "title": "食堂午高峰 · 林晓薇 × 李慧敏",
+      "location_uid": "9a49343c",
+      "people": [
+        "npc01_lin_xiaowei",
+        "npc33_li_huimin"
+      ],
+      "narrative_zh": "食堂午高峰 —— 林晓薇 与 李慧敏 在 Dining Area，关系基调：师生·受指导。",
+      "narrative_en": "Cafeteria lunch rush — Lin Xiaowei & Li Huimin at Dining Area, tone: Teacher-student · mentored."
+    },
+    {
+      "day": "Mon",
+      "time": "16:30",
+      "title": "下午茶时间 · 贺云舒 × 李慧敏",
+      "location_uid": "4ef146d8",
+      "people": [
+        "npc06_he_yunshu",
+        "npc33_li_huimin"
+      ],
+      "narrative_zh": "下午茶时间 —— 贺云舒 与 李慧敏 在 Café，关系基调：师生·考研指导。",
+      "narrative_en": "Afternoon coffee — He Yunshu & Li Huimin at Café, tone: Grad-exam mentorship."
+    },
+    {
+      "day": "Mon",
+      "time": "20:00",
+      "title": "晚间社团活动 · 林晓薇 × 温婉如",
+      "location_uid": "8dc3960a",
+      "people": [
+        "npc01_lin_xiaowei",
+        "npc56_wen_wanru"
+      ],
+      "narrative_zh": "晚间社团活动 —— 林晓薇 与 温婉如 在 Club Activities，关系基调：校报同事+文友。",
+      "narrative_en": "Evening club meet — Lin Xiaowei & Wen Wanru at Club Activities, tone: Newspaper colleagues & writing friends."
+    },
+    {
+      "day": "Mon",
+      "time": "22:30",
+      "title": "宿舍熄灯前夜话 · 温婉如 × 李慧敏",
+      "location_uid": "438038e3",
+      "people": [
+        "npc56_wen_wanru",
+        "npc33_li_huimin"
+      ],
+      "narrative_zh": "宿舍熄灯前夜话 —— 温婉如 与 李慧敏 在 Dorm Rooms，关系基调：选修课师生。",
+      "narrative_en": "Pre-lights-out dorm chat — Wen Wanru & Li Huimin at Dorm Rooms, tone: Elective course teacher-student."
+    },
+    {
+      "day": "Tue",
+      "time": "08:15",
+      "title": "晨间开馆 · 陈远航 × 王建国",
+      "location_uid": "64a9bc35",
+      "people": [
+        "npc02_chen_yuanhang",
+        "npc34_wang_jianguo"
+      ],
+      "narrative_zh": "晨间开馆 —— 陈远航 与 王建国 在 Study Area，关系基调：导师-研究生。",
+      "narrative_en": "Morning library opens — Chen Yuanhang & Wang Jianguo at Study Area, tone: Advisor - Grad student."
+    },
+    {
+      "day": "Tue",
+      "time": "12:30",
+      "title": "食堂午高峰 · 许晴岚 × 王建国",
+      "location_uid": "9a49343c",
+      "people": [
+        "npc08_xu_qinglan",
+        "npc34_wang_jianguo"
+      ],
+      "narrative_zh": "食堂午高峰 —— 许晴岚 与 王建国 在 Dining Area，关系基调：导师-研究生。",
+      "narrative_en": "Cafeteria lunch rush — Xu Qinglan & Wang Jianguo at Dining Area, tone: Advisor - Grad student."
+    },
+    {
+      "day": "Tue",
+      "time": "16:30",
+      "title": "下午茶时间 · 吴若琳 × 王建国",
+      "location_uid": "4ef146d8",
+      "people": [
+        "npc10_wu_ruolin",
+        "npc34_wang_jianguo"
+      ],
+      "narrative_zh": "下午茶时间 —— 吴若琳 与 王建国 在 Café，关系基调：导师-研究生。",
+      "narrative_en": "Afternoon coffee — Wu Ruolin & Wang Jianguo at Café, tone: Advisor - Grad student."
+    },
+    {
+      "day": "Tue",
+      "time": "20:00",
+      "title": "晚间社团活动 · 陈远航 × 许晴岚",
+      "location_uid": "8dc3960a",
+      "people": [
+        "npc02_chen_yuanhang",
+        "npc08_xu_qinglan"
+      ],
+      "narrative_zh": "晚间社团活动 —— 陈远航 与 许晴岚 在 Club Activities，关系基调：实验室同门·暗中竞争。",
+      "narrative_en": "Evening club meet — Chen Yuanhang & Xu Qinglan at Club Activities, tone: Lab peers · subtle rivalry."
+    },
+    {
+      "day": "Tue",
+      "time": "22:30",
+      "title": "宿舍熄灯前夜话 · 陈远航 × 吴若琳",
+      "location_uid": "438038e3",
+      "people": [
+        "npc02_chen_yuanhang",
+        "npc10_wu_ruolin"
+      ],
+      "narrative_zh": "宿舍熄灯前夜话 —— 陈远航 与 吴若琳 在 Dorm Rooms，关系基调：实验室同门·互助。",
+      "narrative_en": "Pre-lights-out dorm chat — Chen Yuanhang & Wu Ruolin at Dorm Rooms, tone: Lab peers · mutual help."
+    },
+    {
+      "day": "Wed",
+      "time": "08:15",
+      "title": "晨间开馆 · 许晴岚 × 吴若琳",
+      "location_uid": "64a9bc35",
+      "people": [
+        "npc08_xu_qinglan",
+        "npc10_wu_ruolin"
+      ],
+      "narrative_zh": "晨间开馆 —— 许晴岚 与 吴若琳 在 Study Area，关系基调：同门·微妙竞争。",
+      "narrative_en": "Morning library opens — Xu Qinglan & Wu Ruolin at Study Area, tone: Same lab · subtle rivalry."
+    },
+    {
+      "day": "Wed",
+      "time": "12:30",
+      "title": "食堂午高峰 · 刘思涵 × 吴若琳",
+      "location_uid": "9a49343c",
+      "people": [
+        "npc12_liu_sihan",
+        "npc10_wu_ruolin"
+      ],
+      "narrative_zh": "食堂午高峰 —— 刘思涵 与 吴若琳 在 Dining Area，关系基调：答疑学妹。",
+      "narrative_en": "Cafeteria lunch rush — Liu Sihan & Wu Ruolin at Dining Area, tone: Tutoring junior."
+    },
+    {
+      "day": "Wed",
+      "time": "16:30",
+      "title": "下午茶时间 · 韩子墨 × 孙悦彤",
+      "location_uid": "4ef146d8",
+      "people": [
+        "npc09_han_zimo",
+        "npc19_sun_yuetong"
+      ],
+      "narrative_zh": "下午茶时间 —— 韩子墨 与 孙悦彤 在 Café，关系基调：创业合伙人。",
+      "narrative_en": "Afternoon coffee — Han Zimo & Sun Yuetong at Café, tone: Startup co-founders."
+    },
+    {
+      "day": "Wed",
+      "time": "20:00",
+      "title": "晚间社团活动 · 韩子墨 × 徐嘉铭",
+      "location_uid": "8dc3960a",
+      "people": [
+        "npc09_han_zimo",
+        "npc28_xu_jiaming"
+      ],
+      "narrative_zh": "晚间社团活动 —— 韩子墨 与 徐嘉铭 在 Club Activities，关系基调：内容合作。",
+      "narrative_en": "Evening club meet — Han Zimo & Xu Jiaming at Club Activities, tone: Content collaboration."
+    },
+    {
+      "day": "Wed",
+      "time": "22:30",
+      "title": "宿舍熄灯前夜话 · 苏雨桐 × 唐亦辰",
+      "location_uid": "438038e3",
+      "people": [
+        "npc03_su_yutong",
+        "npc13_tang_yichen"
+      ],
+      "narrative_zh": "宿舍熄灯前夜话 —— 苏雨桐 与 唐亦辰 在 Dorm Rooms，关系基调：同门竞赛搭档。",
+      "narrative_en": "Pre-lights-out dorm chat — Su Yutong & Tang Yichen at Dorm Rooms, tone: Competition partners."
+    },
+    {
+      "day": "Thu",
+      "time": "08:15",
+      "title": "晨间开馆 · 唐亦辰 × 张伟民",
+      "location_uid": "64a9bc35",
+      "people": [
+        "npc13_tang_yichen",
+        "npc36_zhang_weimin"
+      ],
+      "narrative_zh": "晨间开馆 —— 唐亦辰 与 张伟民 在 Study Area，关系基调：导师-毕设指导。",
+      "narrative_en": "Morning library opens — Tang Yichen & Zhang Weimin at Study Area, tone: Thesis advisor."
+    },
+    {
+      "day": "Thu",
+      "time": "12:30",
+      "title": "食堂午高峰 · 蒋语嫣 × 张伟民",
+      "location_uid": "9a49343c",
+      "people": [
+        "npc14_jiang_yuyan",
+        "npc36_zhang_weimin"
+      ],
+      "narrative_zh": "食堂午高峰 —— 蒋语嫣 与 张伟民 在 Dining Area，关系基调：课程师生。",
+      "narrative_en": "Cafeteria lunch rush — Jiang Yuyan & Zhang Weimin at Dining Area, tone: Course teacher-student."
+    },
+    {
+      "day": "Thu",
+      "time": "16:30",
+      "title": "下午茶时间 · 苏雨桐 × 张伟民",
+      "location_uid": "4ef146d8",
+      "people": [
+        "npc03_su_yutong",
+        "npc36_zhang_weimin"
+      ],
+      "narrative_zh": "下午茶时间 —— 苏雨桐 与 张伟民 在 Café，关系基调：竞赛指导师生。",
+      "narrative_en": "Afternoon coffee — Su Yutong & Zhang Weimin at Café, tone: Competition mentor-student."
+    },
+    {
+      "day": "Thu",
+      "time": "20:00",
+      "title": "晚间社团活动 · 陆小曼 × 张伟民",
+      "location_uid": "8dc3960a",
+      "people": [
+        "npc16_lu_xiaoman",
+        "npc36_zhang_weimin"
+      ],
+      "narrative_zh": "晚间社团活动 —— 陆小曼 与 张伟民 在 Club Activities，关系基调：研究生-导师。",
+      "narrative_en": "Evening club meet — Lu Xiaoman & Zhang Weimin at Club Activities, tone: Grad student - Advisor."
+    },
+    {
+      "day": "Thu",
+      "time": "22:30",
+      "title": "宿舍熄灯前夜话 · 马天翔 × 王思瑶",
+      "location_uid": "438038e3",
+      "people": [
+        "npc15_ma_tianxiang",
+        "npc17_wang_siyao"
+      ],
+      "narrative_zh": "宿舍熄灯前夜话 —— 马天翔 与 王思瑶 在 Dorm Rooms，关系基调：学生会同事。",
+      "narrative_en": "Pre-lights-out dorm chat — Ma Tianxiang & Wang Siyao at Dorm Rooms, tone: Student union colleagues."
+    },
+    {
+      "day": "Fri",
+      "time": "08:15",
+      "title": "晨间开馆 · 王思瑶 × 赵丽华",
+      "location_uid": "64a9bc35",
+      "people": [
+        "npc17_wang_siyao",
+        "npc35_zhao_lihua"
+      ],
+      "narrative_zh": "晨间开馆 —— 王思瑶 与 赵丽华 在 Study Area，关系基调：辅导员管辖。",
+      "narrative_en": "Morning library opens — Wang Siyao & Zhao Lihua at Study Area, tone: Under counselor's charge."
+    },
+    {
+      "day": "Fri",
+      "time": "12:30",
+      "title": "食堂午高峰 · 杨明哲 × 孙悦彤",
+      "location_uid": "9a49343c",
+      "people": [
+        "npc18_yang_mingzhe",
+        "npc19_sun_yuetong"
+      ],
+      "narrative_zh": "食堂午高峰 —— 杨明哲 与 孙悦彤 在 Dining Area，关系基调：商业观点交锋。",
+      "narrative_en": "Cafeteria lunch rush — Yang Mingzhe & Sun Yuetong at Dining Area, tone: Business-view clash."
+    },
+    {
+      "day": "Fri",
+      "time": "16:30",
+      "title": "下午茶时间 · 孙悦彤 × 魏子涵",
+      "location_uid": "4ef146d8",
+      "people": [
+        "npc19_sun_yuetong",
+        "npc41_wei_zihan"
+      ],
+      "narrative_zh": "下午茶时间 —— 孙悦彤 与 魏子涵 在 Café，关系基调：创业圈朋友。",
+      "narrative_en": "Afternoon coffee — Sun Yuetong & Wei Zihan at Café, tone: Startup circle friends."
+    },
+    {
+      "day": "Fri",
+      "time": "20:00",
+      "title": "晚间社团活动 · 陈芷若 × 赵丽华",
+      "location_uid": "8dc3960a",
+      "people": [
+        "npc20_chen_zhiruo",
+        "npc35_zhao_lihua"
+      ],
+      "narrative_zh": "晚间社团活动 —— 陈芷若 与 赵丽华 在 Club Activities，关系基调：辅导员关注对象。",
+      "narrative_en": "Evening club meet — Chen Zhiruo & Zhao Lihua at Club Activities, tone: On counselor's watch list."
+    },
+    {
+      "day": "Fri",
+      "time": "22:30",
+      "title": "宿舍熄灯前夜话 · 李默然 × 黄子轩",
+      "location_uid": "438038e3",
+      "people": [
+        "npc21_li_moran",
+        "npc23_huang_zixuan"
+      ],
+      "narrative_zh": "宿舍熄灯前夜话 —— 李默然 与 黄子轩 在 Dorm Rooms，关系基调：理科天才联盟。",
+      "narrative_en": "Pre-lights-out dorm chat — Li Moran & Huang Zixuan at Dorm Rooms, tone: Science-genius alliance."
+    },
+    {
+      "day": "Sat",
+      "time": "08:15",
+      "title": "晨间开馆 · 周小梦 × 赵丽华",
+      "location_uid": "64a9bc35",
+      "people": [
+        "npc22_zhou_xiaomeng",
+        "npc35_zhao_lihua"
+      ],
+      "narrative_zh": "晨间开馆 —— 周小梦 与 赵丽华 在 Study Area，关系基调：心理危机转介合作。",
+      "narrative_en": "Morning library opens — Zhou Xiaomeng & Zhao Lihua at Study Area, tone: Crisis referral cooperation."
+    },
+    {
+      "day": "Sat",
+      "time": "12:30",
+      "title": "食堂午高峰 · 周小梦 × 孙芳",
+      "location_uid": "9a49343c",
+      "people": [
+        "npc22_zhou_xiaomeng",
+        "npc40_sun_fang"
+      ],
+      "narrative_zh": "食堂午高峰 —— 周小梦 与 孙芳 在 Dining Area，关系基调：心理+医疗联动。",
+      "narrative_en": "Cafeteria lunch rush — Zhou Xiaomeng & Sun Fang at Dining Area, tone: Psych + medical coordination."
+    },
+    {
+      "day": "Sat",
+      "time": "16:30",
+      "title": "下午茶时间 · 叶知秋 × 张鹤鸣",
+      "location_uid": "4ef146d8",
+      "people": [
+        "npc44_ye_zhiqiu",
+        "npc04_zhang_heming"
+      ],
+      "narrative_zh": "下午茶时间 —— 叶知秋 与 张鹤鸣 在 Café，关系基调：学术讨论伙伴。",
+      "narrative_en": "Afternoon coffee — Ye Zhiqiu & Zhang Heming at Café, tone: Academic discussion partners."
+    },
+    {
+      "day": "Sat",
+      "time": "20:00",
+      "title": "晚间社团活动 · 叶知秋 × 陶然",
+      "location_uid": "8dc3960a",
+      "people": [
+        "npc44_ye_zhiqiu",
+        "npc60_tao_ran"
+      ],
+      "narrative_zh": "晚间社团活动 —— 叶知秋 与 陶然 在 Club Activities，关系基调：科学哲学同好。",
+      "narrative_en": "Evening club meet — Ye Zhiqiu & Tao Ran at Club Activities, tone: Philosophy-of-science peers."
+    },
+    {
+      "day": "Sat",
+      "time": "22:30",
+      "title": "宿舍熄灯前夜话 · 何佳琪 × 徐嘉铭",
+      "location_uid": "438038e3",
+      "people": [
+        "npc27_he_jiaqi",
+        "npc28_xu_jiaming"
+      ],
+      "narrative_zh": "宿舍熄灯前夜话 —— 何佳琪 与 徐嘉铭 在 Dorm Rooms，关系基调：内容创作交流。",
+      "narrative_en": "Pre-lights-out dorm chat — He Jiaqi & Xu Jiaming at Dorm Rooms, tone: Creator-community exchange."
+    },
+    {
+      "day": "Sun",
+      "time": "08:15",
+      "title": "晨间开馆 · 徐嘉铭 × 苏雨桐",
+      "location_uid": "64a9bc35",
+      "people": [
+        "npc28_xu_jiaming",
+        "npc03_su_yutong"
+      ],
+      "narrative_zh": "晨间开馆 —— 徐嘉铭 与 苏雨桐 在 Study Area，关系基调：拍视频合作。",
+      "narrative_en": "Morning library opens — Xu Jiaming & Su Yutong at Study Area, tone: Video shooting collab."
+    },
+    {
+      "day": "Sun",
+      "time": "12:30",
+      "title": "食堂午高峰 · 程思远 × 张鹤鸣",
+      "location_uid": "9a49343c",
+      "people": [
+        "npc29_cheng_siyuan",
+        "npc04_zhang_heming"
+      ],
+      "narrative_zh": "食堂午高峰 —— 程思远 与 张鹤鸣 在 Dining Area，关系基调：博士同读书会。",
+      "narrative_en": "Cafeteria lunch rush — Cheng Siyuan & Zhang Heming at Dining Area, tone: PhD reading group."
+    },
+    {
+      "day": "Sun",
+      "time": "16:30",
+      "title": "下午茶时间 · 程思远 × 罗晨曦",
+      "location_uid": "4ef146d8",
+      "people": [
+        "npc29_cheng_siyuan",
+        "npc32_luo_chenxi"
+      ],
+      "narrative_zh": "下午茶时间 —— 程思远 与 罗晨曦 在 Café，关系基调：采访合作。",
+      "narrative_en": "Afternoon coffee — Cheng Siyuan & Luo Chenxi at Café, tone: Interview collaboration."
+    },
+    {
+      "day": "Sun",
+      "time": "20:00",
+      "title": "晚间社团活动 · 罗晨曦 × 林晓薇",
+      "location_uid": "8dc3960a",
+      "people": [
+        "npc32_luo_chenxi",
+        "npc01_lin_xiaowei"
+      ],
+      "narrative_zh": "晚间社团活动 —— 罗晨曦 与 林晓薇 在 Club Activities，关系基调：校园媒体合作。",
+      "narrative_en": "Evening club meet — Luo Chenxi & Lin Xiaowei at Club Activities, tone: Campus media collaboration."
+    },
+    {
+      "day": "Sun",
+      "time": "22:30",
+      "title": "宿舍熄灯前夜话 · 罗晨曦 × 徐嘉铭",
+      "location_uid": "438038e3",
+      "people": [
+        "npc32_luo_chenxi",
+        "npc28_xu_jiaming"
+      ],
+      "narrative_zh": "宿舍熄灯前夜话 —— 罗晨曦 与 徐嘉铭 在 Dorm Rooms，关系基调：媒体圈同行。",
+      "narrative_en": "Pre-lights-out dorm chat — Luo Chenxi & Xu Jiaming at Dorm Rooms, tone: Media-circle peers."
+    }
+  ]
+}

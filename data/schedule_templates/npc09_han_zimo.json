@@ -1,0 +1,524 @@
+{
+  "id": "npc09_han_zimo",
+  "description": "基于参考 HTML 的 韩子墨 周课表（工作日相同，周末略简）。",
+  "week": {
+    "monday": [
+      {
+        "start": "00:30",
+        "end": "09:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      },
+      {
+        "start": "09:00",
+        "end": "09:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "自然醒"
+      },
+      {
+        "start": "09:30",
+        "end": "11:00",
+        "activity": "lab_work",
+        "location_uid": "438038e3",
+        "narrative_zh": "宿舍直接开始写代码"
+      },
+      {
+        "start": "11:00",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "叫外卖"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "边吃边测试"
+      },
+      {
+        "start": "13:00",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "出门上专业必修课"
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍继续开发"
+      },
+      {
+        "start": "17:00",
+        "end": "18:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "创业孵化中心和合伙人碰面"
+      },
+      {
+        "start": "18:30",
+        "end": "19:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:30",
+        "end": "22:00",
+        "activity": "coffee_break",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "咖啡厅换个环境写代码"
+      },
+      {
+        "start": "22:00",
+        "end": "23:30",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍·运营产品社群"
+      },
+      {
+        "start": "23:30",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "看产品数据"
+      }
+    ],
+    "tuesday": [
+      {
+        "start": "00:30",
+        "end": "09:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      },
+      {
+        "start": "09:00",
+        "end": "09:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "自然醒"
+      },
+      {
+        "start": "09:30",
+        "end": "11:00",
+        "activity": "lab_work",
+        "location_uid": "438038e3",
+        "narrative_zh": "宿舍直接开始写代码"
+      },
+      {
+        "start": "11:00",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "叫外卖"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "边吃边测试"
+      },
+      {
+        "start": "13:00",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "出门上专业必修课"
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍继续开发"
+      },
+      {
+        "start": "17:00",
+        "end": "18:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "创业孵化中心和合伙人碰面"
+      },
+      {
+        "start": "18:30",
+        "end": "19:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:30",
+        "end": "22:00",
+        "activity": "coffee_break",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "咖啡厅换个环境写代码"
+      },
+      {
+        "start": "22:00",
+        "end": "23:30",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍·运营产品社群"
+      },
+      {
+        "start": "23:30",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "看产品数据"
+      }
+    ],
+    "wednesday": [
+      {
+        "start": "00:30",
+        "end": "09:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      },
+      {
+        "start": "09:00",
+        "end": "09:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "自然醒"
+      },
+      {
+        "start": "09:30",
+        "end": "11:00",
+        "activity": "lab_work",
+        "location_uid": "438038e3",
+        "narrative_zh": "宿舍直接开始写代码"
+      },
+      {
+        "start": "11:00",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "叫外卖"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "边吃边测试"
+      },
+      {
+        "start": "13:00",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "出门上专业必修课"
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍继续开发"
+      },
+      {
+        "start": "17:00",
+        "end": "18:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "创业孵化中心和合伙人碰面"
+      },
+      {
+        "start": "18:30",
+        "end": "19:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:30",
+        "end": "22:00",
+        "activity": "coffee_break",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "咖啡厅换个环境写代码"
+      },
+      {
+        "start": "22:00",
+        "end": "23:30",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍·运营产品社群"
+      },
+      {
+        "start": "23:30",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "看产品数据"
+      }
+    ],
+    "thursday": [
+      {
+        "start": "00:30",
+        "end": "09:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      },
+      {
+        "start": "09:00",
+        "end": "09:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "自然醒"
+      },
+      {
+        "start": "09:30",
+        "end": "11:00",
+        "activity": "lab_work",
+        "location_uid": "438038e3",
+        "narrative_zh": "宿舍直接开始写代码"
+      },
+      {
+        "start": "11:00",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "叫外卖"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "边吃边测试"
+      },
+      {
+        "start": "13:00",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "出门上专业必修课"
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍继续开发"
+      },
+      {
+        "start": "17:00",
+        "end": "18:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "创业孵化中心和合伙人碰面"
+      },
+      {
+        "start": "18:30",
+        "end": "19:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:30",
+        "end": "22:00",
+        "activity": "coffee_break",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "咖啡厅换个环境写代码"
+      },
+      {
+        "start": "22:00",
+        "end": "23:30",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍·运营产品社群"
+      },
+      {
+        "start": "23:30",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "看产品数据"
+      }
+    ],
+    "friday": [
+      {
+        "start": "00:30",
+        "end": "09:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      },
+      {
+        "start": "09:00",
+        "end": "09:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "自然醒"
+      },
+      {
+        "start": "09:30",
+        "end": "11:00",
+        "activity": "lab_work",
+        "location_uid": "438038e3",
+        "narrative_zh": "宿舍直接开始写代码"
+      },
+      {
+        "start": "11:00",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "叫外卖"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "边吃边测试"
+      },
+      {
+        "start": "13:00",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "出门上专业必修课"
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍继续开发"
+      },
+      {
+        "start": "17:00",
+        "end": "18:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "创业孵化中心和合伙人碰面"
+      },
+      {
+        "start": "18:30",
+        "end": "19:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:30",
+        "end": "22:00",
+        "activity": "coffee_break",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "咖啡厅换个环境写代码"
+      },
+      {
+        "start": "22:00",
+        "end": "23:30",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍·运营产品社群"
+      },
+      {
+        "start": "23:30",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "看产品数据"
+      }
+    ],
+    "saturday": [
+      {
+        "start": "00:30",
+        "end": "09:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      },
+      {
+        "start": "09:00",
+        "end": "09:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "自然醒"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "chat",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "周末自由活动"
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍继续开发"
+      },
+      {
+        "start": "18:30",
+        "end": "19:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "22:00",
+        "end": "23:30",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍·运营产品社群"
+      }
+    ],
+    "sunday": [
+      {
+        "start": "00:30",
+        "end": "09:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      },
+      {
+        "start": "09:00",
+        "end": "09:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "自然醒"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "leisure_media",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "周末闲聊"
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍继续开发"
+      },
+      {
+        "start": "18:30",
+        "end": "19:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "22:00",
+        "end": "23:30",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍·运营产品社群"
+      }
+    ]
+  }
+}

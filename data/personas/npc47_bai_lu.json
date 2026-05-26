@@ -1,0 +1,76 @@
+{
+  "id": "npc47_bai_lu",
+  "name": "白露",
+  "role": "undergraduate_arts",
+  "personality": {
+    "openness": 0.75,
+    "conscientiousness": 0.7,
+    "extraversion": 0.45,
+    "agreeableness": 0.6,
+    "neuroticism": 0.5
+  },
+  "preferences": {
+    "favorite_locations": [
+      "438038e3"
+    ],
+    "favorite_tags": [
+      "creative",
+      "leisure"
+    ]
+  },
+  "relations": {
+    "npc25_lin_yuxuan": "排练厅邻居",
+    "npc40_sun_fang": "舞蹈伤病常来看",
+    "npc14_jiang_yuyan": "艺术审美同好"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc47_bai_lu",
+  "profile": {
+    "id_num": 47,
+    "name_zh": "白露",
+    "name_en": "Bai Lu",
+    "age": 21,
+    "role_zh": "舞蹈系大三·古典舞者",
+    "role_en": "Dance Yr3 · Classical Dancer",
+    "major_zh": "舞蹈表演",
+    "major_en": "Dance Performance",
+    "group_zh": "艺术学院",
+    "group_en": "",
+    "mbti": "ISFP",
+    "ocean_raw": "O75 C70 E45 A60 N50",
+    "innate_zh": "柔韧性极好、节奏感强、表现力丰富",
+    "innate_en": "Flexibility, musicality, expressiveness",
+    "learned_zh": "十五年舞蹈训练塑造的身体控制力和舞台气质",
+    "learned_en": "15 years of training built body control and stage presence",
+    "belief_zh": "身体是最诚实的表达工具",
+    "belief_en": "The body is the most honest instrument",
+    "goal_zh": "进入国家级舞蹈团",
+    "goal_en": "Join a national dance troupe",
+    "contradiction_zh": "追求艺术极致 vs 身体伤痛的折磨",
+    "contradiction_en": "Artistic extremity vs. chronic injuries",
+    "surface_zh": "优雅沉静",
+    "surface_en": "Elegant, serene",
+    "deep_zh": "每天都在和伤痛做斗争",
+    "deep_en": "Fights pain daily",
+    "fear_zh": "身体不允许再跳下去",
+    "fear_en": "Body giving up",
+    "desire_zh": "在舞台上绽放到最后一刻",
+    "desire_en": "Bloom on stage until the very end",
+    "lifestyle_zh": "围绕排练运转",
+    "lifestyle_en": "Orbits rehearsal",
+    "rhythm_zh": "上午基本功，下午排练，晚上恢复",
+    "rhythm_en": "Basics AM, rehearsal PM, recovery at night",
+    "spaces_zh": "舞蹈排练厅、康复室、宿舍",
+    "spaces_en": "Studio, rehab, dorm",
+    "long_desire_zh": "下个月汇报演出完美呈现",
+    "long_desire_en": "Flawless show next month",
+    "short_goal_zh": "今天把新舞段记完",
+    "short_goal_en": "Memorize new choreography today",
+    "constraint_zh": "腰伤未愈；排练时间和其他课冲突",
+    "constraint_en": "Waist injury unhealed; rehearsal conflicts with classes",
+    "bias_zh": "倾向忽视身体的疼痛信号",
+    "bias_en": "Ignores body's pain signals",
+    "narrative_zh": "疼是暂时的，遗憾是永远的",
+    "narrative_en": "Pain is temporary; regret is forever"
+  }
+}

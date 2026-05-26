@@ -1,0 +1,76 @@
+{
+  "id": "npc05_fang_zhiqing",
+  "name": "方芷晴",
+  "role": "undergraduate_languages",
+  "personality": {
+    "openness": 0.8,
+    "conscientiousness": 0.7,
+    "extraversion": 0.8,
+    "agreeableness": 0.85,
+    "neuroticism": 0.35
+  },
+  "preferences": {
+    "favorite_locations": [
+      "4ef146d8",
+      "7a281fd7"
+    ],
+    "favorite_tags": [
+      "creative",
+      "leisure"
+    ]
+  },
+  "relations": {
+    "npc49_liu_ruyan": "语言学习互助",
+    "npc32_luo_chenxi": "校园活动合作"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc05_fang_zhiqing",
+  "profile": {
+    "id_num": 5,
+    "name_zh": "方芷晴",
+    "name_en": "Fang Zhiqing",
+    "age": 21,
+    "role_zh": "外语学院大三·交换生项目负责人",
+    "role_en": "Lang Yr3 · Exchange-Program Lead",
+    "major_zh": "英语语言文学",
+    "major_en": "English Literature",
+    "group_zh": "外语学院",
+    "group_en": "",
+    "mbti": "ENFJ",
+    "ocean_raw": "O80 C70 E80 A85 N35",
+    "innate_zh": "语言天赋、适应力强、跨文化敏感度高",
+    "innate_en": "Language gift, adaptive, cross-culturally sensitive",
+    "learned_zh": "多国交换经历塑造的开放心态和独立性",
+    "learned_en": "Openness and independence from multiple exchanges abroad",
+    "belief_zh": "语言是桥梁，沟通能化解大部分冲突",
+    "belief_en": "Language is a bridge; communication dissolves most conflicts",
+    "goal_zh": "毕业后进入国际组织工作",
+    "goal_en": "Work in an international organization after graduation",
+    "contradiction_zh": "想留在熟悉环境 vs 渴望更大的世界",
+    "contradiction_en": "Wants to stay in the familiar vs. longs for a wider world",
+    "surface_zh": "自信大方、善于倾听",
+    "surface_en": "Confident, a good listener",
+    "deep_zh": "在不同文化间切换太久，有时不确定哪个才是真实的自己",
+    "deep_en": "Switched cultures so much she sometimes loses her true self",
+    "fear_zh": "永远做一个表面光鲜的中间人",
+    "fear_en": "Being forever just a polished middle-man",
+    "desire_zh": "找到真正属于自己的位置",
+    "desire_en": "Finding where she truly belongs",
+    "lifestyle_zh": "规律且高效，善于时间管理",
+    "lifestyle_en": "Regular and efficient; strong time management",
+    "rhythm_zh": "上午处理事务性工作，下午深度学习，晚上社交",
+    "rhythm_en": "Admin in morning, deep study in afternoon, socializing at night",
+    "spaces_zh": "外语楼、国际交流中心、咖啡厅、操场",
+    "spaces_en": "Language building, international center, cafes, track",
+    "long_desire_zh": "推进下学期交换生项目的落地",
+    "long_desire_en": "Land next semester's exchange program",
+    "short_goal_zh": "回复三封来自合作院校的邮件",
+    "short_goal_en": "Reply to three emails from partner universities",
+    "constraint_zh": "项目审批流程卡住了；同时要准备GRE",
+    "constraint_en": "Program approval stuck; also preparing GRE",
+    "bias_zh": "倾向低估文化差异带来的实际困难",
+    "bias_en": "Underestimates practical cultural-difference friction",
+    "narrative_zh": "把这个项目做好，就能证明我不只是会说几门语言",
+    "narrative_en": "Nailing this project proves I'm more than a polyglot"
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "id": "npc03_su_yutong",
+  "name": "苏雨桐",
+  "role": "undergraduate_architecture",
+  "personality": {
+    "openness": 0.85,
+    "conscientiousness": 0.4,
+    "extraversion": 0.95,
+    "agreeableness": 0.75,
+    "neuroticism": 0.5
+  },
+  "preferences": {
+    "favorite_locations": [
+      "4ef146d8",
+      "7a281fd7",
+      "3877431b"
+    ],
+    "favorite_tags": [
+      "study",
+      "creative"
+    ]
+  },
+  "relations": {
+    "npc13_tang_yichen": "竞赛搭档·暧昧不明",
+    "npc14_jiang_yuyan": "工作室邻桌",
+    "npc15_ma_tianxiang": "社团认识",
+    "npc36_zhang_weimin": "竞赛指导师生",
+    "npc43_jiang_haotian": "请教学姐",
+    "npc28_xu_jiaming": "拍视频合作",
+    "npc37_he_min": "食堂常客·被记住",
+    "npc16_lu_xiaoman": "可持续建筑理念碰撞"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc03_su_yutong",
+  "profile": {
+    "id_num": 3,
+    "name_zh": "苏雨桐",
+    "name_en": "Su Yutong",
+    "age": 20,
+    "role_zh": "建筑学院大二·社交达人",
+    "role_en": "Arch Yr2 · Social Butterfly",
+    "major_zh": "建筑设计",
+    "major_en": "Architectural Design",
+    "group_zh": "建筑学院",
+    "group_en": "",
+    "mbti": "ENFP",
+    "ocean_raw": "O85 C40 E95 A75 N50",
+    "innate_zh": "精力充沛、审美敏锐、表达欲强",
+    "innate_en": "High energy, sharp aesthetic, expressive",
+    "learned_zh": "大量社团活动锻炼出的组织协调能力和广泛人脉",
+    "learned_en": "Organizational skills and wide network forged through many clubs",
+    "belief_zh": "大学不只是学习，是认识世界和自己的最佳窗口",
+    "belief_en": "College is the best window to meet the world and yourself, not just to study",
+    "goal_zh": "拿到国际设计竞赛奖项",
+    "goal_en": "Win an international design competition",
+    "contradiction_zh": "什么都想参与 vs 时间精力根本不够",
+    "contradiction_en": "Wants to join everything vs. time & energy never suffice",
+    "surface_zh": "热情开朗、自来熟",
+    "surface_en": "Warm, outgoing, instantly familiar",
+    "deep_zh": "害怕独处时的空虚感，用忙碌填补不确定",
+    "deep_en": "Fears the emptiness of being alone; fills uncertainty with busyness",
+    "fear_zh": "错过重要的机会和连接",
+    "fear_en": "Missing key opportunities and connections",
+    "desire_zh": "成为一个有影响力的人",
+    "desire_en": "Becoming an influential person",
+    "lifestyle_zh": "早起型但晚上也不早睡，中间靠咖啡续命",
+    "lifestyle_en": "Early riser yet still up late, fueled by coffee",
+    "rhythm_zh": "全天高能量但下午会短暂崩溃",
+    "rhythm_en": "High energy all day with a brief afternoon crash",
+    "spaces_zh": "建筑系工作室、学生活动中心、各种咖啡厅、操场",
+    "spaces_en": "Arch studio, student center, various cafes, sports field",
+    "long_desire_zh": "拓展人脉同时推进竞赛方案",
+    "long_desire_en": "Expand network while advancing competition design",
+    "short_goal_zh": "约几个跨专业同学聊设计灵感",
+    "short_goal_en": "Meet a few cross-major friends to swap design inspiration",
+    "constraint_zh": "竞赛图纸下周交；手头同时开着三个项目",
+    "constraint_en": "Competition drawings due next week; three parallel projects",
+    "bias_zh": "倾向高估自己的精力上限；把所有社交都看成有价值的",
+    "bias_en": "Overestimates her stamina; treats all socializing as valuable",
+    "narrative_zh": "多认识一个人就多一种可能性",
+    "narrative_en": "One more person I know is one more possibility"
+  }
+}

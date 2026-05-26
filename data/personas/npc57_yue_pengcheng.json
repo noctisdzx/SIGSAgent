@@ -1,0 +1,76 @@
+{
+  "id": "npc57_yue_pengcheng",
+  "name": "岳鹏程",
+  "role": "graduate_master",
+  "personality": {
+    "openness": 0.55,
+    "conscientiousness": 0.8,
+    "extraversion": 0.35,
+    "agreeableness": 0.5,
+    "neuroticism": 0.35
+  },
+  "preferences": {
+    "favorite_locations": [
+      "3877431b"
+    ],
+    "favorite_tags": [
+      "study",
+      "leisure"
+    ]
+  },
+  "relations": {
+    "npc08_xu_qinglan": "跨组技术交流",
+    "npc13_tang_yichen": "跨学科结构讨论",
+    "npc55_shi_lei": "实验室邻居·工科苦逼联盟"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc57_yue_pengcheng",
+  "profile": {
+    "id_num": 57,
+    "name_zh": "岳鹏程",
+    "name_en": "Yue Pengcheng",
+    "age": 23,
+    "role_zh": "机械工程研一·实验室劳模",
+    "role_en": "Mech Eng M1 · Workshop Hero",
+    "major_zh": "机械设计制造",
+    "major_en": "Mechanical Design & Manufacturing",
+    "group_zh": "理学院",
+    "group_en": "",
+    "mbti": "ISTP",
+    "ocean_raw": "O55 C80 E35 A50 N35",
+    "innate_zh": "动手能力极强、耐心细致、能吃苦",
+    "innate_en": "Extreme hands-on, patient, hard-working",
+    "learned_zh": "本科毕业设计期间掌握了车铣刨磨全套技能",
+    "learned_en": "Mastered full machining in undergrad thesis",
+    "belief_zh": "理论再好不如一个能跑的原型",
+    "belief_en": "A running prototype beats a pretty theory",
+    "goal_zh": "做出一个能落地的产品原型",
+    "goal_en": "Deliverable product prototype",
+    "contradiction_zh": "喜欢动手做东西 vs 导师要他写论文",
+    "contradiction_en": "Loves making things vs. advisor pushes for papers",
+    "surface_zh": "不太说话·手不停",
+    "surface_en": "Quiet, hands-always-busy",
+    "deep_zh": "在车间里最自在",
+    "deep_en": "Most at home in the workshop",
+    "fear_zh": "一辈子只能画图不能做实物",
+    "fear_en": "Stuck drafting, never building",
+    "desire_zh": "把图纸变成真实的机器",
+    "desire_en": "Turning drawings into real machines",
+    "lifestyle_zh": "实验室就是家",
+    "lifestyle_en": "Lab is home",
+    "rhythm_zh": "上午加工，下午调试，晚上设计",
+    "rhythm_en": "Machining AM, debug PM, design at night",
+    "spaces_zh": "机械车间、实验室、CAD机房",
+    "spaces_en": "Mechanical workshop, lab, CAD room",
+    "long_desire_zh": "原型机在月底跑起来",
+    "long_desire_en": "Prototype running by month-end",
+    "short_goal_zh": "今天把那个轴承座车出来",
+    "short_goal_en": "Turn the bearing seat today",
+    "constraint_zh": "车间排队等设备；零件精度不够需要返工",
+    "constraint_en": "Machine queue; tolerance fails, needs rework",
+    "bias_zh": "倾向花太多时间在加工上而忽视文档",
+    "bias_en": "Spends too much on machining, ignores documentation",
+    "narrative_zh": "论文可以晚点写，零件公差不能等",
+    "narrative_en": "Papers can wait; tolerances cannot"
+  }
+}

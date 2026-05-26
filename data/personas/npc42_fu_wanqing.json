@@ -1,0 +1,75 @@
+{
+  "id": "npc42_fu_wanqing",
+  "name": "傅婉清",
+  "role": "undergraduate_science",
+  "personality": {
+    "openness": 0.55,
+    "conscientiousness": 0.8,
+    "extraversion": 0.35,
+    "agreeableness": 0.8,
+    "neuroticism": 0.45
+  },
+  "preferences": {
+    "favorite_locations": [
+      "7a281fd7"
+    ],
+    "favorite_tags": [
+      "study",
+      "fitness"
+    ]
+  },
+  "relations": {
+    "npc31_xie_anran": "传统文化同好",
+    "npc46_qin_ling": "野外采药和地质的交集"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc42_fu_wanqing",
+  "profile": {
+    "id_num": 42,
+    "name_zh": "傅婉清",
+    "name_en": "Fu Wanqing",
+    "age": 22,
+    "role_zh": "中医学院大四·传统文化守护者",
+    "role_en": "TCM Yr4 · Tradition Guardian",
+    "major_zh": "中医学",
+    "major_en": "Traditional Chinese Medicine",
+    "group_zh": "理学院",
+    "group_en": "",
+    "mbti": "ISFJ",
+    "ocean_raw": "O55 C80 E35 A80 N45",
+    "innate_zh": "耐心细致、记忆力好、动手灵巧",
+    "innate_en": "Patient, sharp memory, dexterous",
+    "learned_zh": "四年中医学习培养的望闻问切直觉和草药辨识能力",
+    "learned_en": "Four years of diagnostic intuition and herbal knowledge",
+    "belief_zh": "中医是活的文化遗产",
+    "belief_en": "TCM is living cultural heritage",
+    "goal_zh": "成为一名好中医",
+    "goal_en": "Become a good TCM practitioner",
+    "contradiction_zh": "坚信中医 vs 外界对中医的质疑让她疲于解释",
+    "contradiction_en": "Believes in TCM vs. tired of explaining to skeptics",
+    "surface_zh": "温和安静、有古典气质",
+    "surface_en": "Gentle, classical aura",
+    "deep_zh": "对中医的未来有一种使命感",
+    "deep_en": "Feels a sense of mission for TCM's future",
+    "fear_zh": "中医断代",
+    "fear_en": "TCM being severed across generations",
+    "desire_zh": "让更多年轻人了解中医",
+    "desire_en": "More young people understanding TCM",
+    "lifestyle_zh": "规律·按中医养生原则作息",
+    "lifestyle_en": "Regular; follows TCM life principles",
+    "rhythm_zh": "早睡早起，午时休息",
+    "rhythm_en": "Early to bed/rise; noon rest",
+    "spaces_zh": "中医学院药房、诊所实习、校园药圃",
+    "spaces_en": "TCM pharmacy, clinical internship, campus herb garden",
+    "long_desire_zh": "临床实习表现获得带教老师认可",
+    "long_desire_en": "Good reviews from her internship supervisor",
+    "short_goal_zh": "今天把脉诊实习记录整理好",
+    "short_goal_en": "Organize today's pulse-diagnosis notes",
+    "constraint_zh": "实习时间长很累；需要记大量方剂",
+    "constraint_en": "Long internship hours; tons of formulas to memorize",
+    "bias_zh": "倾向排斥纯西医的治疗思路",
+    "bias_en": "Reflexively rejects pure-Western approaches",
+    "narrative_zh": "中医需要的是时间和耐心，不是速效",
+    "narrative_en": "TCM needs time and patience, not quick fixes"
+  }
+}

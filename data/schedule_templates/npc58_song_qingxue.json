@@ -1,0 +1,524 @@
+{
+  "id": "npc58_song_qingxue",
+  "description": "基于参考 HTML 的 宋清雪 周课表（工作日相同，周末略简）。",
+  "week": {
+    "monday": [
+      {
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床"
+      },
+      {
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "08:00",
+        "end": "10:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "上课"
+      },
+      {
+        "start": "10:00",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "去社区发放健康宣传材料"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "14:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "整理问卷数据"
+      },
+      {
+        "start": "14:30",
+        "end": "16:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "上课"
+      },
+      {
+        "start": "16:00",
+        "end": "17:30",
+        "activity": "meeting",
+        "location_uid": "99883bc6",
+        "narrative_zh": "志愿者活动站开会"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "18:30",
+        "end": "21:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆学习"
+      },
+      {
+        "start": "21:00",
+        "end": "22:30",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍·安排明天的志愿活动"
+      },
+      {
+        "start": "22:30",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "tuesday": [
+      {
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床"
+      },
+      {
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "08:00",
+        "end": "10:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "上课"
+      },
+      {
+        "start": "10:00",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "去社区发放健康宣传材料"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "14:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "整理问卷数据"
+      },
+      {
+        "start": "14:30",
+        "end": "16:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "上课"
+      },
+      {
+        "start": "16:00",
+        "end": "17:30",
+        "activity": "meeting",
+        "location_uid": "99883bc6",
+        "narrative_zh": "志愿者活动站开会"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "18:30",
+        "end": "21:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆学习"
+      },
+      {
+        "start": "21:00",
+        "end": "22:30",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍·安排明天的志愿活动"
+      },
+      {
+        "start": "22:30",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "wednesday": [
+      {
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床"
+      },
+      {
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "08:00",
+        "end": "10:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "上课"
+      },
+      {
+        "start": "10:00",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "去社区发放健康宣传材料"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "14:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "整理问卷数据"
+      },
+      {
+        "start": "14:30",
+        "end": "16:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "上课"
+      },
+      {
+        "start": "16:00",
+        "end": "17:30",
+        "activity": "meeting",
+        "location_uid": "99883bc6",
+        "narrative_zh": "志愿者活动站开会"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "18:30",
+        "end": "21:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆学习"
+      },
+      {
+        "start": "21:00",
+        "end": "22:30",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍·安排明天的志愿活动"
+      },
+      {
+        "start": "22:30",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "thursday": [
+      {
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床"
+      },
+      {
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "08:00",
+        "end": "10:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "上课"
+      },
+      {
+        "start": "10:00",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "去社区发放健康宣传材料"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "14:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "整理问卷数据"
+      },
+      {
+        "start": "14:30",
+        "end": "16:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "上课"
+      },
+      {
+        "start": "16:00",
+        "end": "17:30",
+        "activity": "meeting",
+        "location_uid": "99883bc6",
+        "narrative_zh": "志愿者活动站开会"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "18:30",
+        "end": "21:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆学习"
+      },
+      {
+        "start": "21:00",
+        "end": "22:30",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍·安排明天的志愿活动"
+      },
+      {
+        "start": "22:30",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "friday": [
+      {
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床"
+      },
+      {
+        "start": "07:30",
+        "end": "08:00",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "08:00",
+        "end": "10:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "上课"
+      },
+      {
+        "start": "10:00",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "去社区发放健康宣传材料"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "14:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "整理问卷数据"
+      },
+      {
+        "start": "14:30",
+        "end": "16:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "上课"
+      },
+      {
+        "start": "16:00",
+        "end": "17:30",
+        "activity": "meeting",
+        "location_uid": "99883bc6",
+        "narrative_zh": "志愿者活动站开会"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "18:30",
+        "end": "21:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆学习"
+      },
+      {
+        "start": "21:00",
+        "end": "22:30",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍·安排明天的志愿活动"
+      },
+      {
+        "start": "22:30",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "saturday": [
+      {
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "午饭"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "chat",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "周末自由活动"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "21:00",
+        "end": "22:30",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍·安排明天的志愿活动"
+      },
+      {
+        "start": "22:30",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "sunday": [
+      {
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "午饭"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "leisure_media",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "周末闲聊"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "21:00",
+        "end": "22:30",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍·安排明天的志愿活动"
+      },
+      {
+        "start": "22:30",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ]
+  }
+}

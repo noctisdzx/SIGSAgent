@@ -1,0 +1,510 @@
+{
+  "id": "npc18_yang_mingzhe",
+  "description": "基于参考 HTML 的 杨明哲 周课表（工作日相同，周末略简）。",
+  "week": {
+    "monday": [
+      {
+        "start": "06:30",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床·穿正装"
+      },
+      {
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "07:30",
+        "end": "09:00",
+        "activity": "cbd",
+        "location_uid": "438038e3",
+        "narrative_zh": "坐地铁去CBD实习"
+      },
+      {
+        "start": "09:00",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "实习岗位到岗"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "和同事午饭·networking"
+      },
+      {
+        "start": "13:00",
+        "end": "17:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续实习"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "赶回学校"
+      },
+      {
+        "start": "18:30",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "21:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆做行测题"
+      },
+      {
+        "start": "21:00",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "和求职群交流面试经验"
+      },
+      {
+        "start": "22:00",
+        "end": "23:30",
+        "activity": "excel",
+        "location_uid": "438038e3",
+        "narrative_zh": "做Excel财务建模练习"
+      },
+      {
+        "start": "23:30",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "tuesday": [
+      {
+        "start": "06:30",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床·穿正装"
+      },
+      {
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "07:30",
+        "end": "09:00",
+        "activity": "cbd",
+        "location_uid": "438038e3",
+        "narrative_zh": "坐地铁去CBD实习"
+      },
+      {
+        "start": "09:00",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "实习岗位到岗"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "和同事午饭·networking"
+      },
+      {
+        "start": "13:00",
+        "end": "17:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续实习"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "赶回学校"
+      },
+      {
+        "start": "18:30",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "21:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆做行测题"
+      },
+      {
+        "start": "21:00",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "和求职群交流面试经验"
+      },
+      {
+        "start": "22:00",
+        "end": "23:30",
+        "activity": "excel",
+        "location_uid": "438038e3",
+        "narrative_zh": "做Excel财务建模练习"
+      },
+      {
+        "start": "23:30",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "wednesday": [
+      {
+        "start": "06:30",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床·穿正装"
+      },
+      {
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "07:30",
+        "end": "09:00",
+        "activity": "cbd",
+        "location_uid": "438038e3",
+        "narrative_zh": "坐地铁去CBD实习"
+      },
+      {
+        "start": "09:00",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "实习岗位到岗"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "和同事午饭·networking"
+      },
+      {
+        "start": "13:00",
+        "end": "17:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续实习"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "赶回学校"
+      },
+      {
+        "start": "18:30",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "21:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆做行测题"
+      },
+      {
+        "start": "21:00",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "和求职群交流面试经验"
+      },
+      {
+        "start": "22:00",
+        "end": "23:30",
+        "activity": "excel",
+        "location_uid": "438038e3",
+        "narrative_zh": "做Excel财务建模练习"
+      },
+      {
+        "start": "23:30",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "thursday": [
+      {
+        "start": "06:30",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床·穿正装"
+      },
+      {
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "07:30",
+        "end": "09:00",
+        "activity": "cbd",
+        "location_uid": "438038e3",
+        "narrative_zh": "坐地铁去CBD实习"
+      },
+      {
+        "start": "09:00",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "实习岗位到岗"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "和同事午饭·networking"
+      },
+      {
+        "start": "13:00",
+        "end": "17:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续实习"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "赶回学校"
+      },
+      {
+        "start": "18:30",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "21:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆做行测题"
+      },
+      {
+        "start": "21:00",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "和求职群交流面试经验"
+      },
+      {
+        "start": "22:00",
+        "end": "23:30",
+        "activity": "excel",
+        "location_uid": "438038e3",
+        "narrative_zh": "做Excel财务建模练习"
+      },
+      {
+        "start": "23:30",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "friday": [
+      {
+        "start": "06:30",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床·穿正装"
+      },
+      {
+        "start": "07:00",
+        "end": "07:30",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "07:30",
+        "end": "09:00",
+        "activity": "cbd",
+        "location_uid": "438038e3",
+        "narrative_zh": "坐地铁去CBD实习"
+      },
+      {
+        "start": "09:00",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "实习岗位到岗"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "和同事午饭·networking"
+      },
+      {
+        "start": "13:00",
+        "end": "17:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续实习"
+      },
+      {
+        "start": "17:30",
+        "end": "18:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "赶回学校"
+      },
+      {
+        "start": "18:30",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "21:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆做行测题"
+      },
+      {
+        "start": "21:00",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "和求职群交流面试经验"
+      },
+      {
+        "start": "22:00",
+        "end": "23:30",
+        "activity": "excel",
+        "location_uid": "438038e3",
+        "narrative_zh": "做Excel财务建模练习"
+      },
+      {
+        "start": "23:30",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "saturday": [
+      {
+        "start": "06:30",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床·穿正装"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "和同事午饭·networking"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "chat",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "周末自由活动"
+      },
+      {
+        "start": "18:30",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "23:30",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "sunday": [
+      {
+        "start": "06:30",
+        "end": "07:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床·穿正装"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "和同事午饭·networking"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "leisure_media",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "周末闲聊"
+      },
+      {
+        "start": "18:30",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "23:30",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ]
+  }
+}

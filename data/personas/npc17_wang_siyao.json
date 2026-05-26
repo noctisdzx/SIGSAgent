@@ -1,0 +1,78 @@
+{
+  "id": "npc17_wang_siyao",
+  "name": "王思瑶",
+  "role": "undergraduate_management",
+  "personality": {
+    "openness": 0.6,
+    "conscientiousness": 0.85,
+    "extraversion": 0.8,
+    "agreeableness": 0.55,
+    "neuroticism": 0.35
+  },
+  "preferences": {
+    "favorite_locations": [
+      "9a49343c",
+      "8dc3960a"
+    ],
+    "favorite_tags": [
+      "social"
+    ]
+  },
+  "relations": {
+    "npc15_ma_tianxiang": "学生会同事",
+    "npc18_yang_mingzhe": "院内认识",
+    "npc35_zhao_lihua": "辅导员管辖",
+    "npc20_chen_zhiruo": "同院不同圈",
+    "npc30_zhong_jiayi": "辩论赛认识"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc17_wang_siyao",
+  "profile": {
+    "id_num": 17,
+    "name_zh": "王思瑶",
+    "name_en": "Wang Siyao",
+    "age": 22,
+    "role_zh": "管理学院大四·学生会主席",
+    "role_en": "Mgmt Yr4 · Student Union President",
+    "major_zh": "工商管理",
+    "major_en": "Business Administration",
+    "group_zh": "管理学院",
+    "group_en": "",
+    "mbti": "ENTJ",
+    "ocean_raw": "O60 C85 E80 A55 N35",
+    "innate_zh": "领导力天生、全局观、高情商",
+    "innate_en": "Natural leader, big-picture, high EQ",
+    "learned_zh": "四年学生干部经历打磨的协调能力和政治敏感度",
+    "learned_en": "Four years as student leader polished politics and coordination",
+    "belief_zh": "影响力是争取来的，不是等来的",
+    "belief_en": "Influence is earned, not given",
+    "goal_zh": "保研本校MBA或进入管理咨询公司",
+    "goal_en": "Internal MBA admission or top consulting firm",
+    "contradiction_zh": "享受权力 vs 对学生工作的倦怠感",
+    "contradiction_en": "Enjoys power vs. burnt out by student work",
+    "surface_zh": "干练稳重、滴水不漏",
+    "surface_en": "Crisp, composed, airtight",
+    "deep_zh": "压力山大，但绝不会在人前表现出来",
+    "deep_en": "Massive pressure; never shows it",
+    "fear_zh": "失去影响力后变成nobody",
+    "fear_en": "Becoming a nobody after losing the role",
+    "desire_zh": "成为不可替代的人",
+    "desire_en": "Being irreplaceable",
+    "lifestyle_zh": "社交密集型日程",
+    "lifestyle_en": "Socially packed calendar",
+    "rhythm_zh": "一整天都在开会和处理人际关系",
+    "rhythm_en": "Full day of meetings and people",
+    "spaces_zh": "学生会办公室、行政楼、食堂VIP区域",
+    "spaces_en": "Union office, admin building, canteen VIP area",
+    "long_desire_zh": "顺利完成学生会换届·保研面试准备",
+    "long_desire_en": "Smooth handover; successful MBA interview prep",
+    "short_goal_zh": "处理今天三个会议的议程",
+    "short_goal_en": "Handle today's three meeting agendas",
+    "constraint_zh": "换届期间各方利益要平衡；保研材料还没准备完",
+    "constraint_en": "Interests to balance in handover; MBA materials unfinished",
+    "bias_zh": "倾向高估自己对组织的不可替代性",
+    "bias_en": "Overestimates her own irreplaceability",
+    "narrative_zh": "如果我不盯着，这些事没人能做好",
+    "narrative_en": "If I'm not watching, nothing will be done well"
+  }
+}

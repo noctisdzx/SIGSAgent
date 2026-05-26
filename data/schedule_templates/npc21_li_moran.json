@@ -1,0 +1,426 @@
+{
+  "id": "npc21_li_moran",
+  "description": "基于参考 HTML 的 李默然 周课表（工作日相同，周末略简）。",
+  "week": {
+    "monday": [
+      {
+        "start": "00:00",
+        "end": "08:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "躺在床上继续想"
+      },
+      {
+        "start": "08:30",
+        "end": "09:00",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂随便吃点"
+      },
+      {
+        "start": "09:00",
+        "end": "12:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "物理楼自习室推公式"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "有时候忘记午饭·室友提醒才去"
+      },
+      {
+        "start": "13:00",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续推导"
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "上课（经常迟到）"
+      },
+      {
+        "start": "17:00",
+        "end": "18:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "18:00",
+        "end": "21:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆看论文"
+      },
+      {
+        "start": "21:00",
+        "end": "23:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍继续想问题"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "66cb10e7",
+        "narrative_zh": "天台看星星"
+      }
+    ],
+    "tuesday": [
+      {
+        "start": "00:00",
+        "end": "08:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "躺在床上继续想"
+      },
+      {
+        "start": "08:30",
+        "end": "09:00",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂随便吃点"
+      },
+      {
+        "start": "09:00",
+        "end": "12:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "物理楼自习室推公式"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "有时候忘记午饭·室友提醒才去"
+      },
+      {
+        "start": "13:00",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续推导"
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "上课（经常迟到）"
+      },
+      {
+        "start": "17:00",
+        "end": "18:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "18:00",
+        "end": "21:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆看论文"
+      },
+      {
+        "start": "21:00",
+        "end": "23:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍继续想问题"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "66cb10e7",
+        "narrative_zh": "天台看星星"
+      }
+    ],
+    "wednesday": [
+      {
+        "start": "00:00",
+        "end": "08:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "躺在床上继续想"
+      },
+      {
+        "start": "08:30",
+        "end": "09:00",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂随便吃点"
+      },
+      {
+        "start": "09:00",
+        "end": "12:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "物理楼自习室推公式"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "有时候忘记午饭·室友提醒才去"
+      },
+      {
+        "start": "13:00",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续推导"
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "上课（经常迟到）"
+      },
+      {
+        "start": "17:00",
+        "end": "18:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "18:00",
+        "end": "21:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆看论文"
+      },
+      {
+        "start": "21:00",
+        "end": "23:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍继续想问题"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "66cb10e7",
+        "narrative_zh": "天台看星星"
+      }
+    ],
+    "thursday": [
+      {
+        "start": "00:00",
+        "end": "08:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "躺在床上继续想"
+      },
+      {
+        "start": "08:30",
+        "end": "09:00",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂随便吃点"
+      },
+      {
+        "start": "09:00",
+        "end": "12:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "物理楼自习室推公式"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "有时候忘记午饭·室友提醒才去"
+      },
+      {
+        "start": "13:00",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续推导"
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "上课（经常迟到）"
+      },
+      {
+        "start": "17:00",
+        "end": "18:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "18:00",
+        "end": "21:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆看论文"
+      },
+      {
+        "start": "21:00",
+        "end": "23:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍继续想问题"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "66cb10e7",
+        "narrative_zh": "天台看星星"
+      }
+    ],
+    "friday": [
+      {
+        "start": "00:00",
+        "end": "08:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "躺在床上继续想"
+      },
+      {
+        "start": "08:30",
+        "end": "09:00",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂随便吃点"
+      },
+      {
+        "start": "09:00",
+        "end": "12:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "物理楼自习室推公式"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "有时候忘记午饭·室友提醒才去"
+      },
+      {
+        "start": "13:00",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续推导"
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "上课（经常迟到）"
+      },
+      {
+        "start": "17:00",
+        "end": "18:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "18:00",
+        "end": "21:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆看论文"
+      },
+      {
+        "start": "21:00",
+        "end": "23:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍继续想问题"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "66cb10e7",
+        "narrative_zh": "天台看星星"
+      }
+    ],
+    "saturday": [
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "有时候忘记午饭·室友提醒才去"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "chat",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "周末自由活动"
+      },
+      {
+        "start": "17:00",
+        "end": "18:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "21:00",
+        "end": "23:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍继续想问题"
+      }
+    ],
+    "sunday": [
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "有时候忘记午饭·室友提醒才去"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "leisure_media",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "周末闲聊"
+      },
+      {
+        "start": "17:00",
+        "end": "18:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "21:00",
+        "end": "23:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍继续想问题"
+      }
+    ]
+  }
+}

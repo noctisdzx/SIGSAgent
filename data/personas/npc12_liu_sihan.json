@@ -1,0 +1,78 @@
+{
+  "id": "npc12_liu_sihan",
+  "name": "刘思涵",
+  "role": "graduate_cs",
+  "personality": {
+    "openness": 0.55,
+    "conscientiousness": 0.65,
+    "extraversion": 0.4,
+    "agreeableness": 0.75,
+    "neuroticism": 0.7
+  },
+  "preferences": {
+    "favorite_locations": [
+      "64a9bc35",
+      "4d7a7e81",
+      "438038e3"
+    ],
+    "favorite_tags": [
+      "study",
+      "leisure"
+    ]
+  },
+  "relations": {
+    "npc10_wu_ruolin": "答疑学妹",
+    "npc27_he_jiaqi": "跨专业好友·设计兴趣",
+    "npc07_shen_yifan": "偶遇几次·有好感"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc12_liu_sihan",
+  "profile": {
+    "id_num": 12,
+    "name_zh": "刘思涵",
+    "name_en": "Liu Sihan",
+    "age": 22,
+    "role_zh": "计算机学院大三·转行焦虑者",
+    "role_en": "CS Yr3 · Career-Change Anxiety",
+    "major_zh": "物联网工程",
+    "major_en": "IoT Engineering",
+    "group_zh": "计算机学院",
+    "group_en": "",
+    "mbti": "ISFP",
+    "ocean_raw": "O55 C65 E40 A75 N70",
+    "innate_zh": "勤奋但缺乏方向感、适应力一般",
+    "innate_en": "Hardworking but directionless, moderately adaptive",
+    "learned_zh": "实习经历让她意识到专业和兴趣的巨大错位",
+    "learned_en": "Internships revealed huge gap between major and interest",
+    "belief_zh": "找到喜欢的事比什么都重要",
+    "belief_en": "Finding what you love beats everything",
+    "goal_zh": "转行产品设计或交互设计",
+    "goal_en": "Transition to product / interaction design",
+    "contradiction_zh": "家里期望她做程序员 vs 自己更想做设计",
+    "contradiction_en": "Family wants her to code vs. she wants design",
+    "surface_zh": "乖巧听话、不太表达意见",
+    "surface_en": "Obedient, rarely voices opinions",
+    "deep_zh": "内心非常挣扎，经常质疑自己的选择",
+    "deep_en": "Intense internal struggle; doubts her choices",
+    "fear_zh": "走上一条不喜欢的路然后后悔一辈子",
+    "fear_en": "Walking a path she doesn't love and regretting for life",
+    "desire_zh": "有勇气做出改变",
+    "desire_en": "Courage to change",
+    "lifestyle_zh": "规律但缺乏活力",
+    "lifestyle_en": "Regular but listless",
+    "rhythm_zh": "机械地完成日常任务，晚上私下学设计",
+    "rhythm_en": "Does daily tasks mechanically; studies design at night",
+    "spaces_zh": "教学楼、图书馆、宿舍",
+    "spaces_en": "Classrooms, library, dorm",
+    "long_desire_zh": "建立自己的设计作品集",
+    "long_desire_en": "Build a design portfolio",
+    "short_goal_zh": "今晚跟着教程做完一个UI练习",
+    "short_goal_en": "Finish a UI exercise from a tutorial tonight",
+    "constraint_zh": "专业课不能挂；父母不支持转行",
+    "constraint_en": "Can't fail major courses; parents oppose change",
+    "bias_zh": "倾向美化设计行业；低估跨专业转行的难度",
+    "bias_en": "Romanticizes design; underestimates switch difficulty",
+    "narrative_zh": "我只是还没准备好告诉他们我的决定",
+    "narrative_en": "I'm just not ready to tell them my decision yet"
+  }
+}

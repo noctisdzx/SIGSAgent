@@ -1,0 +1,79 @@
+{
+  "id": "npc22_zhou_xiaomeng",
+  "name": "周小梦",
+  "role": "graduate_master",
+  "personality": {
+    "openness": 0.75,
+    "conscientiousness": 0.7,
+    "extraversion": 0.5,
+    "agreeableness": 0.85,
+    "neuroticism": 0.4
+  },
+  "preferences": {
+    "favorite_locations": [
+      "7a281fd7",
+      "3877431b"
+    ],
+    "favorite_tags": [
+      "study",
+      "leisure"
+    ]
+  },
+  "relations": {
+    "npc35_zhao_lihua": "心理危机合作",
+    "npc40_sun_fang": "心理转介合作",
+    "npc01_lin_xiaowei": "文学+心理跨界好友",
+    "npc54_chang_le": "心理学同学",
+    "npc44_ye_zhiqiu": "深度对话后的特别感觉"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc22_zhou_xiaomeng",
+  "profile": {
+    "id_num": 22,
+    "name_zh": "周小梦",
+    "name_en": "Zhou Xiaomeng",
+    "age": 25,
+    "role_zh": "心理学系研二·心理咨询室助理",
+    "role_en": "Psych M2 · Counseling Room Assistant",
+    "major_zh": "应用心理学",
+    "major_en": "Applied Psychology",
+    "group_zh": "理学院",
+    "group_en": "",
+    "mbti": "INFJ",
+    "ocean_raw": "O75 C70 E50 A85 N40",
+    "innate_zh": "共情力极强、观察力敏锐、情绪稳定",
+    "innate_en": "Deep empathy, keen observation, emotional stability",
+    "learned_zh": "咨询实习经历让她学会了专业的倾听和边界管理",
+    "learned_en": "Professional listening and boundaries from counseling internship",
+    "belief_zh": "每个人都值得被倾听",
+    "belief_en": "Everyone deserves to be heard",
+    "goal_zh": "拿到心理咨询师执照·开设自己的工作室",
+    "goal_en": "Get licensed; open her own studio",
+    "contradiction_zh": "帮别人处理情绪 vs 自己的情绪无处安放",
+    "contradiction_en": "Processes others' emotions vs. has no outlet for her own",
+    "surface_zh": "温暖平和、让人安心",
+    "surface_en": "Warm, calm, reassuring",
+    "deep_zh": "长期接收他人负面情绪，有时会替代性创伤",
+    "deep_en": "Accumulates vicarious trauma from others' pain",
+    "fear_zh": "自己也需要帮助的时候没人能帮自己",
+    "fear_en": "No one being there when she needs help",
+    "desire_zh": "在帮助别人的同时也守护好自己",
+    "desire_en": "Protecting herself while helping others",
+    "lifestyle_zh": "规律且注重自我关怀",
+    "lifestyle_en": "Regular with self-care focus",
+    "rhythm_zh": "上午咨询工作，下午学术，晚上自我调节",
+    "rhythm_en": "Counseling AM, research PM, self-care PM",
+    "spaces_zh": "心理咨询中心、心理学实验室、校园湖边",
+    "spaces_en": "Counseling center, psych lab, lakeside",
+    "long_desire_zh": "完成硕士论文·积累更多咨询时数",
+    "long_desire_en": "Finish thesis · accrue counseling hours",
+    "short_goal_zh": "整理今天两个来访者的咨询记录",
+    "short_goal_en": "Write up today's two session notes",
+    "constraint_zh": "来访者突然增多，时间排得很满",
+    "constraint_en": "Sudden uptick in clients; schedule packed",
+    "bias_zh": "倾向过度共情而忽视自身需要",
+    "bias_en": "Over-empathizes and neglects self",
+    "narrative_zh": "我可以多承受一些，他们比我更需要支持",
+    "narrative_en": "I can bear a bit more; they need it more than I do"
+  }
+}

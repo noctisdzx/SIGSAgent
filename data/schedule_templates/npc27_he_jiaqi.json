@@ -1,0 +1,524 @@
+{
+  "id": "npc27_he_jiaqi",
+  "description": "基于参考 HTML 的 何佳琪 周课表（工作日相同，周末略简）。",
+  "week": {
+    "monday": [
+      {
+        "start": "00:00",
+        "end": "01:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "还在画"
+      },
+      {
+        "start": "01:30",
+        "end": "09:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "终于放下平板入睡"
+      },
+      {
+        "start": "09:00",
+        "end": "09:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "勉强起床"
+      },
+      {
+        "start": "09:30",
+        "end": "11:00",
+        "activity": "draw",
+        "location_uid": "438038e3",
+        "narrative_zh": "宿舍里边吃面包边画画"
+      },
+      {
+        "start": "11:00",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "去上设计基础课"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "美术系画室做课题"
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "色彩课"
+      },
+      {
+        "start": "17:00",
+        "end": "18:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "18:00",
+        "end": "20:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍画约稿"
+      },
+      {
+        "start": "20:00",
+        "end": "21:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "在网上和粉丝互动"
+      },
+      {
+        "start": "21:00",
+        "end": "23:59",
+        "activity": "draw",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续画画"
+      }
+    ],
+    "tuesday": [
+      {
+        "start": "00:00",
+        "end": "01:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "还在画"
+      },
+      {
+        "start": "01:30",
+        "end": "09:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "终于放下平板入睡"
+      },
+      {
+        "start": "09:00",
+        "end": "09:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "勉强起床"
+      },
+      {
+        "start": "09:30",
+        "end": "11:00",
+        "activity": "draw",
+        "location_uid": "438038e3",
+        "narrative_zh": "宿舍里边吃面包边画画"
+      },
+      {
+        "start": "11:00",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "去上设计基础课"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "美术系画室做课题"
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "色彩课"
+      },
+      {
+        "start": "17:00",
+        "end": "18:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "18:00",
+        "end": "20:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍画约稿"
+      },
+      {
+        "start": "20:00",
+        "end": "21:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "在网上和粉丝互动"
+      },
+      {
+        "start": "21:00",
+        "end": "23:59",
+        "activity": "draw",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续画画"
+      }
+    ],
+    "wednesday": [
+      {
+        "start": "00:00",
+        "end": "01:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "还在画"
+      },
+      {
+        "start": "01:30",
+        "end": "09:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "终于放下平板入睡"
+      },
+      {
+        "start": "09:00",
+        "end": "09:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "勉强起床"
+      },
+      {
+        "start": "09:30",
+        "end": "11:00",
+        "activity": "draw",
+        "location_uid": "438038e3",
+        "narrative_zh": "宿舍里边吃面包边画画"
+      },
+      {
+        "start": "11:00",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "去上设计基础课"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "美术系画室做课题"
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "色彩课"
+      },
+      {
+        "start": "17:00",
+        "end": "18:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "18:00",
+        "end": "20:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍画约稿"
+      },
+      {
+        "start": "20:00",
+        "end": "21:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "在网上和粉丝互动"
+      },
+      {
+        "start": "21:00",
+        "end": "23:59",
+        "activity": "draw",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续画画"
+      }
+    ],
+    "thursday": [
+      {
+        "start": "00:00",
+        "end": "01:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "还在画"
+      },
+      {
+        "start": "01:30",
+        "end": "09:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "终于放下平板入睡"
+      },
+      {
+        "start": "09:00",
+        "end": "09:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "勉强起床"
+      },
+      {
+        "start": "09:30",
+        "end": "11:00",
+        "activity": "draw",
+        "location_uid": "438038e3",
+        "narrative_zh": "宿舍里边吃面包边画画"
+      },
+      {
+        "start": "11:00",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "去上设计基础课"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "美术系画室做课题"
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "色彩课"
+      },
+      {
+        "start": "17:00",
+        "end": "18:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "18:00",
+        "end": "20:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍画约稿"
+      },
+      {
+        "start": "20:00",
+        "end": "21:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "在网上和粉丝互动"
+      },
+      {
+        "start": "21:00",
+        "end": "23:59",
+        "activity": "draw",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续画画"
+      }
+    ],
+    "friday": [
+      {
+        "start": "00:00",
+        "end": "01:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "还在画"
+      },
+      {
+        "start": "01:30",
+        "end": "09:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "终于放下平板入睡"
+      },
+      {
+        "start": "09:00",
+        "end": "09:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "勉强起床"
+      },
+      {
+        "start": "09:30",
+        "end": "11:00",
+        "activity": "draw",
+        "location_uid": "438038e3",
+        "narrative_zh": "宿舍里边吃面包边画画"
+      },
+      {
+        "start": "11:00",
+        "end": "12:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "去上设计基础课"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "15:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "美术系画室做课题"
+      },
+      {
+        "start": "15:00",
+        "end": "17:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "色彩课"
+      },
+      {
+        "start": "17:00",
+        "end": "18:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "18:00",
+        "end": "20:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍画约稿"
+      },
+      {
+        "start": "20:00",
+        "end": "21:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "在网上和粉丝互动"
+      },
+      {
+        "start": "21:00",
+        "end": "23:59",
+        "activity": "draw",
+        "location_uid": "438038e3",
+        "narrative_zh": "继续画画"
+      }
+    ],
+    "saturday": [
+      {
+        "start": "01:30",
+        "end": "09:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "终于放下平板入睡"
+      },
+      {
+        "start": "09:00",
+        "end": "09:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "勉强起床"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "chat",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "周末自由活动"
+      },
+      {
+        "start": "17:00",
+        "end": "18:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "18:00",
+        "end": "20:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍画约稿"
+      }
+    ],
+    "sunday": [
+      {
+        "start": "01:30",
+        "end": "09:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "终于放下平板入睡"
+      },
+      {
+        "start": "09:00",
+        "end": "09:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "勉强起床"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "leisure_media",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "周末闲聊"
+      },
+      {
+        "start": "17:00",
+        "end": "18:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "18:00",
+        "end": "20:00",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍画约稿"
+      }
+    ]
+  }
+}

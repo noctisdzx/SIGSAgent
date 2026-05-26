@@ -1,0 +1,580 @@
+{
+  "id": "npc24_zhao_xinyi",
+  "description": "基于参考 HTML 的 赵心怡 周课表（工作日相同，周末略简）。",
+  "week": {
+    "monday": [
+      {
+        "start": "08:00",
+        "end": "08:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床"
+      },
+      {
+        "start": "08:30",
+        "end": "09:00",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "09:00",
+        "end": "09:30",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "化学实验室准备试剂"
+      },
+      {
+        "start": "09:30",
+        "end": "12:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "开始实验"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "have_meal",
+        "location_uid": "3877431b",
+        "narrative_zh": "实验间隙去食堂吃饭"
+      },
+      {
+        "start": "12:30",
+        "end": "14:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "回实验室等反应"
+      },
+      {
+        "start": "14:00",
+        "end": "15:30",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "处理实验数据"
+      },
+      {
+        "start": "15:30",
+        "end": "18:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "继续下一组实验"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "20:30",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "实验室整理数据"
+      },
+      {
+        "start": "20:30",
+        "end": "22:00",
+        "activity": "self_study",
+        "location_uid": "3877431b",
+        "narrative_zh": "图书馆写实验报告"
+      },
+      {
+        "start": "22:00",
+        "end": "22:30",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍"
+      },
+      {
+        "start": "22:30",
+        "end": "23:00",
+        "activity": "chat",
+        "location_uid": "438038e3",
+        "narrative_zh": "和室友聊天"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "tuesday": [
+      {
+        "start": "08:00",
+        "end": "08:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床"
+      },
+      {
+        "start": "08:30",
+        "end": "09:00",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "09:00",
+        "end": "09:30",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "化学实验室准备试剂"
+      },
+      {
+        "start": "09:30",
+        "end": "12:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "开始实验"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "have_meal",
+        "location_uid": "3877431b",
+        "narrative_zh": "实验间隙去食堂吃饭"
+      },
+      {
+        "start": "12:30",
+        "end": "14:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "回实验室等反应"
+      },
+      {
+        "start": "14:00",
+        "end": "15:30",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "处理实验数据"
+      },
+      {
+        "start": "15:30",
+        "end": "18:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "继续下一组实验"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "20:30",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "实验室整理数据"
+      },
+      {
+        "start": "20:30",
+        "end": "22:00",
+        "activity": "self_study",
+        "location_uid": "3877431b",
+        "narrative_zh": "图书馆写实验报告"
+      },
+      {
+        "start": "22:00",
+        "end": "22:30",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍"
+      },
+      {
+        "start": "22:30",
+        "end": "23:00",
+        "activity": "chat",
+        "location_uid": "438038e3",
+        "narrative_zh": "和室友聊天"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "wednesday": [
+      {
+        "start": "08:00",
+        "end": "08:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床"
+      },
+      {
+        "start": "08:30",
+        "end": "09:00",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "09:00",
+        "end": "09:30",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "化学实验室准备试剂"
+      },
+      {
+        "start": "09:30",
+        "end": "12:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "开始实验"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "have_meal",
+        "location_uid": "3877431b",
+        "narrative_zh": "实验间隙去食堂吃饭"
+      },
+      {
+        "start": "12:30",
+        "end": "14:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "回实验室等反应"
+      },
+      {
+        "start": "14:00",
+        "end": "15:30",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "处理实验数据"
+      },
+      {
+        "start": "15:30",
+        "end": "18:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "继续下一组实验"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "20:30",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "实验室整理数据"
+      },
+      {
+        "start": "20:30",
+        "end": "22:00",
+        "activity": "self_study",
+        "location_uid": "3877431b",
+        "narrative_zh": "图书馆写实验报告"
+      },
+      {
+        "start": "22:00",
+        "end": "22:30",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍"
+      },
+      {
+        "start": "22:30",
+        "end": "23:00",
+        "activity": "chat",
+        "location_uid": "438038e3",
+        "narrative_zh": "和室友聊天"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "thursday": [
+      {
+        "start": "08:00",
+        "end": "08:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床"
+      },
+      {
+        "start": "08:30",
+        "end": "09:00",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "09:00",
+        "end": "09:30",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "化学实验室准备试剂"
+      },
+      {
+        "start": "09:30",
+        "end": "12:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "开始实验"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "have_meal",
+        "location_uid": "3877431b",
+        "narrative_zh": "实验间隙去食堂吃饭"
+      },
+      {
+        "start": "12:30",
+        "end": "14:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "回实验室等反应"
+      },
+      {
+        "start": "14:00",
+        "end": "15:30",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "处理实验数据"
+      },
+      {
+        "start": "15:30",
+        "end": "18:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "继续下一组实验"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "20:30",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "实验室整理数据"
+      },
+      {
+        "start": "20:30",
+        "end": "22:00",
+        "activity": "self_study",
+        "location_uid": "3877431b",
+        "narrative_zh": "图书馆写实验报告"
+      },
+      {
+        "start": "22:00",
+        "end": "22:30",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍"
+      },
+      {
+        "start": "22:30",
+        "end": "23:00",
+        "activity": "chat",
+        "location_uid": "438038e3",
+        "narrative_zh": "和室友聊天"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "friday": [
+      {
+        "start": "08:00",
+        "end": "08:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床"
+      },
+      {
+        "start": "08:30",
+        "end": "09:00",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "09:00",
+        "end": "09:30",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "化学实验室准备试剂"
+      },
+      {
+        "start": "09:30",
+        "end": "12:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "开始实验"
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "have_meal",
+        "location_uid": "3877431b",
+        "narrative_zh": "实验间隙去食堂吃饭"
+      },
+      {
+        "start": "12:30",
+        "end": "14:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "回实验室等反应"
+      },
+      {
+        "start": "14:00",
+        "end": "15:30",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "处理实验数据"
+      },
+      {
+        "start": "15:30",
+        "end": "18:00",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "继续下一组实验"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "20:30",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "实验室整理数据"
+      },
+      {
+        "start": "20:30",
+        "end": "22:00",
+        "activity": "self_study",
+        "location_uid": "3877431b",
+        "narrative_zh": "图书馆写实验报告"
+      },
+      {
+        "start": "22:00",
+        "end": "22:30",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍"
+      },
+      {
+        "start": "22:30",
+        "end": "23:00",
+        "activity": "chat",
+        "location_uid": "438038e3",
+        "narrative_zh": "和室友聊天"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "saturday": [
+      {
+        "start": "08:00",
+        "end": "08:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "chat",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "周末自由活动"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "22:00",
+        "end": "22:30",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ],
+    "sunday": [
+      {
+        "start": "08:00",
+        "end": "08:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "leisure_media",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "周末闲聊"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "22:00",
+        "end": "22:30",
+        "activity": "return_dorm",
+        "location_uid": "438038e3",
+        "narrative_zh": "回宿舍"
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      }
+    ]
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "id": "npc29_cheng_siyuan",
+  "name": "程思远",
+  "role": "graduate_humanities",
+  "personality": {
+    "openness": 0.9,
+    "conscientiousness": 0.55,
+    "extraversion": 0.7,
+    "agreeableness": 0.75,
+    "neuroticism": 0.4
+  },
+  "preferences": {
+    "favorite_locations": [
+      "4ef146d8"
+    ],
+    "favorite_tags": [
+      "creative"
+    ]
+  },
+  "relations": {
+    "npc04_zhang_heming": "博士同读书会",
+    "npc32_luo_chenxi": "田野采访中的默契",
+    "npc50_gao_yuan": "社会调研学术同盟",
+    "npc01_lin_xiaowei": "写作和调研的灵感交换"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc29_cheng_siyuan",
+  "profile": {
+    "id_num": 29,
+    "name_zh": "程思远",
+    "name_en": "Cheng Siyuan",
+    "age": 26,
+    "role_zh": "社会学系博二·田野调查达人",
+    "role_en": "Sociology PhD Yr2 · Field Researcher",
+    "major_zh": "社会学",
+    "major_en": "Sociology",
+    "group_zh": "哲学社科",
+    "group_en": "",
+    "mbti": "ENFP",
+    "ocean_raw": "O90 C55 E70 A75 N40",
+    "innate_zh": "好奇心强、善于观察、不惧与陌生人交谈",
+    "innate_en": "Curious, observant, fearless with strangers",
+    "learned_zh": "多次田野调查形成的质性研究方法论和同理心",
+    "learned_en": "Qualitative methods and empathy from field research",
+    "belief_zh": "真正的知识在课堂之外",
+    "belief_en": "Real knowledge lives outside the classroom",
+    "goal_zh": "发一篇C刊并完成博士论文",
+    "goal_en": "Publish in a top journal, finish dissertation",
+    "contradiction_zh": "热爱田野 vs 讨厌把鲜活的故事写成学术八股文",
+    "contradiction_en": "Loves fieldwork vs. hates turning it into academic jargon",
+    "surface_zh": "热情健谈、平易近人",
+    "surface_en": "Warm, talkative, approachable",
+    "deep_zh": "对学术体制有深深的矛盾感",
+    "deep_en": "Conflicted about academia's structure",
+    "fear_zh": "自己的研究对象变成论文里的数据点",
+    "fear_en": "His subjects becoming mere data points",
+    "desire_zh": "让边缘群体的声音被听见",
+    "desire_en": "Amplifying marginalized voices",
+    "lifestyle_zh": "不规律·跟着田野节奏走",
+    "lifestyle_en": "Irregular - follows the field",
+    "rhythm_zh": "出田野时全天在外，回校时在办公室写材料",
+    "rhythm_en": "In-field all day outside; at desk back at school",
+    "spaces_zh": "校外田野点、社会学系办公室、咖啡厅",
+    "spaces_en": "Off-campus sites, sociology office, cafes",
+    "long_desire_zh": "完成本轮田野调查",
+    "long_desire_en": "Finish this field-study phase",
+    "short_goal_zh": "整理昨天访谈的录音转写",
+    "short_goal_en": "Transcribe yesterday's interview",
+    "constraint_zh": "受访者时间不好约；经费快用完了",
+    "constraint_en": "Hard to schedule interviewees; funds drying up",
+    "bias_zh": "倾向过度投入受访者的故事而拖延学术写作",
+    "bias_en": "Over-invests in subjects' stories, delays writing",
+    "narrative_zh": "再多听一个人的故事，论文就会更真实",
+    "narrative_en": "One more story heard makes the paper more real"
+  }
+}

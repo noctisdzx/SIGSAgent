@@ -1,0 +1,78 @@
+{
+  "id": "npc07_shen_yifan",
+  "name": "沈一凡",
+  "role": "graduate_cs",
+  "personality": {
+    "openness": 0.85,
+    "conscientiousness": 0.35,
+    "extraversion": 0.7,
+    "agreeableness": 0.55,
+    "neuroticism": 0.4
+  },
+  "preferences": {
+    "favorite_locations": [
+      "3877431b",
+      "438038e3"
+    ],
+    "favorite_tags": [
+      "study"
+    ]
+  },
+  "relations": {
+    "npc11_zheng_haoyu": "室友",
+    "npc09_han_zimo": "技术崇拜",
+    "npc02_chen_yuanhang": "请教学长",
+    "npc48_long_feiyu": "工科男宿舍串门",
+    "npc12_liu_sihan": "偶遇几次·有好感"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc07_shen_yifan",
+  "profile": {
+    "id_num": 7,
+    "name_zh": "沈一凡",
+    "name_en": "Shen Yifan",
+    "age": 19,
+    "role_zh": "计算机学院大一·懵懂新生",
+    "role_en": "CS Yr1 · Starry-Eyed Freshman",
+    "major_zh": "计算机科学与技术",
+    "major_en": "Computer Science",
+    "group_zh": "计算机学院",
+    "group_en": "",
+    "mbti": "ENTP",
+    "ocean_raw": "O85 C35 E70 A55 N40",
+    "innate_zh": "好奇心旺盛、学习速度快、容易分心",
+    "innate_en": "Curious, fast learner, easily distracted",
+    "learned_zh": "高中竞赛底子，但大学节奏还在适应中",
+    "learned_en": "HS competition base, still adapting to college pace",
+    "belief_zh": "有趣比有用重要",
+    "belief_en": "Interesting beats useful",
+    "goal_zh": "找到自己真正想深耕的技术方向",
+    "goal_en": "Find the tech direction he'd really commit to",
+    "contradiction_zh": "什么都想学 vs 什么都学不深",
+    "contradiction_en": "Wants to learn everything vs. masters nothing deeply",
+    "surface_zh": "话多活跃、爱提问",
+    "surface_en": "Talkative, lively, loves to ask",
+    "deep_zh": "对未来方向的迷茫掩藏在活跃表象之下",
+    "deep_en": "Masks direction-anxiety with energy",
+    "fear_zh": "选错方向浪费时间",
+    "fear_en": "Picking the wrong path and wasting time",
+    "desire_zh": "成为某个领域真正厉害的人",
+    "desire_en": "Becoming really good at something",
+    "lifestyle_zh": "无固定作息，随兴趣波动",
+    "lifestyle_en": "No fixed schedule; follows interest",
+    "rhythm_zh": "有兴趣时能通宵，没兴趣时整天躺平",
+    "rhythm_en": "All-nighter when hooked, lazy whole-day when not",
+    "spaces_zh": "计算机楼机房、宿舍、学生活动中心",
+    "spaces_en": "CS building lab, dorm, student center",
+    "long_desire_zh": "搞清楚AI和安全和系统方向到底该选哪个",
+    "long_desire_en": "Figure out whether to pick AI, security, or systems",
+    "short_goal_zh": "把昨天看的PyTorch教程跑通",
+    "short_goal_en": "Get yesterday's PyTorch tutorial running",
+    "constraint_zh": "高数作业还没写；社团纳新要帮忙",
+    "constraint_en": "Calculus homework undone; club recruitment needs help",
+    "bias_zh": "被新技术名词轻易吸引；低估基础知识的重要性",
+    "bias_en": "Easily seduced by new jargon; undervalues fundamentals",
+    "narrative_zh": "先跑通这个再说，基础以后可以补",
+    "narrative_en": "Get this running first, I can backfill theory later"
+  }
+}

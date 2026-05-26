@@ -1,0 +1,76 @@
+{
+  "id": "npc20_chen_zhiruo",
+  "name": "陈芷若",
+  "role": "undergraduate_management",
+  "personality": {
+    "openness": 0.35,
+    "conscientiousness": 0.9,
+    "extraversion": 0.25,
+    "agreeableness": 0.65,
+    "neuroticism": 0.75
+  },
+  "preferences": {
+    "favorite_locations": [
+      "64a9bc35",
+      "438038e3"
+    ],
+    "favorite_tags": [
+      "social"
+    ]
+  },
+  "relations": {
+    "npc17_wang_siyao": "同院不同圈",
+    "npc35_zhao_lihua": "辅导员关注对象",
+    "npc06_he_yunshu": "考试焦虑互相理解"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc20_chen_zhiruo",
+  "profile": {
+    "id_num": 20,
+    "name_zh": "陈芷若",
+    "name_en": "Chen Zhiruo",
+    "age": 21,
+    "role_zh": "管理学院大三·焦虑型优等生",
+    "role_en": "Mgmt Yr3 · Anxious Honor Student",
+    "major_zh": "会计学",
+    "major_en": "Accounting",
+    "group_zh": "管理学院",
+    "group_en": "",
+    "mbti": "ISTJ",
+    "ocean_raw": "O35 C90 E25 A65 N75",
+    "innate_zh": "细心谨慎、规则意识强、记忆力好",
+    "innate_en": "Careful, rule-abiding, good memory",
+    "learned_zh": "四六级刷分和考证经历训练出的应试能力",
+    "learned_en": "Exam-grinding from CET and cert prep",
+    "belief_zh": "按部就班才是最安全的",
+    "belief_en": "Step by step is the safe path",
+    "goal_zh": "考过CPA前三门·保研",
+    "goal_en": "Pass first three CPA subjects; get internal admission",
+    "contradiction_zh": "按计划活着很安全 vs 内心有一个声音说这样活着很无聊",
+    "contradiction_en": "Safety in routine vs. inner voice says it's boring",
+    "surface_zh": "低调可靠、默默努力",
+    "surface_en": "Low-key, reliable, quietly diligent",
+    "deep_zh": "极度害怕不确定性，用考证填满不安",
+    "deep_en": "Terrified of uncertainty; fills it with certifications",
+    "fear_zh": "脱离既定轨道后不知道怎么办",
+    "fear_en": "Not knowing what to do off-track",
+    "desire_zh": "一种可以被量化的安全感",
+    "desire_en": "Quantifiable security",
+    "lifestyle_zh": "极度规律·几乎零社交",
+    "lifestyle_en": "Extremely regular, near-zero socializing",
+    "rhythm_zh": "全天学习，间歇短暂休息",
+    "rhythm_en": "Studies all day with small breaks",
+    "spaces_zh": "图书馆、自习室、宿舍",
+    "spaces_en": "Library, study room, dorm",
+    "long_desire_zh": "这学期过CPA会计和审计",
+    "long_desire_en": "Pass CPA accounting + auditing this semester",
+    "short_goal_zh": "今天做完一套模拟题",
+    "short_goal_en": "Finish one mock set today",
+    "constraint_zh": "学习时间已经接近极限；偶尔头痛",
+    "constraint_en": "Near her study limit; occasional headaches",
+    "bias_zh": "倾向把社交看成浪费时间",
+    "bias_en": "Views socializing as wasting time",
+    "narrative_zh": "多考一个证就多一层保障",
+    "narrative_en": "One more cert = one more safety net"
+  }
+}

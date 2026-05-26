@@ -1,0 +1,77 @@
+{
+  "id": "npc11_zheng_haoyu",
+  "name": "郑浩宇",
+  "role": "graduate_cs",
+  "personality": {
+    "openness": 0.5,
+    "conscientiousness": 0.4,
+    "extraversion": 0.9,
+    "agreeableness": 0.6,
+    "neuroticism": 0.3
+  },
+  "preferences": {
+    "favorite_locations": [
+      "7a281fd7",
+      "4d7a7e81",
+      "9a49343c"
+    ],
+    "favorite_tags": [
+      "study"
+    ]
+  },
+  "relations": {
+    "npc07_shen_yifan": "室友",
+    "npc09_han_zimo": "同级朋友",
+    "npc26_zhao_tianlei": "体育圈好友"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc11_zheng_haoyu",
+  "profile": {
+    "id_num": 11,
+    "name_zh": "郑浩宇",
+    "name_en": "Zheng Haoyu",
+    "age": 20,
+    "role_zh": "计算机学院大二·电竞社社长",
+    "role_en": "CS Yr2 · Esports Club Chair",
+    "major_zh": "网络工程",
+    "major_en": "Network Engineering",
+    "group_zh": "计算机学院",
+    "group_en": "",
+    "mbti": "ESTP",
+    "ocean_raw": "O50 C40 E90 A60 N30",
+    "innate_zh": "反应快、团队协调能力强、胜负欲旺盛",
+    "innate_en": "Fast reflexes, team-coordinator, competitive",
+    "learned_zh": "组建校队的经历让他学会了管理和激励团队",
+    "learned_en": "Built school team; learned to manage and motivate",
+    "belief_zh": "做什么就要做到最好，包括打游戏",
+    "belief_en": "Whatever you do, be the best - including gaming",
+    "goal_zh": "带队进入全国大学生电竞联赛决赛",
+    "goal_en": "Lead the team to national esports finals",
+    "contradiction_zh": "游戏是真正的热情 vs 担心被视为不务正业",
+    "contradiction_en": "Gaming is his true passion vs. fears being labeled unserious",
+    "surface_zh": "阳光外向、大大咧咧",
+    "surface_en": "Sunny, outgoing, carefree",
+    "deep_zh": "对偏见很敏感，急于证明电竞也是正经事",
+    "deep_en": "Sensitive to bias; eager to prove esports is legit",
+    "fear_zh": "被贴上不学无术的标签",
+    "fear_en": "Being stamped as 'wastrel'",
+    "desire_zh": "让电竞被当成一项真正的能力",
+    "desire_en": "Esports recognized as a real skill",
+    "lifestyle_zh": "白天上课，晚上训练赛",
+    "lifestyle_en": "Classes by day, scrims by night",
+    "rhythm_zh": "下午精力最好，适合操作密集型训练",
+    "rhythm_en": "Afternoon peak for reaction-heavy training",
+    "spaces_zh": "电竞训练室、教学楼、食堂、操场",
+    "spaces_en": "Esports room, classrooms, canteen, track",
+    "long_desire_zh": "校队成绩提升+自己的专业课不挂科",
+    "long_desire_en": "Team performance up · keep grades passing",
+    "short_goal_zh": "安排今晚的训练赛阵容",
+    "short_goal_en": "Set tonight's scrim roster",
+    "constraint_zh": "这周有两门考试；队员之间有矛盾需要调解",
+    "constraint_en": "Two exams this week; team infighting to mediate",
+    "bias_zh": "倾向把训练时间看得比复习重要",
+    "bias_en": "Prioritizes practice over study",
+    "narrative_zh": "考试临时抱佛脚就行，训练赛不能缺席",
+    "narrative_en": "I can cram the exam, but I can't skip scrim"
+  }
+}

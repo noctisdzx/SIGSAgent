@@ -1,0 +1,76 @@
+{
+  "id": "npc54_chang_le",
+  "name": "常乐",
+  "role": "undergraduate_science",
+  "personality": {
+    "openness": 0.8,
+    "conscientiousness": 0.55,
+    "extraversion": 0.75,
+    "agreeableness": 0.85,
+    "neuroticism": 0.4
+  },
+  "preferences": {
+    "favorite_locations": [
+      "4ef146d8",
+      "438038e3"
+    ],
+    "favorite_tags": [
+      "study",
+      "leisure"
+    ]
+  },
+  "relations": {
+    "npc19_sun_yuetong": "创业者互相打气",
+    "npc22_zhou_xiaomeng": "心理学同学"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc54_chang_le",
+  "profile": {
+    "id_num": 54,
+    "name_zh": "常乐",
+    "name_en": "Chang Le",
+    "age": 22,
+    "role_zh": "心理学系大三·猫咖店主理人",
+    "role_en": "Psych Yr3 · Cat Cafe Owner",
+    "major_zh": "心理学",
+    "major_en": "Psychology",
+    "group_zh": "理学院",
+    "group_en": "",
+    "mbti": "ENFP",
+    "ocean_raw": "O80 C55 E75 A85 N40",
+    "innate_zh": "共情力强、商业直觉好、爱小动物",
+    "innate_en": "Empathic, business-savvy, animal-lover",
+    "learned_zh": "开猫咖的经历让她学会了同时安抚人和猫的情绪",
+    "learned_en": "Cat-cafe ownership taught her to calm both humans and cats",
+    "belief_zh": "治愈别人也是治愈自己",
+    "belief_en": "Healing others heals yourself",
+    "goal_zh": "把猫咖做成心理疗愈空间",
+    "goal_en": "Turn cat cafe into healing space",
+    "contradiction_zh": "学业和创业精力分配不过来",
+    "contradiction_en": "Can't split energy between studies and business",
+    "surface_zh": "暖系治愈·走到哪都带着猫的气息",
+    "surface_en": "Warm, carries a cat's aura",
+    "deep_zh": "自己也需要被治愈，只是不说",
+    "deep_en": "Also needs healing, just doesn't say",
+    "fear_zh": "猫咖撑不下去",
+    "fear_en": "Cafe not surviving",
+    "desire_zh": "创造一个人和动物都能放松的空间",
+    "desire_en": "A space where people and animals relax",
+    "lifestyle_zh": "在学校和猫咖之间切换",
+    "lifestyle_en": "Switches between school and cafe",
+    "rhythm_zh": "上午上课，下午猫咖，晚上学习",
+    "rhythm_en": "Class AM, cafe PM, study at night",
+    "spaces_zh": "心理学系、校外猫咖、宿舍",
+    "spaces_en": "Psych dept, off-campus cat cafe, dorm",
+    "long_desire_zh": "猫咖盈利·论文也不落下",
+    "long_desire_en": "Cafe profits and thesis both on track",
+    "short_goal_zh": "今天给猫咖进一批新玩具",
+    "short_goal_en": "Order new cat toys today",
+    "constraint_zh": "房租压力大；有只猫生病了",
+    "constraint_en": "High rent; one cat is ill",
+    "bias_zh": "倾向认为所有问题都可以用温暖化解",
+    "bias_en": "Thinks all issues melt with warmth",
+    "narrative_zh": "你不开心的时候，来撸猫就好了",
+    "narrative_en": "When you're sad, come pet a cat"
+  }
+}

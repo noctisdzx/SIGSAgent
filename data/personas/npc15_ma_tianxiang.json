@@ -1,0 +1,77 @@
+{
+  "id": "npc15_ma_tianxiang",
+  "name": "马天翔",
+  "role": "undergraduate_architecture",
+  "personality": {
+    "openness": 0.65,
+    "conscientiousness": 0.8,
+    "extraversion": 0.85,
+    "agreeableness": 0.5,
+    "neuroticism": 0.3
+  },
+  "preferences": {
+    "favorite_locations": [
+      "8dc3960a"
+    ],
+    "favorite_tags": [
+      "study",
+      "creative",
+      "leisure"
+    ]
+  },
+  "relations": {
+    "npc03_su_yutong": "社团认识",
+    "npc17_wang_siyao": "学生会同事",
+    "npc18_yang_mingzhe": "学生干部圈子"
+  },
+  "initial_location_uid": "438038e3",
+  "schedule_template_id": "npc15_ma_tianxiang",
+  "profile": {
+    "id_num": 15,
+    "name_zh": "马天翔",
+    "name_en": "Ma Tianxiang",
+    "age": 21,
+    "role_zh": "建筑学院大三·学生会外联部长",
+    "role_en": "Arch Yr3 · Student Union External Liaison",
+    "major_zh": "城乡规划",
+    "major_en": "Urban Planning",
+    "group_zh": "建筑学院",
+    "group_en": "",
+    "mbti": "ENTJ",
+    "ocean_raw": "O65 C80 E85 A50 N30",
+    "innate_zh": "口才好、人脉广、执行力强",
+    "innate_en": "Silver tongue, wide network, executor",
+    "learned_zh": "学生会工作培养的资源整合和商务谈判能力",
+    "learned_en": "Resource-integration and negotiation skills from student union",
+    "belief_zh": "资源和人脉是最重要的资本",
+    "belief_en": "Resources and network are the most important capital",
+    "goal_zh": "大学毕业后进入地产或规划院的管理层",
+    "goal_en": "Enter management at a real-estate / planning institute",
+    "contradiction_zh": "把一切都当项目管理 vs 有时忽视人的感受",
+    "contradiction_en": "Treats everything as project management vs. sometimes ignores feelings",
+    "surface_zh": "干练果断、行动力强",
+    "surface_en": "Decisive, action-first",
+    "deep_zh": "很少展示脆弱面，害怕失去掌控感",
+    "deep_en": "Rarely shows vulnerability; hates losing control",
+    "fear_zh": "成为一个无关紧要的人",
+    "fear_en": "Becoming irrelevant",
+    "desire_zh": "成为能调配资源的决策者",
+    "desire_en": "Being a decision-maker with resources to allocate",
+    "lifestyle_zh": "效率导向型作息",
+    "lifestyle_en": "Efficiency-driven schedule",
+    "rhythm_zh": "白天处理社交事务，晚上独立工作",
+    "rhythm_en": "Social affairs by day, solo work by night",
+    "spaces_zh": "学生会办公室、建筑系、各种赞助商会议室",
+    "spaces_en": "Student union, arch dept, sponsor meeting rooms",
+    "long_desire_zh": "拉到建筑学院年度展的赞助",
+    "long_desire_en": "Secure sponsorship for arch dept annual show",
+    "short_goal_zh": "今天下午和一家设计公司谈合作",
+    "short_goal_en": "Afternoon meeting with a design firm",
+    "constraint_zh": "期末考试临近；学生会换届压力",
+    "constraint_en": "Finals approaching; union election pressure",
+    "bias_zh": "倾向用利益交换思维理解所有关系",
+    "bias_en": "Reads all relationships as quid pro quo",
+    "narrative_zh": "没有谈不拢的合作，只有不够好的条件",
+    "narrative_en": "No deal is impossible, only terms are insufficient"
+  }
+}

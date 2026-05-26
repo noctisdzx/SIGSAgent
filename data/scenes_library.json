@@ -1,0 +1,714 @@
+{
+  "scenes": [
+    {
+      "id": "scn_001_senior_junior_from_same_advisor",
+      "title_zh": "林晓薇 × 贺云舒：同门学姐妹",
+      "title_en": "Lin Xiaowei × He Yunshu: Senior/junior from same advisor",
+      "title": "林晓薇 × 贺云舒：同门学姐妹",
+      "tags": [
+        "学术/同门",
+        "Academic / cohort",
+        "Study Area"
+      ],
+      "people": [
+        "npc01_lin_xiaowei",
+        "npc06_he_yunshu"
+      ],
+      "location_uid": "64a9bc35",
+      "trigger": "perception:near(npc01_lin_xiaowei,npc06_he_yunshu) in Study Area",
+      "narrative_zh": "林晓薇 和 贺云舒 在 Study Area 相遇，延续“同门学姐妹”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Lin Xiaowei bumps into He Yunshu at the Study Area, continuing their `Senior/junior from same advisor` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_002_newspaper_colleagues_writing_friends",
+      "title_zh": "林晓薇 × 温婉如：校报同事+文友",
+      "title_en": "Lin Xiaowei × Wen Wanru: Newspaper colleagues & writing friends",
+      "title": "林晓薇 × 温婉如：校报同事+文友",
+      "tags": [
+        "学术/同门",
+        "Academic / cohort",
+        "Lab Area"
+      ],
+      "people": [
+        "npc01_lin_xiaowei",
+        "npc56_wen_wanru"
+      ],
+      "location_uid": "3877431b",
+      "trigger": "perception:near(npc01_lin_xiaowei,npc56_wen_wanru) in Lab Area",
+      "narrative_zh": "林晓薇 和 温婉如 在 Lab Area 相遇，延续“校报同事+文友”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Lin Xiaowei bumps into Wen Wanru at the Lab Area, continuing their `Newspaper colleagues & writing friends` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_003_lab_peers_mutual_help",
+      "title_zh": "陈远航 × 吴若琳：实验室同门·互助",
+      "title_en": "Chen Yuanhang × Wu Ruolin: Lab peers · mutual help",
+      "title": "陈远航 × 吴若琳：实验室同门·互助",
+      "tags": [
+        "学术/同门",
+        "Academic / cohort",
+        "Café"
+      ],
+      "people": [
+        "npc02_chen_yuanhang",
+        "npc10_wu_ruolin"
+      ],
+      "location_uid": "4ef146d8",
+      "trigger": "perception:near(npc02_chen_yuanhang,npc10_wu_ruolin) in Café",
+      "narrative_zh": "陈远航 和 吴若琳 在 Café 相遇，延续“实验室同门·互助”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Chen Yuanhang bumps into Wu Ruolin at the Café, continuing their `Lab peers · mutual help` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_004_tutoring_junior",
+      "title_zh": "刘思涵 × 吴若琳：答疑学妹",
+      "title_en": "Liu Sihan × Wu Ruolin: Tutoring junior",
+      "title": "刘思涵 × 吴若琳：答疑学妹",
+      "tags": [
+        "学术/同门",
+        "Academic / cohort",
+        "Garden Space"
+      ],
+      "people": [
+        "npc12_liu_sihan",
+        "npc10_wu_ruolin"
+      ],
+      "location_uid": "7a281fd7",
+      "trigger": "perception:near(npc12_liu_sihan,npc10_wu_ruolin) in Garden Space",
+      "narrative_zh": "刘思涵 和 吴若琳 在 Garden Space 相遇，延续“答疑学妹”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Liu Sihan bumps into Wu Ruolin at the Garden Space, continuing their `Tutoring junior` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_005_teacher_student_mentored",
+      "title_zh": "林晓薇 × 李慧敏：师生·受指导",
+      "title_en": "Lin Xiaowei × Li Huimin: Teacher-student · mentored",
+      "title": "林晓薇 × 李慧敏：师生·受指导",
+      "tags": [
+        "师生/职能",
+        "Teacher-student / role",
+        "Club Activities"
+      ],
+      "people": [
+        "npc01_lin_xiaowei",
+        "npc33_li_huimin"
+      ],
+      "location_uid": "8dc3960a",
+      "trigger": "perception:near(npc01_lin_xiaowei,npc33_li_huimin) in Club Activities",
+      "narrative_zh": "林晓薇 和 李慧敏 在 Club Activities 相遇，延续“师生·受指导”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Lin Xiaowei bumps into Li Huimin at the Club Activities, continuing their `Teacher-student · mentored` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_006_grad_exam_mentorship",
+      "title_zh": "贺云舒 × 李慧敏：师生·考研指导",
+      "title_en": "He Yunshu × Li Huimin: Grad-exam mentorship",
+      "title": "贺云舒 × 李慧敏：师生·考研指导",
+      "tags": [
+        "师生/职能",
+        "Teacher-student / role",
+        "Dining Area"
+      ],
+      "people": [
+        "npc06_he_yunshu",
+        "npc33_li_huimin"
+      ],
+      "location_uid": "9a49343c",
+      "trigger": "perception:near(npc06_he_yunshu,npc33_li_huimin) in Dining Area",
+      "narrative_zh": "贺云舒 和 李慧敏 在 Dining Area 相遇，延续“师生·考研指导”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "He Yunshu bumps into Li Huimin at the Dining Area, continuing their `Grad-exam mentorship` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_007_elective_course_teacher_student",
+      "title_zh": "温婉如 × 李慧敏：选修课师生",
+      "title_en": "Wen Wanru × Li Huimin: Elective course teacher-student",
+      "title": "温婉如 × 李慧敏：选修课师生",
+      "tags": [
+        "师生/职能",
+        "Teacher-student / role",
+        "Discussion Area"
+      ],
+      "people": [
+        "npc56_wen_wanru",
+        "npc33_li_huimin"
+      ],
+      "location_uid": "99883bc6",
+      "trigger": "perception:near(npc56_wen_wanru,npc33_li_huimin) in Discussion Area",
+      "narrative_zh": "温婉如 和 李慧敏 在 Discussion Area 相遇，延续“选修课师生”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Wen Wanru bumps into Li Huimin at the Discussion Area, continuing their `Elective course teacher-student` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_008_advisor_grad_student",
+      "title_zh": "陈远航 × 王建国：导师-研究生",
+      "title_en": "Chen Yuanhang × Wang Jianguo: Advisor - Grad student",
+      "title": "陈远航 × 王建国：导师-研究生",
+      "tags": [
+        "师生/职能",
+        "Teacher-student / role",
+        "Classroom"
+      ],
+      "people": [
+        "npc02_chen_yuanhang",
+        "npc34_wang_jianguo"
+      ],
+      "location_uid": "4d7a7e81",
+      "trigger": "perception:near(npc02_chen_yuanhang,npc34_wang_jianguo) in Classroom",
+      "narrative_zh": "陈远航 和 王建国 在 Classroom 相遇，延续“导师-研究生”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Chen Yuanhang bumps into Wang Jianguo at the Classroom, continuing their `Advisor - Grad student` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_009_lab_peers_subtle_rivalry",
+      "title_zh": "陈远航 × 许晴岚：实验室同门·暗中竞争",
+      "title_en": "Chen Yuanhang × Xu Qinglan: Lab peers · subtle rivalry",
+      "title": "陈远航 × 许晴岚：实验室同门·暗中竞争",
+      "tags": [
+        "竞争/张力",
+        "Rivalry / tension",
+        "Study Area"
+      ],
+      "people": [
+        "npc02_chen_yuanhang",
+        "npc08_xu_qinglan"
+      ],
+      "location_uid": "64a9bc35",
+      "trigger": "perception:near(npc02_chen_yuanhang,npc08_xu_qinglan) in Study Area",
+      "narrative_zh": "陈远航 和 许晴岚 在 Study Area 相遇，延续“实验室同门·暗中竞争”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Chen Yuanhang bumps into Xu Qinglan at the Study Area, continuing their `Lab peers · subtle rivalry` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_010_same_lab_subtle_rivalry",
+      "title_zh": "许晴岚 × 吴若琳：同门·微妙竞争",
+      "title_en": "Xu Qinglan × Wu Ruolin: Same lab · subtle rivalry",
+      "title": "许晴岚 × 吴若琳：同门·微妙竞争",
+      "tags": [
+        "竞争/张力",
+        "Rivalry / tension",
+        "Lab Area"
+      ],
+      "people": [
+        "npc08_xu_qinglan",
+        "npc10_wu_ruolin"
+      ],
+      "location_uid": "3877431b",
+      "trigger": "perception:near(npc08_xu_qinglan,npc10_wu_ruolin) in Lab Area",
+      "narrative_zh": "许晴岚 和 吴若琳 在 Lab Area 相遇，延续“同门·微妙竞争”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Xu Qinglan bumps into Wu Ruolin at the Lab Area, continuing their `Same lab · subtle rivalry` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_011_business_view_clash",
+      "title_zh": "杨明哲 × 孙悦彤：商业观点交锋",
+      "title_en": "Yang Mingzhe × Sun Yuetong: Business-view clash",
+      "title": "杨明哲 × 孙悦彤：商业观点交锋",
+      "tags": [
+        "竞争/张力",
+        "Rivalry / tension",
+        "Café"
+      ],
+      "people": [
+        "npc18_yang_mingzhe",
+        "npc19_sun_yuetong"
+      ],
+      "location_uid": "4ef146d8",
+      "trigger": "perception:near(npc18_yang_mingzhe,npc19_sun_yuetong) in Café",
+      "narrative_zh": "杨明哲 和 孙悦彤 在 Café 相遇，延续“商业观点交锋”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Yang Mingzhe bumps into Sun Yuetong at the Café, continuing their `Business-view clash` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_012_business_mindset_clash",
+      "title_zh": "韩子墨 × 杨明哲：商业思维碰撞",
+      "title_en": "Han Zimo × Yang Mingzhe: Business-mindset clash",
+      "title": "韩子墨 × 杨明哲：商业思维碰撞",
+      "tags": [
+        "竞争/张力",
+        "Rivalry / tension",
+        "Garden Space"
+      ],
+      "people": [
+        "npc09_han_zimo",
+        "npc18_yang_mingzhe"
+      ],
+      "location_uid": "7a281fd7",
+      "trigger": "perception:near(npc09_han_zimo,npc18_yang_mingzhe) in Garden Space",
+      "narrative_zh": "韩子墨 和 杨明哲 在 Garden Space 相遇，延续“商业思维碰撞”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Han Zimo bumps into Yang Mingzhe at the Garden Space, continuing their `Business-mindset clash` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_013_roommates",
+      "title_zh": "沈一凡 × 郑浩宇：室友",
+      "title_en": "Shen Yifan × Zheng Haoyu: Roommates",
+      "title": "沈一凡 × 郑浩宇：室友",
+      "tags": [
+        "朋友/同好",
+        "Friends / peers",
+        "Club Activities"
+      ],
+      "people": [
+        "npc07_shen_yifan",
+        "npc11_zheng_haoyu"
+      ],
+      "location_uid": "8dc3960a",
+      "trigger": "perception:near(npc07_shen_yifan,npc11_zheng_haoyu) in Club Activities",
+      "narrative_zh": "沈一凡 和 郑浩宇 在 Club Activities 相遇，延续“室友”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Shen Yifan bumps into Zheng Haoyu at the Club Activities, continuing their `Roommates` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_014_peer_friends",
+      "title_zh": "韩子墨 × 郑浩宇：同级朋友",
+      "title_en": "Han Zimo × Zheng Haoyu: Peer friends",
+      "title": "韩子墨 × 郑浩宇：同级朋友",
+      "tags": [
+        "朋友/同好",
+        "Friends / peers",
+        "Dining Area"
+      ],
+      "people": [
+        "npc09_han_zimo",
+        "npc11_zheng_haoyu"
+      ],
+      "location_uid": "9a49343c",
+      "trigger": "perception:near(npc09_han_zimo,npc11_zheng_haoyu) in Dining Area",
+      "narrative_zh": "韩子墨 和 郑浩宇 在 Dining Area 相遇，延续“同级朋友”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Han Zimo bumps into Zheng Haoyu at the Dining Area, continuing their `Peer friends` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_015_cross_major_friend_design_interest",
+      "title_zh": "刘思涵 × 何佳琪：跨专业好友·设计兴趣",
+      "title_en": "Liu Sihan × He Jiaqi: Cross-major friend · design interest",
+      "title": "刘思涵 × 何佳琪：跨专业好友·设计兴趣",
+      "tags": [
+        "朋友/同好",
+        "Friends / peers",
+        "Discussion Area"
+      ],
+      "people": [
+        "npc12_liu_sihan",
+        "npc27_he_jiaqi"
+      ],
+      "location_uid": "99883bc6",
+      "trigger": "perception:near(npc12_liu_sihan,npc27_he_jiaqi) in Discussion Area",
+      "narrative_zh": "刘思涵 和 何佳琪 在 Discussion Area 相遇，延续“跨专业好友·设计兴趣”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Liu Sihan bumps into He Jiaqi at the Discussion Area, continuing their `Cross-major friend · design interest` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_016_studio_desk_neighbors",
+      "title_zh": "苏雨桐 × 蒋语嫣：工作室邻桌",
+      "title_en": "Su Yutong × Jiang Yuyan: Studio desk neighbors",
+      "title": "苏雨桐 × 蒋语嫣：工作室邻桌",
+      "tags": [
+        "朋友/同好",
+        "Friends / peers",
+        "Classroom"
+      ],
+      "people": [
+        "npc03_su_yutong",
+        "npc14_jiang_yuyan"
+      ],
+      "location_uid": "4d7a7e81",
+      "trigger": "perception:near(npc03_su_yutong,npc14_jiang_yuyan) in Classroom",
+      "narrative_zh": "苏雨桐 和 蒋语嫣 在 Classroom 相遇，延续“工作室邻桌”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Su Yutong bumps into Jiang Yuyan at the Classroom, continuing their `Studio desk neighbors` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_017_tech_idolization",
+      "title_zh": "沈一凡 × 韩子墨：技术崇拜",
+      "title_en": "Shen Yifan × Han Zimo: Tech idolization",
+      "title": "沈一凡 × 韩子墨：技术崇拜",
+      "tags": [
+        "崇拜/请教",
+        "Admiration / asking",
+        "Study Area"
+      ],
+      "people": [
+        "npc07_shen_yifan",
+        "npc09_han_zimo"
+      ],
+      "location_uid": "64a9bc35",
+      "trigger": "perception:near(npc07_shen_yifan,npc09_han_zimo) in Study Area",
+      "narrative_zh": "沈一凡 和 韩子墨 在 Study Area 相遇，延续“技术崇拜”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Shen Yifan bumps into Han Zimo at the Study Area, continuing their `Tech idolization` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_018_asking_a_senior",
+      "title_zh": "沈一凡 × 陈远航：请教学长",
+      "title_en": "Shen Yifan × Chen Yuanhang: Asking a senior",
+      "title": "沈一凡 × 陈远航：请教学长",
+      "tags": [
+        "崇拜/请教",
+        "Admiration / asking",
+        "Lab Area"
+      ],
+      "people": [
+        "npc07_shen_yifan",
+        "npc02_chen_yuanhang"
+      ],
+      "location_uid": "3877431b",
+      "trigger": "perception:near(npc07_shen_yifan,npc02_chen_yuanhang) in Lab Area",
+      "narrative_zh": "沈一凡 和 陈远航 在 Lab Area 相遇，延续“请教学长”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Shen Yifan bumps into Chen Yuanhang at the Lab Area, continuing their `Asking a senior` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_019_senior_admiration",
+      "title_zh": "姜浩天 × 唐亦辰：学长崇拜",
+      "title_en": "Jiang Haotian × Tang Yichen: Senior admiration",
+      "title": "姜浩天 × 唐亦辰：学长崇拜",
+      "tags": [
+        "崇拜/请教",
+        "Admiration / asking",
+        "Café"
+      ],
+      "people": [
+        "npc43_jiang_haotian",
+        "npc13_tang_yichen"
+      ],
+      "location_uid": "4ef146d8",
+      "trigger": "perception:near(npc43_jiang_haotian,npc13_tang_yichen) in Café",
+      "narrative_zh": "姜浩天 和 唐亦辰 在 Café 相遇，延续“学长崇拜”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Jiang Haotian bumps into Tang Yichen at the Café, continuing their `Senior admiration` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_020_asking_a_senior_female",
+      "title_zh": "姜浩天 × 苏雨桐：请教学姐",
+      "title_en": "Jiang Haotian × Su Yutong: Asking a senior (female)",
+      "title": "姜浩天 × 苏雨桐：请教学姐",
+      "tags": [
+        "崇拜/请教",
+        "Admiration / asking",
+        "Garden Space"
+      ],
+      "people": [
+        "npc43_jiang_haotian",
+        "npc03_su_yutong"
+      ],
+      "location_uid": "7a281fd7",
+      "trigger": "perception:near(npc43_jiang_haotian,npc03_su_yutong) in Garden Space",
+      "narrative_zh": "姜浩天 和 苏雨桐 在 Garden Space 相遇，延续“请教学姐”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Jiang Haotian bumps into Su Yutong at the Garden Space, continuing their `Asking a senior (female)` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_021_startup_co_founders",
+      "title_zh": "韩子墨 × 孙悦彤：创业合伙人",
+      "title_en": "Han Zimo × Sun Yuetong: Startup co-founders",
+      "title": "韩子墨 × 孙悦彤：创业合伙人",
+      "tags": [
+        "合作/项目",
+        "Collaboration",
+        "Club Activities"
+      ],
+      "people": [
+        "npc09_han_zimo",
+        "npc19_sun_yuetong"
+      ],
+      "location_uid": "8dc3960a",
+      "trigger": "perception:near(npc09_han_zimo,npc19_sun_yuetong) in Club Activities",
+      "narrative_zh": "韩子墨 和 孙悦彤 在 Club Activities 相遇，延续“创业合伙人”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Han Zimo bumps into Sun Yuetong at the Club Activities, continuing their `Startup co-founders` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_022_content_collaboration",
+      "title_zh": "韩子墨 × 徐嘉铭：内容合作",
+      "title_en": "Han Zimo × Xu Jiaming: Content collaboration",
+      "title": "韩子墨 × 徐嘉铭：内容合作",
+      "tags": [
+        "合作/项目",
+        "Collaboration",
+        "Dining Area"
+      ],
+      "people": [
+        "npc09_han_zimo",
+        "npc28_xu_jiaming"
+      ],
+      "location_uid": "9a49343c",
+      "trigger": "perception:near(npc09_han_zimo,npc28_xu_jiaming) in Dining Area",
+      "narrative_zh": "韩子墨 和 徐嘉铭 在 Dining Area 相遇，延续“内容合作”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Han Zimo bumps into Xu Jiaming at the Dining Area, continuing their `Content collaboration` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_023_startup_circle_friends",
+      "title_zh": "孙悦彤 × 魏子涵：创业圈朋友",
+      "title_en": "Sun Yuetong × Wei Zihan: Startup circle friends",
+      "title": "孙悦彤 × 魏子涵：创业圈朋友",
+      "tags": [
+        "合作/项目",
+        "Collaboration",
+        "Discussion Area"
+      ],
+      "people": [
+        "npc19_sun_yuetong",
+        "npc41_wei_zihan"
+      ],
+      "location_uid": "99883bc6",
+      "trigger": "perception:near(npc19_sun_yuetong,npc41_wei_zihan) in Discussion Area",
+      "narrative_zh": "孙悦彤 和 魏子涵 在 Discussion Area 相遇，延续“创业圈朋友”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Sun Yuetong bumps into Wei Zihan at the Discussion Area, continuing their `Startup circle friends` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_024_creator_community_exchange",
+      "title_zh": "何佳琪 × 徐嘉铭：内容创作交流",
+      "title_en": "He Jiaqi × Xu Jiaming: Creator-community exchange",
+      "title": "何佳琪 × 徐嘉铭：内容创作交流",
+      "tags": [
+        "合作/项目",
+        "Collaboration",
+        "Classroom"
+      ],
+      "people": [
+        "npc27_he_jiaqi",
+        "npc28_xu_jiaming"
+      ],
+      "location_uid": "4d7a7e81",
+      "trigger": "perception:near(npc27_he_jiaqi,npc28_xu_jiaming) in Classroom",
+      "narrative_zh": "何佳琪 和 徐嘉铭 在 Classroom 相遇，延续“内容创作交流”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "He Jiaqi bumps into Xu Jiaming at the Classroom, continuing their `Creator-community exchange` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_025_occasional_lakeside_meets_exchange_of_ideas",
+      "title_zh": "李默然 × 张鹤鸣：偶尔在湖边相遇·思想交流",
+      "title_en": "Li Moran × Zhang Heming: Occasional lakeside meets · exchange of ideas",
+      "title": "李默然 × 张鹤鸣：偶尔在湖边相遇·思想交流",
+      "tags": [
+        "弱连接/偶遇",
+        "Weak tie / chance",
+        "Study Area"
+      ],
+      "people": [
+        "npc21_li_moran",
+        "npc04_zhang_heming"
+      ],
+      "location_uid": "64a9bc35",
+      "trigger": "perception:near(npc21_li_moran,npc04_zhang_heming) in Study Area",
+      "narrative_zh": "李默然 和 张鹤鸣 在 Study Area 相遇，延续“偶尔在湖边相遇·思想交流”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Li Moran bumps into Zhang Heming at the Study Area, continuing their `Occasional lakeside meets · exchange of ideas` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_026_science_building_neighbors_occasional_chat",
+      "title_zh": "赵心怡 × 秦岭：理学院同楼·偶尔聊天",
+      "title_en": "Zhao Xinyi × Qin Ling: Science building neighbors · occasional chat",
+      "title": "赵心怡 × 秦岭：理学院同楼·偶尔聊天",
+      "tags": [
+        "弱连接/偶遇",
+        "Weak tie / chance",
+        "Lab Area"
+      ],
+      "people": [
+        "npc24_zhao_xinyi",
+        "npc46_qin_ling"
+      ],
+      "location_uid": "3877431b",
+      "trigger": "perception:near(npc24_zhao_xinyi,npc46_qin_ling) in Lab Area",
+      "narrative_zh": "赵心怡 和 秦岭 在 Lab Area 相遇，延续“理学院同楼·偶尔聊天”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Zhao Xinyi bumps into Qin Ling at the Lab Area, continuing their `Science building neighbors · occasional chat` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_027_library_regular_recognized",
+      "title_zh": "谢安然 × 刘正清：图书馆常客·被认识",
+      "title_en": "Xie Anran × Liu Zhengqing: Library regular · recognized",
+      "title": "谢安然 × 刘正清：图书馆常客·被认识",
+      "tags": [
+        "弱连接/偶遇",
+        "Weak tie / chance",
+        "Café"
+      ],
+      "people": [
+        "npc31_xie_anran",
+        "npc38_liu_zhengqing"
+      ],
+      "location_uid": "4ef146d8",
+      "trigger": "perception:near(npc31_xie_anran,npc38_liu_zhengqing) in Café",
+      "narrative_zh": "谢安然 和 刘正清 在 Café 相遇，延续“图书馆常客·被认识”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Xie Anran bumps into Liu Zhengqing at the Café, continuing their `Library regular · recognized` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_028_ex_programmer_occasional_debug_help",
+      "title_zh": "陶然 × 陈远航：前程序员·偶尔帮debug",
+      "title_en": "Tao Ran × Chen Yuanhang: Ex-programmer · occasional debug help",
+      "title": "陶然 × 陈远航：前程序员·偶尔帮debug",
+      "tags": [
+        "弱连接/偶遇",
+        "Weak tie / chance",
+        "Garden Space"
+      ],
+      "people": [
+        "npc60_tao_ran",
+        "npc02_chen_yuanhang"
+      ],
+      "location_uid": "7a281fd7",
+      "trigger": "perception:near(npc60_tao_ran,npc02_chen_yuanhang) in Garden Space",
+      "narrative_zh": "陶然 和 陈远航 在 Garden Space 相遇，延续“前程序员·偶尔帮debug”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Tao Ran bumps into Chen Yuanhang at the Garden Space, continuing their `Ex-programmer · occasional debug help` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_029_soul_talks_subtle_attraction",
+      "title_zh": "林晓薇 × 张鹤鸣：灵魂对话·微妙吸引",
+      "title_en": "Lin Xiaowei × Zhang Heming: Soul talks · subtle attraction",
+      "title": "林晓薇 × 张鹤鸣：灵魂对话·微妙吸引",
+      "tags": [
+        "暧昧/吸引",
+        "Attraction / flirt",
+        "Club Activities"
+      ],
+      "people": [
+        "npc01_lin_xiaowei",
+        "npc04_zhang_heming"
+      ],
+      "location_uid": "8dc3960a",
+      "trigger": "perception:near(npc01_lin_xiaowei,npc04_zhang_heming) in Club Activities",
+      "narrative_zh": "林晓薇 和 张鹤鸣 在 Club Activities 相遇，延续“灵魂对话·微妙吸引”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Lin Xiaowei bumps into Zhang Heming at the Club Activities, continuing their `Soul talks · subtle attraction` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_030_contest_partners_ambiguous_chemistry",
+      "title_zh": "苏雨桐 × 唐亦辰：竞赛搭档·暧昧不明",
+      "title_en": "Su Yutong × Tang Yichen: Contest partners · ambiguous chemistry",
+      "title": "苏雨桐 × 唐亦辰：竞赛搭档·暧昧不明",
+      "tags": [
+        "暧昧/吸引",
+        "Attraction / flirt",
+        "Dining Area"
+      ],
+      "people": [
+        "npc03_su_yutong",
+        "npc13_tang_yichen"
+      ],
+      "location_uid": "9a49343c",
+      "trigger": "perception:near(npc03_su_yutong,npc13_tang_yichen) in Dining Area",
+      "narrative_zh": "苏雨桐 和 唐亦辰 在 Dining Area 相遇，延续“竞赛搭档·暧昧不明”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Su Yutong bumps into Tang Yichen at the Dining Area, continuing their `Contest partners · ambiguous chemistry` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_031_few_chance_encounters_crush_forming",
+      "title_zh": "沈一凡 × 刘思涵：偶遇几次·有好感",
+      "title_en": "Shen Yifan × Liu Sihan: Few chance encounters · crush forming",
+      "title": "沈一凡 × 刘思涵：偶遇几次·有好感",
+      "tags": [
+        "暧昧/吸引",
+        "Attraction / flirt",
+        "Discussion Area"
+      ],
+      "people": [
+        "npc07_shen_yifan",
+        "npc12_liu_sihan"
+      ],
+      "location_uid": "99883bc6",
+      "trigger": "perception:near(npc07_shen_yifan,npc12_liu_sihan) in Discussion Area",
+      "narrative_zh": "沈一凡 和 刘思涵 在 Discussion Area 相遇，延续“偶遇几次·有好感”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Shen Yifan bumps into Liu Sihan at the Discussion Area, continuing their `Few chance encounters · crush forming` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_032_music_sports_opposites_attract",
+      "title_zh": "林雨萱 × 赵天磊：音乐+体育·反差吸引",
+      "title_en": "Lin Yuxuan × Zhao Tianlei: Music × sports · opposites attract",
+      "title": "林雨萱 × 赵天磊：音乐+体育·反差吸引",
+      "tags": [
+        "暧昧/吸引",
+        "Attraction / flirt",
+        "Classroom"
+      ],
+      "people": [
+        "npc25_lin_yuxuan",
+        "npc26_zhao_tianlei"
+      ],
+      "location_uid": "4d7a7e81",
+      "trigger": "perception:near(npc25_lin_yuxuan,npc26_zhao_tianlei) in Classroom",
+      "narrative_zh": "林雨萱 和 赵天磊 在 Classroom 相遇，延续“音乐+体育·反差吸引”的关系——两人会自然地停下来交谈几句。",
+      "narrative_en": "Lin Yuxuan bumps into Zhao Tianlei at the Classroom, continuing their `Music × sports · opposites attract` dynamic — a brief, on-brand chat unfolds."
+    },
+    {
+      "id": "scn_morning_library_run",
+      "title_zh": "图书馆开门冲锋",
+      "title_en": "Morning library dash",
+      "title": "图书馆开门冲锋",
+      "tags": [
+        "晨间",
+        "morning",
+        "Study Area"
+      ],
+      "people": [
+        "npc02_chen_yuanhang",
+        "npc06_he_yunshu",
+        "npc20_chen_zhiruo"
+      ],
+      "location_uid": "64a9bc35",
+      "trigger": "time>=08:00 and time<=08:30",
+      "narrative_zh": "考研党们在图书馆开门时挤进自习区，互相默契地占座、点头不语。",
+      "narrative_en": "Grad-exam regulars rush into the Study Area at opening, claim seats with a nod, and slip into focused silence."
+    },
+    {
+      "id": "scn_cafeteria_lunch_rush",
+      "title_zh": "食堂午高峰",
+      "title_en": "Cafeteria lunch rush",
+      "title": "食堂午高峰",
+      "tags": [
+        "正午",
+        "noon",
+        "Dining Area"
+      ],
+      "people": [
+        "npc37_he_min",
+        "npc03_su_yutong",
+        "npc26_zhao_tianlei",
+        "npc53_yin_xiaoya"
+      ],
+      "location_uid": "9a49343c",
+      "trigger": "time>=12:00 and time<=12:45",
+      "narrative_zh": "王阿姨给常客们偷偷多打了一勺；体育生苏振东和美食博主马思源在排队时打了招呼。",
+      "narrative_en": "Auntie Wang gives regulars an extra ladle; athlete Su Zhendong and food-blogger Ma Siyuan exchange nods in line."
+    },
+    {
+      "id": "scn_cafe_afternoon_writing",
+      "title_zh": "咖啡厅午后写稿",
+      "title_en": "Café afternoon writing",
+      "title": "咖啡厅午后写稿",
+      "tags": [
+        "下午",
+        "afternoon",
+        "Café"
+      ],
+      "people": [
+        "npc01_lin_xiaowei",
+        "npc56_wen_wanru",
+        "npc27_he_jiaqi"
+      ],
+      "location_uid": "4ef146d8",
+      "trigger": "time>=15:00 and time<=17:30",
+      "narrative_zh": "校报主编林晓薇靠窗写稿，对面是网文作者周思琪和插画师陈雨欣，三人偶尔交换灵感。",
+      "narrative_en": "Editor Lin Xiaowei writes by the window; web-novelist Zhou Siqi and illustrator Chen Yuxin sit across, swapping bits of inspiration."
+    },
+    {
+      "id": "scn_evening_garden_run",
+      "title_zh": "傍晚操场夜跑",
+      "title_en": "Evening garden run",
+      "title": "傍晚操场夜跑",
+      "tags": [
+        "傍晚",
+        "evening",
+        "Garden Space"
+      ],
+      "people": [
+        "npc11_zheng_haoyu",
+        "npc26_zhao_tianlei",
+        "npc25_lin_yuxuan"
+      ],
+      "location_uid": "7a281fd7",
+      "trigger": "time>=19:00 and time<=20:30",
+      "narrative_zh": "体育生苏振东带着电竞选手赵小哲热身；声乐生顾乐瑶从旁边经过，三人短暂寒暄。",
+      "narrative_en": "Athlete Su Zhendong warms up esports player Zhao Xiaozhe; vocal student Gu Leyao passes by — a quick hello exchanged."
+    },
+    {
+      "id": "scn_club_room_rehearsal",
+      "title_zh": "社团活动彩排夜",
+      "title_en": "Club rehearsal night",
+      "title": "社团活动彩排夜",
+      "tags": [
+        "夜间",
+        "night",
+        "Club Activities"
+      ],
+      "people": [
+        "npc15_ma_tianxiang",
+        "npc17_wang_siyao",
+        "npc47_bai_lu",
+        "npc25_lin_yuxuan"
+      ],
+      "location_uid": "8dc3960a",
+      "trigger": "time>=20:00 and time<=22:30",
+      "narrative_zh": "学生会例会与舞蹈、声乐排练在同一晚同一空间错峰进行，气氛热闹但略微紧张。",
+      "narrative_en": "Student-union meeting and dance/vocal rehearsals overlap in the Club Activities room — buzzing energy with a hint of tension."
+    }
+  ]
+}

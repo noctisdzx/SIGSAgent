@@ -1,0 +1,594 @@
+{
+  "id": "npc56_wen_wanru",
+  "description": "基于参考 HTML 的 温婉如 周课表（工作日相同，周末略简）。",
+  "week": {
+    "monday": [
+      {
+        "start": "00:30",
+        "end": "08:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      },
+      {
+        "start": "08:00",
+        "end": "08:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床·看读者评论"
+      },
+      {
+        "start": "08:30",
+        "end": "09:00",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "上课"
+      },
+      {
+        "start": "11:00",
+        "end": "12:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆构思剧情"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "14:00",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休"
+      },
+      {
+        "start": "14:00",
+        "end": "16:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "上课"
+      },
+      {
+        "start": "16:00",
+        "end": "18:00",
+        "activity": "coffee_break",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "咖啡厅写今天的存稿"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "宿舍集中写作"
+      },
+      {
+        "start": "22:00",
+        "end": "22:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "发布更新"
+      },
+      {
+        "start": "22:30",
+        "end": "23:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回复读者评论"
+      },
+      {
+        "start": "23:30",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "构思明天的剧情"
+      }
+    ],
+    "tuesday": [
+      {
+        "start": "00:30",
+        "end": "08:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      },
+      {
+        "start": "08:00",
+        "end": "08:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床·看读者评论"
+      },
+      {
+        "start": "08:30",
+        "end": "09:00",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "上课"
+      },
+      {
+        "start": "11:00",
+        "end": "12:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆构思剧情"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "14:00",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休"
+      },
+      {
+        "start": "14:00",
+        "end": "16:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "上课"
+      },
+      {
+        "start": "16:00",
+        "end": "18:00",
+        "activity": "coffee_break",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "咖啡厅写今天的存稿"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "宿舍集中写作"
+      },
+      {
+        "start": "22:00",
+        "end": "22:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "发布更新"
+      },
+      {
+        "start": "22:30",
+        "end": "23:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回复读者评论"
+      },
+      {
+        "start": "23:30",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "构思明天的剧情"
+      }
+    ],
+    "wednesday": [
+      {
+        "start": "00:30",
+        "end": "08:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      },
+      {
+        "start": "08:00",
+        "end": "08:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床·看读者评论"
+      },
+      {
+        "start": "08:30",
+        "end": "09:00",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "上课"
+      },
+      {
+        "start": "11:00",
+        "end": "12:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆构思剧情"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "14:00",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休"
+      },
+      {
+        "start": "14:00",
+        "end": "16:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "上课"
+      },
+      {
+        "start": "16:00",
+        "end": "18:00",
+        "activity": "coffee_break",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "咖啡厅写今天的存稿"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "宿舍集中写作"
+      },
+      {
+        "start": "22:00",
+        "end": "22:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "发布更新"
+      },
+      {
+        "start": "22:30",
+        "end": "23:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回复读者评论"
+      },
+      {
+        "start": "23:30",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "构思明天的剧情"
+      }
+    ],
+    "thursday": [
+      {
+        "start": "00:30",
+        "end": "08:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      },
+      {
+        "start": "08:00",
+        "end": "08:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床·看读者评论"
+      },
+      {
+        "start": "08:30",
+        "end": "09:00",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "上课"
+      },
+      {
+        "start": "11:00",
+        "end": "12:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆构思剧情"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "14:00",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休"
+      },
+      {
+        "start": "14:00",
+        "end": "16:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "上课"
+      },
+      {
+        "start": "16:00",
+        "end": "18:00",
+        "activity": "coffee_break",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "咖啡厅写今天的存稿"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "宿舍集中写作"
+      },
+      {
+        "start": "22:00",
+        "end": "22:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "发布更新"
+      },
+      {
+        "start": "22:30",
+        "end": "23:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回复读者评论"
+      },
+      {
+        "start": "23:30",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "构思明天的剧情"
+      }
+    ],
+    "friday": [
+      {
+        "start": "00:30",
+        "end": "08:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      },
+      {
+        "start": "08:00",
+        "end": "08:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床·看读者评论"
+      },
+      {
+        "start": "08:30",
+        "end": "09:00",
+        "activity": "free_time",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂早餐"
+      },
+      {
+        "start": "09:00",
+        "end": "11:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "上课"
+      },
+      {
+        "start": "11:00",
+        "end": "12:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "图书馆构思剧情"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "14:00",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休"
+      },
+      {
+        "start": "14:00",
+        "end": "16:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "上课"
+      },
+      {
+        "start": "16:00",
+        "end": "18:00",
+        "activity": "coffee_break",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "咖啡厅写今天的存稿"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      },
+      {
+        "start": "19:00",
+        "end": "22:00",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "宿舍集中写作"
+      },
+      {
+        "start": "22:00",
+        "end": "22:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "发布更新"
+      },
+      {
+        "start": "22:30",
+        "end": "23:30",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "回复读者评论"
+      },
+      {
+        "start": "23:30",
+        "end": "23:59",
+        "activity": "free_time",
+        "location_uid": "438038e3",
+        "narrative_zh": "构思明天的剧情"
+      }
+    ],
+    "saturday": [
+      {
+        "start": "00:30",
+        "end": "08:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      },
+      {
+        "start": "08:00",
+        "end": "08:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床·看读者评论"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "14:00",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "chat",
+        "location_uid": "7a281fd7",
+        "narrative_zh": "周末自由活动"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      }
+    ],
+    "sunday": [
+      {
+        "start": "00:30",
+        "end": "08:00",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "入睡"
+      },
+      {
+        "start": "08:00",
+        "end": "08:30",
+        "activity": "wake_up_and_wash",
+        "location_uid": "438038e3",
+        "narrative_zh": "起床·看读者评论"
+      },
+      {
+        "start": "12:00",
+        "end": "13:00",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂午饭"
+      },
+      {
+        "start": "13:00",
+        "end": "14:00",
+        "activity": "midday_rest",
+        "location_uid": "438038e3",
+        "narrative_zh": "午休"
+      },
+      {
+        "start": "14:00",
+        "end": "17:00",
+        "activity": "leisure_media",
+        "location_uid": "4ef146d8",
+        "narrative_zh": "周末闲聊"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "食堂晚饭"
+      }
+    ]
+  }
+}
