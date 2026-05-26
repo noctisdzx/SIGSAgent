@@ -22,10 +22,23 @@ uvicorn app.main:app --reload
 |---|---|
 | `GET /api/scene/graph` | 场景拓扑图（供前端 SceneGraphView） |
 | `GET /api/world` | 实时 WorldState 快照 |
-| `GET /api/agents/{id}/memory` | STM / LTM / 三元组图 |
+| `GET /api/agents/{id}/memory` | STM / LTM / 三元组图（含 `text_en` 双语字段） |
 | `GET /api/agents/{id}/schedule` | 5min 槽位时间轴 |
 | `GET /api/agents/{id}/history` | 行为历史（GOAP 已执行步骤） |
-| `WS /ws` | tick / agent_decision / memory_update 等事件流 |
+| `GET /api/sim/status` | `{running, sim_time, pause_reason, current_day}` |
+| `GET /api/sim/day_summaries` | 历次跨午夜的双语旁白 |
+| `POST /api/sim/start` / `pause` / `step` | 启动 / 恢复（开启下一天）/ 暂停 / 单步 |
+| `WS /ws` | `welcome` `tick` `agent_decision` `behavior` `dialog` **`day_summary`** `agent_error` |
+
+## 关键能力
+
+- **跨午夜自动旁白**：`sim/loop.py` 检测 sim 跨日，收集 dialog/behavior，
+  调 LLM `narrate_day` 产中英双语段落，自动 `pause` 并推 `day_summary` 事件。
+- **行为反馈写回 STM**：每条原子动作执行后写一条"结果型"STM，含
+  `ok / note / pre_state / post_state`，决策可读。
+- **双语记忆**：`ShortTermItem` / `LongTermItem` 都带 `text_en`；
+  `summarize_memories` / `generate_dialog` / `narrate_day` prompt 强制双语 JSON。
+- **LLM 容错**：`SafeLLMAdapter(primary, fallback)`，失败标记 `degraded=True`。
 
 ## 模块图
 

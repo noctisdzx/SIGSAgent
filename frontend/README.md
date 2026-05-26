@@ -23,10 +23,17 @@ is offline, every store falls back to a small inline mock (see
 | Route | File | Purpose |
 |---|---|---|
 | `/relations` (default) | `views/RelationView.vue` | 60-NPC social graph + 5-tab side panel (NPC / Edge / Scenes / Timeline / Heat). Drag-resizable, bilingual. |
-| `/scene` | `views/SceneGraphView.vue` | 16-room topology from `/api/scene/graph`, with per-room metadata + agents-here panel. |
+| `/scene` | `views/SceneGraphView.vue` | 16-room topology + live NPC tracking + **RoomHeatPanel** (real-time occupancy heatmap) + per-room metadata panel. |
 | `/agent`, `/agent/:id` | `views/AgentDetailView.vue` | Searchable NPC list + tabs (Memory / Schedule / Behavior / Perception). |
-| `/memory-graph` | `views/MemoryGraphView.vue` | Aggregated triplet (subject → predicate → object) graph across NPCs. |
-| `/timeline` | `views/TimelineView.vue` | LEFT: live WS event stream. RIGHT: seeded narrative timeline grouped by day. |
+| `/memory-graph` | `views/MemoryGraphView.vue` | Aggregated triplet graph; node labels resolve `npcNN_xxx` to the NPC's display name. |
+| `/timeline` | `views/TimelineView.vue` | LEFT: live WS event stream (renders dialog, behavior, **day_summary**). RIGHT: seeded narrative timeline. |
+
+## Global UI
+
+- **Top-nav sim controls**: ⏱ clock · running/paused badge · ⏸ Pause · ▶ Resume / Next-day · 📜 Recap.
+- **DaySummaryModal**: opens automatically on `day_summary` WS event; shows
+  the narrator paragraph in the active language, plus a "▶ 开启下一天" button
+  that hits `/api/sim/start`.
 
 ## Reusable components
 
@@ -43,6 +50,8 @@ is offline, every store falls back to a small inline mock (see
 | `PerceptionPanel.vue`     | Children + siblings perception columns. |
 | `TimelineFeed.vue`        | WS event stream renderer (color-coded by type). |
 | `Chip.vue`                | Tiny chip with `default / taboo / comfort / filter / people` variants. |
+| `RoomHeatPanel.vue`       | Real-time room occupancy heatmap (7-stop ramp), honors the NPC tracking filter; click rows to select room. |
+| `DaySummaryModal.vue`     | Full-screen narrator recap that pops on `day_summary`, dismissable or via "Start next day". |
 
 ## Pinia stores
 
@@ -50,7 +59,8 @@ is offline, every store falls back to a small inline mock (see
 |---|---|---|
 | `useLangStore`     | -                          | `'zh' | 'en'` toggle, `t(zh, en)` helper, `pickField(obj, base)`. Persists to `localStorage.npcGraphLang`. |
 | `useEventsStore`   | WS                         | Rolling event ring buffer + `connectionStatus`. |
-| `useWorldStore`    | `/api/scene/graph`, `/api/world` | Reacts to `tick` events from WS via `applyTick()`. |
+| `useWorldStore`    | `/api/scene/graph`, `/api/world` | Reacts to `tick` events from WS via `applyTick()`; can poll `/api/world` for NPC tracking. |
+| `useSimStore`      | `/api/sim/status` (poll 4s) + WS `day_summary` | `running / pauseReason / summaries[] / pendingSummary`; `pause()`, `resume()` aka `startNextDay()`. |
 | `useAgentsStore`   | `/api/agents/*`            | List + per-id detail/memory/schedule/history cache. |
 | `useRelationsStore`| `/api/relations`           | 123 edges. |
 | `useScenesStore`   | `/api/scenes-library`      | 37 scenes. |
@@ -63,7 +73,8 @@ Every store sets `usingMock = true` and substitutes inline data from
 
 `src/api/ws.ts` opens `ws://${location.host}/ws` with exponential backoff
 (`1s → 15s` cap) and updates `useEventsStore().connectionStatus`. Handles
-`welcome`, `tick`, `agent_decision`, `behavior`, `agent_error`, etc.
+`welcome`, `tick`, `agent_decision`, `behavior`, `dialog`, **`day_summary`**, `agent_error`, etc.
+`day_summary` is forwarded to `useSimStore.applyDaySummaryEvent` which auto-opens the modal.
 
 ## Theme tokens
 
