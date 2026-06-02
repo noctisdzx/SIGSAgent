@@ -65,10 +65,10 @@
 ### 前端可视化（Vue 3 + vis-network + Pinia）
 | 路由 | 内容 |
 |---|---|
-| `/relations` | 60 NPC 社交关系图 + 5 标签侧栏（NPC/Edge/Scenes/Timeline/Heat） |
-| `/scene` | 16 房间拓扑 + 实时 NPC 追踪 + **房间人数热力图** + 房间详情 |
+| `/relations` | 60 NPC 社交关系图 + 5 标签侧栏（NPC/Edge/Scenes/Timeline/Heat），**NPC 详情卡完整双语**（人格底色 / 双层人格 / 动态层 / 生活方式） |
+| `/scene` | 16 房间六边形拓扑 + 实时 NPC 追踪动画 + 物品搬运 + **移动/驻留双层热力图** + 节点点击查看三元组事件 + 缩放自适应节点尺寸 + 房间/NPC/物品尺寸 & 连线长度调节面板 |
 | `/agent/:id` | 单 NPC 的 STM/LTM/Schedule/Behavior/Perception |
-| `/memory-graph` | 全 NPC 三元组叙事图（已把 `npcNN_xxx` 解析为人名） |
+| `/memory-graph` | NPC-中心三元组叙事图：节点 = NPC，边 = NPC↔NPC 互动（按 pair 聚合，自身事件归并到节点 tooltip）；**互动热力图**（边粗细/颜色随互动次数渐变、活跃 NPC 橙色光晕、最热对金色发光）；**边色图例**（按当前在用 tone 自适应）；可调显示标签的 top-K 边 |
 | `/timeline` | 实时 WS 事件流 + 种子叙事轴 |
 
 顶部条始终展示 **⏱ 当前 sim 时间 / Pause / Resume / Next-day / 📜 Recap**；
@@ -129,13 +129,22 @@ Copy-Item .env.example .env
 | `SIM_AUTOSTART` | `false` | 后端启动后是否自动开始 tick |
 | `SIM_START_TIME` | `2026-05-26T07:00:00` | sim 起始时间；改成 `…T23:55:00` 可立刻验证跨午夜 |
 
-### 2. 一键拉起（PowerShell）
+### 2. 一键拉起
+
+**Windows 双击启动**（推荐）：
+
+```
+start.bat
+```
+
+会弹出两个独立 cmd 窗口分别跑 backend（:8000）与 frontend（:5173），并在 ~7s 后
+自动打开浏览器到 `http://127.0.0.1:5173/`。控制台用 UTF-8（`chcp 65001`），中文不会乱码。
+
+**PowerShell 替代**：
 
 ```powershell
 .\scripts\run_dev.ps1
 ```
-
-会在两个独立终端里分别跑 backend（:8000）和 frontend（:5173 或 :5174）。
 
 或手动启动：
 
@@ -268,6 +277,26 @@ behavior executor、感知、tick、LLM fallback。
 - [ ] 把 `actions.json` 扩到 ~12 条原子动作，让 GOAP 搜索空间更丰富
 - [ ] 给 Memory Graph 三元组的 `predicate` 也输出双语
 - [ ] Persistence：把当前以内存为主的 STM/LTM/Graph 全量落 SQLite，支持断点续跑
+
+---
+
+## 更新日志（近期高亮）
+
+- **记忆图谱 · 互动热力 + 图例**：边色随 NPC 对的互动次数从情感色 → 橙 → 红渐变，
+  最热的一对加金色发光；右下角图例自动按当前数据中实际出现的 tone 显示。
+- **NPC 详情卡 · 中文模式修复**：persona JSON 用 `*_zh / *_en` 后缀双语字段，
+  之前 `pick()` 只在英文模式追加 `_en`，导致中文模式下「先天特质 / 信念 / 表层 / 深层 /
+  核心恐惧 / 核心渴望 / narrative」等全空；现已在两侧都查后缀；同时修正中文模式
+  `role` 显示机器代码（`undergraduate_literature`）的问题，改取 `profile.role_zh`
+  里的人读标签（如「文学院大三·校报主编」）。
+- **场景拓扑 · 缩放自适应 + 物品搬运 + 双层热力**：缩小视图时房间六边形与 NPC/物品
+  节点会按可配置上限放大；NPC 可拾取/搬运物品（拾取后挂在 NPC 上、放下后回到场景节点）；
+  右上角面板可分别调节房间尺寸、NPC 尺寸、物品尺寸、NPC↔房间连线距离及自动缩放上限。
+- **场景拓扑 · 节点事件三元组**：点击任意房间节点，右侧抽屉显示该房间最近发生的事件
+  （以 subject / predicate / object 三元组呈现）。
+- **跨午夜旁白**：跨日自动收集当天 dialog + behavior，喂 LLM 生成中英双语小说式段落
+  （含主人公 / 配角 / 情节 / 明日预测），落 `sim.day_summaries` 并自动暂停；玩家点
+  「📜 Recap」也可手动触发。
 
 ---
 
