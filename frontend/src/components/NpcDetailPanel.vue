@@ -130,13 +130,20 @@ const profile = computed<any>(() => props.npc?.profile || props.npc || {});
 
 function pick(field: string): string {
   if (!props.npc) return '';
-  // try language-specific suffix first on profile, then top-level npc
-  const tryEn = lang.lang === 'en';
+  // Persona JSON uses bilingual suffixes (`field_zh` / `field_en`); when no
+  // suffix exists the bare `field` is treated as Chinese-by-default. We must
+  // try the language-suffixed key FIRST in both directions — the previous
+  // version only added the `_en` candidate, so Chinese mode always missed
+  // every `*_zh` field and rendered blank.
+  const preferred = lang.lang === 'en' ? '_en' : '_zh';
+  const fallback  = lang.lang === 'en' ? '_zh' : '_en';
   const candidates = [
-    tryEn ? profile.value[field + '_en'] : null,
+    profile.value[field + preferred],
+    props.npc[field + preferred],
     profile.value[field],
-    tryEn ? props.npc[field + '_en'] : null,
     props.npc[field],
+    profile.value[field + fallback],
+    props.npc[field + fallback],
   ];
   for (const c of candidates) {
     if (c !== undefined && c !== null && c !== '') return String(c);
@@ -146,15 +153,24 @@ function pick(field: string): string {
 
 const name = computed(() => {
   if (!props.npc) return '';
+  // `profile.name_zh / name_en` is the authoritative bilingual pair from the
+  // persona JSON; the top-level `name` mirrors the Chinese one but may be
+  // missing in older mock data, so we fall through to the id as a last resort.
   return lang.lang === 'en'
-    ? (props.npc.name_en || props.npc.name || String(props.npc.id || ''))
-    : (props.npc.name || props.npc.name_en || String(props.npc.id || ''));
+    ? (profile.value.name_en || props.npc.name_en || profile.value.name_zh
+        || props.npc.name || String(props.npc.id || ''))
+    : (profile.value.name_zh || props.npc.name || profile.value.name_en
+        || props.npc.name_en || String(props.npc.id || ''));
 });
 const role = computed(() => {
   if (!props.npc) return '';
+  // CAVEAT: top-level `npc.role` is the machine code (e.g.
+  // "undergraduate_literature"); the human-readable role lives in
+  // `profile.role_zh / role_en`. The old code returned the code in Chinese
+  // mode because it only checked `npc.role`.
   return lang.lang === 'en'
-    ? (props.npc.role_en || props.npc.role || '')
-    : (props.npc.role || props.npc.role_en || '');
+    ? (profile.value.role_en || profile.value.role_zh || props.npc.role_en || props.npc.role || '')
+    : (profile.value.role_zh || profile.value.role_en || props.npc.role || props.npc.role_en || '');
 });
 const major = computed(() => {
   if (!props.npc) return '';

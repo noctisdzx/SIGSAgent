@@ -46,12 +46,136 @@
           />
           <b>{{ labelTopK }}</b>
         </label>
+        <button class="ctrl-btn" @click="showHeatPanel = !showHeatPanel">
+          🔥 {{ showHeatPanel ? lang.t('收起', 'Hide') : lang.t('热力', 'Heat') }}
+        </button>
+        <button class="ctrl-btn" @click="showLegend = !showLegend">
+          🎨 {{ showLegend ? lang.t('隐藏图例', 'Hide legend') : lang.t('图例', 'Legend') }}
+        </button>
         <button class="ctrl-btn" @click="reload">
           {{ lang.t('刷新', 'Refresh') }}
         </button>
         <button class="ctrl-btn" @click="resetView">
           {{ lang.t('重置视图', 'Reset View') }}
         </button>
+      </div>
+
+      <!-- Heat-map control panel: same shape as the scene-graph one -->
+      <div v-if="showHeatPanel" class="heat-panel">
+        <div class="heat-header">
+          <strong>🔥 {{ lang.t('互动热力', 'Interaction heat') }}</strong>
+        </div>
+        <label class="heat-row">
+          <input type="checkbox" v-model="showEdgeHeat" />
+          <span class="heat-sw edge"></span>
+          {{ lang.t('NPC 对热力边', 'Pair-edge heat') }}
+          <span class="heat-num">· max {{ maxEdgeTotal }}</span>
+        </label>
+        <label class="heat-row">
+          <input type="checkbox" v-model="showNpcHeat" />
+          <span class="heat-sw npc"></span>
+          {{ lang.t('NPC 活跃度光晕', 'NPC activity halo') }}
+          <span class="heat-num">· max {{ maxNpcActivity }}</span>
+        </label>
+        <label class="heat-row">
+          <input type="checkbox" v-model="showHottestPairGlow" />
+          <span class="heat-sw glow"></span>
+          {{ lang.t('最热 NPC 对发光', 'Glow on hottest pair') }}
+        </label>
+        <div v-if="hottestPair" class="heat-hot-now">
+          {{ lang.t('当前最热对', 'Hottest pair now') }}:
+          <b>{{ entityLabel(hottestPair.from) }}</b>
+          <span class="arrow">→</span>
+          <b>{{ entityLabel(hottestPair.to) }}</b>
+          <span class="heat-num">×{{ hottestPair.total }}</span>
+        </div>
+        <div class="heat-hint">
+          {{ lang.t(
+            '边粗细/颜色 = 互动次数；NPC 光晕 = 活跃度；金色 = 最热 NPC 对',
+            'Edge width/color = interactions; NPC halo = activity; gold = hottest pair'
+          ) }}
+        </div>
+      </div>
+
+      <!-- ===== Legend: explains every edge / node color the user can see ===== -->
+      <div v-if="showLegend" class="legend-panel">
+        <div class="legend-header">
+          <strong>🎨 {{ lang.t('边色图例', 'Edge color legend') }}</strong>
+          <button class="micro-btn legend-close" @click="showLegend = false" :title="lang.t('关闭', 'Close')">×</button>
+        </div>
+
+        <!-- Heat tier (only shown when heat layer is on) -->
+        <div v-if="showEdgeHeat && maxEdgeTotal > 0" class="legend-section">
+          <div class="legend-sec-title">{{ lang.t('互动热度', 'Interaction heat') }}</div>
+          <div class="legend-gradient">
+            <div class="legend-bar"></div>
+            <div class="legend-scale">
+              <span>0</span>
+              <span>{{ Math.ceil(maxEdgeTotal / 2) }}</span>
+              <span>{{ maxEdgeTotal }}</span>
+            </div>
+          </div>
+          <div class="legend-row tight">
+            <span class="legend-sw" :style="{ background: '#42a5f5' }"></span>
+            <span>{{ lang.t('低 (按情感色)', 'low (tone-tinted)') }}</span>
+          </div>
+          <div class="legend-row tight">
+            <span class="legend-sw" :style="{ background: '#ff9800' }"></span>
+            <span>{{ lang.t('中 (橙)', 'mid (orange)') }}</span>
+          </div>
+          <div class="legend-row tight">
+            <span class="legend-sw" :style="{ background: '#ff5722' }"></span>
+            <span>{{ lang.t('高 (红)', 'high (red)') }}</span>
+          </div>
+        </div>
+
+        <!-- Hottest pair gold -->
+        <div v-if="showHottestPairGlow && hottestPair" class="legend-section">
+          <div class="legend-sec-title">{{ lang.t('最热 NPC 对', 'Hottest NPC pair') }}</div>
+          <div class="legend-row">
+            <span class="legend-sw gold-glow"></span>
+            <span>{{ lang.t('金色发光边', 'gold glowing edge') }}</span>
+          </div>
+        </div>
+
+        <!-- Tone palette: only the tones actually present on the current graph,
+             so the legend stays compact and meaningful. -->
+        <div v-if="tonesInUse.length" class="legend-section">
+          <div class="legend-sec-title">
+            {{ lang.t('情感色 (互动语气)', 'Tone (interaction mood)') }}
+          </div>
+          <div class="legend-tones">
+            <div
+              v-for="t in tonesInUse"
+              :key="t"
+              class="legend-row tight"
+            >
+              <span
+                class="legend-sw"
+                :style="{ background: t === '__default' ? '#42a5f5' : (TONE_MAP[t] || '#42a5f5') }"
+              ></span>
+              <span>{{ t === '__default' ? lang.t('默认/未知', 'default/unknown') : toneLabel(t) }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- NPC halo (only when active) -->
+        <div v-if="showNpcHeat" class="legend-section">
+          <div class="legend-sec-title">{{ lang.t('NPC 节点光晕', 'NPC node halo') }}</div>
+          <div class="legend-row">
+            <span class="legend-sw halo-sw"></span>
+            <span>{{ lang.t('活跃度 (互动次数累计)', 'activity (sum of interactions)') }}</span>
+          </div>
+        </div>
+
+        <div class="legend-section">
+          <div class="legend-sec-title">{{ lang.t('边宽与箭头', 'Width & arrows') }}</div>
+          <div class="legend-row tight"><span class="legend-sw thin"></span><span>{{ lang.t('少量互动', 'few interactions') }}</span></div>
+          <div class="legend-row tight"><span class="legend-sw thick"></span><span>{{ lang.t('大量互动', 'many interactions') }}</span></div>
+          <div class="legend-hint">
+            {{ lang.t('箭头方向 = 主体 → 客体', 'Arrow = subject → object') }}
+          </div>
+        </div>
       </div>
     </div>
 
@@ -265,6 +389,29 @@ const selectedEdge = ref<PairEdge | null>(null);
 const labelTopK = ref<number>(8);
 let netInstance: Network | null = null;
 
+/* ---- Heatmap toggles (persisted to localStorage) ---- */
+const MG_HEAT_LS_KEY = 'sigs_mg_heat_v1';
+const mgHeatLoad = (() => {
+  try { return JSON.parse(localStorage.getItem(MG_HEAT_LS_KEY) || '{}'); }
+  catch { return {}; }
+})();
+const showEdgeHeat = ref<boolean>(mgHeatLoad.edge ?? true);
+const showHottestPairGlow = ref<boolean>(mgHeatLoad.hot ?? true);
+const showNpcHeat = ref<boolean>(mgHeatLoad.npc ?? true);
+const showHeatPanel = ref<boolean>(false);
+/** Default-on so first-time users immediately understand the edge palette. */
+const showLegend = ref<boolean>(mgHeatLoad.legend ?? true);
+watch([showEdgeHeat, showHottestPairGlow, showNpcHeat, showLegend], () => {
+  try {
+    localStorage.setItem(MG_HEAT_LS_KEY, JSON.stringify({
+      edge: showEdgeHeat.value,
+      hot: showHottestPairGlow.value,
+      npc: showNpcHeat.value,
+      legend: showLegend.value,
+    }));
+  } catch {}
+});
+
 /** Stable warm-tone color per agent id (matches the scene-graph palette). */
 function colorForAgent(id: string): string {
   let h = 0;
@@ -294,7 +441,23 @@ const TONE_MAP: Record<string, string> = {
   warm:'#ffa726', tense:'#ef5350', focused:'#26c6da', casual:'#78909c',
   curious:'#ce93d8', gentle:'#a5d6a7', playful:'#fff176', decisive:'#ff8a65',
 };
+/** Bilingual labels for the legend; falls back to the raw tone key if unmapped. */
+const TONE_LABELS: Record<string, [string, string]> = {
+  warm:     ['温暖', 'warm'],
+  tense:    ['紧张', 'tense'],
+  focused:  ['专注', 'focused'],
+  casual:   ['随意', 'casual'],
+  curious:  ['好奇', 'curious'],
+  gentle:   ['温柔', 'gentle'],
+  playful:  ['俏皮', 'playful'],
+  decisive: ['果断', 'decisive'],
+};
 function toneColor(t?: string): string { return (t && TONE_MAP[t]) || '#42a5f5'; }
+function toneLabel(t: string): string {
+  const pair = TONE_LABELS[t];
+  if (!pair) return t;
+  return lang.lang === 'en' ? pair[1] : pair[0];
+}
 function modeTone(preds: PredicateAgg[]): string | undefined {
   const tally = new Map<string, number>();
   for (const p of preds) {
@@ -379,6 +542,43 @@ const totalSelfEvents = computed(() => {
 });
 const topPairEdges = computed(() => pairEdges.value.slice(0, 40));
 
+/* ---- Heat aggregates ---- */
+/** Per-NPC total interaction count (sum of incident pair-edge totals).
+ *  Drives the NPC node's soft glow when the NPC heat layer is on. */
+const npcActivity = computed<Map<string, number>>(() => {
+  const m = new Map<string, number>();
+  for (const e of pairEdges.value) {
+    m.set(e.from, (m.get(e.from) || 0) + e.total);
+    m.set(e.to,   (m.get(e.to)   || 0) + e.total);
+  }
+  return m;
+});
+const maxNpcActivity = computed(() => {
+  let m = 0;
+  for (const v of npcActivity.value.values()) if (v > m) m = v;
+  return m;
+});
+const maxEdgeTotal = computed(() => pairEdges.value[0]?.total || 0);
+/** The single (subject, object) pair with the most interactions. Already
+ *  sorted desc in `pairEdges`, so we just take the first. */
+const hottestPair = computed<PairEdge | null>(() => pairEdges.value[0] || null);
+
+/** Tones that actually show up on the current graph. The legend filters to
+ *  these so it stays compact (only colors users can actually see). The
+ *  fallback `default` is added when any edge ends up using the catch-all
+ *  blue `#42a5f5` because its tone is missing/unknown. */
+const tonesInUse = computed<string[]>(() => {
+  const set = new Set<string>();
+  let hasDefault = false;
+  for (const e of pairEdges.value) {
+    if (e.tone && TONE_MAP[e.tone]) set.add(e.tone);
+    else hasDefault = true;
+  }
+  const arr = [...set].sort();
+  if (hasDefault) arr.push('__default');
+  return arr;
+});
+
 const npcEdges = computed<PairEdge[]>(() => {
   if (!selectedNpc.value) return [];
   return pairEdges.value
@@ -408,13 +608,23 @@ function buildNpcTitle(npcId: string, selfs: Triplet[]): string {
 
 const vNodes = computed(() => {
   const out: any[] = [];
+  const maxAct = maxNpcActivity.value;
+  const hotIds = new Set<string>();
+  if (showHottestPairGlow.value && hottestPair.value) {
+    hotIds.add(hottestPair.value.from);
+    hotIds.add(hottestPair.value.to);
+  }
   for (const npcId of analysis.value.npcSet) {
     const selfs = analysis.value.selfEvents.get(npcId) || [];
     const baseColor = colorForAgent(npcId);
+    const act = npcActivity.value.get(npcId) || 0;
+    const heat = (showNpcHeat.value && maxAct > 0) ? act / maxAct : 0;
+    const isOnHottestEdge = hotIds.has(npcId);
     out.push({
       id: npcId,
       label: entityLabel(npcId) + (selfs.length ? `  📋${selfs.length}` : ''),
-      title: buildNpcTitle(npcId, selfs),
+      title: buildNpcTitle(npcId, selfs)
+        + `\n${lang.t('总互动', 'Total interactions')}: ${act}`,
       shape: 'dot',
       size: 18,
       color: {
@@ -423,6 +633,13 @@ const vNodes = computed(() => {
         highlight: { background: baseColor, border: '#FFFFFF' },
       },
       borderWidth: 1.5,
+      // Heat overlay: warm halo per NPC, plus an extra bright pulse if this
+      // NPC is one of the two endpoints of the single most-active pair.
+      shadow: isOnHottestEdge
+        ? { enabled: true, color: 'rgba(255,160,0,0.85)', size: 22, x: 0, y: 0 }
+        : (heat > 0
+            ? { enabled: true, color: `rgba(255,140,0,${0.15 + 0.50 * heat})`, size: 6 + 14 * heat, x: 0, y: 0 }
+            : { enabled: false }),
       font: { color: '#fff', size: 12, strokeWidth: 2, strokeColor: '#0a0e17' },
     });
   }
@@ -441,6 +658,19 @@ const labelEdgeIds = computed(() => {
 
 const vEdges = computed(() => pairEdges.value.map(e => {
   const showLabel = labelEdgeIds.value.has(e.id);
+  // Edge heat: gradient from tone-color (cool) → amber → red as the pair's
+  // interaction count approaches the max. Width gets a heat boost on top
+  // of the existing log-scale so the hottest links stand out instantly.
+  const heat = (showEdgeHeat.value && maxEdgeTotal.value > 0)
+    ? e.total / maxEdgeTotal.value
+    : 0;
+  const isHottest = showHottestPairGlow.value && hottestPair.value?.id === e.id;
+  const baseWidth = 1 + Math.min(5, Math.log2(e.total + 1));
+  const width = baseWidth + (isHottest ? 4 : heat * 3);
+  const color = isHottest
+    ? '#FFD54F'
+    : (heat > 0.05 ? (heat < 0.5 ? '#ff9800' : '#ff5722') : toneColor(e.tone));
+  const opacity = isHottest ? 1 : (heat > 0 ? Math.min(0.95, 0.5 + 0.45 * heat) : 0.7);
   return {
     id: e.id,
     from: e.from,
@@ -450,11 +680,20 @@ const vEdges = computed(() => pairEdges.value.map(e => {
           ? `${e.topPredicate}+${e.predicates.length - 1}  ×${e.total}`
           : `${e.topPredicate} ×${e.total}`)
       : undefined,
-    width: 1 + Math.min(5, Math.log2(e.total + 1)),
+    width,
     arrows: { to: { enabled: true, scaleFactor: 0.55 } },
-    color: { color: toneColor(e.tone), opacity: 0.7 },
+    color: { color, opacity },
+    // vis-network supports per-edge shadow — use it on the single hottest
+    // pair so the eye locks on instantly without scanning labels.
+    shadow: isHottest
+      ? { enabled: true, color: 'rgba(255,213,79,0.85)', size: 12, x: 0, y: 0 }
+      : undefined,
     font: showLabel
-      ? { color: '#cfd8dc', size: 10, strokeWidth: 0, align: 'middle' }
+      ? {
+          color: isHottest ? '#FFD54F' : '#cfd8dc',
+          size: isHottest ? 12 : 10,
+          strokeWidth: 0, align: 'middle',
+        }
       : undefined,
     smooth: { enabled: true, type: 'continuous', roundness: 0.15 },
   };
@@ -491,6 +730,15 @@ function applyNodeHighlights() {
 }
 
 watch([selectedNpc, selectedEdge], () => applyNodeHighlights());
+
+/* Re-apply selection-highlight whenever vNodes get rebuilt (e.g. when the
+ * heat-layer toggles change or new triplets arrive). vis-network's
+ * incremental `nodes.update` from NetworkGraph would otherwise overwrite
+ * our imperative size/border tweaks with the baseline from `vNodes`. */
+watch(
+  [showEdgeHeat, showHottestPairGlow, showNpcHeat, () => pairEdges.value.length],
+  () => requestAnimationFrame(() => applyNodeHighlights()),
+);
 
 const opts = {
   edges: { arrows: { to: { enabled: true, scaleFactor: 0.55 } } },
@@ -788,5 +1036,164 @@ onMounted(async () => {
   color: var(--accent-primary);
   margin: 12px 0 6px;
   letter-spacing: 0.4px;
+}
+
+/* ===== Heat-map control panel ===== */
+.heat-panel {
+  position: absolute;
+  top: 56px;
+  right: 16px;
+  width: 240px;
+  background: rgba(18, 24, 43, 0.96);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  z-index: 10;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+}
+.heat-header {
+  font-size: 12px;
+  color: var(--accent-warn);
+  margin-bottom: 6px;
+  border-bottom: 1px dashed var(--border-soft);
+  padding-bottom: 4px;
+}
+.heat-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0;
+  cursor: pointer;
+  user-select: none;
+}
+.heat-row input[type="checkbox"] {
+  accent-color: var(--accent-warn);
+}
+.heat-sw {
+  width: 14px; height: 4px;
+  border-radius: 3px;
+  display: inline-block;
+}
+.heat-sw.edge {
+  background: linear-gradient(90deg, #42a5f5, #ff9800 60%, #ff5722);
+}
+.heat-sw.npc {
+  background: radial-gradient(circle, #ffb74d, rgba(255,140,0,0));
+  width: 14px; height: 14px; border-radius: 50%;
+}
+.heat-sw.glow {
+  background: #FFD54F;
+  box-shadow: 0 0 6px 2px rgba(255, 213, 79, 0.85);
+  width: 12px; height: 12px; border-radius: 50%;
+}
+.heat-num {
+  color: var(--text-very-dim);
+  font-family: Consolas, monospace;
+  font-size: 11px;
+}
+.heat-hot-now {
+  margin-top: 6px;
+  padding: 6px 8px;
+  background: rgba(255, 213, 79, 0.08);
+  border: 1px solid rgba(255, 213, 79, 0.35);
+  border-radius: 6px;
+  font-size: 11.5px;
+  line-height: 1.4;
+}
+.heat-hot-now b { color: var(--accent-primary); }
+.heat-hot-now .arrow { color: var(--accent-warn); margin: 0 4px; }
+.heat-hint {
+  margin-top: 6px;
+  color: var(--text-very-dim);
+  font-size: 10.5px;
+  line-height: 1.4;
+}
+
+/* ===== Legend panel ===== */
+.legend-panel {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  width: 220px;
+  max-height: 70%;
+  overflow-y: auto;
+  background: rgba(18, 24, 43, 0.96);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: var(--text-secondary);
+  font-size: 11.5px;
+  z-index: 10;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+}
+.legend-header {
+  display: flex; align-items: center; justify-content: space-between;
+  color: var(--accent-warn);
+  border-bottom: 1px dashed var(--border-soft);
+  padding-bottom: 4px;
+  margin-bottom: 6px;
+}
+.legend-close {
+  padding: 0 6px;
+  font-size: 13px;
+  line-height: 1;
+}
+.legend-section {
+  margin-top: 8px;
+}
+.legend-section:first-of-type { margin-top: 0; }
+.legend-sec-title {
+  font-size: 11px;
+  color: var(--accent-primary);
+  margin-bottom: 4px;
+  letter-spacing: 0.3px;
+}
+.legend-row {
+  display: flex; align-items: center; gap: 6px;
+  padding: 3px 0;
+  line-height: 1.3;
+}
+.legend-row.tight { padding: 2px 0; }
+.legend-sw {
+  width: 18px; height: 6px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  display: inline-block;
+}
+.legend-sw.thin  { height: 1.5px; background: #b0bec5; }
+.legend-sw.thick { height: 5px;   background: #b0bec5; }
+.legend-sw.gold-glow {
+  background: #FFD54F;
+  box-shadow: 0 0 6px 2px rgba(255, 213, 79, 0.75);
+}
+.legend-sw.halo-sw {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: radial-gradient(circle, #ffb74d, rgba(255,140,0,0));
+}
+.legend-gradient { margin: 4px 0 6px; }
+.legend-bar {
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #42a5f5 0%, #ff9800 55%, #ff5722 100%);
+}
+.legend-scale {
+  display: flex; justify-content: space-between;
+  font-family: Consolas, monospace;
+  font-size: 10px;
+  color: var(--text-very-dim);
+  margin-top: 2px;
+}
+.legend-tones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 8px;
+}
+.legend-hint {
+  margin-top: 4px;
+  color: var(--text-very-dim);
+  font-size: 10.5px;
+  line-height: 1.4;
 }
 </style>
