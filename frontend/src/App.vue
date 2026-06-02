@@ -59,6 +59,15 @@
           : lang.t('继续', 'Resume') }}
       </button>
       <button
+        class="nav-btn sim-btn"
+        :disabled="sim.summarizing"
+        @click="sim.summarizeNow()"
+        :title="lang.t('用 LLM 立即总结今天发生的事（不暂停模拟）', 'LLM-recap today now (does not pause)')"
+      >
+        <template v-if="sim.summarizing">⏳ {{ lang.t('总结中…', 'Summarizing…') }}</template>
+        <template v-else>✍ {{ lang.t('立即总结', 'Recap now') }}</template>
+      </button>
+      <button
         v-if="sim.summaries.length"
         class="nav-btn sim-btn"
         @click="sim.openLatestSummary()"

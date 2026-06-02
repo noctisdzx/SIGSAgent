@@ -29,6 +29,8 @@ const emit = defineEmits<{
 
 const el = ref<HTMLDivElement | null>(null);
 let network: Network | null = null;
+const prevNodeIds = new Set<string | number>();
+const prevEdgeIds = new Set<string | number>();
 
 const DEFAULT_OPTS: Options = {
   nodes: {
@@ -38,6 +40,10 @@ const DEFAULT_OPTS: Options = {
     borderWidth: 2,
     borderWidthSelected: 3,
     shadow: { enabled: true, color: 'rgba(0,0,0,0.3)', size: 6 },
+    // CAVEAT: if a caller sets a `value` on a node, vis-network silently
+    // switches to value-based scaling (default range 10..30 px), which
+    // OVERRIDES the explicit per-node `size`. To use a custom size, do
+    // NOT also pass `value` on the same node.
   },
   edges: {
     width: 1.5,
@@ -71,6 +77,12 @@ function build() {
   if (!el.value) return;
   const data: Data = { nodes: props.nodes as any, edges: props.edges as any };
   network = new Network(el.value, data, deepMerge(DEFAULT_OPTS, props.options || {}) as Options);
+
+  // Seed the prev-id sets so the diffing watcher starts in a consistent state.
+  prevNodeIds.clear();
+  for (const n of props.nodes as any[]) prevNodeIds.add(n.id);
+  prevEdgeIds.clear();
+  for (const e of props.edges as any[]) prevEdgeIds.add(e.id ?? `${e.from}|${e.to}`);
 
   network.on('click', (params: any) => {
     if (params.nodes?.length) {
@@ -107,16 +119,60 @@ function deepMerge(a: any, b: any): any {
 onMounted(build);
 onBeforeUnmount(() => network?.destroy());
 
+/* Incremental diff & update.
+   `setData()` rebuilds the whole DataSet which (a) resets the viewport so the
+   user's pan/zoom is lost every tick and (b) is wasteful when only a handful
+   of NPC positions change. We instead diff the previous id set against the
+   current one and call `nodes.update`/`edges.update` plus `.remove` for the
+   gone ids. vis-network preserves the current viewport across these calls. */
+function applyIncremental() {
+  if (!network) return;
+  const nodesDS = (network as any).body.data.nodes;
+  const edgesDS = (network as any).body.data.edges;
+
+  const curNodeIds = new Set<string | number>();
+  for (const n of props.nodes as any[]) curNodeIds.add(n.id);
+  const curEdgeIds = new Set<string | number>();
+  for (const e of props.edges as any[]) {
+    if (e.id == null) e.id = `${e.from}|${e.to}`;
+    curEdgeIds.add(e.id);
+  }
+
+  const removedNodes: (string | number)[] = [];
+  for (const id of prevNodeIds) if (!curNodeIds.has(id)) removedNodes.push(id);
+  const removedEdges: (string | number)[] = [];
+  for (const id of prevEdgeIds) if (!curEdgeIds.has(id)) removedEdges.push(id);
+
+  if (removedEdges.length) edgesDS.remove(removedEdges);
+  if (removedNodes.length) nodesDS.remove(removedNodes);
+
+  nodesDS.update(props.nodes as any[]);
+  edgesDS.update(props.edges as any[]);
+
+  prevNodeIds.clear();
+  for (const id of curNodeIds) prevNodeIds.add(id);
+  prevEdgeIds.clear();
+  for (const id of curEdgeIds) prevEdgeIds.add(id);
+}
+
 watch(
   () => [props.nodes, props.edges],
-  () => network?.setData({ nodes: props.nodes as any, edges: props.edges as any }),
+  () => applyIncremental(),
   { deep: true },
 );
 
 defineExpose({
   fit() { network?.fit({ animation: { duration: 600, easingFunction: 'easeInOutCubic' } } as any); },
   focus(id: string | number) { network?.focus(id, { scale: 1.2, animation: true }); },
+  moveTo(opts: any) { network?.moveTo(opts); },
   network: () => network,
+  /** Cheap per-frame mutation that bypasses the prop/watch path so we can
+   *  drive smooth animations (NPC sliding along an edge) without thrashing
+   *  the whole `setData` pipeline. */
+  updateNodes(updates: any[]) {
+    if (!network) return;
+    (network as any).body.data.nodes.update(updates);
+  },
   setNodeOpacity(opaqueIds: Set<string | number>, dimAlpha = 0.15) {
     if (!network) return;
     const updates: any[] = [];

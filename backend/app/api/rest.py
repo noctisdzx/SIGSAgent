@@ -333,3 +333,36 @@ async def get_day_summaries(req: Request, limit: int = 30) -> dict[str, Any]:
     sim = _sim(req)
     items = list(getattr(sim, "day_summaries", []) or [])
     return {"summaries": items[-max(1, limit):]}
+
+
+@router.post("/sim/summarize_now")
+async def sim_summarize_now(req: Request) -> dict[str, Any]:
+    """Force an omniscient-narrator summary of the *current* simulated day.
+
+    Useful when the player wants a recap mid-day instead of waiting for the
+    midnight rollover. Does NOT pause the loop or advance the day; it just
+    appends one entry to ``sim.day_summaries`` and publishes a `day_summary`
+    WS event so the UI's modal pops.
+    """
+    sim = _sim(req)
+    world = _world(req)
+    if sim is None:
+        return {"status": "error", "reason": "no sim loop"}
+    current_day = world.sim_time.date()
+    day_iso = current_day.isoformat()
+    # Bypass the once-per-rollover guard for manual triggers.
+    sim._last_summarised_day = None  # type: ignore[attr-defined]
+    # If a summary for the same day already exists (user is re-summarising),
+    # drop the old one so the manual version replaces it instead of duplicating.
+    sim.day_summaries = [s for s in (sim.day_summaries or [])
+                         if s.get("day") != day_iso]
+    try:
+        await sim._do_day_summary(current_day)  # type: ignore[attr-defined]
+    except Exception as exc:
+        return {"status": "error", "reason": repr(exc)}
+    last = (sim.day_summaries or [{}])[-1] if sim.day_summaries else {}
+    return {
+        "status": "ok",
+        "day": day_iso,
+        "summary": last,
+    }

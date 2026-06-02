@@ -83,6 +83,28 @@
         "agent.energy": "+= 1"
       },
       "concurrent_with": []
+    },
+    {
+      "id": "pickup",
+      "label": "pickup(item_id)",
+      "cost": 1,
+      "duration_minutes": 5,
+      "params": ["item_id"],
+      "preconditions": {
+        "item.location_uid": "== agent.location_uid"
+      },
+      "effects": {},
+      "concurrent_with": []
+    },
+    {
+      "id": "drop",
+      "label": "drop(item_id)",
+      "cost": 1,
+      "duration_minutes": 5,
+      "params": ["item_id"],
+      "preconditions": {},
+      "effects": {},
+      "concurrent_with": []
     }
   ]
 }

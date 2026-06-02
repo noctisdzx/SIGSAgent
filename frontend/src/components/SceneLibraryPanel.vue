@@ -8,39 +8,81 @@
 -->
 <template>
   <div class="scenes">
-    <div class="hint">
-      {{ lang.t(
-        `共 ${scenes.length} 个基础场景。点击参与者跳到 NPC。`,
-        `${scenes.length} base scenes. Click any participant to jump to that NPC.`
-      ) }}
-    </div>
+    <!-- ============== LIVE: runtime activity feed ============== -->
+    <section class="live-block">
+      <h3 class="block-title">
+        📡 {{ lang.t('正在发生 · 实时活动', 'Happening Now · Live Activity') }}
+      </h3>
+      <div class="hint">
+        {{ lang.t(
+          `从 WS 事件流聚合，最近 ${liveActivity.length} 条事件。`,
+          `Aggregated from the WS stream — latest ${liveActivity.length} events.`,
+        ) }}
+      </div>
 
-    <div class="filter-row">
-      <span class="row-label">{{ lang.t('按空间', 'By space') }}</span>
-      <Chip v-for="s in spaceOptions" :key="s.key"
-            variant="filter" :clickable="true"
-            :class="{ active: spaceFilter === s.key }"
-            @click="spaceFilter = s.key">
-        {{ s.label }}
-      </Chip>
-    </div>
-    <div class="filter-row">
-      <span class="row-label">{{ lang.t('按天气', 'By weather') }}</span>
-      <Chip v-for="w in weatherOptions" :key="w.key"
-            variant="filter" :clickable="true"
-            :class="{ active: weatherFilter === w.key, [`weather-${w.key}`]: w.key !== 'all' }"
-            @click="weatherFilter = w.key">
-        {{ w.label }}
-      </Chip>
-    </div>
+      <div v-if="!liveActivity.length" class="placeholder">
+        {{ lang.t('暂时风平浪静，等 NPC 做点什么…',
+                 'All quiet for now — wait for the NPCs to act…') }}
+      </div>
 
-    <div class="hint">
-      {{ lang.t('当前筛选', 'Showing') }}:
-      <b style="color: var(--accent-warn)">{{ filtered.length }}</b>
-      {{ lang.t('个场景', 'scenes') }}
-    </div>
+      <div v-for="(ev, i) in liveActivity" :key="`live${i}`"
+           class="live-card" :class="`live-${ev.kind}`">
+        <div class="live-head">
+          <span class="live-time">{{ ev.time }}</span>
+          <span class="live-tag">{{ ev.tagLabel }}</span>
+          <span v-if="ev.loc" class="live-loc">@{{ ev.loc }}</span>
+        </div>
+        <div class="live-people" v-if="ev.peopleIds.length">
+          <Chip v-for="pid in ev.peopleIds" :key="pid"
+                variant="people" :clickable="true"
+                @click="emit('jumpNpc', String(pid))">
+            {{ npcLabel(pid) }}
+          </Chip>
+        </div>
+        <div class="live-body">{{ ev.body }}</div>
+      </div>
+    </section>
 
-    <div v-for="sc in filtered" :key="String(sc.id)" class="scene-card">
+    <!-- ============== Seeded scene library (collapsed) ============== -->
+    <section class="scripted-block">
+      <h3 class="block-title block-title--folded"
+          :class="{ open: showScripted }"
+          @click="showScripted = !showScripted">
+        <span class="caret">{{ showScripted ? '▾' : '▸' }}</span>
+        📚 {{ lang.t('剧本预设场景', 'Scripted Scenes') }}
+        <span class="block-meta">
+          {{ lang.t(`(${scenes.length} 条参考剧本，与运行时无关)`,
+                    `(${scenes.length} reference scenes, not runtime-driven)`) }}
+        </span>
+      </h3>
+
+      <div v-show="showScripted">
+        <div class="filter-row">
+          <span class="row-label">{{ lang.t('按空间', 'By space') }}</span>
+          <Chip v-for="s in spaceOptions" :key="s.key"
+                variant="filter" :clickable="true"
+                :class="{ active: spaceFilter === s.key }"
+                @click="spaceFilter = s.key">
+            {{ s.label }}
+          </Chip>
+        </div>
+        <div class="filter-row">
+          <span class="row-label">{{ lang.t('按天气', 'By weather') }}</span>
+          <Chip v-for="w in weatherOptions" :key="w.key"
+                variant="filter" :clickable="true"
+                :class="{ active: weatherFilter === w.key, [`weather-${w.key}`]: w.key !== 'all' }"
+                @click="weatherFilter = w.key">
+            {{ w.label }}
+          </Chip>
+        </div>
+
+        <div class="hint">
+          {{ lang.t('当前筛选', 'Showing') }}:
+          <b style="color: var(--accent-warn)">{{ filtered.length }}</b>
+          {{ lang.t('个场景', 'scenes') }}
+        </div>
+
+        <div v-for="sc in filtered" :key="String(sc.id)" class="scene-card">
       <div class="scene-title">{{ titleOf(sc) }}</div>
       <div class="scene-meta">
         <span v-if="sc.space_zh">📍 {{ lang.lang === 'en' ? (sc.space_en || sc.space_zh) : sc.space_zh }}</span>
@@ -72,9 +114,11 @@
       </div>
     </div>
 
-    <div v-if="!filtered.length" class="placeholder">
-      {{ lang.t('当前筛选下没有场景。', 'No scenes match the current filter.') }}
-    </div>
+        <div v-if="!filtered.length" class="placeholder">
+          {{ lang.t('当前筛选下没有场景。', 'No scenes match the current filter.') }}
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -82,17 +126,103 @@
 import { computed, ref } from 'vue';
 import Chip from './Chip.vue';
 import { useLangStore } from '@/stores/lang';
+import { useEventsStore } from '@/stores/events';
 import type { SceneEntry } from '@/api/endpoints';
 
 const lang = useLangStore();
+const events = useEventsStore();
 const props = defineProps<{
   scenes: SceneEntry[];
   npcMap: Record<string, any>;
+  /** Optional room name lookup (uid -> chinese name). */
+  roomNameMap?: Record<string, string>;
 }>();
 const emit = defineEmits<{ (e: 'jumpNpc', id: string): void }>();
 
 const spaceFilter   = ref<string>('all');
 const weatherFilter = ref<string>('all');
+const showScripted  = ref<boolean>(false);
+
+/* ------------------------------------------------------------------ *
+ * Live activity feed                                                  *
+ * Built from the WS ring buffer:                                      *
+ *   - `dialog`   -> "💬 NPC X ↔ NPC Y" card with the spoken line     *
+ *   - `behavior` -> only emit when meaningful (move, ok=false, talk)  *
+ *   - `day_summary` -> one big narrative card                         *
+ * Limited to the most recent ~40 cards, newest first.                 *
+ * ------------------------------------------------------------------ */
+interface LiveCard {
+  kind: 'dialog' | 'move' | 'fail' | 'narrator';
+  time: string;
+  loc?: string;
+  peopleIds: string[];
+  tagLabel: string;
+  body: string;
+}
+
+function shortTime(iso?: string): string {
+  if (!iso) return '';
+  try { return iso.slice(11, 16); } catch { return ''; }
+}
+function roomName(uid?: string): string {
+  if (!uid) return '';
+  return props.roomNameMap?.[uid] || uid;
+}
+
+const liveActivity = computed<LiveCard[]>(() => {
+  const out: LiveCard[] = [];
+  for (const ev of events.stream) {
+    const t = shortTime(ev.ts_sim);
+    const p: any = ev.payload || {};
+    if (ev.type === 'dialog') {
+      const line = lang.lang === 'en'
+        ? (p.speaker_line_en || p.speaker_line || '')
+        : (p.speaker_line || p.speaker_line_en || '');
+      const reply = lang.lang === 'en'
+        ? (p.listener_line_en || p.listener_line || '')
+        : (p.listener_line || p.listener_line_en || '');
+      out.push({
+        kind: 'dialog',
+        time: t,
+        loc: roomName(p.here_uid),
+        peopleIds: [String(p.speaker_id || ''), String(p.listener_id || '')].filter(Boolean),
+        tagLabel: lang.t('💬 对话', '💬 Talk'),
+        body: line && reply ? `“${line}” ↩ “${reply}”` : (line || reply || ''),
+      });
+    } else if (ev.type === 'behavior') {
+      const ok = p.ok !== false;
+      if (p.action_id === 'move' && ok && p.params?.target_uid) {
+        out.push({
+          kind: 'move',
+          time: t,
+          loc: roomName(p.params.target_uid),
+          peopleIds: [String(ev.agent_id || '')].filter(Boolean),
+          tagLabel: lang.t('🚶 移动', '🚶 Move'),
+          body: `${roomName(p.pre_state?.['agent.location_uid']) || '?'} → ${roomName(p.params.target_uid)}`,
+        });
+      } else if (!ok && p.action_id !== 'idle') {
+        out.push({
+          kind: 'fail',
+          time: t,
+          loc: roomName(p.here_uid),
+          peopleIds: [String(ev.agent_id || '')].filter(Boolean),
+          tagLabel: lang.t('⚠ 行动失败', '⚠ Action failed'),
+          body: `${p.action_id}(${JSON.stringify(p.params || {})}) — ${p.note || ''}`,
+        });
+      }
+    } else if (ev.type === 'day_summary') {
+      const narr = lang.lang === 'en' ? (p.narrative_en || p.narrative_zh) : (p.narrative_zh || p.narrative_en);
+      out.push({
+        kind: 'narrator',
+        time: t,
+        peopleIds: [],
+        tagLabel: `📜 ${p.day || ''}`,
+        body: narr || '',
+      });
+    }
+  }
+  return out.reverse().slice(0, 40);
+});
 
 const spaceOptions = computed(() => {
   const set = new Set<string>();
@@ -193,4 +323,68 @@ function npcLabel(id: string | number): string {
 .weather-hot     { color: #ff7043; }
 .weather-cold    { color: #80deea; }
 .weather-snow    { color: #e1f5fe; }
+
+/* ---- live activity feed ---- */
+.live-block { margin-bottom: 16px; }
+.block-title {
+  color: var(--accent-warn);
+  font-weight: 600;
+  font-size: 13.5px;
+  margin: 6px 0;
+}
+.block-title--folded {
+  cursor: pointer;
+  user-select: none;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.02);
+  padding: 6px 8px;
+  border-radius: 6px;
+  display: flex; align-items: center; gap: 6px;
+  border-top: 1px dashed var(--border-soft);
+  margin-top: 16px;
+}
+.block-title--folded.open { color: var(--accent-warn); }
+.block-title--folded:hover { background: rgba(255,255,255,0.05); }
+.block-title--folded .caret { font-size: 11px; color: var(--text-very-dim); }
+.block-title--folded .block-meta {
+  color: var(--text-very-dim);
+  font-size: 10.5px;
+  font-weight: 400;
+  margin-left: auto;
+}
+
+.live-card {
+  background: var(--bg-card);
+  padding: 8px 10px;
+  border-radius: 6px;
+  border-left: 3px solid var(--accent-primary);
+  margin-bottom: 6px;
+}
+.live-card.live-dialog   { border-left-color: #66BB6A; }
+.live-card.live-move     { border-left-color: var(--accent-primary); }
+.live-card.live-fail     { border-left-color: var(--accent-danger, #EF5350); }
+.live-card.live-narrator {
+  border-left-color: #FFD54F;
+  background: rgba(255, 213, 79, 0.06);
+}
+.live-head {
+  display: flex; gap: 8px; align-items: center;
+  font-size: 11px;
+  color: var(--text-very-dim);
+  margin-bottom: 3px;
+}
+.live-time {
+  color: var(--accent-warn);
+  font-family: Consolas, monospace;
+  font-weight: 600;
+}
+.live-tag { color: var(--text-secondary); }
+.live-loc { color: var(--text-very-dim); margin-left: auto; }
+.live-people { margin: 4px 0; display: flex; flex-wrap: wrap; gap: 4px; }
+.live-body {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
 </style>

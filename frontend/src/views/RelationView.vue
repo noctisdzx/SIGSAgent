@@ -116,40 +116,125 @@
           v-else-if="activeTab === 'scenes'"
           :scenes="scenes.scenes"
           :npc-map="npcMap"
+          :room-name-map="roomNameMap"
           @jump-npc="jumpToNpc"
         />
         <div v-else-if="activeTab === 'timeline'" class="timeline-tab">
-          <div class="filter-row">
-            <span class="row-label">{{ lang.t('按日期', 'By day') }}</span>
-            <span
-              class="filter-chip"
-              :class="{ active: dayFilter === 'all' }"
-              @click="dayFilter = 'all'"
-            >
-              {{ lang.t('全部', 'All') }}
-            </span>
-            <span
-              v-for="d in availableDays"
-              :key="d"
-              class="filter-chip"
-              :class="{ active: dayFilter === d }"
-              @click="dayFilter = d"
-            >
-              {{ d }}
-            </span>
-          </div>
-          <template v-for="d in groupedDays" :key="d.day">
-            <div class="tl-day">{{ d.day }}</div>
-            <div v-for="(ev, i) in d.events" :key="i" class="tl-event">
-              <span class="tl-time">{{ ev.time || (ev.ts || '').slice(11, 16) }}</span>
-              <span class="tl-name">{{ titleOf(ev) }}</span>
-              <span v-if="ev.location_uid" class="tl-loc">@{{ ev.location_uid }}</span>
-              <div class="tri-narr">{{ narrativeOf(ev) }}</div>
+
+          <!-- ============== Per-NPC runtime timeline ============== -->
+          <section class="npc-tl">
+            <h3 class="block-title">
+              📋 {{ lang.t('当前 NPC：', 'Current NPC: ') }}
+              <span v-if="selectedNpcDetail?.name" class="cur-npc">
+                {{ lang.lang === 'en'
+                    ? (selectedNpcDetail.name_en || selectedNpcDetail.name)
+                    : selectedNpcDetail.name }}
+              </span>
+              <span v-else class="cur-npc dim">
+                {{ lang.t('（点击图中节点选择）', '(click a node in the graph)') }}
+              </span>
+            </h3>
+            <div v-if="!selectedNpcDetail" class="placeholder-block">
+              {{ lang.t('选中一个 NPC 即可看到其正在采用的日程与已执行行为。',
+                       'Select an NPC to see its current schedule and executed actions.') }}
             </div>
-          </template>
-          <div v-if="!filteredTimeline.length" class="placeholder-block">
-            {{ lang.t('无时间线事件。', 'No timeline events.') }}
-          </div>
+            <template v-else>
+              <div class="sim-now">
+                ⏱ {{ lang.t('当前 sim 时间', 'Sim time') }}:
+                <b>{{ simHHMM || '—' }}</b>
+                <span class="dim">· {{ lang.t('日期', 'day') }} {{ sim.currentDay || '—' }}</span>
+              </div>
+
+              <div class="sched-group">
+                <div class="sg-label sg-now">
+                  🟢 {{ lang.t('正在进行', 'Now') }}
+                </div>
+                <div v-if="!npcNowSlot" class="placeholder-block small">
+                  {{ lang.t('当前没有锚定的日程。', 'No anchored slot right now.') }}
+                </div>
+                <div v-else class="slot-row now">
+                  <span class="tl-time">{{ shortIso(npcNowSlot.start) }}–{{ shortIso(npcNowSlot.end) }}</span>
+                  <span class="tl-name">{{ npcNowSlot.activity || '(idle)' }}</span>
+                  <span v-if="npcNowSlot.location_uid" class="tl-loc">
+                    @{{ roomNameMap[npcNowSlot.location_uid] || npcNowSlot.location_uid }}
+                  </span>
+                  <span class="slot-kind">[{{ npcNowSlot.kind }}]</span>
+                </div>
+              </div>
+
+              <div class="sched-group">
+                <div class="sg-label sg-hist">
+                  ✓ {{ lang.t('已执行行为', 'Executed') }}
+                  <span class="dim">({{ npcRecentHistory.length }} {{ lang.t('条', '') }})</span>
+                </div>
+                <div v-if="!npcRecentHistory.length" class="placeholder-block small">
+                  {{ lang.t('该 NPC 尚未执行任何动作。', 'This NPC has not acted yet.') }}
+                </div>
+                <div v-for="(h, i) in npcRecentHistory" :key="`h${i}`"
+                     class="slot-row" :class="{ failed: h.ok === false }">
+                  <span class="tl-time">{{ shortIso(h.ts) }}</span>
+                  <span class="tl-name">
+                    {{ h.ok === false ? '✗' : '✓' }} {{ h.action_id }}
+                  </span>
+                  <span v-if="h.params && Object.keys(h.params).length" class="slot-params">
+                    {{ JSON.stringify(h.params) }}
+                  </span>
+                  <span v-if="h.note" class="tri-narr">— {{ h.note }}</span>
+                </div>
+              </div>
+
+              <div class="sched-group">
+                <div class="sg-label sg-next">
+                  ⏭ {{ lang.t('即将进行', 'Upcoming') }}
+                </div>
+                <div v-if="!npcUpcomingSlots.length" class="placeholder-block small">
+                  {{ lang.t('今天后续无更多锚定日程。', 'No further anchored slots today.') }}
+                </div>
+                <div v-for="(s, i) in npcUpcomingSlots" :key="`u${i}`" class="slot-row">
+                  <span class="tl-time">{{ shortIso(s.start) }}</span>
+                  <span class="tl-name">{{ s.activity }}</span>
+                  <span v-if="s.location_uid" class="tl-loc">
+                    @{{ roomNameMap[s.location_uid] || s.location_uid }}
+                  </span>
+                  <span class="slot-kind">[{{ s.kind }}]</span>
+                </div>
+              </div>
+            </template>
+          </section>
+
+          <!-- ============== Seeded weekly highlights ============== -->
+          <section class="seed-tl">
+            <h3 class="block-title block-title--folded"
+                :class="{ open: showSeedTimeline }"
+                @click="showSeedTimeline = !showSeedTimeline">
+              <span class="caret">{{ showSeedTimeline ? '▾' : '▸' }}</span>
+              📅 {{ lang.t('一周高亮（剧本预设）', 'Weekly Highlights (scripted)') }}
+              <span class="block-meta">{{ lang.t(`(${timeline.seedEvents.length} 条)`,
+                                         `(${timeline.seedEvents.length})`) }}</span>
+            </h3>
+            <div v-show="showSeedTimeline">
+              <div class="filter-row">
+                <span class="row-label">{{ lang.t('按日期', 'By day') }}</span>
+                <span class="filter-chip" :class="{ active: dayFilter === 'all' }"
+                      @click="dayFilter = 'all'">{{ lang.t('全部', 'All') }}</span>
+                <span v-for="d in availableDays" :key="d"
+                      class="filter-chip" :class="{ active: dayFilter === d }"
+                      @click="dayFilter = d">{{ d }}</span>
+              </div>
+              <template v-for="d in groupedDays" :key="d.day">
+                <div class="tl-day">{{ d.day }}</div>
+                <div v-for="(ev, i) in d.events" :key="i" class="tl-event">
+                  <span class="tl-time">{{ ev.time || (ev.ts || '').slice(11, 16) }}</span>
+                  <span class="tl-name">{{ titleOf(ev) }}</span>
+                  <span v-if="ev.location_uid" class="tl-loc">@{{ ev.location_uid }}</span>
+                  <div class="tri-narr">{{ narrativeOf(ev) }}</div>
+                </div>
+              </template>
+              <div v-if="!filteredTimeline.length" class="placeholder-block">
+                {{ lang.t('无时间线事件。', 'No timeline events.') }}
+              </div>
+            </div>
+          </section>
         </div>
         <HeatPanel
           v-else-if="activeTab === 'heatmap'"
@@ -173,6 +258,8 @@ import { useAgentsStore } from '@/stores/agents';
 import { useRelationsStore, edgeFromTo } from '@/stores/relations';
 import { useScenesStore } from '@/stores/scenes';
 import { useTimelineStore } from '@/stores/timeline';
+import { useWorldStore } from '@/stores/world';
+import { useSimStore } from '@/stores/sim';
 import type { RelationEdge, AgentLite, TimelineEvent } from '@/api/endpoints';
 
 const lang = useLangStore();
@@ -180,6 +267,8 @@ const agentsStore = useAgentsStore();
 const relationsStore = useRelationsStore();
 const scenes = useScenesStore();
 const timeline = useTimelineStore();
+const world = useWorldStore();
+const sim = useSimStore();
 
 /* ----------------------------------------------------------------- *
  * Group palette (verbatim from spec §6).                              *
@@ -230,6 +319,12 @@ const usingMock = computed(() =>
 const npcMap = computed<Record<string, AgentLite>>(() => {
   const m: Record<string, AgentLite> = {};
   for (const a of npcs.value) m[String(a.id)] = a;
+  return m;
+});
+
+const roomNameMap = computed<Record<string, string>>(() => {
+  const m: Record<string, string> = {};
+  for (const r of (world.sceneGraph?.rooms || [])) m[r.uid] = r.name;
   return m;
 });
 
@@ -314,7 +409,10 @@ const graphRef = ref<InstanceType<typeof NetworkGraph> | null>(null);
 async function onSelectNode(id: string) {
   selectedNpcId.value = id;
   activeTab.value = 'npc';
-  selectedNpcDetail.value = await agentsStore.loadDetail(id);
+  // Full select() also primes schedule + history so the Timeline tab can
+  // render this NPC's current/past/upcoming activities immediately.
+  await agentsStore.select(id);
+  selectedNpcDetail.value = agentsStore.detail;
   // Dim non-connected nodes.
   const connected = new Set<string | number>([id]);
   for (const e of edges.value) {
@@ -340,7 +438,8 @@ function onDeselect() {
 async function jumpToNpc(id: string) {
   selectedNpcId.value = id;
   activeTab.value = 'npc';
-  selectedNpcDetail.value = await agentsStore.loadDetail(id);
+  await agentsStore.select(id);
+  selectedNpcDetail.value = agentsStore.detail;
   graphRef.value?.focus?.(id);
 }
 
@@ -457,6 +556,47 @@ function titleOf(ev: TimelineEvent): string {
 function narrativeOf(ev: TimelineEvent): string {
   return lang.lang === 'en' ? (ev.narrative_en || ev.narrative_zh || '') : (ev.narrative_zh || ev.narrative_en || '');
 }
+function shortIso(iso?: string): string {
+  if (!iso) return '';
+  try { return iso.slice(11, 16); } catch { return iso; }
+}
+
+/* ----------------------------------------------------------------- *
+ * Per-NPC runtime timeline                                            *
+ * ----------------------------------------------------------------- */
+const showSeedTimeline = ref(false);
+
+const simHHMM = computed(() => shortIso(sim.simTime));
+
+const npcSchedule = computed<any>(() => agentsStore.schedule);
+const npcHistory = computed<any[]>(() => agentsStore.history || []);
+
+/** All non-empty slots in order. */
+const npcSlots = computed<any[]>(() => (npcSchedule.value?.slots || []));
+
+/** The slot that wraps `simTime` (start <= simTime < end). */
+const npcNowSlot = computed<any | null>(() => {
+  const t = sim.simTime;
+  if (!t || !npcSlots.value.length) return null;
+  for (const s of npcSlots.value) {
+    if (s.start <= t && t < s.end) return s;
+  }
+  return null;
+});
+
+/** Up-to-next 6 slots after the current sim time. */
+const npcUpcomingSlots = computed<any[]>(() => {
+  const t = sim.simTime;
+  if (!t) return [];
+  return npcSlots.value.filter(s => s.start > t).slice(0, 6);
+});
+
+/** Most recent 12 actions, newest first. */
+const npcRecentHistory = computed<any[]>(() => {
+  const arr = [...npcHistory.value];
+  arr.sort((a, b) => String(b.ts || '').localeCompare(String(a.ts || '')));
+  return arr.slice(0, 12);
+});
 
 /* ----------------------------------------------------------------- *
  * Bootstrap                                                           *
@@ -467,6 +607,8 @@ onMounted(async () => {
     relationsStore.load(),
     scenes.load(),
     timeline.loadSeed(),
+    world.loadScene(),
+    world.loadWorld(),
   ]);
 });
 
@@ -672,4 +814,95 @@ watch(() => lang.lang, () => onSearch());
   display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin-bottom: 8px;
 }
 .row-label { font-size: 11px; color: var(--text-very-dim); margin-right: 8px; }
+
+/* per-NPC timeline */
+.npc-tl { margin-bottom: 16px; }
+.block-title {
+  color: var(--accent-warn);
+  font-size: 13.5px;
+  font-weight: 600;
+  margin: 6px 0 8px;
+}
+.block-title--folded {
+  cursor: pointer; user-select: none;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.02);
+  padding: 6px 8px;
+  border-radius: 6px;
+  display: flex; align-items: center; gap: 6px;
+  border-top: 1px dashed var(--border-soft);
+  margin-top: 16px;
+}
+.block-title--folded.open { color: var(--accent-warn); }
+.block-title--folded:hover { background: rgba(255,255,255,0.05); }
+.block-title--folded .caret { font-size: 11px; color: var(--text-very-dim); }
+.block-title--folded .block-meta {
+  margin-left: auto;
+  color: var(--text-very-dim);
+  font-size: 10.5px;
+  font-weight: 400;
+}
+.cur-npc {
+  color: var(--accent-primary);
+  font-weight: 700;
+}
+.cur-npc.dim { color: var(--text-very-dim); font-weight: 400; }
+.sim-now {
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+.sim-now b { color: var(--accent-warn); margin: 0 4px; font-family: Consolas, monospace; }
+.sim-now .dim { color: var(--text-very-dim); margin-left: 8px; }
+.sched-group { margin-bottom: 12px; }
+.sg-label {
+  font-size: 11.5px;
+  color: var(--text-very-dim);
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+.sg-now { color: #66BB6A; }
+.sg-hist { color: var(--accent-primary); }
+.sg-next { color: var(--accent-warm-soft); }
+.sg-label .dim { color: var(--text-very-dim); font-weight: 400; margin-left: 4px; }
+
+.slot-row {
+  background: var(--bg-card);
+  padding: 5px 10px;
+  border-radius: 4px;
+  border-left: 2px solid var(--border-soft);
+  margin-bottom: 4px;
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px;
+}
+.slot-row.now {
+  border-left-color: #66BB6A;
+  background: rgba(102, 187, 106, 0.08);
+}
+.slot-row.failed {
+  border-left-color: var(--accent-danger, #EF5350);
+  color: var(--text-very-dim);
+}
+.slot-row .tl-time {
+  color: var(--accent-warn); font-weight: 600;
+  font-family: Consolas, monospace; min-width: 90px;
+}
+.slot-row .tl-name { color: var(--accent-primary); font-weight: 500; }
+.slot-row .tl-loc { color: var(--text-very-dim); font-size: 10.5px; }
+.slot-row .slot-kind {
+  color: var(--text-very-dim); font-size: 10px; margin-left: auto;
+  font-family: Consolas, monospace;
+}
+.slot-row .slot-params {
+  color: var(--text-very-dim); font-size: 10.5px;
+  font-family: Consolas, monospace;
+}
+.slot-row .tri-narr {
+  color: var(--text-very-dim);
+  font-size: 11px;
+  margin-top: 2px;
+  flex-basis: 100%;
+}
+.placeholder-block.small { font-size: 11.5px; padding: 6px 0; }
 </style>

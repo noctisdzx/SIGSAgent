@@ -79,9 +79,25 @@ class LLMAdapter(Protocol):
         bullets: list[str],
         stats: dict[str, Any],
     ) -> dict[str, Any]:
-        """Produce an omniscient-narrator paragraph for a finished sim day.
+        """Produce a literary recap for a finished sim day.
 
-        Returns {zh, en, degraded}.
+        Returns a dict with at least::
+
+            {
+              "zh": "<one-paragraph synopsis>",
+              "en": "<one-paragraph synopsis>",
+              "degraded": bool,
+            }
+
+        Rich adapters additionally return::
+
+            {
+              "title_zh", "title_en",
+              "protagonist": {"name", "name_en", "why_zh", "why_en"},
+              "supporting": [{"name", "name_en", "role_zh", "role_en"}, ...],
+              "story_zh", "story_en",          # multi-paragraph short story
+              "tomorrow_zh", "tomorrow_en",    # predictions for next day
+            }
         """
         ...
 
@@ -159,12 +175,66 @@ class MockLLMAdapter:
         stats: dict[str, Any],
     ) -> dict[str, Any]:
         head = bullets[:3] if bullets else ["（无事可记）"]
-        zh = f"{day} 这一天，校园里共发生约 {stats.get('n_behaviors', 0)} 次行为、{stats.get('n_dialogs', 0)} 段对话。"
-        en = f"On {day}, the campus saw roughly {stats.get('n_behaviors', 0)} actions and {stats.get('n_dialogs', 0)} conversations."
+        zh_synopsis = (
+            f"{day} 这一天，校园里共发生约 {stats.get('n_behaviors', 0)} 次行为、"
+            f"{stats.get('n_dialogs', 0)} 段对话。"
+        )
+        en_synopsis = (
+            f"On {day}, the campus saw roughly {stats.get('n_behaviors', 0)} actions "
+            f"and {stats.get('n_dialogs', 0)} conversations."
+        )
         if head:
-            zh += " 例如：" + "；".join(h[:60] for h in head)
-            en += " e.g. " + "; ".join(h[:60] for h in head)
-        return {"zh": zh, "en": en, "degraded": True}
+            zh_synopsis += " 例如：" + "；".join(h[:60] for h in head)
+            en_synopsis += " e.g. " + "; ".join(h[:60] for h in head)
+
+        actor_stats = stats.get("activity_top") or []
+        protagonist_name = ""
+        protagonist_name_en = ""
+        if actor_stats:
+            top = actor_stats[0]
+            protagonist_name = str(top.get("name") or top.get("id") or "")
+            protagonist_name_en = str(top.get("name_en") or protagonist_name)
+
+        supporting: list[dict[str, str]] = []
+        for a in actor_stats[1:4]:
+            supporting.append({
+                "name": str(a.get("name") or a.get("id") or ""),
+                "name_en": str(a.get("name_en") or a.get("name") or a.get("id") or ""),
+                "role_zh": "活跃的同伴",
+                "role_en": "active companion",
+            })
+
+        story_zh = (
+            f"清晨，校园在 {protagonist_name or '人群'} 的脚步声里醒来。\n\n"
+            f"{zh_synopsis}\n\n"
+            "（LLM 降级中：本段为占位短篇。）"
+        )
+        story_en = (
+            f"Dawn broke over the campus with {protagonist_name_en or 'the crowd'} on the move.\n\n"
+            f"{en_synopsis}\n\n"
+            "(LLM degraded: placeholder story.)"
+        )
+        tomorrow_zh = "明日预测暂不可用（LLM 降级中）。"
+        tomorrow_en = "Tomorrow predictions unavailable (LLM degraded)."
+
+        return {
+            "title_zh": f"{day} · 校园速写",
+            "title_en": f"{day} · A Campus Sketch",
+            "protagonist": {
+                "name": protagonist_name,
+                "name_en": protagonist_name_en,
+                "why_zh": "今日活动最多的 NPC。",
+                "why_en": "Most active NPC of the day.",
+            },
+            "supporting": supporting,
+            "story_zh": story_zh,
+            "story_en": story_en,
+            "tomorrow_zh": tomorrow_zh,
+            "tomorrow_en": tomorrow_en,
+            "zh": zh_synopsis,
+            "en": en_synopsis,
+            "degraded": True,
+        }
 
 
 # ---------------------------------------------------------------------------
@@ -182,6 +252,183 @@ def _build_jinja_env() -> Environment:
 
 
 _FENCE_RE = re.compile(r"^```(?:json)?\s*|\s*```$", flags=re.IGNORECASE | re.MULTILINE)
+
+
+# ---------------------------------------------------------------------------
+# Shared literary-prompt builder for narrate_day
+# ---------------------------------------------------------------------------
+# Why a shared builder:
+#   Both `DeepSeekAdapter.narrate_day` here AND the inline adapter in
+#   `app.main._make_llm_adapter` need to send the SAME high-quality prompt;
+#   otherwise edits drift apart silently (we hit that exact bug — main.py's
+#   `_Adapter` was shadowing this module's narrate_day).
+#
+# Craft choices baked into the prompt (drawn from working LLM creative-writing
+# playbooks):
+#   - Expert persona ("literary fiction novelist + showrunner") to filter
+#     training-data style.
+#   - Chain-of-thought scaffold: model first fills a private "beats" plan that
+#     is NEVER rendered to the user, then writes the story informed by it.
+#   - Show-don't-tell + Four-Modality (visual / auditory / kinesthetic /
+#     meaning) hard rules.
+#   - Three-act structure baked into the story brief.
+#   - Hard length floors enforced both in words AND with an anti-laziness
+#     clause ("any value shorter than the floor is INVALID, regenerate").
+# ---------------------------------------------------------------------------
+NARRATE_DAY_SYSTEM = (
+    "You are an experienced literary-fiction novelist and showrunner. You write "
+    "vivid, character-driven short stories with psychological depth, atmospheric "
+    "immersion and thematic resonance. You are also bilingual and write equally "
+    "well in 现代汉语 and contemporary literary English.\n\n"
+    "CRAFT RULES (non-negotiable):\n"
+    "  1. SHOW, don't tell. Embed emotion through specific body language, "
+    "     gesture, dialogue, and sensory detail — never bare statements like "
+    "     '他很紧张' or 'She felt sad'.\n"
+    "  2. FOUR-MODALITY pass per scene: weave in (a) visual specifics — light, "
+    "     objects, gestures, (b) auditory — voices, ambient sound, silence, "
+    "     (c) kinesthetic — temperature, fatigue, taste, posture, "
+    "     (d) meaning — the small internal recognition that shifts the beat.\n"
+    "  3. THIRD-PERSON OMNISCIENT but warm and intimate; restrained, no purple "
+    "     prose. Vary sentence length for pacing — short for tension, longer "
+    "     for introspection.\n"
+    "  4. ANCHOR every beat in the raw event log: do NOT invent named characters; "
+    "     use Chinese names verbatim in BOTH languages (do not romanise).\n"
+    "  5. THREE-ACT structure for the story: setup → escalation → reveal/turn. "
+    "     The supporting cast each gets a clear function (catalyst, foil, "
+    "     mentor, confidant, comic relief).\n"
+    "  6. ANTI-LAZINESS: if you find yourself shortening the story to dodge the "
+    "     length floor, STOP and expand with another sensory scene. Outputs "
+    "     under the floor are INVALID and you must regenerate before returning.\n"
+    "  7. NEVER mention 'simulation', 'NPC', 'agent', 'JSON', 'prompt', or any "
+    "     tooling vocabulary inside the prose.\n"
+)
+
+
+def _build_narrate_day_user_prompt(
+    day: str,
+    bullets: list[str],
+    stats: dict[str, Any],
+) -> str:
+    """Build the user message for narrate_day, with the strict output contract."""
+    actor_stats = stats.get("activity_top") or []
+    actor_hint_lines = [
+        f"  - {a.get('name', '?')} (id={a.get('id', '?')}): "
+        f"{a.get('n_behaviors', 0)} actions, {a.get('n_dialogs', 0)} dialogs"
+        for a in actor_stats[:12]
+    ]
+    actor_hint = "\n".join(actor_hint_lines) or "  (no actor stats)"
+    clean_stats = {k: v for k, v in stats.items() if k != "activity_top"}
+
+    return (
+        f"DAY: {day}\n"
+        f"STATS: {clean_stats}\n"
+        f"TOP ACTORS (sorted by activity — choose protagonist & cast from here):\n"
+        f"{actor_hint}\n\n"
+        "EVENTS (chronological, capped):\n"
+        + "\n".join(f"- {b}" for b in bullets)
+        + "\n\n"
+        "TASK: Turn this day into a literary short story (a self-contained "
+        "chapter), in both Chinese and English. Use the CRAFT RULES from the "
+        "system message.\n\n"
+        "OUTPUT — return ONE JSON object, no preamble, no code fences. "
+        "ALL keys are REQUIRED and must satisfy the length floors:\n\n"
+        "{\n"
+        "  \"beats\": [\n"
+        "    \"<≤30字 私有大纲: 第1幕 setup>\",\n"
+        "    \"<≤30字 第2幕 escalation>\",\n"
+        "    \"<≤30字 第3幕 reveal/turn>\"\n"
+        "  ],   // chain-of-thought scaffold — keep terse, used to plan the story\n"
+        "  \"title_zh\": \"<10–20 字 文学感章节标题>\",\n"
+        "  \"title_en\": \"<8–14 word literary chapter title>\",\n"
+        "  \"protagonist\": {\n"
+        "    \"name\": \"<中文名 from TOP ACTORS>\",\n"
+        "    \"name_en\": \"<English name or same 中文名>\",\n"
+        "    \"why_zh\": \"<≤40字 为什么 Ta 是今日主角>\",\n"
+        "    \"why_en\": \"<≤30 words why they anchor today>\"\n"
+        "  },\n"
+        "  \"supporting\": [   // 2–4 配角，每人一个清晰戏剧功能\n"
+        "    {\"name\": \"<中文名>\", \"name_en\": \"<英文或中文名>\",\n"
+        "     \"role_zh\": \"<≤20字 在剧情里的功能>\",\n"
+        "     \"role_en\": \"<≤15 words story function>\"}\n"
+        "  ],\n"
+        "  \"story_zh\": \"<HARD FLOOR ≥ 500 汉字, 4–6 段, 用 \\n\\n 分段。\n"
+        "                    全知温暖旁白，现在时态，文学化但克制。\n"
+        "                    至少包含 3 处感官细节(视/听/触/嗅味)和 1 处对白。\n"
+        "                    严格遵守 SHOW-DON'T-TELL 与四感官规则。>\",\n"
+        "  \"story_en\": \"<HARD FLOOR ≥ 350 English words, 4–6 paragraphs, "
+        "separated by \\n\\n. Past tense, warm omniscient. At least 3 sensory "
+        "details and 1 line of dialog. Same SHOW-DON'T-TELL rules.>\",\n"
+        "  \"tomorrow_zh\": \"<2–4 条明日预测，每条独立成行 (用 \\n 分隔)。\n"
+        "                       基于今日未解的张力、日程、关系做出具体但不绝对的预测。>\",\n"
+        "  \"tomorrow_en\": \"<2–4 tomorrow predictions, one per line, \\n separated.\n"
+        "                       Specific but not certain — teasers, not certainties.>\"\n"
+        "}\n\n"
+        "VALIDATION: count characters/words of story_zh and story_en yourself "
+        "before returning. If story_zh < 500 汉字 OR story_en < 350 words, "
+        "REGENERATE with more vivid scenes before responding. No exceptions."
+    )
+
+
+def build_narrate_day_messages(
+    day: str,
+    bullets: list[str],
+    stats: dict[str, Any],
+) -> list[dict[str, str]]:
+    """Return the [system, user] message pair both DeepSeekAdapter and
+    the inline adapter in `main.py` feed to /chat/completions."""
+    return [
+        {"role": "system", "content": NARRATE_DAY_SYSTEM},
+        {"role": "user", "content": _build_narrate_day_user_prompt(day, bullets, stats)},
+    ]
+
+
+def parse_narrate_day_response(data: dict[str, Any]) -> dict[str, Any]:
+    """Normalise a parsed JSON object returned by the LLM into the canonical
+    rich short-story shape. Backfills `zh`/`en` synopsis from the first
+    paragraph of the story so backward-compatible consumers keep working."""
+    def _s(k: str) -> str:
+        return str(data.get(k, "")).strip()
+
+    proto = data.get("protagonist") if isinstance(data.get("protagonist"), dict) else {}
+    supporting_raw = data.get("supporting") if isinstance(data.get("supporting"), list) else []
+    supporting: list[dict[str, str]] = []
+    for it in supporting_raw[:6]:
+        if not isinstance(it, dict):
+            continue
+        supporting.append({
+            "name": str(it.get("name", "")).strip(),
+            "name_en": str(it.get("name_en", "")).strip(),
+            "role_zh": str(it.get("role_zh", "")).strip(),
+            "role_en": str(it.get("role_en", "")).strip(),
+        })
+
+    story_zh = _s("story_zh")
+    story_en = _s("story_en")
+
+    def _first_para(text: str, cap: int) -> str:
+        if not text:
+            return ""
+        first = text.split("\n\n", 1)[0].strip()
+        return first if len(first) <= cap else first[: cap - 1].rstrip() + "…"
+
+    return {
+        "title_zh": _s("title_zh"),
+        "title_en": _s("title_en"),
+        "protagonist": {
+            "name": str(proto.get("name", "")).strip(),
+            "name_en": str(proto.get("name_en", "")).strip(),
+            "why_zh": str(proto.get("why_zh", "")).strip(),
+            "why_en": str(proto.get("why_en", "")).strip(),
+        },
+        "supporting": supporting,
+        "story_zh": story_zh,
+        "story_en": story_en,
+        "tomorrow_zh": _s("tomorrow_zh"),
+        "tomorrow_en": _s("tomorrow_en"),
+        "zh": _first_para(story_zh, 220),
+        "en": _first_para(story_en, 600),
+        "degraded": False,
+    }
 
 
 def _strip_code_fences(text: str) -> str:
@@ -236,6 +483,7 @@ class DeepSeekAdapter:
         *,
         json_mode: bool = False,
         temperature: float | None = None,
+        max_tokens: int | None = None,
     ) -> str:
         messages = [{"role": "user", "content": prompt}]
         if temperature is None:
@@ -246,6 +494,7 @@ class DeepSeekAdapter:
             messages=messages,
             temperature=temperature,
             json_mode=json_mode,
+            max_tokens=max_tokens,
         )
         return self.client.extract_text(payload)
 
@@ -344,24 +593,18 @@ class DeepSeekAdapter:
         bullets: list[str],
         stats: dict[str, Any],
     ) -> dict[str, Any]:
-        prompt = (
-            "You are the omniscient narrator of a campus simulation. Given a day's worth of "
-            "raw event bullets, write ONE vivid paragraph in Chinese and ONE in English describing "
-            "what happened that day on campus — pace, tensions, relationships, small details. "
-            "Stay grounded in the bullets; don't invent named characters not present.\n\n"
-            f"DAY: {day}\nSTATS: {stats}\nEVENTS (chronological):\n"
-            + "\n".join(f"- {b}" for b in bullets)
-            + "\n\nReturn STRICTLY this JSON: {\"zh\": \"<≤200汉字>\", \"en\": \"<≤180 words>\"}."
+        messages = build_narrate_day_messages(day, bullets, stats)
+        payload = await self.client.chat(
+            messages=messages,
+            temperature=0.85,
+            json_mode=True,
+            max_tokens=8000,
         )
-        out = await self._chat_text(prompt, json_mode=True)
+        out = self.client.extract_text(payload)
         data = _parse_json_object(out)
         if not isinstance(data, dict):
             raise ValueError(f"narrate_day: expected object, got {type(data).__name__}")
-        return {
-            "zh": str(data.get("zh", "")).strip(),
-            "en": str(data.get("en", "")).strip(),
-            "degraded": False,
-        }
+        return parse_narrate_day_response(data)
 
     async def generate_dialog(
         self,

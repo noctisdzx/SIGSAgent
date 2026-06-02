@@ -110,4 +110,8 @@ export const api = {
     ).then(r => r.data),
   simDaySummaries: (limit = 30) =>
     http.get<{ summaries: any[] }>('/sim/day_summaries', { params: { limit } }).then(r => r.data),
+  simSummarizeNow: () =>
+    http.post<{ status: string; day: string; summary?: any; reason?: string }>(
+      '/sim/summarize_now',
+    ).then(r => r.data),
 };

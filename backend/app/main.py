@@ -31,7 +31,12 @@ from app.agents.schedule.fragments import Fragment, FragmentLibrary  # noqa: E40
 from app.api import rest_router, ws_router  # noqa: E402
 from app.config.loader import ConfigLoader  # noqa: E402
 from app.config.registry import get_registry  # noqa: E402
-from app.llm.adapter import LLMAdapter, MockLLMAdapter  # noqa: E402
+from app.llm.adapter import (  # noqa: E402
+    LLMAdapter,
+    MockLLMAdapter,
+    build_narrate_day_messages,
+    parse_narrate_day_response,
+)
 from app.llm.client import OpenAICompatibleClient  # noqa: E402
 from app.persistence.db import Database  # noqa: E402
 from app.settings import get_settings  # noqa: E402
@@ -229,38 +234,32 @@ def _make_llm_adapter() -> tuple[LLMAdapter, bool]:
                 )
 
         async def narrate_day(self, day, bullets, stats):
-            """Bilingual omniscient-narrator paragraph for a finished sim day."""
+            """Literary short-story recap of a finished sim day.
+
+            Uses the shared `build_narrate_day_messages` so the prompt stays
+            in sync with `DeepSeekAdapter.narrate_day`. Returns the full rich
+            payload (title / protagonist / supporting / story_zh / story_en /
+            tomorrow_*) with a synopsis (`zh`/`en`) auto-derived from the
+            story for backward compatibility.
+            """
             try:
-                sys_msg = (
-                    "你是校园模拟器的旁白者。给定一天的事件流水，"
-                    "用生动、克制的笔触写一段中文旁白和一段英文旁白，描述这一天发生了什么 —— "
-                    "节奏、关系、有趣的细节都可以，但只用流水里出现过的人物。"
-                    "严格 JSON 输出: {\"zh\": \"<≤200汉字>\", \"en\": \"<≤180 words>\"}。"
-                )
-                events_blob = "\n".join(f"- {b}" for b in bullets)
-                user_msg = (
-                    f"DAY: {day}\n"
-                    f"STATS: {stats}\n"
-                    f"EVENTS (chronological):\n{events_blob}"
-                )
+                messages = build_narrate_day_messages(day, bullets, stats)
                 resp = await client.chat(
-                    messages=[
-                        {"role": "system", "content": sys_msg},
-                        {"role": "user", "content": user_msg},
-                    ],
-                    temperature=0.7,
-                    max_tokens=2000,
+                    messages=messages,
+                    temperature=0.85,
+                    max_tokens=8000,
                     response_format={"type": "json_object"},
                 )
                 content = resp["choices"][0]["message"]["content"]
                 import json as _json
                 data = _json.loads(content)
-                return {
-                    "zh": str(data.get("zh", "")).strip(),
-                    "en": str(data.get("en", "")).strip(),
-                    "degraded": False,
-                }
-            except Exception:
+                if not isinstance(data, dict):
+                    raise ValueError(
+                        f"narrate_day: expected object, got {type(data).__name__}"
+                    )
+                return parse_narrate_day_response(data)
+            except Exception as exc:
+                log.warning("narrate_day LLM call failed, falling back: %s", exc)
                 return await self._mock.narrate_day(day, bullets, stats)
 
     return _Adapter(), True
@@ -306,6 +305,11 @@ async def lifespan(app: FastAPI):
     world = WorldState()
     if registry.personas:
         world.populate_from_personas(registry.personas)
+    if scene:
+        # Seed movable items (chairs, books, mugs…) from each room's furniture
+        # so the topology graph has things NPCs can pick up & carry around.
+        world.populate_items_from_rooms(scene.all_rooms())
+        log.info("Seeded %d movable items from room furniture", len(world.items))
 
     # 3) Runtime DB.
     db = Database(settings.db_path)

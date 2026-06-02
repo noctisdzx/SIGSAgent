@@ -10,11 +10,40 @@
 -->
 <template>
   <div class="heat">
-    <h3 class="hh">{{ lang.t('🌡️ 关系热度排行', '🌡️ Relation Heat Ranking') }}</h3>
+    <!-- LIVE: pair interactions accumulated from WS dialog events. -->
+    <h3 class="hh">{{ lang.t('📡 实时互动热度', '📡 Live Interactions') }}</h3>
     <div class="hint">
       {{ lang.t(
-        '一周内每对 NPC 之间的关系强度（按 √ 缩放，最热 = 黄色）。',
-        'Relation intensity between NPC pairs (sqrt-scaled, hottest = yellow).'
+        `累计自服务启动以来的 NPC 对话次数（共 ${liveTotal} 次，${livePairCount} 对）。`,
+        `Dialog counts accumulated since server start (${liveTotal} talks, ${livePairCount} pairs).`
+      ) }}
+    </div>
+    <div v-if="!liveTopRows.length" class="placeholder">
+      {{ lang.t('暂无对话事件，等 NPC 开口…', 'No dialog events yet — waiting for NPCs to speak…') }}
+    </div>
+    <div v-else class="bars">
+      <div v-for="r in liveTopRows" :key="`L${r.from}|${r.to}`" class="hm-row live">
+        <span class="hm-space">{{ r.fromName }} ⇌ {{ r.toName }}</span>
+        <span class="hm-bar-wrap">
+          <span class="hm-bar"
+                :style="{
+                  width: r.barW + '%',
+                  background: `linear-gradient(90deg, ${heatColor(r.t * 0.4)}, ${heatColor(r.t)})`,
+                }">
+            <span v-if="r.t > 0.45" class="hm-bar-label">×{{ r.count }}</span>
+          </span>
+        </span>
+        <span class="hm-num">×{{ r.count }}</span>
+      </div>
+    </div>
+
+    <h3 class="hh" style="margin-top:14px;">
+      {{ lang.t('🌡️ 关系热度排行（种子 + 实时叠加）', '🌡️ Relation Heat (seed + live boost)') }}
+    </h3>
+    <div class="hint">
+      {{ lang.t(
+        '种子关系权重 + 实时对话加成（每次对话 +0.15）。',
+        'Seeded weight + live dialog boost (+0.15 per talk).'
       ) }}
     </div>
 
@@ -30,7 +59,9 @@
             <span v-if="r.t > 0.45" class="hm-bar-label">{{ r.weight.toFixed(2) }}</span>
           </span>
         </span>
-        <span class="hm-num">{{ r.weight.toFixed(2) }}</span>
+        <span class="hm-num">
+          {{ r.weight.toFixed(2) }}<span v-if="r.boost" class="boost">+{{ r.boost.toFixed(2) }}</span>
+        </span>
       </div>
     </div>
 
@@ -72,16 +103,24 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useLangStore } from '@/stores/lang';
+import { useEventsStore } from '@/stores/events';
 import type { RelationEdge } from '@/api/endpoints';
 import { edgeFromTo } from '@/stores/relations';
 
 const lang = useLangStore();
+const events = useEventsStore();
 const props = defineProps<{
   edges: RelationEdge[];
   npcMap: Record<string, any>;
 }>();
 
-interface Row { from: string; to: string; fromName: string; toName: string; weight: number; t: number; barW: number; }
+interface Row {
+  from: string; to: string; fromName: string; toName: string;
+  weight: number;       // total effective weight (seed + live boost)
+  boost: number;        // live-only addition for display
+  count?: number;       // live dialog count (live-only rows)
+  t: number; barW: number;
+}
 
 function nameOf(id: string): string {
   const n = props.npcMap[id];
@@ -93,19 +132,86 @@ function shortName(id: string): string {
   return full.length > 4 ? full.slice(0, 4) : full;
 }
 
+/* ------------------------------------------------------------------ *
+ * Live dialog accumulator                                            *
+ * - Key is "a|b" with a < b lexicographically (undirected).          *
+ * - Each `dialog` event in the WS ring buffer counts +1.             *
+ * ------------------------------------------------------------------ */
+const LIVE_WEIGHT_PER_TALK = 0.15;
+
+const livePairCounts = computed<Record<string, number>>(() => {
+  const out: Record<string, number> = {};
+  for (const ev of events.stream) {
+    if (ev.type !== 'dialog') continue;
+    const p = ev.payload || {};
+    const a = String(p.speaker_id || '').trim();
+    const b = String(p.listener_id || '').trim();
+    if (!a || !b || a === b) continue;
+    const key = a < b ? `${a}|${b}` : `${b}|${a}`;
+    out[key] = (out[key] || 0) + 1;
+  }
+  return out;
+});
+const liveTotal = computed(() =>
+  Object.values(livePairCounts.value).reduce((s, v) => s + v, 0)
+);
+const livePairCount = computed(() => Object.keys(livePairCounts.value).length);
+
+const liveTopRows = computed<Row[]>(() => {
+  const entries = Object.entries(livePairCounts.value);
+  if (!entries.length) return [];
+  const maxC = Math.max(1, ...entries.map(([, c]) => c));
+  const rows: Row[] = entries.map(([key, count]) => {
+    const [from, to] = key.split('|');
+    const t = Math.min(1, count / maxC);
+    return {
+      from, to,
+      fromName: nameOf(from), toName: nameOf(to),
+      weight: count * LIVE_WEIGHT_PER_TALK,
+      boost: 0,
+      count,
+      t,
+      barW: Math.sqrt(t) * 100,
+    };
+  });
+  rows.sort((a, b) => (b.count || 0) - (a.count || 0));
+  return rows.slice(0, 12);
+});
+
+/* ------------------------------------------------------------------ *
+ * Seed + boost ranking                                               *
+ * ------------------------------------------------------------------ */
 const sortedRows = computed<Row[]>(() => {
   const rows: Row[] = [];
   let max = 0.0001;
   for (const e of props.edges) {
     const { from, to } = edgeFromTo(e);
     if (!from || !to) continue;
-    const w = Number(e.weight ?? 0.5);
+    const a = String(from), b = String(to);
+    const key = a < b ? `${a}|${b}` : `${b}|${a}`;
+    const seed = Number(e.weight ?? 0.5);
+    const boost = (livePairCounts.value[key] || 0) * LIVE_WEIGHT_PER_TALK;
+    const w = seed + boost;
     rows.push({
-      from, to,
-      fromName: nameOf(from), toName: nameOf(to),
-      weight: w, t: 0, barW: 0,
+      from: a, to: b,
+      fromName: nameOf(a), toName: nameOf(b),
+      weight: w, boost,
+      t: 0, barW: 0,
     });
     if (w > max) max = w;
+  }
+  // Also surface pairs that only exist in live data (no seed edge).
+  for (const [key, count] of Object.entries(livePairCounts.value)) {
+    const [a, b] = key.split('|');
+    if (rows.some(r => (r.from === a && r.to === b) || (r.from === b && r.to === a))) continue;
+    const boost = count * LIVE_WEIGHT_PER_TALK;
+    rows.push({
+      from: a, to: b,
+      fromName: nameOf(a), toName: nameOf(b),
+      weight: boost, boost,
+      t: 0, barW: 0,
+    });
+    if (boost > max) max = boost;
   }
   for (const r of rows) {
     r.t = Math.min(1, Math.max(0, r.weight / max));
@@ -209,10 +315,22 @@ function heatColor(t: number): string {
   text-shadow: 0 1px 2px rgba(0,0,0,0.7);
 }
 .hm-num {
-  width: 50px;
+  width: 78px;
   color: var(--accent-warm-soft);
   font-size: 11.5px;
   font-family: Consolas, monospace;
+  text-align: right;
+}
+.hm-num .boost {
+  color: #66BB6A;
+  margin-left: 4px;
+  font-size: 10.5px;
+}
+.hm-row.live .hm-space { color: var(--accent-primary); }
+.placeholder {
+  color: var(--text-disabled);
+  font-size: 11.5px;
+  padding: 6px 0 10px;
 }
 
 .hm-grid-wrap {

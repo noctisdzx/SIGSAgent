@@ -101,6 +101,9 @@ class SimLoop:
             if prev is not None and prev != a.location_uid:
                 moved.append({"agent_id": aid, "from": prev, "to": a.location_uid})
 
+        # Items being carried follow their carrier across rooms.
+        self.world.tick_carried_items()
+
         self._latest_decisions = recent_decisions
 
         await event_bus.publish({
@@ -160,8 +163,23 @@ class SimLoop:
             n_behaviors = 0
             n_memories = 0
 
+            # Per-NPC tally so the LLM can pick a real protagonist.
+            per_actor: dict[str, dict[str, Any]] = {}
+
+            def _bump(aid: str, pname: str, pname_en: str, key: str) -> None:
+                slot = per_actor.setdefault(aid, {
+                    "id": aid,
+                    "name": pname,
+                    "name_en": pname_en or pname,
+                    "n_behaviors": 0,
+                    "n_dialogs": 0,
+                })
+                slot[key] = int(slot.get(key, 0)) + 1
+
             for aid, agent in self.agents.items():
-                pname = getattr(getattr(agent, "persona", None), "name", aid)
+                persona = getattr(agent, "persona", None)
+                pname = getattr(persona, "name", aid)
+                pname_en = getattr(persona, "name_en", "") or pname
 
                 # Dialogs (from STM source=dialog:*) belong to this day if ts.date matches
                 stm_items = getattr(getattr(agent, "stm", None), "all", lambda: [])()
@@ -171,6 +189,7 @@ class SimLoop:
                     n_memories += 1
                     if (it.source or "").startswith("dialog:"):
                         n_dialogs += 1
+                        _bump(aid, pname, pname_en, "n_dialogs")
                         partner = (it.meta or {}).get("partner_name", "?")
                         line = (it.meta or {}).get("line", "")
                         reply = (it.meta or {}).get("reply", "")
@@ -188,6 +207,7 @@ class SimLoop:
                             continue
                         if h.action_id in {"move", "talk", "interact"}:
                             n_behaviors += 1
+                            _bump(aid, pname, pname_en, "n_behaviors")
                             ok = "✓" if h.ok else "✗"
                             bullets.append(
                                 f"{h.ts.strftime('%H:%M')} {pname} {ok} "
@@ -197,6 +217,13 @@ class SimLoop:
             # Cap bullets to ~120 entries to stay friendly to LLM context.
             bullets = bullets[-120:]
 
+            # Top-12 actors by (behaviors + 2*dialogs) so dialog-heavy NPCs surface.
+            activity_top = sorted(
+                per_actor.values(),
+                key=lambda a: int(a.get("n_behaviors", 0)) + 2 * int(a.get("n_dialogs", 0)),
+                reverse=True,
+            )[:12]
+
             summary_meta = {
                 "day": day_iso,
                 "n_agents": n_agents,
@@ -204,12 +231,14 @@ class SimLoop:
                 "n_behaviors": n_behaviors,
                 "n_memories": n_memories,
                 "n_bullets_used": len(bullets),
+                "activity_top": activity_top,
             }
             log.info("day-summary inputs: %s", summary_meta)
 
             zh = "（今日无事可记。）"
             en = "(Nothing of note happened today.)"
             degraded = True
+            rich: dict[str, Any] = {}
 
             if self.llm is not None and bullets:
                 try:
@@ -221,9 +250,25 @@ class SimLoop:
                     zh = (result.get("zh") or zh).strip() or zh
                     en = (result.get("en") or en).strip() or en
                     degraded = bool(result.get("degraded", False))
+                    # Carry over the short-story payload; missing keys are tolerated
+                    # by the frontend renderer which falls back to the synopsis.
+                    rich = {
+                        "title_zh": str(result.get("title_zh", "")).strip(),
+                        "title_en": str(result.get("title_en", "")).strip(),
+                        "protagonist": result.get("protagonist") or {},
+                        "supporting": result.get("supporting") or [],
+                        "story_zh": str(result.get("story_zh", "")).strip(),
+                        "story_en": str(result.get("story_en", "")).strip(),
+                        "tomorrow_zh": str(result.get("tomorrow_zh", "")).strip(),
+                        "tomorrow_en": str(result.get("tomorrow_en", "")).strip(),
+                    }
                 except Exception as exc:
                     log.warning("LLM narrate_day failed: %s", exc)
                     degraded = True
+
+            # Strip the heavy activity_top off the persisted stats blob — the
+            # frontend doesn't need it and it bloats the WS payload.
+            stats_for_entry = {k: v for k, v in summary_meta.items() if k != "activity_top"}
 
             entry = {
                 "day": day_iso,
@@ -231,8 +276,9 @@ class SimLoop:
                 "ts_sim": self.world.sim_time.isoformat(),
                 "narrative_zh": zh,
                 "narrative_en": en,
-                "stats": summary_meta,
+                "stats": stats_for_entry,
                 "degraded": degraded,
+                **rich,
             }
             self.day_summaries.append(entry)
             # Cap retained summaries so memory doesn't grow forever.

@@ -12,6 +12,7 @@
         :edges="vEdgesAll"
         :options="opts"
         @select-node="onSelectNode"
+        @ready="onNetReady"
       />
       <div class="stats">
         <span>{{ lang.t('房间', 'Rooms') }}
@@ -55,9 +56,112 @@
         </div>
       </div>
 
-      <button class="ctrl-btn topright" @click="resetView">
-        {{ lang.t('重置视图', 'Reset View') }}
-      </button>
+      <div class="topright-actions">
+        <button class="ctrl-btn" @click="showHeatPanel = !showHeatPanel">
+          🔥 {{ showHeatPanel ? lang.t('收起', 'Hide') : lang.t('热力', 'Heat') }}
+        </button>
+        <button class="ctrl-btn" @click="showTunePanel = !showTunePanel">
+          {{ showTunePanel ? lang.t('收起调节', 'Hide') : lang.t('⚙ 视图调节', '⚙ Tune') }}
+        </button>
+        <button class="ctrl-btn" @click="resetView">
+          {{ lang.t('重置视图', 'Reset View') }}
+        </button>
+      </div>
+
+      <!-- Heat-map controls: each layer can be toggled independently;
+           the bottom row exposes the current totals and a reset button. -->
+      <div v-if="showHeatPanel" class="heat-panel">
+        <div class="heat-header">
+          <strong>🔥 {{ lang.t('热力图层', 'Heat Layers') }}</strong>
+          <button class="micro-btn" @click="clearHeat">
+            {{ lang.t('清零', 'Reset') }}
+          </button>
+        </div>
+        <label class="heat-row">
+          <input type="checkbox" v-model="showMoveHeat" />
+          <span class="heat-sw move"></span>
+          {{ lang.t('移动路线热力', 'Movement routes') }}
+          <span class="heat-num">·  max {{ heat.maxMoveCount }}</span>
+        </label>
+        <label class="heat-row">
+          <input type="checkbox" v-model="showDwellHeat" />
+          <span class="heat-sw dwell"></span>
+          {{ lang.t('驻留时间热力', 'Dwell time') }}
+          <span class="heat-num">·  max {{ heat.maxDwellCount }}</span>
+        </label>
+        <label class="heat-row">
+          <input type="checkbox" v-model="showHotRoomGlow" />
+          <span class="heat-sw glow"></span>
+          {{ lang.t('当前最热房间发光', 'Glow on hottest room now') }}
+        </label>
+        <div v-if="hottestCurrentRoom" class="heat-hot-now">
+          {{ lang.t('当前最多人', 'Most NPCs now') }}:
+          <b>{{ roomLabel(hottestCurrentRoom) }}</b>
+          <span class="heat-num">({{ roomPopulation[hottestCurrentRoom] }})</span>
+        </div>
+        <div class="heat-hint">
+          {{ lang.t(
+            '边粗细/颜色 = 累计穿过次数；房间发光 = 累计驻留量；金色边框 = 当前人数最多',
+            'Edge width/color = cumulative traversals; room glow = cumulative dwell; gold border = most NPCs now'
+          ) }}
+        </div>
+      </div>
+
+      <!-- View tuning panel: change sizes & spacing without losing the camera -->
+      <div v-if="showTunePanel" class="tune-panel" :class="{ 'shift-below-heat': showHeatPanel }">
+        <div class="tune-header">
+          <strong>{{ lang.t('视图调节', 'View tuning') }}</strong>
+          <button class="micro-btn" @click="resetSizes">{{ lang.t('恢复默认', 'Defaults') }}</button>
+        </div>
+        <div class="tune-row">
+          <label>{{ lang.t('房间间距', 'Room spacing') }}</label>
+          <input type="range" min="8" max="60" step="1" v-model.number="roomPosScale" />
+          <span class="tune-val">{{ roomPosScale }}</span>
+        </div>
+        <div class="tune-row">
+          <label>{{ lang.t('房间大小', 'Room size') }}</label>
+          <input type="range" min="4" max="80" step="1" v-model.number="roomSize" />
+          <span class="tune-val">{{ roomSize }}</span>
+        </div>
+        <div class="tune-row">
+          <label>{{ lang.t('NPC 大小', 'NPC size') }}</label>
+          <input type="range" min="3" max="20" step="1" v-model.number="npcSize" />
+          <span class="tune-val">{{ npcSize }}</span>
+        </div>
+        <div class="tune-row">
+          <label>{{ lang.t('物品大小', 'Item size') }}</label>
+          <input type="range" min="2" max="16" step="1" v-model.number="itemSize" />
+          <span class="tune-val">{{ itemSize }}</span>
+        </div>
+        <div class="tune-row">
+          <label>{{ lang.t('NPC 离场景距离', 'NPC ↔ room gap') }}</label>
+          <input type="range" min="0" max="120" step="1" v-model.number="npcRoomGap" />
+          <span class="tune-val">{{ npcRoomGap }}</span>
+        </div>
+        <label class="tune-toggle">
+          <input type="checkbox" v-model="autoScaleOnZoom" />
+          <span>{{ lang.t('缩小时自动放大节点', 'Auto-scale nodes on zoom-out') }}</span>
+          <span class="tune-val">×{{ zoomBoost.toFixed(2) }}</span>
+        </label>
+        <template v-if="autoScaleOnZoom">
+          <div class="tune-row sub">
+            <label>{{ lang.t('房间放大上限', 'Room cap') }}</label>
+            <input type="range" min="1" max="16" step="0.5" v-model.number="maxRoomBoost" />
+            <span class="tune-val">×{{ maxRoomBoost }}</span>
+          </div>
+          <div class="tune-row sub">
+            <label>{{ lang.t('NPC 放大上限', 'NPC cap') }}</label>
+            <input type="range" min="1" max="8" step="0.5" v-model.number="maxNpcBoost" />
+            <span class="tune-val">×{{ maxNpcBoost }}</span>
+          </div>
+          <div class="tune-row sub">
+            <label>{{ lang.t('物品放大上限', 'Item cap') }}</label>
+            <input type="range" min="1" max="8" step="0.5" v-model.number="maxItemBoost" />
+            <span class="tune-val">×{{ maxItemBoost }}</span>
+          </div>
+        </template>
+        <div class="tune-hint">{{ lang.t('调整后会保留视角；设置存于本地。', 'Camera stays put. Saved locally.') }}</div>
+      </div>
     </div>
 
     <aside class="scene-side">
@@ -125,24 +229,93 @@
         <div v-if="!agentsHere.length" class="empty">
           {{ lang.t('（暂无 NPC 在此）', '(no NPC here)') }}
         </div>
+
+        <div class="section-title">{{ lang.t('物品（在此 / 被携带）', 'Items (here / carried)') }}</div>
+        <div v-if="itemsHere.length" class="kv-block">
+          <div v-for="it in itemsHere" :key="it.id" class="kv">
+            <span class="k">🪑 {{ itemDisplayLabel(it) }}</span>
+            <span class="v">
+              <template v-if="it.carrier_id">
+                {{ lang.t('被', 'carried by') }}
+                <em>{{ (agents.list.find(a => String(a.id) === it.carrier_id) || {}).name || it.carrier_id }}</em>
+              </template>
+              <template v-else>{{ lang.t('放置', 'placed') }}</template>
+            </span>
+          </div>
+        </div>
+        <div v-else class="empty">{{ lang.t('（无物品）', '(no items)') }}</div>
+
+        <div class="section-title">
+          {{ lang.t('此处事件（最近）', 'Events here (recent)') }}
+        </div>
+        <div v-if="roomTriplets.length" class="triplet-list">
+          <div
+            v-for="(t, idx) in roomTriplets"
+            :key="idx"
+            class="triplet"
+            :class="{ failed: t.failed }"
+          >
+            <span class="trip-time">{{ t.time }}</span>
+            <span class="trip-s">{{ t.s }}</span>
+            <span class="trip-p">{{ t.p }}</span>
+            <span class="trip-o">{{ t.o }}</span>
+          </div>
+        </div>
+        <div v-else class="empty">{{ lang.t('（暂无记录）', '(no events yet)') }}</div>
       </div>
     </aside>
+
+    <!-- 三色图例（固定在画布左下） -->
+    <div class="legend">
+      <div class="lg-row"><span class="lg-dot" style="background:#42A5F5;border-radius:3px"></span>{{ lang.t('房间', 'Room') }}</div>
+      <div class="lg-row"><span class="lg-dot" style="background:hsl(30,85%,62%)"></span>{{ lang.t('NPC', 'NPC') }}</div>
+      <div class="lg-row"><span class="lg-dot" style="background:#BA68C8;border-radius:2px"></span>{{ lang.t('物品', 'Item') }}</div>
+      <div class="lg-row small">{{ lang.t('实线=携带 / 虚线=放置', 'solid=carried / dashed=placed') }}</div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import NetworkGraph from '@/components/NetworkGraph.vue';
 import RoomHeatPanel from '@/components/RoomHeatPanel.vue';
 import Chip from '@/components/Chip.vue';
 import { useWorldStore } from '@/stores/world';
 import { useAgentsStore } from '@/stores/agents';
 import { useLangStore } from '@/stores/lang';
+import { useEventsStore } from '@/stores/events';
+import { useHeatStore } from '@/stores/heat';
 import type { Room, AgentLite } from '@/api/endpoints';
 
 const lang = useLangStore();
 const world = useWorldStore();
 const agents = useAgentsStore();
+const events = useEventsStore();
+const heat = useHeatStore();
+
+/* ---- Heatmap toggles (persisted to localStorage) ---- */
+const HEAT_LS_KEY = 'sigs_heat_toggles_v1';
+const heatLsLoad = (() => {
+  try { return JSON.parse(localStorage.getItem(HEAT_LS_KEY) || '{}'); }
+  catch { return {}; }
+})();
+const showMoveHeat = ref<boolean>(heatLsLoad.move ?? true);
+const showDwellHeat = ref<boolean>(heatLsLoad.dwell ?? true);
+const showHotRoomGlow = ref<boolean>(heatLsLoad.hot ?? true);
+watch([showMoveHeat, showDwellHeat, showHotRoomGlow], () => {
+  try {
+    localStorage.setItem(HEAT_LS_KEY, JSON.stringify({
+      move: showMoveHeat.value,
+      dwell: showDwellHeat.value,
+      hot: showHotRoomGlow.value,
+    }));
+  } catch {}
+});
+
+function clearHeat() {
+  if (!confirm(lang.t('清空累计的热力数据？', 'Clear accumulated heat data?'))) return;
+  heat.reset();
+}
 
 const graphRef = ref<InstanceType<typeof NetworkGraph> | null>(null);
 const selectedUid = ref<string | null>(null);
@@ -151,6 +324,7 @@ const selectedUid = ref<string | null>(null);
 const trackedAgents = ref<string[]>([]);  // ordered list of agent ids
 const trackedSet = computed(() => new Set(trackedAgents.value));
 const filterText = ref('');
+const trackingInitialized = ref(false);  // tracks all NPCs by default on first load
 
 const rooms = computed<Room[]>(() => world.sceneGraph?.rooms || []);
 const roomMap = computed<Record<string, Room>>(() => {
@@ -173,14 +347,165 @@ function colorOf(tag?: string[]): string {
   return TAG_COLOR[tag[0]] || '#90caf9';
 }
 
+/* ---- View-tuning state (user adjustable, persisted to localStorage) ---- */
+const LS_KEY = 'sigs_scene_view_v2';
+const lsLoad = (() => {
+  try { return JSON.parse(localStorage.getItem(LS_KEY) || '{}'); }
+  catch { return {}; }
+})();
+const roomPosScale = ref<number>(lsLoad.roomPosScale ?? 22);
+const roomSize = ref<number>(lsLoad.roomSize ?? 42);
+const npcSize = ref<number>(lsLoad.npcSize ?? 7);
+const itemSize = ref<number>(lsLoad.itemSize ?? 5);
+/** World-unit gap between the room hexagon edge and the first NPC satellite
+ *  ring. Tunable so users can choose between "NPCs hug the room" (gap=4)
+ *  and "NPCs orbit far out" (gap=80) without touching anything else. */
+const npcRoomGap = ref<number>(lsLoad.npcRoomGap ?? 16);
+const autoScaleOnZoom = ref<boolean>(lsLoad.autoScaleOnZoom ?? true);
+const showTunePanel = ref<boolean>(false);
+const showHeatPanel = ref<boolean>(false);
+
+/* ---- Inverse-zoom scaling -----------------------------------------
+ *  When the user zooms OUT for an overview, individual nodes shrink to
+ *  illegibly tiny dots. We compensate by boosting visual node sizes
+ *  inversely with the camera scale: `boost = clamp(1, 1/scale, MAX)`.
+ *  This keeps the on-screen pixel size of a node roughly CONSTANT as
+ *  long as the cap isn't hit (and cushions the shrink below the cap).
+ *
+ *  Three caps because rooms should dominate the overview while NPC /
+ *  item dots should remain peripheral (still visible, but not bigger
+ *  than their room). Caps are user-tunable from the ⚙ panel.
+ *
+ *  IMPORTANT: vis-network's `font.size` is in *screen pixels*, not
+ *  world units, so we deliberately do NOT pipe `zoomBoost` into label
+ *  sizes — otherwise labels would balloon and visually crowd out the
+ *  shapes they're labelling.
+ */
+const maxRoomBoost = ref<number>(lsLoad.maxRoomBoost ?? 8);
+const maxNpcBoost  = ref<number>(lsLoad.maxNpcBoost  ?? 4);
+const maxItemBoost = ref<number>(lsLoad.maxItemBoost ?? 4);
+const zoomBoost = ref<number>(1);
+const roomVisualSize = computed(() => roomSize.value * Math.min(zoomBoost.value, maxRoomBoost.value));
+const npcVisualSize  = computed(() => npcSize.value  * Math.min(zoomBoost.value, maxNpcBoost.value));
+const itemVisualSize = computed(() => itemSize.value * Math.min(zoomBoost.value, maxItemBoost.value));
+
+function persistView() {
+  try {
+    localStorage.setItem(LS_KEY, JSON.stringify({
+      roomPosScale: roomPosScale.value,
+      roomSize: roomSize.value,
+      npcSize: npcSize.value,
+      itemSize: itemSize.value,
+      npcRoomGap: npcRoomGap.value,
+      autoScaleOnZoom: autoScaleOnZoom.value,
+      maxRoomBoost: maxRoomBoost.value,
+      maxNpcBoost: maxNpcBoost.value,
+      maxItemBoost: maxItemBoost.value,
+    }));
+  } catch {}
+}
+watch(
+  [roomPosScale, roomSize, npcSize, itemSize, npcRoomGap, autoScaleOnZoom,
+   maxRoomBoost, maxNpcBoost, maxItemBoost],
+  persistView,
+);
+
+
+/* ---- Current room population (from live world snapshot) ----
+ *  The backend snapshot returns `agents` as a dict (keyed by id) while a
+ *  few places assume an array — normalise here so we always end up with
+ *  `Array<{location_uid?}>`. Falls back to the agents store at startup
+ *  before the first world snapshot arrives. */
+function snapshotAgentsList(): Array<{ location_uid?: string | null }> {
+  const snap = world.worldSnapshot?.agents;
+  if (Array.isArray(snap)) return snap;
+  if (snap && typeof snap === 'object') return Object.values(snap) as any[];
+  return agents.list as any[];
+}
+const roomPopulation = computed<Record<string, number>>(() => {
+  const out: Record<string, number> = {};
+  for (const a of snapshotAgentsList()) {
+    const uid = a?.location_uid;
+    if (uid) out[uid] = (out[uid] || 0) + 1;
+  }
+  return out;
+});
+/** UID of the room with the most NPCs *right now*. Null when no agents
+ *  are placed yet (very early at startup). */
+const hottestCurrentRoom = computed<string | null>(() => {
+  let bestUid: string | null = null;
+  let bestN = 0;
+  for (const [uid, n] of Object.entries(roomPopulation.value)) {
+    if (n > bestN) { bestN = n; bestUid = uid; }
+  }
+  return bestN > 0 ? bestUid : null;
+});
+
+/** Heat → CSS color. dwell 0 = base room color, dwell 1 = saturated warm orange.
+ *  Mixes the base tag-color with a hot accent in a perceptual way. */
+function mixHexWithWarm(hex: string, t: number): string {
+  // Clamp t and parse the input hex (#RRGGBB).
+  const a = Math.max(0, Math.min(1, t));
+  const r1 = parseInt(hex.slice(1, 3), 16);
+  const g1 = parseInt(hex.slice(3, 5), 16);
+  const b1 = parseInt(hex.slice(5, 7), 16);
+  // Hot accent: vivid orange-red (#ff5722).
+  const r2 = 0xff, g2 = 0x57, b2 = 0x22;
+  const r = Math.round(r1 + (r2 - r1) * a);
+  const g = Math.round(g1 + (g2 - g1) * a);
+  const b = Math.round(b1 + (b2 - b1) * a);
+  return `#${r.toString(16).padStart(2,'0')}${g.toString(16).padStart(2,'0')}${b.toString(16).padStart(2,'0')}`;
+}
+
 const vNodes = computed(() =>
-  rooms.value.map(r => ({
-    id: r.uid,
-    label: r.name,
-    title: `${r.name} · ${r.uid}\n${r.description}`,
-    color: { background: colorOf(r.tag), border: '#0a0e17' },
-    value: r.containment || 1,
-  }))
+  rooms.value.map(r => {
+    const [rx = 0, ry = 0] = r.position || [];
+    const baseColor = colorOf(r.tag);
+    const dwell = showDwellHeat.value ? heat.dwellHeat(r.uid) : 0;
+    // Visually noticeable but never fully blow out the base color.
+    const tinted = dwell > 0 ? mixHexWithWarm(baseColor, Math.min(0.8, dwell)) : baseColor;
+    const isHot = showHotRoomGlow.value && r.uid === hottestCurrentRoom.value;
+    return {
+      id: r.uid,
+      label: r.name,
+      title: `${r.name} · ${r.uid}\n${r.description}`
+        + `\n${lang.t('当前 NPC', 'NPCs now')}: ${roomPopulation.value[r.uid] || 0}`
+        + `\n${lang.t('累计驻留样本', 'Dwell samples')}: ${heat.dwellRoomCounts[r.uid] || 0}`,
+      group: 'room',
+      shape: 'hexagon',
+      size: roomVisualSize.value,
+      color: {
+        background: tinted,
+        border: isHot ? '#FFD54F' : '#0a0e17',
+        highlight: { background: tinted, border: '#FFD54F' },
+      },
+      borderWidth: isHot ? 4 : 1,
+      // vis-network supports a per-node shadow — pulse it on the hot room so
+      // the eye finds it instantly without obscuring the rest of the layout.
+      shadow: isHot
+        ? { enabled: true, color: 'rgba(255,160,0,0.85)', size: 28 * zoomBoost.value, x: 0, y: 0 }
+        : (dwell > 0
+            ? { enabled: true, color: `rgba(255,87,34,${0.18 + 0.45 * dwell})`, size: (10 + 18 * dwell) * zoomBoost.value, x: 0, y: 0 }
+            : { enabled: false }),
+      // NOTE: deliberately NO `value` field — vis-network silently switches
+      // to value-based scaling (range scaling.min..max, default 10..30) the
+      // moment a node carries a `value`, which would override our explicit
+      // `size` and pin every hexagon to ~10–30 px regardless of zoom-boost.
+      font: {
+        color: '#e3f2fd',
+        // Font is in *screen pixels* — keep it tied to the BASE roomSize
+        // (not the zoom-boosted one), otherwise labels balloon larger
+        // than the shapes themselves at low zoom.
+        size: Math.max(11, Math.round(roomSize.value * 0.4)),
+        strokeWidth: 3,
+        strokeColor: '#0a0e17',
+      },
+      x: rx * roomPosScale.value,
+      y: ry * roomPosScale.value,
+      fixed: { x: true, y: true },
+      physics: false,
+    };
+  })
 );
 const vEdges = computed(() => {
   const seen = new Set<string>();
@@ -190,38 +515,91 @@ const vEdges = computed(() => {
       const key = [r.uid, a].sort().join('|');
       if (seen.has(key)) continue;
       seen.add(key);
-      out.push({ from: r.uid, to: a, color: { color: '#1e2a45', opacity: 0.7 } });
+      const h = showMoveHeat.value ? heat.moveHeat(r.uid, a) : 0;
+      // Width grows from 1.5 (cold) → 7.5 (hottest). Opacity rises with heat too.
+      const width = 1.5 + 6 * h;
+      const color = h > 0.05
+        // Hot edges shift from amber (#ff9800) to red (#ff5722) as heat rises.
+        ? (h < 0.5 ? '#ff9800' : '#ff5722')
+        : '#37474f';
+      const opacity = h > 0 ? Math.min(0.95, 0.55 + 0.4 * h) : 0.75;
+      const count = heat.moveEdgeCounts[r.uid < a ? `${r.uid}|${a}` : `${a}|${r.uid}`] || 0;
+      out.push({
+        from: r.uid, to: a,
+        color: { color, opacity },
+        width,
+        title: count > 0
+          ? `${roomLabel(r.uid)} ↔ ${roomLabel(a)} · ${lang.t('累计穿过', 'traversals')} ${count}`
+          : `${roomLabel(r.uid)} ↔ ${roomLabel(a)}`,
+        smooth: { enabled: false },
+      });
     }
   }
   return out;
 });
 
 const opts = {
+  layout: { improvedLayout: false, randomSeed: 42 },
   nodes: { shape: 'dot', size: 22, font: { size: 13, color: '#cfd8dc' } },
-  physics: {
-    solver: 'forceAtlas2Based',
-    forceAtlas2Based: {
-      gravitationalConstant: -80,
-      springLength: 220,
-      springConstant: 0.05,
-    },
-    stabilization: { iterations: 250 },
-  },
+  // Physics disabled everywhere — fully static layout, no idle drifting.
+  physics: { enabled: false },
+  interaction: { hover: true, tooltipDelay: 80, zoomView: true, dragView: true },
 };
 
 // ---- NPC tracking: derive nodes + edges to merge into the graph ----
+/* Warm-tone NPC palette (saturated oranges/pinks/yellows) so NPCs visually
+   pop against the cooler room hexagons. Stable HSL per id. */
 function colorForAgent(id: string): string {
-  // stable HSL hash so the same NPC always gets the same hue
   let h = 0;
   for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) >>> 0;
-  return `hsl(${h % 360}, 70%, 60%)`;
+  // limit hue to 0-60 (red→yellow) so NPCs read as a "warm" cluster.
+  const hue = h % 60;
+  return `hsl(${hue}, 85%, 62%)`;
 }
+const ITEM_COLOR = '#BA68C8';   // purple — distinct from rooms and NPCs
 
 function currentLocation(id: string): string | null {
   const snap = (world.worldSnapshot?.agents) as any;
   if (snap && snap[id]) return snap[id].location_uid || null;
   const a = agents.list.find(x => String(x.id) === id);
   return a ? (a.location_uid || null) : null;
+}
+
+/* Stable index of an NPC inside a room (sorted by id) → drives its angle
+   on the satellite ring around the room hexagon. */
+function npcsInRoom(uid: string): string[] {
+  const out: string[] = [];
+  for (const id of trackedAgents.value) {
+    if (currentLocation(id) === uid) out.push(id);
+  }
+  return out.sort();
+}
+
+/** Returns {x, y} in vis-network world-units for an NPC orbiting its room.
+ *  Uses multiple rings (12 NPCs per ring) so dense rooms (35+ NPCs) don't
+ *  spill into neighbour rooms. */
+function npcSatellitePos(id: string, loc: string): { x: number; y: number } {
+  const room = roomMap.value[loc];
+  const [rx = 0, ry = 0] = room?.position || [];
+  const cx = rx * roomPosScale.value;
+  const cy = ry * roomPosScale.value;
+  const peers = npcsInRoom(loc);
+  const idx = Math.max(0, peers.indexOf(id));
+  const PER_RING = 12;
+  const ring = Math.floor(idx / PER_RING);
+  const slot = idx % PER_RING;
+  const slotsThisRing = Math.min(PER_RING, peers.length - ring * PER_RING);
+  // Satellite ring radius = (room edge) + npcRoomGap world units.
+  // `npcRoomGap` is user-tunable from the ⚙ panel so you can pull NPCs in
+  // tight against the room or push them out into a wide orbit. Adding a
+  // small NPC-size term keeps a minimum visual gap even when NPCs are
+  // boosted larger than the gap.
+  const minGap = npcVisualSize.value * 1.1;
+  const ringStart = roomVisualSize.value + Math.max(npcRoomGap.value, minGap);
+  const ringStep  = npcVisualSize.value * 2.0 + 3;
+  const radius = ringStart + ring * ringStep;
+  const angle = (2 * Math.PI * slot) / slotsThisRing - Math.PI / 2;
+  return { x: cx + radius * Math.cos(angle), y: cy + radius * Math.sin(angle) };
 }
 
 const vNpcNodes = computed(() => {
@@ -231,17 +609,29 @@ const vNpcNodes = computed(() => {
     if (!loc || !roomMap.value[loc]) continue;
     const a = agents.list.find(x => String(x.id) === id);
     const label = a ? npcName(a) : id;
+    const { x, y } = npcSatellitePos(id, loc);
     out.push({
       id: `npc:${id}`,
       label,
       title: `${label}\n@${roomMap.value[loc]?.name || loc}`,
+      group: 'npc',
       shape: 'dot',
-      size: 12,
-      color: { background: colorForAgent(id), border: '#0a0e17' },
-      font: { color: '#fff', size: 11 },
-      borderWidth: 2,
-      // mass < 1 makes the NPC node "orbit" the room without dragging it.
-      mass: 0.4,
+      size: npcVisualSize.value,
+      color: {
+        background: colorForAgent(id),
+        border: '#1a0d00',
+        highlight: { background: colorForAgent(id), border: '#FFFFFF' },
+      },
+      font: {
+        color: '#fff',
+        size: Math.max(8, Math.round(npcSize.value * 1.0)),
+        strokeWidth: 2,
+        strokeColor: '#0a0e17',
+      },
+      borderWidth: 1.5,
+      x, y,
+      fixed: { x: true, y: true },
+      physics: false,
     });
   }
   return out;
@@ -255,16 +645,123 @@ const vNpcEdges = computed(() => {
       id: `npc-edge:${id}`,
       from: `npc:${id}`,
       to: loc,
-      dashes: true,
-      color: { color: colorForAgent(id), opacity: 0.55 },
-      width: 1.5,
-      length: 90,
+      dashes: [2, 4],
+      color: { color: colorForAgent(id), opacity: 0.45 },
+      width: 1,
+      smooth: { enabled: false },
     });
   }
   return out;
 });
-const vNodesAll = computed(() => [...vNodes.value, ...vNpcNodes.value]);
-const vEdgesAll = computed(() => [...vEdges.value, ...vNpcEdges.value]);
+
+/* ---- Items: nodes purple, mounted to either room or NPC ("carrier") ---- */
+interface ItemLite { id: string; location_uid?: string; carrier_id?: string | null; extra?: any }
+const itemsList = computed<ItemLite[]>(() => {
+  const items = (world.worldSnapshot?.items) as Record<string, any> | undefined;
+  if (!items) return [];
+  return Object.entries(items).map(([id, v]) => ({
+    id,
+    location_uid: v?.location_uid,
+    carrier_id: v?.extra?.carrier_id ?? null,
+    extra: v?.extra || {},
+  }));
+});
+
+function itemDisplayLabel(it: ItemLite): string {
+  // strip the trailing index "_3" from "couch_3"
+  const name = (it.extra?.name as string) || it.id.replace(/_\d+$/, '');
+  return name;
+}
+function itemSatellitePos(it: ItemLite): { x: number; y: number } | null {
+  if (it.carrier_id) {
+    // Mount on the NPC: small offset from the NPC node.
+    const npcLoc = currentLocation(it.carrier_id);
+    if (!npcLoc) return null;
+    const p = npcSatellitePos(it.carrier_id, npcLoc);
+    const off = npcVisualSize.value + 4;
+    return { x: p.x + off, y: p.y - off * 0.4 };
+  }
+  if (!it.location_uid) return null;
+  const room = roomMap.value[it.location_uid];
+  if (!room) return null;
+  const [rx = 0, ry = 0] = room.position || [];
+  const cx = rx * roomPosScale.value;
+  const cy = ry * roomPosScale.value;
+  // Place items on an inner ring close to the room core, evenly spaced.
+  const here = itemsList.value.filter(i => !i.carrier_id && i.location_uid === it.location_uid);
+  const idx = here.findIndex(i => i.id === it.id);
+  const n = Math.max(1, here.length);
+  const angle = (2 * Math.PI * idx) / n + Math.PI / 6;
+  const r = roomVisualSize.value * 0.7;
+  return { x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) };
+}
+const vItemNodes = computed(() => {
+  const out: any[] = [];
+  for (const it of itemsList.value) {
+    const pos = itemSatellitePos(it);
+    if (!pos) continue;
+    const label = itemDisplayLabel(it);
+    const carriedBy = it.carrier_id
+      ? (agents.list.find(a => String(a.id) === it.carrier_id) || {} as any).name || it.carrier_id
+      : null;
+    out.push({
+      id: `item:${it.id}`,
+      label,
+      title: carriedBy
+        ? `${label} · 被 ${carriedBy} 携带`
+        : `${label} · @${roomMap.value[it.location_uid || '']?.name || it.location_uid}`,
+      group: 'item',
+      shape: 'square',
+      size: itemVisualSize.value,
+      color: {
+        background: ITEM_COLOR,
+        border: it.carrier_id ? '#FFFFFF' : '#4A148C',
+        highlight: { background: ITEM_COLOR, border: '#FFFFFF' },
+      },
+      font: {
+        color: '#E1BEE7',
+        size: Math.max(7, Math.round(itemSize.value * 1.2)),
+        strokeWidth: 2,
+        strokeColor: '#0a0e17',
+      },
+      borderWidth: it.carrier_id ? 2 : 1,
+      x: pos.x, y: pos.y,
+      fixed: { x: true, y: true },
+      physics: false,
+    });
+  }
+  return out;
+});
+const vItemEdges = computed(() => {
+  const out: any[] = [];
+  for (const it of itemsList.value) {
+    if (it.carrier_id) {
+      out.push({
+        id: `item-edge:${it.id}`,
+        from: `item:${it.id}`,
+        to: `npc:${it.carrier_id}`,
+        dashes: false,
+        color: { color: ITEM_COLOR, opacity: 0.8 },
+        width: 1.2,
+        smooth: { enabled: false },
+      });
+    } else if (it.location_uid) {
+      out.push({
+        id: `item-edge:${it.id}`,
+        from: `item:${it.id}`,
+        to: it.location_uid,
+        dashes: [1, 3],
+        color: { color: ITEM_COLOR, opacity: 0.35 },
+        width: 0.8,
+        smooth: { enabled: false },
+      });
+    }
+  }
+  return out;
+});
+
+const vNodesAll = computed(() => [...vNodes.value, ...vNpcNodes.value, ...vItemNodes.value]);
+const vEdgesAll = computed(() => [...vEdges.value, ...vNpcEdges.value, ...vItemEdges.value]);
 
 const filteredAgents = computed<AgentLite[]>(() => {
   const q = filterText.value.trim().toLowerCase();
@@ -301,9 +798,15 @@ function onSelectNode(nodeId: string) {
   // virtual NPC nodes start with "npc:" — clicking one routes to that agent.
   if (nodeId.startsWith('npc:')) {
     const aid = nodeId.slice(4);
-    // navigate to AgentDetailView
     (window as any).__lastClickedAgent = aid;
     window.location.hash = `#/agent/${aid}`;
+    return;
+  }
+  // virtual item nodes select their carrier's room.
+  if (nodeId.startsWith('item:')) {
+    const iid = nodeId.slice(5);
+    const it = itemsList.value.find(x => x.id === iid);
+    if (it?.location_uid) selectedUid.value = it.location_uid;
     return;
   }
   selectedUid.value = nodeId;
@@ -315,7 +818,14 @@ function jumpToRoom(uid: string) {
 function resetView() {
   graphRef.value?.fit?.();
 }
-function roomLabel(uid: string): string {
+function resetSizes() {
+  roomPosScale.value = 22;
+  roomSize.value = 42;
+  npcSize.value = 7;
+  itemSize.value = 5;
+}
+function roomLabel(uid: string | null | undefined): string {
+  if (!uid) return '—';
   return roomMap.value[uid]?.name || uid;
 }
 
@@ -337,6 +847,230 @@ function npcName(a: AgentLite): string {
   if (lang.lang === 'en') return (a as any).name_en || a.name || String(a.id);
   return a.name || (a as any).name_en || String(a.id);
 }
+function npcNameById(id: string): string {
+  const a = agents.list.find(x => String(x.id) === id);
+  return a ? npcName(a) : id;
+}
+
+/* ---------- Items panel: items currently in the selected room ---------- */
+const itemsHere = computed<ItemLite[]>(() => {
+  const uid = selectedUid.value;
+  if (!uid) return [];
+  return itemsList.value.filter(it => it.location_uid === uid);
+});
+
+/* ---------- Room triplet event stream (S, P, O) ---------- */
+interface Triplet { time: string; s: string; p: string; o: string; failed?: boolean }
+const ACTION_LABEL_ZH: Record<string, string> = {
+  move: '走到', talk: '与…交谈', interact: '使用', sleep: '入睡',
+  wake_up: '醒来', idle: '休息', pickup: '拾起', drop: '放下',
+};
+const ACTION_LABEL_EN: Record<string, string> = {
+  move: 'walks to', talk: 'talks with', interact: 'uses', sleep: 'sleeps',
+  wake_up: 'wakes up', idle: 'idles', pickup: 'picks up', drop: 'drops',
+};
+function predicateFor(action: string): string {
+  return lang.lang === 'en'
+    ? (ACTION_LABEL_EN[action] || action)
+    : (ACTION_LABEL_ZH[action] || action);
+}
+function shortHHMM(ts?: string): string {
+  if (!ts) return '';
+  // 2026-05-26T07:35:00 → 07:35
+  return ts.includes('T') ? ts.split('T')[1].slice(0, 5) : ts.slice(0, 5);
+}
+const roomTriplets = computed<Triplet[]>(() => {
+  const uid = selectedUid.value;
+  if (!uid) return [];
+  const out: Triplet[] = [];
+  // walk newest → oldest, take up to 25
+  for (let i = events.stream.length - 1; i >= 0 && out.length < 25; i--) {
+    const ev = events.stream[i];
+    const p = ev.payload || {};
+    if (ev.type === 'dialog' && p.here_uid === uid) {
+      const sName = lang.lang === 'en' ? (p.speaker_name_en || p.speaker_name) : (p.speaker_name || p.speaker_name_en);
+      const lName = lang.lang === 'en' ? (p.listener_name_en || p.listener_name) : (p.listener_name || p.listener_name_en);
+      out.push({
+        time: shortHHMM(ev.ts_sim),
+        s: sName || p.speaker_id,
+        p: predicateFor('talk'),
+        o: lName || p.listener_id,
+      });
+    } else if (ev.type === 'behavior') {
+      const preLoc = p.pre_state?.['agent.location_uid'];
+      const postLoc = p.post_state?.['agent.location_uid'];
+      if (preLoc !== uid && postLoc !== uid) continue;
+      const action = p.action_id || 'act';
+      const npc = npcNameById(String(ev.agent_id || ''));
+      let obj = '';
+      if (action === 'move') {
+        obj = roomLabel(postLoc) + (preLoc && preLoc !== postLoc ? `  (← ${roomLabel(preLoc)})` : '');
+      } else if (action === 'pickup' || action === 'drop') {
+        const iid = p.params?.item_id || p.item_id || '';
+        const it = itemsList.value.find(x => x.id === iid);
+        obj = it ? itemDisplayLabel(it) : (iid || (p.activity || ''));
+      } else {
+        obj = p.activity || roomLabel(postLoc || preLoc);
+      }
+      out.push({
+        time: shortHHMM(ev.ts_sim),
+        s: npc,
+        p: predicateFor(action),
+        o: obj,
+        failed: !p.ok,
+      });
+    }
+  }
+  return out;
+});
+
+/* ====================================================================
+   NPC MOVE ANIMATION
+   --------------------------------------------------------------------
+   When the backend publishes a `behavior` event with `action_id="move"`,
+   we lerp the NPC node from its old room's satellite slot to a slot on
+   the new room over ~1.2s. After the lerp finishes, the next world
+   snapshot poll will reaffirm the final position (no visual jump because
+   the lerp's endpoint matches the satellite slot we computed).
+   ==================================================================== */
+const ANIM_DURATION_MS = 1200;
+/** Tracks the last `events.pushedTotal` value we've processed for heat /
+ *  animation. Using a monotonic counter (rather than a stream index) is
+ *  necessary because the events stream is a ring buffer — indices shift
+ *  once it saturates, so `stream.length` alone can't detect new pushes. */
+let lastSeenPushedTotal = 0;
+const animations = new Map<string, number>();    // npc id → raf handle
+
+/* ---- Zoom event → inverse-boost factor ----
+ *  vis-network fires `zoom` on every wheel tick. We collapse those into
+ *  one update per animation frame and tween nothing — Vue's reactivity
+ *  picks up the new `zoomBoost` and the dependent size computeds
+ *  re-emit fresh nodes for vis-network to render. */
+let zoomRaf: number | null = null;
+let visNet: any = null;
+function onNetReady(net: any) {
+  visNet = net;
+  net.on('zoom', () => scheduleZoomBoostUpdate());
+  // Also re-evaluate after fit/move animations finish, because vis-network
+  // doesn't always emit `zoom` during fit() / moveTo() animations.
+  net.on('animationFinished', () => scheduleZoomBoostUpdate());
+  net.on('dragEnd', () => scheduleZoomBoostUpdate());
+  // Initial sync (fit() during mount may set scale before our listener attaches).
+  scheduleZoomBoostUpdate();
+}
+function scheduleZoomBoostUpdate() {
+  if (!autoScaleOnZoom.value) {
+    if (zoomBoost.value !== 1) zoomBoost.value = 1;
+    return;
+  }
+  if (zoomRaf != null) return;
+  zoomRaf = requestAnimationFrame(() => {
+    zoomRaf = null;
+    if (!visNet) return;
+    const scale = (visNet.getScale?.() as number) || 1;
+    // No boost when zoomed in past parity; otherwise boost = 1/scale.
+    // Per-type caps (maxRoomBoost / maxNpcBoost / maxItemBoost) are
+    // applied at consumption time, so a huge boost here just means each
+    // node type rides up to its own ceiling.
+    const ABSOLUTE_CAP = 16;  // sanity-bound for scale → 0 edge cases
+    const target = scale >= 1 ? 1 : Math.min(ABSOLUTE_CAP, 1 / scale);
+    // Round to 2 decimals so tiny scale jitters (e.g. animations) don't
+    // trigger a re-render every frame.
+    const rounded = Math.round(target * 100) / 100;
+    if (Math.abs(rounded - zoomBoost.value) > 0.005) {
+      zoomBoost.value = rounded;
+    }
+  });
+}
+// Re-evaluate boost (forced to 1) the moment the user toggles auto-scale off.
+watch(autoScaleOnZoom, scheduleZoomBoostUpdate);
+
+function animateNpcMove(id: string, fromUid: string, toUid: string) {
+  const net = graphRef.value as any;
+  if (!net?.updateNodes) return;
+  // Compute endpoints in the same coord-space as everything else.
+  const fromRoom = roomMap.value[fromUid];
+  const toRoom = roomMap.value[toUid];
+  if (!fromRoom || !toRoom) return;
+  const fromPos = npcSatellitePos(id, fromUid);
+  // For the target slot, anticipate the post-move ring (peers ≈ npcsInRoom(toUid)).
+  // Approximation is good enough because the next snapshot recompute corrects it.
+  const toPos = npcSatellitePos(id, toUid);
+
+  const start = performance.now();
+  // Cancel any in-flight animation for this NPC.
+  if (animations.has(id)) {
+    cancelAnimationFrame(animations.get(id)!);
+    animations.delete(id);
+  }
+  const tick = (now: number) => {
+    const t = Math.min(1, (now - start) / ANIM_DURATION_MS);
+    // Ease in/out cubic.
+    const e = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    const x = fromPos.x + (toPos.x - fromPos.x) * e;
+    const y = fromPos.y + (toPos.y - fromPos.y) * e;
+    const updates: any[] = [{ id: `npc:${id}`, x, y }];
+    // If this NPC is carrying an item, drag it along too.
+    for (const it of itemsList.value) {
+      if (it.carrier_id === id) {
+        updates.push({ id: `item:${it.id}`, x: x + 22, y: y - 8 });
+      }
+    }
+    net.updateNodes(updates);
+    if (t < 1) {
+      animations.set(id, requestAnimationFrame(tick));
+    } else {
+      animations.delete(id);
+    }
+  };
+  animations.set(id, requestAnimationFrame(tick));
+}
+
+/** Process a single sim event into heat / animations. Idempotent guard
+ *  rails live in the move/animate handlers themselves. The `animate`
+ *  arg lets us run animations only for NEW events (skip backfill). */
+function processSimEvent(ev: any, animate: boolean) {
+  if (ev?.type !== 'behavior') return;
+  const p = ev.payload || {};
+  if (p.action_id !== 'move' || !p.ok) return;
+  const aid = String(ev.agent_id || '');
+  const from = p.pre_state?.['agent.location_uid'];
+  const to = p.post_state?.['agent.location_uid'];
+  if (!aid || !from || !to || from === to) return;
+  // Heat-map: record every successful traversal regardless of tracking.
+  heat.recordMove(String(from), String(to));
+  if (animate && trackedSet.value.has(aid)) {
+    animateNpcMove(aid, String(from), String(to));
+  }
+}
+
+watch(
+  () => events.pushedTotal,
+  (total) => {
+    const newCount = total - lastSeenPushedTotal;
+    if (newCount <= 0) { lastSeenPushedTotal = total; return; }
+    // Only the most recent `newCount` events are guaranteed to be the
+    // newcomers; older indices may have just been evicted by the ring
+    // buffer. Clamp to stream length so we don't underflow.
+    const start = Math.max(0, events.stream.length - newCount);
+    for (let i = start; i < events.stream.length; i++) {
+      processSimEvent(events.stream[i], /*animate=*/true);
+    }
+    lastSeenPushedTotal = total;
+  },
+);
+
+/* Sample dwell heat whenever a new world snapshot is observed. The
+ * snapshot's `sim_time` field is the dedupe key (it's stamped server-side
+ * once per simulation tick), so both REST polling and WS pushes feed the
+ * same accumulator without double-counting. */
+watch(
+  () => world.worldSnapshot?.sim_time ?? world.lastTickAt,
+  (tickAt) => {
+    if (!tickAt) return;
+    heat.sampleDwell(String(tickAt), snapshotAgentsList());
+  },
+);
 
 onMounted(async () => {
   await Promise.all([
@@ -344,11 +1078,40 @@ onMounted(async () => {
     world.loadWorld(),
     agents.loadList(),
   ]);
-  // Poll world snapshot every 3s so tracked NPC nodes re-attach when an NPC
-  // changes room (vis-network animates the edge re-layout).
+  // Backfill heat counters from any events already in the ring buffer
+  // (e.g. user switched here from another tab). We DON'T animate these —
+  // they're history — but we do count them for the move-route heat map.
+  for (const ev of events.stream) processSimEvent(ev, /*animate=*/false);
+  lastSeenPushedTotal = events.pushedTotal;
+  // Track every NPC by default so the user immediately sees motion.
+  if (!trackingInitialized.value && agents.list?.length) {
+    trackedAgents.value = agents.list.map(a => String(a.id));
+    trackingInitialized.value = true;
+  }
+  // Poll world snapshot every 3s so tracked NPC nodes / items re-attach when
+  // they change room. Animations (1.2s) finish before the next poll lands.
   world.startPolling(3000);
+  // Center the camera on the room centroid at a useful zoom.
+  setTimeout(() => {
+    const rs = rooms.value;
+    if (!rs.length) return;
+    let sx = 0, sy = 0;
+    for (const r of rs) {
+      sx += (r.position?.[0] || 0) * roomPosScale.value;
+      sy += (r.position?.[1] || 0) * roomPosScale.value;
+    }
+    const cx = sx / rs.length;
+    const cy = sy / rs.length;
+    (graphRef.value as any)?.moveTo?.({
+      position: { x: cx, y: cy },
+      scale: 0.5,
+      animation: false,
+    });
+  }, 150);
 });
 onBeforeUnmount(() => {
+  for (const h of animations.values()) cancelAnimationFrame(h);
+  animations.clear();
   world.stopPolling();
 });
 </script>
@@ -383,6 +1146,135 @@ onBeforeUnmount(() => {
 .stats b { color: var(--accent-warn); margin-left: 4px; }
 
 .topright { position: absolute; top: 16px; right: 16px; }
+.topright-actions {
+  position: absolute;
+  top: 16px; right: 16px;
+  display: flex; gap: 8px;
+  z-index: 6;
+}
+
+/* ---- Heat-map control panel ---- */
+.heat-panel {
+  position: absolute;
+  top: 62px;
+  right: 16px;
+  width: 280px;
+  background: rgba(18,24,43,0.96);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  padding: 10px 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+  z-index: 6;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+.heat-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 8px;
+}
+.heat-header strong { color: var(--accent-warn); font-size: 13px; }
+.heat-row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 3px 0;
+}
+.heat-row input[type="checkbox"] { accent-color: var(--accent-warn); cursor: pointer; }
+.heat-sw {
+  display: inline-block;
+  width: 16px; height: 4px;
+  border-radius: 2px;
+}
+.heat-sw.move  { background: linear-gradient(90deg, #ff9800, #ff5722); }
+.heat-sw.dwell { background: radial-gradient(circle, #ff5722 0%, transparent 70%); height: 8px; width: 8px; border-radius: 50%; }
+.heat-sw.glow  { background: #FFD54F; box-shadow: 0 0 6px rgba(255,213,79,0.9); }
+.heat-num {
+  color: var(--text-very-dim);
+  font-family: Consolas, monospace;
+  font-size: 10.5px;
+  margin-left: auto;
+}
+.heat-hot-now {
+  margin-top: 8px;
+  padding: 5px 8px;
+  background: rgba(255,213,79,0.08);
+  border-left: 2px solid var(--accent-warn);
+  border-radius: 4px;
+  font-size: 11.5px;
+  color: var(--text-secondary);
+}
+.heat-hot-now b { color: var(--accent-warn); margin: 0 4px; }
+.heat-hint {
+  margin-top: 8px;
+  font-size: 10.5px;
+  line-height: 1.5;
+  color: var(--text-very-dim);
+  font-style: italic;
+}
+
+/* ---- View tuning panel ---- */
+.tune-panel {
+  position: absolute;
+  top: 62px;
+  right: 16px;
+  width: 260px;
+  background: rgba(18,24,43,0.96);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  padding: 10px 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+  z-index: 6;
+  color: var(--text-secondary);
+  font-size: 12px;
+  transition: top 0.18s ease;
+}
+/* When the heat-panel is also visible, slide tune-panel below it instead
+ * of overlapping. (Height of heat-panel ≈ 245px + 16px gap.) */
+.tune-panel.shift-below-heat { top: 320px; }
+.tune-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 8px;
+}
+.tune-header strong { color: var(--accent-primary); font-size: 13px; }
+.tune-row {
+  display: grid;
+  grid-template-columns: 90px 1fr 32px;
+  align-items: center;
+  gap: 6px;
+  margin: 4px 0;
+}
+.tune-row label { color: var(--text-very-dim); }
+.tune-row input[type=range] { width: 100%; }
+.tune-row.sub {
+  margin-left: 14px;
+  opacity: 0.85;
+  border-left: 2px solid var(--border-soft);
+  padding-left: 8px;
+}
+.tune-val {
+  text-align: right;
+  font-family: Consolas, monospace;
+  color: var(--accent-warm-soft);
+  font-size: 11px;
+}
+.tune-toggle {
+  display: flex; align-items: center; gap: 8px;
+  margin: 8px 0 2px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding-top: 6px;
+  border-top: 1px dashed var(--border-soft);
+}
+.tune-toggle input[type=checkbox] { accent-color: var(--accent-warn); cursor: pointer; }
+.tune-toggle .tune-val { margin-left: auto; }
+.tune-hint {
+  margin-top: 6px;
+  font-size: 10.5px;
+  color: var(--text-very-dim);
+  font-style: italic;
+}
 
 .panel-header {
   padding: 14px 18px;
@@ -477,4 +1369,48 @@ onBeforeUnmount(() => {
 .tracker-loc { color: var(--text-very-dim); font-size: 10.5px; }
 .sim-clock { color: var(--accent-warm-soft); margin-left: auto; }
 .empty-small { color: var(--text-disabled); font-size: 11px; padding: 4px; text-align: center; }
+
+/* ---- Triplet panel (events in selected room) ---- */
+.triplet-list { display: flex; flex-direction: column; gap: 4px; margin-top: 4px; }
+.triplet {
+  display: grid;
+  grid-template-columns: 38px 1fr auto 1fr;
+  gap: 6px;
+  align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-left: 3px solid #66BB6A;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11.5px;
+  color: var(--text-secondary);
+}
+.triplet.failed { border-left-color: #EF5350; opacity: 0.8; }
+.triplet .trip-time { color: var(--text-very-dim); font-family: Consolas, monospace; font-size: 10.5px; }
+.triplet .trip-s { color: #FFD54F; font-weight: 600; }
+.triplet .trip-p {
+  color: var(--text-disabled);
+  background: rgba(255,255,255,0.04);
+  padding: 1px 6px;
+  border-radius: 8px;
+  font-size: 10.5px;
+}
+.triplet .trip-o { color: #81D4FA; }
+
+/* ---- Legend ---- */
+.legend {
+  position: absolute;
+  bottom: 16px; right: 16px;
+  background: rgba(18,24,43,0.94);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  z-index: 5;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.lg-row { display: flex; align-items: center; gap: 6px; }
+.lg-row.small { color: var(--text-very-dim); font-size: 10.5px; margin-top: 2px; }
+.lg-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
 </style>

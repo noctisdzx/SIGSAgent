@@ -122,6 +122,81 @@ class WorldState:
             else:
                 self.agents[pid] = AgentState(id=pid, location_uid=loc)
 
+    def populate_items_from_rooms(self, rooms) -> None:
+        """Seed movable items from each room's furniture list.
+
+        We only seed names that read as obviously movable (chair, stool, ball,
+        book, etc.). Big stuff like dining tables / treadmills stays implicit.
+        Each item gets `extra.name` (the display label) and `extra.movable=True`
+        so the pickup / drop GOAP actions can validate it later.
+        """
+        MOVABLE = {
+            "chair", "stool", "trolley", "plant", "lamp", "book", "mug",
+            "cup", "kettle", "ball", "cushion", "pillow", "yoga_mat",
+            "dumbbell", "notebook", "laptop", "tablet",
+        }
+        for room in rooms:
+            for f in getattr(room, "furniture", []) or []:
+                name = str(f.get("name", "")).strip().lower()
+                if not name or name not in MOVABLE:
+                    continue
+                num = max(1, int(f.get("num", 1)))
+                # Cap at 2 per kind per room to avoid graph clutter.
+                for k in range(min(num, 2)):
+                    iid = f"{name}_{room.uid[:6]}_{k+1}"
+                    if iid in self.items:
+                        continue
+                    self.items[iid] = ItemState(
+                        id=iid,
+                        location_uid=room.uid,
+                        status="idle",
+                        extra={"name": name, "movable": True, "carrier_id": None},
+                    )
+
+    def pickup_item(self, agent_id: str, item_id: str) -> bool:
+        """Mark `item_id` as carried by `agent_id`. Returns True on success."""
+        a = self.agents.get(agent_id)
+        it = self.items.get(item_id)
+        if not a or not it:
+            return False
+        if it.extra.get("carrier_id"):
+            return False  # already carried
+        if a.location_uid != it.location_uid:
+            return False  # not co-located
+        if a.holding:
+            return False  # only one item at a time
+        it.extra["carrier_id"] = agent_id
+        a.holding = item_id
+        return True
+
+    def drop_item(self, agent_id: str, item_id: str | None = None) -> bool:
+        """Drop the (carried) item into the agent's current room."""
+        a = self.agents.get(agent_id)
+        if not a:
+            return False
+        iid = item_id or a.holding
+        if not iid:
+            return False
+        it = self.items.get(iid)
+        if not it or it.extra.get("carrier_id") != agent_id:
+            return False
+        # The item travels with the carrier: snap to the agent's room.
+        it.location_uid = a.location_uid
+        it.extra["carrier_id"] = None
+        if a.holding == iid:
+            a.holding = None
+        return True
+
+    def tick_carried_items(self) -> None:
+        """Keep carried items' location_uid in sync with their carrier each tick."""
+        for it in self.items.values():
+            carrier = it.extra.get("carrier_id")
+            if not carrier:
+                continue
+            a = self.agents.get(carrier)
+            if a:
+                it.location_uid = a.location_uid
+
     # ----- queries -----
 
     def agents_in(self, location_uid: str) -> list[AgentState]:

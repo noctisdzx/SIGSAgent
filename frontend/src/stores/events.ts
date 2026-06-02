@@ -19,6 +19,10 @@ export interface SimEvent {
 export const useEventsStore = defineStore('events', () => {
   const stream = ref<SimEvent[]>([]);
   const max = 500;
+  /** Monotonic count of every event ever pushed (does not decrement on
+   *  ring-buffer eviction). Used by watchers that need to detect new
+   *  events even after `stream.length` has saturated at `max`. */
+  const pushedTotal = ref<number>(0);
 
   const connectionStatus = ref<WsStatus>('idle');
   const lastError = ref<string | null>(null);
@@ -27,9 +31,11 @@ export const useEventsStore = defineStore('events', () => {
   function push(ev: SimEvent) {
     stream.value.push(ev);
     if (stream.value.length > max) stream.value.splice(0, stream.value.length - max);
+    pushedTotal.value += 1;
   }
   function clear() {
     stream.value = [];
+    pushedTotal.value = 0;
   }
   function setStatus(s: WsStatus, err?: string) {
     connectionStatus.value = s;
@@ -41,6 +47,7 @@ export const useEventsStore = defineStore('events', () => {
 
   return {
     stream,
+    pushedTotal,
     connectionStatus,
     lastError,
     lastWelcomeAt,

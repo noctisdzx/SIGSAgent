@@ -450,6 +450,14 @@ class NPCAgent:
                     },
                 })
 
+            # 8) Occasional emergent item carry: pick up a movable item nearby,
+            # or drop something we're already carrying. Light-touch, but enough
+            # to keep the scene-graph items panel visibly evolving.
+            try:
+                await self._maybe_carry_item(world, activity_text)
+            except Exception as exc:
+                log.debug("carry-item hook failed for %s: %s", self.persona.id, exc)
+
         except Exception as exc:  # never crash the loop
             log.exception("agent %s tick failed: %s", self.persona.id, exc)
             await event_bus.publish({
@@ -545,6 +553,81 @@ class NPCAgent:
             return False
         low = activity.lower()
         return any(h in low for h in SOCIAL_HINTS)
+
+    async def _maybe_carry_item(self, world: "WorldState", activity_text: str) -> None:
+        """Probabilistic pickup / drop. Lets NPCs ferry chairs / mugs / books
+        across rooms — a lightweight stand-in for a goal-driven inventory plan.
+
+        * If holding nothing & a movable item is in the room: ~15% chance pickup.
+        * If currently holding an item: ~25% chance drop (after at least one
+          room change so the user can see something *move*).
+        """
+        import random
+        a = world.agents.get(self.persona.id)
+        if not a:
+            return
+
+        # Drop branch — only when we've already moved to a *different* room
+        # than where we picked it up (otherwise it's not visually interesting).
+        if a.holding:
+            iid = a.holding
+            it = world.items.get(iid)
+            if not it:
+                a.holding = None
+                return
+            origin = (it.extra or {}).get("origin_uid")
+            if origin and origin != a.location_uid and random.random() < 0.25:
+                if self.behavior_executor is not None:
+                    res = await self.behavior_executor.execute(
+                        self.persona.id, "drop", {"item_id": iid}, world,
+                    )
+                    if res.ok:
+                        await event_bus.publish({
+                            "type": "behavior",
+                            "ts_sim": world.sim_time.isoformat(),
+                            "agent_id": self.persona.id,
+                            "payload": {
+                                **res.to_dict(),
+                                "item_id": iid,
+                                "from": origin,
+                                "to": a.location_uid,
+                                "activity": f"drop({iid})",
+                            },
+                        })
+            return
+
+        # Pickup branch
+        if random.random() >= 0.15:
+            return
+        # candidates: movable items in this room, not already carried
+        here_items = [
+            it for it in world.items.values()
+            if it.location_uid == a.location_uid
+            and not (it.extra or {}).get("carrier_id")
+            and (it.extra or {}).get("movable")
+        ]
+        if not here_items:
+            return
+        pick = random.choice(here_items)
+        # remember where it came from so we know when a drop is "meaningful"
+        pick.extra["origin_uid"] = a.location_uid
+        if self.behavior_executor is not None:
+            res = await self.behavior_executor.execute(
+                self.persona.id, "pickup", {"item_id": pick.id}, world,
+            )
+            if res.ok:
+                await event_bus.publish({
+                    "type": "behavior",
+                    "ts_sim": world.sim_time.isoformat(),
+                    "agent_id": self.persona.id,
+                    "payload": {
+                        **res.to_dict(),
+                        "item_id": pick.id,
+                        "from": a.location_uid,
+                        "to": a.location_uid,
+                        "activity": f"pickup({pick.id})",
+                    },
+                })
 
     async def _maybe_have_dialog(
         self,

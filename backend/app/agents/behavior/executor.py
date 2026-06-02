@@ -73,7 +73,29 @@ class BehaviorExecutor:
         params: dict[str, Any],
         world: WorldState,
     ) -> tuple[bool, str]:
-        """Check preconditions, then apply effects via WorldState.apply_action."""
+        """Check preconditions, then apply effects via WorldState.apply_action.
+
+        `pickup` / `drop` are two-object atomic mutations (item.carrier_id +
+        agent.holding) that the value-based DSL cannot express cleanly, so we
+        intercept them here and call WorldState helpers directly.
+        """
+        if spec.id == "pickup":
+            ok, note = world.check_preconditions(agent_id, spec.preconditions, params)
+            if not ok:
+                return False, f"precondition failed: {note}"
+            iid = params.get("item_id")
+            if not iid:
+                return False, "pickup: missing item_id"
+            success = world.pickup_item(agent_id, str(iid))
+            return (True, f"picked up {iid}") if success else (
+                False, f"pickup refused (carrier/holding/colocation): {iid}")
+
+        if spec.id == "drop":
+            iid = params.get("item_id")
+            success = world.drop_item(agent_id, str(iid) if iid else None)
+            return (True, f"dropped {iid or 'item'}") if success else (
+                False, f"drop refused (not carrying): {iid}")
+
         ok, note = world.check_preconditions(agent_id, spec.preconditions, params)
         if not ok:
             return False, f"precondition failed: {note}"
