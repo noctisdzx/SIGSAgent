@@ -85,12 +85,18 @@ export interface TimelineEvent {
 export const api = {
   health: () => http.get('/health').then(r => r.data),
   sceneGraph: () => http.get<SceneGraphResponse>('/scene/graph').then(r => r.data),
+  sceneLayout: () =>
+    http.get<{ rooms: Record<string, { x: number; y: number }>; map: any }>(
+      '/scene/layout',
+    ).then(r => r.data),
+  saveSceneLayout: (body: { rooms: Record<string, { x: number; y: number }>; map: any }) =>
+    http.put('/scene/layout', body).then(r => r.data),
   world: () => http.get('/world').then(r => r.data),
   agents: () => http.get<AgentLite[]>('/agents').then(r => r.data),
   agent: (id: string) => http.get(`/agents/${id}`).then(r => r.data),
   agentMemory: (id: string) => http.get(`/agents/${id}/memory`).then(r => r.data),
-  agentSchedule: (id: string, day?: string) =>
-    http.get(`/agents/${id}/schedule`, { params: { day } }).then(r => r.data),
+  agentSchedule: (id: string, day?: string, week?: boolean) =>
+    http.get(`/agents/${id}/schedule`, { params: { day, week } }).then(r => r.data),
   agentHistory: (id: string, limit = 100) =>
     http.get(`/agents/${id}/history`, { params: { limit } }).then(r => r.data),
   agentPerception: (id: string) => http.get(`/agents/${id}/perception`).then(r => r.data),
@@ -100,6 +106,12 @@ export const api = {
     http.get<{ scenes: SceneEntry[] }>('/scenes-library').then(r => r.data),
   timelineSeed: () =>
     http.get<{ events: TimelineEvent[] }>('/timeline-seed').then(r => r.data),
+  recordings: () =>
+    http.get<{ recordings: any[]; current: string | null }>('/recordings').then(r => r.data),
+  recording: (name: string) =>
+    http.get<{ name: string; header: any; frames: any[] }>(
+      `/recordings/${encodeURIComponent(name)}`,
+    ).then(r => r.data),
   reloadConfig: () => http.post('/config/reload').then(r => r.data),
   simStart: () => http.post('/sim/start').then(r => r.data),
   simPause: () => http.post('/sim/pause').then(r => r.data),

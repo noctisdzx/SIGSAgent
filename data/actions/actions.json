@@ -40,7 +40,17 @@
       "effects": {
         "agent.mood": "+= 1"
       },
-      "concurrent_with": []
+      "concurrent_with": ["move", "interact", "find", "idle"]
+    },
+    {
+      "id": "mutter",
+      "label": "mutter",
+      "cost": 0,
+      "duration_minutes": 5,
+      "params": [],
+      "preconditions": {},
+      "effects": {},
+      "concurrent_with": ["move", "interact", "find", "idle"]
     },
     {
       "id": "phone_call",

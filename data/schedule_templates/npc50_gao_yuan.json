@@ -1,112 +1,60 @@
 {
   "id": "npc50_gao_yuan",
-  "description": "高远 的周课表（archetype=grad，自动生成、每天差异化、含 target_state）。",
-  "archetype": "grad",
+  "description": "高远 的周课表（专业=马克思主义哲学 Marxist Philosophy，由真实课表 CSV 生成、含 target_state；空档交给 slot_filler）。",
+  "archetype": "from_csv",
+  "major": "马克思主义哲学 Marxist Philosophy",
   "week": {
     "monday": [
       {
         "start": "00:00",
-        "end": "08:05",
+        "end": "07:30",
         "activity": "sleep",
         "location_uid": "438038e3",
-        "narrative_zh": "凌晨睡眠",
+        "narrative_zh": "睡眠",
         "target_state": {
           "agent.location_uid": "438038e3",
           "agent.energy": ">=3"
         }
       },
       {
-        "start": "08:05",
-        "end": "08:35",
-        "activity": "wake_up",
-        "location_uid": "438038e3",
-        "narrative_zh": "起床",
+        "start": "08:30",
+        "end": "09:00",
+        "activity": "attend_lecture",
+        "location_uid": "cb0199d8",
+        "narrative_zh": "学术讲座",
         "target_state": {
-          "agent.location_uid": "438038e3"
-        }
-      },
-      {
-        "start": "09:05",
-        "end": "11:35",
-        "activity": "lab_work",
-        "location_uid": "3877431b",
-        "narrative_zh": "上午实验",
-        "target_state": {
-          "agent.location_uid": "3877431b"
-        }
-      },
-      {
-        "start": "12:05",
-        "end": "12:35",
-        "activity": "have_lunch",
-        "location_uid": "9a49343c",
-        "narrative_zh": "午饭",
-        "target_state": {
-          "agent.location_uid": "9a49343c"
-        }
-      },
-      {
-        "start": "14:05",
-        "end": "17:05",
-        "activity": "lab_work",
-        "location_uid": "3877431b",
-        "narrative_zh": "下午实验/写代码",
-        "target_state": {
-          "agent.location_uid": "3877431b"
-        }
-      },
-      {
-        "start": "18:05",
-        "end": "18:35",
-        "activity": "have_dinner",
-        "location_uid": "9a49343c",
-        "narrative_zh": "晚饭",
-        "target_state": {
-          "agent.location_uid": "9a49343c"
-        }
-      },
-      {
-        "start": "23:05",
-        "end": "23:35",
-        "activity": "sleep",
-        "location_uid": "438038e3",
-        "narrative_zh": "睡觉",
-        "target_state": {
-          "agent.location_uid": "438038e3",
-          "agent.energy": ">=3"
-        }
-      }
-    ],
-    "tuesday": [
-      {
-        "start": "00:00",
-        "end": "08:00",
-        "activity": "sleep",
-        "location_uid": "438038e3",
-        "narrative_zh": "凌晨睡眠",
-        "target_state": {
-          "agent.location_uid": "438038e3",
-          "agent.energy": ">=3"
-        }
-      },
-      {
-        "start": "08:00",
-        "end": "08:30",
-        "activity": "wake_up",
-        "location_uid": "438038e3",
-        "narrative_zh": "起床",
-        "target_state": {
-          "agent.location_uid": "438038e3"
+          "agent.location_uid": "cb0199d8"
         }
       },
       {
         "start": "09:00",
-        "end": "10:30",
-        "activity": "group_discussion",
-        "location_uid": "99883bc6",
-        "narrative_zh": "周二组会",
+        "end": "09:30",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "作品布展",
         "target_state": {
-          "agent.location_uid": "99883bc6"
+          "agent.location_uid": "3877431b"
+        }
+      },
+      {
+        "start": "09:30",
+        "end": "10:00",
+        "activity": "leisure",
+        "location_uid": "a62839dd",
+        "narrative_zh": "展览参观",
+        "target_state": {
+          "agent.location_uid": "a62839dd",
+          "agent.mood": ">=1"
+        }
+      },
+      {
+        "start": "10:00",
+        "end": "11:30",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "中国现当代文学",
+        "target_state": {
+          "agent.location_uid": "4d7a7e81"
         }
       },
       {
@@ -120,18 +68,8 @@
         }
       },
       {
-        "start": "14:30",
-        "end": "16:30",
-        "activity": "lab_work",
-        "location_uid": "3877431b",
-        "narrative_zh": "做实验",
-        "target_state": {
-          "agent.location_uid": "3877431b"
-        }
-      },
-      {
-        "start": "18:00",
-        "end": "18:30",
+        "start": "17:30",
+        "end": "18:00",
         "activity": "have_dinner",
         "location_uid": "9a49343c",
         "narrative_zh": "晚饭",
@@ -140,11 +78,106 @@
         }
       },
       {
+        "start": "19:00",
+        "end": "20:30",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "现代汉语",
+        "target_state": {
+          "agent.location_uid": "4d7a7e81"
+        }
+      },
+      {
         "start": "23:00",
-        "end": "23:30",
+        "end": "23:59",
         "activity": "sleep",
         "location_uid": "438038e3",
-        "narrative_zh": "睡觉",
+        "narrative_zh": "睡眠",
+        "target_state": {
+          "agent.location_uid": "438038e3",
+          "agent.energy": ">=3"
+        }
+      }
+    ],
+    "tuesday": [
+      {
+        "start": "00:00",
+        "end": "07:30",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "睡眠",
+        "target_state": {
+          "agent.location_uid": "438038e3",
+          "agent.energy": ">=3"
+        }
+      },
+      {
+        "start": "08:00",
+        "end": "09:30",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "古代汉语",
+        "target_state": {
+          "agent.location_uid": "4d7a7e81"
+        }
+      },
+      {
+        "start": "10:00",
+        "end": "11:30",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "文学批评实践",
+        "target_state": {
+          "agent.location_uid": "4d7a7e81"
+        }
+      },
+      {
+        "start": "12:00",
+        "end": "12:30",
+        "activity": "have_lunch",
+        "location_uid": "9a49343c",
+        "narrative_zh": "午饭",
+        "target_state": {
+          "agent.location_uid": "9a49343c"
+        }
+      },
+      {
+        "start": "13:30",
+        "end": "15:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "中国古代文学",
+        "target_state": {
+          "agent.location_uid": "4d7a7e81"
+        }
+      },
+      {
+        "start": "17:30",
+        "end": "18:00",
+        "activity": "have_dinner",
+        "location_uid": "9a49343c",
+        "narrative_zh": "晚饭",
+        "target_state": {
+          "agent.location_uid": "9a49343c"
+        }
+      },
+      {
+        "start": "19:00",
+        "end": "19:30",
+        "activity": "walk",
+        "location_uid": "66cb10e7",
+        "narrative_zh": "校园慢走",
+        "target_state": {
+          "agent.location_uid": "66cb10e7",
+          "agent.mood": ">=2"
+        }
+      },
+      {
+        "start": "23:00",
+        "end": "23:59",
+        "activity": "sleep",
+        "location_uid": "438038e3",
+        "narrative_zh": "睡眠",
         "target_state": {
           "agent.location_uid": "438038e3",
           "agent.energy": ">=3"
@@ -154,38 +187,28 @@
     "wednesday": [
       {
         "start": "00:00",
-        "end": "08:25",
+        "end": "08:00",
         "activity": "sleep",
         "location_uid": "438038e3",
-        "narrative_zh": "凌晨睡眠",
+        "narrative_zh": "睡眠",
         "target_state": {
           "agent.location_uid": "438038e3",
           "agent.energy": ">=3"
         }
       },
       {
-        "start": "08:25",
-        "end": "08:55",
-        "activity": "wake_up",
-        "location_uid": "438038e3",
-        "narrative_zh": "起床",
+        "start": "08:00",
+        "end": "09:30",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "中国文化专题",
         "target_state": {
-          "agent.location_uid": "438038e3"
+          "agent.location_uid": "4d7a7e81"
         }
       },
       {
-        "start": "09:25",
-        "end": "11:25",
-        "activity": "lab_work",
-        "location_uid": "3877431b",
-        "narrative_zh": "上午实验",
-        "target_state": {
-          "agent.location_uid": "3877431b"
-        }
-      },
-      {
-        "start": "12:25",
-        "end": "12:55",
+        "start": "12:00",
+        "end": "12:30",
         "activity": "have_lunch",
         "location_uid": "9a49343c",
         "narrative_zh": "午饭",
@@ -194,18 +217,28 @@
         }
       },
       {
-        "start": "13:55",
-        "end": "15:25",
-        "activity": "attend_lecture",
-        "location_uid": "cb0199d8",
-        "narrative_zh": "周三专题课",
+        "start": "13:30",
+        "end": "15:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "比较文学",
         "target_state": {
-          "agent.location_uid": "cb0199d8"
+          "agent.location_uid": "4d7a7e81"
         }
       },
       {
-        "start": "17:55",
-        "end": "18:25",
+        "start": "17:00",
+        "end": "17:30",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "课程复盘",
+        "target_state": {
+          "agent.location_uid": "64a9bc35"
+        }
+      },
+      {
+        "start": "17:30",
+        "end": "18:00",
         "activity": "have_dinner",
         "location_uid": "9a49343c",
         "narrative_zh": "晚饭",
@@ -214,11 +247,21 @@
         }
       },
       {
-        "start": "22:55",
-        "end": "23:25",
+        "start": "19:00",
+        "end": "19:30",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "实验室做实验",
+        "target_state": {
+          "agent.location_uid": "3877431b"
+        }
+      },
+      {
+        "start": "23:30",
+        "end": "23:59",
         "activity": "sleep",
         "location_uid": "438038e3",
-        "narrative_zh": "睡觉",
+        "narrative_zh": "睡眠",
         "target_state": {
           "agent.location_uid": "438038e3",
           "agent.energy": ">=3"
@@ -231,7 +274,7 @@
         "end": "08:00",
         "activity": "sleep",
         "location_uid": "438038e3",
-        "narrative_zh": "凌晨睡眠",
+        "narrative_zh": "睡眠",
         "target_state": {
           "agent.location_uid": "438038e3",
           "agent.energy": ">=3"
@@ -239,22 +282,22 @@
       },
       {
         "start": "08:00",
-        "end": "08:30",
-        "activity": "wake_up",
-        "location_uid": "438038e3",
-        "narrative_zh": "起床",
+        "end": "09:30",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "语言学概论",
         "target_state": {
-          "agent.location_uid": "438038e3"
+          "agent.location_uid": "4d7a7e81"
         }
       },
       {
-        "start": "09:00",
+        "start": "10:00",
         "end": "11:30",
-        "activity": "lab_work",
-        "location_uid": "3877431b",
-        "narrative_zh": "上午实验",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "文献学导论",
         "target_state": {
-          "agent.location_uid": "3877431b"
+          "agent.location_uid": "4d7a7e81"
         }
       },
       {
@@ -269,17 +312,17 @@
       },
       {
         "start": "14:30",
-        "end": "16:30",
-        "activity": "group_discussion",
-        "location_uid": "99883bc6",
-        "narrative_zh": "课题讨论",
+        "end": "15:00",
+        "activity": "self_study",
+        "location_uid": "64a9bc35",
+        "narrative_zh": "课程复盘",
         "target_state": {
-          "agent.location_uid": "99883bc6"
+          "agent.location_uid": "64a9bc35"
         }
       },
       {
-        "start": "18:00",
-        "end": "18:30",
+        "start": "17:30",
+        "end": "18:00",
         "activity": "have_dinner",
         "location_uid": "9a49343c",
         "narrative_zh": "晚饭",
@@ -288,11 +331,32 @@
         }
       },
       {
-        "start": "23:00",
-        "end": "23:30",
+        "start": "20:00",
+        "end": "20:30",
+        "activity": "club_activity",
+        "location_uid": "8dc3960a",
+        "narrative_zh": "社团活动",
+        "target_state": {
+          "agent.location_uid": "8dc3960a",
+          "agent.mood": ">=2"
+        }
+      },
+      {
+        "start": "21:30",
+        "end": "22:00",
+        "activity": "self_study",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "空教室刷题",
+        "target_state": {
+          "agent.location_uid": "4d7a7e81"
+        }
+      },
+      {
+        "start": "23:30",
+        "end": "23:59",
         "activity": "sleep",
         "location_uid": "438038e3",
-        "narrative_zh": "睡觉",
+        "narrative_zh": "睡眠",
         "target_state": {
           "agent.location_uid": "438038e3",
           "agent.energy": ">=3"
@@ -302,33 +366,23 @@
     "friday": [
       {
         "start": "00:00",
-        "end": "08:30",
+        "end": "07:30",
         "activity": "sleep",
         "location_uid": "438038e3",
-        "narrative_zh": "凌晨睡眠",
+        "narrative_zh": "睡眠",
         "target_state": {
           "agent.location_uid": "438038e3",
           "agent.energy": ">=3"
         }
       },
       {
-        "start": "08:30",
-        "end": "09:00",
-        "activity": "wake_up",
-        "location_uid": "438038e3",
-        "narrative_zh": "起床",
-        "target_state": {
-          "agent.location_uid": "438038e3"
-        }
-      },
-      {
-        "start": "09:30",
+        "start": "10:00",
         "end": "11:30",
-        "activity": "lab_work",
-        "location_uid": "3877431b",
-        "narrative_zh": "周五早实验",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "文学理论",
         "target_state": {
-          "agent.location_uid": "3877431b"
+          "agent.location_uid": "4d7a7e81"
         }
       },
       {
@@ -342,31 +396,51 @@
         }
       },
       {
-        "start": "14:00",
-        "end": "16:00",
-        "activity": "lab_work",
-        "location_uid": "3877431b",
-        "narrative_zh": "周五收尾",
+        "start": "13:30",
+        "end": "15:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "写作训练",
         "target_state": {
-          "agent.location_uid": "3877431b"
+          "agent.location_uid": "4d7a7e81"
         }
       },
       {
-        "start": "18:00",
-        "end": "18:30",
+        "start": "15:30",
+        "end": "17:00",
+        "activity": "attend_class",
+        "location_uid": "4d7a7e81",
+        "narrative_zh": "外国文学",
+        "target_state": {
+          "agent.location_uid": "4d7a7e81"
+        }
+      },
+      {
+        "start": "17:30",
+        "end": "18:00",
         "activity": "have_dinner",
         "location_uid": "9a49343c",
-        "narrative_zh": "和组内聚餐",
+        "narrative_zh": "晚饭",
         "target_state": {
           "agent.location_uid": "9a49343c"
         }
       },
       {
+        "start": "20:00",
+        "end": "20:30",
+        "activity": "lab_work",
+        "location_uid": "3877431b",
+        "narrative_zh": "实验室做实验",
+        "target_state": {
+          "agent.location_uid": "3877431b"
+        }
+      },
+      {
         "start": "23:00",
-        "end": "23:30",
+        "end": "23:59",
         "activity": "sleep",
         "location_uid": "438038e3",
-        "narrative_zh": "睡觉",
+        "narrative_zh": "睡眠",
         "target_state": {
           "agent.location_uid": "438038e3",
           "agent.energy": ">=3"
@@ -376,51 +450,32 @@
     "saturday": [
       {
         "start": "00:00",
-        "end": "09:40",
+        "end": "08:30",
         "activity": "sleep",
         "location_uid": "438038e3",
-        "narrative_zh": "凌晨睡眠",
+        "narrative_zh": "睡眠",
         "target_state": {
           "agent.location_uid": "438038e3",
           "agent.energy": ">=3"
         }
       },
       {
-        "start": "09:40",
-        "end": "10:10",
-        "activity": "wake_up",
-        "location_uid": "438038e3",
-        "narrative_zh": "周六晚起",
+        "start": "15:00",
+        "end": "15:30",
+        "activity": "club_activity",
+        "location_uid": "8dc3960a",
+        "narrative_zh": "社团活动",
         "target_state": {
-          "agent.location_uid": "438038e3"
+          "agent.location_uid": "8dc3960a",
+          "agent.mood": ">=2"
         }
       },
       {
-        "start": "12:40",
-        "end": "13:10",
-        "activity": "have_lunch",
-        "location_uid": "9a49343c",
-        "narrative_zh": "午饭",
-        "target_state": {
-          "agent.location_uid": "9a49343c"
-        }
-      },
-      {
-        "start": "18:10",
-        "end": "18:40",
-        "activity": "have_dinner",
-        "location_uid": "9a49343c",
-        "narrative_zh": "晚饭",
-        "target_state": {
-          "agent.location_uid": "9a49343c"
-        }
-      },
-      {
-        "start": "23:40",
+        "start": "23:00",
         "end": "23:59",
         "activity": "sleep",
         "location_uid": "438038e3",
-        "narrative_zh": "睡觉",
+        "narrative_zh": "睡眠",
         "target_state": {
           "agent.location_uid": "438038e3",
           "agent.energy": ">=3"
@@ -430,61 +485,52 @@
     "sunday": [
       {
         "start": "00:00",
-        "end": "09:10",
+        "end": "08:30",
         "activity": "sleep",
         "location_uid": "438038e3",
-        "narrative_zh": "凌晨睡眠",
+        "narrative_zh": "睡眠",
         "target_state": {
           "agent.location_uid": "438038e3",
           "agent.energy": ">=3"
         }
       },
       {
-        "start": "09:10",
-        "end": "09:40",
-        "activity": "wake_up",
-        "location_uid": "438038e3",
-        "narrative_zh": "起床",
-        "target_state": {
-          "agent.location_uid": "438038e3"
-        }
-      },
-      {
-        "start": "12:40",
-        "end": "13:10",
-        "activity": "have_lunch",
-        "location_uid": "9a49343c",
-        "narrative_zh": "午饭",
-        "target_state": {
-          "agent.location_uid": "9a49343c"
-        }
-      },
-      {
-        "start": "14:40",
-        "end": "16:40",
+        "start": "09:00",
+        "end": "09:30",
         "activity": "lab_work",
         "location_uid": "3877431b",
-        "narrative_zh": "准备下周组会",
+        "narrative_zh": "作品布展",
         "target_state": {
           "agent.location_uid": "3877431b"
         }
       },
       {
-        "start": "18:10",
-        "end": "18:40",
-        "activity": "have_dinner",
-        "location_uid": "9a49343c",
-        "narrative_zh": "晚饭",
+        "start": "17:00",
+        "end": "17:30",
+        "activity": "club_activity",
+        "location_uid": "8dc3960a",
+        "narrative_zh": "社团例会",
         "target_state": {
-          "agent.location_uid": "9a49343c"
+          "agent.location_uid": "8dc3960a",
+          "agent.mood": ">=2"
         }
       },
       {
-        "start": "23:10",
-        "end": "23:40",
+        "start": "21:00",
+        "end": "21:30",
+        "activity": "group_discussion",
+        "location_uid": "99883bc6",
+        "narrative_zh": "导师谈话",
+        "target_state": {
+          "agent.location_uid": "99883bc6"
+        }
+      },
+      {
+        "start": "23:30",
+        "end": "23:59",
         "activity": "sleep",
         "location_uid": "438038e3",
-        "narrative_zh": "睡觉",
+        "narrative_zh": "睡眠",
         "target_state": {
           "agent.location_uid": "438038e3",
           "agent.energy": ">=3"

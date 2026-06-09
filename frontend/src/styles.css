@@ -92,7 +92,9 @@ a:hover { color: var(--accent-primary); }
   letter-spacing: .5px;
   margin-right: 18px;
   font-size: 14px;
+  text-decoration: none;
 }
+.top-nav .brand:hover { filter: brightness(1.12); }
 .top-nav .nav-link {
   padding: 6px 12px;
   border-radius: 14px;

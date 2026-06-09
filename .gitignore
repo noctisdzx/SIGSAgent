@@ -53,3 +53,11 @@ scripts/_*.txt
 .env
 .env.*
 !.env.example
+
+# ===== Runtime recordings (per-run playback dumps) =====
+runtime/recordings/
+
+# ===== Root-level scratch artifacts (not for VCS) =====
+/GY.jpeg
+/attempt_*.png
+/InternationalPhase1_InsertEvents_60.json

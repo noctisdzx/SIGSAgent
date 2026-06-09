@@ -7,11 +7,13 @@ the next day via /api/sim/start.
 
 from __future__ import annotations
 
+import asyncio
 import logging
 from datetime import date
 from typing import Any
 
 from app.events.bus import event_bus
+from app.settings import get_settings
 from app.world.scene_graph import SceneGraph
 from app.world.world_state import WorldState
 from .clock import TickClock
@@ -34,6 +36,11 @@ class SimLoop:
         # Track which sim-day we last summarised so we only fire once per rollover.
         self._last_summarised_day: date | None = None
         self._busy_summarising: bool = False
+        # Optional per-tick recorder (set by main.py). None = no recording.
+        self.recorder: Any | None = None
+
+    def set_recorder(self, recorder: Any) -> None:
+        self.recorder = recorder
 
     def set_llm(self, llm: Any) -> None:
         self.llm = llm
@@ -73,26 +80,35 @@ class SimLoop:
             await self.stop()
             return  # skip the rest of this tick — the next /api/sim/start re-enters
 
+        # Run agents concurrently (bounded) — the per-agent work is dominated by
+        # awaited LLM calls, so firing them together collapses N sequential
+        # network round-trips into ~1. A semaphore caps how many hit the LLM at
+        # once; set SIM_TICK_CONCURRENCY=1 to restore strict sequential ticking.
         recent_decisions: list[dict[str, Any]] = []
-        for aid, agent in self.agents.items():
-            try:
-                await agent.perceive_decide_act(self.world, self.scene)
-                # Best-effort latest-decision snapshot for the tick payload.
-                history = getattr(agent, "behavior_executor", None)
-                if history and getattr(history, "history", None):
-                    last = history.history.get(aid, [])
-                    if last:
-                        recent_decisions.append(last[-1].to_dict())
-            except NotImplementedError:
-                continue
-            except Exception as exc:
-                log.exception("agent %s tick failed: %s", aid, exc)
-                await event_bus.publish({
-                    "type": "agent_error",
-                    "ts_sim": self.world.sim_time.isoformat(),
-                    "agent_id": aid,
-                    "payload": {"error": repr(exc)},
-                })
+        concurrency = max(1, get_settings().sim_tick_concurrency)
+        sem = asyncio.Semaphore(concurrency)
+
+        async def _run_one(aid: str, agent: Any) -> None:
+            async with sem:
+                try:
+                    await agent.perceive_decide_act(self.world, self.scene)
+                    history = getattr(agent, "behavior_executor", None)
+                    if history and getattr(history, "history", None):
+                        last = history.history.get(aid, [])
+                        if last:
+                            recent_decisions.append(last[-1].to_dict())
+                except NotImplementedError:
+                    return
+                except Exception as exc:
+                    log.exception("agent %s tick failed: %s", aid, exc)
+                    await event_bus.publish({
+                        "type": "agent_error",
+                        "ts_sim": self.world.sim_time.isoformat(),
+                        "agent_id": aid,
+                        "payload": {"error": repr(exc)},
+                    })
+
+        await asyncio.gather(*(_run_one(aid, agent) for aid, agent in self.agents.items()))
 
         # Compute world_delta: which agents moved this tick.
         moved: list[dict[str, str]] = []
@@ -116,6 +132,18 @@ class SimLoop:
                 "recent_decisions": recent_decisions[:20],
             },
         })
+
+        # Persist this tick as a playback frame (world snapshot + the events
+        # emitted during the tick, which the recorder tapped off the bus).
+        if self.recorder is not None:
+            try:
+                self.recorder.write_frame(
+                    index=idx,
+                    sim_time=self.world.sim_time.isoformat(),
+                    world=self.world.snapshot(),
+                )
+            except Exception as exc:  # noqa: BLE001
+                log.warning("recorder.write_frame failed: %s", exc)
 
     # ----- control -----
 
@@ -197,6 +225,14 @@ class SimLoop:
                             f"{it.ts.strftime('%H:%M')} {pname} ↔ {partner}: "
                             f"\"{line}\" / \"{reply}\""
                         )
+                    elif (it.source or "") == "mutter":
+                        # Inner monologue (dialog channel's Mutter state) —
+                        # adds narrative colour to the day recap.
+                        line = (it.meta or {}).get("line", "")
+                        if line:
+                            bullets.append(
+                                f"{it.ts.strftime('%H:%M')} {pname}（心想）{line}"
+                            )
 
                 # Behavior history (executor side)
                 exec_ = getattr(agent, "behavior_executor", None)
@@ -205,7 +241,7 @@ class SimLoop:
                     for h in items:
                         if getattr(h, "ts", None) is None or h.ts.date() != summarised_day:
                             continue
-                        if h.action_id in {"move", "talk", "interact"}:
+                        if h.action_id in {"move", "talk", "interact", "mutter"}:
                             n_behaviors += 1
                             _bump(aid, pname, pname_en, "n_behaviors")
                             ok = "✓" if h.ok else "✗"

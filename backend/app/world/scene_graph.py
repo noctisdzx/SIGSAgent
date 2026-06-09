@@ -103,6 +103,61 @@ class SceneGraph:
         return [a for a in self._rooms[uid].adjacent
                 if a in self._rooms and self._floor(a) == z]
 
+    # ----- navigation (multi-hop over the global topology) -----
+
+    def shortest_path(self, src: str, dst: str) -> list[str] | None:
+        """BFS shortest path over the undirected `adjacent` graph.
+
+        Returns the inclusive node path `[src, ..., dst]`. `src == dst` yields
+        `[src]`. Returns None when either endpoint is unknown or `dst` is
+        unreachable from `src` (disconnected components).
+
+        NPCs are modelled as knowing the full campus topology, so the search
+        spans the entire graph; perception only biases *which* destination an
+        NPC prefers, not whether it can be reached.
+        """
+        if src not in self._rooms or dst not in self._rooms:
+            return None
+        if src == dst:
+            return [src]
+        # Standard queue BFS with a parent map for path reconstruction.
+        from collections import deque
+        prev: dict[str, str] = {src: src}
+        queue: deque[str] = deque([src])
+        while queue:
+            cur = queue.popleft()
+            for nxt in self._rooms[cur].adjacent:
+                if nxt not in self._rooms or nxt in prev:
+                    continue
+                prev[nxt] = cur
+                if nxt == dst:
+                    # Reconstruct path from dst back to src.
+                    path = [dst]
+                    while path[-1] != src:
+                        path.append(prev[path[-1]])
+                    path.reverse()
+                    return path
+                queue.append(nxt)
+        return None
+
+    def hop_distance(self, src: str, dst: str) -> int | None:
+        """Number of edges on the shortest path (0 when src == dst).
+
+        Returns None when unreachable / unknown endpoints.
+        """
+        path = self.shortest_path(src, dst)
+        return None if path is None else len(path) - 1
+
+    def next_hop(self, src: str, dst: str) -> str | None:
+        """The next node to step to along the shortest path toward `dst`.
+
+        Returns None when already at `dst`, unreachable, or unknown.
+        """
+        path = self.shortest_path(src, dst)
+        if not path or len(path) < 2:
+            return None
+        return path[1]
+
     # ----- export -----
 
     def to_dict(self) -> dict[str, Any]:

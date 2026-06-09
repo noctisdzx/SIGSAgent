@@ -14,6 +14,27 @@
         @select-node="onSelectNode"
         @ready="onNetReady"
       />
+
+      <!-- "talking" indicator bubbles above NPC sprites (placeholder only;
+           the actual lines show in the chat log when you click the NPC). -->
+      <div class="bubble-layer">
+        <div
+          v-for="b in bubbles"
+          :key="b.key"
+          v-show="b.show"
+          class="bubble"
+          :class="`bubble--${b.kind}`"
+          :style="{ left: b.x + 'px', top: b.y + 'px' }"
+          :title="b.kind === 'thought'
+            ? lang.t('点击该 NPC 查看内心独白', 'click the NPC to read the inner monologue')
+            : lang.t('点击该 NPC 查看对话', 'click the NPC to read the conversation')"
+        >
+          <span v-if="b.kind === 'thought'" class="bubble-think">💭</span>
+          <span v-else class="bubble-dots"><i /><i /><i /></span>
+        </div>
+      </div>
+
+      <PlaybackControls />
       <div class="stats">
         <span>{{ lang.t('房间', 'Rooms') }}
           <b>{{ rooms.length }}</b></span>
@@ -128,6 +149,15 @@
           <input type="range" min="3" max="20" step="1" v-model.number="npcSize" />
           <span class="tune-val">{{ npcSize }}</span>
         </div>
+        <label class="tune-toggle no-border">
+          <input type="checkbox" v-model="useSprites" />
+          <span>{{ lang.t('用像素小人头像', 'Pixel sprite avatars') }}</span>
+        </label>
+        <div class="tune-row">
+          <label>{{ lang.t('移动速度', 'Move speed') }}</label>
+          <input type="range" min="400" max="6000" step="100" v-model.number="moveAnimMs" />
+          <span class="tune-val">{{ (moveAnimMs / 1000).toFixed(1) }}s</span>
+        </div>
         <div class="tune-row">
           <label>{{ lang.t('物品大小', 'Item size') }}</label>
           <input type="range" min="2" max="16" step="1" v-model.number="itemSize" />
@@ -160,11 +190,127 @@
             <span class="tune-val">×{{ maxItemBoost }}</span>
           </div>
         </template>
-        <div class="tune-hint">{{ lang.t('调整后会保留视角；设置存于本地。', 'Camera stays put. Saved locally.') }}</div>
+        <div class="tune-divider">{{ lang.t('校园底图', 'Campus map') }}</div>
+        <label class="tune-toggle no-border">
+          <input type="checkbox" v-model="mapVisible" />
+          <span>{{ lang.t('显示底图', 'Show map') }}</span>
+        </label>
+        <template v-if="mapVisible">
+          <div class="tune-row sub">
+            <label>{{ lang.t('透明度', 'Opacity') }}</label>
+            <input type="range" min="0" max="1" step="0.05" v-model.number="mapOpacity" />
+            <span class="tune-val">{{ mapOpacity.toFixed(2) }}</span>
+          </div>
+          <div class="tune-row sub">
+            <label>{{ lang.t('缩放', 'Scale') }}</label>
+            <input type="range" :min="mapScaleMin" :max="mapScaleMax" :step="mapScaleStep" v-model.number="mapScale" />
+            <span class="tune-val">{{ mapScale.toFixed(3) }}</span>
+          </div>
+          <div class="tune-row sub">
+            <label>{{ lang.t('水平位移', 'Offset X') }}</label>
+            <input type="range" :min="-mapOffsetRange" :max="mapOffsetRange" step="1" v-model.number="mapX" />
+            <span class="tune-val">{{ Math.round(mapX) }}</span>
+          </div>
+          <div class="tune-row sub">
+            <label>{{ lang.t('垂直位移', 'Offset Y') }}</label>
+            <input type="range" :min="-mapOffsetRange" :max="mapOffsetRange" step="1" v-model.number="mapY" />
+            <span class="tune-val">{{ Math.round(mapY) }}</span>
+          </div>
+        </template>
+        <button class="micro-btn full" @click="resetRoomPositions">
+          {{ lang.t('重置房间位置', 'Reset room positions') }}
+        </button>
+        <div class="tune-hint">
+          {{ lang.t('拖动房间到任意位置，会自动保存（重启后保留）。视图设置存于本地。',
+            'Drag rooms anywhere — saved automatically (kept after restart). View prefs stored locally.') }}
+        </div>
       </div>
     </div>
 
     <aside class="scene-side">
+      <!-- NPC inline panel: GOAP behaviour chain + conversation log -->
+      <div v-if="selectedNpcId" class="npc-panel">
+        <div class="npc-panel-head">
+          <div class="npc-panel-title">
+            <span class="dot" />{{ selectedNpcName }}
+          </div>
+          <div class="npc-panel-actions">
+            <button class="mini-btn" @click="openNpcProfile">{{ lang.t('完整档案', 'Profile') }}</button>
+            <button class="mini-btn" @click="closeNpcPanel">✕</button>
+          </div>
+        </div>
+
+        <div class="section-title">{{ lang.t('GOAP 行为规划', 'GOAP Plan') }}</div>
+        <div v-if="npcDecision" class="goap-box">
+          <div class="goap-row">
+            <span class="goap-k">{{ lang.t('日程活动', 'Activity') }}</span>
+            <span class="goap-v">{{ activityText }}
+              <em class="goap-kind">{{ npcDecision.payload?.slot_kind }}</em>
+              <span v-if="activityRaw" class="goap-raw">{{ lang.t('原始日程', 'raw') }}: {{ activityRaw }}</span>
+            </span>
+          </div>
+          <div class="goap-row">
+            <span class="goap-k">{{ lang.t('目标状态', 'Goal') }}</span>
+            <span class="goap-v mono">
+              <template v-if="npcDecision.payload?.goal && Object.keys(npcDecision.payload.goal).length">
+                <span v-for="(gv, gk) in npcDecision.payload.goal" :key="gk" class="goal-chip">{{ gk }} = {{ gv }}</span>
+              </template>
+              <template v-else>—</template>
+            </span>
+          </div>
+          <div class="goap-arrow">↓ {{ lang.t('规划为行为链', 'planned into action chain') }}</div>
+          <div class="chain">
+            <template v-if="(npcDecision.payload?.plan || []).length">
+              <div
+                v-for="(s, i) in npcDecision.payload.plan"
+                :key="i"
+                class="chain-step"
+                :class="{ active: npcDecision.payload?.step && npcDecision.payload.step.action_id === s.action_id && i === 0 }"
+              >
+                <span class="chain-idx">{{ i + 1 }}</span>
+                <span class="chain-label">{{ s.label || s.action_id }}</span>
+                <span class="chain-cost">c{{ s.cost }}</span>
+              </div>
+            </template>
+            <div v-else class="empty">
+              {{ lang.t('（无计划 — 执行：', '(no plan — executing: ') }}{{ npcDecision.payload?.step?.action_id || 'idle' }}）
+            </div>
+          </div>
+          <div v-if="npcDecision.payload?.step" class="goap-exec">
+            {{ lang.t('当前执行', 'Executing') }}:
+            <strong>{{ npcDecision.payload.step.action_id }}</strong>
+            <span v-if="npcDecision.payload.step.params && Object.keys(npcDecision.payload.step.params).length" class="mono">
+              {{ JSON.stringify(npcDecision.payload.step.params) }}
+            </span>
+          </div>
+        </div>
+        <div v-else class="empty">{{ lang.t('（等待该 NPC 的下一次决策…）', '(waiting for next decision…)') }}</div>
+
+        <div class="section-title">{{ lang.t('对话记录', 'Chat Log') }}</div>
+        <div v-if="npcChat.length" class="chatlog">
+          <div v-for="t in npcChat" :key="t.key" class="chat-turn">
+            <div class="chat-meta">
+              <span class="chat-time">{{ t.ts }}</span>
+              <span class="chat-partner">↔ {{ t.partner }}</span>
+              <span v-if="t.topic" class="chat-topic">{{ t.topic }}</span>
+            </div>
+            <div class="chat-line mine"><b>{{ selectedNpcName }}:</b> {{ t.mine }}</div>
+            <div v-if="t.theirs" class="chat-line theirs"><b>{{ t.partner }}:</b> {{ t.theirs }}</div>
+          </div>
+        </div>
+        <div v-else class="empty">{{ lang.t('（暂无对话）', '(no conversation yet)') }}</div>
+
+        <div class="section-title">{{ lang.t('内心独白', 'Monologue') }}</div>
+        <div v-if="npcMutters.length" class="mutterlog">
+          <div v-for="m in npcMutters" :key="m.key" class="mutter-turn">
+            <span class="mutter-time">{{ m.ts }}</span>
+            <span class="mutter-line">💭 {{ m.line }}</span>
+            <span v-if="m.mood" class="mutter-mood">{{ m.mood }}</span>
+          </div>
+        </div>
+        <div v-else class="empty">{{ lang.t('（暂无独白）', '(no monologue yet)') }}</div>
+      </div>
+
       <RoomHeatPanel
         :rooms="rooms"
         :world-agents="world.worldSnapshot?.agents || null"
@@ -276,10 +422,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue';
 import NetworkGraph from '@/components/NetworkGraph.vue';
+import { api } from '@/api/endpoints';
 import RoomHeatPanel from '@/components/RoomHeatPanel.vue';
+import PlaybackControls from '@/components/PlaybackControls.vue';
 import Chip from '@/components/Chip.vue';
+import { usePlaybackStore } from '@/stores/playback';
 import { useWorldStore } from '@/stores/world';
 import { useAgentsStore } from '@/stores/agents';
 import { useLangStore } from '@/stores/lang';
@@ -292,6 +441,7 @@ const world = useWorldStore();
 const agents = useAgentsStore();
 const events = useEventsStore();
 const heat = useHeatStore();
+const playback = usePlaybackStore();
 
 /* ---- Heatmap toggles (persisted to localStorage) ---- */
 const HEAT_LS_KEY = 'sigs_heat_toggles_v1';
@@ -319,6 +469,120 @@ function clearHeat() {
 
 const graphRef = ref<InstanceType<typeof NetworkGraph> | null>(null);
 const selectedUid = ref<string | null>(null);
+const selectedNpcId = ref<string | null>(null);
+
+/* ---------- NPC inline panel: GOAP plan + chat log ---------- */
+const selectedNpcName = computed(() => selectedNpcId.value ? npcNameById(selectedNpcId.value) : '');
+
+// Latest GOAP decision for the selected NPC, pulled from the agent_decision
+// events flowing through the events store (also works during playback).
+const npcDecision = computed<any | null>(() => {
+  const id = selectedNpcId.value;
+  if (!id) return null;
+  for (let i = events.stream.length - 1; i >= 0; i--) {
+    const ev = events.stream[i];
+    if (ev?.type === 'agent_decision' && String(ev.agent_id) === id) return ev;
+  }
+  return null;
+});
+
+// Full conversation log for the selected NPC, reconstructed from dialog events
+// (the NPC as either speaker or listener), oldest → newest.
+interface ChatTurn { key: string; ts: string; mine: string; theirs: string; partner: string; role: 'speaker' | 'listener'; topic: string }
+const npcChat = computed<ChatTurn[]>(() => {
+  const id = selectedNpcId.value;
+  if (!id) return [];
+  const en = lang.lang === 'en';
+  const out: ChatTurn[] = [];
+  // Dedupe: the same dialog line can be re-emitted across ticks. We key on
+  // (partner + my line + their line) and keep the latest occurrence, dropping
+  // earlier identical turns so the log doesn't fill with repeats.
+  const seen = new Map<string, number>();
+  for (let i = 0; i < events.stream.length; i++) {
+    const ev = events.stream[i];
+    if (ev?.type !== 'dialog') continue;
+    const p = ev.payload || {};
+    const isSpeaker = String(p.speaker_id) === id;
+    const isListener = String(p.listener_id) === id;
+    if (!isSpeaker && !isListener) continue;
+    const sLine = en ? (p.speaker_line_en || p.speaker_line) : (p.speaker_line || p.speaker_line_en);
+    const lLine = en ? (p.listener_line_en || p.listener_line) : (p.listener_line || p.listener_line_en);
+    const partnerId = isSpeaker ? p.listener_id : p.speaker_id;
+    const mine = isSpeaker ? String(sLine || '') : String(lLine || '');
+    const theirs = isSpeaker ? String(lLine || '') : String(sLine || '');
+    const dedupeKey = `${partnerId}|${mine}|${theirs}`;
+    const turn: ChatTurn = {
+      key: `${i}-${ev.ts_sim || ''}`,
+      ts: hhmm(ev.ts_sim),
+      mine,
+      theirs,
+      partner: npcNameById(String(partnerId || '')),
+      role: isSpeaker ? 'speaker' : 'listener',
+      topic: en ? (p.topic_en || p.topic || '') : (p.topic || p.topic_en || ''),
+    };
+    if (seen.has(dedupeKey)) {
+      out[seen.get(dedupeKey)!] = turn;  // refresh to latest timestamp, keep order slot
+    } else {
+      seen.set(dedupeKey, out.length);
+      out.push(turn);
+    }
+  }
+  return out;
+});
+// Activity shown in the GOAP panel: prefer the NPCAgent's persona+scene-aware
+// description (activity_desc / _en) over the raw fragment label.
+const activityText = computed<string>(() => {
+  const p = npcDecision.value?.payload;
+  if (!p) return '—';
+  const en = lang.lang === 'en';
+  const desc = en ? (p.activity_desc_en || p.activity_desc) : (p.activity_desc || p.activity_desc_en);
+  return String(desc || p.activity || '—');
+});
+// True when we're showing a processed description (so we can also surface the
+// raw label underneath as a subtle hint).
+const activityRaw = computed<string>(() => {
+  const p = npcDecision.value?.payload;
+  const en = lang.lang === 'en';
+  const desc = en ? (p?.activity_desc_en || p?.activity_desc) : (p?.activity_desc || p?.activity_desc_en);
+  return desc ? String(p?.activity || '') : '';
+});
+
+// Inner-monologue (mutter) feed for the selected NPC, oldest → newest, deduped.
+interface MutterTurn { key: string; ts: string; line: string; mood: string }
+const npcMutters = computed<MutterTurn[]>(() => {
+  const id = selectedNpcId.value;
+  if (!id) return [];
+  const en = lang.lang === 'en';
+  const out: MutterTurn[] = [];
+  const seen = new Map<string, number>();
+  for (let i = 0; i < events.stream.length; i++) {
+    const ev = events.stream[i];
+    if (ev?.type !== 'mutter' || String(ev.agent_id) !== id) continue;
+    const p = ev.payload || {};
+    const line = en ? (p.line_en || p.line) : (p.line || p.line_en);
+    if (!line) continue;
+    const turn: MutterTurn = {
+      key: `${i}-${ev.ts_sim || ''}`,
+      ts: hhmm(ev.ts_sim),
+      line: String(line),
+      mood: String(p.mood || ''),
+    };
+    const dedupeKey = String(line);
+    if (seen.has(dedupeKey)) out[seen.get(dedupeKey)!] = turn;
+    else { seen.set(dedupeKey, out.length); out.push(turn); }
+  }
+  return out;
+});
+function hhmm(iso: string | undefined): string {
+  if (!iso) return '';
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return String(iso).slice(11, 16);
+  return d.toTimeString().slice(0, 5);
+}
+function closeNpcPanel() { selectedNpcId.value = null; }
+function openNpcProfile() {
+  if (selectedNpcId.value) window.location.hash = `#/agent/${selectedNpcId.value}`;
+}
 
 // ---- NPC tracking state ----
 const trackedAgents = ref<string[]>([]);  // ordered list of agent ids
@@ -357,6 +621,8 @@ const roomPosScale = ref<number>(lsLoad.roomPosScale ?? 22);
 const roomSize = ref<number>(lsLoad.roomSize ?? 42);
 const npcSize = ref<number>(lsLoad.npcSize ?? 7);
 const itemSize = ref<number>(lsLoad.itemSize ?? 5);
+// Per-move animation duration (ms); larger = slower NPC gliding.
+const moveAnimMs = ref<number>(lsLoad.moveAnimMs ?? 2400);
 /** World-unit gap between the room hexagon edge and the first NPC satellite
  *  ring. Tunable so users can choose between "NPCs hug the room" (gap=4)
  *  and "NPCs orbit far out" (gap=80) without touching anything else. */
@@ -396,6 +662,7 @@ function persistView() {
       roomSize: roomSize.value,
       npcSize: npcSize.value,
       itemSize: itemSize.value,
+      moveAnimMs: moveAnimMs.value,
       npcRoomGap: npcRoomGap.value,
       autoScaleOnZoom: autoScaleOnZoom.value,
       maxRoomBoost: maxRoomBoost.value,
@@ -405,10 +672,151 @@ function persistView() {
   } catch {}
 }
 watch(
-  [roomPosScale, roomSize, npcSize, itemSize, npcRoomGap, autoScaleOnZoom,
+  [roomPosScale, roomSize, npcSize, itemSize, moveAnimMs, npcRoomGap, autoScaleOnZoom,
    maxRoomBoost, maxNpcBoost, maxItemBoost],
   persistView,
 );
+
+/* ---- Draggable room positions + background campus map ----
+ *  Room nodes can be dragged to any spot; the position is saved server-side
+ *  (runtime/scene_layout.json) so it survives a service restart. A campus
+ *  map image is drawn behind the graph (in world coordinates) and can be
+ *  offset / scaled / faded to align with the rooms. */
+const MAP_URL = '/campus_map.png';
+// uid → { x, y } in vis-network world units (overrides the computed layout).
+const roomPosOverride = reactive<Record<string, { x: number; y: number }>>({});
+const mapVisible = ref<boolean>(true);
+const mapOpacity = ref<number>(0.55);
+const mapScale = ref<number>(1);       // world units per image pixel
+const mapX = ref<number>(0);           // world-coord of image center
+const mapY = ref<number>(0);
+const mapDefaulted = ref<boolean>(false);  // true once we've auto-fit the map once
+let layoutLoaded = false;
+
+const mapImage = new Image();
+let mapImageReady = false;
+mapImage.onload = () => { mapImageReady = true; maybeDefaultMap(); visNet?.redraw?.(); };
+mapImage.src = MAP_URL;
+
+/** Effective world-coord center for a room: user override if dragged, else
+ *  the template layout (position × spacing). */
+function roomCenter(uid: string): { x: number; y: number } {
+  const ov = roomPosOverride[uid];
+  if (ov) return ov;
+  const r = roomMap.value[uid];
+  const [rx = 0, ry = 0] = r?.position || [];
+  return { x: rx * roomPosScale.value, y: ry * roomPosScale.value };
+}
+
+/** Auto-place the map over the room bounding box the first time, when the
+ *  user has no saved map transform yet. */
+function maybeDefaultMap() {
+  if (mapDefaulted.value || !mapImageReady) return;
+  const rs = rooms.value;
+  if (!rs.length) return;
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  for (const r of rs) {
+    const c = roomCenter(r.uid);
+    minX = Math.min(minX, c.x); maxX = Math.max(maxX, c.x);
+    minY = Math.min(minY, c.y); maxY = Math.max(maxY, c.y);
+  }
+  if (!isFinite(minX)) return;
+  const bw = Math.max(1, maxX - minX);
+  const cx = (minX + maxX) / 2;
+  const cy = (minY + maxY) / 2;
+  mapX.value = cx;
+  mapY.value = cy;
+  // Fit the image width to ~1.25× the room spread.
+  mapScale.value = (bw * 1.25) / (mapImage.naturalWidth || bw);
+  mapDefaulted.value = true;
+}
+
+let saveTimer: number | null = null;
+function persistLayout() {
+  if (saveTimer != null) window.clearTimeout(saveTimer);
+  saveTimer = window.setTimeout(async () => {
+    saveTimer = null;
+    try {
+      await api.saveSceneLayout({
+        rooms: { ...roomPosOverride },
+        map: {
+          visible: mapVisible.value,
+          opacity: mapOpacity.value,
+          scale: mapScale.value,
+          x: mapX.value,
+          y: mapY.value,
+          defaulted: mapDefaulted.value,
+        },
+      });
+    } catch (err) {
+      console.warn('[scene] save layout failed', err);
+    }
+  }, 500);
+}
+
+async function loadLayout() {
+  try {
+    const data = await api.sceneLayout();
+    const r = data?.rooms || {};
+    for (const [uid, pos] of Object.entries(r)) {
+      if (pos && typeof (pos as any).x === 'number' && typeof (pos as any).y === 'number') {
+        roomPosOverride[uid] = { x: (pos as any).x, y: (pos as any).y };
+      }
+    }
+    const m = data?.map || {};
+    if (typeof m.visible === 'boolean') mapVisible.value = m.visible;
+    if (typeof m.opacity === 'number') mapOpacity.value = m.opacity;
+    if (typeof m.scale === 'number' && m.scale > 0) mapScale.value = m.scale;
+    if (typeof m.x === 'number') mapX.value = m.x;
+    if (typeof m.y === 'number') mapY.value = m.y;
+    if (m.defaulted) mapDefaulted.value = true;
+  } catch (err) {
+    console.warn('[scene] load layout failed', err);
+  } finally {
+    layoutLoaded = true;
+    maybeDefaultMap();
+  }
+}
+
+/** Draw the campus map behind the graph, in world coordinates so it pans /
+ *  zooms together with the room nodes. */
+function drawMap(ctx: CanvasRenderingContext2D) {
+  if (!mapVisible.value || !mapImageReady) return;
+  const w = mapImage.naturalWidth * mapScale.value;
+  const h = mapImage.naturalHeight * mapScale.value;
+  ctx.save();
+  ctx.globalAlpha = Math.max(0, Math.min(1, mapOpacity.value));
+  ctx.drawImage(mapImage, mapX.value - w / 2, mapY.value - h / 2, w, h);
+  ctx.restore();
+}
+
+// Re-render the canvas + re-save whenever the map transform changes.
+watch([mapVisible, mapOpacity, mapScale, mapX, mapY], () => {
+  visNet?.redraw?.();
+  if (layoutLoaded) persistLayout();
+});
+
+/* Slider bounds derived from the room spread so the controls stay usable
+ * regardless of the layout's world scale. */
+const worldExtent = computed(() => {
+  const rs = rooms.value;
+  if (!rs.length) return 1000;
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  for (const r of rs) {
+    const c = roomCenter(r.uid);
+    minX = Math.min(minX, c.x); maxX = Math.max(maxX, c.x);
+    minY = Math.min(minY, c.y); maxY = Math.max(maxY, c.y);
+  }
+  if (!isFinite(minX)) return 1000;
+  return Math.max(maxX - minX, maxY - minY, 200);
+});
+const mapOffsetRange = computed(() => Math.round(worldExtent.value * 2 + 1000));
+const mapScaleMin = 0.005;
+const mapScaleMax = computed(() => {
+  const base = (worldExtent.value * 3) / (mapImage.naturalWidth || 800);
+  return Math.max(5, Math.round(base * 100) / 100);
+});
+const mapScaleStep = 0.005;
 
 
 /* ---- Current room population (from live world snapshot) ----
@@ -459,7 +867,6 @@ function mixHexWithWarm(hex: string, t: number): string {
 
 const vNodes = computed(() =>
   rooms.value.map(r => {
-    const [rx = 0, ry = 0] = r.position || [];
     const baseColor = colorOf(r.tag);
     const dwell = showDwellHeat.value ? heat.dwellHeat(r.uid) : 0;
     // Visually noticeable but never fully blow out the base color.
@@ -500,9 +907,10 @@ const vNodes = computed(() =>
         strokeWidth: 3,
         strokeColor: '#0a0e17',
       },
-      x: rx * roomPosScale.value,
-      y: ry * roomPosScale.value,
-      fixed: { x: true, y: true },
+      x: roomCenter(r.uid).x,
+      y: roomCenter(r.uid).y,
+      // Rooms are user-draggable; physics stays off so they don't drift.
+      fixed: { x: false, y: false },
       physics: false,
     };
   })
@@ -543,7 +951,7 @@ const opts = {
   nodes: { shape: 'dot', size: 22, font: { size: 13, color: '#cfd8dc' } },
   // Physics disabled everywhere — fully static layout, no idle drifting.
   physics: { enabled: false },
-  interaction: { hover: true, tooltipDelay: 80, zoomView: true, dragView: true },
+  interaction: { hover: true, tooltipDelay: 80, zoomView: true, dragView: true, dragNodes: true },
 };
 
 // ---- NPC tracking: derive nodes + edges to merge into the graph ----
@@ -557,6 +965,30 @@ function colorForAgent(id: string): string {
   return `hsl(${hue}, 85%, 62%)`;
 }
 const ITEM_COLOR = '#BA68C8';   // purple — distinct from rooms and NPCs
+
+/* ---- NPC pixel-sprite avatars ----
+ *  60 sprites sliced from the sheet live at /sprites/npc_00.png … npc_59.png.
+ *  Each NPC is assigned a stable sprite by its sorted position in the agent
+ *  list (wrapping with modulo if there are ever >60 NPCs). */
+const SPRITE_COUNT = 60;
+const useSprites = ref<boolean>(lsLoad.useSprites ?? true);
+function hashId(id: string): number {
+  let h = 0;
+  for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) >>> 0;
+  return h;
+}
+const spriteIndex = computed<Record<string, number>>(() => {
+  const ids = (agents.list || []).map(a => String(a.id)).sort();
+  const m: Record<string, number> = {};
+  ids.forEach((id, i) => { m[id] = i % SPRITE_COUNT; });
+  return m;
+});
+function spriteUrl(id: string): string {
+  const i = spriteIndex.value[id] ?? (hashId(id) % SPRITE_COUNT);
+  return `/sprites/npc_${String(i).padStart(2, '0')}.png`;
+}
+// Pixel sprites read better a few× larger than the old dot size.
+const spriteSize = computed(() => npcVisualSize.value * 3.2);
 
 function currentLocation(id: string): string | null {
   const snap = (world.worldSnapshot?.agents) as any;
@@ -579,10 +1011,7 @@ function npcsInRoom(uid: string): string[] {
  *  Uses multiple rings (12 NPCs per ring) so dense rooms (35+ NPCs) don't
  *  spill into neighbour rooms. */
 function npcSatellitePos(id: string, loc: string): { x: number; y: number } {
-  const room = roomMap.value[loc];
-  const [rx = 0, ry = 0] = room?.position || [];
-  const cx = rx * roomPosScale.value;
-  const cy = ry * roomPosScale.value;
+  const { x: cx, y: cy } = roomCenter(loc);
   const peers = npcsInRoom(loc);
   const idx = Math.max(0, peers.indexOf(id));
   const PER_RING = 12;
@@ -594,9 +1023,12 @@ function npcSatellitePos(id: string, loc: string): { x: number; y: number } {
   // tight against the room or push them out into a wide orbit. Adding a
   // small NPC-size term keeps a minimum visual gap even when NPCs are
   // boosted larger than the gap.
-  const minGap = npcVisualSize.value * 1.1;
+  // Sprites occupy more space than the old dots — size the orbit to the
+  // actual marker size so avatars don't overlap.
+  const markerSize = useSprites.value ? spriteSize.value : npcVisualSize.value;
+  const minGap = markerSize * 0.9;
   const ringStart = roomVisualSize.value + Math.max(npcRoomGap.value, minGap);
-  const ringStep  = npcVisualSize.value * 2.0 + 3;
+  const ringStep  = markerSize * 1.3 + 3;
   const radius = ringStart + ring * ringStep;
   const angle = (2 * Math.PI * slot) / slotsThisRing - Math.PI / 2;
   return { x: cx + radius * Math.cos(angle), y: cy + radius * Math.sin(angle) };
@@ -615,20 +1047,32 @@ const vNpcNodes = computed(() => {
       label,
       title: `${label}\n@${roomMap.value[loc]?.name || loc}`,
       group: 'npc',
-      shape: 'dot',
-      size: npcVisualSize.value,
-      color: {
-        background: colorForAgent(id),
-        border: '#1a0d00',
-        highlight: { background: colorForAgent(id), border: '#FFFFFF' },
-      },
+      ...(useSprites.value
+        ? {
+            shape: 'image',
+            image: spriteUrl(id),
+            size: spriteSize.value,
+            // Crisp nearest-neighbour scaling for pixel art; colored ring on
+            // select so the tracker color still reads.
+            shapeProperties: { useImageSize: false, interpolation: false },
+            color: { border: colorForAgent(id), highlight: { border: '#FFFFFF' } },
+          }
+        : {
+            shape: 'dot',
+            size: npcVisualSize.value,
+            color: {
+              background: colorForAgent(id),
+              border: '#1a0d00',
+              highlight: { background: colorForAgent(id), border: '#FFFFFF' },
+            },
+            borderWidth: 1.5,
+          }),
       font: {
         color: '#fff',
         size: Math.max(8, Math.round(npcSize.value * 1.0)),
         strokeWidth: 2,
         strokeColor: '#0a0e17',
       },
-      borderWidth: 1.5,
       x, y,
       fixed: { x: true, y: true },
       physics: false,
@@ -678,15 +1122,13 @@ function itemSatellitePos(it: ItemLite): { x: number; y: number } | null {
     const npcLoc = currentLocation(it.carrier_id);
     if (!npcLoc) return null;
     const p = npcSatellitePos(it.carrier_id, npcLoc);
-    const off = npcVisualSize.value + 4;
+    const off = (useSprites.value ? spriteSize.value * 0.5 : npcVisualSize.value) + 4;
     return { x: p.x + off, y: p.y - off * 0.4 };
   }
   if (!it.location_uid) return null;
   const room = roomMap.value[it.location_uid];
   if (!room) return null;
-  const [rx = 0, ry = 0] = room.position || [];
-  const cx = rx * roomPosScale.value;
-  const cy = ry * roomPosScale.value;
+  const { x: cx, y: cy } = roomCenter(it.location_uid);
   // Place items on an inner ring close to the room core, evenly spaced.
   const here = itemsList.value.filter(i => !i.carrier_id && i.location_uid === it.location_uid);
   const idx = here.findIndex(i => i.id === it.id);
@@ -795,11 +1237,15 @@ function shortTime(iso: string): string {
 }
 
 function onSelectNode(nodeId: string) {
-  // virtual NPC nodes start with "npc:" — clicking one routes to that agent.
+  // virtual NPC nodes start with "npc:" — clicking one opens the inline NPC
+  // panel (GOAP plan + chat log) instead of navigating away.
   if (nodeId.startsWith('npc:')) {
     const aid = nodeId.slice(4);
     (window as any).__lastClickedAgent = aid;
-    window.location.hash = `#/agent/${aid}`;
+    selectedNpcId.value = aid;
+    const st = (world.worldSnapshot?.agents || []).find((a: any) => String(a.id) === aid)
+      || agents.list.find(a => String(a.id) === aid);
+    if (st?.location_uid) selectedUid.value = st.location_uid;
     return;
   }
   // virtual item nodes select their carrier's room.
@@ -823,6 +1269,7 @@ function resetSizes() {
   roomSize.value = 42;
   npcSize.value = 7;
   itemSize.value = 5;
+  moveAnimMs.value = 2400;
 }
 function roomLabel(uid: string | null | undefined): string {
   if (!uid) return '—';
@@ -933,13 +1380,69 @@ const roomTriplets = computed<Triplet[]>(() => {
    snapshot poll will reaffirm the final position (no visual jump because
    the lerp's endpoint matches the satellite slot we computed).
    ==================================================================== */
-const ANIM_DURATION_MS = 1200;
 /** Tracks the last `events.pushedTotal` value we've processed for heat /
  *  animation. Using a monotonic counter (rather than a stream index) is
  *  necessary because the events stream is a ring buffer — indices shift
  *  once it saturates, so `stream.length` alone can't detect new pushes. */
 let lastSeenPushedTotal = 0;
 const animations = new Map<string, number>();    // npc id → raf handle
+
+/* ---- Speech bubbles above NPC sprites ----
+ *  On a `dialog` event we float the spoken line above the speaker (and the
+ *  reply above the listener). Positions are recomputed each animation frame
+ *  from the node's world coords → screen coords so bubbles track panning,
+ *  zooming, dragging and NPC movement. */
+type BubbleKind = 'dialog' | 'thought';
+interface Bubble { key: number; agentId: string; until: number; x: number; y: number; show: boolean; kind: BubbleKind }
+const bubbles = ref<Bubble[]>([]);
+let bubbleKey = 0;
+let bubbleRaf: number | null = null;
+const BUBBLE_MS = 4500;
+
+// Show a "talking" (dialog) or "thinking" (mutter) indicator over an NPC. If
+// one is already active, extend it instead of stacking (one bubble per NPC).
+function addBubble(agentId: string, kind: BubbleKind = 'dialog') {
+  if (!agentId) return;
+  const existing = bubbles.value.find(b => b.agentId === agentId);
+  if (existing) {
+    existing.until = performance.now() + BUBBLE_MS;
+    existing.kind = kind;
+    ensureBubbleLoop();
+    return;
+  }
+  bubbles.value.push({
+    key: ++bubbleKey,
+    agentId,
+    until: performance.now() + BUBBLE_MS,
+    x: -9999, y: -9999, show: false,
+    kind,
+  });
+  ensureBubbleLoop();
+}
+function ensureBubbleLoop() {
+  if (bubbleRaf == null) bubbleRaf = requestAnimationFrame(updateBubbles);
+}
+function updateBubbles() {
+  const now = performance.now();
+  bubbles.value = bubbles.value.filter(b => b.until > now);
+  if (visNet && bubbles.value.length) {
+    const scale = (visNet.getScale?.() as number) || 1;
+    for (const b of bubbles.value) {
+      const nid = `npc:${b.agentId}`;
+      const pos = visNet.getPositions?.([nid])?.[nid];
+      if (pos) {
+        const dom = visNet.canvasToDOM({ x: pos.x, y: pos.y });
+        b.x = dom.x;
+        // Sit the bubble's tail just above the sprite's head.
+        b.y = dom.y - (spriteSize.value * scale * 0.6 + 12);
+        b.show = true;
+      } else {
+        b.show = false;
+      }
+    }
+  }
+  bubbleRaf = bubbles.value.length ? requestAnimationFrame(updateBubbles) : null;
+}
 
 /* ---- Zoom event → inverse-boost factor ----
  *  vis-network fires `zoom` on every wheel tick. We collapse those into
@@ -954,9 +1457,36 @@ function onNetReady(net: any) {
   // Also re-evaluate after fit/move animations finish, because vis-network
   // doesn't always emit `zoom` during fit() / moveTo() animations.
   net.on('animationFinished', () => scheduleZoomBoostUpdate());
-  net.on('dragEnd', () => scheduleZoomBoostUpdate());
+  net.on('dragEnd', (params: any) => {
+    handleDragEnd(params);
+    scheduleZoomBoostUpdate();
+  });
+  // Draw the campus map behind every frame (world coords → pans/zooms too).
+  net.on('beforeDrawing', (ctx: CanvasRenderingContext2D) => drawMap(ctx));
   // Initial sync (fit() during mount may set scale before our listener attaches).
   scheduleZoomBoostUpdate();
+  net.redraw?.();
+}
+
+/** Persist final positions of any dragged ROOM nodes (npc:/item: nodes are
+ *  satellites and not user-draggable). */
+function handleDragEnd(params: any) {
+  const ids: string[] = (params?.nodes || []).map((x: any) => String(x));
+  const roomIds = ids.filter(id => !id.startsWith('npc:') && !id.startsWith('item:') && roomMap.value[id]);
+  if (!roomIds.length || !visNet) return;
+  const positions = visNet.getPositions(roomIds);
+  let changed = false;
+  for (const uid of roomIds) {
+    const p = positions[uid];
+    if (p) { roomPosOverride[uid] = { x: Math.round(p.x), y: Math.round(p.y) }; changed = true; }
+  }
+  if (changed) persistLayout();
+}
+
+/** Clear all dragged room positions → revert to template layout. */
+function resetRoomPositions() {
+  for (const k of Object.keys(roomPosOverride)) delete roomPosOverride[k];
+  persistLayout();
 }
 function scheduleZoomBoostUpdate() {
   if (!autoScaleOnZoom.value) {
@@ -1003,8 +1533,9 @@ function animateNpcMove(id: string, fromUid: string, toUid: string) {
     cancelAnimationFrame(animations.get(id)!);
     animations.delete(id);
   }
+  const dur = Math.max(200, moveAnimMs.value);
   const tick = (now: number) => {
-    const t = Math.min(1, (now - start) / ANIM_DURATION_MS);
+    const t = Math.min(1, (now - start) / dur);
     // Ease in/out cubic.
     const e = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
     const x = fromPos.x + (toPos.x - fromPos.x) * e;
@@ -1030,6 +1561,20 @@ function animateNpcMove(id: string, fromUid: string, toUid: string) {
  *  rails live in the move/animate handlers themselves. The `animate`
  *  arg lets us run animations only for NEW events (skip backfill). */
 function processSimEvent(ev: any, animate: boolean) {
+  // Dialog → speech bubbles over speaker + listener (only for new/live events,
+  // not historical backfill).
+  if (ev?.type === 'dialog' && animate) {
+    const p = ev.payload || {};
+    if (p.speaker_id) addBubble(String(p.speaker_id));
+    if (p.listener_id) addBubble(String(p.listener_id));
+    return;
+  }
+  // Mutter (inner monologue) → a "thinking" bubble over the NPC.
+  if (ev?.type === 'mutter' && animate) {
+    const p = ev.payload || {};
+    if (p.agent_id) addBubble(String(p.agent_id), 'thought');
+    return;
+  }
   if (ev?.type !== 'behavior') return;
   const p = ev.payload || {};
   if (p.action_id !== 'move' || !p.ok) return;
@@ -1078,6 +1623,9 @@ onMounted(async () => {
     world.loadWorld(),
     agents.loadList(),
   ]);
+  // Load saved room positions + map transform (after rooms so we can
+  // auto-fit the map on first run).
+  await loadLayout();
   // Backfill heat counters from any events already in the ring buffer
   // (e.g. user switched here from another tab). We DON'T animate these —
   // they're history — but we do count them for the move-route heat map.
@@ -1090,7 +1638,8 @@ onMounted(async () => {
   }
   // Poll world snapshot every 3s so tracked NPC nodes / items re-attach when
   // they change room. Animations (1.2s) finish before the next poll lands.
-  world.startPolling(3000);
+  // (Suppressed while a recording is being played back.)
+  if (!playback.active) world.startPolling(3000);
   // Center the camera on the room centroid at a useful zoom.
   setTimeout(() => {
     const rs = rooms.value;
@@ -1109,16 +1658,126 @@ onMounted(async () => {
     });
   }, 150);
 });
+// While playback owns the world, stop live polling; resume on exit.
+watch(() => playback.active, (on) => {
+  if (on) world.stopPolling();
+  else world.startPolling(3000);
+});
+
 onBeforeUnmount(() => {
   for (const h of animations.values()) cancelAnimationFrame(h);
   animations.clear();
+  if (bubbleRaf != null) cancelAnimationFrame(bubbleRaf);
   world.stopPolling();
+  // Hand the world back to the live feed if we leave mid-playback.
+  if (playback.active) playback.exit();
 });
 </script>
 
 <style scoped>
 .scene-page { display: flex; height: 100%; }
 .scene-graph { flex: 1; position: relative; min-width: 0; }
+
+/* ---- Speech bubbles ---- */
+.bubble-layer {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 6;
+}
+.bubble {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  background: rgba(255,255,255,0.96);
+  border-radius: 11px;
+  padding: 5px 9px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.45);
+}
+.bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -6px; left: 50%; transform: translateX(-50%);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 7px solid rgba(255,255,255,0.96);
+}
+.bubble-dots { display: flex; gap: 3px; align-items: center; }
+.bubble-dots i {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: #5b6b86;
+  animation: bubble-blink 1.2s infinite ease-in-out;
+}
+.bubble-dots i:nth-child(2) { animation-delay: 0.2s; }
+.bubble-dots i:nth-child(3) { animation-delay: 0.4s; }
+@keyframes bubble-blink {
+  0%, 80%, 100% { opacity: 0.25; transform: translateY(0); }
+  40% { opacity: 1; transform: translateY(-2px); }
+}
+/* Mutter (inner monologue) bubble — softer, with a thought glyph. */
+.bubble--thought { background: rgba(226,236,255,0.96); }
+.bubble--thought::after { border-top-color: rgba(226,236,255,0.96); }
+.bubble-think { font-size: 12px; line-height: 1; display: block; }
+/* ---- NPC inline panel (GOAP plan + chat log) ---- */
+.npc-panel {
+  border: 1px solid var(--border, #2a3550);
+  border-radius: 10px;
+  padding: 10px 12px 12px;
+  margin-bottom: 12px;
+  background: rgba(255,255,255,0.03);
+}
+.npc-panel-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.npc-panel-title { display: flex; align-items: center; gap: 6px; font-weight: 700; font-size: 14px; }
+.npc-panel-title .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-active, #4ea1ff); }
+.npc-panel-actions { display: flex; gap: 6px; }
+.mini-btn {
+  font-size: 11px; padding: 2px 8px; border-radius: 6px; cursor: pointer;
+  border: 1px solid var(--border, #2a3550); background: transparent; color: inherit;
+}
+.mini-btn:hover { background: rgba(255,255,255,0.08); }
+.goap-box { font-size: 12px; }
+.goap-row { display: flex; gap: 8px; margin: 3px 0; }
+.goap-k { flex: 0 0 64px; color: var(--text-dim, #8aa); }
+.goap-v { flex: 1; word-break: break-word; }
+.goap-kind { color: var(--text-dim, #8aa); font-style: normal; font-size: 10px; margin-left: 4px; }
+.goap-raw { display: block; color: var(--text-dim, #8aa); font-size: 10px; margin-top: 2px; opacity: 0.8; }
+.goal-chip {
+  display: inline-block; padding: 1px 6px; margin: 0 4px 4px 0;
+  border-radius: 5px; background: rgba(78,161,255,0.15); border: 1px solid rgba(78,161,255,0.4);
+}
+.goap-arrow { text-align: center; color: var(--text-dim, #8aa); font-size: 11px; margin: 6px 0 4px; }
+.chain { display: flex; flex-direction: column; gap: 4px; }
+.chain-step {
+  display: flex; align-items: center; gap: 8px;
+  padding: 4px 8px; border-radius: 6px;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border, #2a3550);
+}
+.chain-step.active { border-color: var(--accent-active, #4ea1ff); background: rgba(78,161,255,0.12); }
+.chain-idx {
+  flex: 0 0 18px; height: 18px; line-height: 18px; text-align: center;
+  border-radius: 50%; background: rgba(255,255,255,0.1); font-size: 10px;
+}
+.chain-label { flex: 1; }
+.chain-cost { color: var(--text-dim, #8aa); font-size: 10px; }
+.goap-exec { margin-top: 6px; font-size: 11px; color: var(--text-dim, #9bb); }
+.goap-exec .mono { margin-left: 4px; }
+.chatlog { display: flex; flex-direction: column; gap: 8px; max-height: 320px; overflow-y: auto; }
+.chat-turn { border-left: 2px solid rgba(78,161,255,0.4); padding-left: 8px; }
+.chat-meta { display: flex; gap: 8px; font-size: 10px; color: var(--text-dim, #8aa); margin-bottom: 2px; }
+.chat-topic { font-style: italic; }
+.chat-line { font-size: 12px; line-height: 1.35; margin: 1px 0; word-break: break-word; }
+.chat-line.theirs { color: var(--text-dim, #aab); }
+.mutterlog { display: flex; flex-direction: column; gap: 6px; max-height: 220px; overflow-y: auto; }
+.mutter-turn {
+  display: flex; align-items: baseline; gap: 6px;
+  border-left: 2px solid rgba(170,150,255,0.45); padding-left: 8px;
+  font-size: 12px; line-height: 1.35;
+}
+.mutter-time { flex: 0 0 auto; font-size: 10px; color: var(--text-dim, #8aa); }
+.mutter-line { flex: 1; font-style: italic; color: var(--text-dim, #c2bdf0); word-break: break-word; }
+.mutter-mood {
+  flex: 0 0 auto; font-size: 10px; color: #b8a8ff;
+  border: 1px solid rgba(170,150,255,0.4); border-radius: 5px; padding: 0 5px;
+}
 .scene-side {
   width: 380px;
   background: var(--bg-panel);
@@ -1274,6 +1933,20 @@ onBeforeUnmount(() => {
   font-size: 10.5px;
   color: var(--text-very-dim);
   font-style: italic;
+}
+.tune-divider {
+  margin: 10px 0 4px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border-soft);
+  color: var(--accent-warm-soft);
+  font-size: 11.5px;
+  font-weight: 600;
+}
+.tune-toggle.no-border { border-top: none; padding-top: 2px; margin-top: 2px; }
+.micro-btn.full {
+  width: 100%;
+  margin-top: 8px;
+  padding: 5px 8px;
 }
 
 .panel-header {

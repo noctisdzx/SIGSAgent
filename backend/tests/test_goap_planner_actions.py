@@ -23,10 +23,13 @@ def _lib() -> ActionSpecLibrary:
     return ActionSpecLibrary.from_json(ACTIONS_JSON)
 
 
-def test_action_lib_loads_all_six():
+def test_action_lib_loads_expected_actions():
     lib = _lib()
     ids = {a.id for a in lib.all()}
-    assert ids == {"move", "interact", "talk", "phone_call", "find", "idle"}
+    assert ids == {
+        "move", "interact", "talk", "phone_call", "find", "idle",
+        "pickup", "drop", "mutter",
+    }
 
 
 def test_plan_dorm_to_library_single_move():

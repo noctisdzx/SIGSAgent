@@ -11,7 +11,7 @@
 <template>
   <div class="app-shell">
     <nav class="top-nav">
-      <span class="brand">SIGSAgent · {{ lang.t('校园多智能体', 'Campus Multi-Agent') }}</span>
+      <router-link class="brand" to="/">SIGSAgent · {{ lang.t('校园多智能体', 'Campus Multi-Agent') }}</router-link>
 
       <router-link class="nav-link" to="/relations">
         {{ lang.t('人际关系', 'Relations') }}

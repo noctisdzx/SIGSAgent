@@ -54,11 +54,61 @@ class LLMAdapter(Protocol):
         """
         ...
 
+    async def choose_insert_event(
+        self,
+        gap_minutes: int,
+        persona: dict,
+        memories: list[str],
+        candidates: list[dict[str, Any]],
+        context: dict[str, Any] | None = None,
+    ) -> tuple[str, str]:
+        """Return (event_id, rationale). Mirrors `choose_fragment` but the
+        candidates carry a natural-language `description`, `tags`,
+        `duration_minutes` and a `from`→`to` trip.
+        """
+        ...
+
+    async def describe_insert_event(self, event: dict[str, Any]) -> dict[str, str]:
+        """Author a bilingual one-line description for a raw insert event.
+
+        Returns {"description_zh": ..., "description_en": ...}.
+        """
+        ...
+
+    async def describe_activity(
+        self,
+        persona: dict[str, Any],
+        activity: str,
+        situation: dict[str, Any],
+    ) -> dict[str, str]:
+        """Rephrase a raw schedule/fragment label into a short, in-character,
+        scene-aware sentence for THIS npc (so the UI shows a personalised
+        description rather than the generic fragment label).
+
+        `situation` carries sim_time, weekday, here_uid, here_name.
+        Returns {"description_zh": ..., "description_en": ...}.
+        """
+        ...
+
     async def extract_triplets(
         self,
         agent_id: str,
         events: list[str],
     ) -> list[dict[str, Any]]: ...
+
+    async def choose_dialog_target(
+        self,
+        speaker: dict[str, Any],
+        candidates: list[dict[str, Any]],
+        situation: dict[str, Any],
+    ) -> tuple[str | None, str]:
+        """Pick WHO (if anyone) the speaker talks to this moment.
+
+        `candidates` are co-located agents, each with `id`, `name`,
+        `archetype` and `minutes_since_last_talk` (None = never). Returns
+        `(target_id, rationale)`; `target_id` may be None to stay silent.
+        """
+        ...
 
     async def generate_dialog(
         self,
@@ -70,6 +120,21 @@ class LLMAdapter(Protocol):
         """Generate one short two-line dialog.
 
         Returns dict: {speaker_line, listener_line, topic, tone}.
+        """
+        ...
+
+    async def generate_mutter(
+        self,
+        speaker: dict[str, Any],
+        situation: dict[str, Any],
+        memories: list[str],
+    ) -> dict[str, Any]:
+        """Generate one short line of inner monologue (the dialog channel's
+        `Mutter` state) for when the speaker has no one to talk to.
+
+        `situation` carries sim_time, weekday, here_uid, here_name,
+        current_activity and body_action. Returns dict:
+        {line, line_en, mood}.
         """
         ...
 
@@ -139,6 +204,50 @@ class MockLLMAdapter:
         best = max(candidates, key=score)
         return best["id"], "mock: best tag-overlap with persona"
 
+    async def choose_insert_event(
+        self,
+        gap_minutes: int,
+        persona: dict,
+        memories: list[str],
+        candidates: list[dict[str, Any]],
+        context: dict[str, Any] | None = None,
+    ) -> tuple[str, str]:
+        if not candidates:
+            raise ValueError("MockLLMAdapter.choose_insert_event: empty candidates")
+        favs = set(persona.get("preferences", {}).get("favorite_tags", []) or [])
+        visible = set((context or {}).get("visible_agents", []) or [])
+
+        def score(c: dict[str, Any]) -> int:
+            s = len(favs & set(c.get("tags", []) or []))
+            if visible and "social" in (c.get("tags", []) or []):
+                s += 1
+            return s
+
+        best = max(candidates, key=score)
+        return best["id"], "mock: best tag-overlap with persona"
+
+    async def describe_insert_event(self, event: dict[str, Any]) -> dict[str, str]:
+        start = event.get("start_name", "?")
+        end = event.get("end_name", "?")
+        return {
+            "description_zh": f"从{start}前往{end}，忙里偷闲走一趟。",
+            "description_en": f"A quick trip from {start} to {end} during free time.",
+        }
+
+    async def describe_activity(
+        self,
+        persona: dict[str, Any],
+        activity: str,
+        situation: dict[str, Any],
+    ) -> dict[str, str]:
+        name = persona.get("name") or persona.get("id") or "TA"
+        here = situation.get("here_name") or situation.get("here_uid") or "此处"
+        act = (activity or "休息").strip()
+        return {
+            "description_zh": f"{name}正在{here}{act}。",
+            "description_en": f"{name} is busy with {act} at {here}.",
+        }
+
     async def extract_triplets(
         self,
         agent_id: str,
@@ -148,6 +257,26 @@ class MockLLMAdapter:
             {"subject": agent_id, "predicate": "did", "object": ev[:30]}
             for ev in events
         ]
+
+    async def choose_dialog_target(
+        self,
+        speaker: dict[str, Any],
+        candidates: list[dict[str, Any]],
+        situation: dict[str, Any],
+    ) -> tuple[str | None, str]:
+        if not candidates:
+            return None, "mock: no candidates"
+        # Prefer someone we've never spoken to; otherwise the least-recently
+        # talked-to. If everyone was engaged very recently, stay silent so the
+        # same pair doesn't loop every tick.
+        def recency(c: dict[str, Any]) -> float:
+            m = c.get("minutes_since_last_talk")
+            return float("inf") if m is None else float(m)
+        best = max(candidates, key=recency)
+        m = best.get("minutes_since_last_talk")
+        if m is not None and m < 30:
+            return None, "mock: everyone spoken to recently — stay silent"
+        return best["id"], "mock: least-recently-talked partner"
 
     async def generate_dialog(
         self,
@@ -166,6 +295,19 @@ class MockLLMAdapter:
             "topic": "寒暄",
             "topic_en": "greetings",
             "tone": "friendly",
+        }
+
+    async def generate_mutter(
+        self,
+        speaker: dict[str, Any],
+        situation: dict[str, Any],
+        memories: list[str],
+    ) -> dict[str, Any]:
+        activity = situation.get("current_activity") or "发呆"
+        return {
+            "line": f"该专心{activity}了……",
+            "line_en": f"Better focus on {activity} now...",
+            "mood": "neutral",
         }
 
     async def narrate_day(
@@ -544,6 +686,79 @@ class DeepSeekAdapter:
             )
         return fid, rationale
 
+    async def choose_insert_event(
+        self,
+        gap_minutes: int,
+        persona: dict,
+        memories: list[str],
+        candidates: list[dict[str, Any]],
+        context: dict[str, Any] | None = None,
+    ) -> tuple[str, str]:
+        if not candidates:
+            raise ValueError("choose_insert_event: empty candidates")
+        prompt = self._render(
+            "choose_insert_event.j2",
+            gap_minutes=gap_minutes,
+            persona=persona,
+            memories=memories,
+            candidates=candidates,
+            context=context or {},
+        )
+        out = await self._chat_text(prompt, json_mode=True)
+        data = _parse_json_object(out)
+        if not isinstance(data, dict):
+            raise ValueError(f"choose_insert_event: expected object, got {type(data).__name__}")
+        eid = data.get("id")
+        rationale = str(data.get("rationale", "")).strip() or "(no rationale)"
+        valid_ids = {c["id"] for c in candidates}
+        if eid not in valid_ids:
+            raise ValueError(
+                f"choose_insert_event: returned id {eid!r} not in candidates {sorted(valid_ids)}"
+            )
+        return eid, rationale
+
+    async def describe_insert_event(self, event: dict[str, Any]) -> dict[str, str]:
+        prompt = self._render(
+            "describe_insert_event.j2",
+            role=event.get("role", "student"),
+            start_name=event.get("start_name", "?"),
+            end_name=event.get("end_name", "?"),
+            duration_minutes=event.get("duration_minutes", 0),
+            tags=event.get("tags", []),
+            drives=event.get("drives", {}),
+        )
+        out = await self._chat_text(prompt, json_mode=True)
+        data = _parse_json_object(out)
+        if not isinstance(data, dict):
+            raise ValueError(f"describe_insert_event: expected object, got {type(data).__name__}")
+        zh = str(data.get("description_zh", "")).strip()
+        en = str(data.get("description_en", "")).strip()
+        if not zh:
+            raise ValueError("describe_insert_event: empty description_zh")
+        return {"description_zh": zh, "description_en": en or zh}
+
+    async def describe_activity(
+        self,
+        persona: dict[str, Any],
+        activity: str,
+        situation: dict[str, Any],
+    ) -> dict[str, str]:
+        prompt = self._render(
+            "describe_activity.j2",
+            persona=persona,
+            activity=activity,
+            situation=situation,
+        )
+        out = await self._chat_text(prompt, json_mode=True)
+        data = _parse_json_object(out)
+        if not isinstance(data, dict):
+            raise ValueError(f"describe_activity: expected object, got {type(data).__name__}")
+        zh = str(data.get("description_zh", "")).strip()
+        en = str(data.get("description_en", "")).strip()
+        if not zh:
+            raise ValueError("describe_activity: empty description_zh")
+        return {"description_zh": zh, "description_en": en or zh}
+
     async def extract_triplets(
         self,
         agent_id: str,
@@ -606,6 +821,38 @@ class DeepSeekAdapter:
             raise ValueError(f"narrate_day: expected object, got {type(data).__name__}")
         return parse_narrate_day_response(data)
 
+    async def choose_dialog_target(
+        self,
+        speaker: dict[str, Any],
+        candidates: list[dict[str, Any]],
+        situation: dict[str, Any],
+    ) -> tuple[str | None, str]:
+        if not candidates:
+            return None, "no candidates"
+        prompt = self._render(
+            "choose_dialog_target.j2",
+            speaker=speaker,
+            candidates=candidates,
+            situation=situation,
+        )
+        out = await self._chat_text(prompt, json_mode=True)
+        data = _parse_json_object(out)
+        if not isinstance(data, dict):
+            raise ValueError(
+                f"choose_dialog_target: expected object, got {type(data).__name__}"
+            )
+        tid = data.get("id")
+        rationale = str(data.get("rationale", "")).strip() or "(no rationale)"
+        # `null` / "none" / "" → stay silent.
+        if tid in (None, "", "none", "null", "None"):
+            return None, rationale
+        valid_ids = {c["id"] for c in candidates}
+        if tid not in valid_ids:
+            raise ValueError(
+                f"choose_dialog_target: id {tid!r} not in candidates {sorted(valid_ids)}"
+            )
+        return tid, rationale
+
     async def generate_dialog(
         self,
         speaker: dict[str, Any],
@@ -634,6 +881,31 @@ class DeepSeekAdapter:
             "listener_line": str(data.get("listener_line", "")).strip() or "（无回应）",
             "topic": str(data.get("topic", "")).strip() or "杂谈",
             "tone": str(data.get("tone", "neutral")).strip() or "neutral",
+        }
+
+    async def generate_mutter(
+        self,
+        speaker: dict[str, Any],
+        situation: dict[str, Any],
+        memories: list[str],
+    ) -> dict[str, Any]:
+        prompt = self._render(
+            "generate_mutter.j2",
+            speaker=speaker,
+            situation=situation,
+            memories=memories,
+        )
+        out = await self._chat_text(prompt, json_mode=True)
+        data = _parse_json_object(out)
+        if not isinstance(data, dict):
+            raise ValueError(f"generate_mutter: expected object, got {type(data).__name__}")
+        line = str(data.get("line", "")).strip()
+        if not line:
+            raise ValueError("generate_mutter: empty line")
+        return {
+            "line": line,
+            "line_en": str(data.get("line_en", "")).strip() or line,
+            "mood": str(data.get("mood", "neutral")).strip() or "neutral",
         }
 
 
@@ -695,6 +967,55 @@ class SafeLLMAdapter:
         self._record("choose_fragment", degraded)
         return result
 
+    async def choose_insert_event(
+        self,
+        gap_minutes: int,
+        persona: dict,
+        memories: list[str],
+        candidates: list[dict[str, Any]],
+        context: dict[str, Any] | None = None,
+    ) -> tuple[str, str]:
+        async def _primary() -> tuple[str, str]:
+            return await self.primary.choose_insert_event(
+                gap_minutes, persona, memories, candidates, context=context,
+            )
+
+        async def _fallback() -> tuple[str, str]:
+            return await self.fallback.choose_insert_event(
+                gap_minutes, persona, memories, candidates, context=context,
+            )
+
+        result, degraded = await safe_call(_primary, _fallback)
+        self._record("choose_insert_event", degraded)
+        return result
+
+    async def describe_insert_event(self, event: dict[str, Any]) -> dict[str, str]:
+        async def _primary() -> dict[str, str]:
+            return await self.primary.describe_insert_event(event)
+
+        async def _fallback() -> dict[str, str]:
+            return await self.fallback.describe_insert_event(event)
+
+        result, degraded = await safe_call(_primary, _fallback)
+        self._record("describe_insert_event", degraded)
+        return result
+
+    async def describe_activity(
+        self,
+        persona: dict[str, Any],
+        activity: str,
+        situation: dict[str, Any],
+    ) -> dict[str, str]:
+        async def _primary() -> dict[str, str]:
+            return await self.primary.describe_activity(persona, activity, situation)
+
+        async def _fallback() -> dict[str, str]:
+            return await self.fallback.describe_activity(persona, activity, situation)
+
+        result, degraded = await safe_call(_primary, _fallback)
+        self._record("describe_activity", degraded)
+        return result
+
     async def extract_triplets(
         self,
         agent_id: str,
@@ -708,6 +1029,22 @@ class SafeLLMAdapter:
 
         result, degraded = await safe_call(_primary, _fallback)
         self._record("extract_triplets", degraded)
+        return result
+
+    async def choose_dialog_target(
+        self,
+        speaker: dict[str, Any],
+        candidates: list[dict[str, Any]],
+        situation: dict[str, Any],
+    ) -> tuple[str | None, str]:
+        async def _primary() -> tuple[str | None, str]:
+            return await self.primary.choose_dialog_target(speaker, candidates, situation)
+
+        async def _fallback() -> tuple[str | None, str]:
+            return await self.fallback.choose_dialog_target(speaker, candidates, situation)
+
+        result, degraded = await safe_call(_primary, _fallback)
+        self._record("choose_dialog_target", degraded)
         return result
 
     async def generate_dialog(
@@ -729,6 +1066,22 @@ class SafeLLMAdapter:
 
         result, degraded = await safe_call(_primary, _fallback)
         self._record("generate_dialog", degraded)
+        return result
+
+    async def generate_mutter(
+        self,
+        speaker: dict[str, Any],
+        situation: dict[str, Any],
+        memories: list[str],
+    ) -> dict[str, Any]:
+        async def _primary() -> dict[str, Any]:
+            return await self.primary.generate_mutter(speaker, situation, memories)
+
+        async def _fallback() -> dict[str, Any]:
+            return await self.fallback.generate_mutter(speaker, situation, memories)
+
+        result, degraded = await safe_call(_primary, _fallback)
+        self._record("generate_mutter", degraded)
         return result
 
     async def narrate_day(

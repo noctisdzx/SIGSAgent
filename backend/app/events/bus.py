@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import asyncio
 from collections import deque
-from typing import Any, Deque
+from typing import Any, Callable, Deque
 
 BUFFER_SIZE = 200
 
@@ -19,6 +19,17 @@ class EventBus:
     def __init__(self, buffer_size: int = BUFFER_SIZE) -> None:
         self._subscribers: list[asyncio.Queue] = []
         self._buffer: Deque[dict[str, Any]] = deque(maxlen=buffer_size)
+        # Synchronous taps invoked on every publish (e.g. the recorder). Unlike
+        # queue subscribers, taps never drop events, so they can capture the
+        # full per-tick event stream for playback.
+        self._taps: list[Callable[[dict[str, Any]], None]] = []
+
+    def add_tap(self, fn: Callable[[dict[str, Any]], None]) -> None:
+        self._taps.append(fn)
+
+    def remove_tap(self, fn: Callable[[dict[str, Any]], None]) -> None:
+        if fn in self._taps:
+            self._taps.remove(fn)
 
     def subscribe(self, maxsize: int = 1000, *, replay: bool = True) -> asyncio.Queue:
         q: asyncio.Queue = asyncio.Queue(maxsize=maxsize)
@@ -42,6 +53,11 @@ class EventBus:
 
     async def publish(self, event: dict[str, Any]) -> None:
         self._buffer.append(event)
+        for tap in list(self._taps):
+            try:
+                tap(event)
+            except Exception:
+                continue
         for q in list(self._subscribers):
             if q.full():
                 try:

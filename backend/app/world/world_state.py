@@ -22,6 +22,7 @@ DSL recap (from `data/actions/actions.json`):
 
 from __future__ import annotations
 
+import asyncio
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Any
@@ -96,6 +97,12 @@ class WorldState:
         self.agents: dict[str, AgentState] = {}
         self.items: dict[str, ItemState] = {}
         self.sim_time: datetime = _initial_sim_time()
+        # Serializes world-mutating critical sections (precondition-check +
+        # effect-apply, pickup/drop, cross-agent dialog writes) so that when
+        # agents tick concurrently their reads/writes never interleave. The
+        # GOAP "sense" reads stale state freely; only the commit is guarded,
+        # so parallelism is preserved for the slow LLM/planning phase.
+        self.lock: asyncio.Lock = asyncio.Lock()
 
     # ----- mutation -----
 

@@ -2,12 +2,15 @@
 
 from __future__ import annotations
 
+import json
+from pathlib import Path
 from typing import Any
 
 from fastapi import APIRouter, HTTPException, Request
 
 from app.config.loader import ConfigLoader
 from app.config.registry import get_registry
+from app.settings import get_settings
 
 router = APIRouter(prefix="/api", tags=["rest"])
 
@@ -109,6 +112,107 @@ async def get_scene_graph(req: Request) -> dict[str, Any]:
     return scene.to_vis_graph()
 
 
+def _layout_path() -> Path:
+    return get_settings().runtime_dir / "scene_layout.json"
+
+
+@router.get("/scene/layout")
+async def get_scene_layout(req: Request) -> dict[str, Any]:
+    """User-saved scene-topology layout: room positions + background map
+    transform. Persisted to disk so it survives a service restart."""
+    p = _layout_path()
+    if p.exists():
+        try:
+            data = json.loads(p.read_text(encoding="utf-8"))
+            if isinstance(data, dict):
+                data.setdefault("rooms", {})
+                data.setdefault("map", {})
+                return data
+        except (json.JSONDecodeError, OSError):
+            pass
+    return {"rooms": {}, "map": {}}
+
+
+@router.put("/scene/layout")
+async def put_scene_layout(req: Request) -> dict[str, Any]:
+    """Persist the dragged room positions and background-map transform."""
+    try:
+        body = await req.json()
+    except Exception as exc:  # noqa: BLE001
+        raise HTTPException(status_code=400, detail=f"invalid JSON body: {exc}")
+    if not isinstance(body, dict):
+        raise HTTPException(status_code=400, detail="layout body must be an object")
+    rooms = body.get("rooms") if isinstance(body.get("rooms"), dict) else {}
+    map_cfg = body.get("map") if isinstance(body.get("map"), dict) else {}
+    doc = {"rooms": rooms, "map": map_cfg}
+    p = _layout_path()
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps(doc, ensure_ascii=False, indent=2), encoding="utf-8")
+    return {"status": "saved", "rooms": len(rooms)}
+
+
+def _recordings_dir() -> Path:
+    return get_settings().runtime_dir / "recordings"
+
+
+def _safe_recording_path(name: str) -> Path:
+    # Only allow plain rec_*.jsonl basenames (no path traversal).
+    if "/" in name or "\\" in name or ".." in name or not name.endswith(".jsonl"):
+        raise HTTPException(status_code=400, detail="invalid recording name")
+    return _recordings_dir() / name
+
+
+@router.get("/recordings")
+async def list_recordings(req: Request) -> dict[str, Any]:
+    """List saved playback recordings (newest first)."""
+    d = _recordings_dir()
+    cur = getattr(req.app.state, "recorder", None)
+    cur_name = cur.path.name if cur and getattr(cur, "path", None) else None
+    out: list[dict[str, Any]] = []
+    if d.exists():
+        for p in sorted(d.glob("rec_*.jsonl"), key=lambda x: x.stat().st_mtime, reverse=True):
+            try:
+                with p.open("r", encoding="utf-8") as fh:
+                    frames = sum(1 for line in fh if '"kind": "frame"' in line or '"kind":"frame"' in line)
+            except OSError:
+                frames = 0
+            out.append({
+                "name": p.name,
+                "size": p.stat().st_size,
+                "mtime": p.stat().st_mtime,
+                "frames": frames,
+                "is_current": p.name == cur_name,
+            })
+    return {"recordings": out, "current": cur_name}
+
+
+@router.get("/recordings/{name}")
+async def get_recording(name: str, req: Request) -> dict[str, Any]:
+    """Return a full recording: header + every frame (world snapshot + events)."""
+    p = _safe_recording_path(name)
+    if not p.exists():
+        raise HTTPException(status_code=404, detail=f"recording not found: {name}")
+    header: dict[str, Any] = {}
+    frames: list[dict[str, Any]] = []
+    try:
+        with p.open("r", encoding="utf-8") as fh:
+            for line in fh:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    rec = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                if rec.get("kind") == "header":
+                    header = rec
+                elif rec.get("kind") == "frame":
+                    frames.append(rec)
+    except OSError as exc:
+        raise HTTPException(status_code=500, detail=f"read failed: {exc}")
+    return {"name": name, "header": header, "frames": frames}
+
+
 @router.get("/world")
 async def get_world_state(req: Request) -> dict[str, Any]:
     return _world(req).snapshot()
@@ -180,9 +284,11 @@ async def get_agent_memory(agent_id: str, req: Request) -> dict[str, Any]:
 
 
 @router.get("/agents/{agent_id}/schedule")
-async def get_agent_schedule(agent_id: str, req: Request, day: str | None = None) -> dict[str, Any]:
+async def get_agent_schedule(
+    agent_id: str, req: Request, day: str | None = None, week: bool = False,
+) -> dict[str, Any]:
     agent = _get_agent(req, agent_id)
-    return agent.schedule_view(day=day)
+    return agent.schedule_view(day=day, week=week)
 
 
 @router.get("/agents/{agent_id}/history")

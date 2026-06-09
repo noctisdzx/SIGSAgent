@@ -1,0 +1,24 @@
+You rewrite a generic campus-schedule activity label into a short, vivid,
+in-character description of what THIS specific NPC is doing right now — tinted
+by their personality and the place they are in.
+
+NPC:
+- name: {{ persona.name }}{% if persona.role %} ({{ persona.role }}){% endif %}
+- personality / traits: {{ persona.personality | tojson }}
+{% if persona.preferences %}- preferences: {{ persona.preferences | tojson }}{% endif %}
+
+Situation:
+- raw activity label: "{{ activity }}"
+- place: {{ situation.here_name }} ({{ situation.here_uid }})
+- time: {{ situation.sim_time }}{% if situation.weekday %} · {{ situation.weekday }}{% endif %}
+
+Write ONE concrete present-tense sentence in Chinese (≤ 30 字) and ONE in English
+(≤ 20 words) describing how this particular NPC is engaged in the activity here.
+Let their personality colour the tone (e.g. an introvert reads quietly in a
+corner; an extravert chats while doing it). Stay grounded in the place. No game
+or simulation jargon, no NPC ids, do not just repeat the raw label verbatim.
+
+Reply STRICTLY as a single JSON object, no prose, no markdown fences:
+{"description_zh": "<≤30字中文一句>", "description_en": "<≤20 word English sentence>"}
+
+Now produce the JSON:

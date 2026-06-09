@@ -233,6 +233,146 @@ def _make_llm_adapter() -> tuple[LLMAdapter, bool]:
                     speaker, listener, speaker_memories, situation,
                 )
 
+        async def choose_dialog_target(self, speaker, candidates, situation):
+            """Pick WHO (if anyone) the speaker talks to right now.
+
+            Returns ``(target_id | None, rationale)``. **This method must exist
+            on the real adapter** — without it the dialog channel's
+            ``choose_dialog_target`` call raises AttributeError, gets swallowed,
+            and every NPC silently "stays silent" forever (the no-dialog bug).
+            Falls back to the mock chooser on any network/parse failure.
+            """
+            if not candidates:
+                return None, "no candidates"
+            valid_ids = [c.get("id") for c in candidates if c.get("id")]
+            try:
+                sys_msg = (
+                    "你在为校园模拟里的一位 NPC 决定此刻是否要找人搭话、以及找谁。"
+                    "从候选里挑一个最自然的对象；若此刻更适合专注或独处，可选择不说话。"
+                    "严格 JSON 输出: {\"id\":\"<候选id 或 null>\", \"rationale\":\"<≤20字>\"}。"
+                    "id 必须严格是候选之一，或 null 表示不说话。"
+                    "倾向于：很久没说过话(minutes_since_last_talk 大或为 null)、"
+                    "与当前活动相关、外向性格更主动。"
+                )
+                user_msg = (
+                    f"speaker={speaker.get('name')}({speaker.get('role','')}) "
+                    f"traits={speaker.get('personality', {})}\n"
+                    f"sim_time={situation.get('sim_time')} "
+                    f"room={situation.get('here_name')} "
+                    f"activity={situation.get('current_activity')}\n"
+                    f"candidates={candidates}"
+                )
+                resp = await client.chat(
+                    messages=[
+                        {"role": "system", "content": sys_msg},
+                        {"role": "user", "content": user_msg},
+                    ],
+                    temperature=0.5,
+                    max_tokens=200,
+                    response_format={"type": "json_object"},
+                )
+                content = resp["choices"][0]["message"]["content"].strip()
+                import json as _json
+                data = _json.loads(content)
+                tid = data.get("id")
+                rationale = str(data.get("rationale", "")).strip() or "llm pick"
+                if tid in (None, "", "none", "null", "None"):
+                    return None, rationale
+                tid = str(tid).strip()
+                if tid not in valid_ids:
+                    # salvage: an id may be embedded in noisy text
+                    tid = next((v for v in valid_ids if v and v in content), "")
+                if not tid or tid not in valid_ids:
+                    return None, "no valid target"
+                return tid, rationale
+            except Exception:
+                return await self._mock.choose_dialog_target(
+                    speaker, candidates, situation,
+                )
+
+        async def generate_mutter(self, speaker, situation, memories):
+            """Generate one short inner-monologue line (the dialog channel's
+            `Mutter` state). Returns {line, line_en, mood}. Falls back to mock
+            on any failure (also missing before — would break muttering under a
+            real key)."""
+            try:
+                sys_msg = (
+                    "你为一位校园 NPC 写一句简短的内心独白（自言自语）。"
+                    "结合当前时间、地点、活动与最近记忆，写得自然、有个性、口语化。"
+                    "严格 JSON 输出: {\"line\":\"<中文 ≤30字>\", "
+                    "\"line_en\":\"<English ≤20 words>\", \"mood\":\"<一个情绪词>\"}。"
+                )
+                user_msg = (
+                    f"speaker={speaker.get('name')}({speaker.get('role','')}) "
+                    f"traits={speaker.get('personality', {})}\n"
+                    f"sim_time={situation.get('sim_time')} weekday={situation.get('weekday')} "
+                    f"room={situation.get('here_name')} "
+                    f"activity={situation.get('current_activity')} "
+                    f"body_action={situation.get('body_action')}\n"
+                    f"memories={memories}"
+                )
+                resp = await client.chat(
+                    messages=[
+                        {"role": "system", "content": sys_msg},
+                        {"role": "user", "content": user_msg},
+                    ],
+                    temperature=0.8,
+                    max_tokens=200,
+                    response_format={"type": "json_object"},
+                )
+                content = resp["choices"][0]["message"]["content"]
+                import json as _json
+                data = _json.loads(content)
+                return {
+                    "line": str(data.get("line", "")).strip() or "……",
+                    "line_en": str(data.get("line_en", "")).strip() or "...",
+                    "mood": str(data.get("mood", "neutral")).strip() or "neutral",
+                }
+            except Exception:
+                return await self._mock.generate_mutter(speaker, situation, memories)
+
+        async def describe_activity(self, persona, activity, situation):
+            """Rewrite a raw fragment/schedule label into a short, in-character,
+            scene-aware description for THIS npc. Returns
+            {description_zh, description_en}. Falls back to mock on any failure.
+            """
+            try:
+                sys_msg = (
+                    "你把一个通用的日程活动标签，改写成这位校园 NPC 此刻“正在做什么”的"
+                    "一句具体描述，要贴合其人格特征与所在场景。"
+                    "中文 ≤30 字、英文 ≤20 词，现在进行时，自然口语、有画面感；"
+                    "不要照抄原始标签，不要出现 id 或系统术语。"
+                    "严格 JSON 输出: {\"description_zh\":\"<中文一句>\", "
+                    "\"description_en\":\"<English sentence>\"}。"
+                )
+                user_msg = (
+                    f"npc={persona.get('name')}({persona.get('role','')}) "
+                    f"traits={persona.get('personality', {})} "
+                    f"prefs={persona.get('preferences', {})}\n"
+                    f"raw_activity={activity!r}\n"
+                    f"place={situation.get('here_name')} ({situation.get('here_uid')})\n"
+                    f"time={situation.get('sim_time')} weekday={situation.get('weekday')}"
+                )
+                resp = await client.chat(
+                    messages=[
+                        {"role": "system", "content": sys_msg},
+                        {"role": "user", "content": user_msg},
+                    ],
+                    temperature=0.6,
+                    max_tokens=200,
+                    response_format={"type": "json_object"},
+                )
+                content = resp["choices"][0]["message"]["content"]
+                import json as _json
+                data = _json.loads(content)
+                zh = str(data.get("description_zh", "")).strip()
+                en = str(data.get("description_en", "")).strip()
+                if not zh:
+                    raise ValueError("empty description_zh")
+                return {"description_zh": zh, "description_en": en or zh}
+            except Exception:
+                return await self._mock.describe_activity(persona, activity, situation)
+
         async def narrate_day(self, day, bullets, stats):
             """Literary short-story recap of a finished sim day.
 
@@ -335,12 +475,35 @@ async def lifespan(app: FastAPI):
         ) for f in registry.fragments.fragments]
         fragment_lib = FragmentLibrary(fragments)
 
+    # Insert-event library (optional; produced by scripts/build_insert_events.py).
+    insert_event_lib = None
+    try:
+        from app.agents.schedule.insert_events import InsertEventLibrary
+        ie_path = settings.data_dir / "insert_events" / "insert_events.json"
+        if ie_path.exists():
+            insert_event_lib = InsertEventLibrary.from_json(ie_path)
+            log.info("Loaded %d insert events", len(insert_event_lib.all()))
+    except Exception as exc:
+        log.warning("failed to load insert events: %s", exc)
+
     behavior_executor = BehaviorExecutor(action_lib, db=db) if action_lib else None
 
     # 6) Sim loop (started on demand by /api/sim/start, or auto).
     sim = SimLoop(world, scene) if scene else None
+    recorder = None
     if sim is not None:
         sim.set_llm(llm)  # so SimLoop can call narrate_day on midnight rollover
+        # Playback recorder: tap the event bus + write one frame per tick.
+        from app.events.bus import event_bus as _bus
+        from app.sim.recorder import Recorder
+        recorder = Recorder(settings.runtime_dir / "recordings", enabled=settings.sim_record)
+        if settings.sim_record:
+            _bus.add_tap(recorder.tap)
+            recorder.start_session(meta={
+                "sim_start": world.sim_time.isoformat(),
+                "n_personas": len(registry.personas),
+            })
+            sim.set_recorder(recorder)
 
     # 7) Build NPCAgents.
     agents: dict[str, NPCAgent] = {}
@@ -362,6 +525,7 @@ async def lifespan(app: FastAPI):
                     template=template,
                     memory_seed=seed,
                     behavior_executor=behavior_executor,
+                    insert_event_lib=insert_event_lib,
                 )
                 agents[pid] = agent
                 if sim:
@@ -380,6 +544,7 @@ async def lifespan(app: FastAPI):
     app.state.action_lib = action_lib
     app.state.fragment_lib = fragment_lib
     app.state.agents = agents
+    app.state.recorder = recorder
     # Allow NPCAgents to find each other (used by the dialog pipeline).
     try:
         from app.agents.agent import NPCAgent as _NPCAgent
@@ -402,6 +567,8 @@ async def lifespan(app: FastAPI):
     finally:
         if sim:
             await sim.stop()
+        if recorder is not None:
+            recorder.close()
         log.info("Backend shutdown complete")
 
 

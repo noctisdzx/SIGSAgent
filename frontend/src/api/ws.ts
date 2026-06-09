@@ -31,6 +31,16 @@ function handleEvent(raw: any): void {
   if (!raw || typeof raw !== 'object') return;
   const ev = raw as { type?: string; payload?: any; ts_sim?: string; agent_id?: string };
 
+  // While a recording is being replayed the world store is detached from the
+  // live feed (liveEnabled=false). Suppress live events entirely so they don't
+  // pollute the replayed event stream or fight the recorded frames (which was
+  // the visible "playback glitches" bug — live ticks teleported sprites on top
+  // of the replay). We still track connection bookkeeping via socket handlers.
+  if (!world.liveEnabled) {
+    if (ev.type === 'welcome') events.noteWelcome(ev.ts_sim);
+    return;
+  }
+
   events.push({
     type: ev.type || 'unknown',
     ts_sim: ev.ts_sim,

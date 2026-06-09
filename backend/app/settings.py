@@ -41,6 +41,13 @@ class Settings:
     sim_tick_seconds: int = _env_int("SIM_TICK_SECONDS", 300)
     sim_real_tick_seconds: float = float(os.getenv("SIM_REAL_TICK_SECONDS", "1"))
     sim_autostart: bool = _env_bool("SIM_AUTOSTART", False)
+    # How many agents may run their (LLM-heavy) perceive→decide→act concurrently
+    # within a single tick. 1 = old sequential behaviour. Higher = faster ticks
+    # at the cost of more concurrent LLM calls and looser intra-tick ordering.
+    sim_tick_concurrency: int = _env_int("SIM_TICK_CONCURRENCY", 8)
+    # Record every tick (world snapshot + events) to runtime/recordings for
+    # later playback. Disable with SIM_RECORD=0.
+    sim_record: bool = _env_bool("SIM_RECORD", True)
 
     @property
     def db_path(self) -> Path:

@@ -8,6 +8,9 @@ export const useWorldStore = defineStore('world', () => {
   const worldSnapshot = ref<any | null>(null);
   const lastTickAt = ref<string | null>(null);
   const usingMock = ref(false);
+  // When false, live WS ticks / polling stop driving the snapshot (playback
+  // mode takes over via setSnapshot()).
+  const liveEnabled = ref(true);
   let pollHandle: number | null = null;
 
   async function loadScene() {
@@ -21,6 +24,7 @@ export const useWorldStore = defineStore('world', () => {
     }
   }
   async function loadWorld() {
+    if (!liveEnabled.value) return;  // playback owns the snapshot; don't clobber it
     try {
       worldSnapshot.value = await api.world();
       usingMock.value = false;
@@ -31,10 +35,19 @@ export const useWorldStore = defineStore('world', () => {
     }
   }
   function applyTick(payload: any) {
+    if (!liveEnabled.value) return;  // playback owns the snapshot
     if (!payload) return;
     if (payload.sim_time) lastTickAt.value = String(payload.sim_time);
     if (payload.world) worldSnapshot.value = payload.world;
   }
+
+  /** Directly set the snapshot (used by playback to render a recorded frame).
+   *  Bypasses the liveEnabled gate. */
+  function setSnapshot(snap: any, simTime?: string) {
+    worldSnapshot.value = snap;
+    if (simTime) lastTickAt.value = String(simTime);
+  }
+  function setLive(on: boolean) { liveEnabled.value = on; }
 
   /** Begin polling /api/world every `intervalMs` ms. Safe to call repeatedly. */
   function startPolling(intervalMs = 3000) {
@@ -49,8 +62,8 @@ export const useWorldStore = defineStore('world', () => {
   }
 
   return {
-    sceneGraph, worldSnapshot, lastTickAt, usingMock,
-    loadScene, loadWorld, applyTick,
+    sceneGraph, worldSnapshot, lastTickAt, usingMock, liveEnabled,
+    loadScene, loadWorld, applyTick, setSnapshot, setLive,
     startPolling, stopPolling,
   };
 });

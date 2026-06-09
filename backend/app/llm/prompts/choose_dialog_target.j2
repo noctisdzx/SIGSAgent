@@ -1,0 +1,34 @@
+You decide WHO an NPC chooses to talk to right now in a campus simulator —
+or whether they simply keep to themselves this moment.
+
+Speaker (主动方):
+- id    : {{ speaker.id }}
+- name  : {{ speaker.name }}
+- role  : {{ speaker.role }}
+- traits: {{ speaker.personality | tojson }}
+
+Situation:
+- in-game time : {{ situation.sim_time }}  (weekday={{ situation.weekday }})
+- room         : {{ situation.here_uid }}  ({{ situation.here_name }})
+- current activity : {{ situation.current_activity }}
+
+Co-located people the speaker could talk to:
+{% for c in candidates %}- id={{ c.id }} | name={{ c.name }} | archetype={{ c.archetype }} | minutes_since_last_talk={{ c.minutes_since_last_talk if c.minutes_since_last_talk is not none else "never" }}
+{% endfor %}
+
+Everyone listed is already a valid person to approach (recently-talked people
+have been filtered out). Pick the single most natural partner for the speaker
+right now:
+- Prefer someone whose interests / archetype fit the current activity, or whom
+  the speaker hasn't talked to in a while ("never" or large minutes).
+- Match personality: outgoing speakers seek lively partners; reserved ones
+  pick a familiar or quiet one.
+- Normally you SHOULD pick someone (the roster is small and already cooled
+  down). Only return null in the rare case the activity is strictly heads-down
+  and solo (e.g. an exam) where talking would be unnatural.
+
+Output STRICTLY this single JSON object (no markdown fences, no prose):
+{
+  "id"       : "<the chosen candidate id; null only if talking is unnatural>",
+  "rationale": "<≤ 20 Chinese chars: why this choice>"
+}

@@ -1,0 +1,2601 @@
+{
+  "meta": {
+    "source": "InternationalPhase1_InsertEvents_60.json",
+    "count": 60,
+    "slot_minutes": 30,
+    "descriptions_from_llm": 60,
+    "location_map": {
+      "International Phase I Dormitory": "438038e3",
+      "H Building": "4d7a7e81",
+      "Heyuan Canteen": "9a49343c",
+      "Roof Garden": "7a281fd7",
+      "Study Space": "64a9bc35",
+      "Gym": "66cb10e7",
+      "Lawson": "a62839dd",
+      "Parcel Station": "cb0199d8"
+    },
+    "role_to_archetypes": {
+      "student": [
+        "undergrad",
+        "grad"
+      ],
+      "faculty": [
+        "faculty"
+      ],
+      "logistics": [
+        "logistics"
+      ],
+      "staff": [
+        "faculty",
+        "logistics",
+        "other"
+      ]
+    },
+    "tag_sources": "destination room scene tags + dominant drives (>=0.6)",
+    "scoring": "0.6*cosine(OCEAN5) + 0.3*cosine(drive_proxy) + 0.1*mbti_bonus; role-gated.",
+    "drive_proxy_doc": {
+      "stress": "neuroticism",
+      "curiosity": "openness",
+      "procrastination": "1 - conscientiousness",
+      "budget": "0.5 (placeholder; use sim money later)",
+      "loneliness": "1 - extraversion",
+      "weather_sensitivity": "0.25 + 0.5*neuroticism",
+      "health_awareness": "conscientiousness",
+      "club_engagement": "0.8 if fav_tags has social/leisure else extraversion",
+      "research_interest": "1.0 if grad/faculty else 0.4",
+      "romantic_interest": "0.5 (placeholder)"
+    }
+  },
+  "events": [
+    {
+      "id": "IE001",
+      "description_zh": "从国际一期宿舍散步到和园食堂，路上偶遇同事聊起周末联谊活动。",
+      "description_en": "Strolls from International Phase I Dormitory to Heyuan Canteen, chatting with a colleague about weekend social events.",
+      "tags": [
+        "daily life",
+        "social"
+      ],
+      "role": "faculty",
+      "eligible_archetypes": [
+        "faculty"
+      ],
+      "slots": 4,
+      "duration_minutes": 120,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Heyuan Canteen",
+      "start_uid": "438038e3",
+      "end_uid": "9a49343c",
+      "weak_location": false,
+      "mbti": "ENTP",
+      "ocean": {
+        "openness": 0.53,
+        "conscientiousness": 0.47,
+        "extroversion": 0.43,
+        "agreeableness": 0.59,
+        "neuroticism": 0.61
+      },
+      "drives": {
+        "stress": 0.07,
+        "curiosity": 0.11,
+        "procrastination": 0.13,
+        "budget": 0.17,
+        "loneliness": 0.19,
+        "weather_sensitivity": 0.23,
+        "health_awareness": 0.29,
+        "club_engagement": 0.31,
+        "research_interest": 0.37,
+        "romantic_interest": 0.41
+      }
+    },
+    {
+      "id": "IE002",
+      "description_zh": "从H楼溜达到屋顶花园，想约心上人一起看夕阳。",
+      "description_en": "Walks from H Building to Roof Garden, hoping to meet a crush for sunset.",
+      "tags": [
+        "leisure",
+        "fitness",
+        "romance",
+        "study"
+      ],
+      "role": "staff",
+      "eligible_archetypes": [
+        "faculty",
+        "logistics",
+        "other"
+      ],
+      "slots": 5,
+      "duration_minutes": 150,
+      "start_name": "H Building",
+      "end_name": "Roof Garden",
+      "start_uid": "4d7a7e81",
+      "end_uid": "7a281fd7",
+      "weak_location": false,
+      "mbti": "INFP",
+      "ocean": {
+        "openness": 0.05,
+        "conscientiousness": 0.94,
+        "extroversion": 0.86,
+        "agreeableness": 0.17,
+        "neuroticism": 0.21
+      },
+      "drives": {
+        "stress": 0.14,
+        "curiosity": 0.22,
+        "procrastination": 0.26,
+        "budget": 0.34,
+        "loneliness": 0.38,
+        "weather_sensitivity": 0.46,
+        "health_awareness": 0.58,
+        "club_engagement": 0.62,
+        "research_interest": 0.74,
+        "romantic_interest": 0.82
+      }
+    },
+    {
+      "id": "IE003",
+      "description_zh": "从国际一期宿舍出发，去学习空间参加社团活动，顺便锻炼身体。",
+      "description_en": "Leaves the dorm for the study space to join a club activity and squeeze in a workout.",
+      "tags": [
+        "study",
+        "social",
+        "club",
+        "fitness"
+      ],
+      "role": "logistics",
+      "eligible_archetypes": [
+        "logistics"
+      ],
+      "slots": 6,
+      "duration_minutes": 180,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Study Space",
+      "start_uid": "438038e3",
+      "end_uid": "64a9bc35",
+      "weak_location": false,
+      "mbti": "ESTJ",
+      "ocean": {
+        "openness": 0.58,
+        "conscientiousness": 0.4,
+        "extroversion": 0.28,
+        "agreeableness": 0.76,
+        "neuroticism": 0.82
+      },
+      "drives": {
+        "stress": 0.21,
+        "curiosity": 0.33,
+        "procrastination": 0.39,
+        "budget": 0.51,
+        "loneliness": 0.57,
+        "weather_sensitivity": 0.69,
+        "health_awareness": 0.87,
+        "club_engagement": 0.93,
+        "research_interest": 0.1,
+        "romantic_interest": 0.22
+      }
+    },
+    {
+      "id": "IE004",
+      "description_zh": "因为怕下雨，从H楼跑到包裹站取快递，顺便约暗恋的人一起。",
+      "description_en": "Fearing rain, she dashes from H Building to the Parcel Station, inviting her crush along.",
+      "tags": [
+        "study",
+        "social",
+        "romance"
+      ],
+      "role": "student",
+      "eligible_archetypes": [
+        "undergrad",
+        "grad"
+      ],
+      "slots": 7,
+      "duration_minutes": 210,
+      "start_name": "H Building",
+      "end_name": "Parcel Station",
+      "start_uid": "4d7a7e81",
+      "end_uid": "cb0199d8",
+      "weak_location": true,
+      "mbti": "ENFP",
+      "ocean": {
+        "openness": 0.1,
+        "conscientiousness": 0.87,
+        "extroversion": 0.71,
+        "agreeableness": 0.34,
+        "neuroticism": 0.42
+      },
+      "drives": {
+        "stress": 0.28,
+        "curiosity": 0.44,
+        "procrastination": 0.52,
+        "budget": 0.68,
+        "loneliness": 0.76,
+        "weather_sensitivity": 0.92,
+        "health_awareness": 0.15,
+        "club_engagement": 0.23,
+        "research_interest": 0.47,
+        "romantic_interest": 0.63
+      }
+    },
+    {
+      "id": "IE005",
+      "description_zh": "教授从国际一期宿舍溜达到健身房，想借运动排解孤独，顺便备课。",
+      "description_en": "A professor walks from the dorm to the gym, hoping to ease loneliness through exercise while reviewing lecture notes.",
+      "tags": [
+        "leisure",
+        "fitness",
+        "social",
+        "study"
+      ],
+      "role": "faculty",
+      "eligible_archetypes": [
+        "faculty"
+      ],
+      "slots": 8,
+      "duration_minutes": 240,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Gym",
+      "start_uid": "438038e3",
+      "end_uid": "66cb10e7",
+      "weak_location": true,
+      "mbti": "ISTP",
+      "ocean": {
+        "openness": 0.63,
+        "conscientiousness": 0.33,
+        "extroversion": 0.13,
+        "agreeableness": 0.93,
+        "neuroticism": 0.02
+      },
+      "drives": {
+        "stress": 0.35,
+        "curiosity": 0.55,
+        "procrastination": 0.65,
+        "budget": 0.85,
+        "loneliness": 0.95,
+        "weather_sensitivity": 0.14,
+        "health_awareness": 0.44,
+        "club_engagement": 0.54,
+        "research_interest": 0.84,
+        "romantic_interest": 0.03
+      }
+    },
+    {
+      "id": "IE006",
+      "description_zh": "从H楼溜达到Lawson，路上跟社团伙伴聊得火热，顺便买点零食犒劳自己。",
+      "description_en": "Strolls from H Building to Lawson, chatting with club friends and grabbing snacks to unwind.",
+      "tags": [
+        "leisure",
+        "social",
+        "daily life",
+        "club"
+      ],
+      "role": "staff",
+      "eligible_archetypes": [
+        "faculty",
+        "logistics",
+        "other"
+      ],
+      "slots": 9,
+      "duration_minutes": 270,
+      "start_name": "H Building",
+      "end_name": "Lawson",
+      "start_uid": "4d7a7e81",
+      "end_uid": "a62839dd",
+      "weak_location": true,
+      "mbti": "ISFJ",
+      "ocean": {
+        "openness": 0.15,
+        "conscientiousness": 0.8,
+        "extroversion": 0.56,
+        "agreeableness": 0.51,
+        "neuroticism": 0.63
+      },
+      "drives": {
+        "stress": 0.42,
+        "curiosity": 0.66,
+        "procrastination": 0.78,
+        "budget": 0.01,
+        "loneliness": 0.13,
+        "weather_sensitivity": 0.37,
+        "health_awareness": 0.73,
+        "club_engagement": 0.85,
+        "research_interest": 0.2,
+        "romantic_interest": 0.44
+      }
+    },
+    {
+      "id": "IE007",
+      "description_zh": "从国际一期宿舍溜达到荷园食堂，路上磨蹭了五个小时，就为了多和同学聊聊天。",
+      "description_en": "Procrastinating for 5 hours on the way from the dorm to the canteen, just to chat with classmates.",
+      "tags": [
+        "daily life",
+        "social",
+        "leisure",
+        "rest"
+      ],
+      "role": "logistics",
+      "eligible_archetypes": [
+        "logistics"
+      ],
+      "slots": 10,
+      "duration_minutes": 300,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Heyuan Canteen",
+      "start_uid": "438038e3",
+      "end_uid": "9a49343c",
+      "weak_location": false,
+      "mbti": "ENTJ",
+      "ocean": {
+        "openness": 0.68,
+        "conscientiousness": 0.26,
+        "extroversion": 0.99,
+        "agreeableness": 0.09,
+        "neuroticism": 0.23
+      },
+      "drives": {
+        "stress": 0.49,
+        "curiosity": 0.77,
+        "procrastination": 0.91,
+        "budget": 0.18,
+        "loneliness": 0.32,
+        "weather_sensitivity": 0.6,
+        "health_awareness": 0.01,
+        "club_engagement": 0.15,
+        "research_interest": 0.57,
+        "romantic_interest": 0.85
+      }
+    },
+    {
+      "id": "IE008",
+      "description_zh": "从H楼溜达到屋顶花园，好奇地观察植物生长，顺便复习笔记。",
+      "description_en": "Wanders from H Building to Roof Garden, driven by curiosity to observe plants and review notes.",
+      "tags": [
+        "leisure",
+        "fitness",
+        "study"
+      ],
+      "role": "student",
+      "eligible_archetypes": [
+        "undergrad",
+        "grad"
+      ],
+      "slots": 3,
+      "duration_minutes": 90,
+      "start_name": "H Building",
+      "end_name": "Roof Garden",
+      "start_uid": "4d7a7e81",
+      "end_uid": "7a281fd7",
+      "weak_location": false,
+      "mbti": "INTJ",
+      "ocean": {
+        "openness": 0.2,
+        "conscientiousness": 0.73,
+        "extroversion": 0.41,
+        "agreeableness": 0.68,
+        "neuroticism": 0.84
+      },
+      "drives": {
+        "stress": 0.56,
+        "curiosity": 0.88,
+        "procrastination": 0.03,
+        "budget": 0.35,
+        "loneliness": 0.51,
+        "weather_sensitivity": 0.83,
+        "health_awareness": 0.3,
+        "club_engagement": 0.46,
+        "research_interest": 0.94,
+        "romantic_interest": 0.25
+      }
+    },
+    {
+      "id": "IE009",
+      "description_zh": "教授好奇地走出国际一期宿舍，去学习空间参加社团活动，缓解孤独。",
+      "description_en": "Driven by curiosity, a professor leaves the dorm for the study space to join a club activity and ease loneliness.",
+      "tags": [
+        "study",
+        "leisure",
+        "social",
+        "club"
+      ],
+      "role": "faculty",
+      "eligible_archetypes": [
+        "faculty"
+      ],
+      "slots": 4,
+      "duration_minutes": 120,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Study Space",
+      "start_uid": "438038e3",
+      "end_uid": "64a9bc35",
+      "weak_location": false,
+      "mbti": "ENTP",
+      "ocean": {
+        "openness": 0.73,
+        "conscientiousness": 0.19,
+        "extroversion": 0.84,
+        "agreeableness": 0.26,
+        "neuroticism": 0.44
+      },
+      "drives": {
+        "stress": 0.63,
+        "curiosity": 0.99,
+        "procrastination": 0.16,
+        "budget": 0.52,
+        "loneliness": 0.7,
+        "weather_sensitivity": 0.05,
+        "health_awareness": 0.59,
+        "club_engagement": 0.77,
+        "research_interest": 0.3,
+        "romantic_interest": 0.66
+      }
+    },
+    {
+      "id": "IE010",
+      "description_zh": "从H楼走到快递站，想找人聊聊，顺便活动一下久坐的身体。",
+      "description_en": "Walks from H Building to Parcel Station, hoping to chat with someone and stretch after long hours of work.",
+      "tags": [
+        "study",
+        "social",
+        "fitness",
+        "rest"
+      ],
+      "role": "staff",
+      "eligible_archetypes": [
+        "faculty",
+        "logistics",
+        "other"
+      ],
+      "slots": 5,
+      "duration_minutes": 150,
+      "start_name": "H Building",
+      "end_name": "Parcel Station",
+      "start_uid": "4d7a7e81",
+      "end_uid": "cb0199d8",
+      "weak_location": true,
+      "mbti": "INFP",
+      "ocean": {
+        "openness": 0.25,
+        "conscientiousness": 0.66,
+        "extroversion": 0.26,
+        "agreeableness": 0.85,
+        "neuroticism": 0.04
+      },
+      "drives": {
+        "stress": 0.7,
+        "curiosity": 0.09,
+        "procrastination": 0.29,
+        "budget": 0.69,
+        "loneliness": 0.89,
+        "weather_sensitivity": 0.28,
+        "health_awareness": 0.88,
+        "club_engagement": 0.07,
+        "research_interest": 0.67,
+        "romantic_interest": 0.06
+      }
+    },
+    {
+      "id": "IE011",
+      "description_zh": "为了省钱，他步行去健身房，顺便缓解压力。",
+      "description_en": "He walks to the gym to save money and relieve stress.",
+      "tags": [
+        "leisure",
+        "fitness",
+        "rest"
+      ],
+      "role": "logistics",
+      "eligible_archetypes": [
+        "logistics"
+      ],
+      "slots": 6,
+      "duration_minutes": 180,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Gym",
+      "start_uid": "438038e3",
+      "end_uid": "66cb10e7",
+      "weak_location": true,
+      "mbti": "ESTJ",
+      "ocean": {
+        "openness": 0.78,
+        "conscientiousness": 0.12,
+        "extroversion": 0.69,
+        "agreeableness": 0.43,
+        "neuroticism": 0.65
+      },
+      "drives": {
+        "stress": 0.77,
+        "curiosity": 0.2,
+        "procrastination": 0.42,
+        "budget": 0.86,
+        "loneliness": 0.07,
+        "weather_sensitivity": 0.51,
+        "health_awareness": 0.16,
+        "club_engagement": 0.38,
+        "research_interest": 0.03,
+        "romantic_interest": 0.47
+      }
+    },
+    {
+      "id": "IE012",
+      "description_zh": "从H楼溜达到Lawson，想偶遇那个常去的人，顺便散散心。",
+      "description_en": "Walks from H Building to Lawson, hoping to run into a crush and unwind from stress.",
+      "tags": [
+        "leisure",
+        "social",
+        "daily life",
+        "romance"
+      ],
+      "role": "student",
+      "eligible_archetypes": [
+        "undergrad",
+        "grad"
+      ],
+      "slots": 7,
+      "duration_minutes": 210,
+      "start_name": "H Building",
+      "end_name": "Lawson",
+      "start_uid": "4d7a7e81",
+      "end_uid": "a62839dd",
+      "weak_location": true,
+      "mbti": "ENFP",
+      "ocean": {
+        "openness": 0.3,
+        "conscientiousness": 0.59,
+        "extroversion": 0.11,
+        "agreeableness": 0.01,
+        "neuroticism": 0.25
+      },
+      "drives": {
+        "stress": 0.84,
+        "curiosity": 0.31,
+        "procrastination": 0.55,
+        "budget": 0.02,
+        "loneliness": 0.26,
+        "weather_sensitivity": 0.74,
+        "health_awareness": 0.45,
+        "club_engagement": 0.69,
+        "research_interest": 0.4,
+        "romantic_interest": 0.88
+      }
+    },
+    {
+      "id": "IE013",
+      "description_zh": "教授顶着烈日快步走向荷园餐厅，想赶紧吃完饭后去社团活动室放松。",
+      "description_en": "The professor hurries to Heyuan Canteen under the scorching sun, eager to eat quickly and then relax at the club activity room.",
+      "tags": [
+        "daily life",
+        "social",
+        "club",
+        "rest"
+      ],
+      "role": "faculty",
+      "eligible_archetypes": [
+        "faculty"
+      ],
+      "slots": 8,
+      "duration_minutes": 240,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Heyuan Canteen",
+      "start_uid": "438038e3",
+      "end_uid": "9a49343c",
+      "weak_location": false,
+      "mbti": "ISTP",
+      "ocean": {
+        "openness": 0.83,
+        "conscientiousness": 0.05,
+        "extroversion": 0.54,
+        "agreeableness": 0.6,
+        "neuroticism": 0.86
+      },
+      "drives": {
+        "stress": 0.91,
+        "curiosity": 0.42,
+        "procrastination": 0.68,
+        "budget": 0.19,
+        "loneliness": 0.45,
+        "weather_sensitivity": 0.97,
+        "health_awareness": 0.74,
+        "club_engagement": 1.0,
+        "research_interest": 0.77,
+        "romantic_interest": 0.28
+      }
+    },
+    {
+      "id": "IE014",
+      "description_zh": "被工作压得喘不过气，从H楼溜到屋顶花园，独自吹风发呆。",
+      "description_en": "Overwhelmed by stress, he sneaks from H Building to the Roof Garden to unwind alone.",
+      "tags": [
+        "leisure",
+        "fitness",
+        "rest",
+        "romance"
+      ],
+      "role": "staff",
+      "eligible_archetypes": [
+        "faculty",
+        "logistics",
+        "other"
+      ],
+      "slots": 9,
+      "duration_minutes": 270,
+      "start_name": "H Building",
+      "end_name": "Roof Garden",
+      "start_uid": "4d7a7e81",
+      "end_uid": "7a281fd7",
+      "weak_location": false,
+      "mbti": "ISFJ",
+      "ocean": {
+        "openness": 0.35,
+        "conscientiousness": 0.52,
+        "extroversion": 0.97,
+        "agreeableness": 0.18,
+        "neuroticism": 0.46
+      },
+      "drives": {
+        "stress": 0.98,
+        "curiosity": 0.53,
+        "procrastination": 0.81,
+        "budget": 0.36,
+        "loneliness": 0.64,
+        "weather_sensitivity": 0.19,
+        "health_awareness": 0.02,
+        "club_engagement": 0.3,
+        "research_interest": 0.13,
+        "romantic_interest": 0.69
+      }
+    },
+    {
+      "id": "IE015",
+      "description_zh": "为了逃避作业，他溜到自习室，边刷手机边发呆，偶尔翻两页书。",
+      "description_en": "Procrastinating on assignments, he heads to the study space to scroll his phone, zone out, and halfheartedly flip through a book.",
+      "tags": [
+        "study",
+        "leisure",
+        "rest",
+        "social"
+      ],
+      "role": "logistics",
+      "eligible_archetypes": [
+        "logistics"
+      ],
+      "slots": 10,
+      "duration_minutes": 300,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Study Space",
+      "start_uid": "438038e3",
+      "end_uid": "64a9bc35",
+      "weak_location": false,
+      "mbti": "ENTJ",
+      "ocean": {
+        "openness": 0.88,
+        "conscientiousness": 0.99,
+        "extroversion": 0.39,
+        "agreeableness": 0.77,
+        "neuroticism": 0.06
+      },
+      "drives": {
+        "stress": 0.04,
+        "curiosity": 0.64,
+        "procrastination": 0.94,
+        "budget": 0.53,
+        "loneliness": 0.83,
+        "weather_sensitivity": 0.42,
+        "health_awareness": 0.31,
+        "club_engagement": 0.61,
+        "research_interest": 0.5,
+        "romantic_interest": 0.09
+      }
+    },
+    {
+      "id": "IE016",
+      "description_zh": "从H楼溜达到快递站，路上顺便和社团伙伴讨论刚读完的论文。",
+      "description_en": "Walks from H Building to Parcel Station, chatting with club friends about a paper they just read.",
+      "tags": [
+        "study",
+        "social",
+        "club",
+        "leisure"
+      ],
+      "role": "student",
+      "eligible_archetypes": [
+        "undergrad",
+        "grad"
+      ],
+      "slots": 3,
+      "duration_minutes": 90,
+      "start_name": "H Building",
+      "end_name": "Parcel Station",
+      "start_uid": "4d7a7e81",
+      "end_uid": "cb0199d8",
+      "weak_location": true,
+      "mbti": "INTJ",
+      "ocean": {
+        "openness": 0.4,
+        "conscientiousness": 0.45,
+        "extroversion": 0.82,
+        "agreeableness": 0.35,
+        "neuroticism": 0.67
+      },
+      "drives": {
+        "stress": 0.11,
+        "curiosity": 0.75,
+        "procrastination": 0.06,
+        "budget": 0.7,
+        "loneliness": 0.01,
+        "weather_sensitivity": 0.65,
+        "health_awareness": 0.6,
+        "club_engagement": 0.92,
+        "research_interest": 0.87,
+        "romantic_interest": 0.5
+      }
+    },
+    {
+      "id": "IE017",
+      "description_zh": "教授从国际一期宿舍出发去健身房，想偶遇心仪的人，顺便锻炼身体。",
+      "description_en": "A professor heads from the dorm to the gym, hoping to run into a crush while getting fit.",
+      "tags": [
+        "leisure",
+        "fitness",
+        "romance"
+      ],
+      "role": "faculty",
+      "eligible_archetypes": [
+        "faculty"
+      ],
+      "slots": 4,
+      "duration_minutes": 120,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Gym",
+      "start_uid": "438038e3",
+      "end_uid": "66cb10e7",
+      "weak_location": true,
+      "mbti": "ENTP",
+      "ocean": {
+        "openness": 0.93,
+        "conscientiousness": 0.92,
+        "extroversion": 0.24,
+        "agreeableness": 0.94,
+        "neuroticism": 0.27
+      },
+      "drives": {
+        "stress": 0.18,
+        "curiosity": 0.86,
+        "procrastination": 0.19,
+        "budget": 0.87,
+        "loneliness": 0.2,
+        "weather_sensitivity": 0.88,
+        "health_awareness": 0.89,
+        "club_engagement": 0.22,
+        "research_interest": 0.23,
+        "romantic_interest": 0.91
+      }
+    },
+    {
+      "id": "IE018",
+      "description_zh": "从H楼溜达到Lawson，好奇地探索新开的文具区，顺便买杯咖啡。",
+      "description_en": "Curious about the new stationery section, a staff member walks from H Building to Lawson, grabbing a coffee along the way.",
+      "tags": [
+        "leisure",
+        "social",
+        "daily life",
+        "study"
+      ],
+      "role": "staff",
+      "eligible_archetypes": [
+        "faculty",
+        "logistics",
+        "other"
+      ],
+      "slots": 5,
+      "duration_minutes": 150,
+      "start_name": "H Building",
+      "end_name": "Lawson",
+      "start_uid": "4d7a7e81",
+      "end_uid": "a62839dd",
+      "weak_location": true,
+      "mbti": "INFP",
+      "ocean": {
+        "openness": 0.45,
+        "conscientiousness": 0.38,
+        "extroversion": 0.67,
+        "agreeableness": 0.52,
+        "neuroticism": 0.88
+      },
+      "drives": {
+        "stress": 0.25,
+        "curiosity": 0.97,
+        "procrastination": 0.32,
+        "budget": 0.03,
+        "loneliness": 0.39,
+        "weather_sensitivity": 0.1,
+        "health_awareness": 0.17,
+        "club_engagement": 0.53,
+        "research_interest": 0.6,
+        "romantic_interest": 0.31
+      }
+    },
+    {
+      "id": "IE019",
+      "description_zh": "从国际一期宿舍去和苑食堂的路上，他边走边看社团活动资料，想着研究课题。",
+      "description_en": "Walking from International Phase I Dormitory to Heyuan Canteen, he reviews club materials, driven by research interest.",
+      "tags": [
+        "daily life",
+        "social",
+        "study",
+        "club"
+      ],
+      "role": "logistics",
+      "eligible_archetypes": [
+        "logistics"
+      ],
+      "slots": 6,
+      "duration_minutes": 180,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Heyuan Canteen",
+      "start_uid": "438038e3",
+      "end_uid": "9a49343c",
+      "weak_location": false,
+      "mbti": "ESTJ",
+      "ocean": {
+        "openness": 0.98,
+        "conscientiousness": 0.85,
+        "extroversion": 0.09,
+        "agreeableness": 0.1,
+        "neuroticism": 0.48
+      },
+      "drives": {
+        "stress": 0.32,
+        "curiosity": 0.07,
+        "procrastination": 0.45,
+        "budget": 0.2,
+        "loneliness": 0.58,
+        "weather_sensitivity": 0.33,
+        "health_awareness": 0.46,
+        "club_engagement": 0.84,
+        "research_interest": 0.97,
+        "romantic_interest": 0.72
+      }
+    },
+    {
+      "id": "IE020",
+      "description_zh": "从H楼溜达到屋顶花园，想找人聊聊，顺便活动一下筋骨。",
+      "description_en": "Walks from H Building to the Roof Garden, hoping to chat with someone and stretch her legs.",
+      "tags": [
+        "leisure",
+        "fitness",
+        "social"
+      ],
+      "role": "student",
+      "eligible_archetypes": [
+        "undergrad",
+        "grad"
+      ],
+      "slots": 7,
+      "duration_minutes": 210,
+      "start_name": "H Building",
+      "end_name": "Roof Garden",
+      "start_uid": "4d7a7e81",
+      "end_uid": "7a281fd7",
+      "weak_location": false,
+      "mbti": "ENFP",
+      "ocean": {
+        "openness": 0.5,
+        "conscientiousness": 0.31,
+        "extroversion": 0.52,
+        "agreeableness": 0.69,
+        "neuroticism": 0.08
+      },
+      "drives": {
+        "stress": 0.39,
+        "curiosity": 0.18,
+        "procrastination": 0.58,
+        "budget": 0.37,
+        "loneliness": 0.77,
+        "weather_sensitivity": 0.56,
+        "health_awareness": 0.75,
+        "club_engagement": 0.14,
+        "research_interest": 0.33,
+        "romantic_interest": 0.12
+      }
+    },
+    {
+      "id": "IE021",
+      "description_zh": "因为感到孤独，教授从国际一期宿舍溜达到学习空间，打算边学习边找人聊天。",
+      "description_en": "Feeling lonely, the professor wanders from the dorm to the study space, hoping to study and chat with someone.",
+      "tags": [
+        "study",
+        "social",
+        "leisure",
+        "rest"
+      ],
+      "role": "faculty",
+      "eligible_archetypes": [
+        "faculty"
+      ],
+      "slots": 8,
+      "duration_minutes": 240,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Study Space",
+      "start_uid": "438038e3",
+      "end_uid": "64a9bc35",
+      "weak_location": false,
+      "mbti": "ISTP",
+      "ocean": {
+        "openness": 0.02,
+        "conscientiousness": 0.78,
+        "extroversion": 0.95,
+        "agreeableness": 0.27,
+        "neuroticism": 0.69
+      },
+      "drives": {
+        "stress": 0.46,
+        "curiosity": 0.29,
+        "procrastination": 0.71,
+        "budget": 0.54,
+        "loneliness": 0.96,
+        "weather_sensitivity": 0.79,
+        "health_awareness": 0.03,
+        "club_engagement": 0.45,
+        "research_interest": 0.7,
+        "romantic_interest": 0.53
+      }
+    },
+    {
+      "id": "IE022",
+      "description_zh": "从H楼溜达到快递站，路上忍不住给暗恋的人发了条消息，心跳加速。",
+      "description_en": "Walks from H Building to Parcel Station, impulsively texting a secret crush, heart racing with romantic hope.",
+      "tags": [
+        "study",
+        "social",
+        "romance",
+        "leisure"
+      ],
+      "role": "staff",
+      "eligible_archetypes": [
+        "faculty",
+        "logistics",
+        "other"
+      ],
+      "slots": 9,
+      "duration_minutes": 270,
+      "start_name": "H Building",
+      "end_name": "Parcel Station",
+      "start_uid": "4d7a7e81",
+      "end_uid": "cb0199d8",
+      "weak_location": true,
+      "mbti": "ISFJ",
+      "ocean": {
+        "openness": 0.55,
+        "conscientiousness": 0.24,
+        "extroversion": 0.37,
+        "agreeableness": 0.86,
+        "neuroticism": 0.29
+      },
+      "drives": {
+        "stress": 0.53,
+        "curiosity": 0.4,
+        "procrastination": 0.84,
+        "budget": 0.71,
+        "loneliness": 0.14,
+        "weather_sensitivity": 0.01,
+        "health_awareness": 0.32,
+        "club_engagement": 0.76,
+        "research_interest": 0.06,
+        "romantic_interest": 0.94
+      }
+    },
+    {
+      "id": "IE023",
+      "description_zh": "为了拖延复习，他溜去健身房，一待就是五小时，边练边刷手机。",
+      "description_en": "To procrastinate on studying, he sneaks to the gym for five hours, half-heartedly working out while scrolling his phone.",
+      "tags": [
+        "leisure",
+        "fitness",
+        "rest"
+      ],
+      "role": "logistics",
+      "eligible_archetypes": [
+        "logistics"
+      ],
+      "slots": 10,
+      "duration_minutes": 300,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Gym",
+      "start_uid": "438038e3",
+      "end_uid": "66cb10e7",
+      "weak_location": true,
+      "mbti": "ENTJ",
+      "ocean": {
+        "openness": 0.07,
+        "conscientiousness": 0.71,
+        "extroversion": 0.8,
+        "agreeableness": 0.44,
+        "neuroticism": 0.9
+      },
+      "drives": {
+        "stress": 0.6,
+        "curiosity": 0.51,
+        "procrastination": 0.97,
+        "budget": 0.88,
+        "loneliness": 0.33,
+        "weather_sensitivity": 0.24,
+        "health_awareness": 0.61,
+        "club_engagement": 0.06,
+        "research_interest": 0.43,
+        "romantic_interest": 0.34
+      }
+    },
+    {
+      "id": "IE024",
+      "description_zh": "从H楼走到Lawson，90分钟的路程，既能锻炼身体又能放松心情。",
+      "description_en": "Walks from H Building to Lawson, a 90-minute trip to boost fitness and unwind from stress.",
+      "tags": [
+        "leisure",
+        "social",
+        "daily life",
+        "fitness"
+      ],
+      "role": "student",
+      "eligible_archetypes": [
+        "undergrad",
+        "grad"
+      ],
+      "slots": 3,
+      "duration_minutes": 90,
+      "start_name": "H Building",
+      "end_name": "Lawson",
+      "start_uid": "4d7a7e81",
+      "end_uid": "a62839dd",
+      "weak_location": true,
+      "mbti": "INTJ",
+      "ocean": {
+        "openness": 0.6,
+        "conscientiousness": 0.17,
+        "extroversion": 0.22,
+        "agreeableness": 0.02,
+        "neuroticism": 0.5
+      },
+      "drives": {
+        "stress": 0.67,
+        "curiosity": 0.62,
+        "procrastination": 0.09,
+        "budget": 0.04,
+        "loneliness": 0.52,
+        "weather_sensitivity": 0.47,
+        "health_awareness": 0.9,
+        "club_engagement": 0.37,
+        "research_interest": 0.8,
+        "romantic_interest": 0.75
+      }
+    },
+    {
+      "id": "IE025",
+      "description_zh": "教授感到压力大，独自去荷园餐厅散步，享受两小时的宁静。",
+      "description_en": "Feeling stressed, the professor takes a two-hour solo stroll to Heyuan Canteen for peace.",
+      "tags": [
+        "daily life",
+        "social",
+        "rest",
+        "leisure"
+      ],
+      "role": "faculty",
+      "eligible_archetypes": [
+        "faculty"
+      ],
+      "slots": 4,
+      "duration_minutes": 120,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Heyuan Canteen",
+      "start_uid": "438038e3",
+      "end_uid": "9a49343c",
+      "weak_location": false,
+      "mbti": "ENTP",
+      "ocean": {
+        "openness": 0.12,
+        "conscientiousness": 0.64,
+        "extroversion": 0.65,
+        "agreeableness": 0.61,
+        "neuroticism": 0.1
+      },
+      "drives": {
+        "stress": 0.74,
+        "curiosity": 0.73,
+        "procrastination": 0.22,
+        "budget": 0.21,
+        "loneliness": 0.71,
+        "weather_sensitivity": 0.7,
+        "health_awareness": 0.18,
+        "club_engagement": 0.68,
+        "research_interest": 0.16,
+        "romantic_interest": 0.15
+      }
+    },
+    {
+      "id": "IE026",
+      "description_zh": "趁午休溜去屋顶花园，和园艺社成员一起修剪花草，顺便晒晒太阳聊聊天。",
+      "description_en": "During lunch break, heads to the roof garden to prune plants with the gardening club, enjoying the sun and socializing.",
+      "tags": [
+        "leisure",
+        "fitness",
+        "social",
+        "club"
+      ],
+      "role": "staff",
+      "eligible_archetypes": [
+        "faculty",
+        "logistics",
+        "other"
+      ],
+      "slots": 5,
+      "duration_minutes": 150,
+      "start_name": "H Building",
+      "end_name": "Roof Garden",
+      "start_uid": "4d7a7e81",
+      "end_uid": "7a281fd7",
+      "weak_location": false,
+      "mbti": "INFP",
+      "ocean": {
+        "openness": 0.65,
+        "conscientiousness": 0.1,
+        "extroversion": 0.07,
+        "agreeableness": 0.19,
+        "neuroticism": 0.71
+      },
+      "drives": {
+        "stress": 0.81,
+        "curiosity": 0.84,
+        "procrastination": 0.35,
+        "budget": 0.38,
+        "loneliness": 0.9,
+        "weather_sensitivity": 0.93,
+        "health_awareness": 0.47,
+        "club_engagement": 0.99,
+        "research_interest": 0.53,
+        "romantic_interest": 0.56
+      }
+    },
+    {
+      "id": "IE027",
+      "description_zh": "从国际一期宿舍溜去学习空间，想偶遇那个常泡自习室的身影。",
+      "description_en": "Sneaks from the dorm to the study space, hoping to run into that familiar face who always studies there.",
+      "tags": [
+        "study",
+        "romance",
+        "leisure",
+        "rest"
+      ],
+      "role": "logistics",
+      "eligible_archetypes": [
+        "logistics"
+      ],
+      "slots": 6,
+      "duration_minutes": 180,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Study Space",
+      "start_uid": "438038e3",
+      "end_uid": "64a9bc35",
+      "weak_location": false,
+      "mbti": "ESTJ",
+      "ocean": {
+        "openness": 0.17,
+        "conscientiousness": 0.57,
+        "extroversion": 0.5,
+        "agreeableness": 0.78,
+        "neuroticism": 0.31
+      },
+      "drives": {
+        "stress": 0.88,
+        "curiosity": 0.95,
+        "procrastination": 0.48,
+        "budget": 0.55,
+        "loneliness": 0.08,
+        "weather_sensitivity": 0.15,
+        "health_awareness": 0.76,
+        "club_engagement": 0.29,
+        "research_interest": 0.9,
+        "romantic_interest": 0.97
+      }
+    },
+    {
+      "id": "IE028",
+      "description_zh": "从H楼走到快递站，路上刷手机放松，缓解考试压力。",
+      "description_en": "Walks from H Building to Parcel Station, scrolling phone to relieve exam stress.",
+      "tags": [
+        "study",
+        "social",
+        "rest",
+        "leisure"
+      ],
+      "role": "student",
+      "eligible_archetypes": [
+        "undergrad",
+        "grad"
+      ],
+      "slots": 7,
+      "duration_minutes": 210,
+      "start_name": "H Building",
+      "end_name": "Parcel Station",
+      "start_uid": "4d7a7e81",
+      "end_uid": "cb0199d8",
+      "weak_location": true,
+      "mbti": "ENFP",
+      "ocean": {
+        "openness": 0.7,
+        "conscientiousness": 0.03,
+        "extroversion": 0.93,
+        "agreeableness": 0.36,
+        "neuroticism": 0.92
+      },
+      "drives": {
+        "stress": 0.95,
+        "curiosity": 0.05,
+        "procrastination": 0.61,
+        "budget": 0.72,
+        "loneliness": 0.27,
+        "weather_sensitivity": 0.38,
+        "health_awareness": 0.04,
+        "club_engagement": 0.6,
+        "research_interest": 0.26,
+        "romantic_interest": 0.37
+      }
+    },
+    {
+      "id": "IE029",
+      "description_zh": "教授从国际一期宿舍溜达到健身房，参加俱乐部活动，顺便锻炼社交。",
+      "description_en": "A professor strolls from the dorm to the gym for a club workout, blending fitness with socializing.",
+      "tags": [
+        "leisure",
+        "fitness",
+        "social",
+        "club"
+      ],
+      "role": "faculty",
+      "eligible_archetypes": [
+        "faculty"
+      ],
+      "slots": 8,
+      "duration_minutes": 240,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Gym",
+      "start_uid": "438038e3",
+      "end_uid": "66cb10e7",
+      "weak_location": true,
+      "mbti": "ISTP",
+      "ocean": {
+        "openness": 0.22,
+        "conscientiousness": 0.5,
+        "extroversion": 0.35,
+        "agreeableness": 0.95,
+        "neuroticism": 0.52
+      },
+      "drives": {
+        "stress": 0.01,
+        "curiosity": 0.16,
+        "procrastination": 0.74,
+        "budget": 0.89,
+        "loneliness": 0.46,
+        "weather_sensitivity": 0.61,
+        "health_awareness": 0.33,
+        "club_engagement": 0.91,
+        "research_interest": 0.63,
+        "romantic_interest": 0.78
+      }
+    },
+    {
+      "id": "IE030",
+      "description_zh": "从H楼溜达到Lawson，为了查资料顺便躲开无聊的工作。",
+      "description_en": "Walked from H Building to Lawson to research a topic and escape tedious work.",
+      "tags": [
+        "leisure",
+        "social",
+        "daily life",
+        "study"
+      ],
+      "role": "staff",
+      "eligible_archetypes": [
+        "faculty",
+        "logistics",
+        "other"
+      ],
+      "slots": 9,
+      "duration_minutes": 270,
+      "start_name": "H Building",
+      "end_name": "Lawson",
+      "start_uid": "4d7a7e81",
+      "end_uid": "a62839dd",
+      "weak_location": true,
+      "mbti": "ISFJ",
+      "ocean": {
+        "openness": 0.75,
+        "conscientiousness": 0.97,
+        "extroversion": 0.78,
+        "agreeableness": 0.53,
+        "neuroticism": 0.12
+      },
+      "drives": {
+        "stress": 0.08,
+        "curiosity": 0.27,
+        "procrastination": 0.87,
+        "budget": 0.05,
+        "loneliness": 0.65,
+        "weather_sensitivity": 0.84,
+        "health_awareness": 0.62,
+        "club_engagement": 0.21,
+        "research_interest": 1.0,
+        "romantic_interest": 0.18
+      }
+    },
+    {
+      "id": "IE031",
+      "description_zh": "为了拖延正事，他慢悠悠地从国际一期宿舍晃到河苑食堂，路上还跟熟人聊了几句。",
+      "description_en": "To procrastinate, he dawdles from International Phase I Dormitory to Heyuan Canteen, chatting with acquaintances along the way.",
+      "tags": [
+        "daily life",
+        "social",
+        "leisure",
+        "rest"
+      ],
+      "role": "logistics",
+      "eligible_archetypes": [
+        "logistics"
+      ],
+      "slots": 10,
+      "duration_minutes": 300,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Heyuan Canteen",
+      "start_uid": "438038e3",
+      "end_uid": "9a49343c",
+      "weak_location": false,
+      "mbti": "ENTJ",
+      "ocean": {
+        "openness": 0.27,
+        "conscientiousness": 0.43,
+        "extroversion": 0.2,
+        "agreeableness": 0.11,
+        "neuroticism": 0.73
+      },
+      "drives": {
+        "stress": 0.15,
+        "curiosity": 0.38,
+        "procrastination": 1.0,
+        "budget": 0.22,
+        "loneliness": 0.84,
+        "weather_sensitivity": 0.06,
+        "health_awareness": 0.91,
+        "club_engagement": 0.52,
+        "research_interest": 0.36,
+        "romantic_interest": 0.59
+      }
+    },
+    {
+      "id": "IE032",
+      "description_zh": "从H楼溜达到屋顶花园，想和暗恋的人一起看夕阳。",
+      "description_en": "Walks from H Building to the Roof Garden, hoping to catch the sunset with a crush.",
+      "tags": [
+        "leisure",
+        "fitness",
+        "romance",
+        "social"
+      ],
+      "role": "student",
+      "eligible_archetypes": [
+        "undergrad",
+        "grad"
+      ],
+      "slots": 3,
+      "duration_minutes": 90,
+      "start_name": "H Building",
+      "end_name": "Roof Garden",
+      "start_uid": "4d7a7e81",
+      "end_uid": "7a281fd7",
+      "weak_location": false,
+      "mbti": "INTJ",
+      "ocean": {
+        "openness": 0.8,
+        "conscientiousness": 0.9,
+        "extroversion": 0.63,
+        "agreeableness": 0.7,
+        "neuroticism": 0.33
+      },
+      "drives": {
+        "stress": 0.22,
+        "curiosity": 0.49,
+        "procrastination": 0.12,
+        "budget": 0.39,
+        "loneliness": 0.02,
+        "weather_sensitivity": 0.29,
+        "health_awareness": 0.19,
+        "club_engagement": 0.83,
+        "research_interest": 0.73,
+        "romantic_interest": 1.0
+      }
+    },
+    {
+      "id": "IE033",
+      "description_zh": "教授从国际一期宿舍溜达到学习空间，好奇地翻看新到的学术期刊。",
+      "description_en": "A faculty member strolls from the dorm to the study space, driven by curiosity to browse new academic journals.",
+      "tags": [
+        "study",
+        "leisure"
+      ],
+      "role": "faculty",
+      "eligible_archetypes": [
+        "faculty"
+      ],
+      "slots": 4,
+      "duration_minutes": 120,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Study Space",
+      "start_uid": "438038e3",
+      "end_uid": "64a9bc35",
+      "weak_location": false,
+      "mbti": "ENTP",
+      "ocean": {
+        "openness": 0.32,
+        "conscientiousness": 0.36,
+        "extroversion": 0.05,
+        "agreeableness": 0.28,
+        "neuroticism": 0.94
+      },
+      "drives": {
+        "stress": 0.29,
+        "curiosity": 0.6,
+        "procrastination": 0.25,
+        "budget": 0.56,
+        "loneliness": 0.21,
+        "weather_sensitivity": 0.52,
+        "health_awareness": 0.48,
+        "club_engagement": 0.13,
+        "research_interest": 0.09,
+        "romantic_interest": 0.4
+      }
+    },
+    {
+      "id": "IE034",
+      "description_zh": "从H楼溜达到快递站，路上想着给暗恋的人寄份惊喜，心跳比脚步还快。",
+      "description_en": "Walks from H Building to Parcel Station, heart racing as she plans to mail a surprise gift to her crush.",
+      "tags": [
+        "study",
+        "social",
+        "romance",
+        "fitness"
+      ],
+      "role": "staff",
+      "eligible_archetypes": [
+        "faculty",
+        "logistics",
+        "other"
+      ],
+      "slots": 5,
+      "duration_minutes": 150,
+      "start_name": "H Building",
+      "end_name": "Parcel Station",
+      "start_uid": "4d7a7e81",
+      "end_uid": "cb0199d8",
+      "weak_location": true,
+      "mbti": "INFP",
+      "ocean": {
+        "openness": 0.85,
+        "conscientiousness": 0.83,
+        "extroversion": 0.48,
+        "agreeableness": 0.87,
+        "neuroticism": 0.54
+      },
+      "drives": {
+        "stress": 0.36,
+        "curiosity": 0.71,
+        "procrastination": 0.38,
+        "budget": 0.73,
+        "loneliness": 0.4,
+        "weather_sensitivity": 0.75,
+        "health_awareness": 0.77,
+        "club_engagement": 0.44,
+        "research_interest": 0.46,
+        "romantic_interest": 0.81
+      }
+    },
+    {
+      "id": "IE035",
+      "description_zh": "虽然天气阴沉，但为了省钱和健身，还是从国际一期宿舍步行去了健身房，顺便在路上背单词。",
+      "description_en": "Despite the gloomy weather, he walks from the dorm to the gym to save money and study vocabulary along the way.",
+      "tags": [
+        "leisure",
+        "fitness",
+        "study",
+        "social"
+      ],
+      "role": "logistics",
+      "eligible_archetypes": [
+        "logistics"
+      ],
+      "slots": 6,
+      "duration_minutes": 180,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Gym",
+      "start_uid": "438038e3",
+      "end_uid": "66cb10e7",
+      "weak_location": true,
+      "mbti": "ESTJ",
+      "ocean": {
+        "openness": 0.37,
+        "conscientiousness": 0.29,
+        "extroversion": 0.91,
+        "agreeableness": 0.45,
+        "neuroticism": 0.14
+      },
+      "drives": {
+        "stress": 0.43,
+        "curiosity": 0.82,
+        "procrastination": 0.51,
+        "budget": 0.9,
+        "loneliness": 0.59,
+        "weather_sensitivity": 0.98,
+        "health_awareness": 0.05,
+        "club_engagement": 0.75,
+        "research_interest": 0.83,
+        "romantic_interest": 0.21
+      }
+    },
+    {
+      "id": "IE036",
+      "description_zh": "从H楼溜达到Lawson，好奇地探索新开的甜品区，顺便打发时间。",
+      "description_en": "Curious about the new dessert section, she wanders from H Building to Lawson to kill time and ease her loneliness.",
+      "tags": [
+        "leisure",
+        "social",
+        "daily life",
+        "rest"
+      ],
+      "role": "student",
+      "eligible_archetypes": [
+        "undergrad",
+        "grad"
+      ],
+      "slots": 7,
+      "duration_minutes": 210,
+      "start_name": "H Building",
+      "end_name": "Lawson",
+      "start_uid": "4d7a7e81",
+      "end_uid": "a62839dd",
+      "weak_location": true,
+      "mbti": "ENFP",
+      "ocean": {
+        "openness": 0.9,
+        "conscientiousness": 0.76,
+        "extroversion": 0.33,
+        "agreeableness": 0.03,
+        "neuroticism": 0.75
+      },
+      "drives": {
+        "stress": 0.5,
+        "curiosity": 0.93,
+        "procrastination": 0.64,
+        "budget": 0.06,
+        "loneliness": 0.78,
+        "weather_sensitivity": 0.2,
+        "health_awareness": 0.34,
+        "club_engagement": 0.05,
+        "research_interest": 0.19,
+        "romantic_interest": 0.62
+      }
+    },
+    {
+      "id": "IE037",
+      "description_zh": "独自走向荷园餐厅，想找人聊聊，缓解一下孤独感。",
+      "description_en": "Walking alone to Heyuan Canteen, hoping to chat with someone to ease the loneliness.",
+      "tags": [
+        "daily life",
+        "social",
+        "leisure",
+        "rest"
+      ],
+      "role": "faculty",
+      "eligible_archetypes": [
+        "faculty"
+      ],
+      "slots": 8,
+      "duration_minutes": 240,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Heyuan Canteen",
+      "start_uid": "438038e3",
+      "end_uid": "9a49343c",
+      "weak_location": false,
+      "mbti": "ISTP",
+      "ocean": {
+        "openness": 0.42,
+        "conscientiousness": 0.22,
+        "extroversion": 0.76,
+        "agreeableness": 0.62,
+        "neuroticism": 0.35
+      },
+      "drives": {
+        "stress": 0.57,
+        "curiosity": 0.03,
+        "procrastination": 0.77,
+        "budget": 0.23,
+        "loneliness": 0.97,
+        "weather_sensitivity": 0.43,
+        "health_awareness": 0.63,
+        "club_engagement": 0.36,
+        "research_interest": 0.56,
+        "romantic_interest": 0.02
+      }
+    },
+    {
+      "id": "IE038",
+      "description_zh": "从H楼溜去屋顶花园，边研究资料边做拉伸，享受偷闲的学术健身时光。",
+      "description_en": "Sneaks from H Building to the Roof Garden, stretching while reviewing research notes for a refreshing academic break.",
+      "tags": [
+        "leisure",
+        "fitness",
+        "study",
+        "rest"
+      ],
+      "role": "staff",
+      "eligible_archetypes": [
+        "faculty",
+        "logistics",
+        "other"
+      ],
+      "slots": 9,
+      "duration_minutes": 270,
+      "start_name": "H Building",
+      "end_name": "Roof Garden",
+      "start_uid": "4d7a7e81",
+      "end_uid": "7a281fd7",
+      "weak_location": false,
+      "mbti": "ISFJ",
+      "ocean": {
+        "openness": 0.95,
+        "conscientiousness": 0.69,
+        "extroversion": 0.18,
+        "agreeableness": 0.2,
+        "neuroticism": 0.96
+      },
+      "drives": {
+        "stress": 0.64,
+        "curiosity": 0.14,
+        "procrastination": 0.9,
+        "budget": 0.4,
+        "loneliness": 0.15,
+        "weather_sensitivity": 0.66,
+        "health_awareness": 0.92,
+        "club_engagement": 0.67,
+        "research_interest": 0.93,
+        "romantic_interest": 0.43
+      }
+    },
+    {
+      "id": "IE039",
+      "description_zh": "带着社团资料和给暗恋对象的小礼物，从国际一期宿舍快步走向学习空间。",
+      "description_en": "Carrying club materials and a small gift for a crush, hurries from the dorm to the study space.",
+      "tags": [
+        "study",
+        "social",
+        "club",
+        "romance"
+      ],
+      "role": "logistics",
+      "eligible_archetypes": [
+        "logistics"
+      ],
+      "slots": 10,
+      "duration_minutes": 300,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Study Space",
+      "start_uid": "438038e3",
+      "end_uid": "64a9bc35",
+      "weak_location": false,
+      "mbti": "ENTJ",
+      "ocean": {
+        "openness": 0.47,
+        "conscientiousness": 0.15,
+        "extroversion": 0.61,
+        "agreeableness": 0.79,
+        "neuroticism": 0.56
+      },
+      "drives": {
+        "stress": 0.71,
+        "curiosity": 0.25,
+        "procrastination": 0.02,
+        "budget": 0.57,
+        "loneliness": 0.34,
+        "weather_sensitivity": 0.89,
+        "health_awareness": 0.2,
+        "club_engagement": 0.98,
+        "research_interest": 0.29,
+        "romantic_interest": 0.84
+      }
+    },
+    {
+      "id": "IE040",
+      "description_zh": "从H楼走到快递站，顺便散心缓解学习压力。",
+      "description_en": "Walks from H Building to Parcel Station to relieve study stress.",
+      "tags": [
+        "study",
+        "social",
+        "rest"
+      ],
+      "role": "student",
+      "eligible_archetypes": [
+        "undergrad",
+        "grad"
+      ],
+      "slots": 3,
+      "duration_minutes": 90,
+      "start_name": "H Building",
+      "end_name": "Parcel Station",
+      "start_uid": "4d7a7e81",
+      "end_uid": "cb0199d8",
+      "weak_location": true,
+      "mbti": "INTJ",
+      "ocean": {
+        "openness": 1.0,
+        "conscientiousness": 0.62,
+        "extroversion": 0.03,
+        "agreeableness": 0.37,
+        "neuroticism": 0.16
+      },
+      "drives": {
+        "stress": 0.78,
+        "curiosity": 0.36,
+        "procrastination": 0.15,
+        "budget": 0.74,
+        "loneliness": 0.53,
+        "weather_sensitivity": 0.11,
+        "health_awareness": 0.49,
+        "club_engagement": 0.28,
+        "research_interest": 0.66,
+        "romantic_interest": 0.24
+      }
+    },
+    {
+      "id": "IE041",
+      "description_zh": "教授从国际一期宿舍步行去健身房，挥汗两小时缓解工作压力。",
+      "description_en": "A professor walks from the International Phase I Dormitory to the gym for a two-hour workout to relieve work stress.",
+      "tags": [
+        "leisure",
+        "fitness",
+        "rest",
+        "social"
+      ],
+      "role": "faculty",
+      "eligible_archetypes": [
+        "faculty"
+      ],
+      "slots": 4,
+      "duration_minutes": 120,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Gym",
+      "start_uid": "438038e3",
+      "end_uid": "66cb10e7",
+      "weak_location": true,
+      "mbti": "ENTP",
+      "ocean": {
+        "openness": 0.52,
+        "conscientiousness": 0.08,
+        "extroversion": 0.46,
+        "agreeableness": 0.96,
+        "neuroticism": 0.77
+      },
+      "drives": {
+        "stress": 0.85,
+        "curiosity": 0.47,
+        "procrastination": 0.28,
+        "budget": 0.91,
+        "loneliness": 0.72,
+        "weather_sensitivity": 0.34,
+        "health_awareness": 0.78,
+        "club_engagement": 0.59,
+        "research_interest": 0.02,
+        "romantic_interest": 0.65
+      }
+    },
+    {
+      "id": "IE042",
+      "description_zh": "下班后，从H楼走到Lawson，买杯咖啡坐坐，缓解一天的压力。",
+      "description_en": "After work, walks from H Building to Lawson for coffee and a break, easing stress.",
+      "tags": [
+        "leisure",
+        "social",
+        "daily life",
+        "rest"
+      ],
+      "role": "staff",
+      "eligible_archetypes": [
+        "faculty",
+        "logistics",
+        "other"
+      ],
+      "slots": 5,
+      "duration_minutes": 150,
+      "start_name": "H Building",
+      "end_name": "Lawson",
+      "start_uid": "4d7a7e81",
+      "end_uid": "a62839dd",
+      "weak_location": true,
+      "mbti": "INFP",
+      "ocean": {
+        "openness": 0.04,
+        "conscientiousness": 0.55,
+        "extroversion": 0.89,
+        "agreeableness": 0.54,
+        "neuroticism": 0.37
+      },
+      "drives": {
+        "stress": 0.92,
+        "curiosity": 0.58,
+        "procrastination": 0.41,
+        "budget": 0.07,
+        "loneliness": 0.91,
+        "weather_sensitivity": 0.57,
+        "health_awareness": 0.06,
+        "club_engagement": 0.9,
+        "research_interest": 0.39,
+        "romantic_interest": 0.05
+      }
+    },
+    {
+      "id": "IE043",
+      "description_zh": "顶着压力，从国际一期宿舍溜达到和园食堂，边吃边复习。",
+      "description_en": "Overwhelmed by stress, I stroll from International Phase I Dormitory to Heyuan Canteen to eat and study.",
+      "tags": [
+        "daily life",
+        "social",
+        "rest",
+        "study"
+      ],
+      "role": "logistics",
+      "eligible_archetypes": [
+        "logistics"
+      ],
+      "slots": 6,
+      "duration_minutes": 180,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Heyuan Canteen",
+      "start_uid": "438038e3",
+      "end_uid": "9a49343c",
+      "weak_location": false,
+      "mbti": "ESTJ",
+      "ocean": {
+        "openness": 0.57,
+        "conscientiousness": 0.01,
+        "extroversion": 0.31,
+        "agreeableness": 0.12,
+        "neuroticism": 0.98
+      },
+      "drives": {
+        "stress": 0.99,
+        "curiosity": 0.69,
+        "procrastination": 0.54,
+        "budget": 0.24,
+        "loneliness": 0.09,
+        "weather_sensitivity": 0.8,
+        "health_awareness": 0.35,
+        "club_engagement": 0.2,
+        "research_interest": 0.76,
+        "romantic_interest": 0.46
+      }
+    },
+    {
+      "id": "IE044",
+      "description_zh": "从H楼溜达到屋顶花园，想碰碰运气看能不能偶遇那个常来的人。",
+      "description_en": "Wanders from H Building to the Roof Garden, hoping to run into that someone who often comes here.",
+      "tags": [
+        "leisure",
+        "fitness",
+        "romance",
+        "rest"
+      ],
+      "role": "student",
+      "eligible_archetypes": [
+        "undergrad",
+        "grad"
+      ],
+      "slots": 7,
+      "duration_minutes": 210,
+      "start_name": "H Building",
+      "end_name": "Roof Garden",
+      "start_uid": "4d7a7e81",
+      "end_uid": "7a281fd7",
+      "weak_location": false,
+      "mbti": "ENFP",
+      "ocean": {
+        "openness": 0.09,
+        "conscientiousness": 0.48,
+        "extroversion": 0.74,
+        "agreeableness": 0.71,
+        "neuroticism": 0.58
+      },
+      "drives": {
+        "stress": 0.05,
+        "curiosity": 0.8,
+        "procrastination": 0.67,
+        "budget": 0.41,
+        "loneliness": 0.28,
+        "weather_sensitivity": 0.02,
+        "health_awareness": 0.64,
+        "club_engagement": 0.51,
+        "research_interest": 0.12,
+        "romantic_interest": 0.87
+      }
+    },
+    {
+      "id": "IE045",
+      "description_zh": "教授从国际一期宿舍溜达到学习空间，好奇地探索新研究，顺便活动筋骨。",
+      "description_en": "A professor strolls from the dorm to the study space, driven by curiosity to explore new research and stretch their legs.",
+      "tags": [
+        "study",
+        "fitness",
+        "leisure",
+        "social"
+      ],
+      "role": "faculty",
+      "eligible_archetypes": [
+        "faculty"
+      ],
+      "slots": 8,
+      "duration_minutes": 240,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Study Space",
+      "start_uid": "438038e3",
+      "end_uid": "64a9bc35",
+      "weak_location": false,
+      "mbti": "ISTP",
+      "ocean": {
+        "openness": 0.62,
+        "conscientiousness": 0.95,
+        "extroversion": 0.16,
+        "agreeableness": 0.29,
+        "neuroticism": 0.18
+      },
+      "drives": {
+        "stress": 0.12,
+        "curiosity": 0.91,
+        "procrastination": 0.8,
+        "budget": 0.58,
+        "loneliness": 0.47,
+        "weather_sensitivity": 0.25,
+        "health_awareness": 0.93,
+        "club_engagement": 0.82,
+        "research_interest": 0.49,
+        "romantic_interest": 0.27
+      }
+    },
+    {
+      "id": "IE046",
+      "description_zh": "从H楼溜达到快递站，路上刷手机拖延时间，顺便看看有没有新包裹。",
+      "description_en": "Strolls from H Building to Parcel Station, procrastinating by scrolling phone and checking for packages.",
+      "tags": [
+        "study",
+        "social",
+        "leisure",
+        "rest"
+      ],
+      "role": "staff",
+      "eligible_archetypes": [
+        "faculty",
+        "logistics",
+        "other"
+      ],
+      "slots": 9,
+      "duration_minutes": 270,
+      "start_name": "H Building",
+      "end_name": "Parcel Station",
+      "start_uid": "4d7a7e81",
+      "end_uid": "cb0199d8",
+      "weak_location": true,
+      "mbti": "ISFJ",
+      "ocean": {
+        "openness": 0.14,
+        "conscientiousness": 0.41,
+        "extroversion": 0.59,
+        "agreeableness": 0.88,
+        "neuroticism": 0.79
+      },
+      "drives": {
+        "stress": 0.19,
+        "curiosity": 0.01,
+        "procrastination": 0.93,
+        "budget": 0.75,
+        "loneliness": 0.66,
+        "weather_sensitivity": 0.48,
+        "health_awareness": 0.21,
+        "club_engagement": 0.12,
+        "research_interest": 0.86,
+        "romantic_interest": 0.68
+      }
+    },
+    {
+      "id": "IE047",
+      "description_zh": "为了省钱，他选择步行去健身房，路上还顺便约了朋友一起锻炼。",
+      "description_en": "To save money, he walks to the gym and invites a friend along for company.",
+      "tags": [
+        "leisure",
+        "fitness",
+        "social"
+      ],
+      "role": "logistics",
+      "eligible_archetypes": [
+        "logistics"
+      ],
+      "slots": 10,
+      "duration_minutes": 300,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Gym",
+      "start_uid": "438038e3",
+      "end_uid": "66cb10e7",
+      "weak_location": true,
+      "mbti": "ENTJ",
+      "ocean": {
+        "openness": 0.67,
+        "conscientiousness": 0.88,
+        "extroversion": 0.01,
+        "agreeableness": 0.46,
+        "neuroticism": 0.39
+      },
+      "drives": {
+        "stress": 0.26,
+        "curiosity": 0.12,
+        "procrastination": 0.05,
+        "budget": 0.92,
+        "loneliness": 0.85,
+        "weather_sensitivity": 0.71,
+        "health_awareness": 0.5,
+        "club_engagement": 0.43,
+        "research_interest": 0.22,
+        "romantic_interest": 0.08
+      }
+    },
+    {
+      "id": "IE048",
+      "description_zh": "从H楼出发去Lawson，因为天气好，想和同学一起散步锻炼。",
+      "description_en": "Leaving H Building for Lawson, a student enjoys a 90-minute walk with friends, motivated by the pleasant weather and a desire to stay fit.",
+      "tags": [
+        "leisure",
+        "social",
+        "daily life",
+        "fitness"
+      ],
+      "role": "student",
+      "eligible_archetypes": [
+        "undergrad",
+        "grad"
+      ],
+      "slots": 3,
+      "duration_minutes": 90,
+      "start_name": "H Building",
+      "end_name": "Lawson",
+      "start_uid": "4d7a7e81",
+      "end_uid": "a62839dd",
+      "weak_location": true,
+      "mbti": "INTJ",
+      "ocean": {
+        "openness": 0.19,
+        "conscientiousness": 0.34,
+        "extroversion": 0.44,
+        "agreeableness": 0.04,
+        "neuroticism": 1.0
+      },
+      "drives": {
+        "stress": 0.33,
+        "curiosity": 0.23,
+        "procrastination": 0.18,
+        "budget": 0.08,
+        "loneliness": 0.03,
+        "weather_sensitivity": 0.94,
+        "health_awareness": 0.79,
+        "club_engagement": 0.74,
+        "research_interest": 0.59,
+        "romantic_interest": 0.49
+      }
+    },
+    {
+      "id": "IE049",
+      "description_zh": "教授从国际一期宿舍散步到和园食堂，路上还在思考研究课题，顺便约了学生讨论。",
+      "description_en": "A professor walks from International Phase I Dormitory to Heyuan Canteen, pondering research and arranging to meet a student there.",
+      "tags": [
+        "daily life",
+        "social",
+        "study",
+        "romance"
+      ],
+      "role": "faculty",
+      "eligible_archetypes": [
+        "faculty"
+      ],
+      "slots": 4,
+      "duration_minutes": 120,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Heyuan Canteen",
+      "start_uid": "438038e3",
+      "end_uid": "9a49343c",
+      "weak_location": false,
+      "mbti": "ENTP",
+      "ocean": {
+        "openness": 0.72,
+        "conscientiousness": 0.81,
+        "extroversion": 0.87,
+        "agreeableness": 0.63,
+        "neuroticism": 0.6
+      },
+      "drives": {
+        "stress": 0.4,
+        "curiosity": 0.34,
+        "procrastination": 0.31,
+        "budget": 0.25,
+        "loneliness": 0.22,
+        "weather_sensitivity": 0.16,
+        "health_awareness": 0.07,
+        "club_engagement": 0.04,
+        "research_interest": 0.96,
+        "romantic_interest": 0.9
+      }
+    },
+    {
+      "id": "IE050",
+      "description_zh": "工作压力大，从H楼溜达到屋顶花园，吹风看景放松心情。",
+      "description_en": "Feeling stressed, a staff member walks from H Building to the Roof Garden to relax and enjoy the view.",
+      "tags": [
+        "leisure",
+        "fitness"
+      ],
+      "role": "staff",
+      "eligible_archetypes": [
+        "faculty",
+        "logistics",
+        "other"
+      ],
+      "slots": 5,
+      "duration_minutes": 150,
+      "start_name": "H Building",
+      "end_name": "Roof Garden",
+      "start_uid": "4d7a7e81",
+      "end_uid": "7a281fd7",
+      "weak_location": false,
+      "mbti": "INFP",
+      "ocean": {
+        "openness": 0.24,
+        "conscientiousness": 0.27,
+        "extroversion": 0.29,
+        "agreeableness": 0.21,
+        "neuroticism": 0.2
+      },
+      "drives": {
+        "stress": 0.47,
+        "curiosity": 0.45,
+        "procrastination": 0.44,
+        "budget": 0.42,
+        "loneliness": 0.41,
+        "weather_sensitivity": 0.39,
+        "health_awareness": 0.36,
+        "club_engagement": 0.35,
+        "research_interest": 0.32,
+        "romantic_interest": 0.3
+      }
+    },
+    {
+      "id": "IE051",
+      "description_zh": "从国际一期宿舍溜达到自习空间，路上想着约暗恋的人一起复习。",
+      "description_en": "Walks from International Phase I Dormitory to Study Space, hoping to run into a crush and study together.",
+      "tags": [
+        "study",
+        "romance",
+        "social",
+        "club"
+      ],
+      "role": "logistics",
+      "eligible_archetypes": [
+        "logistics"
+      ],
+      "slots": 6,
+      "duration_minutes": 180,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Study Space",
+      "start_uid": "438038e3",
+      "end_uid": "64a9bc35",
+      "weak_location": false,
+      "mbti": "ESTJ",
+      "ocean": {
+        "openness": 0.77,
+        "conscientiousness": 0.74,
+        "extroversion": 0.72,
+        "agreeableness": 0.8,
+        "neuroticism": 0.81
+      },
+      "drives": {
+        "stress": 0.54,
+        "curiosity": 0.56,
+        "procrastination": 0.57,
+        "budget": 0.59,
+        "loneliness": 0.6,
+        "weather_sensitivity": 0.62,
+        "health_awareness": 0.65,
+        "club_engagement": 0.66,
+        "research_interest": 0.69,
+        "romantic_interest": 0.71
+      }
+    },
+    {
+      "id": "IE052",
+      "description_zh": "从H楼出发去包裹站，路上顺便参加社团活动，再跑个步，因为太想融入集体了。",
+      "description_en": "Leaves H Building for the parcel station, joining a club activity and jogging along the way, driven by a strong desire to engage with the community.",
+      "tags": [
+        "study",
+        "social",
+        "club",
+        "fitness"
+      ],
+      "role": "student",
+      "eligible_archetypes": [
+        "undergrad",
+        "grad"
+      ],
+      "slots": 7,
+      "duration_minutes": 210,
+      "start_name": "H Building",
+      "end_name": "Parcel Station",
+      "start_uid": "4d7a7e81",
+      "end_uid": "cb0199d8",
+      "weak_location": true,
+      "mbti": "ENFP",
+      "ocean": {
+        "openness": 0.29,
+        "conscientiousness": 0.2,
+        "extroversion": 0.14,
+        "agreeableness": 0.38,
+        "neuroticism": 0.41
+      },
+      "drives": {
+        "stress": 0.61,
+        "curiosity": 0.67,
+        "procrastination": 0.7,
+        "budget": 0.76,
+        "loneliness": 0.79,
+        "weather_sensitivity": 0.85,
+        "health_awareness": 0.94,
+        "club_engagement": 0.97,
+        "research_interest": 0.05,
+        "romantic_interest": 0.11
+      }
+    },
+    {
+      "id": "IE053",
+      "description_zh": "教授独自去健身房锻炼，想借运动排解孤独感。",
+      "description_en": "A professor heads to the gym alone, hoping to shake off loneliness through exercise.",
+      "tags": [
+        "leisure",
+        "fitness",
+        "social",
+        "rest"
+      ],
+      "role": "faculty",
+      "eligible_archetypes": [
+        "faculty"
+      ],
+      "slots": 8,
+      "duration_minutes": 240,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Gym",
+      "start_uid": "438038e3",
+      "end_uid": "66cb10e7",
+      "weak_location": true,
+      "mbti": "ISTP",
+      "ocean": {
+        "openness": 0.82,
+        "conscientiousness": 0.67,
+        "extroversion": 0.57,
+        "agreeableness": 0.97,
+        "neuroticism": 0.01
+      },
+      "drives": {
+        "stress": 0.68,
+        "curiosity": 0.78,
+        "procrastination": 0.83,
+        "budget": 0.93,
+        "loneliness": 0.98,
+        "weather_sensitivity": 0.07,
+        "health_awareness": 0.22,
+        "club_engagement": 0.27,
+        "research_interest": 0.42,
+        "romantic_interest": 0.52
+      }
+    },
+    {
+      "id": "IE054",
+      "description_zh": "从H楼溜达到Lawson，借口买咖啡，其实是想偶遇那个常去的人。",
+      "description_en": "Strolls from H Building to Lawson, ostensibly for coffee but secretly hoping to run into that special someone.",
+      "tags": [
+        "leisure",
+        "social",
+        "daily life",
+        "rest"
+      ],
+      "role": "staff",
+      "eligible_archetypes": [
+        "faculty",
+        "logistics",
+        "other"
+      ],
+      "slots": 9,
+      "duration_minutes": 270,
+      "start_name": "H Building",
+      "end_name": "Lawson",
+      "start_uid": "4d7a7e81",
+      "end_uid": "a62839dd",
+      "weak_location": true,
+      "mbti": "ISFJ",
+      "ocean": {
+        "openness": 0.34,
+        "conscientiousness": 0.13,
+        "extroversion": 1.0,
+        "agreeableness": 0.55,
+        "neuroticism": 0.62
+      },
+      "drives": {
+        "stress": 0.75,
+        "curiosity": 0.89,
+        "procrastination": 0.96,
+        "budget": 0.09,
+        "loneliness": 0.16,
+        "weather_sensitivity": 0.3,
+        "health_awareness": 0.51,
+        "club_engagement": 0.58,
+        "research_interest": 0.79,
+        "romantic_interest": 0.93
+      }
+    },
+    {
+      "id": "IE055",
+      "description_zh": "从国际一期宿舍溜达到荷园食堂，好奇地探索沿途新开的社团摊位。",
+      "description_en": "Curious about new club booths, he strolls from International Phase I Dormitory to Heyuan Canteen, exploring along the way.",
+      "tags": [
+        "daily life",
+        "social",
+        "leisure",
+        "club"
+      ],
+      "role": "logistics",
+      "eligible_archetypes": [
+        "logistics"
+      ],
+      "slots": 10,
+      "duration_minutes": 300,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Heyuan Canteen",
+      "start_uid": "438038e3",
+      "end_uid": "9a49343c",
+      "weak_location": false,
+      "mbti": "ENTJ",
+      "ocean": {
+        "openness": 0.87,
+        "conscientiousness": 0.6,
+        "extroversion": 0.42,
+        "agreeableness": 0.13,
+        "neuroticism": 0.22
+      },
+      "drives": {
+        "stress": 0.82,
+        "curiosity": 1.0,
+        "procrastination": 0.08,
+        "budget": 0.26,
+        "loneliness": 0.35,
+        "weather_sensitivity": 0.53,
+        "health_awareness": 0.8,
+        "club_engagement": 0.89,
+        "research_interest": 0.15,
+        "romantic_interest": 0.33
+      }
+    },
+    {
+      "id": "IE056",
+      "description_zh": "压力太大，他独自爬上屋顶花园，吹风发呆，顺便偷偷看那个常来跑步的女生。",
+      "description_en": "Overwhelmed by stress, he heads to the roof garden to unwind, secretly hoping to catch a glimpse of the girl he likes.",
+      "tags": [
+        "leisure",
+        "fitness",
+        "rest",
+        "romance"
+      ],
+      "role": "student",
+      "eligible_archetypes": [
+        "undergrad",
+        "grad"
+      ],
+      "slots": 3,
+      "duration_minutes": 90,
+      "start_name": "H Building",
+      "end_name": "Roof Garden",
+      "start_uid": "4d7a7e81",
+      "end_uid": "7a281fd7",
+      "weak_location": false,
+      "mbti": "INTJ",
+      "ocean": {
+        "openness": 0.39,
+        "conscientiousness": 0.06,
+        "extroversion": 0.85,
+        "agreeableness": 0.72,
+        "neuroticism": 0.83
+      },
+      "drives": {
+        "stress": 0.89,
+        "curiosity": 0.1,
+        "procrastination": 0.21,
+        "budget": 0.43,
+        "loneliness": 0.54,
+        "weather_sensitivity": 0.76,
+        "health_awareness": 0.08,
+        "club_engagement": 0.19,
+        "research_interest": 0.52,
+        "romantic_interest": 0.74
+      }
+    },
+    {
+      "id": "IE057",
+      "description_zh": "教授顶着寒风快步走向自习室，想躲开阴冷天气，在安静角落备课放松。",
+      "description_en": "The professor hurries to the study space to escape the cold weather, seeking a quiet corner to prepare lectures and unwind.",
+      "tags": [
+        "study",
+        "rest",
+        "social"
+      ],
+      "role": "faculty",
+      "eligible_archetypes": [
+        "faculty"
+      ],
+      "slots": 4,
+      "duration_minutes": 120,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Study Space",
+      "start_uid": "438038e3",
+      "end_uid": "64a9bc35",
+      "weak_location": false,
+      "mbti": "ENTP",
+      "ocean": {
+        "openness": 0.92,
+        "conscientiousness": 0.53,
+        "extroversion": 0.27,
+        "agreeableness": 0.3,
+        "neuroticism": 0.43
+      },
+      "drives": {
+        "stress": 0.96,
+        "curiosity": 0.21,
+        "procrastination": 0.34,
+        "budget": 0.6,
+        "loneliness": 0.73,
+        "weather_sensitivity": 0.99,
+        "health_awareness": 0.37,
+        "club_engagement": 0.5,
+        "research_interest": 0.89,
+        "romantic_interest": 0.14
+      }
+    },
+    {
+      "id": "IE058",
+      "description_zh": "从H楼走到快递站，路上顺便约同学聊社团活动，缓解孤独感。",
+      "description_en": "Walks from H Building to Parcel Station, chatting with classmates about club activities to ease loneliness.",
+      "tags": [
+        "study",
+        "social",
+        "club",
+        "fitness"
+      ],
+      "role": "staff",
+      "eligible_archetypes": [
+        "faculty",
+        "logistics",
+        "other"
+      ],
+      "slots": 5,
+      "duration_minutes": 150,
+      "start_name": "H Building",
+      "end_name": "Parcel Station",
+      "start_uid": "4d7a7e81",
+      "end_uid": "cb0199d8",
+      "weak_location": true,
+      "mbti": "INFP",
+      "ocean": {
+        "openness": 0.44,
+        "conscientiousness": 1.0,
+        "extroversion": 0.7,
+        "agreeableness": 0.89,
+        "neuroticism": 0.03
+      },
+      "drives": {
+        "stress": 0.02,
+        "curiosity": 0.32,
+        "procrastination": 0.47,
+        "budget": 0.77,
+        "loneliness": 0.92,
+        "weather_sensitivity": 0.21,
+        "health_awareness": 0.66,
+        "club_engagement": 0.81,
+        "research_interest": 0.25,
+        "romantic_interest": 0.55
+      }
+    },
+    {
+      "id": "IE059",
+      "description_zh": "为了省钱和健康，他步行去健身房，路上还想着约暗恋的人一起锻炼。",
+      "description_en": "To save money and stay fit, he walks to the gym, hoping to invite his crush to work out together.",
+      "tags": [
+        "leisure",
+        "fitness",
+        "romance",
+        "study"
+      ],
+      "role": "logistics",
+      "eligible_archetypes": [
+        "logistics"
+      ],
+      "slots": 6,
+      "duration_minutes": 180,
+      "start_name": "International Phase I Dormitory",
+      "end_name": "Gym",
+      "start_uid": "438038e3",
+      "end_uid": "66cb10e7",
+      "weak_location": true,
+      "mbti": "ESTJ",
+      "ocean": {
+        "openness": 0.97,
+        "conscientiousness": 0.46,
+        "extroversion": 0.12,
+        "agreeableness": 0.47,
+        "neuroticism": 0.64
+      },
+      "drives": {
+        "stress": 0.09,
+        "curiosity": 0.43,
+        "procrastination": 0.6,
+        "budget": 0.94,
+        "loneliness": 0.1,
+        "weather_sensitivity": 0.44,
+        "health_awareness": 0.95,
+        "club_engagement": 0.11,
+        "research_interest": 0.62,
+        "romantic_interest": 0.96
+      }
+    },
+    {
+      "id": "IE060",
+      "description_zh": "从H楼溜达到Lawson，为了查资料顺便买零食，拖延一下作业。",
+      "description_en": "Walks from H Building to Lawson, grabbing snacks while researching to procrastinate on homework.",
+      "tags": [
+        "leisure",
+        "social",
+        "daily life",
+        "study"
+      ],
+      "role": "student",
+      "eligible_archetypes": [
+        "undergrad",
+        "grad"
+      ],
+      "slots": 7,
+      "duration_minutes": 210,
+      "start_name": "H Building",
+      "end_name": "Lawson",
+      "start_uid": "4d7a7e81",
+      "end_uid": "a62839dd",
+      "weak_location": true,
+      "mbti": "ENFP",
+      "ocean": {
+        "openness": 0.49,
+        "conscientiousness": 0.93,
+        "extroversion": 0.55,
+        "agreeableness": 0.05,
+        "neuroticism": 0.24
+      },
+      "drives": {
+        "stress": 0.16,
+        "curiosity": 0.54,
+        "procrastination": 0.73,
+        "budget": 0.1,
+        "loneliness": 0.29,
+        "weather_sensitivity": 0.67,
+        "health_awareness": 0.23,
+        "club_engagement": 0.42,
+        "research_interest": 0.99,
+        "romantic_interest": 0.36
+      }
+    }
+  ]
+}

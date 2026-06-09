@@ -57,7 +57,7 @@
         />
         <SchedulePanel
           v-else-if="tab === 'schedule'"
-          :slots="agents.schedule?.slots || []"
+          :agent-id="agents.selectedId"
         />
         <BehaviorHistory
           v-else-if="tab === 'history'"

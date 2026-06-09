@@ -1,0 +1,19 @@
+You write a short, natural campus-life "insert event" description for an
+agent simulation. The event is a small spontaneous trip an NPC may take during
+free time.
+
+Event facts:
+- role (who tends to do this): {{ role }}
+- trip: from "{{ start_name }}" to "{{ end_name }}"
+- duration: about {{ duration_minutes }} minutes
+- salient tags: {{ tags }}
+- dominant motivations (0-1, higher = stronger): {{ drives | tojson }}
+
+Write ONE vivid but concise sentence in Chinese (≤ 40 字) and ONE in English
+(≤ 30 words) describing what the NPC does on this trip and WHY (tie it to the
+strongest motivation). Natural, grounded, no game/sim jargon, no NPC ids.
+
+Reply STRICTLY as a single JSON object, no prose, no markdown fences:
+{"description_zh": "<≤40字中文一句>", "description_en": "<≤30 word English sentence>"}
+
+Now produce the JSON:

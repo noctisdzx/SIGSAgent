@@ -1,0 +1,35 @@
+You decide whether an NPC seizes a special campus "insert event" during a
+{{ gap_minutes }}-minute free gap in their day, and if so, which one.
+
+Persona (JSON):
+{{ persona | tojson }}
+
+{% if context %}Current situation:
+- in-game time : {{ context.sim_time | default('?') }}  (weekday={{ context.weekday | default('?') }})
+- current room : {{ context.here_uid | default('?') }}
+- this gap follows activity: {{ context.last_activity | default('?') }}
+- visible nearby NPCs (ids) : {{ context.visible_agents | default([]) }}
+{% endif %}
+Recent memories (most relevant first; the NPC's own STM/LTM):
+{% for m in memories %}- {{ m }}
+{% endfor %}
+
+Candidate insert events (you MUST pick exactly one of these ids):
+{% for c in candidates %}- id={{ c.id }}, desc="{{ c.description }}", tags={{ c.tags }}, needs={{ c.duration_minutes }}min, trip={{ c.from }}→{{ c.to }}
+{% endfor %}
+
+Rules:
+- The picked id MUST appear verbatim in the candidates list above.
+- Choose the event that best fits this persona's character, drives, and the
+  current situation + recent memories.
+- Prefer events whose tags overlap the persona's favorite_tags.
+- If visible NPCs are present and a social event fits, gently favor it.
+- Avoid an event that merely repeats the activity the NPC just did.
+- Keep "rationale" to ONE short Chinese sentence (≤ 30 字).
+
+Reply STRICTLY as a single JSON object, no prose, no markdown fences.
+
+Example output:
+{"id": "IE007", "rationale": "她好奇心强，正好去逛逛展览"}
+
+Now produce the JSON for this case:

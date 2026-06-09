@@ -87,6 +87,12 @@ function summary(ev: any): string {
     const reply = lang.lang === 'en' ? (p.listener_line_en || p.listener_line) : (p.listener_line || p.listener_line_en);
     return `${sp} → ${ls} ${topic}：${line || ''}   ↩ ${reply || ''}`;
   }
+  // Inner monologue (dialog channel's Mutter state).
+  if (ev.type === 'mutter') {
+    const who = npcLabel(p.agent_id) || p.name || '';
+    const line = lang.lang === 'en' ? (p.line_en || p.line) : (p.line || p.line_en);
+    return `💭 ${who}：${line || ''}`;
+  }
   if (ev.type === 'behavior') {
     const ok = p.ok ? '✓' : '✗';
     const act = p.action_id || '?';
@@ -141,6 +147,7 @@ onMounted(() => {
 .ev--tick           { border-left-color: var(--accent-active); }
 .ev--agent_decision { border-left-color: var(--accent-warn); }
 .ev--behavior       { border-left-color: var(--accent-good-soft); }
+.ev--mutter         { border-left-color: var(--accent-cyan-soft); }
 .ev--memory_update  { border-left-color: var(--accent-purple-soft); }
 .ev--agent_error    { border-left-color: var(--accent-danger); }
 .ev--welcome        { border-left-color: var(--accent-cyan-soft); }

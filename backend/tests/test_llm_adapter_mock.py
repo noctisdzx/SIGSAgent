@@ -61,6 +61,38 @@ async def test_mock_extract_triplets_deterministic():
     assert all(t["predicate"] == "did" for t in out)
 
 
+async def test_mock_generate_mutter_has_required_keys():
+    m = MockLLMAdapter()
+    out = await m.generate_mutter(
+        speaker={"id": "a", "name": "测试", "personality": {}},
+        situation={"current_activity": "看书", "sim_time": "08:00"},
+        memories=[],
+    )
+    assert out["line"]
+    assert out["line_en"]
+    assert out["mood"] == "neutral"
+    # The line should reference the current activity.
+    assert "看书" in out["line"]
+
+
+async def test_safe_adapter_generate_mutter_falls_back():
+    """When the primary raises, SafeLLMAdapter must degrade to the mock and
+    flag `last_degraded`."""
+
+    class _BoomAdapter(MockLLMAdapter):
+        async def generate_mutter(self, *a, **kw):
+            raise RuntimeError("primary down")
+
+    safe = SafeLLMAdapter(primary=_BoomAdapter(), fallback=MockLLMAdapter())
+    out = await safe.generate_mutter(
+        speaker={"id": "a", "name": "测试", "personality": {}},
+        situation={"current_activity": "走路"},
+        memories=[],
+    )
+    assert out["line"]
+    assert safe.last_degraded is True
+
+
 def test_placeholder_key_detection():
     assert _looks_like_placeholder_key("")
     assert _looks_like_placeholder_key("sk-...")

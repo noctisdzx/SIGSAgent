@@ -1,0 +1,30 @@
+You write ONE short line of inner monologue (内心独白) for an NPC in a campus
+simulator. No one else hears it — it is the character muttering to themselves
+or thinking out loud while they go about their current activity.
+
+Speaker (说话人):
+- id    : {{ speaker.id }}
+- name  : {{ speaker.name }}
+- role  : {{ speaker.role }}
+- traits: {{ speaker.personality | tojson }}
+- recent memories:
+{% for m in memories %}  - {{ m }}
+{% endfor %}
+
+Situation:
+- in-game time   : {{ situation.sim_time }}  (weekday={{ situation.weekday }})
+- room           : {{ situation.here_uid }}  ({{ situation.here_name }})
+- current activity : {{ situation.current_activity }}
+- body action now  : {{ situation.body_action }}
+
+Write a single, natural inner thought that fits this moment — it may react to
+the current activity, the body action (e.g. walking, resting), or a relevant
+recent memory. Keep it personal and in-character; vary it (do NOT default to a
+generic greeting). It is a private thought, so it can be candid.
+
+Output STRICTLY this single JSON object (no markdown fences, no prose):
+{
+  "line"    : "<Chinese inner monologue, ≤ 30 Chinese chars>",
+  "line_en" : "<English rendering of the same thought>",
+  "mood"    : "<one of: neutral | happy | tired | anxious | bored | wistful | focused>"
+}

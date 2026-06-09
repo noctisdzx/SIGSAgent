@@ -2,6 +2,12 @@
 
 from .builder import bulk_build_for_day, schedule_item_to_stm
 from .fragments import Fragment, FragmentLibrary
+from .insert_events import (
+    InsertEvent,
+    InsertEventChoice,
+    InsertEventLibrary,
+    InsertEventSelector,
+)
 from .template import ScheduleTemplate, TemplateBlock
 from .timeline import DailyTimeline, Slot, SlotKind
 
@@ -10,6 +16,10 @@ __all__ = [
     "TemplateBlock",
     "Fragment",
     "FragmentLibrary",
+    "InsertEvent",
+    "InsertEventLibrary",
+    "InsertEventSelector",
+    "InsertEventChoice",
     "DailyTimeline",
     "Slot",
     "SlotKind",
