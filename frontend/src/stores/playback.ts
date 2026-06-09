@@ -17,7 +17,9 @@ export const usePlaybackStore = defineStore('playback', () => {
   const frames = ref<any[]>([]);
   const index = ref(0);
   const playing = ref(false);
-  const speed = ref(1);            // 1× = one frame per BASE_MS
+  // Default to a gentle 0.5× so NPC movement reads clearly out of the box;
+  // users can go even slower (0.25×) or speed up from the controls.
+  const speed = ref(0.5);          // 1× = one frame per BASE_MS
   const recordings = ref<any[]>([]);
 
   const BASE_MS = 900;

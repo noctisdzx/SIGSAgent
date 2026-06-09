@@ -45,7 +45,7 @@
         <div class="pb-row speeds">
           <span class="pb-lbl">{{ lang.t('倍速', 'Speed') }}</span>
           <button
-            v-for="s in [0.5, 1, 2, 4, 8]"
+            v-for="s in [0.25, 0.5, 1, 2, 4, 8]"
             :key="s"
             class="micro-btn spd"
             :class="{ on: pb.speed === s }"
