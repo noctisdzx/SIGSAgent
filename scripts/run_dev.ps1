@@ -6,7 +6,7 @@ $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
 
 Write-Host "Backend  -> http://127.0.0.1:8000"
-Write-Host "Frontend -> http://127.0.0.1:5173"
+Write-Host "Frontend -> http://127.0.0.1:5680"
 
 Start-Process powershell -ArgumentList @(
     "-NoExit",

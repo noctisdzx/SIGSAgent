@@ -11,7 +11,11 @@ export default defineConfig({
   },
   server: {
     host: '127.0.0.1',
-    port: 5173,
+    // 5173 falls inside a Windows reserved/excluded port range on some machines
+    // (EACCES on bind), so we use 5680 which sits outside those ranges. strictPort
+    // keeps it fixed so the start.bat browser-open URL always matches.
+    port: 5680,
+    strictPort: true,
     proxy: {
       '/api': {
         target: 'http://127.0.0.1:8000',

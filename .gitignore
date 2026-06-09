@@ -48,6 +48,8 @@ runtime/logs/*
 scripts/_*.json
 scripts/_*.txt
 .git_commit_msg.tmp
+# Local dev server log dumps (e.g. backend/_server8000.log)
+backend/_*.log
 
 # ===== Secrets =====
 .env
@@ -56,6 +58,9 @@ scripts/_*.txt
 
 # ===== Runtime recordings (per-run playback dumps) =====
 runtime/recordings/
+
+# ===== Runtime data exports (full-run dumps from the Save button) =====
+runtime/exports/
 
 # ===== Root-level scratch artifacts (not for VCS) =====
 /GY.jpeg

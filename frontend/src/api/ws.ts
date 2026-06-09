@@ -19,7 +19,7 @@ function nextBackoff(): number {
 }
 
 function defaultUrl(): string {
-  if (typeof location === 'undefined') return 'ws://127.0.0.1:5173/ws';
+  if (typeof location === 'undefined') return 'ws://127.0.0.1:5680/ws';
   const proto = location.protocol === 'https:' ? 'wss' : 'ws';
   return `${proto}://${location.host}/ws`;
 }

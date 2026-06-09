@@ -9,7 +9,7 @@ the live SIGSAgent backend (REST `/api/*` + WebSocket `/ws`).
 
 ```powershell
 npm install
-npm run dev      # → http://127.0.0.1:5173
+npm run dev      # → http://127.0.0.1:5680
 npm run build    # type-check (vue-tsc --noEmit) + production bundle
 npm run preview  # serve the production bundle
 ```

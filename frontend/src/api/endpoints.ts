@@ -126,4 +126,32 @@ export const api = {
     http.post<{ status: string; day: string; summary?: any; reason?: string }>(
       '/sim/summarize_now',
     ).then(r => r.data),
+  heatmap: () =>
+    http.get<{ ticks: number; moves: Record<string, number>; dwell: Record<string, number>; max_move: number; max_dwell: number }>(
+      '/heatmap',
+    ).then(r => r.data),
+  exportData: () =>
+    http.post<{ status: string; filename: string; size: number; n_agents: number; sim_time?: string }>(
+      '/export', undefined, { timeout: 120000 },
+    ).then(r => r.data),
+  /** Absolute URL to download a saved export as a JSON attachment. */
+  exportDownloadUrl: (name: string) =>
+    `${http.defaults.baseURL || ''}/exports/${encodeURIComponent(name)}`,
+  /** List server-side saved exports (newest first). */
+  exports: () =>
+    http.get<{ exports: Array<{ name: string; size: number; mtime: number }> }>(
+      '/exports',
+    ).then(r => r.data),
+  /** Restore a run from an uploaded export document (continue simulation). */
+  importData: (doc: any) =>
+    http.post<{ status: string; running: boolean; [k: string]: any }>(
+      '/import', doc, { timeout: 120000 },
+    ).then(r => r.data),
+  /** Restore a run from a server-side export file by name. */
+  importByName: (name: string) =>
+    http.post<{ status: string; running: boolean; source?: string; [k: string]: any }>(
+      `/import/by-name/${encodeURIComponent(name)}`, undefined, { timeout: 120000 },
+    ).then(r => r.data),
+  serviceShutdown: () =>
+    http.post<{ status: string; export?: string }>('/service/shutdown').then(r => r.data),
 };

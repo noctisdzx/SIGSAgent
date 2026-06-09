@@ -98,6 +98,18 @@ export const useHeatStore = defineStore('heat', () => {
     persist();
   }
 
+  /** Replace the local counters with the backend's whole-run cumulative heat
+   *  (GET /api/heatmap). Keys already match ("a|b" move edges, room-uid dwell),
+   *  so the scene graph renders the aggregate immediately. */
+  function loadAggregate(
+    moves: Record<string, number> | null | undefined,
+    dwell: Record<string, number> | null | undefined,
+  ) {
+    moveEdgeCounts.value = { ...(moves || {}) };
+    dwellRoomCounts.value = { ...(dwell || {}) };
+    persist();
+  }
+
   const maxMoveCount = computed(() => {
     let m = 0;
     for (const v of Object.values(moveEdgeCounts.value)) if (v > m) m = v;
@@ -124,7 +136,7 @@ export const useHeatStore = defineStore('heat', () => {
   return {
     moveEdgeCounts, dwellRoomCounts, lastDwellTickAt,
     maxMoveCount, maxDwellCount,
-    recordMove, sampleDwell, reset,
+    recordMove, sampleDwell, reset, loadAggregate,
     moveHeat, dwellHeat,
   };
 });

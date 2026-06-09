@@ -38,6 +38,13 @@ class SimLoop:
         self._busy_summarising: bool = False
         # Optional per-tick recorder (set by main.py). None = no recording.
         self.recorder: Any | None = None
+        # Whole-run ("各总") cumulative heat — independent of the frontend's
+        # localStorage counters so it survives reloads and can be exported.
+        #   heat_moves: undirected edge "a|b" (a<b)  -> traversal count
+        #   heat_dwell: room uid                     -> per-tick presence samples
+        self.heat_moves: dict[str, int] = {}
+        self.heat_dwell: dict[str, int] = {}
+        self._heat_ticks: int = 0
 
     def set_recorder(self, recorder: Any) -> None:
         self.recorder = recorder
@@ -117,6 +124,9 @@ class SimLoop:
             if prev is not None and prev != a.location_uid:
                 moved.append({"agent_id": aid, "from": prev, "to": a.location_uid})
 
+        # Accumulate the whole-run heat map (cumulative, server-side).
+        self._accumulate_heat(moved)
+
         # Items being carried follow their carrier across rooms.
         self.world.tick_carried_items()
 
@@ -168,6 +178,84 @@ class SimLoop:
     @property
     def is_running(self) -> bool:
         return self._running
+
+    # ----- whole-run heat map -----
+
+    def _accumulate_heat(self, moved: list[dict[str, str]]) -> None:
+        """Fold this tick into the cumulative heat counters.
+
+        - moves: one undirected-edge increment per agent that changed rooms
+        - dwell: one increment for every agent's current room (a per-tick
+          presence sample, the same proxy the frontend uses).
+        """
+        for m in moved:
+            a, b = m.get("from"), m.get("to")
+            if not a or not b or a == b:
+                continue
+            key = f"{a}|{b}" if a < b else f"{b}|{a}"
+            self.heat_moves[key] = self.heat_moves.get(key, 0) + 1
+        for st in self.world.agents.values():
+            uid = getattr(st, "location_uid", None)
+            if uid:
+                self.heat_dwell[uid] = self.heat_dwell.get(uid, 0) + 1
+        self._heat_ticks += 1
+
+    def heatmap_view(self) -> dict[str, Any]:
+        """Whole-run cumulative heat, ready for the UI / export.
+
+        Keys match the frontend heat store (undirected "a|b" move edges, room
+        uid dwell) so the client can load it directly.
+        """
+        return {
+            "ticks": self._heat_ticks,
+            "sim_time": self.world.sim_time.isoformat(),
+            "moves": dict(self.heat_moves),
+            "dwell": dict(self.heat_dwell),
+            "max_move": max(self.heat_moves.values(), default=0),
+            "max_dwell": max(self.heat_dwell.values(), default=0),
+        }
+
+    def load_state(
+        self,
+        *,
+        heatmap: dict[str, Any] | None = None,
+        day_summaries: list[dict[str, Any]] | None = None,
+    ) -> None:
+        """Restore SimLoop-owned state from an imported run so the sim can
+        continue where it left off.
+
+        - ``heatmap``: re-seeds the cumulative move/dwell counters + tick count.
+        - ``day_summaries``: replaces the narrative log and marks the latest
+          finished day as already-summarised, so resuming doesn't re-fire a
+          summary for a day that's already done.
+        """
+        if heatmap:
+            self.heat_moves = {
+                str(k): int(v) for k, v in (heatmap.get("moves") or {}).items()
+            }
+            self.heat_dwell = {
+                str(k): int(v) for k, v in (heatmap.get("dwell") or {}).items()
+            }
+            try:
+                self._heat_ticks = int(heatmap.get("ticks", 0) or 0)
+            except (TypeError, ValueError):
+                self._heat_ticks = 0
+
+        if day_summaries is not None:
+            self.day_summaries = list(day_summaries)
+            latest: date | None = None
+            for s in day_summaries:
+                raw = s.get("day") if isinstance(s, dict) else None
+                if not raw:
+                    continue
+                try:
+                    dd = date.fromisoformat(str(raw))
+                except ValueError:
+                    continue
+                if latest is None or dd > latest:
+                    latest = dd
+            if latest is not None:
+                self._last_summarised_day = latest
 
     # ----- day summary -----
 

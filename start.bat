@@ -5,7 +5,7 @@ REM
 REM   Opens two NEW console windows so you can watch both servers'
 REM   live logs side-by-side, then opens the UI in your browser.
 REM     - Backend  -> http://127.0.0.1:8000   (OpenAPI docs at /docs)
-REM     - Frontend -> http://127.0.0.1:5173
+REM     - Frontend -> http://127.0.0.1:5680
 REM
 REM   Each child window uses `cmd /k`, so even if the server exits
 REM   with an error the window stays open and you can read the
@@ -25,7 +25,7 @@ echo   SIGSAgent dev launcher
 echo  -------------------------------------------------
 echo   Repo root : %ROOT%
 echo   Backend   : http://127.0.0.1:8000   (docs: /docs)
-echo   Frontend  : http://127.0.0.1:5173
+echo   Frontend  : http://127.0.0.1:5680
 echo  =================================================
 echo.
 
@@ -53,13 +53,13 @@ start "SIGSAgent Backend (uvicorn 8000)" cmd /k "chcp 65001 >nul && %BACKEND_CMD
 
 REM ---------- frontend window ----------
 echo Starting frontend window ...
-start "SIGSAgent Frontend (vite 5173)" cmd /k "chcp 65001 >nul && cd /d ""%ROOT%\frontend"" && npm run dev"
+start "SIGSAgent Frontend (vite 5680)" cmd /k "chcp 65001 >nul && cd /d ""%ROOT%\frontend"" && npm run dev"
 
 REM ---------- wait + open browser ----------
 echo.
 echo Waiting ~7s for servers to come up, then opening the UI ...
 timeout /t 7 /nobreak >nul
-start "" http://127.0.0.1:5173/
+start "" http://127.0.0.1:5680/
 
 echo.
 echo Both services are now running in their own windows.

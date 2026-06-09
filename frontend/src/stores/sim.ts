@@ -144,6 +144,115 @@ export const useSimStore = defineStore('sim', () => {
     }
   }
 
+  /** Full-run data export: writes a JSON on the server AND triggers a local
+   *  download. Returns the server filename (or null on failure). */
+  const exporting = ref(false);
+  async function exportData(): Promise<string | null> {
+    if (exporting.value) return null;
+    exporting.value = true;
+    try {
+      const r = await api.exportData();
+      if (r?.status === 'ok' && r.filename) {
+        // Trigger a browser download of the same file the server just wrote.
+        try {
+          const a = document.createElement('a');
+          a.href = api.exportDownloadUrl(r.filename);
+          a.download = r.filename;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        } catch { /* download is best-effort; the server copy still exists */ }
+        return r.filename;
+      }
+      return null;
+    } catch (e) {
+      console.warn('exportData failed:', e);
+      return null;
+    } finally {
+      exporting.value = false;
+    }
+  }
+
+  /** Load a previously saved run (interrupt → continue). Reads a local export
+   *  JSON file, ships it to the backend which restores world + memory + heat +
+   *  day summaries and leaves the loop PAUSED. Returns the restore summary
+   *  (or null on failure). */
+  const importing = ref(false);
+  async function importFromFile(file: File): Promise<Record<string, any> | null> {
+    if (importing.value) return null;
+    importing.value = true;
+    try {
+      const text = await file.text();
+      let doc: any;
+      try {
+        doc = JSON.parse(text);
+      } catch {
+        console.warn('importFromFile: not valid JSON');
+        return null;
+      }
+      if (!doc || doc.kind !== 'sigsagent_export') {
+        console.warn('importFromFile: not a SIGSAgent export document');
+        return null;
+      }
+      const r = await api.importData(doc);
+      if (r?.status === 'ok') {
+        running.value = false;
+        pauseReason.value = null;
+        if (r.sim_time) simTime.value = String(r.sim_time);
+        await refreshStatus();
+        await loadSummaries();
+        return r;
+      }
+      return null;
+    } catch (e) {
+      console.warn('importFromFile failed:', e);
+      return null;
+    } finally {
+      importing.value = false;
+    }
+  }
+
+  /** Same as importFromFile but restores a server-side export by name. */
+  async function importByName(name: string): Promise<Record<string, any> | null> {
+    if (importing.value) return null;
+    importing.value = true;
+    try {
+      const r = await api.importByName(name);
+      if (r?.status === 'ok') {
+        running.value = false;
+        pauseReason.value = null;
+        if (r.sim_time) simTime.value = String(r.sim_time);
+        await refreshStatus();
+        await loadSummaries();
+        return r;
+      }
+      return null;
+    } catch (e) {
+      console.warn('importByName failed:', e);
+      return null;
+    } finally {
+      importing.value = false;
+    }
+  }
+
+  /** Auto-save + gracefully shut down the backend process. After this the
+   *  service must be restarted. Returns true if the request was accepted. */
+  const shuttingDown = ref(false);
+  async function shutdownService(): Promise<boolean> {
+    if (shuttingDown.value) return false;
+    shuttingDown.value = true;
+    try {
+      await api.serviceShutdown();
+    } catch {
+      // The process often dies before the HTTP response completes — that's
+      // expected and still means the shutdown succeeded.
+    }
+    stopPolling();
+    running.value = false;
+    pauseReason.value = 'service_stopped';
+    return true;
+  }
+
   function dismissSummary() { pendingSummary.value = null; }
 
   function openLatestSummary() {
@@ -185,10 +294,11 @@ export const useSimStore = defineStore('sim', () => {
   return {
     running, simTime, currentDay, pauseReason,
     summaries, pendingSummary, isAwaitingNextDay,
-    summarizing,
+    summarizing, exporting, importing, shuttingDown,
     refreshStatus, loadSummaries,
     applyDaySummaryEvent, dismissSummary, openLatestSummary,
     pause, resume, startNextDay, summarizeNow,
+    exportData, importFromFile, importByName, shutdownService,
     startPolling, stopPolling,
   };
 });

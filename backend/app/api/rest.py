@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from fastapi import APIRouter, HTTPException, Request
+from fastapi.responses import FileResponse
 
 from app.config.loader import ConfigLoader
 from app.config.registry import get_registry
@@ -472,3 +473,189 @@ async def sim_summarize_now(req: Request) -> dict[str, Any]:
         "day": day_iso,
         "summary": last,
     }
+
+
+# ============================================================
+#              heat map / data export / shutdown
+# ============================================================
+
+@router.get("/heatmap")
+async def get_heatmap(req: Request) -> dict[str, Any]:
+    """Whole-run cumulative heat map (move edges + room dwell).
+
+    Keys match the frontend heat store so the client can load it directly:
+    `moves` is keyed by undirected edge "a|b" (a<b), `dwell` by room uid.
+    """
+    sim = _sim(req)
+    if not hasattr(sim, "heatmap_view"):
+        return {"ticks": 0, "moves": {}, "dwell": {}, "max_move": 0, "max_dwell": 0}
+    return sim.heatmap_view()
+
+
+def _exports_dir() -> Path:
+    return get_settings().runtime_dir / "exports"
+
+
+def _safe_export_path(name: str) -> Path:
+    if "/" in name or "\\" in name or ".." in name or not name.endswith(".json"):
+        raise HTTPException(status_code=400, detail="invalid export name")
+    return _exports_dir() / name
+
+
+@router.post("/export")
+async def export_run_data(req: Request) -> dict[str, Any]:
+    """Full-run dump: every NPC's memory (STM/LTM/graph), behaviour history,
+    the world snapshot, day summaries, the cumulative heat map and relations.
+    Writes runtime/exports/export_*.json and returns its name (the client can
+    then GET /api/exports/{name} to also download it locally)."""
+    from app.persistence.exporter import build_export, write_export
+
+    data = await build_export(req.app.state)
+    path = write_export(get_settings().runtime_dir, data)
+    return {
+        "status": "ok",
+        "filename": path.name,
+        "size": path.stat().st_size,
+        "n_agents": data.get("n_agents", 0),
+        "sim_time": data.get("sim_time"),
+    }
+
+
+@router.get("/exports")
+async def list_exports() -> dict[str, Any]:
+    d = _exports_dir()
+    out: list[dict[str, Any]] = []
+    if d.exists():
+        for p in sorted(d.glob("export_*.json"), key=lambda x: x.stat().st_mtime, reverse=True):
+            out.append({"name": p.name, "size": p.stat().st_size, "mtime": p.stat().st_mtime})
+    return {"exports": out}
+
+
+@router.get("/exports/{name}")
+async def download_export(name: str) -> FileResponse:
+    """Download a saved export as a JSON attachment."""
+    p = _safe_export_path(name)
+    if not p.exists():
+        raise HTTPException(status_code=404, detail=f"export not found: {name}")
+    return FileResponse(
+        p, media_type="application/json", filename=name,
+    )
+
+
+def _validate_export_doc(data: Any) -> dict[str, Any]:
+    if not isinstance(data, dict) or data.get("kind") != "sigsagent_export":
+        raise HTTPException(
+            status_code=400,
+            detail="not a SIGSAgent export document (expected kind=sigsagent_export)",
+        )
+    return data
+
+
+async def _apply_import(req: Request, data: dict[str, Any]) -> dict[str, Any]:
+    """Pause the sim (so restore doesn't race a live tick), then restore."""
+    from app.persistence.importer import apply_import
+
+    sim = getattr(req.app.state, "sim", None)
+    if sim is not None:
+        try:
+            await sim.stop()
+        except Exception:  # noqa: BLE001
+            pass
+    summary = await apply_import(req.app.state, data)
+    return {"status": "ok", "running": False, **summary}
+
+
+@router.post("/import")
+async def import_run_data(req: Request) -> dict[str, Any]:
+    """Restore a run from an uploaded export document so the sim can continue.
+
+    Body is the JSON produced by ``POST /api/export`` / the "Save data" button.
+    Repopulates world (positions/stats/items + sim_time), every NPC's memory
+    (STM/LTM/graph), behaviour history, the cumulative heat map and day
+    summaries. The loop is left **paused** — resume via ``POST /api/sim/start``.
+    """
+    try:
+        data = await req.json()
+    except Exception as exc:  # noqa: BLE001
+        raise HTTPException(status_code=400, detail=f"invalid JSON body: {exc}")
+    _validate_export_doc(data)
+    return await _apply_import(req, data)
+
+
+@router.post("/import/by-name/{name}")
+async def import_run_by_name(name: str, req: Request) -> dict[str, Any]:
+    """Restore a run from a server-side export file (one listed by GET /exports).
+
+    Lighter than uploading: the client just names a file already kept in
+    ``runtime/exports/``. Same restore + leave-paused semantics as /import.
+    """
+    import json as _json
+
+    p = _safe_export_path(name)
+    if not p.exists():
+        raise HTTPException(status_code=404, detail=f"export not found: {name}")
+    try:
+        data = _json.loads(p.read_text(encoding="utf-8"))
+    except Exception as exc:  # noqa: BLE001
+        raise HTTPException(status_code=400, detail=f"failed to read export {name}: {exc}")
+    _validate_export_doc(data)
+    out = await _apply_import(req, data)
+    out["source"] = name
+    return out
+
+
+@router.post("/service/shutdown")
+async def shutdown_service(req: Request) -> dict[str, Any]:
+    """Auto-save the full run, then gracefully stop the backend process.
+
+    Saves first (memory is otherwise RAM-only), stops the sim loop, closes the
+    recorder + DB, and schedules process exit shortly after the response is
+    flushed. The service must be restarted afterwards.
+    """
+    import asyncio
+    import os
+
+    from app.persistence.exporter import build_export, write_export
+
+    state = req.app.state
+    export_name: str | None = None
+    try:
+        data = await build_export(state)
+        path = write_export(get_settings().runtime_dir, data)
+        export_name = path.name
+    except Exception as exc:  # noqa: BLE001
+        # Don't block shutdown on a save failure, but report it.
+        export_name = f"(save failed: {exc!r})"
+
+    # Best-effort graceful teardown of the moving parts before we exit.
+    sim = getattr(state, "sim", None)
+    if sim is not None:
+        try:
+            await sim.stop()
+        except Exception:  # noqa: BLE001
+            pass
+    recorder = getattr(state, "recorder", None)
+    if recorder is not None:
+        try:
+            recorder.close()
+        except Exception:  # noqa: BLE001
+            pass
+    db = getattr(state, "db", None)
+    if db is not None:
+        try:
+            close = getattr(db, "close", None)
+            if close is not None:
+                res = close()
+                if asyncio.iscoroutine(res):
+                    await res
+        except Exception:  # noqa: BLE001
+            pass
+
+    # Exit shortly after this response is sent (cross-platform hard stop; the
+    # teardown above already did what the lifespan would).
+    def _bye() -> None:
+        os._exit(0)
+
+    loop = asyncio.get_event_loop()
+    loop.call_later(0.7, _bye)
+    return {"status": "shutting_down", "export": export_name}

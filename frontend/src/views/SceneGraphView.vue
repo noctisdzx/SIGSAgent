@@ -94,6 +94,14 @@
       <div v-if="showHeatPanel" class="heat-panel">
         <div class="heat-header">
           <strong>🔥 {{ lang.t('热力图层', 'Heat Layers') }}</strong>
+          <button
+            class="micro-btn"
+            :disabled="loadingAggregate"
+            :title="lang.t('加载后端整局累计热力图（移动+驻留）', 'Load the backend whole-run cumulative heat map')"
+            @click="loadAggregateHeat"
+          >
+            {{ loadingAggregate ? lang.t('加载中…', 'loading…') : lang.t('汇总热力图', 'Whole-run') }}
+          </button>
           <button class="micro-btn" @click="clearHeat">
             {{ lang.t('清零', 'Reset') }}
           </button>
@@ -465,6 +473,24 @@ watch([showMoveHeat, showDwellHeat, showHotRoomGlow], () => {
 function clearHeat() {
   if (!confirm(lang.t('清空累计的热力数据？', 'Clear accumulated heat data?'))) return;
   heat.reset();
+}
+
+// Load the backend whole-run ("各总") cumulative heat map and render it on the
+// graph (replaces the local page-session counters). Make sure both layers are
+// visible so the aggregate is actually shown.
+const loadingAggregate = ref(false);
+async function loadAggregateHeat() {
+  loadingAggregate.value = true;
+  try {
+    const h = await api.heatmap();
+    heat.loadAggregate(h.moves, h.dwell);
+    showMoveHeat.value = true;
+    showDwellHeat.value = true;
+  } catch (e) {
+    console.warn('[heat] aggregate load failed', e);
+  } finally {
+    loadingAggregate.value = false;
+  }
 }
 
 const graphRef = ref<InstanceType<typeof NetworkGraph> | null>(null);

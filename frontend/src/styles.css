@@ -151,6 +151,13 @@ a:hover { color: var(--accent-primary); }
   border-color: transparent;
 }
 .top-nav .sim-btn--primary:hover { filter: brightness(1.1); }
+.top-nav .sim-btn--danger {
+  background: var(--accent-warn, #e5534b);
+  color: #fff;
+  border-color: transparent;
+}
+.top-nav .sim-btn--danger:hover { filter: brightness(1.1); }
+.top-nav .sim-btn--danger:disabled { opacity: 0.6; }
 .ws-indicator {
   display: inline-flex; align-items: center; gap: 6px;
   font-size: 11px; color: var(--text-very-dim);
