@@ -86,10 +86,10 @@ export const api = {
   health: () => http.get('/health').then(r => r.data),
   sceneGraph: () => http.get<SceneGraphResponse>('/scene/graph').then(r => r.data),
   sceneLayout: () =>
-    http.get<{ rooms: Record<string, { x: number; y: number }>; map: any }>(
+    http.get<{ rooms: Record<string, { x: number; y: number }>; map: any; obstacles?: any; roomAreas?: any }>(
       '/scene/layout',
     ).then(r => r.data),
-  saveSceneLayout: (body: { rooms: Record<string, { x: number; y: number }>; map: any }) =>
+  saveSceneLayout: (body: { rooms: Record<string, { x: number; y: number }>; map: any; obstacles?: any; roomAreas?: any }) =>
     http.put('/scene/layout', body).then(r => r.data),
   world: () => http.get('/world').then(r => r.data),
   agents: () => http.get<AgentLite[]>('/agents').then(r => r.data),
@@ -126,6 +126,12 @@ export const api = {
     http.post<{ status: string; day: string; summary?: any; reason?: string }>(
       '/sim/summarize_now',
     ).then(r => r.data),
+  simWeekSummaries: (limit = 12) =>
+    http.get<{ summaries: any[] }>('/sim/week_summaries', { params: { limit } }).then(r => r.data),
+  simSummarizeWeekNow: () =>
+    http.post<{ status: string; week: string; summary?: any; reason?: string }>(
+      '/sim/summarize_week_now', undefined, { timeout: 180000 },
+    ).then(r => r.data),
   heatmap: () =>
     http.get<{ ticks: number; moves: Record<string, number>; dwell: Record<string, number>; max_move: number; max_dwell: number }>(
       '/heatmap',
@@ -154,4 +160,15 @@ export const api = {
     ).then(r => r.data),
   serviceShutdown: () =>
     http.post<{ status: string; export?: string }>('/service/shutdown').then(r => r.data),
+  /** Whether an LLM key is currently active (never returns the key itself). */
+  llmStatus: () =>
+    http.get<{ configured: boolean; model: string | null; base_url: string | null }>(
+      '/llm/status',
+    ).then(r => r.data),
+  /** Set the DeepSeek/OpenAI-compatible key for this run (in-memory only).
+   *  With validate=true the backend probes the key and 400s on failure. */
+  setLlmKey: (body: { api_key: string; base_url?: string; model?: string; validate?: boolean }) =>
+    http.post<{ status: string; configured: boolean; model: string | null; base_url: string | null }>(
+      '/llm/key', body, { timeout: 40000 },
+    ).then(r => r.data),
 };

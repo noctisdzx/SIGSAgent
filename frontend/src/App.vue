@@ -31,7 +31,22 @@
 
       <span class="spacer" />
 
-      <!-- Sim control cluster -->
+      <!-- Playback-exclusive banner: while replaying, the live sim is paused
+           and the live controls are hidden so nothing races the recording. -->
+      <template v-if="pb.active">
+        <span class="pb-badge" :title="lang.t('回放独占：实时模拟已暂停', 'Playback owns the view; live sim is paused')">
+          🎬 {{ lang.t('回放模式（独占）', 'Playback (exclusive)') }}
+          <span class="pb-badge-time">⏱ {{ shortSim(pb.simTime) || '—' }}</span>
+        </span>
+        <button
+          class="nav-btn sim-btn sim-btn--primary"
+          @click="pb.exit()"
+          :title="lang.t('退出回放，交还实时视图（模拟仍暂停，可点继续）', 'Exit playback and hand back the live view (sim stays paused)')"
+        >⏏ {{ lang.t('退出回放', 'Exit playback') }}</button>
+      </template>
+
+      <!-- Sim control cluster (hidden during playback) -->
+      <template v-else>
       <span class="sim-clock" :title="lang.t('当前游戏时间', 'In-game time')">
         ⏱ {{ shortSim(sim.simTime) || '—' }}
       </span>
@@ -75,6 +90,21 @@
       >📜 {{ lang.t('旁白', 'Recap') }}</button>
       <button
         class="nav-btn sim-btn"
+        :disabled="sim.summarizingWeek"
+        @click="sim.summarizeWeekNow()"
+        :title="lang.t('让每个居民结合记忆人格评价当前空间（不暂停模拟）', 'Each resident evaluates the space using their memory/persona (does not pause)')"
+      >
+        <template v-if="sim.summarizingWeek">⏳ {{ lang.t('评价中…', 'Reviewing…') }}</template>
+        <template v-else>🏛 {{ lang.t('每周总结', 'Weekly review') }}</template>
+      </button>
+      <button
+        v-if="sim.weekSummaries.length"
+        class="nav-btn sim-btn"
+        @click="sim.openLatestWeekSummary()"
+        :title="lang.t('查看最近一次每周空间评价', 'Open latest weekly space review')"
+      >🗂 {{ lang.t('周评', 'Weekly') }}</button>
+      <button
+        class="nav-btn sim-btn"
         :disabled="sim.exporting"
         @click="onSaveData"
         :title="lang.t('全量保存本局数据（NPC记忆/行为/世界/汇总热力图/关系），服务器留存并下载到本地', 'Save all run data (memory/behavior/world/heatmap/relations); kept on server and downloaded')"
@@ -104,6 +134,7 @@
         @click="onShutdown"
         :title="lang.t('先自动全量保存，再优雅关闭后端服务（之后需重启服务）', 'Auto-save, then gracefully stop the backend (restart required after)')"
       >⏻ {{ sim.shuttingDown ? lang.t('已停止', 'Stopped') : lang.t('终止服务', 'Stop') }}</button>
+      </template>
 
       <span class="ws-indicator" :title="wsTitle">
         <span class="ws-dot" :class="events.connectionStatus" />
@@ -117,6 +148,7 @@
       <router-view />
     </main>
     <DaySummaryModal />
+    <WeekSummaryModal />
   </div>
 </template>
 
@@ -127,12 +159,15 @@ import { useLangStore } from '@/stores/lang';
 import { useEventsStore } from '@/stores/events';
 import { useSimStore } from '@/stores/sim';
 import { useWorldStore } from '@/stores/world';
+import { usePlaybackStore } from '@/stores/playback';
 import DaySummaryModal from '@/components/DaySummaryModal.vue';
+import WeekSummaryModal from '@/components/WeekSummaryModal.vue';
 
 const lang = useLangStore();
 const events = useEventsStore();
 const sim = useSimStore();
 const world = useWorldStore();
+const pb = usePlaybackStore();
 
 const importInput = ref<HTMLInputElement | null>(null);
 
@@ -211,6 +246,7 @@ onMounted(async () => {
   connectWs();
   await sim.refreshStatus();
   await sim.loadSummaries();
+  await sim.loadWeekSummaries();
   sim.startPolling(4000);
 });
 onBeforeUnmount(() => {

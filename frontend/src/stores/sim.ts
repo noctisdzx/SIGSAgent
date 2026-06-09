@@ -40,6 +40,29 @@ export interface DaySummary {
   degraded?: boolean;
 }
 
+export interface WeekAgentEval {
+  id: string;
+  name: string;
+  name_en?: string;
+  role?: string;
+  favorite_place?: string;
+  evaluation_zh?: string;
+  evaluation_en?: string;
+  wants?: string[];
+  pain_points?: string[];
+  degraded?: boolean;
+}
+
+export interface WeekSummary {
+  week: string;
+  week_start: string;
+  week_end: string;
+  ts_real?: string;
+  ts_sim?: string;
+  n_agents?: number;
+  agents: WeekAgentEval[];
+}
+
 export const useSimStore = defineStore('sim', () => {
   const running = ref(true);
   const simTime = ref<string>('');
@@ -50,6 +73,11 @@ export const useSimStore = defineStore('sim', () => {
   const summaries = ref<DaySummary[]>([]);
   /** When non-null, modal is open and showing this summary. */
   const pendingSummary = ref<DaySummary | null>(null);
+
+  /** Weekly per-agent space-evaluation log + active popup. */
+  const weekSummaries = ref<WeekSummary[]>([]);
+  const pendingWeekSummary = ref<WeekSummary | null>(null);
+
   let pollHandle: number | null = null;
 
   const isAwaitingNextDay = computed(
@@ -105,13 +133,61 @@ export const useSimStore = defineStore('sim', () => {
     const idx = summaries.value.findIndex(s => s.day === entry.day);
     if (idx >= 0) summaries.value.splice(idx, 1, entry);
     else summaries.value.push(entry);
+    // Daily summaries no longer pause the sim. Just surface the popup; a newer
+    // summary simply overwrites whatever was showing (single `pendingSummary`
+    // ref → the modal re-renders with the latest entry).
     pendingSummary.value = entry;
-    // Only mirror auto-pause when this is a rollover-driven summary.
-    // Manual triggers (flagged in manualDays) leave loop state alone — the
-    // periodic /sim/status poll keeps `running` / `pauseReason` truthful.
-    if (!manualDays.value.has(entry.day)) {
-      running.value = false;
-      pauseReason.value = `day_summary:${entry.day}`;
+  }
+
+  async function loadWeekSummaries() {
+    try {
+      const r = await api.simWeekSummaries(12);
+      weekSummaries.value = (r.summaries || []) as WeekSummary[];
+    } catch {
+      // ignore
+    }
+  }
+
+  function applyWeekSummaryEvent(payload: any) {
+    if (!payload || !payload.week) return;
+    const entry: WeekSummary = {
+      week: String(payload.week),
+      week_start: String(payload.week_start || ''),
+      week_end: String(payload.week_end || ''),
+      ts_real: String(payload.ts_real || ''),
+      ts_sim: String(payload.ts_sim || ''),
+      n_agents: Number(payload.n_agents || 0),
+      agents: Array.isArray(payload.agents) ? payload.agents : [],
+    };
+    const idx = weekSummaries.value.findIndex(s => s.week === entry.week);
+    if (idx >= 0) weekSummaries.value.splice(idx, 1, entry);
+    else weekSummaries.value.push(entry);
+    pendingWeekSummary.value = entry;
+  }
+
+  function dismissWeekSummary() { pendingWeekSummary.value = null; }
+  function openLatestWeekSummary() {
+    if (weekSummaries.value.length) {
+      pendingWeekSummary.value = weekSummaries.value[weekSummaries.value.length - 1];
+    }
+  }
+
+  /** Force a weekly space evaluation for the current week (does not pause). */
+  const summarizingWeek = ref(false);
+  async function summarizeWeekNow() {
+    if (summarizingWeek.value) return;
+    summarizingWeek.value = true;
+    try {
+      const r = await api.simSummarizeWeekNow();
+      if (r?.status === 'ok' && r.summary) {
+        applyWeekSummaryEvent(r.summary);
+      } else if (r?.reason) {
+        console.warn('summarize_week_now failed:', r.reason);
+      }
+    } catch (e) {
+      console.warn('summarize_week_now error:', e);
+    } finally {
+      summarizingWeek.value = false;
     }
   }
 
@@ -294,9 +370,11 @@ export const useSimStore = defineStore('sim', () => {
   return {
     running, simTime, currentDay, pauseReason,
     summaries, pendingSummary, isAwaitingNextDay,
+    weekSummaries, pendingWeekSummary, summarizingWeek,
     summarizing, exporting, importing, shuttingDown,
-    refreshStatus, loadSummaries,
+    refreshStatus, loadSummaries, loadWeekSummaries,
     applyDaySummaryEvent, dismissSummary, openLatestSummary,
+    applyWeekSummaryEvent, dismissWeekSummary, openLatestWeekSummary, summarizeWeekNow,
     pause, resume, startNextDay, summarizeNow,
     exportData, importFromFile, importByName, shutdownService,
     startPolling, stopPolling,

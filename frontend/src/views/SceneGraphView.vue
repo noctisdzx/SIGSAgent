@@ -15,6 +15,20 @@
         @ready="onNetReady"
       />
 
+      <!-- Brush surface: only captures pointer events while drawing collision
+           areas, so it never interferes with normal pan / zoom / node clicks. -->
+      <div
+        ref="drawSurface"
+        class="draw-surface"
+        :class="{ active: drawMode, erase: brushErase }"
+        :style="{ pointerEvents: drawMode ? 'auto' : 'none' }"
+        @pointerdown="onBrushDown"
+        @pointermove="onBrushMove"
+        @pointerup="onBrushUp"
+        @pointercancel="onBrushUp"
+        @pointerleave="onBrushLeave"
+      />
+
       <!-- "talking" indicator bubbles above NPC sprites (placeholder only;
            the actual lines show in the chat log when you click the NPC). -->
       <div class="bubble-layer">
@@ -78,6 +92,9 @@
       </div>
 
       <div class="topright-actions">
+        <button class="ctrl-btn" :class="{ on: showCollisionPanel }" @click="showCollisionPanel = !showCollisionPanel">
+          🧱 {{ showCollisionPanel ? lang.t('收起', 'Hide') : lang.t('绘制', 'Paint') }}
+        </button>
         <button class="ctrl-btn" @click="showHeatPanel = !showHeatPanel">
           🔥 {{ showHeatPanel ? lang.t('收起', 'Hide') : lang.t('热力', 'Heat') }}
         </button>
@@ -87,6 +104,94 @@
         <button class="ctrl-btn" @click="resetView">
           {{ lang.t('重置视图', 'Reset View') }}
         </button>
+      </div>
+
+      <!-- Painting panel: brush / eraser tool for collision terrain (NPC A*
+           pathfinding routes around) OR per-room footprints (NPCs scatter
+           across the painted cells instead of orbiting the node). -->
+      <div v-if="showCollisionPanel" class="collision-panel">
+        <div class="collision-header">
+          <strong>🖌 {{ lang.t('区域绘制', 'Area paint') }}</strong>
+          <button
+            v-if="paintTarget === 'obstacle'"
+            class="micro-btn"
+            @click="clearObstacles"
+          >{{ lang.t('清空', 'Clear') }}</button>
+          <button
+            v-else
+            class="micro-btn"
+            :disabled="!paintRoomUid"
+            @click="clearActiveRoomArea"
+          >{{ lang.t('清空该节点', 'Clear node') }}</button>
+        </div>
+
+        <!-- What the brush paints. -->
+        <div class="brush-modes target">
+          <label class="brush-mode" :class="{ on: paintTarget === 'obstacle' }">
+            <input type="radio" value="obstacle" v-model="paintTarget" />
+            🧱 {{ lang.t('碰撞', 'Collision') }}
+          </label>
+          <label class="brush-mode" :class="{ on: paintTarget === 'room' }">
+            <input type="radio" value="room" v-model="paintTarget" />
+            🗺 {{ lang.t('场景范围', 'Scene area') }}
+          </label>
+        </div>
+
+        <!-- Which scene node we're shaping (only for the footprint tool). -->
+        <select v-if="paintTarget === 'room'" v-model="paintRoomUid" class="room-select">
+          <option value="">{{ lang.t('— 选择场景节点 —', '— pick a scene node —') }}</option>
+          <option v-for="r in rooms" :key="r.uid" :value="r.uid">{{ r.name }}</option>
+        </select>
+
+        <button
+          class="draw-toggle"
+          :class="{ on: drawMode }"
+          @click="toggleDrawMode"
+        >
+          {{ drawMode ? lang.t('✏ 绘制中（点击退出）', '✏ Drawing (click to exit)') : lang.t('开始绘制', 'Start drawing') }}
+        </button>
+        <div v-if="paintTarget === 'room' && !paintRoomUid" class="pick-hint">
+          {{ lang.t('👆 点击画布中的场景节点即可选择场景（也可用上方下拉框）', '👆 Click a scene node on the canvas to pick the scene (or use the dropdown above)') }}
+        </div>
+        <div class="brush-modes">
+          <label class="brush-mode" :class="{ on: !brushErase }">
+            <input type="radio" :value="false" v-model="brushErase" />
+            🖌 {{ lang.t('画笔', 'Brush') }}
+          </label>
+          <label class="brush-mode" :class="{ on: brushErase }">
+            <input type="radio" :value="true" v-model="brushErase" />
+            🧽 {{ lang.t('橡皮', 'Erase') }}
+          </label>
+        </div>
+        <div class="tune-row">
+          <label>{{ lang.t('笔刷大小', 'Brush size') }}</label>
+          <input type="range" min="24" max="400" step="4" v-model.number="brushRadius" />
+          <span class="tune-val">{{ brushRadius }}</span>
+        </div>
+        <label class="brush-toggle">
+          <input type="checkbox" v-model="showObstacles" />
+          <span>{{ lang.t('显示碰撞区域', 'Show collision') }}</span>
+          <span class="tune-val">{{ obstacleCount }}</span>
+        </label>
+        <label class="brush-toggle">
+          <input type="checkbox" v-model="showAreas" />
+          <span>{{ lang.t('显示场景范围', 'Show scene areas') }}</span>
+          <span v-if="paintTarget === 'room' && paintRoomUid" class="tune-val">{{ activeRoomAreaCount }}</span>
+        </label>
+        <div class="collision-hint">
+          <template v-if="paintTarget === 'obstacle'">
+            {{ lang.t(
+              '按住拖动涂抹不可行走区域；NPC 转场景时用 A* 寻路绕开。绘制时画布平移/缩放暂停。',
+              'Hold-drag to paint non-walkable areas; NPCs route around them with A* when changing rooms. Pan/zoom pauses while drawing.'
+            ) }}
+          </template>
+          <template v-else>
+            {{ lang.t(
+              '点击画布上的场景节点即可选中它来绘制范围；再按住拖动涂格子。该节点的 NPC 会随机分布在这些格子里，而不再围成一圈。',
+              'Click a scene node on the canvas to select it, then hold-drag to paint its cells. The node\'s NPCs scatter randomly across those cells instead of orbiting it.'
+            ) }}
+          </template>
+        </div>
       </div>
 
       <!-- Heat-map controls: each layer can be toggled independently;
@@ -119,6 +224,25 @@
           <span class="heat-num">·  max {{ heat.maxDwellCount }}</span>
         </label>
         <label class="heat-row">
+          <input type="checkbox" v-model="showCellHeat" />
+          <span class="heat-sw cell"></span>
+          {{ lang.t('格子轨迹热力', 'Cell trajectory') }}
+          <span class="heat-num">·  max {{ cellHeatAgent ? heat.maxCellForAgent(cellHeatAgent) : heat.maxCellCount }}</span>
+        </label>
+        <div v-if="showCellHeat" class="cell-heat-tools">
+          <select v-model="cellHeatAgent" class="cell-agent-select">
+            <option value="">{{ lang.t('全部 agent（汇总）', 'All agents (aggregate)') }}</option>
+            <option v-for="a in agents.list" :key="String(a.id)" :value="String(a.id)">
+              {{ npcName(a) }}
+            </option>
+          </select>
+          <button
+            class="micro-btn"
+            :title="lang.t('清空格子轨迹并重绘', 'Clear cell trajectory & redraw')"
+            @click="clearCellHeat"
+          >{{ lang.t('清空格子', 'Clear cells') }}</button>
+        </div>
+        <label class="heat-row">
           <input type="checkbox" v-model="showHotRoomGlow" />
           <span class="heat-sw glow"></span>
           {{ lang.t('当前最热房间发光', 'Glow on hottest room now') }}
@@ -130,8 +254,8 @@
         </div>
         <div class="heat-hint">
           {{ lang.t(
-            '边粗细/颜色 = 累计穿过次数；房间发光 = 累计驻留量；金色边框 = 当前人数最多',
-            'Edge width/color = cumulative traversals; room glow = cumulative dwell; gold border = most NPCs now'
+            '边粗细/颜色 = 累计穿过次数；房间发光 = 累计驻留量；格子轨迹 = agent 经过格子的次数（进入才 +1，停留不重复）；金色边框 = 当前人数最多',
+            'Edge width/color = cumulative traversals; room glow = cumulative dwell; cell trajectory = times agents entered each grid cell (counted on entry, not while idling); gold border = most NPCs now'
           ) }}
         </div>
       </div>
@@ -443,6 +567,16 @@ import { useLangStore } from '@/stores/lang';
 import { useEventsStore } from '@/stores/events';
 import { useHeatStore } from '@/stores/heat';
 import type { Room, AgentLite } from '@/api/endpoints';
+import { MOVE_STAGGER_MS, MOVE_STAGGER_MAX_MS } from '@/anim';
+import {
+  findPath,
+  cellKey,
+  worldToCell,
+  cumulativeLengths,
+  pointAlong,
+  type Pt,
+  type ObstacleGrid,
+} from '@/pathfinding';
 
 const lang = useLangStore();
 const world = useWorldStore();
@@ -460,19 +594,34 @@ const heatLsLoad = (() => {
 const showMoveHeat = ref<boolean>(heatLsLoad.move ?? true);
 const showDwellHeat = ref<boolean>(heatLsLoad.dwell ?? true);
 const showHotRoomGlow = ref<boolean>(heatLsLoad.hot ?? true);
-watch([showMoveHeat, showDwellHeat, showHotRoomGlow], () => {
+const showCellHeat = ref<boolean>(heatLsLoad.cell ?? false);
+// '' = aggregate (all agents). Otherwise restrict the cell-trajectory layer to
+// a single agent id, to inspect that NPC's path on its own.
+const cellHeatAgent = ref<string>('');
+watch([showMoveHeat, showDwellHeat, showHotRoomGlow, showCellHeat], () => {
   try {
     localStorage.setItem(HEAT_LS_KEY, JSON.stringify({
       move: showMoveHeat.value,
       dwell: showDwellHeat.value,
       hot: showHotRoomGlow.value,
+      cell: showCellHeat.value,
     }));
   } catch {}
+  visNet?.redraw?.();
 });
 
 function clearHeat() {
   if (!confirm(lang.t('清空累计的热力数据？', 'Clear accumulated heat data?'))) return;
   heat.reset();
+  visNet?.redraw?.();
+}
+
+/** Clear just the grid-cell trajectory layer and redraw immediately. */
+function clearCellHeat() {
+  if (!confirm(lang.t('清空格子轨迹热力并重绘？', 'Clear cell trajectory heat and redraw?'))) return;
+  heat.clearCells();
+  agentCell.clear();  // forget last-counted cells so fresh moves start counting
+  visNet?.redraw?.();
 }
 
 // Load the backend whole-run ("各总") cumulative heat map and render it on the
@@ -656,6 +805,7 @@ const npcRoomGap = ref<number>(lsLoad.npcRoomGap ?? 16);
 const autoScaleOnZoom = ref<boolean>(lsLoad.autoScaleOnZoom ?? true);
 const showTunePanel = ref<boolean>(false);
 const showHeatPanel = ref<boolean>(false);
+const showCollisionPanel = ref<boolean>(false);
 
 /* ---- Inverse-zoom scaling -----------------------------------------
  *  When the user zooms OUT for an overview, individual nodes shrink to
@@ -719,6 +869,237 @@ const mapY = ref<number>(0);
 const mapDefaulted = ref<boolean>(false);  // true once we've auto-fit the map once
 let layoutLoaded = false;
 
+/* ---- Collision / non-walkable terrain ("obstacles") ----
+ *  Painted on the canvas with a brush; stored as an occupancy grid anchored at
+ *  world origin (0,0). Each blocked cell is keyed "cx,cy". NPC move animations
+ *  route around these cells via A* (see `@/pathfinding`). Persisted to
+ *  runtime/scene_layout.json alongside room positions + map transform. */
+const OBSTACLE_CELL = 48;                 // world-units per grid cell
+const blockedCells = new Set<string>();   // non-reactive (read every frame / in A*)
+const obstacleVersion = ref(0);           // bump → redraw + debounced persist
+const obstacleGrid: ObstacleGrid = { cell: OBSTACLE_CELL, blocked: blockedCells };
+
+/* ---- Scene-node footprint ("areas") ----
+ *  A second brush paints which grid cells belong to a given room. NPCs inside a
+ *  room that has a painted footprint are scattered *randomly across its cells*
+ *  (stable per-NPC) instead of orbiting the hexagon. cellOwner maps a cell →
+ *  its owning room (a cell belongs to at most one room); roomCells is the
+ *  reverse index used for placement + rendering. */
+const cellOwner = new Map<string, string>();        // "cx,cy" → room uid
+const roomCells = new Map<string, Set<string>>();    // uid → set of "cx,cy"
+const areaVersion = ref(0);
+
+/** What the brush currently paints: collision terrain, or a specific room's
+ *  footprint. */
+const paintTarget = ref<'obstacle' | 'room'>('obstacle');
+const paintRoomUid = ref<string>('');
+
+const drawMode = ref<boolean>(false);            // brush tool armed
+const brushErase = ref<boolean>(false);          // false = paint, true = erase
+const brushRadius = ref<number>(120);            // world units
+const showObstacles = ref<boolean>(true);
+const showAreas = ref<boolean>(true);
+const obstacleCount = computed(() => {
+  void obstacleVersion.value;  // re-read after each paint stroke
+  return blockedCells.size;
+});
+const activeRoomAreaCount = computed(() => {
+  void areaVersion.value;
+  return roomCells.get(paintRoomUid.value)?.size ?? 0;
+});
+// Live brush-cursor position in world coords (null when off-canvas).
+let brushWorld: Pt | null = null;
+let painting = false;
+
+/** Assign a cell to a room footprint (clearing any prior owner). */
+function setCellRoom(key: string, uid: string): boolean {
+  const prev = cellOwner.get(key);
+  if (prev === uid) return false;
+  if (prev) roomCells.get(prev)?.delete(key);
+  cellOwner.set(key, uid);
+  let set = roomCells.get(uid);
+  if (!set) { set = new Set(); roomCells.set(uid, set); }
+  set.add(key);
+  return true;
+}
+/** Remove a cell from a specific room footprint (no-op for other owners). */
+function clearCellRoom(key: string, uid: string): boolean {
+  if (cellOwner.get(key) !== uid) return false;
+  cellOwner.delete(key);
+  roomCells.get(uid)?.delete(key);
+  return true;
+}
+
+/** Mark / unmark every cell whose center lies within `brushRadius` of a paint
+ *  point. Routes to either the collision grid or the active room footprint
+ *  depending on `paintTarget`. Returns true when something changed. */
+function paintAt(world: Pt): boolean {
+  const r = brushRadius.value;
+  const cell = OBSTACLE_CELL;
+  const minCx = Math.floor((world.x - r) / cell);
+  const maxCx = Math.floor((world.x + r) / cell);
+  const minCy = Math.floor((world.y - r) / cell);
+  const maxCy = Math.floor((world.y + r) / cell);
+  const r2 = r * r;
+  const toRoom = paintTarget.value === 'room';
+  const uid = paintRoomUid.value;
+  if (toRoom && !uid) return false;
+  let changed = false;
+  for (let cx = minCx; cx <= maxCx; cx++) {
+    for (let cy = minCy; cy <= maxCy; cy++) {
+      const ccx = (cx + 0.5) * cell;
+      const ccy = (cy + 0.5) * cell;
+      if ((ccx - world.x) ** 2 + (ccy - world.y) ** 2 > r2) continue;
+      const key = cellKey(cx, cy);
+      if (toRoom) {
+        if (brushErase.value) { if (clearCellRoom(key, uid)) changed = true; }
+        // Scene-area cells may not overlap collision terrain — skip blocked cells.
+        else if (!blockedCells.has(key)) { if (setCellRoom(key, uid)) changed = true; }
+      } else if (brushErase.value) {
+        if (blockedCells.delete(key)) changed = true;
+      } else if (!blockedCells.has(key)) {
+        blockedCells.add(key);
+        changed = true;
+      }
+    }
+  }
+  return changed;
+}
+
+/** Bump the right version ref so dependent computeds / redraw pick up changes. */
+function bumpPaintVersion() {
+  if (paintTarget.value === 'room') areaVersion.value++;
+  else obstacleVersion.value++;
+  // Placement caches read the area set; invalidate it on any room edit.
+  if (paintTarget.value === 'room') areaCellCache.clear();
+}
+
+function clearObstacles() {
+  if (!blockedCells.size) return;
+  if (!confirm(lang.t('清空所有已绘制的碰撞区域？', 'Clear all painted collision areas?'))) return;
+  blockedCells.clear();
+  obstacleVersion.value++;
+  visNet?.redraw?.();
+  if (layoutLoaded) persistLayout();
+}
+
+/** Clear the footprint of the currently selected room. */
+function clearActiveRoomArea() {
+  const uid = paintRoomUid.value;
+  const set = uid ? roomCells.get(uid) : null;
+  if (!uid || !set || !set.size) return;
+  if (!confirm(lang.t('清空该场景节点的范围格子？', "Clear this scene node's painted cells?"))) return;
+  for (const key of set) cellOwner.delete(key);
+  set.clear();
+  areaVersion.value++;
+  areaCellCache.clear();
+  visNet?.redraw?.();
+  if (layoutLoaded) persistLayout();
+}
+
+/* Cached sorted cell-array per room (for stable NPC placement), invalidated
+ *  whenever a footprint is edited. */
+const areaCellCache = new Map<string, string[]>();
+function areaCellArray(uid: string): string[] {
+  const cached = areaCellCache.get(uid);
+  if (cached) return cached;
+  const set = roomCells.get(uid);
+  const arr = set ? Array.from(set).sort() : [];
+  areaCellCache.set(uid, arr);
+  return arr;
+}
+
+/** DOM(client) coords → vis-network world coords, via the network's own
+ *  DOMtoCanvas (the draw overlay shares the canvas's top-left origin). */
+function clientToWorld(clientX: number, clientY: number): Pt | null {
+  if (!visNet || !drawSurface.value) return null;
+  const rect = drawSurface.value.getBoundingClientRect();
+  const dom = { x: clientX - rect.left, y: clientY - rect.top };
+  const p = visNet.DOMtoCanvas?.(dom);
+  return p ? { x: p.x, y: p.y } : null;
+}
+
+const drawSurface = ref<HTMLDivElement | null>(null);
+
+/** Room uid under the given client coords, or null. Lets us pick which scene
+ *  node to paint by clicking its hexagon on the canvas (the draw overlay
+ *  intercepts pointer events, so we hit-test via vis-network ourselves). */
+function roomNodeAt(clientX: number, clientY: number): string | null {
+  if (!visNet?.getNodeAt || !drawSurface.value) return null;
+  const rect = drawSurface.value.getBoundingClientRect();
+  const id = visNet.getNodeAt({ x: clientX - rect.left, y: clientY - rect.top });
+  if (id == null) return null;
+  const sid = String(id);
+  return roomMap.value[sid] ? sid : null;  // ignore npc:/item: satellite nodes
+}
+
+function onBrushDown(e: PointerEvent) {
+  if (!drawMode.value) return;
+  e.preventDefault();
+  (e.target as HTMLElement).setPointerCapture?.(e.pointerId);
+  // In scene-area mode, clicking a scene node selects it for painting instead
+  // of laying down cells — so you can pick the node straight off the map.
+  if (paintTarget.value === 'room') {
+    const hitUid = roomNodeAt(e.clientX, e.clientY);
+    if (hitUid) {
+      paintRoomUid.value = hitUid;
+      brushWorld = clientToWorld(e.clientX, e.clientY);
+      visNet?.redraw?.();
+      return;  // this stroke only picks the node
+    }
+  }
+  painting = true;
+  const w = clientToWorld(e.clientX, e.clientY);
+  if (w) { brushWorld = w; if (paintAt(w)) bumpPaintVersion(); }
+  visNet?.redraw?.();
+}
+function onBrushMove(e: PointerEvent) {
+  if (!drawMode.value) return;
+  const w = clientToWorld(e.clientX, e.clientY);
+  brushWorld = w;
+  if (painting && w) {
+    if (paintAt(w)) bumpPaintVersion();
+  }
+  visNet?.redraw?.();
+}
+function onBrushUp() {
+  if (!painting) return;
+  painting = false;
+  if (layoutLoaded) persistLayout();
+}
+function onBrushLeave() {
+  brushWorld = null;
+  if (drawMode.value) visNet?.redraw?.();
+}
+
+/** Sync vis-network interaction to the current draw mode (drawing disables
+ *  pan/zoom/node-drag so the brush owns the pointer). */
+function applyInteractionForDrawMode() {
+  if (!visNet?.setOptions) return;
+  visNet.setOptions({
+    interaction: {
+      dragView: !drawMode.value,
+      dragNodes: !drawMode.value,
+      zoomView: !drawMode.value,
+    },
+  });
+}
+function toggleDrawMode() {
+  drawMode.value = !drawMode.value;
+  applyInteractionForDrawMode();
+  visNet?.redraw?.();
+}
+// Closing the panel must release the canvas back to normal interaction.
+watch(showCollisionPanel, (open) => {
+  if (!open && drawMode.value) {
+    drawMode.value = false;
+    painting = false;
+    brushWorld = null;
+    applyInteractionForDrawMode();
+    visNet?.redraw?.();
+  }
+});
+
 const mapImage = new Image();
 let mapImageReady = false;
 mapImage.onload = () => { mapImageReady = true; maybeDefaultMap(); visNet?.redraw?.(); };
@@ -773,6 +1154,18 @@ function persistLayout() {
           y: mapY.value,
           defaulted: mapDefaulted.value,
         },
+        obstacles: {
+          cell: OBSTACLE_CELL,
+          cells: Array.from(blockedCells),
+        },
+        roomAreas: {
+          cell: OBSTACLE_CELL,
+          rooms: Object.fromEntries(
+            Array.from(roomCells.entries())
+              .filter(([, s]) => s.size)
+              .map(([uid, s]) => [uid, Array.from(s)]),
+          ),
+        },
       });
     } catch (err) {
       console.warn('[scene] save layout failed', err);
@@ -796,11 +1189,57 @@ async function loadLayout() {
     if (typeof m.x === 'number') mapX.value = m.x;
     if (typeof m.y === 'number') mapY.value = m.y;
     if (m.defaulted) mapDefaulted.value = true;
+    // Restore painted collision cells. Older saves used a different cell size;
+    // we rescale by recomputing cell centers into the current grid so the mask
+    // still lines up with the map (within a cell).
+    const ob = (data as any)?.obstacles || {};
+    const savedCells: string[] = Array.isArray(ob.cells) ? ob.cells : [];
+    const savedCell = Number(ob.cell) > 0 ? Number(ob.cell) : OBSTACLE_CELL;
+    blockedCells.clear();
+    for (const k of savedCells) {
+      if (typeof k !== 'string') continue;
+      if (savedCell === OBSTACLE_CELL) {
+        blockedCells.add(k);
+      } else {
+        const ci = k.indexOf(',');
+        const cx = Number(k.slice(0, ci));
+        const cy = Number(k.slice(ci + 1));
+        if (!Number.isFinite(cx) || !Number.isFinite(cy)) continue;
+        const [ncx, ncy] = worldToCell((cx + 0.5) * savedCell, (cy + 0.5) * savedCell, OBSTACLE_CELL);
+        blockedCells.add(cellKey(ncx, ncy));
+      }
+    }
+    obstacleVersion.value++;
+    // Restore per-room footprints (same cell-size remap as obstacles).
+    const ra = (data as any)?.roomAreas || {};
+    const raRooms = (ra.rooms && typeof ra.rooms === 'object') ? ra.rooms : {};
+    const raCell = Number(ra.cell) > 0 ? Number(ra.cell) : OBSTACLE_CELL;
+    cellOwner.clear();
+    roomCells.clear();
+    areaCellCache.clear();
+    for (const [uid, cells] of Object.entries(raRooms)) {
+      if (!Array.isArray(cells)) continue;
+      for (const k of cells as any[]) {
+        if (typeof k !== 'string') continue;
+        let key = k;
+        if (raCell !== OBSTACLE_CELL) {
+          const ci = k.indexOf(',');
+          const cx = Number(k.slice(0, ci));
+          const cy = Number(k.slice(ci + 1));
+          if (!Number.isFinite(cx) || !Number.isFinite(cy)) continue;
+          const [ncx, ncy] = worldToCell((cx + 0.5) * raCell, (cy + 0.5) * raCell, OBSTACLE_CELL);
+          key = cellKey(ncx, ncy);
+        }
+        setCellRoom(key, uid);
+      }
+    }
+    areaVersion.value++;
   } catch (err) {
     console.warn('[scene] load layout failed', err);
   } finally {
     layoutLoaded = true;
     maybeDefaultMap();
+    visNet?.redraw?.();
   }
 }
 
@@ -816,11 +1255,110 @@ function drawMap(ctx: CanvasRenderingContext2D) {
   ctx.restore();
 }
 
+/** Draw each room's painted footprint (world coords) tinted with the room's
+ *  color, beneath obstacles + nodes. Helps the user see which cells belong to
+ *  which scene node while painting. */
+function drawAreas(ctx: CanvasRenderingContext2D) {
+  if (!showAreas.value || cellOwner.size === 0) return;
+  const cell = OBSTACLE_CELL;
+  ctx.save();
+  for (const [uid, set] of roomCells) {
+    if (!set.size) continue;
+    const isActive = drawMode.value && paintTarget.value === 'room' && uid === paintRoomUid.value;
+    ctx.fillStyle = hexToRgba(colorOf(roomMap.value[uid]?.tag), isActive ? 0.34 : 0.2);
+    for (const key of set) {
+      const ci = key.indexOf(',');
+      const cx = Number(key.slice(0, ci));
+      const cy = Number(key.slice(ci + 1));
+      ctx.fillRect(cx * cell - 0.5, cy * cell - 0.5, cell + 1, cell + 1);
+    }
+  }
+  ctx.restore();
+}
+
+/** "#rrggbb" + alpha → "rgba(...)". */
+function hexToRgba(hex: string, a: number): string {
+  const h = hex.replace('#', '');
+  const r = parseInt(h.slice(0, 2), 16) || 0;
+  const g = parseInt(h.slice(2, 4), 16) || 0;
+  const b = parseInt(h.slice(4, 6), 16) || 0;
+  return `rgba(${r}, ${g}, ${b}, ${a})`;
+}
+
+/** Draw the painted collision cells (world coords) on top of the map but below
+ *  the room/NPC nodes. Cells are merged visually into a translucent red mask. */
+function drawObstacles(ctx: CanvasRenderingContext2D) {
+  if (!showObstacles.value || blockedCells.size === 0) return;
+  const cell = OBSTACLE_CELL;
+  ctx.save();
+  ctx.fillStyle = 'rgba(229, 57, 53, 0.32)';
+  for (const key of blockedCells) {
+    const ci = key.indexOf(',');
+    const cx = Number(key.slice(0, ci));
+    const cy = Number(key.slice(ci + 1));
+    // Slight overdraw (+0.5) hides seams between adjacent cells.
+    ctx.fillRect(cx * cell - 0.5, cy * cell - 0.5, cell + 1, cell + 1);
+  }
+  ctx.restore();
+}
+
+/** Trajectory heat: tint each visited grid cell by how many agents have passed
+ *  through it (blue = cold → red = hot). Drawn above the map/areas so the
+ *  movement "trails" are visible across the campus. */
+function drawCellHeat(ctx: CanvasRenderingContext2D) {
+  if (!showCellHeat.value) return;
+  // Focus on a single agent's trajectory when one is selected, else aggregate.
+  const focus = cellHeatAgent.value;
+  const counts = focus ? heat.cellCountsForAgent(focus) : heat.cellCounts;
+  const max = focus ? heat.maxCellForAgent(focus) : heat.maxCellCount;
+  if (!max || !counts) return;
+  const cell = OBSTACLE_CELL;
+  ctx.save();
+  for (const key in counts) {
+    const c = counts[key];
+    if (!c) continue;
+    const t = Math.min(1, c / max);
+    const ci = key.indexOf(',');
+    const cx = Number(key.slice(0, ci));
+    const cy = Number(key.slice(ci + 1));
+    // Hue 210 (blue) → 0 (red) as heat rises; alpha grows with heat too.
+    const hue = 210 - 210 * t;
+    ctx.fillStyle = `hsla(${hue}, 90%, 55%, ${0.2 + 0.5 * t})`;
+    ctx.fillRect(cx * cell - 0.5, cy * cell - 0.5, cell + 1, cell + 1);
+  }
+  ctx.restore();
+}
+
+/** Brush preview ring at the cursor while in draw mode. */
+function drawBrushCursor(ctx: CanvasRenderingContext2D) {
+  if (!drawMode.value || !brushWorld) return;
+  // Brush tint: blue when erasing, the room color when painting a footprint,
+  // red when painting collision.
+  let rgb = '255,90,80';
+  if (brushErase.value) rgb = '120,200,255';
+  else if (paintTarget.value === 'room' && paintRoomUid.value) {
+    const h = colorOf(roomMap.value[paintRoomUid.value]?.tag).replace('#', '');
+    rgb = `${parseInt(h.slice(0, 2), 16) || 0},${parseInt(h.slice(2, 4), 16) || 0},${parseInt(h.slice(4, 6), 16) || 0}`;
+  }
+  ctx.save();
+  ctx.lineWidth = 2 / ((visNet?.getScale?.() as number) || 1);
+  ctx.strokeStyle = `rgba(${rgb},0.95)`;
+  ctx.fillStyle = `rgba(${rgb},0.14)`;
+  ctx.beginPath();
+  ctx.arc(brushWorld.x, brushWorld.y, brushRadius.value, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+}
+
 // Re-render the canvas + re-save whenever the map transform changes.
 watch([mapVisible, mapOpacity, mapScale, mapX, mapY], () => {
   visNet?.redraw?.();
   if (layoutLoaded) persistLayout();
 });
+// Re-render when obstacle / area visibility toggles, or the active paint room
+// changes (so the active footprint highlights immediately).
+watch([showObstacles, showAreas, paintRoomUid, paintTarget, cellHeatAgent], () => visNet?.redraw?.());
 
 /* Slider bounds derived from the room spread so the controls stay usable
  * regardless of the layout's world scale. */
@@ -1009,6 +1547,15 @@ const spriteIndex = computed<Record<string, number>>(() => {
   ids.forEach((id, i) => { m[id] = i % SPRITE_COUNT; });
   return m;
 });
+/** Each NPC's FIXED position in the sorted roster. Unlike a per-room peer
+ *  index, this never changes as NPCs move between rooms, so the satellite
+ *  layout below stays put when peers come and go (no per-frame reshuffle). */
+const npcOrderIndex = computed<Record<string, number>>(() => {
+  const ids = (agents.list || []).map(a => String(a.id)).sort();
+  const m: Record<string, number> = {};
+  ids.forEach((id, i) => { m[id] = i; });
+  return m;
+});
 function spriteUrl(id: string): string {
   const i = spriteIndex.value[id] ?? (hashId(id) % SPRITE_COUNT);
   return `/sprites/npc_${String(i).padStart(2, '0')}.png`;
@@ -1023,27 +1570,21 @@ function currentLocation(id: string): string | null {
   return a ? (a.location_uid || null) : null;
 }
 
-/* Stable index of an NPC inside a room (sorted by id) → drives its angle
-   on the satellite ring around the room hexagon. */
-function npcsInRoom(uid: string): string[] {
-  const out: string[] = [];
-  for (const id of trackedAgents.value) {
-    if (currentLocation(id) === uid) out.push(id);
-  }
-  return out.sort();
-}
-
 /** Returns {x, y} in vis-network world-units for an NPC orbiting its room.
- *  Uses multiple rings (12 NPCs per ring) so dense rooms (35+ NPCs) don't
- *  spill into neighbour rooms. */
+ *
+ *  The slot is derived from the NPC's FIXED roster index (not its index among
+ *  the room's *current* occupants), so peers entering/leaving never reshuffle
+ *  anyone. This is the key fix for the playback "frame skip": previously every
+ *  frame's redraw recomputed peer indices and teleported the whole room's NPCs
+ *  to new ring slots. (ring, slot) is a bijection of the roster index, so two
+ *  distinct NPCs can never land on the same spot. Multiple rings (12 per ring)
+ *  keep dense rooms (35+ NPCs) from spilling into neighbours. */
 function npcSatellitePos(id: string, loc: string): { x: number; y: number } {
   const { x: cx, y: cy } = roomCenter(loc);
-  const peers = npcsInRoom(loc);
-  const idx = Math.max(0, peers.indexOf(id));
   const PER_RING = 12;
-  const ring = Math.floor(idx / PER_RING);
-  const slot = idx % PER_RING;
-  const slotsThisRing = Math.min(PER_RING, peers.length - ring * PER_RING);
+  const k = npcOrderIndex.value[id] ?? (hashId(id) % 997);
+  const ring = Math.floor(k / PER_RING);
+  const slot = k % PER_RING;
   // Satellite ring radius = (room edge) + npcRoomGap world units.
   // `npcRoomGap` is user-tunable from the ⚙ panel so you can pull NPCs in
   // tight against the room or push them out into a wide orbit. Adding a
@@ -1056,8 +1597,47 @@ function npcSatellitePos(id: string, loc: string): { x: number; y: number } {
   const ringStart = roomVisualSize.value + Math.max(npcRoomGap.value, minGap);
   const ringStep  = markerSize * 1.3 + 3;
   const radius = ringStart + ring * ringStep;
-  const angle = (2 * Math.PI * slot) / slotsThisRing - Math.PI / 2;
+  // Interleave alternate rings by half a slot so outer rings don't align
+  // radially with inner ones (reads as a fuller, less spoke-like orbit).
+  const halfSlot = (ring % 2) * (Math.PI / PER_RING);
+  const angle = (2 * Math.PI * slot) / PER_RING - Math.PI / 2 + halfSlot;
   return { x: cx + radius * Math.cos(angle), y: cy + radius * Math.sin(angle) };
+}
+
+/** Stable pseudo-random scatter position for an NPC inside a room's painted
+ *  footprint: deterministically pick one of the room's cells from the NPC id,
+ *  then a fixed sub-cell offset (so the NPC keeps the same spot frame-to-frame
+ *  and across peers entering/leaving). Prefers walkable (non-collision) cells.
+ *  Returns null when the room has no footprint → caller uses the ring layout. */
+function roomAreaPos(id: string, loc: string): { x: number; y: number } | null {
+  const all = areaCellArray(loc);
+  if (!all.length) return null;
+  // Skip cells that are also painted as collision; fall back to the full set if
+  // every cell happens to be blocked.
+  const free = all.filter(k => !blockedCells.has(k));
+  const cells = free.length ? free : all;
+  const cell = OBSTACLE_CELL;
+  const h = hashId(id);
+  const key = cells[h % cells.length];
+  const ci = key.indexOf(',');
+  const gx = Number(key.slice(0, ci));
+  const gy = Number(key.slice(ci + 1));
+  // Two independent hashes → stable offset within the cell (with a small inset).
+  const hx = hashId(id + '#x');
+  const hy = hashId(id + '#y');
+  const inset = cell * 0.15;
+  const span = cell - 2 * inset;
+  const ox = inset + ((hx % 1000) / 1000) * span;
+  const oy = inset + ((hy % 1000) / 1000) * span;
+  return { x: gx * cell + ox, y: gy * cell + oy };
+}
+
+/** NPC world position in a room: scattered across the painted footprint when
+ *  one exists, else the orbiting satellite ring. Single entry point used by the
+ *  node renderer, item carriers, and the move animation endpoints. */
+function npcPos(id: string, loc: string): { x: number; y: number } {
+  void areaVersion.value;  // recompute placement when footprints are edited
+  return roomAreaPos(id, loc) || npcSatellitePos(id, loc);
 }
 
 const vNpcNodes = computed(() => {
@@ -1067,7 +1647,9 @@ const vNpcNodes = computed(() => {
     if (!loc || !roomMap.value[loc]) continue;
     const a = agents.list.find(x => String(x.id) === id);
     const label = a ? npcName(a) : id;
-    const { x, y } = npcSatellitePos(id, loc);
+    // Mid-move NPCs are positioned by the glide (origin → destination), not by
+    // the snapshot, to avoid the destination flash described at `moving` above.
+    const { x, y } = (moving[id] && glidePos.get(id)) || npcPos(id, loc);
     out.push({
       id: `npc:${id}`,
       label,
@@ -1147,7 +1729,7 @@ function itemSatellitePos(it: ItemLite): { x: number; y: number } | null {
     // Mount on the NPC: small offset from the NPC node.
     const npcLoc = currentLocation(it.carrier_id);
     if (!npcLoc) return null;
-    const p = npcSatellitePos(it.carrier_id, npcLoc);
+    const p = npcPos(it.carrier_id, npcLoc);
     const off = (useSprites.value ? spriteSize.value * 0.5 : npcVisualSize.value) + 4;
     return { x: p.x + off, y: p.y - off * 0.4 };
   }
@@ -1412,6 +1994,63 @@ const roomTriplets = computed<Triplet[]>(() => {
  *  once it saturates, so `stream.length` alone can't detect new pushes. */
 let lastSeenPushedTotal = 0;
 const animations = new Map<string, number>();    // npc id → raf handle
+const moveStartTimers = new Map<string, number>(); // npc id → pending start setTimeout
+
+/* ---- Move-animation position ownership ----
+ *  While an NPC is mid-move (waiting for its staggered start OR actively
+ *  gliding) its rendered position is owned by the animation, NOT the snapshot.
+ *  Otherwise a freshly-applied frame paints the NPC at its DESTINATION for a
+ *  beat (snapshot already there), then `begin()` snaps it back to the origin to
+ *  start the glide — the "flash to destination, flash back, then move" glitch.
+ *
+ *  `moving` is reactive so `vNpcNodes` recomputes when a move starts/ends and
+ *  reads the override; the live glide coords live in a NON-reactive map so the
+ *  per-frame (60fps) updates don't thrash the computed. A rare recompute mid-
+ *  glide (e.g. a live world poll) reads the CURRENT glide position, so the
+ *  sprite never jumps back to the origin or jumps ahead to the destination. */
+const moving = reactive<Record<string, boolean>>({});
+const glidePos = new Map<string, { x: number; y: number }>();
+
+// Report the number of in-flight move animations (pending start OR gliding) to
+// the playback store so it holds each frame until its glides actually finish,
+// instead of guessing the duration. This is what eliminates the frame-skip:
+// playback advances on the real animation-settle signal.
+watch(
+  () => Object.keys(moving).length,
+  (n) => playback.reportAnimBusy(n),
+);
+
+function finishMove(id: string) {
+  delete moving[id];
+  glidePos.delete(id);
+}
+
+/* ---- Staggered move starts ----
+ *  A single tick (live) or replayed frame (playback) typically moves many NPCs
+ *  at once. Starting every glide on the same frame looks robotic, so we hand
+ *  each move a small, increasing start delay. A rolling "next start slot"
+ *  spreads a burst out; once there's a real gap (the slot falls behind wall
+ *  time) it resets to 0, so isolated moves still start immediately. The total
+ *  drift is capped so a big crowd never lags far behind its frame. */
+let staggerNextStart = 0;          // perf.now timestamp for the next move's start
+
+// During playback the user-chosen speed compresses (or stretches) the whole
+// choreography uniformly: glides AND the stagger gaps shrink by `speedFactor`,
+// so the playback store can wait exactly one (scaled) animation per frame.
+function speedFactor(): number {
+  return playback.active ? Math.max(0.1, playback.speed) : 1;
+}
+
+function nextMoveStaggerDelay(): number {
+  const sf = speedFactor();
+  const gap = MOVE_STAGGER_MS / sf;
+  const cap = MOVE_STAGGER_MAX_MS / sf;
+  const now = performance.now();
+  let startAt = Math.max(now, staggerNextStart);
+  if (startAt - now > cap) startAt = now + cap;
+  staggerNextStart = startAt + gap;
+  return startAt - now;
+}
 
 /* ---- Speech bubbles above NPC sprites ----
  *  On a `dialog` event we float the spoken line above the speaker (and the
@@ -1479,6 +2118,20 @@ let zoomRaf: number | null = null;
 let visNet: any = null;
 function onNetReady(net: any) {
   visNet = net;
+  // While the area-paint panel is open in "scene area" mode, clicking a scene
+  // node picks it as the paint target (selects its name) — works even before
+  // entering draw mode. In draw mode the overlay swallows clicks, so the
+  // onBrushDown path handles the same pick instead.
+  net.on('click', (params: any) => {
+    if (!showCollisionPanel.value || paintTarget.value !== 'room') return;
+    const hit = (params?.nodes || [])
+      .map((x: any) => String(x))
+      .find((nid: string) => !!roomMap.value[nid]);
+    if (hit) {
+      paintRoomUid.value = hit;
+      visNet?.redraw?.();
+    }
+  });
   net.on('zoom', () => scheduleZoomBoostUpdate());
   // Also re-evaluate after fit/move animations finish, because vis-network
   // doesn't always emit `zoom` during fit() / moveTo() animations.
@@ -1487,8 +2140,16 @@ function onNetReady(net: any) {
     handleDragEnd(params);
     scheduleZoomBoostUpdate();
   });
-  // Draw the campus map behind every frame (world coords → pans/zooms too).
-  net.on('beforeDrawing', (ctx: CanvasRenderingContext2D) => drawMap(ctx));
+  // Draw the campus map + painted obstacles behind every frame (world coords →
+  // pans/zooms with the nodes). Map first, obstacles on top of it.
+  net.on('beforeDrawing', (ctx: CanvasRenderingContext2D) => {
+    drawMap(ctx);
+    drawAreas(ctx);
+    drawCellHeat(ctx);
+    drawObstacles(ctx);
+  });
+  // Brush preview ring sits above everything else.
+  net.on('afterDrawing', (ctx: CanvasRenderingContext2D) => drawBrushCursor(ctx));
   // Initial sync (fit() during mount may set scale before our listener attaches).
   scheduleZoomBoostUpdate();
   net.redraw?.();
@@ -1541,46 +2202,100 @@ function scheduleZoomBoostUpdate() {
 // Re-evaluate boost (forced to 1) the moment the user toggles auto-scale off.
 watch(autoScaleOnZoom, scheduleZoomBoostUpdate);
 
-function animateNpcMove(id: string, fromUid: string, toUid: string) {
-  const net = graphRef.value as any;
-  if (!net?.updateNodes) return;
-  // Compute endpoints in the same coord-space as everything else.
-  const fromRoom = roomMap.value[fromUid];
-  const toRoom = roomMap.value[toUid];
-  if (!fromRoom || !toRoom) return;
-  const fromPos = npcSatellitePos(id, fromUid);
-  // For the target slot, anticipate the post-move ring (peers ≈ npcsInRoom(toUid)).
-  // Approximation is good enough because the next snapshot recompute corrects it.
-  const toPos = npcSatellitePos(id, toUid);
+/* ---- Grid-cell trajectory heat ----
+ *  Each agent's last counted cell. We bump a cell's traversal counter only when
+ *  an agent ENTERS a new cell (its cell key changes), so an agent standing
+ *  still inside one cell never re-counts — that's the "avoid dwell over-
+ *  accumulation" guarantee. Counting is driven from the glide tick below. */
+const agentCell = new Map<string, string>();
+function trackAgentCell(id: string, x: number, y: number) {
+  const [cx, cy] = worldToCell(x, y, OBSTACLE_CELL);
+  const key = cellKey(cx, cy);
+  if (agentCell.get(id) === key) return;  // same cell → dwelling, don't count
+  agentCell.set(id, key);
+  heat.recordCellEnter(key, id);
+}
 
-  const start = performance.now();
-  // Cancel any in-flight animation for this NPC.
+function animateNpcMove(id: string, fromUid: string, toUid: string, startDelayMs = 0) {
+  const net = graphRef.value as any;
+  if (!net?.updateNodes) { finishMove(id); return; }
+
+  // Cancel any pending start + in-flight animation for this NPC.
+  if (moveStartTimers.has(id)) {
+    window.clearTimeout(moveStartTimers.get(id)!);
+    moveStartTimers.delete(id);
+  }
   if (animations.has(id)) {
     cancelAnimationFrame(animations.get(id)!);
     animations.delete(id);
   }
-  const dur = Math.max(200, moveAnimMs.value);
-  const tick = (now: number) => {
-    const t = Math.min(1, (now - start) / dur);
-    // Ease in/out cubic.
-    const e = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-    const x = fromPos.x + (toPos.x - fromPos.x) * e;
-    const y = fromPos.y + (toPos.y - fromPos.y) * e;
-    const updates: any[] = [{ id: `npc:${id}`, x, y }];
-    // If this NPC is carrying an item, drag it along too.
-    for (const it of itemsList.value) {
-      if (it.carrier_id === id) {
-        updates.push({ id: `item:${it.id}`, x: x + 22, y: y - 8 });
+
+  const begin = () => {
+    moveStartTimers.delete(id);
+    const net2 = graphRef.value as any;
+    if (!net2?.updateNodes) { finishMove(id); return; }
+    // Compute endpoints in the same coord-space as everything else. Resolved at
+    // start (not schedule) time so a staggered NPC uses up-to-date slots.
+    const fromRoom = roomMap.value[fromUid];
+    const toRoom = roomMap.value[toUid];
+    if (!fromRoom || !toRoom) { finishMove(id); return; }
+    const fromPos = npcPos(id, fromUid);
+    // Endpoints are now stable per-id (roster-index ring or footprint scatter),
+    // so the from/to slots are exact regardless of who else is in either room.
+    const toPos = npcPos(id, toUid);
+
+    // Route around painted collision terrain with A*. When there are no
+    // obstacles in the way, findPath returns null and we glide straight. The
+    // total duration stays `moveAnimMs` (the NPC just travels a longer polyline
+    // a bit faster) so playback timing in `@/anim` remains accurate.
+    let path: Pt[] = [fromPos, toPos];
+    if (blockedCells.size) {
+      const routed = findPath(obstacleGrid, fromPos, toPos, { margin: 28 });
+      if (routed && routed.length >= 2) path = routed;
+    }
+    const { cum, total } = cumulativeLengths(path);
+
+    const start = performance.now();
+    const dur = Math.max(200, moveAnimMs.value) / speedFactor();
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / dur);
+      // Ease in/out cubic.
+      const e = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      const p = pointAlong(path, cum, total, e);
+      const x = p.x;
+      const y = p.y;
+      // Keep the (non-reactive) glide position current so any recompute of
+      // vNpcNodes mid-glide renders the sprite where it actually is.
+      glidePos.set(id, { x, y });
+      // Trajectory heat: count each grid cell this glide passes through (once).
+      trackAgentCell(id, x, y);
+      const updates: any[] = [{ id: `npc:${id}`, x, y }];
+      // If this NPC is carrying an item, drag it along too.
+      for (const it of itemsList.value) {
+        if (it.carrier_id === id) {
+          updates.push({ id: `item:${it.id}`, x: x + 22, y: y - 8 });
+        }
       }
-    }
-    net.updateNodes(updates);
-    if (t < 1) {
-      animations.set(id, requestAnimationFrame(tick));
-    } else {
-      animations.delete(id);
-    }
+      net2.updateNodes(updates);
+      if (t < 1) {
+        animations.set(id, requestAnimationFrame(tick));
+      } else {
+        animations.delete(id);
+        // Hand position back to the snapshot (already at destination) — no flash
+        // because the glide ended exactly on the destination slot.
+        finishMove(id);
+      }
+    };
+    glidePos.set(id, fromPos);
+    moving[id] = true;
+    animations.set(id, requestAnimationFrame(tick));
   };
-  animations.set(id, requestAnimationFrame(tick));
+
+  if (startDelayMs > 0) {
+    moveStartTimers.set(id, window.setTimeout(begin, startDelayMs));
+  } else {
+    begin();
+  }
 }
 
 /** Process a single sim event into heat / animations. Idempotent guard
@@ -1611,7 +2326,14 @@ function processSimEvent(ev: any, animate: boolean) {
   // Heat-map: record every successful traversal regardless of tracking.
   heat.recordMove(String(from), String(to));
   if (animate && trackedSet.value.has(aid)) {
-    animateNpcMove(aid, String(from), String(to));
+    // Pin the sprite at its ORIGIN immediately so the just-applied snapshot
+    // (NPC already at destination) doesn't paint it there during the stagger
+    // wait. `begin()` recomputes the same origin slot, so this is consistent.
+    glidePos.set(aid, npcPos(aid, String(from)));
+    moving[aid] = true;
+    // Stagger the start so a tick/frame that moves many NPCs doesn't fire every
+    // glide on the same instant (reads as a more natural, sequential flow).
+    animateNpcMove(aid, String(from), String(to), nextMoveStaggerDelay());
   }
 }
 
@@ -1693,6 +2415,10 @@ watch(() => playback.active, (on) => {
 onBeforeUnmount(() => {
   for (const h of animations.values()) cancelAnimationFrame(h);
   animations.clear();
+  for (const t of moveStartTimers.values()) window.clearTimeout(t);
+  moveStartTimers.clear();
+  glidePos.clear();
+  for (const k of Object.keys(moving)) delete moving[k];
   if (bubbleRaf != null) cancelAnimationFrame(bubbleRaf);
   world.stopPolling();
   // Hand the world back to the live feed if we leave mid-playback.
@@ -1837,6 +2563,112 @@ onBeforeUnmount(() => {
   display: flex; gap: 8px;
   z-index: 6;
 }
+.ctrl-btn.on {
+  border-color: var(--accent-warn, #ff9800);
+  color: var(--accent-warn, #ff9800);
+}
+
+/* ---- Collision-drawing surface + panel ---- */
+.draw-surface {
+  position: absolute;
+  inset: 0;
+  z-index: 7;            /* above the canvas, below the side panels */
+  touch-action: none;
+}
+.draw-surface.active { cursor: crosshair; }
+.draw-surface.active.erase { cursor: cell; }
+
+.collision-panel {
+  position: absolute;
+  top: 62px;
+  right: 16px;
+  width: 268px;
+  background: rgba(18,24,43,0.96);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  padding: 10px 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+  z-index: 8;            /* above the brush surface so it stays clickable */
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+.collision-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 8px;
+}
+.collision-header strong { color: #ef5350; font-size: 13px; }
+.draw-toggle {
+  width: 100%;
+  padding: 7px 8px;
+  border-radius: 8px;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-size: 12px;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+.draw-toggle:hover { background: var(--bg-elevated); }
+.draw-toggle.on {
+  border-color: #ef5350;
+  background: rgba(239,83,80,0.16);
+  color: #ff8a85;
+  font-weight: 600;
+}
+.brush-modes { display: flex; gap: 8px; margin-bottom: 6px; }
+.brush-modes.target { margin-bottom: 8px; }
+.room-select {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+  padding: 5px 8px;
+  border-radius: 7px;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: 12px;
+  outline: none;
+}
+.draw-toggle:disabled { opacity: 0.45; cursor: not-allowed; }
+.micro-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.pick-hint {
+  margin: -2px 0 8px;
+  padding: 6px 8px;
+  border-radius: 7px;
+  background: rgba(78,161,255,0.12);
+  border: 1px solid rgba(78,161,255,0.4);
+  color: var(--accent-primary);
+  font-size: 11px;
+  line-height: 1.4;
+}
+.brush-mode {
+  flex: 1;
+  display: flex; align-items: center; justify-content: center; gap: 4px;
+  padding: 5px 6px;
+  border-radius: 7px;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-card);
+  cursor: pointer;
+  font-size: 11.5px;
+}
+.brush-mode input { display: none; }
+.brush-mode.on { border-color: var(--accent-primary); background: rgba(78,161,255,0.14); color: var(--accent-primary); }
+.brush-toggle {
+  display: flex; align-items: center; gap: 8px;
+  margin: 6px 0 2px;
+  padding-top: 6px;
+  border-top: 1px dashed var(--border-soft);
+  cursor: pointer;
+}
+.brush-toggle input[type=checkbox] { accent-color: #ef5350; cursor: pointer; }
+.brush-toggle .tune-val { margin-left: auto; }
+.collision-hint {
+  margin-top: 8px;
+  font-size: 10.5px;
+  line-height: 1.5;
+  color: var(--text-very-dim);
+  font-style: italic;
+}
 
 /* ---- Heat-map control panel ---- */
 .heat-panel {
@@ -1873,6 +2705,17 @@ onBeforeUnmount(() => {
 }
 .heat-sw.move  { background: linear-gradient(90deg, #ff9800, #ff5722); }
 .heat-sw.dwell { background: radial-gradient(circle, #ff5722 0%, transparent 70%); height: 8px; width: 8px; border-radius: 50%; }
+.heat-sw.cell  { background: linear-gradient(90deg, hsl(210,90%,55%), hsl(0,90%,55%)); }
+.cell-heat-tools {
+  display: flex; gap: 6px; align-items: center;
+  margin: 2px 0 4px 22px;
+}
+.cell-agent-select {
+  flex: 1; min-width: 0;
+  background: var(--bg-card); color: var(--text-secondary);
+  border: 1px solid var(--border-soft); border-radius: 6px;
+  padding: 3px 6px; font-size: 11px; outline: none;
+}
 .heat-sw.glow  { background: #FFD54F; box-shadow: 0 0 6px rgba(255,213,79,0.9); }
 .heat-num {
   color: var(--text-very-dim);

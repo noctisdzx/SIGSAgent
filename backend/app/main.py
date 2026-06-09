@@ -34,7 +34,9 @@ from app.config.registry import get_registry  # noqa: E402
 from app.llm.adapter import (  # noqa: E402
     LLMAdapter,
     MockLLMAdapter,
+    build_evaluate_space_messages,
     build_narrate_day_messages,
+    parse_evaluate_space_response,
     parse_narrate_day_response,
 )
 from app.llm.client import OpenAICompatibleClient  # noqa: E402
@@ -56,27 +58,95 @@ PLACEHOLDER_KEY_PREFIX = "sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
 
 def _make_llm_adapter() -> tuple[LLMAdapter, bool]:
-    """Return (adapter, is_real)."""
-    s = get_settings()
-    key = (s.llm_api_key or "").strip()
-    if not key or key.startswith(PLACEHOLDER_KEY_PREFIX[:10]):
-        return MockLLMAdapter(), False
+    """Return (adapter, is_real_now).
 
+    Always returns a runtime-configurable adapter wrapping a single shared
+    OpenAI-compatible client. When no usable key is set it transparently falls
+    back to MockLLMAdapter on every call; once a key is supplied (from the env
+    at boot, or via ``POST /api/llm/key`` at runtime) the *same* adapter object
+    — shared by every agent and the sim loop — immediately starts issuing real
+    calls. This lets the entry screen require the operator to enter a DeepSeek
+    key before live simulation without having to rebuild any agents.
+    """
     client = OpenAICompatibleClient()
 
     class _Adapter:
         """Thin LLMAdapter facade backed by an OpenAI-compatible client.
 
-        We keep the real call surface narrow on purpose: only the three
-        Protocol methods. Each call falls back to MockLLMAdapter on failure
-        (so even if the network goes away mid-run we still degrade gracefully
-        rather than throwing).
+        Each call falls back to MockLLMAdapter when no usable key is configured
+        (skipping the network entirely) or on any network/parse failure (so a
+        mid-run outage degrades gracefully rather than throwing).
         """
 
         def __init__(self) -> None:
             self._mock = MockLLMAdapter()
+            self._client = client
+
+        # ----- runtime configuration (used by /api/llm/key) -----
+
+        def _live(self) -> bool:
+            """True iff the client currently holds a usable (non-placeholder) key."""
+            k = (self._client.api_key or "").strip()
+            return bool(k) and not k.startswith(PLACEHOLDER_KEY_PREFIX[:10])
+
+        def configure(self, *, api_key: str | None = None,
+                      base_url: str | None = None, model: str | None = None) -> None:
+            """Update the shared client in place (applies to every agent at once)."""
+            if api_key is not None:
+                self._client.api_key = api_key.strip()
+            if base_url:
+                self._client.base_url = base_url.rstrip("/")
+            if model:
+                self._client.model = model
+
+        def status(self) -> dict:
+            return {
+                "configured": self._live(),
+                "model": self._client.model,
+                "base_url": self._client.base_url,
+            }
+
+        async def validate(self) -> tuple[bool, str]:
+            """Cheap liveness probe: a 1-token completion to confirm the key works."""
+            if not self._live():
+                return False, "no api key configured"
+            try:
+                resp = await self._client.chat(
+                    messages=[{"role": "user", "content": "ping"}],
+                    temperature=0.0,
+                    max_tokens=1,
+                )
+                _ = resp["choices"][0]["message"]
+                return True, "ok"
+            except Exception as exc:  # noqa: BLE001
+                return False, f"{type(exc).__name__}: {exc}"
+
+        async def try_configure(self, *, api_key: str, base_url: str | None = None,
+                                model: str | None = None,
+                                validate: bool = True) -> tuple[bool, str]:
+            """Apply a new config, optionally validating; roll back on failure.
+
+            Keeps the (secret) previous key inside the adapter so a failed probe
+            doesn't leave a broken key active.
+            """
+            prev_key = self._client.api_key
+            prev_base = self._client.base_url
+            prev_model = self._client.model
+            self.configure(api_key=api_key, base_url=base_url, model=model)
+            if validate:
+                ok, msg = await self.validate()
+                if not ok:
+                    self._client.api_key = prev_key
+                    self._client.base_url = prev_base
+                    self._client.model = prev_model
+                    return False, msg
+            return True, "ok"
+
+        # ----- LLMAdapter protocol -----
 
         async def summarize_memories(self, texts: list[str]) -> str:
+            if not self._live():
+                return await self._mock.summarize_memories(texts)
             try:
                 resp = await client.chat(
                     messages=[
@@ -107,6 +177,10 @@ def _make_llm_adapter() -> tuple[LLMAdapter, bool]:
                 return await self._mock.summarize_memories(texts)
 
         async def choose_fragment(self, gap_minutes, persona, memories, candidates, context=None):
+            if not self._live():
+                return await self._mock.choose_fragment(
+                    gap_minutes, persona, memories, candidates, context=context,
+                )
             try:
                 ctx = context or {}
                 ctx_line = (
@@ -157,6 +231,8 @@ def _make_llm_adapter() -> tuple[LLMAdapter, bool]:
                 )
 
         async def extract_triplets(self, agent_id, events):
+            if not self._live():
+                return await self._mock.extract_triplets(agent_id, events)
             try:
                 resp = await client.chat(
                     messages=[
@@ -186,6 +262,10 @@ def _make_llm_adapter() -> tuple[LLMAdapter, bool]:
             topic, topic_en, tone}. Falls back to the mock adapter on any
             network/parse failure.
             """
+            if not self._live():
+                return await self._mock.generate_dialog(
+                    speaker, listener, speaker_memories, situation,
+                )
             try:
                 sys_msg = (
                     "你是校园模拟器的对话编剧。"
@@ -242,6 +322,8 @@ def _make_llm_adapter() -> tuple[LLMAdapter, bool]:
             and every NPC silently "stays silent" forever (the no-dialog bug).
             Falls back to the mock chooser on any network/parse failure.
             """
+            if not self._live():
+                return await self._mock.choose_dialog_target(speaker, candidates, situation)
             if not candidates:
                 return None, "no candidates"
             valid_ids = [c.get("id") for c in candidates if c.get("id")]
@@ -295,6 +377,8 @@ def _make_llm_adapter() -> tuple[LLMAdapter, bool]:
             `Mutter` state). Returns {line, line_en, mood}. Falls back to mock
             on any failure (also missing before — would break muttering under a
             real key)."""
+            if not self._live():
+                return await self._mock.generate_mutter(speaker, situation, memories)
             try:
                 sys_msg = (
                     "你为一位校园 NPC 写一句简短的内心独白（自言自语）。"
@@ -336,6 +420,8 @@ def _make_llm_adapter() -> tuple[LLMAdapter, bool]:
             scene-aware description for THIS npc. Returns
             {description_zh, description_en}. Falls back to mock on any failure.
             """
+            if not self._live():
+                return await self._mock.describe_activity(persona, activity, situation)
             try:
                 sys_msg = (
                     "你把一个通用的日程活动标签，改写成这位校园 NPC 此刻“正在做什么”的"
@@ -382,6 +468,8 @@ def _make_llm_adapter() -> tuple[LLMAdapter, bool]:
             tomorrow_*) with a synopsis (`zh`/`en`) auto-derived from the
             story for backward compatibility.
             """
+            if not self._live():
+                return await self._mock.narrate_day(day, bullets, stats)
             try:
                 messages = build_narrate_day_messages(day, bullets, stats)
                 resp = await client.chat(
@@ -402,7 +490,31 @@ def _make_llm_adapter() -> tuple[LLMAdapter, bool]:
                 log.warning("narrate_day LLM call failed, falling back: %s", exc)
                 return await self._mock.narrate_day(day, bullets, stats)
 
-    return _Adapter(), True
+        async def evaluate_space(self, ctx):
+            """First-person weekly evaluation of the architectural space for one
+            agent, grounded in their persona/personality + week memory."""
+            if not self._live():
+                return await self._mock.evaluate_space(ctx)
+            try:
+                messages = build_evaluate_space_messages(ctx)
+                resp = await client.chat(
+                    messages=messages,
+                    temperature=0.8,
+                    max_tokens=1200,
+                    response_format={"type": "json_object"},
+                )
+                content = resp["choices"][0]["message"]["content"]
+                import json as _json
+                data = _json.loads(content)
+                if not isinstance(data, dict):
+                    raise ValueError("evaluate_space: expected object")
+                return parse_evaluate_space_response(data)
+            except Exception as exc:
+                log.warning("evaluate_space LLM call failed, falling back: %s", exc)
+                return await self._mock.evaluate_space(ctx)
+
+    adapter = _Adapter()
+    return adapter, adapter._live()
 
 
 @asynccontextmanager
@@ -457,7 +569,10 @@ async def lifespan(app: FastAPI):
 
     # 4) LLM adapter (real or mock).
     llm, real = _make_llm_adapter()
-    log.info("LLM adapter: %s", "real (OpenAI-compatible)" if real else "MockLLMAdapter")
+    log.info(
+        "LLM adapter ready (runtime-configurable); key at boot: %s",
+        "present (real calls)" if real else "absent (mock fallback until /api/llm/key)",
+    )
 
     # 5) Action / fragment libraries.
     action_lib: ActionSpecLibrary | None = None

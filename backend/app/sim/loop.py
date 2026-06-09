@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
-from datetime import date
+from datetime import date, datetime, timedelta
 from typing import Any
 
 from app.events.bus import event_bus
@@ -36,6 +36,10 @@ class SimLoop:
         # Track which sim-day we last summarised so we only fire once per rollover.
         self._last_summarised_day: date | None = None
         self._busy_summarising: bool = False
+        # Weekly per-agent space evaluations (in-memory, regenerated each week).
+        self.week_summaries: list[dict[str, Any]] = []
+        self._last_week_summarised: int | None = None
+        self._busy_week: bool = False
         # Optional per-tick recorder (set by main.py). None = no recording.
         self.recorder: Any | None = None
         # Whole-run ("各总") cumulative heat — independent of the frontend's
@@ -73,19 +77,24 @@ class SimLoop:
         self.world.sim_time = self.world.sim_time + self.clock.sim_tick_delta
         new_day = self.world.sim_time.date()
 
-        # Midnight rollover → run a day summary then pause, so the player can
-        # read it before opting into the next day. Only once per real day even
-        # if the loop is repeatedly stepped.
+        # Midnight rollover → kick off the day summary in the BACKGROUND and keep
+        # ticking (no auto-pause anymore). The frontend pops a replaceable modal
+        # once the `day_summary` event arrives. Only once per sim-day.
         if new_day != prev_day and self._last_summarised_day != prev_day:
             self._last_summarised_day = prev_day
+            asyncio.create_task(self._safe_day_summary(prev_day))
+            # ISO-week rollover → per-agent weekly space evaluation (also async).
             try:
-                await self._do_day_summary(prev_day)
-            except Exception as exc:
-                log.exception("day summary failed for %s: %s", prev_day, exc)
-            # Auto-pause regardless of whether the LLM call succeeded.
-            self.pause_reason = f"day_summary:{prev_day.isoformat()}"
-            await self.stop()
-            return  # skip the rest of this tick — the next /api/sim/start re-enters
+                prev_week = prev_day.isocalendar()[1]
+                new_week = new_day.isocalendar()[1]
+            except Exception:
+                prev_week, new_week = 0, 0
+            crossed_week = prev_week != new_week or (new_day - prev_day).days >= 7
+            if crossed_week and self._last_week_summarised != prev_week:
+                self._last_week_summarised = prev_week
+                asyncio.create_task(self._safe_week_summary(prev_day))
+            # NOTE: intentionally NOT pausing/returning — fall through to tick
+            # the new day normally.
 
         # Run agents concurrently (bounded) — the per-agent work is dominated by
         # awaited LLM calls, so firing them together collapses N sequential
@@ -419,3 +428,194 @@ class SimLoop:
                      day_iso, len(zh), len(en), degraded)
         finally:
             self._busy_summarising = False
+
+    async def _safe_day_summary(self, day: date) -> None:
+        """Background-task wrapper: never let a summary failure crash the loop."""
+        try:
+            await self._do_day_summary(day)
+        except Exception as exc:
+            log.exception("day summary failed for %s: %s", day, exc)
+
+    # ----- weekly space evaluation -----
+
+    async def _safe_week_summary(self, week_end_day: date) -> None:
+        try:
+            await self._do_week_summary(week_end_day)
+        except Exception as exc:
+            log.exception("week summary failed (end=%s): %s", week_end_day, exc)
+
+    def _room_name(self, uid: str | None) -> str:
+        if uid and self.scene is not None and self.scene.has(uid):
+            return self.scene.get(uid).name
+        return ""
+
+    def _build_agent_week_context(
+        self, aid: str, agent: Any, week_start: date, week_end: date
+    ) -> dict[str, Any]:
+        """Gather an agent's FULL week-relevant data — persona, personality,
+        preferences, memory (STM + LTM), dialogs and frequented places — into a
+        compact dict for the space-evaluation prompt."""
+        persona = getattr(agent, "persona", None)
+        name = getattr(persona, "name", aid)
+        name_en = getattr(persona, "name_en", "") or name
+        role = getattr(persona, "role", "") or ""
+        personality = dict(getattr(persona, "personality", {}) or {})
+        preferences = dict(getattr(persona, "preferences", {}) or {})
+        profile = dict(getattr(persona, "profile", {}) or {}) if getattr(persona, "profile", None) else {}
+
+        def _in_week(d: date) -> bool:
+            return week_start <= d <= week_end
+
+        mem_lines: list[str] = []
+        dialog_lines: list[str] = []
+        stm_items = getattr(getattr(agent, "stm", None), "all", lambda: [])()
+        for it in stm_items:
+            ts = getattr(it, "ts", None)
+            if ts is None or not _in_week(ts.date()):
+                continue
+            src = (getattr(it, "source", "") or "")
+            meta = getattr(it, "meta", {}) or {}
+            if src.startswith("dialog:"):
+                partner = meta.get("partner_name", "?")
+                line = meta.get("line", "")
+                reply = meta.get("reply", "")
+                if line:
+                    dialog_lines.append(f"与{partner}：“{line}” / “{reply}”")
+            elif src == "mutter":
+                line = meta.get("line", "")
+                if line:
+                    mem_lines.append(f"（独白）{line}")
+            else:
+                txt = (getattr(it, "text", "") or "").strip()
+                if txt:
+                    mem_lines.append(txt)
+
+        ltm_lines: list[str] = []
+        for it in getattr(getattr(agent, "ltm", None), "all", lambda: [])():
+            t = (getattr(it, "text", "") or "").strip()
+            if t:
+                ltm_lines.append(t)
+
+        visited: dict[str, int] = {}
+        exec_ = getattr(agent, "behavior_executor", None)
+        if exec_ is not None and hasattr(exec_, "history_for"):
+            for h in exec_.history_for(aid, limit=500):
+                ts = getattr(h, "ts", None)
+                if ts is None or not _in_week(ts.date()):
+                    continue
+                for v in (getattr(h, "params", {}) or {}).values():
+                    if isinstance(v, str):
+                        nm = self._room_name(v)
+                        if nm:
+                            visited[nm] = visited.get(nm, 0) + 1
+
+        here_name = self._room_name(getattr(agent, "location_uid", None))
+        if here_name:
+            visited.setdefault(here_name, visited.get(here_name, 0))
+
+        visited_top = sorted(visited.items(), key=lambda kv: kv[1], reverse=True)[:8]
+        has_data = bool(mem_lines or dialog_lines or ltm_lines or visited_top)
+
+        return {
+            "id": aid,
+            "name": name,
+            "name_en": name_en,
+            "role": role,
+            "personality": personality,
+            "preferences": preferences,
+            "profile": profile,
+            "week_start": week_start.isoformat(),
+            "week_end": week_end.isoformat(),
+            "here": here_name,
+            "visited": [{"name": n, "count": c} for n, c in visited_top],
+            "memories": mem_lines[-20:],
+            "dialogs": dialog_lines[-12:],
+            "long_term": ltm_lines[:10],
+            "has_data": has_data,
+        }
+
+    def _degraded_space_eval(self, ctx: dict[str, Any]) -> dict[str, Any]:
+        visited = ctx.get("visited") or []
+        fav = visited[0]["name"] if visited else (ctx.get("here") or "")
+        return {
+            "evaluation_zh": (
+                f"本周{ctx.get('name', '这位居民')}主要活动于"
+                f"{fav or '校园各处'}，对当前空间整体感受平稳。（LLM 降级中，占位评价。）"
+            ),
+            "evaluation_en": (
+                f"This week {ctx.get('name_en') or 'they'} mostly stayed around "
+                f"{fav or 'the campus'}; overall the space felt fine. "
+                "(LLM degraded placeholder.)"
+            ),
+            "favorite_place": fav,
+            "wants": [],
+            "pain_points": [],
+            "degraded": True,
+        }
+
+    async def _do_week_summary(self, week_end_day: date) -> None:
+        """For every agent, ask the LLM to evaluate the architectural space using
+        the agent's full data (persona/personality/preferences + memory + visited
+        places), surfacing wishes ("想要的新功能") and pain points ("感受不好的
+        地方"). Publishes a `week_summary` WS event."""
+        if self._busy_week:
+            return
+        self._busy_week = True
+        try:
+            week_start = week_end_day - timedelta(days=6)
+            week_label = f"{week_start.isoformat()} ~ {week_end_day.isoformat()}"
+            log.info("Generating weekly space evaluation for %s ...", week_label)
+
+            sem = asyncio.Semaphore(max(1, get_settings().sim_tick_concurrency))
+            fn = getattr(self.llm, "evaluate_space", None) if self.llm is not None else None
+            agents_out: list[dict[str, Any]] = []
+
+            async def _eval_one(aid: str, agent: Any) -> None:
+                async with sem:
+                    ctx = self._build_agent_week_context(aid, agent, week_start, week_end_day)
+                    ev: dict[str, Any] | None = None
+                    if fn is not None and ctx.get("has_data"):
+                        try:
+                            ev = await fn(ctx)
+                        except Exception as exc:
+                            log.warning("evaluate_space failed for %s: %s", aid, exc)
+                    if not ev:
+                        ev = self._degraded_space_eval(ctx)
+                    agents_out.append({
+                        "id": aid,
+                        "name": ctx.get("name"),
+                        "name_en": ctx.get("name_en"),
+                        "role": ctx.get("role"),
+                        "favorite_place": ev.get("favorite_place", ""),
+                        "evaluation_zh": ev.get("evaluation_zh", ""),
+                        "evaluation_en": ev.get("evaluation_en", ""),
+                        "wants": ev.get("wants", []) or [],
+                        "pain_points": ev.get("pain_points", []) or [],
+                        "degraded": bool(ev.get("degraded", False)),
+                    })
+
+            await asyncio.gather(*[_eval_one(aid, a) for aid, a in list(self.agents.items())])
+            agents_out.sort(key=lambda x: str(x.get("name") or x.get("id")))
+
+            entry = {
+                "week": week_label,
+                "week_start": week_start.isoformat(),
+                "week_end": week_end_day.isoformat(),
+                "ts_real": datetime.utcnow().isoformat(),
+                "ts_sim": self.world.sim_time.isoformat(),
+                "n_agents": len(agents_out),
+                "agents": agents_out,
+            }
+            self.week_summaries.append(entry)
+            if len(self.week_summaries) > 26:
+                self.week_summaries = self.week_summaries[-26:]
+
+            await event_bus.publish({
+                "type": "week_summary",
+                "ts_sim": self.world.sim_time.isoformat(),
+                "agent_id": None,
+                "payload": entry,
+            })
+            log.info("Weekly evaluation for %s ready (%d agents)", week_label, len(agents_out))
+        finally:
+            self._busy_week = False

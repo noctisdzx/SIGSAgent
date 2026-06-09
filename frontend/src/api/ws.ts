@@ -57,8 +57,11 @@ function handleEvent(raw: any): void {
       world.applyTick(ev.payload || ev);
       break;
     case 'day_summary':
-      // Auto-open the narrative modal and flip sim store to paused state.
+      // Non-blocking: just open/refresh the narrative modal (no pause).
       sim.applyDaySummaryEvent(ev.payload);
+      break;
+    case 'week_summary':
+      sim.applyWeekSummaryEvent(ev.payload);
       break;
     default:
       break;

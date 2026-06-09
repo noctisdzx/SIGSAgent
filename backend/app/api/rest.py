@@ -128,10 +128,12 @@ async def get_scene_layout(req: Request) -> dict[str, Any]:
             if isinstance(data, dict):
                 data.setdefault("rooms", {})
                 data.setdefault("map", {})
+                data.setdefault("obstacles", {})
+                data.setdefault("roomAreas", {})
                 return data
         except (json.JSONDecodeError, OSError):
             pass
-    return {"rooms": {}, "map": {}}
+    return {"rooms": {}, "map": {}, "obstacles": {}, "roomAreas": {}}
 
 
 @router.put("/scene/layout")
@@ -145,7 +147,13 @@ async def put_scene_layout(req: Request) -> dict[str, Any]:
         raise HTTPException(status_code=400, detail="layout body must be an object")
     rooms = body.get("rooms") if isinstance(body.get("rooms"), dict) else {}
     map_cfg = body.get("map") if isinstance(body.get("map"), dict) else {}
-    doc = {"rooms": rooms, "map": map_cfg}
+    # Non-walkable terrain painted on the topology canvas: an occupancy grid of
+    # blocked cell keys ("cx,cy") that NPC pathfinding routes around.
+    obstacles = body.get("obstacles") if isinstance(body.get("obstacles"), dict) else {}
+    # Per-room painted footprints: cells that belong to each scene node, used to
+    # scatter NPCs across the node's actual area instead of orbiting it.
+    room_areas = body.get("roomAreas") if isinstance(body.get("roomAreas"), dict) else {}
+    doc = {"rooms": rooms, "map": map_cfg, "obstacles": obstacles, "roomAreas": room_areas}
     p = _layout_path()
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps(doc, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -473,6 +481,87 @@ async def sim_summarize_now(req: Request) -> dict[str, Any]:
         "day": day_iso,
         "summary": last,
     }
+
+
+@router.get("/sim/week_summaries")
+async def get_week_summaries(req: Request, limit: int = 12) -> dict[str, Any]:
+    """Return the most recent weekly per-agent space evaluations."""
+    sim = _sim(req)
+    items = list(getattr(sim, "week_summaries", []) or [])
+    return {"summaries": items[-max(1, limit):]}
+
+
+@router.post("/sim/summarize_week_now")
+async def sim_summarize_week_now(req: Request) -> dict[str, Any]:
+    """Force a weekly space evaluation for the week ENDING on the current sim
+    day (each agent evaluates the space using their full data). Does NOT pause
+    the loop; publishes a `week_summary` WS event."""
+    sim = _sim(req)
+    world = _world(req)
+    if sim is None:
+        return {"status": "error", "reason": "no sim loop"}
+    week_end = world.sim_time.date()
+    try:
+        await sim._do_week_summary(week_end)  # type: ignore[attr-defined]
+    except Exception as exc:
+        return {"status": "error", "reason": repr(exc)}
+    last = (sim.week_summaries or [{}])[-1] if sim.week_summaries else {}
+    return {"status": "ok", "week": last.get("week", ""), "summary": last}
+
+
+# ============================================================
+#              LLM API key (entry-screen gate)
+# ============================================================
+
+@router.get("/llm/status")
+async def llm_status(req: Request) -> dict[str, Any]:
+    """Whether an LLM key is currently active, plus model / base_url.
+
+    Never returns the key itself. The entry screen uses this to decide whether
+    to pre-fill the "use existing key" shortcut.
+    """
+    llm = getattr(req.app.state, "llm", None)
+    if llm is not None and hasattr(llm, "status"):
+        return llm.status()
+    # Mock-only build (no configurable adapter).
+    return {"configured": False, "model": None, "base_url": None}
+
+
+@router.post("/llm/key")
+async def set_llm_key(req: Request) -> dict[str, Any]:
+    """Set the DeepSeek / OpenAI-compatible API key for THIS run.
+
+    Body: ``{"api_key": "...", "base_url"?: "...", "model"?: "...",
+    "validate"?: true}``. The key is held in memory only (never written to
+    disk) and applied to the shared client every agent uses. When
+    ``validate`` is true (default) a 1-token probe confirms the key works
+    before we accept it — a bad key returns HTTP 400 so the UI can show why.
+    """
+    llm = getattr(req.app.state, "llm", None)
+    if llm is None or not hasattr(llm, "configure"):
+        raise HTTPException(
+            status_code=409,
+            detail="LLM adapter is not runtime-configurable in this build",
+        )
+    try:
+        body = await req.json()
+    except Exception as exc:  # noqa: BLE001
+        raise HTTPException(status_code=400, detail=f"invalid JSON body: {exc}")
+
+    api_key = str((body or {}).get("api_key", "")).strip()
+    if not api_key:
+        raise HTTPException(status_code=400, detail="api_key is required")
+    base_url = (body or {}).get("base_url") or None
+    model = (body or {}).get("model") or None
+    do_validate = bool((body or {}).get("validate", True))
+
+    ok, msg = await llm.try_configure(
+        api_key=api_key, base_url=base_url, model=model, validate=do_validate,
+    )
+    if not ok:
+        raise HTTPException(status_code=400, detail=f"API key validation failed: {msg}")
+
+    return {"status": "ok", **llm.status()}
 
 
 # ============================================================

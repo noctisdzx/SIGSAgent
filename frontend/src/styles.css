@@ -158,6 +158,19 @@ a:hover { color: var(--accent-primary); }
 }
 .top-nav .sim-btn--danger:hover { filter: brightness(1.1); }
 .top-nav .sim-btn--danger:disabled { opacity: 0.6; }
+.top-nav .pb-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 600;
+  color: var(--accent-primary, #6ea8ff);
+  padding: 4px 12px; margin-right: 4px;
+  border: 1px solid var(--accent-primary, #6ea8ff);
+  border-radius: 12px;
+  background: rgba(110, 168, 255, 0.10);
+}
+.top-nav .pb-badge-time {
+  font-family: Consolas, monospace; font-weight: 500;
+  font-size: 11px; color: var(--accent-warm-soft);
+}
 .ws-indicator {
   display: inline-flex; align-items: center; gap: 6px;
   font-size: 11px; color: var(--text-very-dim);

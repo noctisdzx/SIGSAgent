@@ -378,6 +378,27 @@ class MockLLMAdapter:
             "degraded": True,
         }
 
+    async def evaluate_space(self, ctx: dict[str, Any]) -> dict[str, Any]:
+        visited = ctx.get("visited") or []
+        fav = visited[0]["name"] if visited else (ctx.get("here") or "")
+        name = ctx.get("name", "这位居民")
+        name_en = ctx.get("name_en") or "they"
+        return {
+            "favorite_place": fav,
+            "evaluation_zh": (
+                f"这一周我大多在{fav or '校园里'}活动，路线还算顺手，"
+                "只是有些角落白天光线偏暗、人多时略显拥挤。（LLM 降级中，占位评价。）"
+            ),
+            "evaluation_en": (
+                f"This week {name_en} spent most time around {fav or 'campus'}; "
+                "the routes felt convenient, though some corners were dim and got "
+                "crowded at peak times. (LLM degraded placeholder.)"
+            ),
+            "wants": ["更多可休息的座位", "更清晰的指示标识"],
+            "pain_points": ["高峰时段通道拥挤", "部分区域采光不足"],
+            "degraded": True,
+        }
+
 
 # ---------------------------------------------------------------------------
 # DeepSeek (OpenAI-compatible) adapter
@@ -569,6 +590,78 @@ def parse_narrate_day_response(data: dict[str, Any]) -> dict[str, Any]:
         "tomorrow_en": _s("tomorrow_en"),
         "zh": _first_para(story_zh, 220),
         "en": _first_para(story_en, 600),
+        "degraded": False,
+    }
+
+
+# ---------------------------------------------------------------------------
+# Weekly per-agent SPACE evaluation (建筑空间评价)
+# ---------------------------------------------------------------------------
+EVALUATE_SPACE_SYSTEM = (
+    "你是一名建筑/空间体验研究员，正在以「居民第一人称」的视角，整理某位校园 NPC "
+    "对其所处建筑空间的一周使用反馈。你要充分代入这个人的人格(OCEAN)、偏好、身份角色"
+    "与其本周的真实记忆、对话和活动轨迹，写出真诚、具体、有人味的空间评价。\n\n"
+    "原则：\n"
+    "  1. 第一人称口吻，像真实居民在做使用回访，不要出现 'NPC/agent/模拟/JSON' 等术语。\n"
+    "  2. 评价必须紧扣其去过的地点与记忆，不要编造没有依据的设施。\n"
+    "  3. 人格要影响语气：外向者更关注社交空间，尽责者关注秩序与效率，神经质高者更敏感于"
+    "     拥挤/噪音/光线等不适。\n"
+    "  4. 同时给出：想要的新功能/新设施(wants) 与 体验不好的地方(pain_points)，要具体可执行。\n"
+    "  5. 中英文都要写，保持人名等专有名词原样。\n"
+)
+
+
+def _build_evaluate_space_user_prompt(ctx: dict[str, Any]) -> str:
+    visited = ctx.get("visited") or []
+    visited_hint = "、".join(
+        f"{v.get('name','?')}×{v.get('count',0)}" for v in visited
+    ) or "（无明显高频地点）"
+    mems = ctx.get("memories") or []
+    dlgs = ctx.get("dialogs") or []
+    ltm = ctx.get("long_term") or []
+    return (
+        f"居民：{ctx.get('name','?')} ({ctx.get('name_en','')})，角色：{ctx.get('role','')}\n"
+        f"本周区间：{ctx.get('week_start','')} ~ {ctx.get('week_end','')}\n"
+        f"人格(OCEAN等)：{ctx.get('personality', {})}\n"
+        f"偏好：{ctx.get('preferences', {})}\n"
+        f"档案：{ctx.get('profile', {})}\n"
+        f"当前所在：{ctx.get('here','')}\n"
+        f"本周高频地点：{visited_hint}\n\n"
+        "本周记忆片段：\n" + ("\n".join(f"- {m}" for m in mems[-20:]) or "- （无）") + "\n\n"
+        "本周对话：\n" + ("\n".join(f"- {d}" for d in dlgs[-12:]) or "- （无）") + "\n\n"
+        "长期印象：\n" + ("\n".join(f"- {t}" for t in ltm[:10]) or "- （无）") + "\n\n"
+        "任务：以该居民第一人称，结合以上全部信息，输出对当前建筑空间的一周评价。\n\n"
+        "只返回一个 JSON 对象，不要代码块、不要前后缀：\n"
+        "{\n"
+        '  "favorite_place": "<本周最喜欢/最常去的地点名，取自高频地点或当前所在>",\n'
+        '  "evaluation_zh": "<120~220字 第一人称中文空间评价，结合人格与真实经历>",\n'
+        '  "evaluation_en": "<80~160 words first-person English evaluation>",\n'
+        '  "wants": ["<想要的新功能/新设施，2~4条，每条简短具体>"],\n'
+        '  "pain_points": ["<体验不好的地方，2~4条，指出具体位置/原因>"]\n'
+        "}"
+    )
+
+
+def build_evaluate_space_messages(ctx: dict[str, Any]) -> list[dict[str, str]]:
+    return [
+        {"role": "system", "content": EVALUATE_SPACE_SYSTEM},
+        {"role": "user", "content": _build_evaluate_space_user_prompt(ctx)},
+    ]
+
+
+def parse_evaluate_space_response(data: dict[str, Any]) -> dict[str, Any]:
+    def _list(key: str) -> list[str]:
+        v = data.get(key)
+        if not isinstance(v, list):
+            return []
+        return [str(x).strip() for x in v if str(x).strip()][:4]
+
+    return {
+        "favorite_place": str(data.get("favorite_place", "")).strip(),
+        "evaluation_zh": str(data.get("evaluation_zh", "")).strip(),
+        "evaluation_en": str(data.get("evaluation_en", "")).strip(),
+        "wants": _list("wants"),
+        "pain_points": _list("pain_points"),
         "degraded": False,
     }
 
