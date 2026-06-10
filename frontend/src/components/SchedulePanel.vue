@@ -183,7 +183,7 @@ onBeforeUnmount(stopPolling);
 }
 .sched h3 { color: var(--accent-warm-soft); font-size: 13px; }
 .legend { display: flex; gap: 8px; font-size: 10.5px; color: var(--text-very-dim); align-items: center; }
-.lg { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.lg { width: 10px; height: 10px; border-radius: 0; display: inline-block; }
 .lg--template { background: var(--accent-warn); }
 .lg--fragment { background: var(--accent-cyan-soft); }
 .lg--insert   { background: var(--accent-primary); }
@@ -191,7 +191,7 @@ onBeforeUnmount(stopPolling);
 
 .tt {
   border: 1px solid var(--border-soft);
-  border-radius: 8px;
+  border-radius: 0;
   overflow: hidden;
   background: var(--bg-card);
 }
@@ -225,7 +225,7 @@ onBeforeUnmount(stopPolling);
   position: absolute; right: 6px;
   transform: translateY(-50%);
   font-size: 9.5px; color: var(--text-very-dim);
-  font-family: Consolas, monospace;
+  font-family: var(--font-mono);
 }
 
 .day-col {
@@ -245,12 +245,12 @@ onBeforeUnmount(stopPolling);
 }
 .now-line::before {
   content: ''; position: absolute; left: 0; top: -3px;
-  width: 5px; height: 5px; border-radius: 50%; background: var(--accent-primary);
+  width: 5px; height: 5px; border-radius: 0; background: var(--accent-primary);
 }
 
 .blk {
   position: absolute; left: 2px; right: 2px;
-  border-radius: 3px;
+  border-radius: 0;
   padding: 1px 4px;
   overflow: hidden;
   font-size: 9.5px;
@@ -262,7 +262,7 @@ onBeforeUnmount(stopPolling);
   flex-direction: column;
   justify-content: flex-start;
 }
-.blk-time { display: block; font-family: Consolas, monospace; opacity: 0.85; font-size: 8.5px; flex: 0 0 auto; }
+.blk-time { display: block; font-family: var(--font-mono); opacity: 0.85; font-size: 8.5px; flex: 0 0 auto; }
 .blk-act  {
   display: block;
   white-space: normal;

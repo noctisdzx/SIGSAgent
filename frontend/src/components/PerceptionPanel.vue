@@ -40,9 +40,9 @@ defineProps<{ here?: string; children: any[]; siblings: any[] }>();
 .cur { font-size: 12px; color: var(--text-secondary); margin-bottom: 8px; }
 .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .label { color: var(--accent-primary); font-size: 12px; margin-bottom: 6px; }
-.room { background: var(--bg-card); border-radius: 6px; padding: 6px 8px; margin-bottom: 6px; }
+.room { background: var(--bg-card); border-radius: 0; padding: 6px 8px; margin-bottom: 6px; }
 .name { font-size: 12.5px; color: var(--accent-warm-soft); }
-.uid { color: var(--text-very-dim); font-size: 10px; margin-left: 4px; font-family: Consolas, monospace; }
+.uid { color: var(--text-very-dim); font-size: 10px; margin-left: 4px; font-family: var(--font-mono); }
 .meta { font-size: 10.5px; color: var(--text-dim); }
 .empty { color: var(--text-disabled); font-size: 11px; padding: 4px 0; }
 </style>

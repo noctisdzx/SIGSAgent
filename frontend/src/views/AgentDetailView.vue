@@ -163,74 +163,95 @@ watch(() => route.params.id, () => loadFromRoute());
 .list {
   width: 240px;
   background: var(--bg-panel);
-  border-right: 1px solid var(--border-soft);
+  border-right: 2px solid var(--border-soft);
   display: flex;
   flex-direction: column;
 }
 .list-head {
-  padding: 12px 14px;
+  padding: 10px 12px;
   border-bottom: 1px solid var(--border-soft);
+  background: var(--bg-card);
 }
 .list-head h3 {
   color: var(--accent-primary);
-  font-size: 13px;
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   margin-bottom: 8px;
 }
 .search {
   width: 100%;
-  padding: 6px 10px;
-  border-radius: 12px;
-  background: var(--bg-card);
-  color: var(--text-secondary);
+  padding: 5px 8px;
+  background: var(--bg-base);
+  color: var(--accent-primary);
   border: 1px solid var(--border-soft);
   outline: none;
-  font-size: 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  caret-color: var(--accent-primary);
 }
-.search:focus { border-color: var(--accent-active); }
-.list-body { flex: 1; overflow-y: auto; padding: 6px; }
+.search::placeholder { color: var(--text-very-dim); }
+.search:focus { border-color: var(--border-pixel); }
+.list-body { flex: 1; overflow-y: auto; padding: 4px; }
 
 .item {
   display: flex; align-items: center; gap: 8px;
-  padding: 6px 8px;
-  border-radius: 6px;
+  padding: 5px 7px;
   cursor: pointer;
-  font-size: 12.5px;
-  margin-bottom: 2px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  margin-bottom: 1px;
+  border: 1px solid transparent;
 }
-.item:hover { background: var(--bg-elevated); }
-.item.active { background: var(--bg-elevated-hover); }
-.item .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-.item .meta { line-height: 1.2; }
-.item .name { color: var(--text-primary); font-weight: 600; }
-.item .role { color: var(--text-very-dim); font-size: 11px; }
-.empty { color: var(--text-disabled); font-size: 12px; padding: 8px; }
+.item:hover { background: var(--bg-elevated); border-color: var(--border-soft); }
+.item.active { background: rgba(255,158,108,0.08); border-color: var(--accent-primary); }
+.item .dot { width: 7px; height: 7px; flex-shrink: 0; }
+.item .meta { line-height: 1.3; }
+.item .name { color: var(--text-primary); }
+.item .role { color: var(--text-very-dim); font-size: 10px; text-transform: uppercase; letter-spacing: 0.3px; }
+.empty { color: var(--text-disabled); font-size: 11px; padding: 8px; font-family: var(--font-mono); }
 
 .detail { flex: 1; display: flex; flex-direction: column; }
 .detail-head {
-  padding: 12px 18px;
-  background: var(--bg-elevated);
-  border-bottom: 1px solid var(--border-soft);
+  padding: 10px 16px;
+  background: var(--bg-card);
+  border-bottom: 2px solid var(--border-soft);
 }
-.d-name { color: var(--accent-primary); font-size: 18px; font-weight: 700; }
-.d-role { color: var(--text-very-dim); font-size: 12.5px; }
-.d-empty { color: var(--text-disabled); font-size: 13px; }
+.d-name {
+  color: var(--accent-primary);
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.d-role { color: var(--text-very-dim); font-size: 11px; font-family: var(--font-mono); margin-top: 2px; }
+.d-empty { color: var(--text-disabled); font-size: 11px; font-family: var(--font-mono); }
 
 .tabs {
   display: flex;
-  background: var(--bg-card);
-  border-bottom: 1px solid var(--border-soft);
+  background: var(--bg-base);
+  border-bottom: 2px solid var(--border-soft);
 }
 .tabs button {
   flex: 1;
-  padding: 10px;
+  padding: 8px;
   background: transparent;
   border: none;
   color: var(--text-very-dim);
   cursor: pointer;
-  font-size: 12px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
   border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
 }
 .tabs button:hover { color: var(--text-muted); }
-.tabs button.active { color: var(--accent-primary); border-bottom-color: var(--accent-active); background: var(--bg-panel); }
+.tabs button.active {
+  color: var(--accent-primary);
+  border-bottom-color: var(--accent-primary);
+  background: var(--bg-card);
+}
 .tab-body { flex: 1; overflow-y: auto; }
 </style>

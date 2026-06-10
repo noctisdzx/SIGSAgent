@@ -91,20 +91,20 @@ onMounted(() => { pb.refreshList(); });
   border: 1px solid var(--border-soft);
   color: var(--accent-primary);
   font-size: 12px; font-weight: 600;
-  padding: 6px 14px; border-radius: 18px;
+  padding: 6px 14px; border-radius: 0;
   cursor: pointer;
   display: flex; align-items: center; gap: 8px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.4);
 }
 .pb-tab:hover { background: var(--bg-elevated); }
-.pb-time { color: var(--accent-warm-soft); font-family: Consolas, monospace; font-size: 11px; }
+.pb-time { color: var(--accent-warm-soft); font-family: var(--font-mono); font-size: 11px; }
 
 .pb-body {
   margin-top: 8px;
   width: 440px;
   background: rgba(18,24,43,0.97);
   border: 1px solid var(--border-soft);
-  border-radius: 12px;
+  border-radius: 0;
   padding: 10px 12px;
   box-shadow: 0 6px 22px rgba(0,0,0,0.5);
 }
@@ -113,14 +113,14 @@ onMounted(() => { pb.refreshList(); });
 .pb-select {
   flex: 1; min-width: 0;
   background: var(--bg-card); color: var(--text-secondary);
-  border: 1px solid var(--border-soft); border-radius: 6px;
+  border: 1px solid var(--border-soft); border-radius: 0;
   padding: 4px 8px; font-size: 11.5px; outline: none;
 }
 .micro-btn {
   background: var(--bg-card);
   border: 1px solid var(--border-soft);
   color: var(--text-secondary);
-  font-size: 11px; padding: 4px 9px; border-radius: 6px; cursor: pointer;
+  font-size: 11px; padding: 4px 9px; border-radius: 0; cursor: pointer;
 }
 .micro-btn:hover:not(:disabled) { background: var(--bg-elevated); color: var(--accent-primary); }
 .micro-btn:disabled { opacity: 0.4; cursor: default; }
@@ -128,8 +128,8 @@ onMounted(() => { pb.refreshList(); });
 .micro-btn.spd.on { background: var(--accent-active); color: #fff; border-color: var(--accent-active); }
 .micro-btn.exit { margin-left: auto; color: var(--accent-warn); }
 .pb-seek { flex: 1; }
-.pb-idx { font-family: Consolas, monospace; font-size: 11px; color: var(--text-very-dim); min-width: 56px; text-align: right; }
+.pb-idx { font-family: var(--font-mono); font-size: 11px; color: var(--text-very-dim); min-width: 56px; text-align: right; }
 .pb-lbl { font-size: 11px; color: var(--text-very-dim); }
-.pb-clock { font-family: Consolas, monospace; font-size: 11px; color: var(--accent-warm-soft); text-align: center; margin-top: 2px; }
+.pb-clock { font-family: var(--font-mono); font-size: 11px; color: var(--accent-warm-soft); text-align: center; margin-top: 2px; }
 .speeds { gap: 4px; }
 </style>

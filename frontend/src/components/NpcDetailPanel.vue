@@ -259,14 +259,14 @@ const scheduleRows = computed(() => {
   margin-top: 8px;
   padding: 6px 10px;
   background: var(--bg-card);
-  border-radius: 6px;
+  border-radius: 0;
 }
 .kv.loc { margin-top: 12px; }
 
 .tag {
   display: inline-block;
   padding: 2px 8px;
-  border-radius: 10px;
+  border-radius: 0;
   font-size: 11px;
   font-weight: 600;
 }
@@ -275,11 +275,11 @@ const scheduleRows = computed(() => {
   color: var(--accent-primary);
 }
 
-.mono { font-family: Consolas, 'Courier New', monospace; font-size: 11.5px; }
+.mono { font-family: var(--font-mono); font-size: 11.5px; }
 
 .schedule-wrap {
   background: var(--bg-card);
-  border-radius: 8px;
+  border-radius: 0;
   padding: 12px;
   margin-top: 8px;
 }
@@ -295,7 +295,7 @@ const scheduleRows = computed(() => {
   min-width: 60px;
   color: var(--accent-warn);
   font-weight: 600;
-  font-family: Consolas, 'Courier New', monospace;
+  font-family: var(--font-mono);
 }
 .sch-act { color: var(--text-muted); }
 </style>

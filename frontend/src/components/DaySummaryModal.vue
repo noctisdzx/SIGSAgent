@@ -199,7 +199,7 @@ function onCloseRequested() {
   max-height: 90vh;
   background: var(--bg-panel);
   border: 1px solid var(--border-soft);
-  border-radius: 16px;
+  border-radius: 0;
   box-shadow: 0 20px 60px rgba(0,0,0,0.55);
   display: flex; flex-direction: column;
   overflow: hidden;
@@ -229,7 +229,7 @@ function onCloseRequested() {
   display: flex; flex-wrap: wrap; gap: 6px;
   font-size: 12px; color: var(--text-very-dim);
 }
-.dsm-day { font-family: Consolas, monospace; color: var(--text-secondary); }
+.dsm-day { font-family: var(--font-mono); color: var(--text-secondary); }
 .dsm-when { color: var(--text-very-dim); }
 .dsm-warn { color: var(--accent-danger); }
 .dsm-close {
@@ -266,7 +266,7 @@ function onCloseRequested() {
 .dsm-proto-card {
   background: linear-gradient(135deg, rgba(255,196,82,0.16), rgba(255,128,82,0.08));
   border: 1px solid rgba(255,196,82,0.35);
-  border-radius: 10px;
+  border-radius: 0;
   padding: 8px 12px;
   display: flex; flex-direction: column; gap: 4px;
 }
@@ -289,7 +289,7 @@ function onCloseRequested() {
 .dsm-cast-chip {
   background: var(--bg-card);
   border: 1px solid var(--border-soft);
-  border-radius: 999px;
+  border-radius: 0;
   padding: 4px 11px;
   font-size: 12px;
   color: var(--text-secondary);
@@ -313,7 +313,7 @@ function onCloseRequested() {
   border-left: 3px solid var(--accent-warn, #ffc452);
   padding: 6px 12px;
   background: rgba(255,196,82,0.05);
-  border-radius: 0 6px 6px 0;
+  border-radius: 0;
 }
 .dsm-synopsis-label {
   display: block;
@@ -333,7 +333,7 @@ function onCloseRequested() {
 .dsm-tomorrow {
   background: var(--bg-card);
   border: 1px solid var(--border-soft);
-  border-radius: 10px;
+  border-radius: 0;
   padding: 10px 14px;
 }
 .dsm-tomorrow-label {
@@ -368,7 +368,7 @@ function onCloseRequested() {
 }
 .dsm-secondary, .dsm-primary {
   padding: 8px 18px;
-  border-radius: 8px;
+  border-radius: 0;
   font-size: 13px;
   cursor: pointer;
   border: 1px solid var(--border-soft);

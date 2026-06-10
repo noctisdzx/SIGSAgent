@@ -297,14 +297,14 @@ function heatColor(t: number): string {
   flex: 1;
   height: 18px;
   background: var(--bg-card);
-  border-radius: 4px;
+  border-radius: 0;
   position: relative;
   box-shadow: inset 0 0 0 1px var(--bg-elevated);
 }
 .hm-bar {
   display: block;
   height: 100%;
-  border-radius: 4px;
+  border-radius: 0;
   position: relative;
 }
 .hm-bar-label {
@@ -318,7 +318,7 @@ function heatColor(t: number): string {
   width: 78px;
   color: var(--accent-warm-soft);
   font-size: 11.5px;
-  font-family: Consolas, monospace;
+  font-family: var(--font-mono);
   text-align: right;
 }
 .hm-num .boost {
@@ -336,7 +336,7 @@ function heatColor(t: number): string {
 .hm-grid-wrap {
   background: var(--bg-base);
   padding: 14px 12px 8px;
-  border-radius: 8px;
+  border-radius: 0;
   overflow-x: auto;
   box-shadow: inset 0 0 0 1px var(--bg-elevated);
 }
@@ -356,10 +356,10 @@ function heatColor(t: number): string {
   text-align: center;
   writing-mode: vertical-lr;
   transform: rotate(180deg);
-  font-family: Consolas, monospace;
+  font-family: var(--font-mono);
 }
 .hm-grid-cell {
-  width: 14px; height: 14px; border-radius: 2px;
+  width: 14px; height: 14px; border-radius: 0;
   flex-shrink: 0;
   transition: transform .15s;
 }
@@ -375,7 +375,7 @@ function heatColor(t: number): string {
 .cb-bar {
   flex: 1;
   height: 12px;
-  border-radius: 3px;
+  border-radius: 0;
   background: linear-gradient(
     90deg,
     rgb(13,18,39),

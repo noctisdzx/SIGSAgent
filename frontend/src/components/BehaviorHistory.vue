@@ -38,12 +38,12 @@ function paramText(p: any): string {
   margin-bottom: 3px;
   background: var(--bg-card);
   border-left: 2px solid var(--accent-active);
-  border-radius: 4px;
+  border-radius: 0;
 }
 .row.fail { border-left-color: var(--accent-danger); }
-.ts     { color: var(--accent-warn); min-width: 130px; font-family: Consolas, monospace; }
+.ts     { color: var(--accent-warn); min-width: 130px; font-family: var(--font-mono); }
 .act    { color: var(--accent-primary); min-width: 80px; }
-.params { color: var(--accent-good-soft); flex: 1; font-family: Consolas, monospace; font-size: 10.5px; }
+.params { color: var(--accent-good-soft); flex: 1; font-family: var(--font-mono); font-size: 10.5px; }
 .note   { color: var(--text-very-dim); font-style: italic; }
 .empty  { color: var(--text-disabled); font-size: 12px; }
 </style>

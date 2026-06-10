@@ -62,7 +62,7 @@ function memText(m: any): string {
   border-left: 3px solid var(--tone-default);
   padding: 8px 10px;
   margin-bottom: 6px;
-  border-radius: 4px;
+  border-radius: 0;
 }
 .meta {
   display: flex; gap: 8px; font-size: 10.5px; color: var(--text-very-dim); margin-bottom: 2px;

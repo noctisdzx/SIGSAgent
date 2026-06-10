@@ -142,7 +142,7 @@ onMounted(() => {
   margin-bottom: 3px;
   background: var(--bg-card);
   border-left: 2px solid var(--border-soft);
-  border-radius: 4px;
+  border-radius: 0;
 }
 .ev--tick           { border-left-color: var(--accent-active); }
 .ev--agent_decision { border-left-color: var(--accent-warn); }
@@ -152,7 +152,7 @@ onMounted(() => {
 .ev--agent_error    { border-left-color: var(--accent-danger); }
 .ev--welcome        { border-left-color: var(--accent-cyan-soft); }
 
-.ts   { color: var(--accent-warn); min-width: 130px; font-family: Consolas, monospace; }
+.ts   { color: var(--accent-warn); min-width: 130px; font-family: var(--font-mono); }
 .type { color: var(--accent-primary); min-width: 110px; }
 .aid  { color: var(--accent-good-soft); min-width: 80px; }
 .payload {
@@ -161,7 +161,7 @@ onMounted(() => {
   overflow: hidden;
   text-overflow: ellipsis;
   flex: 1;
-  font-family: Consolas, monospace;
+  font-family: var(--font-mono);
   font-size: 10.5px;
 }
 </style>

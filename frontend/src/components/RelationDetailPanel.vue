@@ -128,7 +128,7 @@ const hasInteraction = computed(() => Boolean(props.edge && (props.edge as any).
 .em-summary {
   background: var(--bg-card);
   padding: 10px 12px;
-  border-radius: 6px;
+  border-radius: 0;
   font-size: 12px;
   color: var(--text-secondary);
 }
@@ -141,11 +141,11 @@ const hasInteraction = computed(() => Boolean(props.edge && (props.edge as any).
 .em-text { line-height: 1.7; }
 .color-sample { display: inline-flex; align-items: center; gap: 6px; }
 .color-sample .dot {
-  width: 12px; height: 12px; border-radius: 50%;
+  width: 12px; height: 12px; border-radius: 0;
   border: 1px solid #fff3;
 }
 .color-sample .hex {
-  font-family: Consolas, 'Courier New', monospace;
+  font-family: var(--font-mono);
   font-size: 11px;
   color: var(--text-muted);
 }

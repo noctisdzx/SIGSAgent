@@ -116,7 +116,7 @@ function onClose() { sim.dismissWeekSummary(); }
   max-height: 90vh;
   background: var(--bg-panel);
   border: 1px solid var(--border-soft);
-  border-radius: 16px;
+  border-radius: 0;
   box-shadow: 0 20px 60px rgba(0,0,0,0.55);
   display: flex; flex-direction: column;
   overflow: hidden;
@@ -134,7 +134,7 @@ function onClose() { sim.dismissWeekSummary(); }
 }
 .wsm-title { margin: 0; font-size: 18px; font-weight: 600; color: var(--text-primary); line-height: 1.35; }
 .wsm-sub { display: flex; flex-wrap: wrap; gap: 6px; font-size: 12px; color: var(--text-very-dim); }
-.wsm-week { font-family: Consolas, monospace; color: var(--text-secondary); }
+.wsm-week { font-family: var(--font-mono); color: var(--text-secondary); }
 .wsm-close { background: none; border: none; color: var(--text-very-dim); font-size: 22px; cursor: pointer; padding: 0 8px; flex: 0 0 auto; }
 .wsm-close:hover { color: var(--accent-warn); }
 
@@ -143,7 +143,7 @@ function onClose() { sim.dismissWeekSummary(); }
 .wsm-search {
   width: 100%; box-sizing: border-box;
   background: var(--bg-card); color: var(--text-primary);
-  border: 1px solid var(--border-soft); border-radius: 8px;
+  border: 1px solid var(--border-soft); border-radius: 0;
   padding: 7px 12px; font-size: 13px; outline: none;
 }
 .wsm-search:focus { border-color: var(--accent-good-soft, #66BB6A); }
@@ -152,7 +152,7 @@ function onClose() { sim.dismissWeekSummary(); }
 .wsm-card {
   background: var(--bg-card);
   border: 1px solid var(--border-soft);
-  border-radius: 12px;
+  border-radius: 0;
   padding: 12px 14px;
   display: flex; flex-direction: column; gap: 8px;
 }
@@ -180,7 +180,7 @@ function onClose() { sim.dismissWeekSummary(); }
 }
 .wsm-foot-note { font-size: 11.5px; color: var(--text-very-dim); }
 .wsm-secondary {
-  padding: 8px 18px; border-radius: 8px; font-size: 13px; cursor: pointer;
+  padding: 8px 18px; border-radius: 0; font-size: 13px; cursor: pointer;
   border: 1px solid var(--border-soft); background: var(--bg-card); color: var(--text-secondary);
 }
 .wsm-secondary:hover { color: var(--text-primary); }

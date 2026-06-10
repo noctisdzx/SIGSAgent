@@ -158,7 +158,7 @@ function heatColor(t: number): string {
   font-size: 11.5px;
   margin-bottom: 4px;
   padding: 2px 4px;
-  border-radius: 4px;
+  border-radius: 0;
   cursor: pointer;
 }
 .rhp-row:hover { background: rgba(255,255,255,0.04); }
@@ -173,7 +173,7 @@ function heatColor(t: number): string {
   flex: 1;
   height: 14px;
   background: var(--bg-card);
-  border-radius: 3px;
+  border-radius: 0;
   box-shadow: inset 0 0 0 1px var(--bg-elevated);
   overflow: hidden;
 }
@@ -181,13 +181,13 @@ function heatColor(t: number): string {
   display: block;
   height: 100%;
   min-width: 1px;
-  border-radius: 3px;
+  border-radius: 0;
   transition: width .3s ease;
 }
 .rhp-num {
   width: 26px;
   text-align: right;
-  font-family: Consolas, monospace;
+  font-family: var(--font-mono);
   color: var(--accent-warm-soft);
   font-size: 11px;
 }
@@ -200,7 +200,7 @@ function heatColor(t: number): string {
 .rhp-ramp-bar {
   flex: 1;
   height: 8px;
-  border-radius: 3px;
+  border-radius: 0;
   background: linear-gradient(
     90deg,
     rgb(13,18,39), rgb(40,11,84), rgb(101,21,110),

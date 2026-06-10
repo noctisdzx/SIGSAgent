@@ -286,7 +286,7 @@ function npcLabel(id: string | number): string {
 .scene-card {
   background: var(--bg-card);
   padding: 12px;
-  border-radius: 8px;
+  border-radius: 0;
   border-left: 3px solid var(--accent-warn);
   margin-bottom: 10px;
 }
@@ -338,7 +338,7 @@ function npcLabel(id: string | number): string {
   color: var(--text-muted);
   background: rgba(255,255,255,0.02);
   padding: 6px 8px;
-  border-radius: 6px;
+  border-radius: 0;
   display: flex; align-items: center; gap: 6px;
   border-top: 1px dashed var(--border-soft);
   margin-top: 16px;
@@ -356,7 +356,7 @@ function npcLabel(id: string | number): string {
 .live-card {
   background: var(--bg-card);
   padding: 8px 10px;
-  border-radius: 6px;
+  border-radius: 0;
   border-left: 3px solid var(--accent-primary);
   margin-bottom: 6px;
 }
@@ -375,7 +375,7 @@ function npcLabel(id: string | number): string {
 }
 .live-time {
   color: var(--accent-warn);
-  font-family: Consolas, monospace;
+  font-family: var(--font-mono);
   font-weight: 600;
 }
 .live-tag { color: var(--text-secondary); }
